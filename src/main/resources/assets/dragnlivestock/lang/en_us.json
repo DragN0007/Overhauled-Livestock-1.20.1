@@ -1,0 +1,126 @@
+{
+  "itemGroup.overhauled_livestock": "Overhauled Livestock",
+
+  "item.dragnlivestock.o_horse_spawn_egg": "O-Horse Spawn Egg",
+  "entity.dragnlivestock.o_horse": "O-Horse",
+
+  "item.dragnlivestock.o_donkey_spawn_egg": "O-Donkey Spawn Egg",
+  "entity.dragnlivestock.o_donkey": "O-Donkey",
+
+  "item.dragnlivestock.o_mule_spawn_egg": "O-Mule Spawn Egg",
+  "entity.dragnlivestock.o_mule": "O-Mule",
+
+  "item.dragnlivestock.o_cow_spawn_egg": "O-Cow Spawn Egg",
+  "entity.dragnlivestock.o_cow": "O-Cow",
+
+  "item.dragnlivestock.o_chicken_spawn_egg": "O-Chicken Spawn Egg",
+  "entity.dragnlivestock.o_chicken": "O-Chicken",
+
+  "item.dragnlivestock.o_salmon_spawn_egg": "O-Salmon Spawn Egg",
+  "entity.dragnlivestock.o_salmon": "O-Salmon",
+
+  "item.dragnlivestock.o_cod_spawn_egg": "O-Cod Spawn Egg",
+  "entity.dragnlivestock.o_cod": "O-Cod",
+
+  "item.dragnlivestock.o_bee_spawn_egg": "O-Bee Spawn Egg",
+  "entity.dragnlivestock.o_bee": "O-Bee",
+
+  "item.dragnlivestock.o_rabbit_spawn_egg": "O-Rabbit Spawn Egg",
+  "entity.dragnlivestock.o_rabbit": "O-Rabbit",
+
+  "item.dragnlivestock.o_pig_spawn_egg": "O-Pig Spawn Egg",
+  "entity.dragnlivestock.o_pig": "O-Pig",
+
+  "item.dragnlivestock.o_sheep_spawn_egg": "O-Sheep Spawn Egg",
+  "entity.dragnlivestock.o_sheep": "O-Sheep",
+
+  "item.dragnlivestock.o_llama_spawn_egg": "O-Llama Spawn Egg",
+  "entity.dragnlivestock.o_llama": "O-Llama",
+
+
+  "item.dragnlivestock.overworld_unicorn_spawn_egg": "Overworld Unicorn Spawn Egg",
+  "entity.dragnlivestock.overworld_unicorn": "Overworld Unicorn",
+
+  "item.dragnlivestock.nether_unicorn_spawn_egg": "Nether Unicorn Spawn Egg",
+  "entity.dragnlivestock.nether_unicorn": "Nether Unicorn",
+
+  "item.dragnlivestock.end_unicorn_spawn_egg": "End Unicorn Spawn Egg",
+  "entity.dragnlivestock.end_unicorn": "End Unicorn",
+
+  "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
+
+
+  "item.dragnlivestock.brand_tag": "Brand Tag",
+  "tooltip.dragnlivestock.brand_tag.tooltip": "This item isn't fully functional yet.",
+
+  "item.dragnlivestock.netherite_horse_armor": "Netherite Horse Armor",
+  "item.dragnlivestock.griffith_inspired_horse_armor": "Griffith-Inspired Horse Armor",
+
+  "item.dragnlivestock.sheep_milk_bucket": "Sheep Milk Bucket",
+  "item.dragnlivestock.llama_milk_bucket": "Llama Milk Bucket",
+
+  "item.dragnlivestock.cow_milk_jug": "Cow Milk Jug",
+  "item.dragnlivestock.sheep_milk_jug": "Sheep Milk Jug",
+  "item.dragnlivestock.llama_milk_jug": "Llama Milk Jug",
+
+  "item.dragnlivestock.cheese": "Cheese",
+  "item.dragnlivestock.sheep_cheese": "Sheep Cheese",
+  "item.dragnlivestock.llama_cheese": "Llama Cheese",
+
+  "item.dragnlivestock.egg_salad": "Egg Salad",
+
+  "item.dragnlivestock.beef_sirloin_steak": "Beef Sirloin Steak",
+  "item.dragnlivestock.beef_rib_steak": "Beef Rib Steak",
+  "item.dragnlivestock.cooked_beef_sirloin_steak": "Cooked Sirloin Steak",
+  "item.dragnlivestock.cooked_beef_rib_steak": "Cooked Beef Rib Steak",
+
+  "item.dragnlivestock.horse": "Horse",
+  "item.dragnlivestock.horse_sirloin_steak": "Horse Sirloin Steak",
+  "item.dragnlivestock.horse_rib_steak": "Horse Rib Steak",
+  "item.dragnlivestock.cooked_horse": "Cooked Horse",
+  "item.dragnlivestock.cooked_horse_sirloin_steak": "Cooked Sirloin Steak",
+  "item.dragnlivestock.cooked_horse_rib_steak": "Cooked Horse Rib Steak",
+
+  "item.dragnlivestock.llama": "Llama",
+  "item.dragnlivestock.llama_loin": "Llama Sirloin Steak",
+  "item.dragnlivestock.llama_rib": "Llama Rib Steak",
+  "item.dragnlivestock.cooked_llama": "Cooked Llama",
+  "item.dragnlivestock.cooked_llama_loin": "Cooked Sirloin Steak",
+  "item.dragnlivestock.cooked_llama_rib": "Cooked Llama Rib Steak",
+
+  "item.dragnlivestock.mutton_loin": "Mutton Loin",
+  "item.dragnlivestock.mutton_rib": "Mutton Rib ",
+  "item.dragnlivestock.cooked_mutton_loin": "Cooked Mutton Loin",
+  "item.dragnlivestock.cooked_mutton_rib": "Cooked Mutton Rib",
+
+  "item.dragnlivestock.pork_tenderloin": "Pork Tenderloin",
+  "item.dragnlivestock.pork_rib_chop": "Pork Rib Chop",
+  "item.dragnlivestock.cooked_pork_tenderloin": "Cooked Pork Tenderloin",
+  "item.dragnlivestock.cooked_pork_rib_chop": "Cooked Pork Rib Chop",
+
+  "item.dragnlivestock.fish_oil": "Fish Oil",
+  "item.dragnlivestock.roe": "Roe",
+
+  "item.dragnlivestock.chicken_thigh": "Chicken Thigh",
+  "item.dragnlivestock.cooked_chicken_thigh": "Cooked Chicken Thigh",
+
+  "item.dragnlivestock.rabbit_thigh": "Rabbit Thigh",
+  "item.dragnlivestock.cooked_rabbit_thigh": "Cooked Rabbit Thigh",
+
+  "item.dragnlivestock.unicorn": "Unicorn",
+  "item.dragnlivestock.unicorn_sirloin_steak": "Unicorn Sirloin Steak",
+  "item.dragnlivestock.unicorn_rib_steak": "Unicorn Rib Steak",
+  "item.dragnlivestock.cooked_unicorn": "Cooked Unicorn",
+  "item.dragnlivestock.cooked_unicorn_sirloin_steak": "Cooked Sirloin Steak",
+  "item.dragnlivestock.cooked_unicorn_rib_steak": "Cooked Unicorn Rib Steak",
+
+  "item.dragnlivestock.overworld_unicorn_horn": "Overworld Unicorn Horn",
+  "item.dragnlivestock.nether_unicorn_horn": "Nether Unicorn Horn",
+  "item.dragnlivestock.end_unicorn_horn": "End Unicorn Horn",
+
+  "key.dragnlivestock.categories.dragnlivestock": "DragN's Livestock Overhaul",
+  "key.dragnlivestock.horse_speed_up": "Speed Up - Horse",
+  "key.dragnlivestock.horse_slow_down": "Slow Down - Horse",
+  "key.dragnlivestock.horse_bow": "Bow Emote - Horse",
+  "key.dragnlivestock.horse_piaffe": "Piaffe Emote - Horse"
+}

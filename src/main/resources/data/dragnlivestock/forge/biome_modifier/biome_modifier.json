@@ -1,0 +1,8 @@
+{
+  "type": "dragnlivestock:spawn_biome_modifier",
+  "biomes": [
+    "meadow",
+    "basalt_deltas",
+    "end_highlands"
+  ]
+}

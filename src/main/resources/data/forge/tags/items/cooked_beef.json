@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cooked_beef",
+    "dragnlivestock:cooked_beef_sirloin_steak",
+    "dragnlivestock:cooked_beef_rib_steak",
+
+    "dragnlivestock:cooked_horse",
+    "dragnlivestock:cooked_horse_sirloin_steak",
+    "dragnlivestock:cooked_horse_rib_steak",
+
+    "dragnlivestock:cooked_unicorn",
+    "dragnlivestock:cooked_unicorn_sirloin_steak",
+    "dragnlivestock:cooked_unicorn_rib_steak"
+  ]
+}
