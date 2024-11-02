@@ -93,8 +93,6 @@ public class EndUnicorn extends OHorse implements GeoEntity {
 		));
 	}
 
-
-
 	@Override
 	public void aiStep() {
 		super.aiStep();

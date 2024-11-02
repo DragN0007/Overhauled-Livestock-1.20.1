@@ -38,7 +38,6 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -74,7 +73,6 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 				.add(Attributes.ATTACK_DAMAGE, 1D);
 	}
 
-	@Override
 	public void randomizeAttributes() {
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.generateRandomMaxHealth());
 		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.generateRandomSpeed());
@@ -97,17 +95,14 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, (livingEntity) -> livingEntity instanceof Wolf));
 	}
 
-	@Override
 	public float generateRandomMaxHealth() {
 		return 15.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
 	}
 
-	@Override
 	public double generateRandomJumpStrength() {
 		return (double)0.4F + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D;
 	}
 
-	@Override
 	public double generateRandomSpeed() {
 		return ((double)0.45F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
 	}
