@@ -16,34 +16,34 @@ import java.util.List;
 
 public record CreatureSpawnGeneration(HolderSet<Biome> biomes) implements BiomeModifier {
 
-    public static List<MobSpawnSettings.SpawnerData> OVERWORLD_UNICORN_SPAWNS = List.of(
-            new MobSpawnSettings.SpawnerData(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), 1, 1, 1)
-    );
-
-    public static List<MobSpawnSettings.SpawnerData> NETHER_UNICORN_SPAWNS = List.of(
-            new MobSpawnSettings.SpawnerData(EntityTypes.NETHER_UNICORN_ENTITY.get(), 1, 1, 1)
-    );
-
-    public static List<MobSpawnSettings.SpawnerData> END_UNICORN_SPAWNS = List.of(
-            new MobSpawnSettings.SpawnerData(EntityTypes.END_UNICORN_ENTITY.get(), 1, 1, 1)
-    );
+//    public static List<MobSpawnSettings.SpawnerData> OVERWORLD_UNICORN_SPAWNS = List.of(
+//            new MobSpawnSettings.SpawnerData(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), 1, 1, 1)
+//    );
+//
+//    public static List<MobSpawnSettings.SpawnerData> NETHER_UNICORN_SPAWNS = List.of(
+//            new MobSpawnSettings.SpawnerData(EntityTypes.NETHER_UNICORN_ENTITY.get(), 1, 1, 1)
+//    );
+//
+//    public static List<MobSpawnSettings.SpawnerData> END_UNICORN_SPAWNS = List.of(
+//            new MobSpawnSettings.SpawnerData(EntityTypes.END_UNICORN_ENTITY.get(), 1, 1, 1)
+//    );
 
     @Override
     public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
         if(phase == Phase.ADD && biomes.contains(biome)) {
             List<MobSpawnSettings.SpawnerData> spawner = builder.getMobSpawnSettings().getSpawner(MobCategory.CREATURE);
 
-            if(biome.is(Biomes.MEADOW)) {
-                spawner.addAll(OVERWORLD_UNICORN_SPAWNS);
-            }
-
-            if(biome.is(Biomes.BASALT_DELTAS)) {
-                spawner.addAll(NETHER_UNICORN_SPAWNS);
-            }
-
-            if(biome.is(Biomes.END_HIGHLANDS)) {
-                spawner.addAll(END_UNICORN_SPAWNS);
-            }
+//            if(biome.is(Biomes.MEADOW)) {
+//                spawner.addAll(OVERWORLD_UNICORN_SPAWNS);
+//            }
+//
+//            if(biome.is(Biomes.BASALT_DELTAS)) {
+//                spawner.addAll(NETHER_UNICORN_SPAWNS);
+//            }
+//
+//            if(biome.is(Biomes.END_HIGHLANDS)) {
+//                spawner.addAll(END_UNICORN_SPAWNS);
+//            }
         }
     }
 
