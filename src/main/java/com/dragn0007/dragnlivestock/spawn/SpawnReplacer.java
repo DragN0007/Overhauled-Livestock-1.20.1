@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
@@ -458,6 +459,50 @@ public class SpawnReplacer {
             }
         }
 
+        //Mooshroom
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_COWS.get() && event.getEntity() instanceof MushroomCow) {
+            MushroomCow vanillamooshroom = (MushroomCow) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            OMooshroom oMooshroom = EntityTypes.O_MOOSHROOM_ENTITY.get().create(event.getLevel());
+            if (oMooshroom != null) {
+                oMooshroom.copyPosition(vanillamooshroom);
+                Entity entity = event.getEntity();
+
+                oMooshroom.setCustomName(vanillamooshroom.getCustomName());
+                oMooshroom.setAge(vanillamooshroom.getAge());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(23);
+                oMooshroom.setVariant(randomVariant);
+
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(31);
+                oMooshroom.setOverlayVariant(randomOverlayVariant);
+
+                int randomHorns = event.getLevel().getRandom().nextInt(31);
+                oMooshroom.setHornVariant(randomHorns);
+
+                int randomMushrooms = event.getLevel().getRandom().nextInt(31);
+                oMooshroom.setMushroomVariant(randomMushrooms);
+
+                if (event.getLevel().isClientSide) {
+                    vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(oMooshroom);
+                vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);
+
+//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla mooshroom with an O-Mooshroom!");
+
+                event.setCanceled(true);
+            }
+        }
+
+
+
+
 
 
         //FAILSAFE O-to-Vanilla Converter
@@ -774,6 +819,33 @@ public class SpawnReplacer {
 
                 event.getLevel().addFreshEntity(pig);
                 oPig1.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        //Mooshroom
+        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_COWS.get() && event.getEntity() instanceof OMooshroom) {
+            OMooshroom oMooshroom1 = (OMooshroom) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            MushroomCow cow = EntityType.MOOSHROOM.create(event.getLevel());
+            if (cow != null) {
+                cow.copyPosition(oMooshroom1);
+                Entity entity = event.getEntity();
+
+                cow.setCustomName(oMooshroom1.getCustomName());
+                cow.setAge(oMooshroom1.getAge());
+
+                if (event.getLevel().isClientSide) {
+                    oMooshroom1.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(cow);
+                oMooshroom1.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }
