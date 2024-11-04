@@ -53,6 +53,19 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             }
         }
 
+        if(animatable.isBaby()) {
+            model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
+            model.getBone("saddle").ifPresent(b -> b.setHidden(true));
+            model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
+            model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
+            model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
+            model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
+            model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
+            model.getBone("body_armor").ifPresent(b -> b.setHidden(true));
+            model.getBone("neck_armor").ifPresent(b -> b.setHidden(true));
+            model.getBone("head_armor").ifPresent(b -> b.setHidden(true));
+        }
+
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }
