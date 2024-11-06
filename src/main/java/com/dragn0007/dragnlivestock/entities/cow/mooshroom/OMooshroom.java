@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.cow.mooshroom;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.OCowUdderLayer;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -43,7 +44,10 @@ public class OMooshroom extends OCow implements GeoEntity {
 
     public InteractionResult mobInteract(Player p_28298_, InteractionHand p_28299_) {
         ItemStack itemstack = p_28298_.getItemInHand(p_28299_);
-        if (itemstack.is(Items.BOWL) && !this.isBaby() && getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation)) {
+        if (itemstack.is(Items.BOWL) && !this.isBaby() &&
+                (!LivestockOverhaulCommonConfig.GENDERS_ENABLED.get() ||
+                        (LivestockOverhaulCommonConfig.GENDERS_ENABLED.get() &&
+                                getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation)))) {
             p_28298_.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, Items.MUSHROOM_STEW.getDefaultInstance());
             p_28298_.setItemInHand(p_28299_, itemstack1);

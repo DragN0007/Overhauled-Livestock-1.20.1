@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.sheep;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,14 +12,14 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
-    public OSheepWoolLayer(GeoRenderer entityRendererIn) {
+public class OSheepHornLayer extends GeoRenderLayer<OSheep> {
+    public OSheepHornLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
     public void render(PoseStack poseStack, OSheep animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderType renderMarkingType = RenderType.entityCutout(((OSheep)animatable).getOverlayLocation());
+        RenderType renderMarkingType = RenderType.entityCutout(((OSheep)animatable).getHornsLocation());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);
         poseStack.translate(0.0d, 0.0d, 0.0d);
@@ -32,20 +33,18 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
                 1, 1, 1, 1);
     }
 
-    public enum Overlay {
+    public enum HornOverlay {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/none.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/white.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/brown.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/grey.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/light_grey.png"));
+        CURLY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/horns/overlay_horns_curly.png")),
+        SHORT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/horns/overlay_horns_short.png")),
+        LONG(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/horns/overlay_horns_long.png"));
 
         public final ResourceLocation resourceLocation;
-        Overlay(ResourceLocation resourceLocation) {
+        HornOverlay(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
 
-        public static Overlay overlayFromOrdinal(int overlay) { return Overlay.values()[overlay % Overlay.values().length];
+        public static HornOverlay hornOverlayFromOrdinal(int overlay) { return HornOverlay.values()[overlay % HornOverlay.values().length];
         }
     }
 

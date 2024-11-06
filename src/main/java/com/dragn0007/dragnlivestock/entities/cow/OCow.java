@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -241,7 +242,10 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 
 	public InteractionResult mobInteract(Player p_28298_, InteractionHand p_28299_) {
 		ItemStack itemstack = p_28298_.getItemInHand(p_28299_);
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() && getUddersLocation().equals(OCowUdderLayer.Overlay.FEMALE.resourceLocation)) {
+		if (itemstack.is(Items.BUCKET) && !this.isBaby() &&
+				(!LivestockOverhaulCommonConfig.GENDERS_ENABLED.get() ||
+						(LivestockOverhaulCommonConfig.GENDERS_ENABLED.get() &&
+								getUddersLocation().equals(OCowUdderLayer.Overlay.FEMALE.resourceLocation)))) {
 			p_28298_.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, Items.MILK_BUCKET.getDefaultInstance());
 			p_28298_.setItemInHand(p_28299_, itemstack1);

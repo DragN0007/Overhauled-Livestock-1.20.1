@@ -201,6 +201,9 @@ public class SpawnReplacer {
                 int randomHorns = event.getLevel().getRandom().nextInt(31);
                 oCow.setHornVariant(randomHorns);
 
+                int randomGender = event.getLevel().getRandom().nextInt(31);
+                oCow.setUdderVariant(randomGender);
+
                 if (event.getLevel().isClientSide) {
                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
                 }
@@ -373,13 +376,15 @@ public class SpawnReplacer {
 
             if (oSheep != null) {
                 oSheep.copyPosition(vanillasheep);
-                Entity entity = event.getEntity();
 
                 oSheep.setCustomName(vanillasheep.getCustomName());
                 oSheep.setAge(vanillasheep.getAge());
 
                 int randomVariant = event.getLevel().getRandom().nextInt(23);
                 oSheep.setVariant(randomVariant);
+
+                int randomGender = event.getLevel().getRandom().nextInt(31);
+                oSheep.setHornVariant(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillasheep.remove(Entity.RemovalReason.DISCARDED);
@@ -486,6 +491,9 @@ public class SpawnReplacer {
 
                 int randomMushrooms = event.getLevel().getRandom().nextInt(31);
                 oMooshroom.setMushroomVariant(randomMushrooms);
+
+                int randomGender = event.getLevel().getRandom().nextInt(31);
+                oMooshroom.setUdderVariant(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);

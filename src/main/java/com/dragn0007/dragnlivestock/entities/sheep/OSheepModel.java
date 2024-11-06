@@ -29,7 +29,7 @@ public class OSheepModel extends GeoModel<OSheep> {
     }
 
     public ResourceLocation getTextureResource(OSheep object) {
-        return object.getTextureResource();
+        return object.getTextureLocation();
     }
 
     @Override

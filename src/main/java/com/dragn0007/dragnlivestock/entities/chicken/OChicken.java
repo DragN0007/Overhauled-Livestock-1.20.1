@@ -120,10 +120,7 @@ public class OChicken extends Animal implements GeoEntity {
 		}
 
 		if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0
-				&& !getTextureResource().equals(OChickenMarkingLayer.Overlay.BLUE_ROOSTER.resourceLocation)
-				&& !getTextureResource().equals(OChickenMarkingLayer.Overlay.BLACK_ROOSTER.resourceLocation)
-				&& !getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation)
-		)
+				&& (!getTextureResource().equals(OChickenMarkingLayer.Overlay.BLUE_ROOSTER.resourceLocation) || !getTextureResource().equals(OChickenMarkingLayer.Overlay.BLACK_ROOSTER.resourceLocation) || !getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation)))
 		{
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.spawnAtLocation(Items.EGG);
