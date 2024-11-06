@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dragnlivestock:pork_rib_chop"
+  },
+  "result": "dragnlivestock:cooked_pork_rib_chop"
+}

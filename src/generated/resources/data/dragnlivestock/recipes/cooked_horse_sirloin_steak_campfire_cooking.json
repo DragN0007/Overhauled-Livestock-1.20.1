@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dragnlivestock:horse_sirloin_steak"
+  },
+  "result": "dragnlivestock:cooked_horse_sirloin_steak"
+}

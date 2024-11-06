@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dragnlivestock:unicorn_sirloin_steak"
+  },
+  "result": "dragnlivestock:cooked_unicorn_sirloin_steak"
+}

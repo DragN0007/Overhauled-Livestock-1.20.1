@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mutton_rib": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:mutton_rib"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragnlivestock:cooked_mutton_rib_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_mutton_rib",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragnlivestock:cooked_mutton_rib_campfire_cooking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

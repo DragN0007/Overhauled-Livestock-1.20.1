@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "dragnlivestock:llama_milk_jug"
+  },
+  "result": "dragnlivestock:llama_cheese"
+}
