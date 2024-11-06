@@ -11,6 +11,7 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
         super(renderManager, new OCowModel());
         this.addRenderLayer(new OCowMarkingLayer(this));
         this.addRenderLayer(new OCowHornLayer(this));
+        this.addRenderLayer(new OCowUdderLayer(this));
     }
 
     @Override

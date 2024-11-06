@@ -39,7 +39,7 @@ public class OCowModel extends GeoModel<OCow> {
 
     @Override
     public ResourceLocation getTextureResource(OCow object) {
-        return object.getTextureResource();
+        return object.getTextureLocation();
     }
 
     @Override

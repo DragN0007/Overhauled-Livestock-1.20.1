@@ -12,12 +12,13 @@ public class OMooshroomRender extends GeoEntityRenderer<OMooshroom> {
         this.addRenderLayer(new OMooshroomHornLayer(this));
         this.addRenderLayer(new OMooshroomMarkingLayer(this));
         this.addRenderLayer(new OMooshroomMushroomLayer(this));
+        this.addRenderLayer(new OMooshroomUdderLayer(this));
     }
 
     @Override
     public void render(OMooshroom entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
 
-        if (animatable.isChested()) {
+        if (entity.isChested()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             model.getBone("halter").ifPresent(b -> b.setHidden(false));
         } else {
@@ -25,7 +26,7 @@ public class OMooshroomRender extends GeoEntityRenderer<OMooshroom> {
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
         }
 
-        if(animatable.isBaby()) {
+        if(entity.isBaby()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
             model.getBone("utters").ifPresent(b -> b.setHidden(true));
