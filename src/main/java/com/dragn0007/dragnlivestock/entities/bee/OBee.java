@@ -27,13 +27,10 @@ public class OBee extends Bee implements GeoEntity {
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-		double currentSpeed = this.getDeltaMovement().lengthSqr();
-		double speedThreshold = 0.01;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if(tAnimationState.isMoving()) {
-			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("flap", Animation.LoopType.LOOP));
 		} else {
 				if (!tAnimationState.isMoving() && !this.onGround()) {
@@ -42,7 +39,6 @@ public class OBee extends Bee implements GeoEntity {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 				}
 			}
-		}
 
 		return PlayState.CONTINUE;
 	}

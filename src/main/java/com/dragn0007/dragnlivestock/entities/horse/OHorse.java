@@ -491,6 +491,10 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
 
+		if (spawnType == MobSpawnType.SPAWN_EGG) {
+			this.setBreed(random.nextInt(BreedModel.values().length));
+		}
+
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
