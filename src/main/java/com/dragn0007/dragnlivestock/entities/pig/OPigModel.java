@@ -35,7 +35,7 @@ public class OPigModel extends GeoModel<OPig> {
 
     @Override
     public ResourceLocation getTextureResource(OPig object) {
-        return object.getTextureResource();
+        return object.getTextureLocation();
     }
 
     @Override

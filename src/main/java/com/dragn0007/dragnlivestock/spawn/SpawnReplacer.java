@@ -352,6 +352,9 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(23);
                 oRabbit.setVariant(randomVariant);
 
+                int randomOverlay = event.getLevel().getRandom().nextInt(23);
+                oRabbit.setOverlayVariant(randomOverlay);
+
                 if (event.getLevel().isClientSide) {
                     vanillarabbit.remove(Entity.RemovalReason.DISCARDED);
                 }
@@ -419,6 +422,9 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(23);
                 oLlama.setVariant(randomVariant);
 
+                int randomOverlay = event.getLevel().getRandom().nextInt(23);
+                oLlama.setOverlayVariant(randomOverlay);
+
                 if (event.getLevel().isClientSide) {
                     vanillallama.remove(Entity.RemovalReason.DISCARDED);
                 }
@@ -450,6 +456,9 @@ public class SpawnReplacer {
 
                 int randomVariant = event.getLevel().getRandom().nextInt(23);
                 oPig.setVariant(randomVariant);
+
+                int randomTusksVariant = event.getLevel().getRandom().nextInt(23);
+                oPig.setTusksVariant(randomTusksVariant);
 
                 if (event.getLevel().isClientSide) {
                     vanillapig.remove(Entity.RemovalReason.DISCARDED);

@@ -1,8 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.chicken.OChickenModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -134,7 +132,7 @@ public class OPig extends Animal implements GeoEntity {
 	}
 
 	// Generates the base texture
-	public ResourceLocation getTextureResource() {
+	public ResourceLocation getTextureLocation() {
 		return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 
@@ -142,8 +140,13 @@ public class OPig extends Animal implements GeoEntity {
 		return OPigMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
 
+	public ResourceLocation getTusksLocation() {
+		return OPigTuskLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+	}
+
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> TUSKS = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -151,12 +154,18 @@ public class OPig extends Animal implements GeoEntity {
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
+	public int getTusksVariant() {
+		return this.entityData.get(TUSKS);
+	}
 
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 	public void setOverlayVariant(int overlayVariant) {
 		this.entityData.set(OVERLAY, overlayVariant);
+	}
+	public void setTusksVariant(int tusksVariant) {
+		this.entityData.set(TUSKS, tusksVariant);
 	}
 
 	@Override
@@ -170,6 +179,10 @@ public class OPig extends Animal implements GeoEntity {
 		if (tag.contains("Overlay")) {
 			setOverlayVariant(tag.getInt("Overlay"));
 		}
+
+		if (tag.contains("Tusks")) {
+			setTusksVariant(tag.getInt("Tusks"));
+		}
 	}
 
 	@Override
@@ -178,6 +191,8 @@ public class OPig extends Animal implements GeoEntity {
 		tag.putInt("Variant", getVariant());
 
 		tag.putInt("Overlay", getOverlayVariant());
+
+		tag.putInt("Tusks", getTusksVariant());
 	}
 
 	@Override
@@ -189,6 +204,7 @@ public class OPig extends Animal implements GeoEntity {
 		Random random = new Random();
 		setVariant(random.nextInt(OPigModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+		setTusksVariant(random.nextInt(OPigTuskLayer.Overlay.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -198,6 +214,7 @@ public class OPig extends Animal implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(TUSKS, 0);
 	}
 
 	public boolean canParent() {
@@ -205,7 +222,7 @@ public class OPig extends Animal implements GeoEntity {
 	}
 
 	public boolean canMate(Animal animal) {
-			return this.canParent() && ((OPig) animal).canParent();
+		return this.canParent() && ((OPig) animal).canParent();
 	}
 
 	@Override
@@ -222,7 +239,7 @@ public class OPig extends Animal implements GeoEntity {
 			} else if (i < 8) {
 				variant = oPig.getVariant();
 			} else {
-				variant = this.random.nextInt(OChickenModel.Variant.values().length);
+				variant = this.random.nextInt(OPigModel.Variant.values().length);
 			}
 
 			int j = this.random.nextInt(5);
@@ -232,11 +249,15 @@ public class OPig extends Animal implements GeoEntity {
 			} else if (j < 4) {
 				overlay = oPig.getOverlayVariant();
 			} else {
-				overlay = this.random.nextInt(OChickenMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);
 			}
 
-			((OPig) oPig1).setVariant(variant);
-			((OPig) oPig1).setOverlayVariant(overlay);
+			int tusks;
+			tusks = this.random.nextInt(OPigTuskLayer.Overlay.values().length);
+
+			oPig1.setVariant(variant);
+			oPig1.setOverlayVariant(overlay);
+			oPig1.setTusksVariant(tusks);
 		}
 
 		return oPig1;

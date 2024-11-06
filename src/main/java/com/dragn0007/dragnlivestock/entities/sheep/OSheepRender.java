@@ -17,6 +17,9 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
         if(entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
         } else {
             poseStack.scale(1F, 1F, 1F);
         }
