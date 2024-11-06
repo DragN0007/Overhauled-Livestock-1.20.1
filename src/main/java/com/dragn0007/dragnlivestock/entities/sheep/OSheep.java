@@ -53,7 +53,6 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OSheep extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable, GeoEntity {
@@ -70,12 +69,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	public Vec3 getLeashOffset() {
 		return new Vec3(0D, (double)this.getEyeHeight() * 1F, (double)(this.getBbWidth() * 1F));
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
-	}
-
-	public static final Map<DyeColor, float[]> COLORARRAY_BY_COLOR = Maps.<DyeColor, float[]>newEnumMap(Arrays.stream(DyeColor.values()).collect(Collectors.toMap((p_29868_) -> p_29868_, OSheep::createSheepColor)));
-
-	public static float[] getColorArray(DyeColor p_29830_) {
-		return COLORARRAY_BY_COLOR.get(p_29830_);
 	}
 
 	public static float[] createSheepColor(DyeColor p_29866_) {
@@ -492,11 +485,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		} else {
 			this.entityData.set(DATA_WOOL_ID, (byte)(b0 & -17));
 		}
-	}
-
-	public static DyeColor getRandomSheepColor(Random random) {
-		int i = random.nextInt(100);
-		return DyeColor.WHITE;
 	}
 
 	public void ate() {

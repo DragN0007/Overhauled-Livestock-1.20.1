@@ -15,7 +15,6 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import software.bernie.geckolib.core.animation.Animation;
 
 import java.util.function.Supplier;
 
