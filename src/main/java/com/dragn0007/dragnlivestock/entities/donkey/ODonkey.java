@@ -140,8 +140,8 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if(tAnimationState.isMoving() || !this.shouldEmote) {
-			controller.markNeedsReload();
-			controller.setAnimation(new AnimationBuilder().clearAnimations());
+			controller.forceAnimationReset();
+			controller.stop();
 			this.shouldEmote = false;
 			return PlayState.STOP;
 		}
@@ -312,10 +312,11 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 	}
 
 	@Override
-	public void playEmote(String emoteName, Animation.LoopType loopType) {
-		AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, this.getId(), "emoteController");
-		controller.markNeedsReload();
-		controller.setAnimation(new AnimationBuilder().clearAnimations().addAnimation(emoteName, loopType));
+	public void playEmote(String emoteName, String loopType) {
+		AnimationController<?> controller = this.getAnimatableInstanceCache().getManagerForId(this.getId()).getAnimationControllers().get("emoteController");
+		controller.forceAnimationReset();
+		controller.stop();
+		controller.setAnimation(RawAnimation.begin().then(emoteName, Animation.LoopType.fromString(loopType)));
 		this.shouldEmote = true;
 	}
 

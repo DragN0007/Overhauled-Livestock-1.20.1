@@ -18,15 +18,15 @@ public class NetherUnicornRender extends GeoEntityRenderer<NetherUnicorn> {
     @Override
     public void render(NetherUnicorn entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
 
-        if (!animatable.isBaby()) {
+        if (!entity.isBaby()) {
 
-            if (animatable.hasChest() && LivestockOverhaulCommonConfig.HORSE_SADDLEBAG_RENDER.get()) {
+            if (entity.hasChest() && LivestockOverhaulCommonConfig.HORSE_SADDLEBAG_RENDER.get()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
 
-            if (animatable.isSaddled()) {
+            if (entity.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
@@ -42,7 +42,7 @@ public class NetherUnicornRender extends GeoEntityRenderer<NetherUnicorn> {
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
             }
 
-            if (animatable.isWearingArmor()) {
+            if (entity.isWearingArmor()) {
                 model.getBone("body_armor").ifPresent(b -> b.setHidden(false));
                 model.getBone("neck_armor").ifPresent(b -> b.setHidden(false));
                 model.getBone("head_armor").ifPresent(b -> b.setHidden(false));

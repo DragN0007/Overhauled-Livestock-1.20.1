@@ -53,21 +53,21 @@ public class LONetwork {
 
     public static class PlayEmoteRequest {
         public final String emoteName;
-        public final Animation.LoopType loopType;
+        public final String loopType;
 
-        public PlayEmoteRequest(String emoteName, Animation.LoopType loopType) {
+        public PlayEmoteRequest(String emoteName, String loopType) {
             this.emoteName = emoteName;
             this.loopType = loopType;
         }
 
         public static void encode(PlayEmoteRequest msg, FriendlyByteBuf buffer) {
             buffer.writeUtf(msg.emoteName);
-            buffer.writeEnum((Enum<?>) msg.loopType);
+            buffer.writeUtf(msg.loopType);
         }
 
         public static PlayEmoteRequest decode(FriendlyByteBuf buffer) {
             String emoteName = buffer.readUtf();
-            Animation.LoopType loopType = buffer.readEnum(Animation.LoopType.class);
+            String loopType = buffer.readUtf();
             return new PlayEmoteRequest(emoteName, loopType);
         }
 
@@ -90,9 +90,9 @@ public class LONetwork {
     public static class PlayEmoteResponse {
         public final int id;
         public final String emoteName;
-        public final Animation.LoopType loopType;
+        public final String loopType;
 
-        public PlayEmoteResponse(int id, String emoteName, Animation.LoopType loopType) {
+        public PlayEmoteResponse(int id, String emoteName, String loopType) {
             this.id = id;
             this.emoteName = emoteName;
             this.loopType = loopType;
@@ -101,13 +101,13 @@ public class LONetwork {
         public static void encode(PlayEmoteResponse msg, FriendlyByteBuf buffer) {
             buffer.writeInt(msg.id);
             buffer.writeUtf(msg.emoteName);
-            buffer.writeEnum(msg.loopType);
+            buffer.writeUtf(msg.loopType);
         }
 
         public static PlayEmoteResponse decode(FriendlyByteBuf buffer) {
             int id = buffer.readInt();
             String emoteName = buffer.readUtf();
-            Animation.LoopType loopType = buffer.readEnum(Animation.LoopType.class);
+            String loopType = buffer.readUtf();
             return new PlayEmoteResponse(id, emoteName, loopType);
         }
 

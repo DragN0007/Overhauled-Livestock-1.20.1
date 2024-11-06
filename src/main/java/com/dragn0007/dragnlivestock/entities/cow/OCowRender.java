@@ -16,7 +16,7 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
     @Override
     public void render(OCow entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
 
-        if (animatable.isChested()) {
+        if (entity.isChested()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             model.getBone("halter").ifPresent(b -> b.setHidden(false));
         } else {
@@ -24,7 +24,7 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
         }
 
-        if(animatable.isBaby()) {
+        if(entity.isBaby()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
             model.getBone("utters").ifPresent(b -> b.setHidden(true));

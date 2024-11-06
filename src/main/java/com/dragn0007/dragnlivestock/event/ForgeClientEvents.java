@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.event;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LONetwork;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,20 +18,20 @@ public class ForgeClientEvents {
         Player player = Minecraft.getInstance().player;
         if (player == null) return;
 
-        if (LivestockOverhaulClientEvent.HORSE_SPEED_UP.isDown()) {
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_SPEED_UP.getKey().getValue()) {
             LONetwork.INSTANCE.sendToServer(new LONetwork.HandleHorseSpeedRequest(1));
         }
 
-        if (LivestockOverhaulClientEvent.HORSE_SLOW_DOWN.isDown()) {
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_SLOW_DOWN.getKey().getValue()) {
             LONetwork.INSTANCE.sendToServer(new LONetwork.HandleHorseSpeedRequest(-1));
         }
 
-        if (LivestockOverhaulClientEvent.HORSE_BOW.isDown()) {
-            LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("bow", Animation.LoopType.PLAY_ONCE));
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_BOW.getKey().getValue()) {
+            LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("bow", "play_once"));
         }
 
-        if (LivestockOverhaulClientEvent.HORSE_PIAFFE.isDown()) {
-            LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("piaffe", Animation.LoopType.LOOP));
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_PIAFFE.getKey().getValue()) {
+            LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("piaffe", "loop"));
         }
     }
 }

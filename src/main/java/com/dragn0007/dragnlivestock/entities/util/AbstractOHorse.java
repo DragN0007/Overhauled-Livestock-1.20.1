@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
-import software.bernie.geckolib.core.animation.Animation;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -52,7 +51,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         super(entityType, level);
     }
 
-    public abstract void playEmote(String emoteName, Animation.LoopType loopType);
+    public abstract void playEmote(String emoteName, String loopType);
 
     public void openInventory(Player player) {
         if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {

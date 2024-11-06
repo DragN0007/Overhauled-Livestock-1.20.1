@@ -166,7 +166,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	}
 
 	@Override
-	public void playEmote(String emoteName, Animation.LoopType loopType) {
+	public void playEmote(String emoteName, String loopType) {
 	}
 
 	@Override

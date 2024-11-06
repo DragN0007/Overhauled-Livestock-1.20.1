@@ -15,13 +15,13 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
     @Override
     public void render(OSheep entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
 
-        if(animatable.isBaby()) {
+        if(entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         } else {
             poseStack.scale(1F, 1F, 1F);
         }
 
-        if (!animatable.isBaby() && animatable.isSheared()) {
+        if (!entity.isBaby() && entity.isSheared()) {
                 model.getBone("Wool1").ifPresent(b -> b.setHidden(true));
                 model.getBone("Wool2").ifPresent(b -> b.setHidden(true));
             } else {

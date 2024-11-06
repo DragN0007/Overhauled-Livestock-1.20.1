@@ -15,7 +15,7 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
 
     @Override
     public void render(OLlama entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if (animatable.hasChest()) {
+        if (entity.hasChest()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             model.getBone("halter").ifPresent(b -> b.setHidden(false));
         } else {
@@ -23,7 +23,7 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
         }
 
-        if(animatable.isBaby()) {
+        if(entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         } else {
             poseStack.scale(1F, 1F, 1F);
