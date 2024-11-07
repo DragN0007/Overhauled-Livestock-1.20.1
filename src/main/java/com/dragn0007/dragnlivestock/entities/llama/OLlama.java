@@ -85,6 +85,11 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 				.add(Attributes.FOLLOW_RANGE, 40.0D);
 	}
 
+	@Override
+	protected boolean canPerformRearing() {
+		return false;
+	}
+
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new RunAroundLikeCrazyGoal(this, 1.2D));

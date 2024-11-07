@@ -532,6 +532,8 @@ public class SpawnReplacer {
 
                 oCamel.setCustomName(vanillacamel.getCustomName());
                 oCamel.setAge(vanillacamel.getAge());
+                oCamel.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oCamel.generateRandomMaxHealth());
+                oCamel.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oCamel.generateRandomSpeed());
 
                 int randomVariant = event.getLevel().getRandom().nextInt(23);
                 oCamel.setVariant(randomVariant);

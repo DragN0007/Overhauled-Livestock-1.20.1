@@ -94,6 +94,11 @@ public class OMule extends AbstractOHorse implements GeoEntity {
 		return ((double)0.40F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
 	}
 
+	@Override
+	protected boolean canPerformRearing() {
+		return false;
+	}
+
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {

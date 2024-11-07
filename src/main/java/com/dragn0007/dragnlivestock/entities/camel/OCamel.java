@@ -4,6 +4,8 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.util.LOTags;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -17,6 +19,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -29,10 +34,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -78,6 +85,18 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomJumpStrength());
 	}
 
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.DEAD_BUSH, Items.CACTUS, Blocks.HAY_BLOCK.asItem());
+
+	@Override
+	public boolean isFood(ItemStack itemStack) {
+		return FOOD_ITEMS.test(itemStack);
+	}
+
+	@Override
+	protected boolean canPerformRearing() {
+		return false;
+	}
+
 	@Override
 	public void registerGoals() {
 		super.registerGoals();
@@ -86,21 +105,23 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 0.0F));
-		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOHorse.class));
+		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, OCamel.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.addGoal(5, new TemptGoal(this, 1.25D, Ingredient.of(Items.CACTUS), false));
 		this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Wolf.class, false));
 	}
 
 	public float generateRandomMaxHealth() {
-		return 17.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
+		return 25.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
 	}
 
 	public double generateRandomJumpStrength() {
-		return (double)0.3F + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D;
+		return (double)0.0F + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D;
 	}
 
 	public double generateRandomSpeed() {
-		return ((double)0.40F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
+		double randomSpeed = (0.20 + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.25D;
+		return Math.max(randomSpeed, 0.20);
 	}
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -108,30 +129,35 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
+		double currentSpeed = this.getDeltaMovement().lengthSqr();
+		double speedThreshold = 0.01;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(tAnimationState.isMoving()) {
-			if(this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+		if (tAnimationState.isMoving()) {
+			if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(Math.max(0.1, 0.85 * controller.getAnimationSpeed() + animationSpeed));
+			} else if (currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
+			} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 1.3 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else if
-			((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
-
+				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+				controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
 			}
 		} else {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-			controller.setAnimationSpeed(1.0);
-			} if (this.isSaddled() && !this.isControlledByLocalInstance()) {
+			if (this.isSaddled() && !this.isVehicle()) {
 				controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
-			controller.setAnimationSpeed(1.0);
+				controller.setAnimationSpeed(1.0);
+			} else {
+				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(1.0);
+			}
 		}
+
 		return PlayState.CONTINUE;
 	}
 
@@ -162,17 +188,71 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 
 	public int filledHumpsTime = this.random.nextInt(6000) + 6000;
 
-	public InteractionResult mobInteract(Player p_28298_, InteractionHand p_28299_) {
-		ItemStack itemstack = p_28298_.getItemInHand(p_28299_);
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() && --this.filledHumpsTime <= 0) {
-			p_28298_.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
-			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, Items.WATER_BUCKET.getDefaultInstance());
-			p_28298_.setItemInHand(p_28299_, itemstack1);
+			player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.WATER_BUCKET.getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
 			this.filledHumpsTime = this.random.nextInt(6000) + 6000;
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
-		} else {
-			return super.mobInteract(p_28298_, p_28299_);
 		}
+			return super.mobInteract(player, hand);
+	}
+
+	@Override
+	public boolean handleEating(Player p_30796_, ItemStack p_30797_) {
+		int i = 0;
+		int j = 0;
+		float f = 0.0F;
+		boolean flag = false;
+		if (p_30797_.is(Items.HAY_BLOCK)) {
+			i = 10;
+			j = 3;
+			f = 2.0F;
+		} else if (p_30797_.is(Blocks.CACTUS.asItem())) {
+			i = 90;
+			j = 6;
+			f = 10.0F;
+			if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
+				flag = true;
+				this.setInLove(p_30796_);
+			}
+		}
+
+		if (this.getHealth() < this.getMaxHealth() && f > 0.0F) {
+			this.heal(f);
+			flag = true;
+		}
+
+		if (this.isBaby() && i > 0) {
+			this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+			if (!this.level().isClientSide) {
+				this.ageUp(i);
+			}
+
+			flag = true;
+		}
+
+		if (j > 0 && (flag || !this.isTamed()) && this.getTemper() < this.getMaxTemper()) {
+			flag = true;
+			if (!this.level().isClientSide) {
+				this.modifyTemper(j);
+			}
+		}
+
+		if (flag) {
+			this.gameEvent(GameEvent.ENTITY_INTERACT);
+			if (!this.isSilent()) {
+				SoundEvent soundevent = this.getEatingSound();
+				if (soundevent != null) {
+					this.level().playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+				}
+			}
+		}
+
+		return flag;
 	}
 
 	@Override
@@ -180,13 +260,51 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		return itemStack.is(ItemTags.WOOL_CARPETS);
 	}
 
+	@Override
+	public boolean hurt(DamageSource damageSource, float v) {
+		if (damageSource.is(DamageTypes.CACTUS)) {
+			return false;
+		}
+		return super.hurt(damageSource, v);
+	}
+
 	//ground tie
 	@Override
 	public void tick() {
 		super.tick();
-		if (this.isSaddled() && !this.isVehicle() || this.isLeashed()) {
+
+		if ((this.isSaddled() && !this.isVehicle()) || this.isLeashed()) {
 			this.getNavigation().stop();
 		}
+
+		if (this.isOnSand()) {
+			if (!this.hasSpeedEffect()) {
+				this.applySpeedEffect();
+			}
+		} else {
+			if (this.hasSpeedEffect()) {
+				this.removeSpeedEffect();
+			}
+		}
+	}
+
+	public boolean isOnSand() {
+		BlockState blockState = this.level().getBlockState(this.blockPosition().below());
+		return blockState.is(LOTags.Blocks.SAND);
+	}
+
+	private void applySpeedEffect() {
+		MobEffect speedEffect = MobEffect.byId(1);
+		MobEffectInstance speedEffectInstance = new MobEffectInstance(speedEffect, 200, 1, false, false);
+		this.addEffect(speedEffectInstance);
+	}
+
+	private boolean hasSpeedEffect() {
+		return this.hasEffect(MobEffect.byId(1));
+	}
+
+	private void removeSpeedEffect() {
+		this.removeEffect(MobEffect.byId(1));
 	}
 
 	@Override
@@ -208,19 +326,6 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 
 			entity.setPos(x, y, z);
 		}
-	}
-
-	public void travel(Vec3 motion) {
-		if (this.isOnSand()) {
-			double speedMultiplier = 1.5;
-			motion = motion.scale(speedMultiplier);
-		}
-		super.travel(motion);
-	}
-
-	private boolean isOnSand() {
-		BlockState blockState = this.level().getBlockState(this.blockPosition().below());
-		return blockState.is(Blocks.SAND) || blockState.is(Blocks.RED_SAND);
 	}
 
 	@Override
@@ -314,6 +419,10 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		if (tag.contains("Overlay_Texture")) {
 			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
+
+		if (tag.contains("FilledHumpsTime")) {
+			this.filledHumpsTime = tag.getInt("FilledHumpsTime");
+		}
 	}
 
 	@Override
@@ -323,6 +432,7 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		tag.putInt("FilledHumpsTime", this.filledHumpsTime);
 	}
 
 	@Override

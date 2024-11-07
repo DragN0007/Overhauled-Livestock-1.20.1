@@ -1,6 +1,8 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,6 +11,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.player.Inventory;
 
 public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
@@ -39,6 +42,14 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
         if (this.oHorse.canWearArmor()) {
             graphics.blit(HORSE_INVENTORY_LOCATION,x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
+        }
+
+        if (this.oHorse.canWearArmor()) {
+            if (this.oHorse instanceof OCamel) {
+                graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 35, 36, this.imageHeight + 54, 18, 18);
+            } else {
+                graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
+            }
         }
 
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oHorse);
