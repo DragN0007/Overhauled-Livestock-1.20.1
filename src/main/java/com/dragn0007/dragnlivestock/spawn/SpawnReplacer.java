@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.spawn;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
+import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.horse.Donkey;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
@@ -484,7 +486,6 @@ public class SpawnReplacer {
             OMooshroom oMooshroom = EntityTypes.O_MOOSHROOM_ENTITY.get().create(event.getLevel());
             if (oMooshroom != null) {
                 oMooshroom.copyPosition(vanillamooshroom);
-                Entity entity = event.getEntity();
 
                 oMooshroom.setCustomName(vanillamooshroom.getCustomName());
                 oMooshroom.setAge(vanillamooshroom.getAge());
@@ -512,6 +513,40 @@ public class SpawnReplacer {
                 vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);
 
 //                    System.out.println("[Livestock Overhaul]: Replaced a vanilla mooshroom with an O-Mooshroom!");
+
+                event.setCanceled(true);
+            }
+        }
+
+        //Camel
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && event.getEntity() instanceof Camel) {
+            Camel vanillacamel = (Camel) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            OCamel oCamel = EntityTypes.O_CAMEL_ENTITY.get().create(event.getLevel());
+            if (oCamel != null) {
+                oCamel.copyPosition(vanillacamel);
+
+                oCamel.setCustomName(vanillacamel.getCustomName());
+                oCamel.setAge(vanillacamel.getAge());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(23);
+                oCamel.setVariant(randomVariant);
+
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(31);
+                oCamel.setOverlayVariant(randomOverlayVariant);
+
+                if (event.getLevel().isClientSide) {
+                    vanillacamel.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(oCamel);
+                vanillacamel.remove(Entity.RemovalReason.DISCARDED);
+
+//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla camel with an O-Camel!");
 
                 event.setCanceled(true);
             }

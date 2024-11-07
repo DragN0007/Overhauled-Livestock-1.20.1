@@ -47,6 +47,8 @@ public class LOItems {
             () -> new ForgeSpawnEggItem(EntityTypes.O_MULE_ENTITY, 0x502c1a, 0x381f17, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> O_MOOSHROOM_SPAWN_EGG = ITEMS.register("o_mooshroom_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.O_MOOSHROOM_ENTITY, 0xbf2425, 0xcabcbc, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> O_CAMEL_SPAWN_EGG = ITEMS.register("o_camel_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.O_CAMEL_ENTITY, 0xdfb68a, 0xa47d53, new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> OVERWORLD_UNICORN_SPAWN_EGG = ITEMS.register("overworld_unicorn_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.OVERWORLD_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
@@ -139,6 +141,19 @@ public class LOItems {
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationMod(1).build())));
     public static final RegistryObject<Item> COOKED_PORK_TENDERLOIN = ITEMS.register("cooked_pork_tenderloin",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationMod(1).build())));
+
+    public static final RegistryObject<Item> CAMEL = ITEMS.register("camel",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(1).build())));
+    public static final RegistryObject<Item> CAMEL_RIB = ITEMS.register("camel_rib",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(1).build())));
+    public static final RegistryObject<Item> CAMEL_LOIN = ITEMS.register("camel_loin",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(1).build())));
+    public static final RegistryObject<Item> COOKED_CAMEL = ITEMS.register("cooked_camel",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(9).saturationMod(1).build())));
+    public static final RegistryObject<Item> COOKED_CAMEL_RIB = ITEMS.register("cooked_camel_rib",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(1).build())));
+    public static final RegistryObject<Item> COOKED_CAMEL_LOIN = ITEMS.register("cooked_camel_loin",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(1).build())));
 
     public static final RegistryObject<Item> CHICKEN_THIGH = ITEMS.register("chicken_thigh",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(1).build())));

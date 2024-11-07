@@ -31,7 +31,6 @@ import software.bernie.geckolib.GeckoLib;
 @Mod(LivestockOverhaul.MODID)
 public class LivestockOverhaul
 {
-    private static final Logger LOGGER = LogUtils.getLogger();
     public static final String MODID = "dragnlivestock";
 
     public static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, MODID);

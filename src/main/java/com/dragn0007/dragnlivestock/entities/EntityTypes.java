@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities;
 
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
+import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
@@ -107,6 +108,12 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,1.5f)
                     .build(new ResourceLocation(MODID,"o_mooshroom").toString()));
+
+    public static final RegistryObject<EntityType<OCamel>> O_CAMEL_ENTITY = ENTITY_TYPES.register("o_camel",
+            () -> EntityType.Builder.of(OCamel::new,
+                            MobCategory.CREATURE)
+                    .sized(1.5f,2.5f)
+                    .build(new ResourceLocation(MODID,"o_camel").toString()));
 
 
     public static final RegistryObject<EntityType<OverworldUnicorn>> OVERWORLD_UNICORN_ENTITY = ENTITY_TYPES.register("overworld_unicorn",

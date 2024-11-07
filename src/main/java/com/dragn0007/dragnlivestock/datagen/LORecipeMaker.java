@@ -196,6 +196,27 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.MUTTON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_LOIN.get(), 0.35F, 600)
                 .unlockedBy("has_mutton_loin", has(LOItems.MUTTON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_loin_campfire_cooking"));
 
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CAMEL.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL.get(), 0.35F, 100)
+                .unlockedBy("has_camel", has(LOItems.CAMEL.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CAMEL.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL.get(), 0.35F, 200)
+                .unlockedBy("has_camel", has(LOItems.CAMEL.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL.get(), 0.35F, 600)
+                .unlockedBy("has_camel", has(LOItems.CAMEL.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CAMEL_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_RIB.get(), 0.35F, 100)
+                .unlockedBy("has_camel_rib", has(LOItems.CAMEL_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_rib_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CAMEL_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_RIB.get(), 0.35F, 200)
+                .unlockedBy("has_camel_rib", has(LOItems.CAMEL_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_rib_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_RIB.get(), 0.35F, 600)
+                .unlockedBy("has_camel_rib", has(LOItems.CAMEL_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_rib_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 100)
+                .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 200)
+                .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 600)
+                .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_campfire_cooking"));
+
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 100)
                 .unlockedBy("has_rabbit_thigh", has(LOItems.RABBIT_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_rabbit_thigh_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 200)
