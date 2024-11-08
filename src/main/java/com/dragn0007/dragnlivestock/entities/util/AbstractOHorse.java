@@ -3,11 +3,13 @@ package com.dragn0007.dragnlivestock.entities.util;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
@@ -86,8 +88,34 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         }
     }
 
+    @Override
     public boolean canParent() {
         return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+    }
+
+    @Override
+    public boolean isSaddleable() {
+        return this.isAlive() && !this.isBaby() && this.isTamed();
+    }
+
+    @Override
+    public void equipSaddle(@Nullable SoundSource p_30546_) {
+        this.inventory.setItem(0, new ItemStack(Items.SADDLE));
+    }
+
+    @Override
+    public boolean hasChest() {
+        return this.entityData.get(DATA_ID_CHEST);
+    }
+
+    @Override
+    public void setChest(boolean p_30505_) {
+        this.entityData.set(DATA_ID_CHEST, p_30505_);
+    }
+
+    @Override
+    public boolean isSaddled() {
+        return this.getFlag(4);
     }
 
     @Override
@@ -160,23 +188,37 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         return true;
     }
 
+    private static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOHorse.class, EntityDataSerializers.BOOLEAN);
+
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_CARPET_ID, -1);
+        this.entityData.define(DATA_ID_CHEST, false);
     }
 
+    @Override
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
-        if(!this.inventory.getItem(1).isEmpty()) {
+        if (!this.inventory.getItem(1).isEmpty()) {
             compoundTag.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
         }
 
         if (!this.inventory.getItem(1).isEmpty()) {
             compoundTag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
         }
+
+        if (!this.inventory.getItem(0).isEmpty()) {
+            compoundTag.put("SaddleItem", this.inventory.getItem(0).save(new CompoundTag()));
+        }
+
+        compoundTag.putBoolean("ChestedHorse", this.hasChest());
+        if (this.hasChest()) {
+            ListTag listtag = new ListTag();
+        }
     }
 
+    @Override
     public void readAdditionalSaveData(CompoundTag compoundTag) {
         super.readAdditionalSaveData(compoundTag);
         if(compoundTag.contains("ArmorItem", 10)) {
@@ -189,6 +231,15 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         if (compoundTag.contains("DecorItem", 10)) {
             this.inventory.setItem(1, ItemStack.of(compoundTag.getCompound("DecorItem")));
         }
+
+        if (compoundTag.contains("SaddleItem", 10)) {
+            ItemStack itemstack = ItemStack.of(compoundTag.getCompound("SaddleItem"));
+            if (itemstack.is(Items.SADDLE)) {
+                this.inventory.setItem(0, itemstack);
+            }
+        }
+
+        this.setChest(compoundTag.getBoolean("ChestedHorse"));
 
         this.updateContainerEquipment();
     }
