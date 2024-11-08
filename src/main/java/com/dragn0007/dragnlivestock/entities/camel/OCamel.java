@@ -135,18 +135,36 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (tAnimationState.isMoving()) {
+			//Walk
 			if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.85 * controller.getAnimationSpeed() + animationSpeed));
+				controller.setAnimationSpeed(Math.max(0.1, 0.87 * controller.getAnimationSpeed() + animationSpeed));
+
+			} else if (this.isOnSand() && this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
+
+				//Sprint
+			} else if (this.isOnSand() && currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
+
 			} else if (currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
 				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
+
+				//Trot
+			} else if (this.isOnSand() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
+
+			} else if (this.isOnGrass() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(Math.max(0.1, 0.74 * controller.getAnimationSpeed() + animationSpeed));
+
 			} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+				controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
 			}
 		} else {
 			if (this.isSaddled() && !this.isVehicle()) {
@@ -286,16 +304,26 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 				this.removeSpeedEffect();
 			}
 		}
+
+		if (this.isOnGrass()) {
+			if (!this.hasSlownessEffect()) {
+				this.applySlownessEffect();
+			}
+		} else {
+			if (this.hasSlownessEffect()) {
+				this.removeSlownessEffect();
+			}
+		}
 	}
 
 	public boolean isOnSand() {
 		BlockState blockState = this.level().getBlockState(this.blockPosition().below());
-		return blockState.is(LOTags.Blocks.SAND);
+		return blockState.is(LOTags.Blocks.SAND) || blockState.is(Blocks.COARSE_DIRT) || blockState.is(Blocks.GRAVEL);
 	}
 
 	private void applySpeedEffect() {
 		MobEffect speedEffect = MobEffect.byId(1);
-		MobEffectInstance speedEffectInstance = new MobEffectInstance(speedEffect, 200, 1, false, false);
+		MobEffectInstance speedEffectInstance = new MobEffectInstance(speedEffect, 200, 0, false, false);
 		this.addEffect(speedEffectInstance);
 	}
 
@@ -305,6 +333,25 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 
 	private void removeSpeedEffect() {
 		this.removeEffect(MobEffect.byId(1));
+	}
+
+	public boolean isOnGrass() {
+		BlockState blockState = this.level().getBlockState(this.blockPosition().below());
+		return blockState.is(LOTags.Blocks.DIRT);
+	}
+
+	public void applySlownessEffect() {
+		MobEffect slownessEffect = MobEffect.byId(2);
+		MobEffectInstance slownessEffectInstance = new MobEffectInstance(slownessEffect, 200, 1, false, false);
+		this.addEffect(slownessEffectInstance);
+	}
+
+	public boolean hasSlownessEffect() {
+		return this.hasEffect(MobEffect.byId(2));
+	}
+
+	public void removeSlownessEffect() {
+		this.removeEffect(MobEffect.byId(2));
 	}
 
 	@Override
