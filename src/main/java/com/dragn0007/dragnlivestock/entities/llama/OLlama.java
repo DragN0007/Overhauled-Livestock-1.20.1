@@ -75,7 +75,6 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 
 	public OLlama(EntityType<? extends OLlama> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

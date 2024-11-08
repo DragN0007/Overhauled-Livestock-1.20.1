@@ -59,7 +59,6 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 
 	public OCow(EntityType<? extends OCow> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 		this.updateInventory();
 	}
 

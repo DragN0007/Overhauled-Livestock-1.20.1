@@ -42,7 +42,6 @@ public class OPig extends Animal implements GeoEntity {
 
 	public OPig(EntityType<? extends OPig> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	@Override

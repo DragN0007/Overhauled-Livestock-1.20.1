@@ -34,7 +34,6 @@ public class NetherUnicorn extends OHorse implements GeoEntity {
 		this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
 		this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
 		this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, 0.0F);
-		this.noCulling = true;
 		this.xpReward = 50;
 	}
 

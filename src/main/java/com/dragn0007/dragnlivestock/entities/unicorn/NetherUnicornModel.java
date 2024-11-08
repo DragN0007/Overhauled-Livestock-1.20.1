@@ -19,7 +19,7 @@ public class NetherUnicornModel extends GeoModel<NetherUnicorn> {
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/unicorn.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhauled.animation.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
     @Override
     public ResourceLocation getModelResource(NetherUnicorn object) {
         return MODEL;

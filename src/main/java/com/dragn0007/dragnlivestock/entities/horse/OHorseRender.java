@@ -32,7 +32,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
     }
 
     @Override
-    public void render(OHorse entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void preRender(PoseStack poseStack, OHorse entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
         if (!entity.isBaby()) {
             if (entity.hasChest() && LivestockOverhaulCommonConfig.HORSE_SADDLEBAG_RENDER.get()) {
@@ -81,6 +81,6 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             model.getBone("head_armor").ifPresent(b -> b.setHidden(true));
         }
 
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

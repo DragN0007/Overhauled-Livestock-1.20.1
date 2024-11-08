@@ -27,7 +27,6 @@ public class OCod extends AbstractSchoolingFish implements GeoEntity {
 
 	public OCod(EntityType<? extends OCod> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

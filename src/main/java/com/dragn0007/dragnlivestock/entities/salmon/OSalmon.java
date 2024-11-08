@@ -27,7 +27,6 @@ public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
 
 	public OSalmon(EntityType<? extends OSalmon> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

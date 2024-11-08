@@ -52,7 +52,6 @@ public class OMule extends AbstractOHorse implements GeoEntity {
 
 	public OMule(EntityType<? extends OMule> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	public static AttributeSupplier.Builder createBaseHorseAttributes() {

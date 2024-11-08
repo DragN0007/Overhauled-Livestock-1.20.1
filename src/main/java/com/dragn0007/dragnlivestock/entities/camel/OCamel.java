@@ -62,7 +62,6 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 
 	public OCamel(EntityType<? extends OCamel> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	@Override

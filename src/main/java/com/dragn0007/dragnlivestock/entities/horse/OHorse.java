@@ -60,7 +60,6 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 
 	public OHorse(EntityType<? extends OHorse> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	@Override

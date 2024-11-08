@@ -51,7 +51,6 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 
 	public ODonkey(EntityType<? extends ODonkey> type, Level level) {
 		super(type, level);
-		this.noCulling = true;
 	}
 
 	@Override
