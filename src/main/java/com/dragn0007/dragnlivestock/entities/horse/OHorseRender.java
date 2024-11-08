@@ -41,7 +41,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isSaddled() && entity.getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
+            if (entity.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));

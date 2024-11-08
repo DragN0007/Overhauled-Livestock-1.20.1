@@ -24,7 +24,7 @@ public class OMuleModel extends GeoModel<OMule> {
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/mule_overhauled.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhauled.animation.json");
 
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_donkey.geo.json");
 //    public static final ResourceLocation BABY_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/baby_horse.animation.json");
