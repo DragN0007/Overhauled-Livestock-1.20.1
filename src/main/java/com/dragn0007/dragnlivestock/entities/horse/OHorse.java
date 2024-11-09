@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -34,6 +35,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -188,22 +190,22 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> state) {
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
 
-		AnimationController<T> controller = tAnimationState.getController();
+		AnimationController<T> controller = state.getController();
 
 		if(this.isJumping() || !this.onGround()) {
 			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
 			controller.setAnimationSpeed(1.0);
 
-		} else if(tAnimationState.isMoving()) {
+		} else if(state.isMoving() && getControllingPassenger() != null) {
 			if(this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
 				controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+			} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
 

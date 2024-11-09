@@ -25,7 +25,7 @@ version = '1.20.1-1.2'
 group = mod_group_id
 
 base {
-    archivesName = 'DragNs_Livestock_Overhaul'
+    archivesName = 'DragNs_Livestock_Overhaul-DEV_BETA'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)

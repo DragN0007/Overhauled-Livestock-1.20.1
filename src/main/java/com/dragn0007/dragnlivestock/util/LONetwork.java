@@ -49,7 +49,6 @@ public class LONetwork {
         }
     }
 
-
     public static class PlayEmoteRequest {
         public final String emoteName;
         public final String loopType;
@@ -84,7 +83,6 @@ public class LONetwork {
             ctx.setPacketHandled(true);
         }
     }
-
 
     public static class PlayEmoteResponse {
         public final int id;

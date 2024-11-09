@@ -139,27 +139,27 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.87 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else if (this.isOnSand() && this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
+//			} else if (this.isOnSand() && this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+//					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+//					controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
 
 				//Sprint
-			} else if (this.isOnSand() && currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
+//			} else if (this.isOnSand() && currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+//				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
+//				controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
 
 			} else if (currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
 				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
 
 				//Trot
-			} else if (this.isOnSand() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else if (this.isOnGrass() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.74 * controller.getAnimationSpeed() + animationSpeed));
+//			} else if (this.isOnSand() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+//				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+//				controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
+//
+//			} else if (this.isOnGrass() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+//				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+//				controller.setAnimationSpeed(Math.max(0.1, 0.74 * controller.getAnimationSpeed() + animationSpeed));
 
 			} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
