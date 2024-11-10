@@ -16,6 +16,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
@@ -34,6 +35,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.PacketDistributor;
+import org.joml.Vector3d;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -190,40 +193,45 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> state) {
+	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
 
-		AnimationController<T> controller = state.getController();
+		AnimationController<T> controller = tAnimationState.getController();
 
 		if(this.isJumping() || !this.onGround()) {
 			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
 			controller.setAnimationSpeed(1.0);
 
-		} else if(state.isMoving() && getControllingPassenger() != null) {
-			if(this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-				controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-			}
 		} else {
-			if (this.isVehicle()) {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			double xVelocity = this.getDeltaMovement().x;
+			double zVelocity = this.getDeltaMovement().z;
+
+			if (Math.abs(xVelocity) > 0.01 || Math.abs(zVelocity) > 0.01) {
+				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+				}
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
+				if (this.isVehicle()) {
+					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
+				}
+				controller.setAnimationSpeed(1.0);
 			}
-			controller.setAnimationSpeed(1.0);
 		}
 		return PlayState.CONTINUE;
 	}

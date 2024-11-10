@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LONetwork {
+
     public static class HandleHorseSpeedRequest {
         private final int speedMod;
 
