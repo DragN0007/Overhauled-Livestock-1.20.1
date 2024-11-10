@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.util;
 
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.nbt.CompoundTag;
@@ -17,6 +18,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -326,6 +328,10 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         return super.getDismountLocationForPassenger(livingEntity);
     }
 
+    public boolean isOx(Entity entity) {
+        return entity.getType() == EntityTypes.OX_ENTITY.get();
+    }
+
     public void handleSpeedRequest(int speedMod) {
         AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
 
@@ -335,7 +341,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
             movementSpeed.addTransientModifier(WALK_SPEED_MOD);
         } else if (speedMod == 1 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
             movementSpeed.removeModifier(WALK_SPEED_MOD);
-        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
+        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
             movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
         }
     }

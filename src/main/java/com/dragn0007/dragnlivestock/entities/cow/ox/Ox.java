@@ -18,6 +18,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -50,6 +52,8 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		super(type, level);
 	}
 
+	public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.8D, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
 	@Override
 	public Vec3 getLeashOffset() {
 		return new Vec3(0D, (double)this.getEyeHeight() * 1.0F, (double)(this.getBbWidth() * 1F));
@@ -59,7 +63,7 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 	public static AttributeSupplier.Builder createBaseHorseAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 24.0D)
-				.add(Attributes.MOVEMENT_SPEED, 0.20F)
+				.add(Attributes.MOVEMENT_SPEED, 0.17F)
 				.add(Attributes.ATTACK_DAMAGE, 2D);
 	}
 
@@ -106,14 +110,16 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(tAnimationState.isMoving()) {
+		double xVelocity = this.getDeltaMovement().x;
+		double zVelocity = this.getDeltaMovement().z;
+		if (Math.abs(xVelocity) > 0.01 || Math.abs(zVelocity) > 0.01) {
 			if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(0.9);
 
-			} else if (currentSpeed < speedThreshold || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD ) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+			} else if (currentSpeed < speedThreshold || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(0.9);
+				controller.setAnimationSpeed(0.8);
 			}
 		} else {
 				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
