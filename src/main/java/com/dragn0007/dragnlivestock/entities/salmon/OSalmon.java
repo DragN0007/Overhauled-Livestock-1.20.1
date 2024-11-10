@@ -66,6 +66,10 @@ public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
+		if(!this.isInWater()) {
+			controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
+		}
+
 		if(tAnimationState.isMoving()) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("swim_sprint", Animation.LoopType.LOOP));

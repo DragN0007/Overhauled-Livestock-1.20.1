@@ -14,6 +14,8 @@ import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.OCowRender;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomRender;
+import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
+import com.dragn0007.dragnlivestock.entities.cow.ox.OxRender;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyRender;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
@@ -35,6 +37,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
 import com.dragn0007.dragnlivestock.entities.unicorn.*;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.gui.OHorseScreen;
+import com.dragn0007.dragnlivestock.gui.OxScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -65,6 +68,7 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.O_MULE_ENTITY.get(), OMule.createBaseHorseAttributes().build());
         event.put(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroom.createAttributes().build());
         event.put(EntityTypes.O_CAMEL_ENTITY.get(), OCamel.createBaseHorseAttributes().build());
+        event.put(EntityTypes.OX_ENTITY.get(), Ox.createBaseHorseAttributes().build());
 
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
 
@@ -103,6 +107,7 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_MULE_ENTITY.get(), OMuleRender::new);
         EntityRenderers.register(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroomRender::new);
         EntityRenderers.register(EntityTypes.O_CAMEL_ENTITY.get(), OCamelRender::new);
+        EntityRenderers.register(EntityTypes.OX_ENTITY.get(), OxRender::new);
 
         EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);
         EntityRenderers.register(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicornRender::new);
@@ -110,5 +115,6 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorsemanRender::new);
 
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
+        MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);
     }
 }

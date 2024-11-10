@@ -3,6 +3,8 @@ package com.dragn0007.dragnlivestock.entities.cow;
 import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
+import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -398,48 +400,58 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OCow oCow = (OCow) ageableMob;
+
 		if (ageableMob instanceof OCow) {
 			OCow oCow1 = (OCow) ageableMob;
-			oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
-			int variant;
-			if (i < 4) {
-				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = oCow1.getVariant();
+			if (this.random.nextInt(5) == 0) {
+				Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
+				if (oX != null) {
+					oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
+					return oX;
+				}
+
 			} else {
-				variant = this.random.nextInt(OCowModel.Variant.values().length);
+				oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
+
+				int i = this.random.nextInt(9);
+				int variant;
+				if (i < 4) {
+					variant = this.getVariant();
+				} else if (i < 8) {
+					variant = oCow1.getVariant();
+				} else {
+					variant = this.random.nextInt(OCowModel.Variant.values().length);
+				}
+
+				int j = this.random.nextInt(5);
+				int overlay;
+				if (j < 2) {
+					overlay = this.getOverlayVariant();
+				} else if (j < 4) {
+					overlay = oCow1.getOverlayVariant();
+				} else {
+					overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
+				}
+
+				int k = this.random.nextInt(5);
+				int horns;
+				if (k < 2) {
+					horns = this.getHornVariant();
+				} else if (k < 4) {
+					horns = oCow1.getHornVariant();
+				} else {
+					horns = this.random.nextInt(OCowHornLayer.HornOverlay.values().length);
+				}
+
+				int udders;
+				udders = this.random.nextInt(OCowUdderLayer.Overlay.values().length);
+
+				oCow.setVariant(variant);
+				oCow.setOverlayVariant(overlay);
+				oCow.setHornVariant(horns);
+				oCow.setUdderVariant(udders);
 			}
-
-			int j = this.random.nextInt(5);
-			int overlay;
-			if (j < 2) {
-				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
-				overlay = oCow1.getOverlayVariant();
-			} else {
-				overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
-			}
-
-			int k = this.random.nextInt(5);
-			int horns;
-			if (k < 2) {
-				horns = this.getHornVariant();
-			} else if (k < 4) {
-				horns = oCow1.getHornVariant();
-			} else {
-				horns = this.random.nextInt(OCowHornLayer.HornOverlay.values().length);
-			}
-
-			int udders;
-			udders = this.random.nextInt(OCowUdderLayer.Overlay.values().length);
-
-
-			oCow.setVariant(variant);
-			oCow.setOverlayVariant(overlay);
-			oCow.setHornVariant(horns);
-			oCow.setUdderVariant(udders);
 		}
 
 		return oCow;
