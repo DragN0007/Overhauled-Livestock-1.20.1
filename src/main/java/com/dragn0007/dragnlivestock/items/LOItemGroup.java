@@ -40,6 +40,8 @@ public class LOItemGroup {
 
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
 
+//                        output.accept(LOItems.COVERED_WAGON.get());
+
                         output.accept(Items.MILK_BUCKET);
                         output.accept(LOItems.SHEEP_MILK_BUCKET.get());
                         output.accept(LOItems.LLAMA_MILK_BUCKET.get());

@@ -22,6 +22,9 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
         } else {
             poseStack.scale(1F, 1F, 1F);
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
         if (!entity.isBaby() && entity.isSheared()) {

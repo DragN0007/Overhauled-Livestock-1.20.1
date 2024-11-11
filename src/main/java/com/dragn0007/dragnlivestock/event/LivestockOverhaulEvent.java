@@ -35,6 +35,8 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmonRender;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
 import com.dragn0007.dragnlivestock.entities.unicorn.*;
+import com.dragn0007.dragnlivestock.entities.wagons.covered.CoveredWagon;
+import com.dragn0007.dragnlivestock.entities.wagons.covered.CoveredWagonRender;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.gui.OHorseScreen;
 import com.dragn0007.dragnlivestock.gui.OxScreen;
@@ -73,22 +75,8 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
 
         event.put(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicorn.createBaseHorseAttributes().build());
-        SpawnPlacements.register
-                (EntityTypes.OVERWORLD_UNICORN_ENTITY.get(),
-                        SpawnPlacements.Type.ON_GROUND,
-                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-
         event.put(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicorn.createBaseHorseAttributes().build());
-        SpawnPlacements.register
-                (EntityTypes.NETHER_UNICORN_ENTITY.get(),
-                        SpawnPlacements.Type.ON_GROUND,
-                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-
         event.put(EntityTypes.END_UNICORN_ENTITY.get(), EndUnicorn.createBaseHorseAttributes().build());
-        SpawnPlacements.register
-                (EntityTypes.END_UNICORN_ENTITY.get(),
-                        SpawnPlacements.Type.ON_GROUND,
-                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
     }
 
     @SubscribeEvent
@@ -113,6 +101,8 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicornRender::new);
         EntityRenderers.register(EntityTypes.END_UNICORN_ENTITY.get(), EndUnicornRender::new);
         EntityRenderers.register(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorsemanRender::new);
+
+        EntityRenderers.register(EntityTypes.COVERED_WAGON_ENTITY.get(), CoveredWagonRender::new);
 
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);

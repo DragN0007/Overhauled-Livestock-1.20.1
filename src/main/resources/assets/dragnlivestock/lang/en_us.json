@@ -1,6 +1,8 @@
 {
   "itemGroup.overhauled_livestock": "Overhauled Livestock",
 
+  "tooltip.dragnlivestock.not_functional.tooltip": "This item isn't fully functional yet.",
+
   "item.dragnlivestock.o_horse_spawn_egg": "O-Horse Spawn Egg",
   "entity.dragnlivestock.o_horse": "O-Horse",
 
@@ -46,7 +48,6 @@
   "item.dragnlivestock.ox_spawn_egg": "Ox Spawn Egg",
   "entity.dragnlivestock.ox": "Ox",
 
-
   "item.dragnlivestock.overworld_unicorn_spawn_egg": "Overworld Unicorn Spawn Egg",
   "entity.dragnlivestock.overworld_unicorn": "Overworld Unicorn",
 
@@ -59,8 +60,11 @@
   "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
 
 
+  "item.dragnlivestock.covered_wagon": "Covered Wagon",
+  "entity.dragnlivestock.covered_wagon": "Covered Wagon",
+
+
   "item.dragnlivestock.brand_tag": "Brand Tag",
-  "tooltip.dragnlivestock.brand_tag.tooltip": "This item isn't fully functional yet.",
 
   "item.dragnlivestock.netherite_horse_armor": "Netherite Horse Armor",
   "item.dragnlivestock.griffith_inspired_horse_armor": "Griffith-Inspired Horse Armor",

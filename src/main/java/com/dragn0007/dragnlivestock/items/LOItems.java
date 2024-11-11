@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.items;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
+import com.dragn0007.dragnlivestock.items.custom.CoveredWagonItem;
 import com.dragn0007.dragnlivestock.items.custom.FishOilItem;
 import com.dragn0007.dragnlivestock.items.custom.UnicornHornItem;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -66,6 +67,8 @@ public class LOItems {
             () -> new HorseArmorItem(15, "netherite", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> GRIFFITH_INSPIRED_HORSE_ARMOR = ITEMS.register("griffith_inspired_horse_armor",
             () -> new HorseArmorItem(15, "griffth", (new Item.Properties()).stacksTo(1)));
+
+    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
 
 
     //Food/ Items

@@ -459,6 +459,9 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(23);
                 oPig.setVariant(randomVariant);
 
+                int randomOverlay = event.getLevel().getRandom().nextInt(23);
+                oPig.setOverlayVariant(randomOverlay);
+
                 int randomTusksVariant = event.getLevel().getRandom().nextInt(23);
                 oPig.setTusksVariant(randomTusksVariant);
 
