@@ -16,10 +16,11 @@ public class LivestockOverhaulClientEvent {
     public static final KeyMapping HORSE_SLOW_DOWN = new KeyMapping("key.dragnlivestock.horse_slow_down", InputConstants.KEY_LALT, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_BOW = new KeyMapping("key.dragnlivestock.horse_bow", InputConstants.KEY_B, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_PIAFFE = new KeyMapping("key.dragnlivestock.horse_piaffe", InputConstants.KEY_P, "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HITCH_WAGON = new KeyMapping("key.dragnlivestock.hitch_wagon", InputConstants.KEY_H, "key.dragnlivestock.categories.dragnlivestock");
 
     @SubscribeEvent
     public static void registerKeyBindings(FMLClientSetupEvent event) {
-        KeyMapping[] keyMappings = {HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE};
+        KeyMapping[] keyMappings = {HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HITCH_WAGON};
         for (KeyMapping keyMapping : keyMappings) {
         }
     }

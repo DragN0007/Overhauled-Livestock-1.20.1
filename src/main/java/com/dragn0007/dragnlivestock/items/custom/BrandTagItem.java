@@ -39,6 +39,6 @@ public class BrandTagItem extends Item {
 
    @Override
    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-      pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.brand_tag.tooltip").withStyle(ChatFormatting.GRAY));
+      pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.not_functional.tooltip").withStyle(ChatFormatting.GRAY));
    }
 }

@@ -21,6 +21,7 @@ public class OPigRender extends GeoEntityRenderer<OPig> {
             model.getBone("tusks").ifPresent(b -> b.setHidden(true));
         } else {
             poseStack.scale(1F, 1F, 1F);
+            model.getBone("tusks").ifPresent(b -> b.setHidden(false));
         }
 
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);

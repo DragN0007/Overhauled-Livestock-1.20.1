@@ -3,9 +3,6 @@ package com.dragn0007.dragnlivestock.entities.cow;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.world.entity.player.Player;
-import org.joml.Quaterniond;
-import org.joml.Vector3d;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class OCowRender extends GeoEntityRenderer<OCow> {
