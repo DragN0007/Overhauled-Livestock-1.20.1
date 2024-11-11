@@ -292,8 +292,6 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 			}
 		}
 		return PlayState.CONTINUE;
-
-
 	}
 
 	@Override
