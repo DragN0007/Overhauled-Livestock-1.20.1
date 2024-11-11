@@ -126,14 +126,20 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
-		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
-		double animationSpeed = Math.max(0.1, movementSpeed);
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
+
+		boolean isMoving = (x * x + z * z) > 0.002;
+
+		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
+		double animationSpeed = Math.max(0.1, movementSpeed);
+
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if (tAnimationState.isMoving()) {
+		if (isMoving) {
 			//Walk
 			if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));

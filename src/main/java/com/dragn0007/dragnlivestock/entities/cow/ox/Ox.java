@@ -38,6 +38,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -107,18 +108,20 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.03;
 
-		AnimationController<T> controller = tAnimationState.getController();
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
 
-		double xVelocity = this.getDeltaMovement().x;
-		double zVelocity = this.getDeltaMovement().z;
-		if (Math.abs(xVelocity) > 0.01 || Math.abs(zVelocity) > 0.01) {
-			if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+		boolean isMoving = (x * x + z * z) > 0.0001;
+
+		AnimationController<T> controller = tAnimationState.getController();
+		if (isMoving) {
+			if (currentSpeed > speedThreshold || (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(0.9);
 
 			} else if (currentSpeed < speedThreshold || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(0.8);
+				controller.setAnimationSpeed(0.9);
 			}
 		} else {
 				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));

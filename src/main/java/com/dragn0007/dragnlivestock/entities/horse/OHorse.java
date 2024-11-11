@@ -249,8 +249,6 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 	}
 
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-		AnimationController<T> animationController = tAnimationState.getController();
-
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 
