@@ -127,12 +127,12 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 
 	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
-		double speedThreshold = 0.01;
+		double speedThreshold = 0.02;
 
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 
-		boolean isMoving = (x * x + z * z) > 0.002;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
@@ -140,37 +140,23 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (isMoving) {
-			//Walk
-			if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+			if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.87 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else if (this.isOnSand() && this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
-
-//				Sprint
-			} else if (this.isOnSand() && currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+			} else if (this.isOnSand() && currentSpeed > speedThreshold && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else if (currentSpeed > speedThreshold && this.isVehicle() || this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
+			} else if (this.isVehicle() && currentSpeed > speedThreshold) {
+				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
 
-				//Trot
-			} else if (this.isOnSand() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else if (this.isOnGrass() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.74 * controller.getAnimationSpeed() + animationSpeed));
-
-			} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
+			} else {
+				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
 			}
+
 		} else {
 			if (this.isSaddled() && !this.isVehicle()) {
 				controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
@@ -183,6 +169,7 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 
 		return PlayState.CONTINUE;
 	}
+
 
 	private <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();

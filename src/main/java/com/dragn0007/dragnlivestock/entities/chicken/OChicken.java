@@ -86,17 +86,18 @@ public class OChicken extends Animal implements GeoEntity {
 
 		if (!onGround()) {
 			controller.setAnimation(RawAnimation.begin().then("flap", Animation.LoopType.LOOP));
-
-			if (tAnimationState.isMoving()) {
-				if (currentSpeed > speedThreshold) {
-					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-				} else {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				}
-			} else {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-			}
 		}
+
+		if (tAnimationState.isMoving()) {
+			if (currentSpeed > speedThreshold) {
+				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+			} else {
+				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+			}
+		} else {
+			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+		}
+
 		return PlayState.CONTINUE;
 	}
 
