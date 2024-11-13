@@ -12,7 +12,6 @@ public class OxRender extends GeoEntityRenderer<Ox> {
     public OxRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OxModel());
         this.addRenderLayer(new OxHornLayer(this));
-        this.addRenderLayer(new OxUdderLayer(this));
     }
 
     @Override
@@ -36,14 +35,12 @@ public class OxRender extends GeoEntityRenderer<Ox> {
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
         }
 
-        if(animatable.isBaby()) {
+        if(entity.isBaby()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             model.getBone("halter").ifPresent(b -> b.setHidden(true));
             model.getBone("utters").ifPresent(b -> b.setHidden(true));
             model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
             model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
-            model.getBone("saddle").ifPresent(b -> b.setHidden(true));
-            model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

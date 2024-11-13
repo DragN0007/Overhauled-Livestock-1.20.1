@@ -41,18 +41,18 @@ public class OMooshroom extends OCow implements GeoEntity {
         return p_28934_.getBlockState(p_28933_.below()).is(Blocks.MYCELIUM) ? 10.0F : p_28934_.getPathfindingCostFromLightLevels(p_28933_);
     }
 
-    public InteractionResult mobInteract(Player p_28298_, InteractionHand p_28299_) {
-        ItemStack itemstack = p_28298_.getItemInHand(p_28299_);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         if (itemstack.is(Items.BOWL) && !this.isBaby() &&
-                (!LivestockOverhaulCommonConfig.GENDERS_ENABLED.get() ||
-                        (LivestockOverhaulCommonConfig.GENDERS_ENABLED.get() &&
-                                getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation)))) {
-            p_28298_.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
-            ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, Items.MUSHROOM_STEW.getDefaultInstance());
-            p_28298_.setItemInHand(p_28299_, itemstack1);
+                (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+                        (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale))) {
+
+            player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
+            ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MUSHROOM_STEW.getDefaultInstance());
+            player.setItemInHand(hand, itemstack1);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
-            return super.mobInteract(p_28298_, p_28299_);
+            return super.mobInteract(player, hand);
         }
     }
 
@@ -182,12 +182,37 @@ public class OMooshroom extends OCow implements GeoEntity {
         this.entityData.define(UDDERS, 0);
     }
 
+    boolean isFemale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation);
+    boolean isMale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.MALE.resourceLocation);
+
     public boolean canParent() {
         return !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
     }
 
     public boolean canMate(Animal animal) {
-        return this.canParent() && ((OMooshroom) animal).canParent();
+        if (animal == this) {
+            return false;
+        } else if (!(animal instanceof OMooshroom)) {
+            return false;
+        } else {
+            OMooshroom partner = (OMooshroom) animal;
+
+            if (!this.canParent() || !partner.canParent()) {
+                return false;
+            }
+
+            if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+                boolean partnerIsFemale = partner.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation);
+                boolean partnerIsMale = partner.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.MALE.resourceLocation);
+
+                boolean isFemale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation);
+                boolean isMale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.MALE.resourceLocation);
+
+                return (isFemale && partnerIsMale) || (isMale && partnerIsFemale);
+            } else {
+                return true;
+            }
+        }
     }
 
     @Override

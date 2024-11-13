@@ -20,6 +20,28 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GENDER_TEST_STRIP.get(), 4)
+                .requires(Items.PAPER)
+                .requires(Items.PAPER)
+                .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.PAPER)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GENDER_TEST_STRIP.get(), 1)
+                .requires(LOItems.MALE_GENDER_TEST_STRIP.get())
+                .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.PAPER)
+                        .build()))
+                .save(pFinishedRecipeConsumer, "gender_test_strip_from_male");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GENDER_TEST_STRIP.get(), 1)
+                .requires(LOItems.FEMALE_GENDER_TEST_STRIP.get())
+                .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.PAPER)
+                        .build()))
+                .save(pFinishedRecipeConsumer, "gender_test_strip_from_female");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get())
                 .define('A', LOTags.Items.RAW_HORSE)
                 .define('B', Items.ENCHANTED_GOLDEN_APPLE)
@@ -90,11 +112,11 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.EGG_SALAD.get(), 1)
-                .requires(Items.EGG)
-                .requires(Items.EGG)
+                .requires(LOTags.Items.EGG)
+                .requires(LOTags.Items.EGG)
                 .requires(Items.BOWL)
                 .unlockedBy("has_egg", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.EGG)
+                        .of(LOTags.Items.EGG)
                         .build()))
                 .save(pFinishedRecipeConsumer);
 

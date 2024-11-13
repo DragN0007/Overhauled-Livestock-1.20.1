@@ -3,16 +3,14 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:egg"
+      "item": "minecraft:paper"
     },
     {
-      "tag": "forge:egg"
-    },
-    {
-      "item": "minecraft:bowl"
+      "item": "minecraft:paper"
     }
   ],
   "result": {
-    "item": "dragnlivestock:egg_salad"
+    "count": 4,
+    "item": "dragnlivestock:gender_test_strip"
   }
 }

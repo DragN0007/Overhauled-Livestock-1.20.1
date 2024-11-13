@@ -42,6 +42,10 @@ public class LOItemGroup {
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
 
+                        output.accept(LOItems.FERTILIZED_EGG.get());
+                        output.accept(LOItems.EGG.get());
+                        output.accept(LOItems.GENDER_TEST_STRIP.get());
+
                         output.accept(Items.MILK_BUCKET);
                         output.accept(LOItems.SHEEP_MILK_BUCKET.get());
                         output.accept(LOItems.LLAMA_MILK_BUCKET.get());

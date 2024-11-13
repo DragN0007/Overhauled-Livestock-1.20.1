@@ -26,6 +26,12 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.BRAND_TAG);
         simpleItem(LOItems.NETHERITE_HORSE_ARMOR);
         simpleItem(LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR);
+        simpleItem(LOItems.GENDER_TEST_STRIP);
+        simpleItem(LOItems.MALE_GENDER_TEST_STRIP);
+        simpleItem(LOItems.FEMALE_GENDER_TEST_STRIP);
+
+        simpleItem(LOItems.FERTILIZED_EGG);
+        simpleItem(LOItems.EGG);
 
         simpleItem(LOItems.COVERED_WAGON);
 

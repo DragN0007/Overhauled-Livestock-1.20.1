@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.cow.ox;
 
-import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
@@ -38,7 +37,6 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.Animation;
 import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -208,13 +206,8 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		return OxHornLayer.HornOverlay.hornOverlayFromOrdinal(getHornVariant()).resourceLocation;
 	}
 
-	public ResourceLocation getUddersLocation() {
-		return OxUdderLayer.Overlay.overlayFromOrdinal(getUdderVariant()).resourceLocation;
-	}
-
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Ox.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(Ox.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> UDDERS = SynchedEntityData.defineId(Ox.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -222,18 +215,12 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 	public int getHornVariant() {
 		return this.entityData.get(HORNS);
 	}
-	public int getUdderVariant() {
-		return this.entityData.get(UDDERS);
-	}
 
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 	public void setHornVariant(int hornVariant) {
 		this.entityData.set(HORNS, hornVariant);
-	}
-	public void setUdderVariant(int udderVariant) {
-		this.entityData.set(UDDERS, udderVariant);
 	}
 
 	@Override
@@ -247,10 +234,6 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		if (tag.contains("Horns")) {
 			setHornVariant(tag.getInt("Horns"));
 		}
-
-		if (tag.contains("Udders")) {
-			setUdderVariant(tag.getInt("Udders"));
-		}
 	}
 
 	@Override
@@ -259,8 +242,6 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		tag.putInt("Variant", getVariant());
 
 		tag.putInt("Horns", getHornVariant());
-
-		tag.putInt("Udders", getUdderVariant());
 	}
 
 	@Override
@@ -272,7 +253,7 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		Random random = new Random();
 		setVariant(random.nextInt(OxModel.Variant.values().length));
 		setHornVariant(random.nextInt(OxHornLayer.HornOverlay.values().length));
-		setUdderVariant(random.nextInt(OxUdderLayer.Overlay.values().length));
+		setGender(1);
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -282,7 +263,7 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(HORNS, 0);
-		this.entityData.define(UDDERS, 0);
+		this.entityData.define(GENDER, 1);
 	}
 
 	@Override
@@ -294,42 +275,11 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 	}
 
 	public boolean canMate(Animal animal) {
-		return this.canParent() && ((Ox) animal).canParent();
+		return false;
 	}
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		Ox ox1;
-		Ox ox = (Ox) ageableMob;
-		ox1 = EntityTypes.OX_ENTITY.get().create(serverLevel);
-
-		int i = this.random.nextInt(9);
-		int variant;
-		if (i < 4) {
-			variant = this.getVariant();
-		} else if (i < 8) {
-			variant = ox.getVariant();
-		} else {
-			variant = this.random.nextInt(OxModel.Variant.values().length);
-		}
-
-		int k = this.random.nextInt(5);
-		int horns;
-		if (k < 2) {
-			horns = this.getHornVariant();
-		} else if (k < 4) {
-			horns = ox.getHornVariant();
-		} else {
-			horns = this.random.nextInt(OxHornLayer.HornOverlay.values().length);
-		}
-
-		int udders;
-		udders = this.random.nextInt(OxUdderLayer.Overlay.values().length);
-
-		ox1.setVariant(variant);
-		ox1.setHornVariant(horns);
-		ox1.setUdderVariant(udders);
-
-		return ox1;
+		return null;
 	}
 }

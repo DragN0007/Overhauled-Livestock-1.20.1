@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -462,6 +463,10 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		if (tag.contains("FilledHumpsTime")) {
 			this.filledHumpsTime = tag.getInt("FilledHumpsTime");
 		}
+
+		if (tag.contains("Gender")) {
+			this.setGender(tag.getInt("Gender"));
+		}
 	}
 
 	@Override
@@ -472,6 +477,7 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("FilledHumpsTime", this.filledHumpsTime);
+		tag.putInt("Gender", this.getGender());
 	}
 
 	@Override
@@ -483,6 +489,7 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		Random random = new Random();
 		this.setVariant(random.nextInt(OCamelModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OCamelMarkingLayer.Overlay.values().length));
+		this.setGender(random.nextInt(Gender.values().length));
 
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -502,12 +509,34 @@ public class OCamel extends AbstractOHorse implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(GENDER, 0);
 		this.entityData.define(VARIANT_TEXTURE, OCamelModel.Variant.DESERT.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OCamelMarkingLayer.Overlay.NONE.resourceLocation);
 	}
 
 	public boolean canMate(Animal animal) {
-		return this.canParent() && ((OCamel) animal).canParent();
+		if (animal == this) {
+			return false;
+		} else if (!(animal instanceof OCamel)) {
+			return false;
+		} else {
+			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				return this.canParent() && ((OCamel) animal).canParent();
+			} else {
+				OCamel partner = (OCamel) animal;
+				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+					return true;
+				}
+
+				boolean partnerIsFemale = partner.isFemale();
+				boolean partnerIsMale = partner.isMale();
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+					return isFemale();
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

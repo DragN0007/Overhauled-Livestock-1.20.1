@@ -50,6 +50,17 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             }
         }
 
+
+
+
+        if (this.oHorse.isFemale()) {
+            graphics.blit(HORSE_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
+        }
+
+        if (this.oHorse.isMale()) {
+            graphics.blit(HORSE_INVENTORY_LOCATION, x + 161, y + 9, 98, this.imageHeight + 54, 8, 8);
+        }
+
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oHorse);
     }
 

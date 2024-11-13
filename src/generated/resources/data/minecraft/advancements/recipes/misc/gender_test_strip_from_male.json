@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_egg": {
+    "has_paper": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:egg"
+            "items": [
+              "minecraft:paper"
+            ]
           }
         ]
       },
@@ -13,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:egg_salad"
+        "recipe": "minecraft:gender_test_strip_from_male"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_egg",
+      "has_paper",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:egg_salad"
+      "minecraft:gender_test_strip_from_male"
     ]
   },
   "sends_telemetry_event": false

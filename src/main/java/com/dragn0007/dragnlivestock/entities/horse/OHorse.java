@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,11 +33,8 @@ import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -535,6 +533,10 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		if (tag.contains("Breed")) {
 			this.setBreed(tag.getInt("Breed"));
 		}
+
+		if (tag.contains("Gender")) {
+			this.setGender(tag.getInt("Gender"));
+		}
 	}
 
 	@Override
@@ -545,6 +547,7 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Breed", this.getBreed());
+		tag.putInt("Gender", this.getGender());
 	}
 
 	@Override
@@ -557,6 +560,7 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		Random random = new Random();
 		this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+		this.setGender(random.nextInt(Gender.values().length));
 
 		if (spawnType == MobSpawnType.SPAWN_EGG) {
 			this.setBreed(random.nextInt(BreedModel.values().length));
@@ -572,6 +576,7 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(BREED, 0);
+		this.entityData.define(GENDER, 0);
 		this.entityData.define(VARIANT_TEXTURE, OHorseModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OHorseMarkingLayer.Overlay.NONE.resourceLocation);
 	}
@@ -582,8 +587,23 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		} else if (!(animal instanceof ODonkey) && !(animal instanceof OHorse)) {
 			return false;
 		} else {
-			return this.canParent() && ((AbstractOHorse)animal).canParent();
+			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				return this.canParent() && ((AbstractOHorse) animal).canParent();
+			} else {
+				AbstractOHorse partner = (AbstractOHorse) animal;
+				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+					return true;
+				}
+
+				boolean partnerIsFemale = partner.isFemale();
+				boolean partnerIsMale = partner.isMale();
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+					return isFemale();
+				}
+			}
 		}
+		return false;
 	}
 
 	@Override

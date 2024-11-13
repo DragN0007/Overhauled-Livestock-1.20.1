@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.wagons.covered;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.unicorn.EndUnicorn;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

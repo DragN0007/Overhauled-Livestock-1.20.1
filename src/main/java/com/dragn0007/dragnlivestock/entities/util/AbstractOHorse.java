@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.util;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -27,10 +28,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.HorseArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -130,6 +128,29 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         return super.getPassengersRidingOffset() - 0.25D;
     }
 
+    public enum Gender {
+        FEMALE,
+        MALE
+    }
+
+    public boolean isFemale() {
+        return this.getGender() == 0;
+    }
+
+    public boolean isMale() {
+        return this.getGender() == 1;
+    }
+
+    public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AbstractOHorse.class, EntityDataSerializers.INT);
+
+    public int getGender() {
+        return this.entityData.get(GENDER);
+    }
+
+    public void setGender(int gender) {
+        this.entityData.set(GENDER, gender);
+    }
+
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
@@ -142,6 +163,20 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
             if(this.isVehicle()) {
                 return super.mobInteract(player, hand);
             }
+        }
+
+        if (itemStack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
+            player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+            ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+            player.setItemInHand(hand, itemstack1);
+            return InteractionResult.SUCCESS;
+        }
+
+        if (itemStack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
+            player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+            ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+            player.setItemInHand(hand, itemstack1);
+            return InteractionResult.SUCCESS;
         }
 
         if(!itemStack.isEmpty()) {
