@@ -22,7 +22,7 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
 
         if (!entity.isBaby()) {
 
-            if (entity.hasChest() && LivestockOverhaulCommonConfig.HORSE_SADDLEBAG_RENDER.get()) {
+            if (entity.hasChest()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));

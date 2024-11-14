@@ -154,6 +154,19 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+
+        if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+            if (this.hasChest()) {
+                this.dropEquipment();
+                this.inventory.removeAllItems();
+
+                this.setChest(false);
+                this.playChestEquipsSound();
+
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+        }
+
         if(!this.isBaby()) {
             if(this.isTamed() && player.isSecondaryUseActive()) {
                 this.openInventory(player);

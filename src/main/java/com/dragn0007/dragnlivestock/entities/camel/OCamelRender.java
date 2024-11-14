@@ -19,7 +19,7 @@ public class OCamelRender extends GeoEntityRenderer<OCamel> {
 
         if (!entity.isBaby()) {
 
-            if (entity.hasChest() && LivestockOverhaulCommonConfig.HORSE_SADDLEBAG_RENDER.get()) {
+            if (entity.hasChest()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
