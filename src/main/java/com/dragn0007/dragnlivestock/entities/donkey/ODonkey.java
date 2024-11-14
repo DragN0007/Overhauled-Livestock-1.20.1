@@ -108,7 +108,7 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 
-		boolean isMoving = (x * x + z * z) > 0.002;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);

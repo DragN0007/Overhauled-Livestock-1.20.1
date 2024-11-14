@@ -201,6 +201,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 		}
 
+		if (this.isOrderedToSit() && !tAnimationState.isMoving()) {
+			controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
+		}
+
 		return PlayState.CONTINUE;
 	}
 

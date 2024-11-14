@@ -32,5 +32,13 @@ public class ForgeClientEvents {
         if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_PIAFFE.getKey().getValue()) {
             LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("piaffe", "loop"));
         }
+
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_WAVE.getKey().getValue()) {
+            LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("wave", "play_once"));
+        }
+
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_LEVADE.getKey().getValue()) {
+            LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("levade", "play_once"));
+        }
     }
 }

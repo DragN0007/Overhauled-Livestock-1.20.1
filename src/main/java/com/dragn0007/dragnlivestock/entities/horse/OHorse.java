@@ -8,6 +8,8 @@ import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.event.ForgeClientEvents;
+import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -183,74 +185,19 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-//	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-//		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
-//		double animationSpeed = Math.max(0.1, movementSpeed);
-//
-//		AnimationController<T> controller = tAnimationState.getController();
-//
-//		if(this.isJumping() || !this.onGround()) {
-//			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
-//			controller.setAnimationSpeed(1.0);
-//
-//		} else {
-//			double xVelocity = this.getDeltaMovement().x;
-//			double zVelocity = this.getDeltaMovement().z;
-//
-//			if (Math.abs(xVelocity) > 0.01 || Math.abs(zVelocity) > 0.01) {
-//				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-//					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
-//					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-//
-//				} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-//					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-//					controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
-//
-//				} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
-//					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-//					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-//
-//				} else {
-//					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-//					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-//				}
-//			} else {
-//				if (this.isVehicle()) {
-//					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-//				} else {
-//					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
-//				}
-//				controller.setAnimationSpeed(1.0);
-//			}
-//		}
-//		return PlayState.CONTINUE;
-//	}
-
-	private <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
-		AnimationController<T> controller = tAnimationState.getController();
-
-		if(tAnimationState.isMoving() || !this.shouldEmote) {
-			controller.forceAnimationReset();
-			controller.stop();
-			this.shouldEmote = false;
-			return PlayState.STOP;
-		}
-
-		return PlayState.CONTINUE;
-	}
-
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
 		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
 		controllers.add(new AnimationController<>(this, "emoteController", 5, this::emotePredicate));
+//		controllers.add(new AnimationController<>(this, "stanceController", 5, this::stancePredicate));
 	}
 
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 
-		boolean isMoving = (x * x + z * z) > 0.002;
+		boolean isMoving = (x * x + z * z) >  0.0001;
 
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
@@ -273,6 +220,10 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 				} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
@@ -303,6 +254,35 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		controller.setAnimation(RawAnimation.begin().then(emoteName, Animation.LoopType.fromString(loopType)));
 		this.shouldEmote = true;
 	}
+
+	private <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+		AnimationController<T> controller = tAnimationState.getController();
+
+		if(tAnimationState.isMoving() || !this.shouldEmote) {
+			controller.forceAnimationReset();
+			controller.stop();
+			this.shouldEmote = false;
+			return PlayState.STOP;
+		}
+
+		return PlayState.CONTINUE;
+	}
+
+//	private <T extends GeoAnimatable> PlayState stancePredicate(AnimationState<T> tAnimationState) {
+//
+//		AnimationController<T> controller = tAnimationState.getController();
+//
+//		if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_REINING_TOGGLE.isDown()) {
+//			controller.setAnimation(RawAnimation.begin().then("head_down", Animation.LoopType.LOOP));
+//
+//		} else if(!this.isVehicle() || LivestockOverhaulClientEvent.CLEAR.isDown()) {
+//			controller.forceAnimationReset();
+//			controller.stop();
+//			return PlayState.STOP;
+//		}
+//
+//		return PlayState.CONTINUE;
+//	}
 
 	public boolean isFollower() {
 		return this.leader != null && this.leader.isAlive();
