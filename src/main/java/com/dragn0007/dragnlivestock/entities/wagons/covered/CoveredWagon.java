@@ -153,8 +153,6 @@ public class CoveredWagon extends Entity implements GeoEntity, ContainerListener
 		return super.interact(player, hand);
 	}
 
-
-	// Generates the base texture
 	public ResourceLocation getTextureResource() {
 		return CoveredWagonModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
