@@ -39,6 +39,7 @@ public class LOItemGroup {
                         output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());
 
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
+//                        output.accept(LOItems.BLACK_SADDLE.get());
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
 

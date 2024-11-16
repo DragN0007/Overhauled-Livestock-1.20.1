@@ -98,9 +98,14 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         return this.isAlive() && !this.isBaby() && this.isTamed();
     }
 
+    public boolean isSaddle(ItemStack itemStack) {
+        return itemStack.getItem() instanceof SaddleItem;
+    }
+
     @Override
     public void equipSaddle(@Nullable SoundSource p_30546_) {
         this.inventory.setItem(0, new ItemStack(Items.SADDLE));
+//        this.inventory.setItem(0, new ItemStack(LOItems.BLACK_SADDLE.get()));
     }
 
     @Override
@@ -218,7 +223,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            boolean canSaddle = !this.isBaby() && !this.isSaddled() && itemStack.is(Items.SADDLE);
+            boolean canSaddle = !this.isBaby() && !this.isSaddled() && this.isSaddle(itemStack);
             if(this.isArmor(itemStack) || canSaddle) {
                 this.openInventory(player);
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
@@ -283,9 +288,9 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         }
 
         if (compoundTag.contains("SaddleItem", 10)) {
-            ItemStack itemstack = ItemStack.of(compoundTag.getCompound("SaddleItem"));
-            if (itemstack.is(Items.SADDLE)) {
-                this.inventory.setItem(0, itemstack);
+            ItemStack itemStack = ItemStack.of(compoundTag.getCompound("SaddleItem"));
+            if(!itemStack.isEmpty() && this.isSaddle(itemStack)) {
+                this.inventory.setItem(0, itemStack);
             }
         }
 
@@ -378,6 +383,21 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
 
     public boolean isOx(Entity entity) {
         return entity.getType() == EntityTypes.OX_ENTITY.get();
+    }
+    public boolean isHorse(Entity entity) {
+        return entity.getType() == EntityTypes.O_HORSE_ENTITY.get();
+    }
+    public boolean isDonkey(Entity entity) {
+        return entity.getType() == EntityTypes.O_DONKEY_ENTITY.get();
+    }
+    public boolean isMule(Entity entity) {
+        return entity.getType() == EntityTypes.O_MULE_ENTITY.get();
+    }
+
+    public boolean isUnicorn(Entity entity) {
+        return entity.getType() == EntityTypes.OVERWORLD_UNICORN_ENTITY.get()
+                || entity.getType() == EntityTypes.NETHER_UNICORN_ENTITY.get()
+                || entity.getType() == EntityTypes.END_UNICORN_ENTITY.get();
     }
 
     public void handleSpeedRequest(int speedMod) {

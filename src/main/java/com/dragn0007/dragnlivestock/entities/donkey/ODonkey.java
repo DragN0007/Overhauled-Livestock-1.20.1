@@ -115,7 +115,7 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(this.isJumping() || !this.onGround()) {
+		if(this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
 			controller.setAnimationSpeed(1.0);
 		} else {

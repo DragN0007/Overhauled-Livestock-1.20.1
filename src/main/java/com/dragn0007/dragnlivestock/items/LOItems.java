@@ -70,6 +70,9 @@ public class LOItems {
             () -> new HorseArmorItem(15, "netherite", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> GRIFFITH_INSPIRED_HORSE_ARMOR = ITEMS.register("griffith_inspired_horse_armor",
             () -> new HorseArmorItem(15, "griffth", (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> BLACK_SADDLE = ITEMS.register("black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",

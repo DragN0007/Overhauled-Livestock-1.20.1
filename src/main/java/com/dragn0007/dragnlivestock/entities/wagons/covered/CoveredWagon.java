@@ -195,7 +195,6 @@ public class CoveredWagon extends Entity implements GeoEntity, ContainerListener
 	// 0 | 1
 	// 2 | 3
 
-
 	private static final EntityDataAccessor<Float> HEALTH = SynchedEntityData.defineId(CoveredWagon.class, EntityDataSerializers.FLOAT);
 
 	@Override

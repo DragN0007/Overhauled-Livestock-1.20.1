@@ -18,6 +18,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
         this.addRenderLayer(new OHorseMarkingLayer(this));
         this.addRenderLayer(new OHorseCarpetLayer(this));
         this.addRenderLayer(new OHorseArmorLayer(this));
+        this.addRenderLayer(new OHorseSaddleLayer(this));
     }
 
     @Override
