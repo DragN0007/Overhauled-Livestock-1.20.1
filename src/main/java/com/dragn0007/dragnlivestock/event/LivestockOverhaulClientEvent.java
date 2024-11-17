@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -23,9 +24,10 @@ public class LivestockOverhaulClientEvent {
 //    public static final KeyMapping HORSE_REINING_TOGGLE = new KeyMapping("key.dragnlivestock.horse_reining_toggle", InputConstants.KEY_UP, "key.dragnlivestock.categories.dragnlivestock");
 
     @SubscribeEvent
-    public static void registerKeyBindings(FMLClientSetupEvent event) {
+    public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
         KeyMapping[] keyMappings = {CLEAR, HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE};
         for (KeyMapping keyMapping : keyMappings) {
+            event.register(keyMapping);
         }
     }
 }

@@ -15,6 +15,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.ChunkEvent;
+import net.minecraftforge.event.level.SaplingGrowTreeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -22,6 +23,12 @@ import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID)
 public class LOWorldEvents {
+    @SubscribeEvent
+    public static void onSaplingGrowTreeEvent(SaplingGrowTreeEvent event) {
+        event.getFeature();
+    }
+
+
     @SubscribeEvent
     public static void onBlockPlaceEvent(BlockEvent.EntityPlaceEvent event) {
         if(event.getPlacedBlock().getBlock() instanceof BeehiveBlock) {
