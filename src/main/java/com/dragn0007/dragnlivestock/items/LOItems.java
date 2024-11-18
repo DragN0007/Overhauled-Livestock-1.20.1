@@ -49,6 +49,8 @@ public class LOItems {
             () -> new ForgeSpawnEggItem(EntityTypes.O_CAMEL_ENTITY, 0xdfb68a, 0xa47d53, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> OX_SPAWN_EGG = ITEMS.register("ox_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.OX_ENTITY, 0xa19477, 0x826b54, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> O_GOAT_SPAWN_EGG = ITEMS.register("o_goat_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.O_GOAT_ENTITY, 0xfafafa, 0xeae7de, new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> OVERWORLD_UNICORN_SPAWN_EGG = ITEMS.register("overworld_unicorn_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.OVERWORLD_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
@@ -86,6 +88,8 @@ public class LOItems {
          () -> new MilkBucketItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1).build()).craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> LLAMA_MILK_BUCKET = ITEMS.register("llama_milk_bucket",
             () -> new MilkBucketItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1).build()).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> GOAT_MILK_BUCKET = ITEMS.register("goat_milk_bucket",
+            () -> new MilkBucketItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1).build()).craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final RegistryObject<Item> COW_MILK_JUG = ITEMS.register("cow_milk_jug",
             () -> new Item(new Item.Properties()));
@@ -93,12 +97,16 @@ public class LOItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LLAMA_MILK_JUG = ITEMS.register("llama_milk_jug",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOAT_MILK_JUG = ITEMS.register("goat_milk_jug",
+            () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
     public static final RegistryObject<Item> SHEEP_CHEESE = ITEMS.register("sheep_cheese",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
     public static final RegistryObject<Item> LLAMA_CHEESE = ITEMS.register("llama_cheese",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
+    public static final RegistryObject<Item> GOAT_CHEESE = ITEMS.register("goat_cheese",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
 
     public static final RegistryObject<Item> EGG_SALAD = ITEMS.register("egg_salad",

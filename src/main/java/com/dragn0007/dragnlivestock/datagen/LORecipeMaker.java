@@ -20,6 +20,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.EGG)
+                .requires(LOTags.Items.EGG)
+                .unlockedBy("has_egg", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.EGG)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GENDER_TEST_STRIP.get(), 4)
                 .requires(Items.PAPER)
                 .requires(Items.PAPER)
@@ -106,6 +113,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LLAMA_MILK_JUG.get(), 3)
                 .requires(LOItems.LLAMA_MILK_BUCKET.get())
+                .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.MILK)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GOAT_MILK_JUG.get(), 3)
+                .requires(LOItems.GOAT_MILK_BUCKET.get())
                 .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.MILK)
                         .build()))
@@ -254,6 +268,9 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.LLAMA_MILK_JUG.get()), RecipeCategory.MISC, LOItems.LLAMA_CHEESE.get(), 0.35F, 200)
                 .unlockedBy("has_llama_milk", has(LOItems.LLAMA_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "llama_cheese_smelting"));
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.GOAT_MILK_JUG.get()), RecipeCategory.MISC, LOItems.GOAT_CHEESE.get(), 0.35F, 200)
+                .unlockedBy("has_goat_milk", has(LOItems.GOAT_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "goat_cheese_smelting"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.PORK_RIB_CHOP.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_RIB_CHOP.get(), 0.35F, 100)
                 .unlockedBy("has_pork_rib_chop", has(LOItems.PORK_RIB_CHOP.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_rib_chop_smoking"));

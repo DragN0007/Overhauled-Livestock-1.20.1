@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-14T02:26:08.9460936	Item Models: dragnlivestock
+// 1.20.1	2024-11-17T02:48:13.3108363	Item Models: dragnlivestock
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
@@ -38,6 +38,9 @@ a061e12d0f7bd522c3ed8e36a293920e9b114ac4 assets/dragnlivestock/models/item/femal
 e79cd9f4d463e22d730991bd1ab271974b08f9f6 assets/dragnlivestock/models/item/fertilized_egg.json
 db41b4ecb72c712d6712a212055da05e75ec62d7 assets/dragnlivestock/models/item/fish_oil.json
 00b3b17fd5128bfa20b12dc18965e2d41c6be646 assets/dragnlivestock/models/item/gender_test_strip.json
+d6f1237652c48b9746b021e4e003ffe437719f82 assets/dragnlivestock/models/item/goat_cheese.json
+13b3f2d3ea953d2e6e7b57cb0ec9a8c06c258b91 assets/dragnlivestock/models/item/goat_milk_bucket.json
+9855f6c95728769de04801a4229306e1e883ee25 assets/dragnlivestock/models/item/goat_milk_jug.json
 1c2fc93004d7f5e8223c12d7c315e56102b2e18d assets/dragnlivestock/models/item/griffith_inspired_horse_armor.json
 ff9cde1d2cd4752358cdf96a39b7c764533faa4e assets/dragnlivestock/models/item/horse.json
 f73888aec1433210817c55495832680e88f032bb assets/dragnlivestock/models/item/horse_rib_steak.json

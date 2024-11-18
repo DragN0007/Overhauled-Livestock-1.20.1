@@ -48,6 +48,9 @@
   "item.dragnlivestock.ox_spawn_egg": "Ox Spawn Egg",
   "entity.dragnlivestock.ox": "Ox",
 
+  "item.dragnlivestock.o_goat_spawn_egg": "O-Goat Spawn Egg",
+  "entity.dragnlivestock.o_goat": "O-Goat",
+
   "item.dragnlivestock.overworld_unicorn_spawn_egg": "Overworld Unicorn Spawn Egg",
   "entity.dragnlivestock.overworld_unicorn": "Overworld Unicorn",
 
@@ -82,14 +85,17 @@
 
   "item.dragnlivestock.sheep_milk_bucket": "Sheep Milk Bucket",
   "item.dragnlivestock.llama_milk_bucket": "Llama Milk Bucket",
+  "item.dragnlivestock.goat_milk_bucket": "Goat Milk Bucket",
 
   "item.dragnlivestock.cow_milk_jug": "Cow Milk Jug",
   "item.dragnlivestock.sheep_milk_jug": "Sheep Milk Jug",
   "item.dragnlivestock.llama_milk_jug": "Llama Milk Jug",
+  "item.dragnlivestock.goat_milk_jug": "Goat Milk Jug",
 
   "item.dragnlivestock.cheese": "Cheese",
   "item.dragnlivestock.sheep_cheese": "Sheep Cheese",
   "item.dragnlivestock.llama_cheese": "Llama Cheese",
+  "item.dragnlivestock.goat_cheese": "Goat Cheese",
 
   "item.dragnlivestock.egg_salad": "Egg Salad",
 

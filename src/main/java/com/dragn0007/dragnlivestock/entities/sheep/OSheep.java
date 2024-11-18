@@ -57,7 +57,7 @@ import java.util.stream.Stream;
 
 public class OSheep extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable, GeoEntity {
 
-	public static final int EAT_ANIMATION_TICKS = 40;
+	public static final int EAT_ANIMATION_TICKS = 100;
 
 	public static final EntityDataAccessor<Byte> DATA_WOOL_ID = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BYTE);
 

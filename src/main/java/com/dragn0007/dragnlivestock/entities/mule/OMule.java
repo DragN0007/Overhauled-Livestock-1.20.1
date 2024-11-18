@@ -311,6 +311,10 @@ public class OMule extends AbstractOHorse implements GeoEntity {
 		if (tag.contains("Overlay_Texture")) {
 			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
+
+		if (tag.contains("Gender")) {
+			this.setGender(tag.getInt("Gender"));
+		}
 	}
 
 	@Override
@@ -320,6 +324,7 @@ public class OMule extends AbstractOHorse implements GeoEntity {
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		tag.putInt("Gender", this.getGender());
 	}
 
 	@Override
@@ -344,6 +349,7 @@ public class OMule extends AbstractOHorse implements GeoEntity {
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(VARIANT_TEXTURE, OMuleModel.Variant.DEFAULT.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.NONE.resourceLocation);
+		this.entityData.define(GENDER, 0);
 	}
 
 

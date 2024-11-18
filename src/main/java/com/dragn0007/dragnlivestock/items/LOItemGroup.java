@@ -34,6 +34,7 @@ public class LOItemGroup {
                         output.accept(LOItems.O_MOOSHROOM_SPAWN_EGG.get());
                         output.accept(LOItems.O_CAMEL_SPAWN_EGG.get());
                         output.accept(LOItems.OX_SPAWN_EGG.get());
+                        output.accept(LOItems.O_GOAT_SPAWN_EGG.get());
                         output.accept(LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());
@@ -50,9 +51,17 @@ public class LOItemGroup {
                         output.accept(Items.MILK_BUCKET);
                         output.accept(LOItems.SHEEP_MILK_BUCKET.get());
                         output.accept(LOItems.LLAMA_MILK_BUCKET.get());
+                        output.accept(LOItems.GOAT_MILK_BUCKET.get());
+
                         output.accept(LOItems.COW_MILK_JUG.get());
                         output.accept(LOItems.SHEEP_MILK_JUG.get());
                         output.accept(LOItems.LLAMA_MILK_JUG.get());
+                        output.accept(LOItems.GOAT_MILK_JUG.get());
+
+                        output.accept(LOItems.CHEESE.get());
+                        output.accept(LOItems.SHEEP_CHEESE.get());
+                        output.accept(LOItems.LLAMA_CHEESE.get());
+                        output.accept(LOItems.GOAT_CHEESE.get());
                         
                         output.accept(LOItems.EGG_SALAD.get());
 

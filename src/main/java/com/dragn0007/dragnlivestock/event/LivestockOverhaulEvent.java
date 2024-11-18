@@ -18,6 +18,8 @@ import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxRender;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyRender;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoatRender;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseRender;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
@@ -67,6 +69,7 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroom.createAttributes().build());
         event.put(EntityTypes.O_CAMEL_ENTITY.get(), OCamel.createBaseHorseAttributes().build());
         event.put(EntityTypes.OX_ENTITY.get(), Ox.createBaseHorseAttributes().build());
+        event.put(EntityTypes.O_GOAT_ENTITY.get(), OGoat.createAttributes().build());
 
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
 
@@ -92,6 +95,7 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroomRender::new);
         EntityRenderers.register(EntityTypes.O_CAMEL_ENTITY.get(), OCamelRender::new);
         EntityRenderers.register(EntityTypes.OX_ENTITY.get(), OxRender::new);
+        EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatRender::new);
 
         EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);
         EntityRenderers.register(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicornRender::new);
