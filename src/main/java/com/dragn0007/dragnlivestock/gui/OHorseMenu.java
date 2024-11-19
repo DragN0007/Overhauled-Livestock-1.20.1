@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
@@ -9,9 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.HorseArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 
 public class OHorseMenu extends AbstractContainerMenu {
 
@@ -31,7 +30,7 @@ public class OHorseMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, oHorseSlots++, 8, 18) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                return itemStack.is(Items.SADDLE) && !this.hasItem() && OHorseMenu.this.oHorse.isSaddleable();
+                return itemStack.is(LOTags.Items.SADDLE) && !this.hasItem() && OHorseMenu.this.oHorse.isSaddleable();
             }
 
             @Override

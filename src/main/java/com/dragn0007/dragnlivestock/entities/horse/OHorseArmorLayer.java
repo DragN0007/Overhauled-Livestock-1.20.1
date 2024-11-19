@@ -29,7 +29,7 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
-        if (armorSlots == null || armorSlots.size() <= 2) {
+        if (armorSlots.size() <= 2) {
             return;
         }
 
