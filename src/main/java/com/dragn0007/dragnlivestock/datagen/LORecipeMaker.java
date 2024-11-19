@@ -253,6 +253,27 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 600)
                 .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_campfire_cooking"));
 
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHEVON.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON.get(), 0.35F, 100)
+                .unlockedBy("has_chevon", has(LOItems.CHEVON.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHEVON.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON.get(), 0.35F, 200)
+                .unlockedBy("has_chevon", has(LOItems.CHEVON.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHEVON.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON.get(), 0.35F, 600)
+                .unlockedBy("has_chevon", has(LOItems.CHEVON.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHEVON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_RIB.get(), 0.35F, 100)
+                .unlockedBy("has_chevon_rib", has(LOItems.CHEVON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_rib_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHEVON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_RIB.get(), 0.35F, 200)
+                .unlockedBy("has_chevon_rib", has(LOItems.CHEVON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_rib_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHEVON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_RIB.get(), 0.35F, 600)
+                .unlockedBy("has_chevon_rib", has(LOItems.CHEVON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_rib_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHEVON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_LOIN.get(), 0.35F, 100)
+                .unlockedBy("has_chevon_loin", has(LOItems.CHEVON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_loin_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHEVON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_LOIN.get(), 0.35F, 200)
+                .unlockedBy("has_chevon_loin", has(LOItems.CHEVON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_loin_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHEVON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_LOIN.get(), 0.35F, 600)
+                .unlockedBy("has_chevon_loin", has(LOItems.CHEVON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_loin_campfire_cooking"));
+
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 100)
                 .unlockedBy("has_rabbit_thigh", has(LOItems.RABBIT_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_rabbit_thigh_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 200)

@@ -58,7 +58,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:mutton",
+          "name": "dragnlivestock:chevon",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -98,7 +98,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "dragnlivestock:mutton_loin",
+          "name": "dragnlivestock:chevon_loin",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -138,7 +138,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "dragnlivestock:mutton_rib",
+          "name": "dragnlivestock:chevon_rib",
           "functions": [
             {
               "function": "minecraft:set_count",

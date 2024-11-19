@@ -115,7 +115,7 @@
   "item.dragnlivestock.llama_loin": "Llama Sirloin Steak",
   "item.dragnlivestock.llama_rib": "Llama Rib Steak",
   "item.dragnlivestock.cooked_llama": "Cooked Llama",
-  "item.dragnlivestock.cooked_llama_loin": "Cooked Sirloin Steak",
+  "item.dragnlivestock.cooked_llama_loin": "Cooked Llama Sirloin Steak",
   "item.dragnlivestock.cooked_llama_rib": "Cooked Llama Rib Steak",
 
   "item.dragnlivestock.mutton_loin": "Mutton Loin",
@@ -134,6 +134,13 @@
   "item.dragnlivestock.cooked_camel": "Cooked Camel",
   "item.dragnlivestock.cooked_camel_loin": "Cooked Camel Loin",
   "item.dragnlivestock.cooked_camel_rib": "Cooked Camel Rib",
+
+  "item.dragnlivestock.chevon": "Chevon",
+  "item.dragnlivestock.chevon_loin": "Chevon Loin",
+  "item.dragnlivestock.chevon_rib": "Chevon Rib",
+  "item.dragnlivestock.cooked_chevon": "Cooked Chevon",
+  "item.dragnlivestock.cooked_chevon_loin": "Cooked Chevon Loin",
+  "item.dragnlivestock.cooked_chevon_rib": "Cooked Chevon Rib",
 
   "item.dragnlivestock.fish_oil": "Fish Oil",
   "item.dragnlivestock.roe": "Roe",

@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-17T02:48:13.3108363	Item Models: dragnlivestock
+// 1.20.1	2024-11-19T00:45:25.7755011	Item Models: dragnlivestock
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
@@ -7,12 +7,18 @@ dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black
 9ee0d92b815ea947b05b3363d66cec2b05addf48 assets/dragnlivestock/models/item/camel_loin.json
 38b74c1ba8d33848370bd3b5f0e2d9822018bb2e assets/dragnlivestock/models/item/camel_rib.json
 a76d5b386b443e4528485b013a014c6a1bfc9f49 assets/dragnlivestock/models/item/cheese.json
+acebc249cc7b03c5e82fff9c5b1825b50da55c34 assets/dragnlivestock/models/item/chevon.json
+9c6ff7d0b99084af509c0fa55b942b0ae6db4e2a assets/dragnlivestock/models/item/chevon_loin.json
+b7b4e7dc8af2067f26f705772be6c08fd378bec4 assets/dragnlivestock/models/item/chevon_rib.json
 d3a27bff21cc9e08c17a896d351c8700a4f594c9 assets/dragnlivestock/models/item/chicken_thigh.json
 bab767c1820c105153a0681852b73dc3d9e898aa assets/dragnlivestock/models/item/cooked_beef_rib_steak.json
 c0365317435ebf73f9a080b383d8db73457acd6d assets/dragnlivestock/models/item/cooked_beef_sirloin_steak.json
 63c462fa5b19f6b4e4046a8ed66f4f1391339ca7 assets/dragnlivestock/models/item/cooked_camel.json
 b8c89de6da6f1938d8a0e9d672c597a247e5e329 assets/dragnlivestock/models/item/cooked_camel_loin.json
 4831c5ae093f94bd2960bc70a5cc22418fdb9fdf assets/dragnlivestock/models/item/cooked_camel_rib.json
+0a27862271693dbd8fe49c2806d0aeed19554d1f assets/dragnlivestock/models/item/cooked_chevon.json
+938d3272e0e0fd6b45ba46fa6f3ff8b56291c0d7 assets/dragnlivestock/models/item/cooked_chevon_loin.json
+58769360ad84959c2feba024fc2636f1b94eea75 assets/dragnlivestock/models/item/cooked_chevon_rib.json
 a6f702b2c43da573bbeca7744308c13912546f81 assets/dragnlivestock/models/item/cooked_chicken_thigh.json
 ac135ee6b9723724a14d7a96f3e8cc3779f30cf2 assets/dragnlivestock/models/item/cooked_horse.json
 68f6598e456bbe8b5a13b9ec3182a4f5ca3a79d4 assets/dragnlivestock/models/item/cooked_horse_rib_steak.json

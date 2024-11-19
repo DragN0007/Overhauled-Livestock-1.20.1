@@ -77,6 +77,13 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.COOKED_MUTTON_LOIN);
         simpleItem(LOItems.COOKED_MUTTON_RIB);
 
+        simpleItem(LOItems.CHEVON);
+        simpleItem(LOItems.CHEVON_RIB);
+        simpleItem(LOItems.CHEVON_LOIN);
+        simpleItem(LOItems.COOKED_CHEVON);
+        simpleItem(LOItems.COOKED_CHEVON_LOIN);
+        simpleItem(LOItems.COOKED_CHEVON_RIB);
+
         simpleItem(LOItems.PORK_TENDERLOIN);
         simpleItem(LOItems.PORK_RIB_CHOP);
         simpleItem(LOItems.COOKED_PORK_TENDERLOIN);

@@ -101,6 +101,13 @@ public class LOItemGroup {
                         output.accept(LOItems.COOKED_CAMEL_RIB.get());
                         output.accept(LOItems.COOKED_CAMEL_LOIN.get());
 
+                        output.accept(LOItems.CHEVON.get());
+                        output.accept(LOItems.CHEVON_RIB.get());
+                        output.accept(LOItems.CHEVON_LOIN.get());
+                        output.accept(LOItems.COOKED_CHEVON.get());
+                        output.accept(LOItems.COOKED_CHEVON_RIB.get());
+                        output.accept(LOItems.COOKED_CHEVON_LOIN.get());
+
                         output.accept(LOItems.CHICKEN_THIGH.get());
                         output.accept(LOItems.COOKED_CHICKEN_THIGH.get());
 
