@@ -41,6 +41,8 @@ public class LOTags {
 
         public static final TagKey<Item> SADDLE = forgeTag("saddle");
 
+        public static final TagKey<Item> SWEM_CANTAZARITE_POTION = forgeTag("swem_cantazarite_potion");
+
         public static TagKey<Item> forgeTag (String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
         }

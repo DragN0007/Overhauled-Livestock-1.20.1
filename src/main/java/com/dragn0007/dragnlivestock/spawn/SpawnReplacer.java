@@ -37,9 +37,11 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepHornLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -50,7 +52,11 @@ import net.minecraft.world.entity.animal.horse.Donkey;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.animal.horse.Mule;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -409,6 +415,9 @@ public class SpawnReplacer {
 
                 int randomVariant = event.getLevel().getRandom().nextInt(OSheepModel.Variant.values().length);
                 oSheep.setVariant(randomVariant);
+
+                int randomGender = event.getLevel().getRandom().nextInt(OSheepHornLayer.HornOverlay.values().length);
+                oSheep.setHornVariant(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillasheep.remove(Entity.RemovalReason.DISCARDED);
@@ -954,4 +963,6 @@ public class SpawnReplacer {
         }
 
     }
+
+
 }

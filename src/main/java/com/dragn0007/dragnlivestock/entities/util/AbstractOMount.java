@@ -9,6 +9,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -233,6 +234,30 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
         }
+
+        //star worm equestrian horse compat (only spawns the base variant. i dont know, sorry)
+        if (itemStack.is(LOTags.Items.SWEM_CANTAZARITE_POTION) && this.isHorse(this)) {
+            if (!player.level().isClientSide) {
+                Entity entity = this;
+
+                ResourceLocation swemHorseId = new ResourceLocation("swem", "swem_horse");
+
+                EntityType<?> swemHorseType = EntityType.byString(swemHorseId.toString()).orElse(null);
+
+                if (swemHorseType != null) {
+                    Entity newEntity = swemHorseType.create(entity.level());
+                    if (newEntity != null) {
+                        newEntity.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
+                        entity.level().addFreshEntity(newEntity);
+                        entity.discard();
+                    }
+                } else {
+                    return InteractionResult.PASS;
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+
 
         if(this.isBaby()) {
             return super.mobInteract(player, hand);
