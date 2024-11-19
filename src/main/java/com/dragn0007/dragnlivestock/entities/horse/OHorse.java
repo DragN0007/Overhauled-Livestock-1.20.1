@@ -4,7 +4,6 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
-import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;

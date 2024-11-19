@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.spawn;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

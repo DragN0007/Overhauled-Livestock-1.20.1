@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.gui;
 
-import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;

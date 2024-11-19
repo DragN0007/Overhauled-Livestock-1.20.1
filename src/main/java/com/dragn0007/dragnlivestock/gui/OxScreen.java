@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
