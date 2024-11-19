@@ -19,6 +19,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_COD;
     public static final ForgeConfigSpec.BooleanValue REPLACE_BEES;
     public static final ForgeConfigSpec.BooleanValue REPLACE_CAMELS;
+    public static final ForgeConfigSpec.BooleanValue REPLACE_GOATS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BIPRODUCTS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BREEDING;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
@@ -64,6 +65,9 @@ public class LivestockOverhaulCommonConfig {
 
         REPLACE_CAMELS = BUILDER.comment("Should vanilla camels be replaced by O-Camels?")
                 .define("Replace Vanilla Camels", true);
+
+        REPLACE_GOATS = BUILDER.comment("Should vanilla goats be replaced by O-Goats?")
+                .define("Replace Vanilla Goats", true);
         BUILDER.pop();
 
         BUILDER.push("Miscellaneous");

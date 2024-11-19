@@ -35,6 +35,12 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
+        if(entity.isMale() || entity.isBaby()) {
+            model.getBone("utters").ifPresent(b -> b.setHidden(true));
+        } else {
+            model.getBone("utters").ifPresent(b -> b.setHidden(false));
+        }
+
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

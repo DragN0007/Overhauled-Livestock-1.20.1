@@ -41,7 +41,7 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public abstract class AbstractOHorse extends AbstractChestedHorse {
+public abstract class AbstractOMount extends AbstractChestedHorse {
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
     public static final UUID SPRINT_SPEED_MOD_UUID = UUID.fromString("c9379664-01b5-4e19-a7e9-11264453bdce");
     public static final UUID WALK_SPEED_MOD_UUID = UUID.fromString("59b55c98-e39b-45e2-846c-f91f3e9ea861");
@@ -49,7 +49,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
     public static final AttributeModifier SPRINT_SPEED_MOD = new AttributeModifier(SPRINT_SPEED_MOD_UUID, "Sprint speed mod", 0.3D, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.7D, AttributeModifier.Operation.MULTIPLY_TOTAL); // KEEP THIS NEGATIVE. It is calculated by adding 1. So -0.1 actually means 0.9
 
-    public static final EntityDataAccessor<Integer> DATA_CARPET_ID = SynchedEntityData.defineId(AbstractOHorse.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> DATA_CARPET_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
     protected boolean shouldEmote;
 
     public boolean isOnSand() {
@@ -71,7 +71,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         this.removeEffect(MobEffect.byId(2));
     }
 
-    public AbstractOHorse(EntityType<? extends AbstractOHorse> entityType, Level level) {
+    public AbstractOMount(EntityType<? extends AbstractOMount> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -105,6 +105,10 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
     @Override
     public void equipSaddle(@Nullable SoundSource p_30546_) {
         this.inventory.setItem(0, new ItemStack(Items.SADDLE));
+
+        if (this.isGoat(this)) {
+        return;
+        }
 //        this.inventory.setItem(0, new ItemStack(LOItems.BLACK_SADDLE.get()));
     }
 
@@ -146,7 +150,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         return this.getGender() == 1;
     }
 
-    public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AbstractOHorse.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
 
     public int getGender() {
         return this.entityData.get(GENDER);
@@ -243,7 +247,7 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
         return true;
     }
 
-    private static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOHorse.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
 
     @Override
     public void defineSynchedData() {
@@ -259,8 +263,12 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
             compoundTag.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
         }
 
-        if (!this.inventory.getItem(1).isEmpty()) {
+        if (!this.inventory.getItem(1).isEmpty() && !this.isGoat(this)) {
             compoundTag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
+        }
+
+        if (!this.inventory.getItem(0).isEmpty() && this.isGoat(this)) {
+            compoundTag.put("DecorItem", this.inventory.getItem(0).save(new CompoundTag()));
         }
 
         if (!this.inventory.getItem(0).isEmpty()) {
@@ -283,8 +291,12 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
             }
         }
 
-        if (compoundTag.contains("DecorItem", 10)) {
+        if (compoundTag.contains("DecorItem", 10) && !this.isGoat(this)) {
             this.inventory.setItem(1, ItemStack.of(compoundTag.getCompound("DecorItem")));
+        }
+
+        if (compoundTag.contains("DecorItem", 10) && this.isGoat(this)) {
+            this.inventory.setItem(0, ItemStack.of(compoundTag.getCompound("DecorItem")));
         }
 
         if (compoundTag.contains("SaddleItem", 10)) {
@@ -392,6 +404,9 @@ public abstract class AbstractOHorse extends AbstractChestedHorse {
     }
     public boolean isMule(Entity entity) {
         return entity.getType() == EntityTypes.O_MULE_ENTITY.get();
+    }
+    public boolean isGoat(Entity entity) {
+        return entity.getType() == EntityTypes.O_GOAT_ENTITY.get();
     }
 
     public boolean isUnicorn(Entity entity) {

@@ -2,11 +2,12 @@ package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +43,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ODonkey extends AbstractOHorse implements GeoEntity {
+public class ODonkey extends AbstractOMount implements GeoEntity {
 	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(ODonkey.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(ODonkey.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
@@ -80,7 +81,7 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 0.0F));
-		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOHorse.class));
+		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Wolf.class, false));
 	}
@@ -365,9 +366,9 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 			return false;
 		} else {
 			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((AbstractOHorse) animal).canParent();
+				return this.canParent() && ((AbstractOMount) animal).canParent();
 			} else {
-				AbstractOHorse partner = (AbstractOHorse) animal;
+				AbstractOMount partner = (AbstractOMount) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
 					return true;
 				}
@@ -384,7 +385,7 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 	}
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		AbstractOHorse abstracthorse;
+		AbstractOMount abstracthorse;
 		if (ageableMob instanceof OHorse) {
 			OHorse horse = (OHorse) ageableMob;
 
@@ -428,8 +429,12 @@ public class ODonkey extends AbstractOHorse implements GeoEntity {
 				overlay = this.random.nextInt(ODonkeyMarkingLayer.Overlay.values().length);
 			}
 
+			int gender;
+			gender = this.random.nextInt(ODonkey.Gender.values().length);
+
 			((ODonkey) abstracthorse).setVariant(variant);
 			((ODonkey) abstracthorse).setOverlayVariant(overlay);
+			((ODonkey) abstracthorse).setGender(gender);
 		}
 
 		this.setOffspringAttributes(ageableMob, abstracthorse);

@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class OxScreen extends AbstractContainerScreen<OxMenu> {
     public static final ResourceLocation OX_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/ox.png");
-    public final Ox ox;
+    public final AbstractOMount ox;
 
     public OxScreen(OxMenu oxMenu, Inventory inventory, Component component) {
         super(oxMenu, inventory, component);
@@ -34,6 +35,10 @@ public class OxScreen extends AbstractContainerScreen<OxMenu> {
 
         if (this.ox.isSaddleable()) {
             graphics.blit(OX_INVENTORY_LOCATION, x + 7, y + 17, 18, this.imageHeight + 54, 18, 18);
+        }
+
+        if (this.ox.canWearArmor()) {
+            graphics.blit(OX_INVENTORY_LOCATION, x + 7, y + 17, 36, this.imageHeight + 54, 18, 18);
         }
     }
 

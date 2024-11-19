@@ -39,8 +39,6 @@ public class LOTags {
         public static final TagKey<Item> MILK = forgeTag("milk");
         public static final TagKey<Item> EGG = forgeTag("egg");
 
-        public static final TagKey<Item> GOAT_HORNS = forgeTag("goat_horns");
-
         public static final TagKey<Item> SADDLE = forgeTag("saddle");
 
         public static TagKey<Item> forgeTag (String name) {

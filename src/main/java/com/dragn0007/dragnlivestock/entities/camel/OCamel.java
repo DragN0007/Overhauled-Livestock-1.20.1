@@ -2,7 +2,7 @@ package com.dragn0007.dragnlivestock.entities.camel;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -55,7 +55,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class OCamel extends AbstractOHorse implements GeoEntity {
+public class OCamel extends AbstractOMount implements GeoEntity {
 	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OCamel.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OCamel.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);

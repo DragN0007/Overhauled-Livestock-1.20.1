@@ -5,6 +5,9 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
+import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -166,7 +169,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	public void tick() {
 		super.tick();
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
-			List<? extends OCow> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
+			List<? extends OCow> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(20.0D, 20.0D, 20.0D));
 			if (list.size() <= 1) {
 				this.herdSize = 1;
 			}
@@ -246,7 +249,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() &&
 				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale))) {
+						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 
 			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
@@ -340,12 +343,12 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 			setHornVariant(tag.getInt("Horns"));
 		}
 
-		if (tag.contains("Udders")) {
-			setUdderVariant(tag.getInt("Udders"));
-		}
-
 		if (tag.contains("Chested")) {
 			this.setChested(tag.getBoolean("Chested"));
+		}
+
+		if (tag.contains("Gender")) {
+			setGender(tag.getInt("Gender"));
 		}
 
 		this.updateInventory();
@@ -360,7 +363,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 
 		tag.putInt("Horns", getHornVariant());
 
-		tag.putInt("Udders", getUdderVariant());
+		tag.putInt("Gender", getGender());
 
 		tag.putBoolean("Chested", this.isChested());
 	}
@@ -375,7 +378,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		setVariant(random.nextInt(OCowModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
 		setHornVariant(random.nextInt(OCowHornLayer.HornOverlay.values().length));
-		setUdderVariant(random.nextInt(OCowUdderLayer.Overlay.values().length));
+		setGender(random.nextInt(Gender.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -386,12 +389,33 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(HORNS, 0);
+		this.entityData.define(GENDER, 0);
 		this.entityData.define(UDDERS, 0);
 		this.entityData.define(CHESTED, false);
 	}
 
-	boolean isFemale = this.getUddersLocation().equals(OCowUdderLayer.Overlay.FEMALE.resourceLocation);
-	boolean isMale = this.getUddersLocation().equals(OCowUdderLayer.Overlay.MALE.resourceLocation);
+	public enum Gender {
+		FEMALE,
+		MALE
+	}
+
+	public boolean isFemale() {
+		return this.getGender() == 0;
+	}
+
+	public boolean isMale() {
+		return this.getGender() == 1;
+	}
+
+	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+
+	public int getGender() {
+		return this.entityData.get(GENDER);
+	}
+
+	public void setGender(int gender) {
+		this.entityData.set(GENDER, gender);
+	}
 
 	public boolean canParent() {
 		return !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
@@ -403,24 +427,23 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		} else if (!(animal instanceof OCow)) {
 			return false;
 		} else {
-			OCow partner = (OCow) animal;
-
-			if (!this.canParent() || !partner.canParent()) {
-				return false;
-			}
-
-			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				boolean partnerIsFemale = partner.getUddersLocation().equals(OCowUdderLayer.Overlay.FEMALE.resourceLocation);
-				boolean partnerIsMale = partner.getUddersLocation().equals(OCowUdderLayer.Overlay.MALE.resourceLocation);
-
-				boolean isFemale = this.getUddersLocation().equals(OCowUdderLayer.Overlay.FEMALE.resourceLocation);
-				boolean isMale = this.getUddersLocation().equals(OCowUdderLayer.Overlay.MALE.resourceLocation);
-
-				return (isFemale && partnerIsMale) || (isMale && partnerIsFemale);
+			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				return this.canParent() && ((OCow) animal).canParent();
 			} else {
-				return true;
+				OCow partner = (OCow) animal;
+				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+					return true;
+				}
+
+				boolean partnerIsFemale = partner.isFemale();
+				boolean partnerIsMale = partner.isMale();
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+					return isFemale();
+				}
 			}
 		}
+		return false;
 	}
 
 	@Override
@@ -471,12 +494,12 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 				}
 
 				int udders;
-				udders = this.random.nextInt(OCowUdderLayer.Overlay.values().length);
+				udders = this.random.nextInt(Gender.values().length);
 
 				oCow.setVariant(variant);
 				oCow.setOverlayVariant(overlay);
 				oCow.setHornVariant(horns);
-				oCow.setUdderVariant(udders);
+				oCow.setGender(udders);
 			}
 		}
 

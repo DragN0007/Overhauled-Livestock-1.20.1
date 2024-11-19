@@ -4,9 +4,10 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -44,7 +45,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class OHorse extends AbstractOHorse implements GeoEntity {
+public class OHorse extends AbstractOMount implements GeoEntity {
 	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
@@ -89,7 +90,7 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 0.0F));
 
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
-		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOHorse.class));
+		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, (livingEntity) -> livingEntity instanceof Wolf));
 	}
@@ -567,9 +568,9 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 			return false;
 		} else {
 			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((AbstractOHorse) animal).canParent();
+				return this.canParent() && ((AbstractOMount) animal).canParent();
 			} else {
-				AbstractOHorse partner = (AbstractOHorse) animal;
+				AbstractOMount partner = (AbstractOMount) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
 					return true;
 				}
@@ -587,7 +588,7 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		AbstractOHorse abstracthorse;
+		AbstractOMount abstracthorse;
 		if (ageableMob instanceof ODonkey) {
 			ODonkey donkey = (ODonkey) ageableMob;
 
@@ -641,9 +642,13 @@ public class OHorse extends AbstractOHorse implements GeoEntity {
 				breed = this.random.nextInt(BreedModel.values().length);
 			}
 
+			int gender;
+			gender = this.random.nextInt(OHorse.Gender.values().length);
+
 			((OHorse) abstracthorse).setVariant(variant);
 			((OHorse) abstracthorse).setOverlayVariant(overlay);
 			((OHorse) abstracthorse).setBreed(breed);
+			((OHorse) abstracthorse).setGender(gender);
 		}
 
 		this.setOffspringAttributes(ageableMob, abstracthorse);

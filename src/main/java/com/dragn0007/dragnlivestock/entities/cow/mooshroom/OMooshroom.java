@@ -45,7 +45,7 @@ public class OMooshroom extends OCow implements GeoEntity {
         ItemStack itemstack = player.getItemInHand(hand);
         if (itemstack.is(Items.BOWL) && !this.isBaby() &&
                 (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-                        (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale))) {
+                        (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 
             player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MUSHROOM_STEW.getDefaultInstance());
@@ -135,8 +135,8 @@ public class OMooshroom extends OCow implements GeoEntity {
             setMushroomVariant(tag.getInt("Mushrooms"));
         }
 
-        if (tag.contains("Udders")) {
-            setUdderVariant(tag.getInt("Udders"));
+        if (tag.contains("Gender")) {
+            setGender(tag.getInt("Gender"));
         }
 
         this.updateInventory();
@@ -153,7 +153,7 @@ public class OMooshroom extends OCow implements GeoEntity {
 
         tag.putInt("Mushrooms", getMushroomVariant());
 
-        tag.putInt("Udders", getUdderVariant());
+        tag.putInt("Gender", getGender());
     }
 
     @Override
@@ -167,10 +167,12 @@ public class OMooshroom extends OCow implements GeoEntity {
         setOverlayVariant(random.nextInt(OMooshroomMarkingLayer.Overlay.values().length));
         setHornVariant(random.nextInt(OMooshroomHornLayer.HornOverlay.values().length));
         setMushroomVariant(random.nextInt(OMooshroomMushroomLayer.Overlay.values().length));
-        setUdderVariant(random.nextInt(OMooshroomUdderLayer.Overlay.values().length));
+        setGender(random.nextInt(Gender.values().length));
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
+
+    public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
 
     @Override
     public void defineSynchedData() {
@@ -180,10 +182,8 @@ public class OMooshroom extends OCow implements GeoEntity {
         this.entityData.define(HORNS, 0);
         this.entityData.define(MUSHROOMS, 0);
         this.entityData.define(UDDERS, 0);
+        this.entityData.define(GENDER, 0);
     }
-
-    boolean isFemale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation);
-    boolean isMale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.MALE.resourceLocation);
 
     public boolean canParent() {
         return !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
@@ -195,24 +195,23 @@ public class OMooshroom extends OCow implements GeoEntity {
         } else if (!(animal instanceof OMooshroom)) {
             return false;
         } else {
-            OMooshroom partner = (OMooshroom) animal;
-
-            if (!this.canParent() || !partner.canParent()) {
-                return false;
-            }
-
-            if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-                boolean partnerIsFemale = partner.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation);
-                boolean partnerIsMale = partner.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.MALE.resourceLocation);
-
-                boolean isFemale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.FEMALE.resourceLocation);
-                boolean isMale = this.getUddersLocation().equals(OMooshroomUdderLayer.Overlay.MALE.resourceLocation);
-
-                return (isFemale && partnerIsMale) || (isMale && partnerIsFemale);
+            if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+                return this.canParent() && ((OMooshroom) animal).canParent();
             } else {
-                return true;
+                OMooshroom partner = (OMooshroom) animal;
+                if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+                    return true;
+                }
+
+                boolean partnerIsFemale = partner.isFemale();
+                boolean partnerIsMale = partner.isMale();
+                if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+                        && ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+                    return isFemale();
+                }
             }
         }
+        return false;
     }
 
     @Override
@@ -263,13 +262,13 @@ public class OMooshroom extends OCow implements GeoEntity {
             }
 
             int udders;
-            udders = this.random.nextInt(OMooshroomUdderLayer.Overlay.values().length);
+            udders = this.random.nextInt(Gender.values().length);
 
             oMooshroom.setVariant(variant);
             oMooshroom.setOverlayVariant(overlay);
             oMooshroom.setHornVariant(horns);
             oMooshroom.setMushroomVariant(mushrooms);
-            oMooshroom.setUdderVariant(udders);
+            oMooshroom.setGender(udders);
         }
 
         return oMooshroom;

@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.gui;
 
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
@@ -16,16 +16,16 @@ import net.minecraft.world.item.Items;
 public class OHorseMenu extends AbstractContainerMenu {
 
     public Container container;
-    public AbstractOHorse oHorse;
+    public AbstractOMount oHorse;
 
     public OHorseMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerId, inventory, new SimpleContainer(extraData.readInt()), (AbstractOHorse) inventory.player.level().getEntity(extraData.readInt()));
+        this(containerId, inventory, new SimpleContainer(extraData.readInt()), (AbstractOMount) inventory.player.level().getEntity(extraData.readInt()));
     }
 
-    public OHorseMenu(int containerId, Inventory inventory, Container container, AbstractOHorse abstractOHorse) {
+    public OHorseMenu(int containerId, Inventory inventory, Container container, AbstractOMount abstractOMount) {
         super(LOMenuTypes.O_HORSE_MENU.get(), containerId);
         this.container = container;
-        this.oHorse = abstractOHorse;
+        this.oHorse = abstractOMount;
 
         int oHorseSlots = 0;
         this.addSlot(new Slot(this.container, oHorseSlots++, 8, 18) {

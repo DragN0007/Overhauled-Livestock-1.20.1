@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.ox;
 
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
 import net.minecraft.core.BlockPos;
@@ -44,7 +44,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class Ox extends AbstractOHorse implements GeoEntity {
+public class Ox extends AbstractOMount implements GeoEntity {
 
 	public Ox(EntityType<? extends Ox> type, Level level) {
 		super(type, level);
@@ -80,7 +80,7 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 
 	@Override
 	protected int getInventorySize() {
-		return this.hasChest() ? 25 : super.getInventorySize();
+		return this.hasChest() ? 26 : super.getInventorySize();
 	}
 
 	@Override
@@ -93,6 +93,11 @@ public class Ox extends AbstractOHorse implements GeoEntity {
 				data.writeInt(this.getId());
 			});
 		}
+	}
+
+	@Override
+	public boolean canWearArmor() {
+		return false;
 	}
 
 	@Override

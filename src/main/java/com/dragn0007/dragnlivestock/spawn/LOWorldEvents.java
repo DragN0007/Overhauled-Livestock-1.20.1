@@ -80,7 +80,7 @@ public class LOWorldEvents {
                                     List<BlockPos> logs = context.logs();
 
                                     int y = !leaves.isEmpty() ? Math.max(leaves.get(0).getY() - 1, logs.get(0).getY() + 1) : Math.min(logs.get(0).getY() + 1 + randomSource.nextInt(3), logs.get(logs.size() - 1).getY());
-                                    List<BlockPos> placementPositions = (logs.stream().filter((blockPos) -> blockPos.getY() == y).flatMap((blockPos) -> Stream.of(SPAWN_DIRECTIONS).map(blockPos::relative)).toList());
+                                    List<BlockPos> placementPositions = new ArrayList<>((logs.stream().filter((blockPos) -> blockPos.getY() == y).flatMap((blockPos) -> Stream.of(SPAWN_DIRECTIONS).map(blockPos::relative)).toList()));
 
                                     if(!placementPositions.isEmpty()) {
                                         Collections.shuffle(placementPositions);

@@ -1,7 +1,9 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,13 +16,13 @@ import net.minecraft.world.item.Items;
 public class OxMenu extends AbstractContainerMenu {
 
     public Container container;
-    public Ox ox;
+    public AbstractOMount ox;
 
     public OxMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerId, inventory, new SimpleContainer(extraData.readInt()), (Ox) inventory.player.level().getEntity(extraData.readInt()));
+        this(containerId, inventory, new SimpleContainer(extraData.readInt()), (AbstractOMount) inventory.player.level().getEntity(extraData.readInt()));
     }
 
-    public OxMenu(int containerId, Inventory inventory, Container container, Ox ox) {
+    public OxMenu(int containerId, Inventory inventory, Container container, AbstractOMount ox) {
         super(LOMenuTypes.OX_MENU.get(), containerId);
         this.container = container;
         this.ox = ox;
@@ -35,6 +37,21 @@ public class OxMenu extends AbstractContainerMenu {
             @Override
             public boolean isActive() {
                 return OxMenu.this.ox.isSaddleable();
+            }
+        });
+
+        this.addSlot(new Slot(this.container, oxSlots++, 8, 18) {
+            @Override
+            public boolean mayPlace(ItemStack itemStack) {
+                if (itemStack.is(ItemTags.WOOL_CARPETS)) {
+                    return !this.hasItem() && OxMenu.this.ox.canWearArmor();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean isActive() {
+                return OxMenu.this.ox.canWearArmor();
             }
         });
 

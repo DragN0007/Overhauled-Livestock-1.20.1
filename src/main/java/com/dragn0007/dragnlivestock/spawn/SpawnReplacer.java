@@ -4,6 +4,8 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenModel;
@@ -12,6 +14,8 @@ import com.dragn0007.dragnlivestock.entities.cow.*;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
@@ -32,13 +36,14 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepHornLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.Donkey;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
@@ -105,7 +110,7 @@ public class SpawnReplacer {
                 int randomOverlayVariant = event.getLevel().getRandom().nextInt(OHorseMarkingLayer.Overlay.values().length);
                 oHorse.setOverlayVariant(randomOverlayVariant);
 
-                int randomGender = event.getLevel().getRandom().nextInt(AbstractOHorse.Gender.values().length);
+                int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                 oHorse.setGender(randomGender);
 
                 //discard vanilla horse once it's been successfully replaced on client and server
@@ -145,7 +150,7 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(ODonkeyModel.Variant.values().length);
                 oDonkey.setVariant(randomVariant);
 
-                int randomGender = event.getLevel().getRandom().nextInt(AbstractOHorse.Gender.values().length);
+                int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                 oDonkey.setGender(randomGender);
 
                 if (event.getLevel().isClientSide) {
@@ -184,7 +189,7 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(OMuleModel.Variant.values().length);
                 oMule.setVariant(randomVariant);
 
-                int randomGender = event.getLevel().getRandom().nextInt(AbstractOHorse.Gender.values().length);
+                int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                 oMule.setGender(randomGender);
 
                 if (event.getLevel().isClientSide) {
@@ -225,8 +230,8 @@ public class SpawnReplacer {
                 int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
                 oCow.setHornVariant(randomHorns);
 
-                int randomGender = event.getLevel().getRandom().nextInt(OCowUdderLayer.Overlay.values().length);
-                oCow.setUdderVariant(randomGender);
+                int randomGender = event.getLevel().getRandom().nextInt(OCow.Gender.values().length);
+                oCow.setGender(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -403,9 +408,6 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(OSheepModel.Variant.values().length);
                 oSheep.setVariant(randomVariant);
 
-                int randomGender = event.getLevel().getRandom().nextInt(OSheepHornLayer.HornOverlay.values().length);
-                oSheep.setHornVariant(randomGender);
-
                 if (event.getLevel().isClientSide) {
                     vanillasheep.remove(Entity.RemovalReason.DISCARDED);
                 }
@@ -521,8 +523,8 @@ public class SpawnReplacer {
                 int randomMushrooms = event.getLevel().getRandom().nextInt(OMooshroomMushroomLayer.Overlay.values().length);
                 oMooshroom.setMushroomVariant(randomMushrooms);
 
-                int randomGender = event.getLevel().getRandom().nextInt(OMooshroomUdderLayer.Overlay.values().length);
-                oMooshroom.setUdderVariant(randomGender);
+                int randomGender = event.getLevel().getRandom().nextInt(OMooshroom.Gender.values().length);
+                oMooshroom.setGender(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);
@@ -554,11 +556,14 @@ public class SpawnReplacer {
                 oCamel.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oCamel.generateRandomMaxHealth());
                 oCamel.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oCamel.generateRandomSpeed());
 
-                int randomVariant = event.getLevel().getRandom().nextInt(23);
+                int randomVariant = event.getLevel().getRandom().nextInt(OCamelModel.Variant.values().length);
                 oCamel.setVariant(randomVariant);
 
-                int randomOverlayVariant = event.getLevel().getRandom().nextInt(31);
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCamelMarkingLayer.Overlay.values().length);
                 oCamel.setOverlayVariant(randomOverlayVariant);
+
+                int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
+                oCamel.setGender(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillacamel.remove(Entity.RemovalReason.DISCARDED);
@@ -568,6 +573,40 @@ public class SpawnReplacer {
                 vanillacamel.remove(Entity.RemovalReason.DISCARDED);
 
 //                    System.out.println("[Livestock Overhaul]: Replaced a vanilla camel with an O-Camel!");
+
+                event.setCanceled(true);
+            }
+        }
+
+        //Goat
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && event.getEntity() instanceof Goat) {
+            Goat vanillagoat = (Goat) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            OGoat oGoat = EntityTypes.O_GOAT_ENTITY.get().create(event.getLevel());
+            if (oGoat != null) {
+                oGoat.copyPosition(vanillagoat);
+
+                oGoat.setCustomName(vanillagoat.getCustomName());
+                oGoat.setAge(vanillagoat.getAge());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(OGoatModel.Variant.values().length);
+                oGoat.setVariant(randomVariant);
+
+                int randomHorns = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
+                oGoat.setGender(randomHorns);
+
+                if (event.getLevel().isClientSide) {
+                    vanillagoat.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(oGoat);
+                vanillagoat.remove(Entity.RemovalReason.DISCARDED);
+
+//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla goat with an O-Goat!");
 
                 event.setCanceled(true);
             }

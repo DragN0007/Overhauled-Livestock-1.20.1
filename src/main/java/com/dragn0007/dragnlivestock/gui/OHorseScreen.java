@@ -2,7 +2,7 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOHorse;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     public static final ResourceLocation HORSE_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/o_horse.png");
-    public final AbstractOHorse oHorse;
+    public final AbstractOMount oHorse;
     protected int breedLabelX;
     protected int breedLabelY;
 

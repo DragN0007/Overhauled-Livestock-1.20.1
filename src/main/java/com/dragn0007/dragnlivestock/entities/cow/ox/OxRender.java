@@ -41,6 +41,10 @@ public class OxRender extends GeoEntityRenderer<Ox> {
             model.getBone("utters").ifPresent(b -> b.setHidden(true));
             model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
             model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
+        } else {
+            model.getBone("utters").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
