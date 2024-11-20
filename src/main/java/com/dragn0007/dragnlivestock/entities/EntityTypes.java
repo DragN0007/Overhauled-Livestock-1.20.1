@@ -11,6 +11,7 @@ import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
+import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorse;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
@@ -129,6 +130,12 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1f,1f)
                     .build(new ResourceLocation(MODID,"o_goat").toString()));
+
+    public static final RegistryObject<EntityType<OUndeadHorse>> O_UNDEAD_HORSE_ENTITY = ENTITY_TYPES.register("o_undead_horse",
+            () -> EntityType.Builder.of(OUndeadHorse::new,
+                            MobCategory.CREATURE)
+                    .sized(1.5f,2f)
+                    .build(new ResourceLocation(MODID,"o_undead_horse").toString()));
 
 
     public static final RegistryObject<EntityType<OverworldUnicorn>> OVERWORLD_UNICORN_ENTITY = ENTITY_TYPES.register("overworld_unicorn",

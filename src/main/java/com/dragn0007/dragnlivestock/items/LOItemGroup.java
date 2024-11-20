@@ -20,6 +20,9 @@ public class LOItemGroup {
                     .displayItems((displayParameters, output) -> {
 
                         output.accept(LOItems.O_HORSE_SPAWN_EGG.get());
+                        output.accept(LOItems.O_DONKEY_SPAWN_EGG.get());
+                        output.accept(LOItems.O_MULE_SPAWN_EGG.get());
+                        output.accept(LOItems.O_UNDEAD_HORSE_SPAWN_EGG.get());
                         output.accept(LOItems.O_COW_SPAWN_EGG.get());
                         output.accept(LOItems.O_CHICKEN_SPAWN_EGG.get());
                         output.accept(LOItems.O_SALMON_SPAWN_EGG.get());
@@ -29,8 +32,6 @@ public class LOItemGroup {
                         output.accept(LOItems.O_SHEEP_SPAWN_EGG.get());
                         output.accept(LOItems.O_LLAMA_SPAWN_EGG.get());
                         output.accept(LOItems.O_PIG_SPAWN_EGG.get());
-                        output.accept(LOItems.O_DONKEY_SPAWN_EGG.get());
-                        output.accept(LOItems.O_MULE_SPAWN_EGG.get());
                         output.accept(LOItems.O_MOOSHROOM_SPAWN_EGG.get());
                         output.accept(LOItems.O_CAMEL_SPAWN_EGG.get());
                         output.accept(LOItems.OX_SPAWN_EGG.get());

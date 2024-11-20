@@ -641,12 +641,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			int k = this.random.nextInt(4);
 			int breed;
-			if (k < 2) {
-				breed = this.getBreed();
-			} else if (k < 4) {
-				breed = horse.getBreed();
-			} else {
+			if (k == 0) {
 				breed = this.random.nextInt(BreedModel.values().length);
+			} else {
+				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : horse.getBreed();
 			}
 
 			int gender;

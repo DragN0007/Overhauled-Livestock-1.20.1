@@ -23,6 +23,9 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
+import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorse;
+import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseModel;
+import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseSkeletalLayer;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
@@ -48,10 +51,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.goat.Goat;
-import net.minecraft.world.entity.animal.horse.Donkey;
-import net.minecraft.world.entity.animal.horse.Horse;
-import net.minecraft.world.entity.animal.horse.Llama;
-import net.minecraft.world.entity.animal.horse.Mule;
+import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -94,6 +94,30 @@ public class SpawnReplacer {
                         }
 
                         event.getLevel().addFreshEntity(headlessHorseman);
+                        vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().isNight()) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    OUndeadHorse undeadHorse = EntityTypes.O_UNDEAD_HORSE_ENTITY.get().create(event.getLevel());
+
+                    if (undeadHorse != null) {
+                        undeadHorse.copyPosition(vanillaHorse);
+                        event.getLevel().addFreshEntity(undeadHorse);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length);
+                        undeadHorse.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length);
+                        undeadHorse.setOverlayVariant(randomOverlayVariant);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(undeadHorse);
                         vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
                     }
                 }
@@ -623,6 +647,77 @@ public class SpawnReplacer {
             }
         }
 
+        //Undead Horse
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof SkeletonHorse) {
+            SkeletonHorse skeletonHorse = (SkeletonHorse) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            OUndeadHorse oUndeadHorse = EntityTypes.O_UNDEAD_HORSE_ENTITY.get().create(event.getLevel());
+            if (oUndeadHorse != null) {
+                oUndeadHorse.copyPosition(skeletonHorse);
+
+                oUndeadHorse.setCustomName(skeletonHorse.getCustomName());
+                oUndeadHorse.setOwnerUUID(skeletonHorse.getOwnerUUID());
+                oUndeadHorse.setAge(skeletonHorse.getAge());
+                oUndeadHorse.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oUndeadHorse.generateRandomMaxHealth());
+                oUndeadHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oUndeadHorse.generateRandomSpeed());
+                oUndeadHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oUndeadHorse.generateRandomJumpStrength());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length);
+                oUndeadHorse.setVariant(randomVariant);
+
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length);
+                oUndeadHorse.setOverlayVariant(randomOverlayVariant);
+
+                if (event.getLevel().isClientSide) {
+                    skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(oUndeadHorse);
+                skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof ZombieHorse) {
+            ZombieHorse zombieHorse = (ZombieHorse) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            OUndeadHorse oUndeadHorse = EntityTypes.O_UNDEAD_HORSE_ENTITY.get().create(event.getLevel());
+            if (oUndeadHorse != null) {
+                oUndeadHorse.copyPosition(zombieHorse);
+
+                oUndeadHorse.setCustomName(zombieHorse.getCustomName());
+                oUndeadHorse.setOwnerUUID(zombieHorse.getOwnerUUID());
+                oUndeadHorse.setAge(zombieHorse.getAge());
+                oUndeadHorse.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oUndeadHorse.generateRandomMaxHealth());
+                oUndeadHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oUndeadHorse.generateRandomSpeed());
+                oUndeadHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oUndeadHorse.generateRandomJumpStrength());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length);
+                oUndeadHorse.setVariant(randomVariant);
+
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length);
+                oUndeadHorse.setOverlayVariant(randomOverlayVariant);
+
+                if (event.getLevel().isClientSide) {
+                    zombieHorse.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(oUndeadHorse);
+                zombieHorse.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
 
 
 
@@ -962,7 +1057,33 @@ public class SpawnReplacer {
             }
         }
 
-    }
+        //Goat
+        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && event.getEntity() instanceof OGoat) {
+            OGoat oGoat = (OGoat) event.getEntity();
 
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Goat goat = EntityType.GOAT.create(event.getLevel());
+            if (goat != null) {
+                goat.copyPosition(oGoat);
+
+                goat.setCustomName(oGoat.getCustomName());
+                goat.setAge(oGoat.getAge());
+
+                if (event.getLevel().isClientSide) {
+                    oGoat.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(goat);
+                oGoat.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+
+    }
 
 }
