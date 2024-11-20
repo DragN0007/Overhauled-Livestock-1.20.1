@@ -128,7 +128,7 @@ public class EntityTypes {
     public static final RegistryObject<EntityType<OGoat>> O_GOAT_ENTITY = ENTITY_TYPES.register("o_goat",
             () -> EntityType.Builder.of(OGoat::new,
                             MobCategory.CREATURE)
-                    .sized(1f,1f)
+                    .sized(0.9f,1f)
                     .build(new ResourceLocation(MODID,"o_goat").toString()));
 
     public static final RegistryObject<EntityType<OUndeadHorse>> O_UNDEAD_HORSE_ENTITY = ENTITY_TYPES.register("o_undead_horse",
