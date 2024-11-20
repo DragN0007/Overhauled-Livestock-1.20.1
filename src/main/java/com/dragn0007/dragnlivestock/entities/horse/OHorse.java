@@ -68,7 +68,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public Vec3 getLeashOffset() {
-		return new Vec3(0D, (double)this.getEyeHeight() * 0.8F, (double)(this.getBbWidth() * 1.2F));
+		return new Vec3(0D, (double) this.getEyeHeight() * 0.8F, (double) (this.getBbWidth() * 1.2F));
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
 	}
 
@@ -106,30 +106,30 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		float baseHealth;
 		if (getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
 			baseHealth = 16.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(4);
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
 		if (getModelResource().equals(BreedModel.DRAFT.resourceLocation)) {
 			baseHealth = 20.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(4);
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
 		if (getModelResource().equals(BreedModel.WARMBLOOD.resourceLocation)) {
 			baseHealth = 16.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(4);
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
 		if (getModelResource().equals(BreedModel.PONY.resourceLocation)) {
 			baseHealth = 14.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(4);
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
 		if (getModelResource().equals(BreedModel.RACER.resourceLocation)) {
 			baseHealth = 13.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(4);
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
 		return 15.0F + (float) this.random.nextInt(4) + (float) this.random.nextInt(5);
 	}
 
 	public double generateRandomJumpStrength() {
 		double baseStrength = 0.4F;
-		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D;
+		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.25D;
 
 		if (getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
 			baseStrength = 0.5F;
@@ -156,7 +156,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public double generateRandomSpeed() {
 		double baseSpeed = 0.0F;
-		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.25D;
+		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.30D;
 
 		if (getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
 			baseSpeed = 0.2F;
@@ -182,7 +182,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public double generateRandomEndurance() {
-		return ((double)0.45F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
+		return ((double) 0.45F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
 	}
 
 	@Override
@@ -204,14 +204,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 
-		boolean isMoving = (x * x + z * z) >  0.0001;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(this.isJumping()) {
+		if (this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
 			controller.setAnimationSpeed(1.0);
 		} else {
@@ -265,7 +265,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	private <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(tAnimationState.isMoving() || !this.shouldEmote) {
+		if (tAnimationState.isMoving() || !this.shouldEmote) {
 			controller.forceAnimationReset();
 			controller.stop();
 			this.shouldEmote = false;
@@ -639,7 +639,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
 			}
 
-			int k = this.random.nextInt(5);
+			int k = this.random.nextInt(4);
 			int breed;
 			if (k < 2) {
 				breed = this.getBreed();
@@ -656,6 +656,20 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			((OHorse) abstracthorse).setOverlayVariant(overlay);
 			((OHorse) abstracthorse).setBreed(breed);
 			((OHorse) abstracthorse).setGender(gender);
+
+			if (this.random.nextInt(4) == 0) {
+				int randomJumpStrength = (int) Math.max(horse.generateRandomJumpStrength(), this.random.nextInt(10) + 10);
+				((OHorse) abstracthorse).generateRandomJumpStrength();
+
+				int betterSpeed = (int) Math.max(horse.getSpeed(), this.random.nextInt(10) + 20);
+				((OHorse) abstracthorse).setSpeed(betterSpeed);
+
+				int betterHealth = (int) Math.max(horse.getHealth(), this.random.nextInt(20) + 40);
+				((OHorse) abstracthorse).setHealth(betterHealth);
+			} else {
+				((OHorse) abstracthorse).setSpeed(horse.getSpeed());
+				((OHorse) abstracthorse).setHealth(horse.getHealth());
+			}
 		}
 
 		this.setOffspringAttributes(ageableMob, abstracthorse);

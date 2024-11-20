@@ -8,8 +8,10 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SaddleItem;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,17 +30,21 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
 
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        ItemStack saddleSlot = animatable.getSlot(1).get();
+        List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
+        if (armorSlots.size() <= 1) {
+            return;
+        }
 
-        if (saddleSlot.isEmpty() || !(saddleSlot.getItem() instanceof SaddleItem)) {
+        ItemStack saddleItemStack = armorSlots.get(1);
+
+        if (saddleItemStack.isEmpty() || !(saddleItemStack.getItem() instanceof SaddleItem)) {
             return;
         }
 
         ResourceLocation resourceLocation = null;
 
-        if (saddleSlot.getItem() == LOItems.BLACK_SADDLE.get()) {
+        if (saddleItemStack.getItem() == LOItems.BLACK_SADDLE.get()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/black_saddle.png");
-            System.out.println("Applying black saddle.");
         } else {
             return;
         }

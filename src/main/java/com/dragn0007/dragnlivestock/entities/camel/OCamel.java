@@ -98,6 +98,11 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public boolean canJump() {
+		return false;
+	}
+
+	@Override
 	public void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
