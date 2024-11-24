@@ -77,7 +77,7 @@ public class LivestockOverhaulCommonConfig {
 
         BUILDER.push("Miscellaneous");
 
-        GENDERS_AFFECT_BIPRODUCTS = BUILDER.comment("Should animals be able to give bi-products regardless of gender?")
+        GENDERS_AFFECT_BIPRODUCTS = BUILDER.comment("Should an animal's gender affect the ability to get bi-products from it?")
                 .define("Genders Affect Bi-Products", true);
 
         GENDERS_AFFECT_BREEDING = BUILDER.comment("Should an animal's gender affect how it breeds?")
