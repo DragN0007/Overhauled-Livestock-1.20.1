@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dragnlivestock:pork_rib_chop"
+    }
+  ],
+  "result": {
+    "item": "tfc:food/pork"
+  }
+}

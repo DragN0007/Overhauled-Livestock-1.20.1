@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dragnlivestock:chicken_thigh"
+    }
+  ],
+  "result": {
+    "item": "tfc:food/chicken"
+  }
+}

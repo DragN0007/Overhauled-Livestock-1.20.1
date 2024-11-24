@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:rabbit"
+    }
+  ],
+  "result": {
+    "item": "tfc:food/rabbit"
+  }
+}

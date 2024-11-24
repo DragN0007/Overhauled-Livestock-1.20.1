@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:horse",
     "dragnlivestock:o_horse",
     "dragnlivestock:end_unicorn",
     "dragnlivestock:nether_unicorn",

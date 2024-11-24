@@ -27,47 +27,47 @@ public class LivestockOverhaulCommonConfig {
     static {
         BUILDER.push("Spawning");
 
-        REPLACE_HORSES = BUILDER.comment("Should vanilla horses be replaced by O-Horses?")
-                .define("Replace Vanilla Horses", true);
+        REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
+                .define("Replace Horses", true);
 
-        REPLACE_MULES = BUILDER.comment("Should vanilla mules be replaced by O-Mules?")
-                .define("Replace Vanilla Mules", true);
+        REPLACE_MULES = BUILDER.comment("Should mules be replaced by O-Mules?")
+                .define("Replace Mules", true);
 
-        REPLACE_DONKEYS = BUILDER.comment("Should vanilla donkeys be replaced by O-Donkeys?")
-                .define("Replace Vanilla Donkeys", true);
+        REPLACE_DONKEYS = BUILDER.comment("Should donkeys be replaced by O-Donkeys?")
+                .define("Replace Donkeys", true);
 
-        REPLACE_COWS = BUILDER.comment("Should vanilla cows be replaced by O-Cows?")
-                .define("Replace Vanilla Cows", true);
+        REPLACE_COWS = BUILDER.comment("Should cows be replaced by O-Cows?")
+                .define("Replace Cows", true);
 
-        REPLACE_CHICKENS = BUILDER.comment("Should vanilla chickens be replaced by O-Chickens?")
-                .define("Replace Vanilla Chickens", true);
+        REPLACE_CHICKENS = BUILDER.comment("Should chickens be replaced by O-Chickens?")
+                .define("Replace Chickens", true);
 
-        REPLACE_SHEEP = BUILDER.comment("Should vanilla sheep be replaced by O-Sheep?")
-                .define("Replace Vanilla Sheep", true);
+        REPLACE_SHEEP = BUILDER.comment("Should sheep be replaced by O-Sheep?")
+                .define("Replace Sheep", true);
 
-        REPLACE_PIGS = BUILDER.comment("Should vanilla pigs be replaced by O-Pigs?")
-                .define("Replace Vanilla Pigs", true);
+        REPLACE_PIGS = BUILDER.comment("Should pigs be replaced by O-Pigs?")
+                .define("Replace Pigs", true);
 
-        REPLACE_LLAMAS = BUILDER.comment("Should vanilla llamas be replaced by O-Llamas?")
-                .define("Replace Vanilla Llamas", true);
+        REPLACE_LLAMAS = BUILDER.comment("Should llamas be replaced by O-Llamas?")
+                .define("Replace Llamas", true);
 
-        REPLACE_RABBITS = BUILDER.comment("Should vanilla rabbits be replaced by O-Rabbits?")
-                .define("Replace Vanilla Rabbits", true);
+        REPLACE_RABBITS = BUILDER.comment("Should rabbits be replaced by O-Rabbits?")
+                .define("Replace Rabbits", true);
 
-        REPLACE_SALMON = BUILDER.comment("Should vanilla  be replaced by O-Salmon?")
-                .define("Replace Vanilla Salmon", true);
+        REPLACE_SALMON = BUILDER.comment("Should  be replaced by O-Salmon?")
+                .define("Replace Salmon", true);
 
-        REPLACE_COD = BUILDER.comment("Should vanilla cod be replaced by O-Cod?")
-                .define("Replace Vanilla Cod", true);
+        REPLACE_COD = BUILDER.comment("Should cod be replaced by O-Cod?")
+                .define("Replace Cod", true);
 
-        REPLACE_BEES = BUILDER.comment("Should vanilla bees be replaced by O-Bees?")
-                .define("Replace Vanilla Bees", true);
+        REPLACE_BEES = BUILDER.comment("Should bees be replaced by O-Bees?")
+                .define("Replace Bees", true);
 
-        REPLACE_CAMELS = BUILDER.comment("Should vanilla camels be replaced by O-Camels?")
-                .define("Replace Vanilla Camels", true);
+        REPLACE_CAMELS = BUILDER.comment("Should camels be replaced by O-Camels?")
+                .define("Replace Camels", true);
 
-        REPLACE_GOATS = BUILDER.comment("Should vanilla goats be replaced by O-Goats?")
-                .define("Replace Vanilla Goats", true);
+        REPLACE_GOATS = BUILDER.comment("Should goats be replaced by O-Goats?")
+                .define("Replace Goats", true);
         BUILDER.pop();
 
         BUILDER.push("Miscellaneous");

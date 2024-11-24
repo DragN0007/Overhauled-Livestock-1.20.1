@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dragnlivestock:beef_sirloin_steak"
+    }
+  ],
+  "result": {
+    "item": "tfc:food/beef"
+  }
+}
