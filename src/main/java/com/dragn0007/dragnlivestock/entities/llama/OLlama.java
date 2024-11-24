@@ -173,7 +173,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	public int getMaxHerdSize() {
-		return 3;
+		return LivestockOverhaulCommonConfig.LLAMA_HERD_MAX.get();
 	}
 
 	public boolean hasFollowers() {

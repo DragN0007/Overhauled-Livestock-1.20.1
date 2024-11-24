@@ -44,6 +44,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepHornLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -139,6 +140,11 @@ public class SpawnReplacer {
 
                 int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                 oHorse.setGender(randomGender);
+
+                //terrafirmacraft compat, since it doesn't work(?) on LO horses
+                CompoundTag tfcTag = new CompoundTag();
+                tfcTag.putFloat("familiarity", 1F);
+                oHorse.addAdditionalSaveData(tfcTag);
 
                 //discard vanilla horse once it's been successfully replaced on client and server
                 if (event.getLevel().isClientSide) {

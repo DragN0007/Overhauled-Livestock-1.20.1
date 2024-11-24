@@ -154,7 +154,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	}
 
 	public int getMaxHerdSize() {
-		return 8;
+		return LivestockOverhaulCommonConfig.SHEEP_HERD_MAX.get();
 	}
 
 	public boolean hasFollowers() {

@@ -68,6 +68,32 @@ public class ModCompatSpawnReplacer {
     @SubscribeEvent
     public static void onModdedSpawn(EntityJoinLevelEvent event) {
 
+        // TerraFirmaCraft Horse -> Vanilla (so it can be converted into an O-Variant)
+        if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() &&
+                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "horse"))) {
+
+            Entity tfcHorse = event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Horse horse = EntityType.HORSE.create(event.getLevel());
+            if (horse != null) {
+                horse.copyPosition(tfcHorse);
+                horse.setCustomName(tfcHorse.getCustomName());
+
+                if (event.getLevel().isClientSide) {
+                    tfcHorse.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(horse);
+                tfcHorse.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
         // TerraFirmaCraft Donkey -> Vanilla (so it can be converted into an O-Variant)
         if (LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() &&
                 ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "donkey"))) {

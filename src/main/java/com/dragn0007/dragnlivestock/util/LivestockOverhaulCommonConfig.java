@@ -22,6 +22,11 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_GOATS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BIPRODUCTS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BREEDING;
+    public static final ForgeConfigSpec.BooleanValue ANIMALS_HERDING_ENABLED;
+    public static final ForgeConfigSpec.ConfigValue<Integer> SHEEP_HERD_MAX;
+    public static final ForgeConfigSpec.ConfigValue<Integer> COW_HERD_MAX;
+    public static final ForgeConfigSpec.ConfigValue<Integer> LLAMA_HERD_MAX;
+    public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HERD_MAX;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -77,6 +82,21 @@ public class LivestockOverhaulCommonConfig {
 
         GENDERS_AFFECT_BREEDING = BUILDER.comment("Should an animal's gender affect how it breeds?")
                 .define("Genders Affect Breeding", true);
+
+        ANIMALS_HERDING_ENABLED = BUILDER.comment("Should animals, like cows, herd together?")
+                .define("Animals Herd Together", true);
+
+        COW_HERD_MAX = BUILDER.comment("Maximum amount of O-Cows that can herd together. Default is 8.")
+                .define("Cow Herd Maximum", 8);
+
+        HORSE_HERD_MAX = BUILDER.comment("Maximum amount of O-Horses that can herd together. Default is 3.")
+                .define("Horse Herd Maximum", 3);
+
+        SHEEP_HERD_MAX = BUILDER.comment("Maximum amount of O-Sheep that can herd together. Default is 8.")
+                .define("Sheep Herd Maximum", 8);
+
+        LLAMA_HERD_MAX = BUILDER.comment("Maximum amount of O-Llamas that can herd together. Default is 3.")
+                .define("Llama Herd Maximum", 3);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

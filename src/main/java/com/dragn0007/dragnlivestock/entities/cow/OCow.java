@@ -175,7 +175,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	}
 
 	public int getMaxHerdSize() {
-		return 8;
+		return LivestockOverhaulCommonConfig.COW_HERD_MAX.get();
 	}
 
 	public boolean hasFollowers() {
