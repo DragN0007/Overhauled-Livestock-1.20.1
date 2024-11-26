@@ -53,6 +53,10 @@ public class LOItems {
             () -> new ForgeSpawnEggItem(EntityTypes.O_GOAT_ENTITY, 0xfafafa, 0xeae7de, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> O_UNDEAD_HORSE_SPAWN_EGG = ITEMS.register("o_undead_horse_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.O_UNDEAD_HORSE_ENTITY, 0xdbdbdb, 0x868686, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> O_FROG_SPAWN_EGG = ITEMS.register("o_frog_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.O_FROG_ENTITY, 0x9cc15c, 0xc34f31, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> GRUB_SPAWN_EGG = ITEMS.register("grub_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.GRUB_ENTITY, 0xf0f1c3, 0xc9bb8d, new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> OVERWORLD_UNICORN_SPAWN_EGG = ITEMS.register("overworld_unicorn_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.OVERWORLD_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
@@ -202,6 +206,16 @@ public class LOItems {
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).build())));
     public static final RegistryObject<Item> COOKED_CHEVON_LOIN = ITEMS.register("cooked_chevon_loin",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).build())));
+
+    public static final RegistryObject<Item> FROG = ITEMS.register("frog",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(1).build())));
+    public static final RegistryObject<Item> COOKED_FROG = ITEMS.register("cooked_frog",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(1).build())));
+
+    public static final RegistryObject<Item> GRUB = ITEMS.register("grub",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).effect(new MobEffectInstance(MobEffects.CONFUSION, 600, 0), 0.8F).saturationMod(1).build())));
+    public static final RegistryObject<Item> COOKED_GRUB = ITEMS.register("cooked_grub",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(1).build())));
 
     public static final RegistryObject<Item> FISH_OIL = ITEMS.register("fish_oil",
             () -> new FishOilItem(

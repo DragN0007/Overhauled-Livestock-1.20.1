@@ -281,6 +281,20 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 600)
                 .unlockedBy("has_rabbit_thigh", has(LOItems.RABBIT_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_rabbit_thigh_campfire_cooking"));
 
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.FROG.get()), RecipeCategory.MISC, LOItems.COOKED_FROG.get(), 0.35F, 100)
+                .unlockedBy("has_frog", has(LOItems.FROG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_frog_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.FROG.get()), RecipeCategory.MISC, LOItems.COOKED_FROG.get(), 0.35F, 200)
+                .unlockedBy("has_frog", has(LOItems.FROG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_frog_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.FROG.get()), RecipeCategory.MISC, LOItems.COOKED_FROG.get(), 0.35F, 600)
+                .unlockedBy("has_frog", has(LOItems.FROG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_frog_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.GRUB.get()), RecipeCategory.MISC, LOItems.COOKED_GRUB.get(), 0.35F, 100)
+                .unlockedBy("has_grub", has(LOItems.GRUB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_grub_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.GRUB.get()), RecipeCategory.MISC, LOItems.COOKED_GRUB.get(), 0.35F, 200)
+                .unlockedBy("has_grub", has(LOItems.GRUB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_grub_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.GRUB.get()), RecipeCategory.MISC, LOItems.COOKED_GRUB.get(), 0.35F, 600)
+                .unlockedBy("has_grub", has(LOItems.GRUB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_grub_campfire_cooking"));
+
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.COW_MILK_JUG.get()), RecipeCategory.MISC, LOItems.CHEESE.get(), 0.35F, 200)
                 .unlockedBy("has_milk", has(LOItems.COW_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cheese_smelting"));
 

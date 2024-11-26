@@ -1,0 +1,44 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"move": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"bone": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 0.9]
+						},
+						"0.5": {
+							"vector": [1, 1, 1.3]
+						},
+						"1.0": {
+							"vector": [1, 1, 0.9]
+						}
+					}
+				}
+			}
+		},
+		"idle": {
+			"loop": true,
+			"animation_length": 1.5,
+			"bones": {
+				"bone": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1.1, 1]
+						},
+						"0.75": {
+							"vector": [1, 1, 1]
+						},
+						"1.5": {
+							"vector": [1, 1.1, 1]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

@@ -8,6 +8,8 @@ import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.frog.OFrog;
+import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
@@ -136,6 +138,18 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,2f)
                     .build(new ResourceLocation(MODID,"o_undead_horse").toString()));
+
+    public static final RegistryObject<EntityType<OFrog>> O_FROG_ENTITY = ENTITY_TYPES.register("o_frog",
+            () -> EntityType.Builder.of(OFrog::new,
+                            MobCategory.CREATURE)
+                    .sized(0.3f, 0.3f)
+                    .build(new ResourceLocation(MODID,"o_frog").toString()));
+
+    public static final RegistryObject<EntityType<Grub>> GRUB_ENTITY = ENTITY_TYPES.register("grub",
+            () -> EntityType.Builder.of(Grub::new,
+                            MobCategory.CREATURE)
+                    .sized(0.3f, 0.3f)
+                    .build(new ResourceLocation(MODID,"grub").toString()));
 
 
     public static final RegistryObject<EntityType<OverworldUnicorn>> OVERWORLD_UNICORN_ENTITY = ENTITY_TYPES.register("overworld_unicorn",

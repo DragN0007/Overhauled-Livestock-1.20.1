@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_grub": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:grub"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragnlivestock:cooked_grub_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_grub",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragnlivestock:cooked_grub_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

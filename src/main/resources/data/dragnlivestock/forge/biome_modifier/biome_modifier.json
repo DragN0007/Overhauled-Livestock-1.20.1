@@ -1,8 +1,10 @@
 {
   "type": "dragnlivestock:spawn_biome_modifier",
   "biomes": [
-    "meadow",
-    "basalt_deltas",
-    "end_highlands"
+    "jungle",
+    "lush_caves",
+    "swamp",
+    "mangrove_swamp",
+    "flower_forest"
   ]
 }

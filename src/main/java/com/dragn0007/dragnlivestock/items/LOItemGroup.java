@@ -36,6 +36,8 @@ public class LOItemGroup {
                         output.accept(LOItems.O_CAMEL_SPAWN_EGG.get());
                         output.accept(LOItems.OX_SPAWN_EGG.get());
                         output.accept(LOItems.O_GOAT_SPAWN_EGG.get());
+                        output.accept(LOItems.O_FROG_SPAWN_EGG.get());
+                        output.accept(LOItems.GRUB_SPAWN_EGG.get());
                         output.accept(LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());
@@ -114,6 +116,12 @@ public class LOItemGroup {
 
                         output.accept(LOItems.RABBIT_THIGH.get());
                         output.accept(LOItems.COOKED_RABBIT_THIGH.get());
+
+                        output.accept(LOItems.FROG.get());
+                        output.accept(LOItems.COOKED_FROG.get());
+
+                        output.accept(LOItems.GRUB.get());
+                        output.accept(LOItems.COOKED_GRUB.get());
 
                         output.accept(LOItems.FISH_OIL.get());
                         output.accept(LOItems.ROE.get());

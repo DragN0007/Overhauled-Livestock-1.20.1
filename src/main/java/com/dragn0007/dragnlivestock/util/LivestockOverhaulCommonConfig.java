@@ -20,6 +20,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_BEES;
     public static final ForgeConfigSpec.BooleanValue REPLACE_CAMELS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_GOATS;
+    public static final ForgeConfigSpec.BooleanValue REPLACE_FROGS;
+    public static final ForgeConfigSpec.BooleanValue SPAWN_GRUBS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BIPRODUCTS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BREEDING;
     public static final ForgeConfigSpec.BooleanValue ANIMALS_HERDING_ENABLED;
@@ -73,6 +75,12 @@ public class LivestockOverhaulCommonConfig {
 
         REPLACE_GOATS = BUILDER.comment("Should goats be replaced by O-Goats?")
                 .define("Replace Goats", true);
+
+        REPLACE_FROGS = BUILDER.comment("Should frogs be replaced by O-Frogs?")
+                .define("Replace Frogs", true);
+
+        SPAWN_GRUBS = BUILDER.comment("Should Grubs spawn?")
+                .define("Spawn Grubs", true);
         BUILDER.pop();
 
         BUILDER.push("Miscellaneous");

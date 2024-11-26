@@ -102,6 +102,12 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.RABBIT_THIGH);
         simpleItem(LOItems.COOKED_RABBIT_THIGH);
 
+        simpleItem(LOItems.FROG);
+        simpleItem(LOItems.COOKED_FROG);
+
+        simpleItem(LOItems.GRUB);
+        simpleItem(LOItems.COOKED_GRUB);
+
         simpleItem(LOItems.FISH_OIL);
         simpleItem(LOItems.ROE);
 

@@ -18,6 +18,12 @@ import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxRender;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyRender;
+import com.dragn0007.dragnlivestock.entities.frog.OFrog;
+import com.dragn0007.dragnlivestock.entities.frog.OFrogRender;
+import com.dragn0007.dragnlivestock.entities.frog.ReplacedTadpole;
+import com.dragn0007.dragnlivestock.entities.frog.ReplacedTadpoleRender;
+import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
+import com.dragn0007.dragnlivestock.entities.frog.food.GrubRender;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatRender;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
@@ -45,10 +51,16 @@ import com.dragn0007.dragnlivestock.gui.OHorseScreen;
 import com.dragn0007.dragnlivestock.gui.OxScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import software.bernie.example.client.renderer.entity.ReplacedCreeperRenderer;
 
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -73,6 +85,9 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.OX_ENTITY.get(), Ox.createBaseHorseAttributes().build());
         event.put(EntityTypes.O_GOAT_ENTITY.get(), OGoat.createAttributes().build());
         event.put(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorse.createBaseHorseAttributes().build());
+        event.put(EntityTypes.O_FROG_ENTITY.get(), OFrog.createAttributes().build());
+
+        event.put(EntityTypes.GRUB_ENTITY.get(), Grub.createAttributes().build());
 
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
 
@@ -100,7 +115,11 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.OX_ENTITY.get(), OxRender::new);
         EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatRender::new);
         EntityRenderers.register(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorseRender::new);
+        EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
+        EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
+
+        EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);
         EntityRenderers.register(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicornRender::new);
         EntityRenderers.register(EntityTypes.END_UNICORN_ENTITY.get(), EndUnicornRender::new);

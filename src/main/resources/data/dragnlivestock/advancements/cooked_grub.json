@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "dragnlivestock:cooked_grub"
+    },
+    "title": "Can't Eat at Everybody's House",
+    "description": "Cook a Grub.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["dragnlivestock:cooked_grub"]
+          }
+        ]
+      }
+    }
+  }
+}

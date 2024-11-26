@@ -17,6 +17,10 @@ import com.dragn0007.dragnlivestock.entities.cow.OCowModel;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
+import com.dragn0007.dragnlivestock.entities.frog.OFrog;
+import com.dragn0007.dragnlivestock.entities.frog.OFrogEyeLayer;
+import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
@@ -44,12 +48,14 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepHornLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.client.model.FrogModel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
+import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -719,6 +725,40 @@ public class SpawnReplacer {
             }
         }
 
+        //Frog
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && event.getEntity() instanceof Frog) {
+            Frog frog = (Frog) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            OFrog oFrog = EntityTypes.O_FROG_ENTITY.get().create(event.getLevel());
+            if (oFrog != null) {
+                oFrog.copyPosition(frog);
+
+                oFrog.setCustomName(frog.getCustomName());
+                oFrog.setAge(frog.getAge());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(OFrogModel.Variant.values().length);
+                oFrog.setVariant(randomVariant);
+
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OFrogMarkingLayer.Overlay.values().length);
+                oFrog.setOverlayVariant(randomOverlayVariant);
+
+                int randomEyeVariant = event.getLevel().getRandom().nextInt(OFrogEyeLayer.Overlay.values().length);
+                oFrog.setEyesVariant(randomEyeVariant);
+
+                if (event.getLevel().isClientSide) {
+                    frog.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(oFrog);
+                frog.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
 
 
 
@@ -1079,6 +1119,32 @@ public class SpawnReplacer {
 
                 event.getLevel().addFreshEntity(goat);
                 oGoat.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        //Frog
+        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && event.getEntity() instanceof OFrog) {
+            OFrog oFrog = (OFrog) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Frog frog = EntityType.FROG.create(event.getLevel());
+            if (frog != null) {
+                frog.copyPosition(oFrog);
+
+                frog.setCustomName(oFrog.getCustomName());
+                frog.setAge(oFrog.getAge());
+
+                if (event.getLevel().isClientSide) {
+                    oFrog.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(frog);
+                oFrog.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }

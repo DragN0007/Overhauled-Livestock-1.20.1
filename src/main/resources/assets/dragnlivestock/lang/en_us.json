@@ -54,6 +54,12 @@
   "item.dragnlivestock.o_undead_horse_spawn_egg": "O-Undead Horse Spawn Egg",
   "entity.dragnlivestock.o_undead_horse": "O-Undead Horse",
 
+  "item.dragnlivestock.o_frog_spawn_egg": "O-Frog Spawn Egg",
+  "entity.dragnlivestock.o_frog": "O-Frog",
+
+  "item.dragnlivestock.grub_spawn_egg": "Grub Spawn Egg",
+  "entity.dragnlivestock.grub": "Grub",
+
   "item.dragnlivestock.overworld_unicorn_spawn_egg": "Overworld Unicorn Spawn Egg",
   "entity.dragnlivestock.overworld_unicorn": "Overworld Unicorn",
 
@@ -153,6 +159,12 @@
 
   "item.dragnlivestock.rabbit_thigh": "Rabbit Thigh",
   "item.dragnlivestock.cooked_rabbit_thigh": "Cooked Rabbit Thigh",
+
+  "item.dragnlivestock.frog": "Frog Legs",
+  "item.dragnlivestock.cooked_frog": "Cooked Frog Legs",
+
+  "item.dragnlivestock.grub": "Grub",
+  "item.dragnlivestock.cooked_grub": "Cooked Grub",
 
   "item.dragnlivestock.unicorn": "Unicorn",
   "item.dragnlivestock.unicorn_sirloin_steak": "Unicorn Sirloin Steak",
