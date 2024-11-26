@@ -20,7 +20,6 @@ import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyRender;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogRender;
-import com.dragn0007.dragnlivestock.entities.frog.ReplacedTadpole;
 import com.dragn0007.dragnlivestock.entities.frog.ReplacedTadpoleRender;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
 import com.dragn0007.dragnlivestock.entities.frog.food.GrubRender;
@@ -52,15 +51,10 @@ import com.dragn0007.dragnlivestock.gui.OxScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import software.bernie.example.client.renderer.entity.ReplacedCreeperRenderer;
 
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)

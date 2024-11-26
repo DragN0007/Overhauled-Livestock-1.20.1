@@ -29,3 +29,9 @@ mandatory=true
 versionRange = "[4.4.4,)"
 ordering="NONE"
 side="BOTH"
+[[dependencies.dragnlivestock]]
+modId="jade"
+mandatory=false
+versionRange = "[11.0.3,)"
+ordering="NONE"
+side="BOTH"
