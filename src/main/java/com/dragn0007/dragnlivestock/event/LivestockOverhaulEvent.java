@@ -111,8 +111,6 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorseRender::new);
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
-        EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
-
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);
         EntityRenderers.register(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicornRender::new);
@@ -123,5 +121,8 @@ public class LivestockOverhaulEvent {
 
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);
+
+        //Vanilla Replacers
+        EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
     }
 }
