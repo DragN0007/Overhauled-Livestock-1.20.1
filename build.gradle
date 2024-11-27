@@ -93,9 +93,6 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:1.20.1-47.2.0"
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
-
-    //Modded Compat
-    implementation fg.deobf("curse.maven:jade-324717:4573193")
 }
 
 tasks.named('processResources', ProcessResources).configure {
