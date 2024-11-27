@@ -9,6 +9,8 @@ import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
+import com.dragn0007.dragnlivestock.gui.OHorseMenu;
+import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -16,9 +18,11 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -31,6 +35,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -116,6 +121,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseHealth = 13.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
+		if (getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
+			baseHealth = 18.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
 		return 15.0F + (float) this.random.nextInt(4) + (float) this.random.nextInt(5);
 	}
 
@@ -140,6 +149,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			return baseStrength + multiplier;
 		}
 		if (getModelResource().equals(BreedModel.RACER.resourceLocation)) {
+			baseStrength = 0.35F;
+			return baseStrength + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
 			baseStrength = 0.35F;
 			return baseStrength + multiplier;
 		}
@@ -170,11 +183,42 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseSpeed = 0.25F;
 			return baseSpeed + multiplier;
 		}
+		if (getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
+			baseSpeed = 0.2F;
+			return baseSpeed + multiplier;
+		}
 		return baseSpeed + multiplier;
 	}
 
 	public double generateRandomEndurance() {
 		return ((double) 0.45F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
+	}
+
+	protected int getInventorySize() {
+		if (this.hasChest()) {
+			if (this.getBreed() == 0 || this.getBreed() == 2) {
+				return 11; //stock or warmblood
+			} else if (this.getBreed() == 1 || this.getBreed() == 5) {
+				return 17; //draft or coldblood
+			} else if (this.getBreed() == 3) {
+				return 14; //pony
+			} else if (this.getBreed() == 4) {
+				return 5; //racer
+			}
+		}
+		return super.getInventorySize();
+	}
+
+	@Override
+	public void openInventory(Player player) {
+		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
+				return new OHorseMenu(containerId, inventory, this.inventory, this);
+			}, this.getDisplayName()), (data) -> {
+				data.writeInt(this.getInventorySize());
+				data.writeInt(this.getId());
+			});
+		}
 	}
 
 	@Override
@@ -383,6 +427,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			if (this.isSaddled() && getModelResource().equals(BreedModel.PONY.resourceLocation)) {
 				offsetY = 1.1;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
+				offsetY = 1.5;
 			}
 
 			if (this.isJumping()) {

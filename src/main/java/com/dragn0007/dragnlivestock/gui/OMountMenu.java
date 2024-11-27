@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.gui;
 
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,78 +13,54 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 
-public class OHorseMenu extends AbstractContainerMenu {
+public class OMountMenu extends AbstractContainerMenu {
 
     public Container container;
-    public OHorse oHorse;
+    public AbstractOMount oMount;
 
-    public OHorseMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerId, inventory, new SimpleContainer(extraData.readInt()), (OHorse) inventory.player.level().getEntity(extraData.readInt()));
+    public OMountMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
+        this(containerId, inventory, new SimpleContainer(extraData.readInt()), (AbstractOMount) inventory.player.level().getEntity(extraData.readInt()));
     }
 
-    public OHorseMenu(int containerId, Inventory inventory, Container container, OHorse abstractOMount) {
-        super(LOMenuTypes.O_HORSE_MENU.get(), containerId);
+    public OMountMenu(int containerId, Inventory inventory, Container container, AbstractOMount abstractOMount) {
+        super(LOMenuTypes.O_MOUNT_MENU.get(), containerId);
         this.container = container;
-        this.oHorse = abstractOMount;
+        this.oMount = abstractOMount;
 
-        int oHorseSlots = 0;
-        this.addSlot(new Slot(this.container, oHorseSlots++, 8, 18) {
+        int oMountSlots = 0;
+        this.addSlot(new Slot(this.container, oMountSlots++, 8, 18) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                return itemStack.is(LOTags.Items.SADDLE) && !this.hasItem() && OHorseMenu.this.oHorse.isSaddleable();
+                return itemStack.is(LOTags.Items.SADDLE) && !this.hasItem() && OMountMenu.this.oMount.isSaddleable();
             }
 
             @Override
             public boolean isActive() {
-                return OHorseMenu.this.oHorse.isSaddleable();
+                return OMountMenu.this.oMount.isSaddleable();
             }
         });
 
-        this.addSlot(new Slot(this.container, oHorseSlots++, 8, 36) {
+        this.addSlot(new Slot(this.container, oMountSlots++, 8, 36) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
                 if (itemStack.getItem() instanceof HorseArmorItem) {
-                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
+                    return !this.hasItem() && OMountMenu.this.oMount.canWearArmor();
                 } else if (itemStack.is(ItemTags.WOOL_CARPETS)) {
-                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
+                    return !this.hasItem() && OMountMenu.this.oMount.canWearArmor();
                 }
                 return false;
             }
 
             @Override
             public boolean isActive() {
-                return OHorseMenu.this.oHorse.canWearArmor();
+                return OMountMenu.this.oMount.canWearArmor();
             }
         });
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2)) { //stock or warmblood
-            for(int y = 0; y < 3; y++) {
-                for(int x = 0; x < 3; x++) {
-                    this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
-                }
-            }
-        }
-
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5)) { //draft or coldblood
+        if(this.oMount.hasChest()) {
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 5; x++) {
-                    this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
-                }
-            }
-        }
-
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 3)) { //pony
-            for(int y = 0; y < 3; y++) {
-                for(int x = 0; x < 4; x++) {
-                    this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
-                }
-            }
-        }
-
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 4)) { //racer
-            for(int y = 0; y < 3; y++) {
-                for(int x = 0; x < 1; x++) {
-                    this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
+                    this.addSlot(new Slot(this.container, oMountSlots++, 80 + x * 18, 18 + y * 18));
                 }
             }
         }
@@ -103,7 +78,7 @@ public class OHorseMenu extends AbstractContainerMenu {
     }
 
     public boolean stillValid(Player player) {
-        return !this.oHorse.hasInventoryChanged(this.container) && this.container.stillValid(player) && this.oHorse.isAlive() && this.oHorse.distanceTo(player) < 8.0F;
+        return !this.oMount.hasInventoryChanged(this.container) && this.container.stillValid(player) && this.oMount.isAlive() && this.oMount.distanceTo(player) < 8.0F;
     }
 
     public ItemStack quickMoveStack(Player player, int slotId) {
