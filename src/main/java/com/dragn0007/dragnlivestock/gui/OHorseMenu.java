@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;
@@ -57,6 +58,21 @@ public class OHorseMenu extends AbstractContainerMenu {
                 return OHorseMenu.this.oHorse.canWearArmor();
             }
         });
+
+//        this.addSlot(new Slot(this.container, oHorseSlots++, 8, 54) {
+//            @Override
+//            public boolean mayPlace(ItemStack itemStack) {
+//                if (itemStack.getItem() instanceof HorseShoeItem) {
+//                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearShoes();
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean isActive() {
+//                return OHorseMenu.this.oHorse.canWearShoes();
+//            }
+//        });
 
         if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2)) { //stock or warmblood
             for(int y = 0; y < 3; y++) {

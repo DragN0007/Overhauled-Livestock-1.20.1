@@ -209,6 +209,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return super.getInventorySize();
 	}
 
+	//TODO
+//	public boolean canWearShoes() {
+//		return true;
+//	}
+
 	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {

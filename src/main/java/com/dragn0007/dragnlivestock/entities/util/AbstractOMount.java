@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -46,6 +47,7 @@ import java.util.UUID;
 public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
+    public static final UUID SHOE_MODIFIER_UUID = UUID.fromString("d9b2d63d-5baf-4f2d-9e24-d80b02e6d17c");
     public static final UUID SPRINT_SPEED_MOD_UUID = UUID.fromString("c9379664-01b5-4e19-a7e9-11264453bdce");
     public static final UUID WALK_SPEED_MOD_UUID = UUID.fromString("59b55c98-e39b-45e2-846c-f91f3e9ea861");
 
@@ -94,6 +96,43 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     @Override
     public boolean canParent() {
         return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+    }
+
+    public boolean isShoe(ItemStack itemStack) {
+        return itemStack.getItem() instanceof HorseShoeItem;
+    }
+
+    public boolean canWearShoes() {
+        return false;
+    }
+
+    public ItemStack getShoes() {
+        return this.getItemBySlot(EquipmentSlot.CHEST);
+    }
+
+    public void setShoes(ItemStack itemStack) {
+        this.setItemSlot(EquipmentSlot.CHEST, itemStack);
+        this.setDropChance(EquipmentSlot.CHEST, 0f);
+    }
+
+    public void setShoeEquipment(ItemStack itemStack) {
+        this.setShoes(itemStack);
+        if (!this.level().isClientSide) {
+            this.getAttribute(Attributes.ARMOR).removeModifier(SHOE_MODIFIER_UUID);
+
+            if (itemStack.getItem() instanceof HorseShoeItem horseShoeItem) {
+                int protection = horseShoeItem.getProtection();
+                if (protection > 0) {
+                    this.getAttribute(Attributes.ARMOR).addTransientModifier(
+                            new AttributeModifier(SHOE_MODIFIER_UUID, "Horse shoe armor bonus", (double) protection, AttributeModifier.Operation.ADDITION)
+                    );
+                }
+            }
+        }
+    }
+
+    public boolean isWearingShoes() {
+        return !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
     @Override
@@ -301,6 +340,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             compoundTag.put("SaddleItem", this.inventory.getItem(0).save(new CompoundTag()));
         }
 
+        if (!this.inventory.getItem(2).isEmpty()) {
+            compoundTag.put("ShoeItem", this.inventory.getItem(2).save(new CompoundTag()));
+        }
+
         compoundTag.putBoolean("ChestedHorse", this.hasChest());
         if (this.hasChest()) {
             ListTag listtag = new ListTag();
@@ -329,6 +372,13 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             ItemStack itemStack = ItemStack.of(compoundTag.getCompound("SaddleItem"));
             if(!itemStack.isEmpty() && this.isSaddle(itemStack)) {
                 this.inventory.setItem(0, itemStack);
+            }
+        }
+
+        if(compoundTag.contains("ShoeItem", 10)) {
+            ItemStack itemStack = ItemStack.of(compoundTag.getCompound("ShoeItem"));
+            if(!itemStack.isEmpty() && this.isShoe(itemStack)) {
+                this.inventory.setItem(2, itemStack);
             }
         }
 

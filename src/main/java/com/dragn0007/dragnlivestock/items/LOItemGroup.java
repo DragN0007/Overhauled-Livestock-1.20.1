@@ -42,6 +42,12 @@ public class LOItemGroup {
                         output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());
 
+                        output.accept(LOItems.NETHERITE_HORSESHOE.get());
+                        output.accept(LOItems.DIAMOND_HORSESHOE.get());
+                        output.accept(LOItems.GOLD_HORSESHOE.get());
+                        output.accept(LOItems.IRON_HORSESHOE.get());
+                        output.accept(LOItems.STONE_HORSESHOE.get());
+
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
 //                        output.accept(LOItems.BLACK_SADDLE.get());
 

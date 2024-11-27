@@ -74,6 +74,18 @@ public class LOItems {
             () -> new MaleGenderTestKit(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FEMALE_GENDER_TEST_STRIP = ITEMS.register("female_gender_test_strip",
             () -> new FemaleGenderTestKit(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> NETHERITE_HORSESHOE = ITEMS.register("netherite_horseshoe",
+            () -> new HorseShoeItem(7, (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> DIAMOND_HORSESHOE = ITEMS.register("diamond_horseshoe",
+            () -> new HorseShoeItem(5, (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> GOLD_HORSESHOE = ITEMS.register("gold_horseshoe",
+            () -> new HorseShoeItem(4, (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> IRON_HORSESHOE = ITEMS.register("iron_horseshoe",
+            () -> new HorseShoeItem(3, (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> STONE_HORSESHOE = ITEMS.register("stone_horseshoe",
+            () -> new HorseShoeItem(2, (new Item.Properties()).stacksTo(1)));
+
     public static final RegistryObject<Item> NETHERITE_HORSE_ARMOR = ITEMS.register("netherite_horse_armor",
             () -> new HorseArmorItem(15, "netherite", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> GRIFFITH_INSPIRED_HORSE_ARMOR = ITEMS.register("griffith_inspired_horse_armor",
