@@ -207,12 +207,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	protected int getInventorySize() {
 		if (this.hasChest()) {
-			if (this.getBreed() == 0 || this.getBreed() == 2) {
-				return 9; //stock or warmblood
-			} else if (this.getBreed() == 1 || this.getBreed() == 5) {
-				return 15; //draft or coldblood
+		    if (this.getBreed() == 1 || this.getBreed() == 5) {
+				return 17; //draft or coldblood
 			} else if (this.getBreed() == 3) {
-				return 12; //pony
+				return 14; //pony
+			} else if (this.getBreed() == 0 || this.getBreed() == 2) {
+				return 11; //stock or warmblood
 			} else if (this.getBreed() == 4) {
 				return 5; //racer
 			}
