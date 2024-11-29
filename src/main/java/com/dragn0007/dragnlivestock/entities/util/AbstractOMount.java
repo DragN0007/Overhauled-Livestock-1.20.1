@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.entities.util;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
-import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
