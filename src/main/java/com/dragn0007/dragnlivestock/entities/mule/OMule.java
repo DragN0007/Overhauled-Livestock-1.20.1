@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.mule;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -50,6 +52,16 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 	public OMule(EntityType<? extends OMule> type, Level level) {
 		super(type, level);
+	}
+
+	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mule");
+	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/mule");
+	@Override
+	public @NotNull ResourceLocation getDefaultLootTable() {
+		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
+		}
+		return LOOT_TABLE;
 	}
 
 	public static AttributeSupplier.Builder createBaseHorseAttributes() {

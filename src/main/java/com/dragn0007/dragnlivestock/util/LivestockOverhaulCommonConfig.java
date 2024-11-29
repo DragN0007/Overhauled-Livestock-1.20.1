@@ -29,6 +29,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> COW_HERD_MAX;
     public static final ForgeConfigSpec.ConfigValue<Integer> LLAMA_HERD_MAX;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HERD_MAX;
+    public static final ForgeConfigSpec.BooleanValue USE_VANILLA_LOOT;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -105,6 +106,9 @@ public class LivestockOverhaulCommonConfig {
 
         LLAMA_HERD_MAX = BUILDER.comment("Maximum amount of O-Llamas that can herd together. Default is 3.")
                 .define("Llama Herd Maximum", 3);
+
+        USE_VANILLA_LOOT = BUILDER.comment("Should O-Animals use vanilla loot instead of the loot included in the mod?")
+                .define("Use Vanilla Animal Loot", false);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

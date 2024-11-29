@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -62,6 +64,16 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	public OCow(EntityType<? extends OCow> type, Level level) {
 		super(type, level);
 		this.updateInventory();
+	}
+
+	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
+	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
+	@Override
+	public @NotNull ResourceLocation getDefaultLootTable() {
+		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
+		}
+		return LOOT_TABLE;
 	}
 
 	@Override

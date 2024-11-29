@@ -36,6 +36,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -55,6 +56,16 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+
+	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse");
+	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
+	@Override
+	public @NotNull ResourceLocation getDefaultLootTable() {
+		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
+		}
+		return LOOT_TABLE;
+	}
 
 	public OHorse leader;
 	public int herdSize = 1;
@@ -197,11 +208,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	protected int getInventorySize() {
 		if (this.hasChest()) {
 			if (this.getBreed() == 0 || this.getBreed() == 2) {
-				return 11; //stock or warmblood
+				return 9; //stock or warmblood
 			} else if (this.getBreed() == 1 || this.getBreed() == 5) {
-				return 17; //draft or coldblood
+				return 15; //draft or coldblood
 			} else if (this.getBreed() == 3) {
-				return 14; //pony
+				return 12; //pony
 			} else if (this.getBreed() == 4) {
 				return 5; //racer
 			}

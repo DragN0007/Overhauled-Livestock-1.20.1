@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.mooshroom;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 
 import javax.annotation.Nullable;
@@ -35,6 +37,16 @@ import java.util.Random;
 public class OMooshroom extends OCow implements GeoEntity {
     public OMooshroom(EntityType<? extends OCow> type, Level level) {
         super(type, level);
+    }
+
+    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mooshroom");
+    private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/mooshroom");
+    @Override
+    public @NotNull ResourceLocation getDefaultLootTable() {
+        if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+            return VANILLA_LOOT_TABLE;
+        }
+        return LOOT_TABLE;
     }
 
     public float getWalkTargetValue(BlockPos p_28933_, LevelReader p_28934_) {

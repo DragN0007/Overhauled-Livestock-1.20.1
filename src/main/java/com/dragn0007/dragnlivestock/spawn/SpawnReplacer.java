@@ -146,11 +146,6 @@ public class SpawnReplacer {
                 int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                 oHorse.setGender(randomGender);
 
-                //terrafirmacraft compat, since it doesn't work(?) on LO horses
-                CompoundTag tfcTag = new CompoundTag();
-                tfcTag.putFloat("familiarity", 1F);
-                oHorse.addAdditionalSaveData(tfcTag);
-
                 //discard vanilla horse once it's been successfully replaced on client and server
                 if (event.getLevel().isClientSide) {
                     vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
@@ -206,7 +201,7 @@ public class SpawnReplacer {
         }
 
         //Mule
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && event.getEntity() instanceof Mule) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_MULES.get() && event.getEntity() instanceof Mule) {
             Mule vanillaMule = (Mule) event.getEntity();
 
             if (event.getLevel().isClientSide) {
