@@ -4,12 +4,14 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
 
 public enum BreedModel {
-    STOCK(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_overhauled.geo.json")),
-    DRAFT(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_ardennes.geo.json")),
-    WARMBLOOD(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_kladruber.geo.json")),
-    PONY(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_fjord.geo.json")),
-    RACER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_thoroughbred.geo.json")),
-    COLDBLOOD(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_friesian.geo.json"));
+    MUSTANG(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_overhauled.geo.json")),
+    ARDENNES(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_ardennes.geo.json")),
+    KLADRUBER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_kladruber.geo.json")),
+    FJORD(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_fjord.geo.json")),
+    THOROUGHBRED(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_thoroughbred.geo.json")),
+    FRIESIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_friesian.geo.json")),
+    IRISH_COB(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_irish_cob.geo.json")),
+    AMERICAN_QUARTER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_american_quarter.geo.json"));
 
     public final ResourceLocation resourceLocation;
 

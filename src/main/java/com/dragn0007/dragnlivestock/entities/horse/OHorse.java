@@ -112,28 +112,36 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public float generateRandomMaxHealth() {
 		float baseHealth;
-		if (getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
 			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.DRAFT.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
 			baseHealth = 20.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.WARMBLOOD.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
 			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.PONY.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
 			baseHealth = 14.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.RACER.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
 			baseHealth = 13.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
 			baseHealth = 18.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
+		if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+			baseHealth = 18.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
+		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
 		return 15.0F + (float) this.random.nextInt(4) + (float) this.random.nextInt(5);
@@ -143,28 +151,36 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double baseStrength = 0.4F;
 		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.25D;
 
-		if (getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
 			baseStrength = 0.5F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.DRAFT.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.WARMBLOOD.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
 			baseStrength = 0.4F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.PONY.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
 			baseStrength = 0.35F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.RACER.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
 			baseStrength = 0.35F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
 			baseStrength = 0.35F;
+			return baseStrength + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+			baseStrength = 0.3F;
+			return baseStrength + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+			baseStrength = 0.4F;
 			return baseStrength + multiplier;
 		}
 		return baseStrength + this.random.nextDouble() * 0.15D;
@@ -174,27 +190,35 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double baseSpeed = 0.0F;
 		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.30D;
 
-		if (getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.DRAFT.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.WARMBLOOD.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.PONY.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.RACER.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
 			baseSpeed = 0.25F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+			baseSpeed = 0.2F;
+			return baseSpeed + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+			baseSpeed = 0.15F;
+			return baseSpeed + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
@@ -209,15 +233,70 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (this.hasChest()) {
 		    if (this.getBreed() == 1 || this.getBreed() == 5) {
 				return 17; //draft or coldblood
-			} else if (this.getBreed() == 3) {
+			} else if (this.getBreed() == 3 || this.getBreed() == 6) {
 				return 14; //pony
-			} else if (this.getBreed() == 0 || this.getBreed() == 2) {
+			} else if (this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 7) {
 				return 11; //stock or warmblood
 			} else if (this.getBreed() == 4) {
 				return 5; //racer
 			}
 		}
 		return super.getInventorySize();
+	}
+
+	@Override
+	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+		if (this.hasPassenger(entity)) {
+
+			double offsetX = 0;
+			double offsetY = 1.1;
+			double offsetZ = -0.2;
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
+				offsetY = 1.3;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
+				offsetY = 1.45;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
+				offsetY = 1.35;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
+				offsetY = 1.05;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+				offsetY = 1.5;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+				offsetY = 1.1;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+				offsetY = 1.1;
+			}
+
+			if (this.isJumping()) {
+//				offsetY = 1.7;
+				offsetZ = -0.6;
+			}
+
+			double radYaw = Math.toRadians(this.getYRot());
+
+			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
+			double offsetYRotated = offsetY;
+			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
+
+			double x = this.getX() + offsetXRotated;
+			double y = this.getY() + offsetYRotated;
+			double z = this.getZ() + offsetZRotated;
+
+			entity.setPos(x, y, z);
+		}
 	}
 
 	//TODO
@@ -418,53 +497,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (this.hasSlownessEffect()) {
 				this.removeSlownessEffect();
 			}
-		}
-	}
-
-	@Override
-	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
-		if (this.hasPassenger(entity)) {
-
-			double offsetX = 0;
-			double offsetY = 1.1;
-			double offsetZ = -0.2;
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.STOCK.resourceLocation)) {
-				offsetY = 1.3;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.DRAFT.resourceLocation)) {
-				offsetY = 1.45;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.WARMBLOOD.resourceLocation)) {
-				offsetY = 1.35;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.PONY.resourceLocation)) {
-				offsetY = 1.1;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.COLDBLOOD.resourceLocation)) {
-				offsetY = 1.5;
-			}
-
-			if (this.isJumping()) {
-//				offsetY = 1.7;
-				offsetZ = -0.6;
-			}
-
-			double radYaw = Math.toRadians(this.getYRot());
-
-			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
-			double offsetYRotated = offsetY;
-			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
-			double x = this.getX() + offsetXRotated;
-			double y = this.getY() + offsetYRotated;
-			double z = this.getZ() + offsetZRotated;
-
-			entity.setPos(x, y, z);
 		}
 	}
 

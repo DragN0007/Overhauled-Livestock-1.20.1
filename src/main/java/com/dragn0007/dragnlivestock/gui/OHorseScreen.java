@@ -20,7 +20,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     public static final ResourceLocation HORSE_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/o_horse.png");
     public final OHorse oHorse;
-    protected int breedLabelX = 320;
+    protected int breedLabelX = 235;
     protected int breedLabelY = 75;
 
     public OHorseScreen(OHorseMenu oHorseMenu, Inventory inventory, Component component) {
@@ -37,7 +37,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         graphics.blit(HORSE_INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2)) { //stock or warmblood
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7)) { //stock or warmblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 54, 54);
         }
 
@@ -45,7 +45,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 3)) { //pony
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 3 || this.oHorse.getBreed() == 6)) { //pony
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 72, 54);
         }
 
@@ -95,12 +95,14 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     private String getBreedText(int breed) {
         switch (breed) {
-            case 0: return "Stock";
-            case 1: return "Draft";
-            case 2: return "Warmblood";
-            case 3: return "Pony";
-            case 4: return "Racer";
-            case 5: return "Coldblood";
+            case 0: return "Mustang (Stock)";
+            case 1: return "Ardennes (Draft)";
+            case 2: return "Kladruber (Warmblood)";
+            case 3: return "Fjord (Pony)";
+            case 4: return "Thoroughbred (Racer)";
+            case 5: return "Friesian (Coldblood)";
+            case 6: return "Irish Cob (Draft)";
+            case 7: return "American Quarter (Stock)";
             default: return "Unknown";
         }
     }
