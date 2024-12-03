@@ -7,6 +7,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class OHorseRender extends GeoEntityRenderer<OHorse> {
 
     public OHorseRender(EntityRendererProvider.Context renderManager) {

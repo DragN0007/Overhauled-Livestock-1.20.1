@@ -11,6 +11,9 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class OHorseMarkingLayer extends GeoRenderLayer<OHorse> {
     public OHorseMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
@@ -18,6 +21,15 @@ public class OHorseMarkingLayer extends GeoRenderLayer<OHorse> {
 
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+
+        LocalDate currentDate = LocalDate.now();
+        int day = currentDate.getDayOfMonth();
+        Month month = currentDate.getMonth();
+
+        if (month == Month.DECEMBER && (day == 2 || day == 25)) {
+            return;
+        }
+
         RenderType renderMarkingType = RenderType.entityCutout(((OHorse)animatable).getOverlayLocation());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);

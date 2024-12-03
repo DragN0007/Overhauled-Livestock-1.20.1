@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
+import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
@@ -50,11 +51,6 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class OHorse extends AbstractOMount implements GeoEntity {
-	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
@@ -528,20 +524,35 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return SoundEvents.HORSE_ANGRY;
 	}
 
+
+	public static final EntityDataAccessor<Integer> REINDEER_VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+
+
+	public ResourceLocation getReindeerTextureResource() {
+		return OHorseModel.ReindeerVariant.reindeerVariantFromOrdinal(getReindeerVariant()).resourceLocation;
+	}
+
 	public ResourceLocation getTextureResource() {
 		return this.entityData.get(VARIANT_TEXTURE);
-//		return OHorseModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 
 	public ResourceLocation getOverlayLocation() {
 		return this.entityData.get(OVERLAY_TEXTURE);
-//		return OHorseMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
 
 	public ResourceLocation getModelResource() {
 		return BreedModel.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
+
+	public int getReindeerVariant() {
+		return this.entityData.get(REINDEER_VARIANT);
+	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
@@ -552,6 +563,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public int getBreed() {
 		return this.entityData.get(BREED);
+	}
+
+	public void setReindeerVariant(int reindeerVariant) {
+		this.entityData.set(REINDEER_VARIANT, reindeerVariant);
 	}
 
 	public void setVariant(int variant) {
@@ -588,6 +603,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 
+		if (tag.contains("Reindeer_Variant")) {
+			this.setReindeerVariant(tag.getInt("Reindeer_Variant"));
+		}
+
 		if (tag.contains("Variant")) {
 			this.setVariant(tag.getInt("Variant"));
 		}
@@ -616,6 +635,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
@@ -635,6 +655,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
+		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
 
 		if (spawnType == MobSpawnType.SPAWN_EGG) {
 			this.setBreed(random.nextInt(BreedModel.values().length));
@@ -653,6 +674,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(VARIANT_TEXTURE, OHorseModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OHorseMarkingLayer.Overlay.NONE.resourceLocation);
+		this.entityData.define(REINDEER_VARIANT, 0);
 	}
 
 	public boolean canMate(Animal animal) {

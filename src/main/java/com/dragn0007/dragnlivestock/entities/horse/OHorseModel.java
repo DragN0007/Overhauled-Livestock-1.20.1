@@ -4,6 +4,9 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class OHorseModel extends GeoModel<OHorse> {
 
     public enum Variant {
@@ -55,20 +58,47 @@ public class OHorseModel extends GeoModel<OHorse> {
         }
     }
 
-//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_overhauled.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
+    public enum ReindeerVariant {
+        BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_bay.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_black.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_brown.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_cream.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_light_grey.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_white.png"));
 
+        public final ResourceLocation resourceLocation;
+        ReindeerVariant(ResourceLocation resourceLocation) {
+            this.resourceLocation = resourceLocation;
+        }
+
+        public static ReindeerVariant reindeerVariantFromOrdinal(int christmasVariant) { return ReindeerVariant.values()[christmasVariant % ReindeerVariant.values().length];
+        }
+    }
+
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_horse_overhauled.geo.json");
-//    public static final ResourceLocation BABY_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/baby_horse.animation.json");
+    public static final ResourceLocation REINDEER_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/reindeer.geo.json");
+
+    LocalDate date = LocalDate.now();
+    Month month = date.getMonth();
+    int day = date.getDayOfMonth();
+
     @Override
     public ResourceLocation getModelResource(OHorse object) {
-        if(object.isBaby())
+        if (object.isBaby()) {
             return BABY_MODEL;
+        } else if (!object.isBaby() && month == Month.DECEMBER && (day == 2 || day == 25)) {
+            return REINDEER_MODEL;
+        }
         return BreedModel.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override
     public ResourceLocation getTextureResource(OHorse object) {
+        if (month == Month.DECEMBER && (day == 2 || day == 25)) {
+            return object.getReindeerTextureResource();
+        }
         return object.getTextureResource();
     }
 

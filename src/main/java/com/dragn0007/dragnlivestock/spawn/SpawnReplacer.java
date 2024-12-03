@@ -145,6 +145,9 @@ public class SpawnReplacer {
                 int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                 oHorse.setGender(randomGender);
 
+                int randomChristmasVariant = event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length);
+                oHorse.setReindeerVariant(randomChristmasVariant);
+
                 //discard vanilla horse once it's been successfully replaced on client and server
                 if (event.getLevel().isClientSide) {
                     vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
