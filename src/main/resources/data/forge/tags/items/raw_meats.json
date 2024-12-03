@@ -19,6 +19,13 @@
     "dragnlivestock:rabbit_thigh",
     "dragnlivestock:unicorn",
     "dragnlivestock:unicorn_sirloin_steak",
-    "dragnlivestock:unicorn_rib_steak"
+    "dragnlivestock:unicorn_rib_steak",
+    "dragnlivestock:camel",
+    "dragnlivestock:camel_loin",
+    "dragnlivestock:camel_rib",
+    "dragnlivestock:chevon",
+    "dragnlivestock:chevon_loin",
+    "dragnlivestock:chevon_rib",
+    "dragnlivestock:frog"
   ]
 }

@@ -19,6 +19,13 @@
     "dragnlivestock:cooked_rabbit_thigh",
     "dragnlivestock:cooked_unicorn",
     "dragnlivestock:cooked_unicorn_sirloin_steak",
-    "dragnlivestock:cooked_unicorn_rib_steak"
+    "dragnlivestock:cooked_unicorn_rib_steak",
+    "dragnlivestock:cooked_camel",
+    "dragnlivestock:cooked_camel_loin",
+    "dragnlivestock:cooked_camel_rib",
+    "dragnlivestock:cooked_chevon",
+    "dragnlivestock:cooked_chevon_loin",
+    "dragnlivestock:cooked_chevon_rib",
+    "dragnlivestock:cooked_frog"
   ]
 }

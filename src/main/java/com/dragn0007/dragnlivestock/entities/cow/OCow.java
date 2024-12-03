@@ -103,8 +103,9 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 			boolean isHorse = livingEntity.getType().is(LOTags.Entity_Types.HORSES);
 			boolean isRHGHorse = livingEntity.getType().is(LOTags.Entity_Types.RHG_HORSES);
 			boolean isSWEMHorse = livingEntity.getType().is(LOTags.Entity_Types.SWEM_HORSES);
+			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
 			boolean isWolf = livingEntity instanceof Wolf;
-			return isHorse || isRHGHorse || isSWEMHorse || isWolf;
+			return isHorse || isRHGHorse || isSWEMHorse || isOWolf || isWolf;
 		}));
 	}
 

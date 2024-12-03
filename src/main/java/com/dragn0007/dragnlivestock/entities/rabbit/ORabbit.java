@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
@@ -97,8 +98,13 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-
 		this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
+			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
+			boolean isOCat = livingEntity.getType().is(LOTags.Entity_Types.CATS);
+			boolean isWolf = livingEntity instanceof Wolf;
+			return isOWolf || isWolf || isOCat;
+		}));
 	}
 
 	static class RabbitAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
@@ -523,11 +529,11 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			}
 
 			int gender;
-			gender = this.random.nextInt(AbstractOMount.Gender.values().length);
+			gender = this.random.nextInt(ORabbit.Gender.values().length);
 
-			((ORabbit) oRabbit).setVariant(variant);
-			((ORabbit) oRabbit).setOverlayVariant(overlay);
-			((ORabbit) oRabbit).setGender(gender);
+			oRabbit.setVariant(variant);
+			oRabbit.setOverlayVariant(overlay);
+			oRabbit.setGender(gender);
 		}
 
 		return oRabbit;
