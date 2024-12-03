@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.rabbit;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -521,8 +522,12 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				overlay = this.random.nextInt(ORabbitMarkingLayer.Overlay.values().length);
 			}
 
+			int gender;
+			gender = this.random.nextInt(AbstractOMount.Gender.values().length);
+
 			((ORabbit) oRabbit).setVariant(variant);
 			((ORabbit) oRabbit).setOverlayVariant(overlay);
+			((ORabbit) oRabbit).setGender(gender);
 		}
 
 		return oRabbit;

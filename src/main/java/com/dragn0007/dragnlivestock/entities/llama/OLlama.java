@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.LlamaFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -522,9 +523,13 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 				++k;
 			}
 
+			int gender;
+			gender = this.random.nextInt(AbstractOMount.Gender.values().length);
+
 			oLlama.setStrength(k);
 			oLlama.setVariant(variant);
 			oLlama.setOverlayVariant(overlay);
+			oLlama.setGender(gender);
 		}
 
 		return oLlama;
