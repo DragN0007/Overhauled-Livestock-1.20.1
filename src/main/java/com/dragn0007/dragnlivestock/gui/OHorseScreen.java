@@ -99,7 +99,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 6: return "Irish Cob (Draft)";
             case 7: return "American Quarter (Stock)";
             case 8: return "Percheron (Draft)";
-            case 9: return "Selle Francias (Warmblood)";
+            case 9: return "Selle Francais (Warmblood)";
             default: return "Unknown";
         }
     }
