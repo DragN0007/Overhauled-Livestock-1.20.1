@@ -34,6 +34,9 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.IRON_HORSESHOE);
         simpleItem(LOItems.STONE_HORSESHOE);
 
+        simpleItem(LOItems.TAIL_SCISSORS);
+        simpleItem(LOItems.MANE_SCISSORS);
+
         simpleItem(LOItems.GENDER_TEST_STRIP);
         simpleItem(LOItems.MALE_GENDER_TEST_STRIP);
         simpleItem(LOItems.FEMALE_GENDER_TEST_STRIP);

@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
+import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
@@ -139,6 +140,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
+		if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+			baseHealth = 24.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
+		if (getModelResource().equals(BreedModel.SELLE_FRANCIAS.resourceLocation)) {
+			baseHealth = 17.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
 		return 15.0F + (float) this.random.nextInt(4) + (float) this.random.nextInt(5);
 	}
 
@@ -176,6 +185,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
 			baseStrength = 0.4F;
+			return baseStrength + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.SELLE_FRANCIAS.resourceLocation)) {
+			baseStrength = 0.55F;
+			return baseStrength + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+			baseStrength = 0.25F;
 			return baseStrength + multiplier;
 		}
 		return baseStrength + this.random.nextDouble() * 0.15D;
@@ -217,6 +234,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
+		if (getModelResource().equals(BreedModel.SELLE_FRANCIAS.resourceLocation)) {
+			baseSpeed = 0.15F;
+			return baseSpeed + multiplier;
+		}
+		if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+			baseSpeed = 0.15F;
+			return baseSpeed + multiplier;
+		}
 		return baseSpeed + multiplier;
 	}
 
@@ -226,11 +251,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	protected int getInventorySize() {
 		if (this.hasChest()) {
-		    if (this.getBreed() == 1 || this.getBreed() == 5) {
+		    if (this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8) {
 				return 17; //draft or coldblood
 			} else if (this.getBreed() == 3 || this.getBreed() == 6) {
 				return 14; //pony
-			} else if (this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 7) {
+			} else if (this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 7 || this.getBreed() == 9) {
 				return 11; //stock or warmblood
 			} else if (this.getBreed() == 4) {
 				return 5; //racer
@@ -248,30 +273,42 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			double offsetZ = -0.2;
 
 			if (this.isSaddled() && getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
-				offsetY = 1.3;
+				offsetY = 1.0;
 			}
 
 			if (this.isSaddled() && getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
-				offsetY = 1.45;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
-				offsetY = 1.35;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
-				offsetY = 1.05;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
-				offsetY = 1.5;
-			}
-
-			if (this.isSaddled() && getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
 				offsetY = 1.1;
 			}
 
+			if (this.isSaddled() && getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
+				offsetY = 1.15;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
+				offsetY = 0.85;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
+				offsetY = 1.2;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+				offsetY = 1.25;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+				offsetY = 0.95;
+			}
+
 			if (this.isSaddled() && getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+				offsetY = 1.0;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+				offsetY = 1.43;
+			}
+
+			if (this.isSaddled() && getModelResource().equals(BreedModel.SELLE_FRANCIAS.resourceLocation)) {
 				offsetY = 1.1;
 			}
 
@@ -630,6 +667,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("Mane")) {
+			this.setManeType(tag.getInt("Mane"));
+		}
+
+		if (tag.contains("Tail")) {
+			this.setTailType(tag.getInt("Tail"));
+		}
 	}
 
 	@Override
@@ -642,6 +687,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Gender", this.getGender());
+		tag.putInt("Mane", this.getManeType());
+		tag.putInt("Tail", this.getTailType());
 	}
 
 	@Override
@@ -675,6 +722,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT_TEXTURE, OHorseModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OHorseMarkingLayer.Overlay.NONE.resourceLocation);
 		this.entityData.define(REINDEER_VARIANT, 0);
+		this.entityData.define(MANE_TYPE, 0);
+		this.entityData.define(TAIL_TYPE, 0);
 	}
 
 	public boolean canMate(Animal animal) {
@@ -781,6 +830,70 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		this.setOffspringAttributes(ageableMob, abstracthorse);
 		return abstracthorse;
+	}
+
+	public enum Mane {
+		DEFAULT,
+		BUTTONS,
+		SHORT;
+
+		public Mane next() {
+			return Mane.values()[(this.ordinal() + 1) % Mane.values().length];
+		}
+	}
+
+	public boolean hasDefaultMane() {
+		return this.getManeType() == 0;
+	}
+
+	public boolean hasButtonMane() {
+		return this.getManeType() == 1;
+	}
+
+	public boolean hasShortMane() {
+		return this.getManeType() == 2;
+	}
+
+	public enum Tail {
+		DEFAULT,
+		SHORT,
+		LONG;
+
+		public Tail next() {
+			return Tail.values()[(this.ordinal() + 1) % Tail.values().length];
+		}
+	}
+
+	public boolean hasDefaultTail() {
+		return this.getTailType() == 0;
+	}
+
+	public boolean hasLongTail() {
+		return this.getTailType() == 1;
+	}
+
+	public boolean hasShortTail() {
+		return this.getTailType() == 2;
+	}
+
+	public static final EntityDataAccessor<Integer> MANE_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+
+	public int getManeType() {
+		return this.entityData.get(MANE_TYPE);
+	}
+
+	public void setManeType(int mane) {
+		this.entityData.set(MANE_TYPE, mane);
+	}
+
+	public static final EntityDataAccessor<Integer> TAIL_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+
+	public int getTailType() {
+		return this.entityData.get(TAIL_TYPE);
+	}
+
+	public void setTailType(int tail) {
+		this.entityData.set(TAIL_TYPE, tail);
 	}
 
 }

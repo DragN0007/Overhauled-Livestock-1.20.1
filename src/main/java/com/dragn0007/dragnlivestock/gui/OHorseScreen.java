@@ -32,11 +32,11 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         graphics.blit(HORSE_INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7)) { //stock or warmblood
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7 || this.oHorse.getBreed() == 9)) { //stock or warmblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 54, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5)) { //draft or coldblood
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5 || this.oHorse.getBreed() == 8)) { //draft or coldblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
         }
 
@@ -98,6 +98,8 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 5: return "Friesian (Coldblood)";
             case 6: return "Irish Cob (Draft)";
             case 7: return "American Quarter (Stock)";
+            case 8: return "Percheron (Draft)";
+            case 9: return "Selle Francias (Warmblood)";
             default: return "Unknown";
         }
     }

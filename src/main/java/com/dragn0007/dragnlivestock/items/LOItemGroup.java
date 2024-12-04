@@ -48,6 +48,9 @@ public class LOItemGroup {
 //                        output.accept(LOItems.IRON_HORSESHOE.get());
 //                        output.accept(LOItems.STONE_HORSESHOE.get());
 
+                        output.accept(LOItems.MANE_SCISSORS.get());
+                        output.accept(LOItems.TAIL_SCISSORS.get());
+
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
 //                        output.accept(LOItems.BLACK_SADDLE.get());
 

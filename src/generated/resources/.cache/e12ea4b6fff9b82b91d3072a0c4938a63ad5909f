@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-27T04:02:14.0095783	Item Models: dragnlivestock
+// 1.20.1	2024-12-04T02:31:30.8818978	Item Models: dragnlivestock
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
@@ -66,6 +66,7 @@ faa5fbf626b59f66f58da078888b8f3dfb090625 assets/dragnlivestock/models/item/llama
 0187c7dddd46696e96c5f78f5432b44aca5b171f assets/dragnlivestock/models/item/llama_milk_jug.json
 265e5337a5f930cf003de23e8a15aa56cf586802 assets/dragnlivestock/models/item/llama_rib.json
 42b008cc50e8584df5a0964f6a10acc822d4214a assets/dragnlivestock/models/item/male_gender_test_strip.json
+742287150d39806765e9a73af26f407fcd88a7b0 assets/dragnlivestock/models/item/mane_scissors.json
 5fdfa442f98d67165c61f2f21d8d3f4fe82c0114 assets/dragnlivestock/models/item/mutton_loin.json
 8ddd224e8fb4a8158d0bda786e514dfade618f6b assets/dragnlivestock/models/item/mutton_rib.json
 24581255138582da2f634b8d871e53f30b788aff assets/dragnlivestock/models/item/netherite_horseshoe.json
@@ -82,6 +83,7 @@ c2185571ebed61efc6bbe9c600903dd08fff3eb3 assets/dragnlivestock/models/item/roe.j
 830de1b526a64a4fcd456397a391874d45911b08 assets/dragnlivestock/models/item/sheep_milk_bucket.json
 72f10856f81ccecafbb4299f649da7525d2efd63 assets/dragnlivestock/models/item/sheep_milk_jug.json
 b2480b99d79e39b54bc3a5144108a35e48624eda assets/dragnlivestock/models/item/stone_horseshoe.json
+3aeb04fe6fe87c0cea203b4547b336c1f21e3e9d assets/dragnlivestock/models/item/tail_scissors.json
 08e832a7faa8e6e542b8838d3dda80e2ca013789 assets/dragnlivestock/models/item/unicorn.json
 2945405ee81aafdb01962b59b87e2e1993452882 assets/dragnlivestock/models/item/unicorn_rib_steak.json
 432cd7bdf292db9b411018eebe5fd2da5c90a52f assets/dragnlivestock/models/item/unicorn_sirloin_steak.json

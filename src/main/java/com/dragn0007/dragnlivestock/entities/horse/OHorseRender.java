@@ -75,6 +75,34 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             model.getBone("head_armor").ifPresent(b -> b.setHidden(true));
         }
 
+        if (entity.hasDefaultMane()) {
+            model.getBone("roached_mane").ifPresent(b -> b.setHidden(false));
+            model.getBone("button_mane").ifPresent(b -> b.setHidden(true));
+        }
+
+        if (entity.hasButtonMane()) {
+            model.getBone("roached_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("button_mane").ifPresent(b -> b.setHidden(false));
+        }
+
+        if (entity.hasShortMane()) {
+            model.getBone("roached_mane").ifPresent(b -> b.setHidden(false));
+            model.getBone("button_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("mane").ifPresent(b -> b.setScaleZ(0.5F));
+        }
+
+        if (entity.hasDefaultTail()) {
+                model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
+        }
+
+        if (entity.hasLongTail()) {
+                model.getBone("tail").ifPresent(b -> b.setScaleY(1.3F));
+        }
+
+        if (entity.hasShortTail()) {
+                model.getBone("tail").ifPresent(b -> b.setScaleY(0.6F));
+        }
+
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

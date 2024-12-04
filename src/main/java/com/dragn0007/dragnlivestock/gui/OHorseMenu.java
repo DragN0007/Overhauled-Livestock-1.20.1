@@ -72,7 +72,7 @@ public class OHorseMenu extends AbstractContainerMenu {
 //            }
 //        });
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7)) { //stock or warmblood
+        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7 || this.oHorse.getBreed() == 9)) { //stock or warmblood
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 3; x++) {
                     this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
@@ -80,7 +80,7 @@ public class OHorseMenu extends AbstractContainerMenu {
             }
         }
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5)) { //draft or coldblood
+        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5 || this.oHorse.getBreed() == 8)) { //draft or coldblood
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 5; x++) {
                     this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));

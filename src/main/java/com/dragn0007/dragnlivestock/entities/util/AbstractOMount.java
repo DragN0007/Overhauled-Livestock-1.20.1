@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.util;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
@@ -214,6 +215,24 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
+        }
+
+        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.isHorse(this)) {
+            OHorse oHorse = (OHorse) this;
+            OHorse.Mane currentMane = OHorse.Mane.values()[oHorse.getManeType()];
+            OHorse.Mane nextMane = currentMane.next();
+
+            oHorse.setManeType(nextMane.ordinal());
+            this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+        }
+
+        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
+            OHorse oHorse = (OHorse) this;
+            OHorse.Tail currentTail = OHorse.Tail.values()[oHorse.getTailType()];
+            OHorse.Tail nextTail = currentTail.next();
+
+            oHorse.setTailType(nextTail.ordinal());
+            this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
         }
 
         if(!this.isBaby()) {

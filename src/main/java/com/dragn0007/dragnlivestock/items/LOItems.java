@@ -75,6 +75,11 @@ public class LOItems {
     public static final RegistryObject<Item> FEMALE_GENDER_TEST_STRIP = ITEMS.register("female_gender_test_strip",
             () -> new FemaleGenderTestKit(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> MANE_SCISSORS = ITEMS.register("mane_scissors",
+            () -> new HairScissorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> TAIL_SCISSORS = ITEMS.register("tail_scissors",
+            () -> new HairScissorItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> NETHERITE_HORSESHOE = ITEMS.register("netherite_horseshoe",
             () -> new HorseShoeItem(7, (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> DIAMOND_HORSESHOE = ITEMS.register("diamond_horseshoe",

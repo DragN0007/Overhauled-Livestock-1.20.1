@@ -11,7 +11,9 @@ public enum BreedModel {
     THOROUGHBRED(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_thoroughbred.geo.json")),
     FRIESIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_friesian.geo.json")),
     IRISH_COB(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_irish_cob.geo.json")),
-    AMERICAN_QUARTER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_american_quarter.geo.json"));
+    AMERICAN_QUARTER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_american_quarter.geo.json")),
+    PERCHERON(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_percheron.geo.json")),
+    SELLE_FRANCIAS(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_selle_francias.geo.json"));
 
     public final ResourceLocation resourceLocation;
 
