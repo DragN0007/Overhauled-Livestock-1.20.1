@@ -857,7 +857,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public enum Tail {
 		DEFAULT,
 		SHORT,
-		LONG;
+		LONG,
+		TUCKED;
 
 		public Tail next() {
 			return Tail.values()[(this.ordinal() + 1) % Tail.values().length];
@@ -874,6 +875,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public boolean hasShortTail() {
 		return this.getTailType() == 2;
+	}
+
+	public boolean hasTuckedTail() {
+		return this.getTailType() == 3;
 	}
 
 	public static final EntityDataAccessor<Integer> MANE_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);

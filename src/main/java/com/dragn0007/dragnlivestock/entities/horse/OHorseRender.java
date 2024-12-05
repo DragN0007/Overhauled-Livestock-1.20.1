@@ -34,9 +34,17 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             if (entity.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
+                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
+                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
+                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
+                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(true));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
+                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
+                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
+                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
+                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
             }
 
             if (entity.isWearingArmor()) {
@@ -49,17 +57,17 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
                 model.getBone("head_armor").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isWearingShoes()) {
-                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
-            } else {
-                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
-                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
-                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
-                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
-            }
+//            if (entity.isWearingShoes()) {
+//                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
+//                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
+//                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
+//                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
+//            } else {
+//                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
+//                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
+//                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
+//                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
+//            }
         }
 
         if (entity.isBaby()) {
@@ -92,15 +100,31 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
         }
 
         if (entity.hasDefaultTail()) {
-                model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            model.getBone("tail_bottom").ifPresent(b -> b.setHidden(false));
         }
 
         if (entity.hasLongTail()) {
-                model.getBone("tail").ifPresent(b -> b.setScaleY(1.3F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleY(1.3F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            model.getBone("tail_bottom").ifPresent(b -> b.setHidden(false));
         }
 
         if (entity.hasShortTail()) {
-                model.getBone("tail").ifPresent(b -> b.setScaleY(0.6F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleY(0.6F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            model.getBone("tail_bottom").ifPresent(b -> b.setHidden(false));
+        }
+
+        if (entity.hasTuckedTail()) {
+            model.getBone("tail").ifPresent(b -> b.setScaleY(0.7F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(1.1F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            model.getBone("tail_bottom").ifPresent(b -> b.setHidden(true));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

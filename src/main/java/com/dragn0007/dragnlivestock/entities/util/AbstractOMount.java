@@ -224,6 +224,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
             oHorse.setManeType(nextMane.ordinal());
             this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
         if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
@@ -233,6 +234,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
             oHorse.setTailType(nextTail.ordinal());
             this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
         if(!this.isBaby()) {
