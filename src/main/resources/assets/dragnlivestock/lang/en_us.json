@@ -156,7 +156,13 @@
   "item.dragnlivestock.cooked_chevon_rib": "Cooked Chevon Rib",
 
   "item.dragnlivestock.fish_oil": "Fish Oil",
-  "item.dragnlivestock.roe": "Roe",
+  "item.dragnlivestock.roe": "Salmon Roe",
+  "item.dragnlivestock.cod_roe": "Cod Roe",
+
+  "item.dragnlivestock.salmon_fillet": "Salmon Fillet",
+  "item.dragnlivestock.cod_fillet": "Cod Fillet",
+  "item.dragnlivestock.cooked_salmon_fillet": "Cooked Salmon Fillet",
+  "item.dragnlivestock.cooked_cod_fillet": "Cooked Cod Fillet",
 
   "item.dragnlivestock.chicken_thigh": "Chicken Thigh",
   "item.dragnlivestock.cooked_chicken_thigh": "Cooked Chicken Thigh",

@@ -13,6 +13,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
@@ -46,6 +48,12 @@ public class CoveredWagon extends Entity implements GeoEntity, ContainerListener
 	public CoveredWagon(EntityType<? extends CoveredWagon> type, Level level) {
 		super(type, level);
 		this.createInventory();
+	}
+
+	public static AttributeSupplier.Builder createBaseHorseAttributes() {
+		return Mob.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 20D)
+				.add(Attributes.KNOCKBACK_RESISTANCE, 1);
 	}
 
 	public static final EntityDataAccessor<Boolean> HITCHED = SynchedEntityData.defineId(CoveredWagon.class, EntityDataSerializers.BOOLEAN);

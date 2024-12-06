@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "dragnlivestock:salmon_fillet"
+    },
+    "title": "Efficient",
+    "description": "Fillet a salmon to get a bit more food out of it.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["dragnlivestock:salmon_fillet"]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -31,8 +31,11 @@ public class LOTags {
         public static final TagKey<Item> COOKED_LLAMA = forgeTag("cooked_llama");
         public static final TagKey<Item> COOKED_UNICORN = forgeTag("cooked_unicorn");
 
-        public static final TagKey<Item> RAW_MEATS = forgeTag("raw_meats");
+        public static final TagKey<Item> RAW_MEATS = forgeTag("cooked_fishes");
         public static final TagKey<Item> COOKED_MEATS = forgeTag("cooked_meats");
+
+        public static final TagKey<Item> RAW_FISHES = forgeTag("raw_fishes");
+        public static final TagKey<Item> COOKED_FISHES = forgeTag("cooked_fishes");
 
         public static final TagKey<Item> ROE = forgeTag("roe");
         public static final TagKey<Item> CHEESE = forgeTag("cheese");

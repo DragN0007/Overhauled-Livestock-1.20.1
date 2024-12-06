@@ -1,15 +1,15 @@
 package com.dragn0007.dragnlivestock.entities.salmon;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.pig.OPigMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
-import com.dragn0007.dragnlivestock.entities.pig.OPigTuskLayer;
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.util.AbstractSchoolingOFish;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
@@ -17,24 +17,24 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.AbstractSchoolingFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
+public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 
 	public OSalmon(EntityType<? extends OSalmon> type, Level level) {
 		super(type, level);
@@ -53,6 +53,10 @@ public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 3.0D);
+	}
+
+	public OSalmon getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+		return EntityTypes.O_SALMON_ENTITY.get().create(serverLevel);
 	}
 
 	public int getMaxSchoolSize() {
@@ -87,10 +91,6 @@ public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(!this.isInWater()) {
-			controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-		}
-
 		if(tAnimationState.isMoving()) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("swim_sprint", Animation.LoopType.LOOP));
@@ -99,6 +99,10 @@ public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 			}
+		}
+
+		if(!this.isInFluidType(Fluids.WATER.getFluidType())) {
+			controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
 		}
 
 		return PlayState.CONTINUE;
@@ -131,14 +135,15 @@ public class OSalmon extends AbstractSchoolingFish implements GeoEntity {
 
 	@Override
 	@Nullable
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMob.AgeableMobGroupData(0.2F);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+		if (groupData == null) {
+			groupData = new AgeableMob.AgeableMobGroupData(0.2F);
 		}
+
 		Random random = new Random();
 		setVariant(random.nextInt(OSalmonModel.Variant.values().length));
 
-		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, groupData, tag);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-// 1.20.1	2024-12-04T02:31:30.8818978	Item Models: dragnlivestock
+// 1.20.1	2024-12-05T23:23:15.1307191	Item Models: dragnlivestock
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
@@ -11,6 +11,8 @@ acebc249cc7b03c5e82fff9c5b1825b50da55c34 assets/dragnlivestock/models/item/chevo
 9c6ff7d0b99084af509c0fa55b942b0ae6db4e2a assets/dragnlivestock/models/item/chevon_loin.json
 b7b4e7dc8af2067f26f705772be6c08fd378bec4 assets/dragnlivestock/models/item/chevon_rib.json
 d3a27bff21cc9e08c17a896d351c8700a4f594c9 assets/dragnlivestock/models/item/chicken_thigh.json
+c44a2f1d78f82e9079f9a22a6b7dc75a1efbf5f3 assets/dragnlivestock/models/item/cod_fillet.json
+9b33687842d5ab812db3d5ef31a92e03da88c98e assets/dragnlivestock/models/item/cod_roe.json
 bab767c1820c105153a0681852b73dc3d9e898aa assets/dragnlivestock/models/item/cooked_beef_rib_steak.json
 c0365317435ebf73f9a080b383d8db73457acd6d assets/dragnlivestock/models/item/cooked_beef_sirloin_steak.json
 63c462fa5b19f6b4e4046a8ed66f4f1391339ca7 assets/dragnlivestock/models/item/cooked_camel.json
@@ -20,6 +22,7 @@ b8c89de6da6f1938d8a0e9d672c597a247e5e329 assets/dragnlivestock/models/item/cooke
 938d3272e0e0fd6b45ba46fa6f3ff8b56291c0d7 assets/dragnlivestock/models/item/cooked_chevon_loin.json
 58769360ad84959c2feba024fc2636f1b94eea75 assets/dragnlivestock/models/item/cooked_chevon_rib.json
 a6f702b2c43da573bbeca7744308c13912546f81 assets/dragnlivestock/models/item/cooked_chicken_thigh.json
+a9570594123193f349a9e573cf59870c70f2f31c assets/dragnlivestock/models/item/cooked_cod_fillet.json
 74ed91a21f8be00212c01590dfbf641082bf7174 assets/dragnlivestock/models/item/cooked_frog.json
 22b0703a4ab7e0a452da34a34984e6767a2151b4 assets/dragnlivestock/models/item/cooked_grub.json
 ac135ee6b9723724a14d7a96f3e8cc3779f30cf2 assets/dragnlivestock/models/item/cooked_horse.json
@@ -33,6 +36,7 @@ c6e7a2a1d4a53e750a270fcaaef44a0fd7012171 assets/dragnlivestock/models/item/cooke
 4d4df74ed6f5fc1b1c655e42c75ff863bd1b11dd assets/dragnlivestock/models/item/cooked_pork_rib_chop.json
 53bdbae0d0a33ae9077eb405d86660ea0944a1e7 assets/dragnlivestock/models/item/cooked_pork_tenderloin.json
 b114404fba0d641cb159f16f7ee79acbafd847cd assets/dragnlivestock/models/item/cooked_rabbit_thigh.json
+50269bef735922c1096fa23e0745295bcbf2d45e assets/dragnlivestock/models/item/cooked_salmon_fillet.json
 2a3a7292400354a5e0bff1c917eee8e1d196a1b5 assets/dragnlivestock/models/item/cooked_unicorn.json
 6d00ae2c5b8fa83d57262695e324fd0995c7b49f assets/dragnlivestock/models/item/cooked_unicorn_rib_steak.json
 1719aaff92fe5f22c00058a69bcd55f6df4168e6 assets/dragnlivestock/models/item/cooked_unicorn_sirloin_steak.json
@@ -79,6 +83,7 @@ faa5fbf626b59f66f58da078888b8f3dfb090625 assets/dragnlivestock/models/item/llama
 dd7d0744a1c4fe65a7e1f5db4bd7404305763623 assets/dragnlivestock/models/item/pork_tenderloin.json
 feae65ba521db68548af83c15ec55a01ea6fc77a assets/dragnlivestock/models/item/rabbit_thigh.json
 c2185571ebed61efc6bbe9c600903dd08fff3eb3 assets/dragnlivestock/models/item/roe.json
+333cf09c1564d97751a2a3ddf503b7bf63ef18f6 assets/dragnlivestock/models/item/salmon_fillet.json
 6d268126f3b968c0813ab58d42c081303c080f5b assets/dragnlivestock/models/item/sheep_cheese.json
 830de1b526a64a4fcd456397a391874d45911b08 assets/dragnlivestock/models/item/sheep_milk_bucket.json
 72f10856f81ccecafbb4299f649da7525d2efd63 assets/dragnlivestock/models/item/sheep_milk_jug.json

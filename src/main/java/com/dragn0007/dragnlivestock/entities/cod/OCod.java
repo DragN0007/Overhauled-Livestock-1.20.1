@@ -1,20 +1,23 @@
 package com.dragn0007.dragnlivestock.entities.cod;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.util.AbstractSchoolingOFish;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.AbstractSchoolingFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -26,7 +29,7 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class OCod extends AbstractSchoolingFish implements GeoEntity {
+public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 
 	public OCod(EntityType<? extends OCod> type, Level level) {
 		super(type, level);
@@ -40,6 +43,10 @@ public class OCod extends AbstractSchoolingFish implements GeoEntity {
 			return VANILLA_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
+	}
+
+	public OCod getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+		return EntityTypes.O_COD_ENTITY.get().create(serverLevel);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

@@ -134,6 +134,12 @@ public class LOItemGroup {
 
                         output.accept(LOItems.FISH_OIL.get());
                         output.accept(LOItems.ROE.get());
+                        output.accept(LOItems.COD_ROE.get());
+
+                        output.accept(LOItems.SALMON_FILLET.get());
+                        output.accept(LOItems.COD_FILLET.get());
+                        output.accept(LOItems.COOKED_SALMON_FILLET.get());
+                        output.accept(LOItems.COOKED_COD_FILLET.get());
 
                         output.accept(LOItems.UNICORN.get());
                         output.accept(LOItems.UNICORN_RIB_STEAK.get());

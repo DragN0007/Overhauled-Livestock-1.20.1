@@ -119,6 +119,12 @@ public class LOItemModelProvider extends ItemModelProvider {
 
         simpleItem(LOItems.FISH_OIL);
         simpleItem(LOItems.ROE);
+        simpleItem(LOItems.COD_ROE);
+
+        simpleItem(LOItems.SALMON_FILLET);
+        simpleItem(LOItems.COD_FILLET);
+        simpleItem(LOItems.COOKED_SALMON_FILLET);
+        simpleItem(LOItems.COOKED_COD_FILLET);
 
         simpleItem(LOItems.UNICORN);
         simpleItem(LOItems.UNICORN_RIB_STEAK);

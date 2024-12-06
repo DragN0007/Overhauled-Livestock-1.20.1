@@ -239,7 +239,18 @@ public class LOItems {
                     new MobEffectInstance(MobEffects.REGENERATION, 500, 0, true, false)
             ));
     public static final RegistryObject<Item> ROE = ITEMS.register("roe",
+            () -> new SalmonRoeItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())));
+    public static final RegistryObject<Item> COD_ROE = ITEMS.register("cod_roe",
+            () -> new CodRoeItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())));
+
+    public static final RegistryObject<Item> SALMON_FILLET = ITEMS.register("salmon_fillet",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())));
+    public static final RegistryObject<Item> COD_FILLET = ITEMS.register("cod_fillet",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())));
+    public static final RegistryObject<Item> COOKED_SALMON_FILLET = ITEMS.register("cooked_salmon_fillet",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).build())));
+    public static final RegistryObject<Item> COOKED_COD_FILLET = ITEMS.register("cooked_cod_fillet",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).build())));
 
     public static final RegistryObject<Item> UNICORN = ITEMS.register("unicorn",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).effect(new MobEffectInstance(MobEffects.REGENERATION, 600, 0), 0.8F).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0), 0.8F).saturationMod(1).build())));

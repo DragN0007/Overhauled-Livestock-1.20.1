@@ -20,6 +20,20 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.SALMON_FILLET.get(), 2)
+                .requires(Items.SALMON)
+                .unlockedBy("has_fish", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SALMON)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.COD_FILLET.get(), 2)
+                .requires(Items.COD)
+                .unlockedBy("has_fish", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.COD)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.EGG)
                 .requires(LOTags.Items.EGG)
                 .unlockedBy("has_egg", inventoryTrigger(ItemPredicate.Builder.item()
@@ -320,5 +334,19 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .unlockedBy("has_pork_tenderloin", has(LOItems.PORK_TENDERLOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_tenderloin_smelting"));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.PORK_TENDERLOIN.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_TENDERLOIN.get(), 0.35F, 600)
                 .unlockedBy("has_pork_tenderloin", has(LOItems.PORK_TENDERLOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_tenderloin_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 100)
+                .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 200)
+                .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 600)
+                .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.COD_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_COD_FILLET.get(), 0.35F, 100)
+                .unlockedBy("has_cod_fillet", has(LOItems.COD_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_cod_fillet_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.COD_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_COD_FILLET.get(), 0.35F, 200)
+                .unlockedBy("has_cod_fillet", has(LOItems.COD_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_cod_fillet_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.COD_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_COD_FILLET.get(), 0.35F, 600)
+                .unlockedBy("has_cod_fillet", has(LOItems.COD_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_cod_fillet_campfire_cooking"));
     }
 }
