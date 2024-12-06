@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "dragnpets:o_cat",
-    "dragnpets:o_ocelot"
+    "dragnlivestock:o_cat",
+    "dragnlivestock:o_ocelot"
   ]
 }

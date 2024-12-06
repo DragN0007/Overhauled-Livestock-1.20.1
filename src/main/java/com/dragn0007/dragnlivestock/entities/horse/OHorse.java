@@ -36,6 +36,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -706,6 +707,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (spawnType == MobSpawnType.SPAWN_EGG) {
 			this.setBreed(random.nextInt(BreedModel.values().length));
+		}
+
+		//tfc compat
+		if (ModList.get().isLoaded("tfc")) {
+			this.setTamed(true);
 		}
 
 		this.randomizeAttributes();

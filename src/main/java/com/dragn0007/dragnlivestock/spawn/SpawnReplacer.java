@@ -48,6 +48,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepHornLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -56,8 +57,10 @@ import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -147,6 +150,13 @@ public class SpawnReplacer {
 
                 int randomChristmasVariant = event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length);
                 oHorse.setReindeerVariant(randomChristmasVariant);
+
+                //tfc compat
+                CompoundTag tfcTag = new CompoundTag();
+
+                if (ModList.get().isLoaded("tfc")) {
+                    oHorse.setTamed(true);
+                }
 
                 //discard vanilla horse once it's been successfully replaced on client and server
                 if (event.getLevel().isClientSide) {

@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.20.1-1.5'
+version = '1.20.1-1.6'
 group = mod_group_id
 
 base {
@@ -91,8 +91,11 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:1.20.1-47.2.0"
+    minecraft "net.minecraftforge:forge:1.20.1-47.2.0" // 47.2.0 is Recommended
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
+
+//    implementation fg.deobf("curse.maven:patchouli-306770:4966125")
+//    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
 }
 
 tasks.named('processResources', ProcessResources).configure {
