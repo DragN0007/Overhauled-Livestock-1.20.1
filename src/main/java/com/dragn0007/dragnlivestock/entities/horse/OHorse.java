@@ -12,6 +12,7 @@ import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -104,7 +105,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, (livingEntity) -> livingEntity instanceof Wolf));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
+			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
+			boolean isWolf = livingEntity instanceof Wolf;
+			return isOWolf || isWolf;
+		}));
 	}
 
 	public float generateRandomMaxHealth() {

@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
@@ -38,6 +39,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -118,6 +120,13 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
+			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
+			boolean isHerdingDog = livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS);
+			boolean isWolf = livingEntity instanceof Wolf;
+			return isOWolf || isWolf || isHerdingDog;
+		}));
 	}
 
 	protected int calculateFallDamage(float p_149389_, float p_149390_) {

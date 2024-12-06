@@ -54,6 +54,7 @@ public class LOTags {
         public static final TagKey<EntityType<?>> SWEM_HORSES = forgeTag("swem_horses");
         public static final TagKey<EntityType<?>> WOLVES = forgeTag("wolves");
         public static final TagKey<EntityType<?>> CATS = forgeTag("cats");
+        public static final TagKey<EntityType<?>> HERDING_DOGS = forgeTag("herding_dogs");
 
         public static TagKey<EntityType<?>> forgeTag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", name));
