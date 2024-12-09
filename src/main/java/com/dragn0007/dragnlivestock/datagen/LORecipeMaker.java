@@ -20,6 +20,27 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MANE_SCISSORS.get())
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("A A")
+                .pattern("A A")
+                .pattern("BAB")
+                .unlockedBy("has_iron", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.IRON_INGOT).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.TAIL_SCISSORS.get())
+                .define('A', Items.IRON_INGOT)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("A A")
+                .pattern("A A")
+                .pattern("ABA")
+                .unlockedBy("has_iron", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.IRON_INGOT).build()))
+                .save(pFinishedRecipeConsumer);
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.SALMON_FILLET.get(), 2)
                 .requires(Items.SALMON)
                 .unlockedBy("has_fish", inventoryTrigger(ItemPredicate.Builder.item()

@@ -46,13 +46,13 @@
 				"head": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 7.5, 0]
+							"vector": [0, 2.5, 0]
 						},
 						"0.75": {
-							"vector": [0, -7.5, 0]
+							"vector": [0, -2.5, 0]
 						},
 						"1.5": {
-							"vector": [0, 7.5, 0]
+							"vector": [0, 2.5, 0]
 						}
 					}
 				},
@@ -84,7 +84,6 @@
 			}
 		},
 		"idle": {
-			"loop": true,
 			"animation_length": 2.5,
 			"bones": {
 				"body_front": {
@@ -128,13 +127,13 @@
 				"head": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 17.5, 0]
+							"vector": [0, 2.5, 0]
 						},
 						"1.2083": {
-							"vector": [0, -17.5, 0]
+							"vector": [0, -2.5, 0]
 						},
 						"2.5": {
-							"vector": [0, 17.5, 0]
+							"vector": [0, 2.5, 0]
 						}
 					}
 				},
@@ -166,7 +165,6 @@
 			}
 		},
 		"swim_sprint": {
-			"loop": true,
 			"animation_length": 0.75,
 			"bones": {
 				"body_front": {

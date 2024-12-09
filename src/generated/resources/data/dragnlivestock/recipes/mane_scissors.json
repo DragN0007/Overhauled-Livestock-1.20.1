@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "A A",
+    "A A",
+    "BAB"
+  ],
+  "result": {
+    "item": "dragnlivestock:mane_scissors"
+  },
+  "show_notification": true
+}
