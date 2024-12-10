@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.gui;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -15,12 +16,14 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     public static final ResourceLocation HORSE_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/o_horse.png");
     public final OHorse oHorse;
-    protected int breedLabelX = 235;
-    protected int breedLabelY = 75;
+    protected int breedLabelX;
+    protected int breedLabelY;
 
     public OHorseScreen(OHorseMenu oHorseMenu, Inventory inventory, Component component) {
         super(oHorseMenu, inventory, component);
         this.oHorse = oHorseMenu.oHorse;
+        breedLabelX = 235;
+        breedLabelY = 75;
     }
 
     public void renderBg(GuiGraphics graphics, float f, int i, int j) {
@@ -79,11 +82,14 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         this.renderBackground(graphics);
         super.render(graphics, i, i1, v);
         this.renderTooltip(graphics, i, i1);
+        this.renderBreedLabel(graphics);
     }
 
     private void renderBreedLabel(GuiGraphics graphics) {
         String breedText = getBreedText(this.oHorse.getBreed());
         String labelText = "Breed: " + breedText;
+
+        System.out.println("Breed Label Position: X=" + breedLabelX + ", Y=" + breedLabelY);
 
         graphics.drawString(this.font, labelText, breedLabelX, breedLabelY, 0xFFFFFF, false);
     }
