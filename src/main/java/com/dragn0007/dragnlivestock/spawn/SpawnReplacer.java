@@ -415,7 +415,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MANGROVE_SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST)) {
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST)) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     GlowBerryMoobloom moobloom = EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
 

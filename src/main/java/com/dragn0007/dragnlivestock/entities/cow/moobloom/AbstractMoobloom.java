@@ -1,14 +1,17 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomModel;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
@@ -35,6 +38,16 @@ import java.util.Random;
 public class AbstractMoobloom extends OCow implements GeoEntity {
     public AbstractMoobloom(EntityType<? extends OCow> type, Level level) {
         super(type, level);
+    }
+
+    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
+    private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
+    @Override
+    public @NotNull ResourceLocation getDefaultLootTable() {
+        if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+            return VANILLA_LOOT_TABLE;
+        }
+        return LOOT_TABLE;
     }
 
     public int regrowPlantsTickCounter = 0;
