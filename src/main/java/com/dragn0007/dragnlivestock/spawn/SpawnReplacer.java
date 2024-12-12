@@ -388,7 +388,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE)) {
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA)) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     MelonMoobloom moobloom = EntityTypes.MELON_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
