@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.items.custom;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
-import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;

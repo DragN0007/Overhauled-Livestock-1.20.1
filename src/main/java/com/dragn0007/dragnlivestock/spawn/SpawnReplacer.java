@@ -14,6 +14,27 @@ import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot.CarrotMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot.CarrotMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering.FloweringMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering.FloweringMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomRender;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
@@ -57,6 +78,7 @@ import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -256,6 +278,276 @@ public class SpawnReplacer {
 
             if (event.getLevel().isClientSide) {
                 return;
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    WheatMoobloom moobloom = EntityTypes.WHEAT_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(WheatMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.TAIGA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SNOWY_TAIGA)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    SweetBerryMoobloom moobloom = EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(SweetBerryMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    PumpkinMoobloom moobloom = EntityTypes.PUMPKIN_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(PumpkinMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    PotatoMoobloom moobloom = EntityTypes.POTATO_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(PotatoMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    MelonMoobloom moobloom = EntityTypes.MELON_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(MelonMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MANGROVE_SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    GlowBerryMoobloom moobloom = EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(GlowBerryMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FLOWER_FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    FloweringMoobloom moobloom = EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(FloweringMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    CarrotMoobloom moobloom = EntityTypes.CARROT_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(CarrotMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    BeetrootMoobloom moobloom = EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(BeetrootMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+
+            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.BIRCH_FOREST)) {
+                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                    AzaleaMoobloom moobloom = EntityTypes.AZALEA_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                    if (moobloom != null) {
+                        moobloom.copyPosition(vanillacow);
+                        event.getLevel().addFreshEntity(moobloom);
+
+                        int randomVariant = event.getLevel().getRandom().nextInt(AzaleaMoobloomModel.Variant.values().length);
+                        moobloom.setVariant(randomVariant);
+
+                        int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                        moobloom.setOverlayVariant(randomOverlayVariant);
+
+                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                        moobloom.setHornVariant(randomHorns);
+
+                        if (event.getLevel().isClientSide) {
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+
+                        event.getLevel().addFreshEntity(moobloom);
+                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
             }
 
             OCow oCow = EntityTypes.O_COW_ENTITY.get().create(event.getLevel());

@@ -65,6 +65,28 @@ public class LOItems {
     public static final RegistryObject<Item> END_UNICORN_SPAWN_EGG = ITEMS.register("end_unicorn_spawn_egg",
          () -> new ForgeSpawnEggItem(EntityTypes.END_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
 
+    public static final RegistryObject<Item> WHEAT_MOOBLOOM_SPAWN_EGG = ITEMS.register("wheat_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.WHEAT_MOOBLOOM_ENTITY, 0xe3c16a, 0xa69553, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> SWEET_BERRY_MOOBLOOM_SPAWN_EGG = ITEMS.register("sweet_berry_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY, 0x295230, 0x691f21, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> PUMPKIN_MOOBLOOM_SPAWN_EGG = ITEMS.register("pumpkin_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.PUMPKIN_MOOBLOOM_ENTITY, 0xe38a1d, 0xa0560b, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> POTATO_MOOBLOOM_SPAWN_EGG = ITEMS.register("potato_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.POTATO_MOOBLOOM_ENTITY, 0xc8973a, 0xe9ba62, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> MELON_MOOBLOOM_SPAWN_EGG = ITEMS.register("melon_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.MELON_MOOBLOOM_ENTITY, 0xc94132, 0xaf160b, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> GLOW_BERRY_MOOBLOOM_SPAWN_EGG = ITEMS.register("glow_berry_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY, 0xeb8931, 0xf7e26b, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> FLOWERING_MOOBLOOM_SPAWN_EGG = ITEMS.register("flowering_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.FLOWERING_MOOBLOOM_ENTITY, 0xdfbbfd, 0x529a2e, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> CARROT_MOOBLOOM_SPAWN_EGG = ITEMS.register("carrot_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.CARROT_MOOBLOOM_ENTITY, 0xab6112, 0xe38a1d, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> BEETROOT_MOOBLOOM_SPAWN_EGG = ITEMS.register("beetroot_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.BEETROOT_MOOBLOOM_ENTITY, 0xb6484c, 0x71160d, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> AZALEA_MOOBLOOM_SPAWN_EGG = ITEMS.register("azalea_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.AZALEA_MOOBLOOM_ENTITY, 0x6c8031, 0xd07be3, new Item.Properties().stacksTo(64)));
+
+
     //Misc
     public static final RegistryObject<Item> BRAND_TAG = ITEMS.register("brand_tag",
             () -> new BrandTagItem(new Item.Properties()));
