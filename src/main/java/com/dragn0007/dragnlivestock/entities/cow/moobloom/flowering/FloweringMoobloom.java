@@ -59,6 +59,73 @@ public class FloweringMoobloom extends AbstractMoobloom implements GeoEntity {
                 this.spawnAtLocation(Items.AZURE_BLUET);
             }
 
+            if (this.getVariant() == 2) {
+                this.spawnAtLocation(Items.BLUE_ORCHID);
+                this.spawnAtLocation(Items.BLUE_ORCHID);
+                this.spawnAtLocation(Items.BLUE_ORCHID);
+            }
+
+            if (this.getVariant() == 3) {
+                this.spawnAtLocation(Items.CORNFLOWER);
+                this.spawnAtLocation(Items.CORNFLOWER);
+                this.spawnAtLocation(Items.CORNFLOWER);
+            }
+
+            if (this.getVariant() == 4) {
+                this.spawnAtLocation(Items.DANDELION);
+                this.spawnAtLocation(Items.DANDELION);
+                this.spawnAtLocation(Items.DANDELION);
+            }
+
+            if (this.getVariant() == 5) {
+                this.spawnAtLocation(Items.LILY_OF_THE_VALLEY);
+                this.spawnAtLocation(Items.LILY_OF_THE_VALLEY);
+                this.spawnAtLocation(Items.LILY_OF_THE_VALLEY);
+            }
+
+            if (this.getVariant() == 6) {
+                this.spawnAtLocation(Items.OXEYE_DAISY);
+                this.spawnAtLocation(Items.OXEYE_DAISY);
+                this.spawnAtLocation(Items.OXEYE_DAISY);
+            }
+
+            if (this.getVariant() == 7) {
+                this.spawnAtLocation(Items.POPPY);
+                this.spawnAtLocation(Items.POPPY);
+                this.spawnAtLocation(Items.POPPY);
+            }
+
+            if (this.getVariant() == 8) {
+                this.spawnAtLocation(Items.ORANGE_TULIP);
+                this.spawnAtLocation(Items.PINK_TULIP);
+                this.spawnAtLocation(Items.RED_TULIP);
+                this.spawnAtLocation(Items.WHITE_TULIP);
+            }
+
+            if (this.getVariant() == 9) {
+                this.spawnAtLocation(Items.LILAC);
+                this.spawnAtLocation(Items.LILAC);
+                this.spawnAtLocation(Items.LILAC);
+            }
+
+            if (this.getVariant() == 10) {
+                this.spawnAtLocation(Items.PEONY);
+                this.spawnAtLocation(Items.PEONY);
+                this.spawnAtLocation(Items.PEONY);
+            }
+
+            if (this.getVariant() == 11) {
+                this.spawnAtLocation(Items.ROSE_BUSH);
+                this.spawnAtLocation(Items.ROSE_BUSH);
+                this.spawnAtLocation(Items.ROSE_BUSH);
+            }
+
+            if (this.getVariant() == 12) {
+                this.spawnAtLocation(Items.SUNFLOWER);
+                this.spawnAtLocation(Items.SUNFLOWER);
+                this.spawnAtLocation(Items.SUNFLOWER);
+            }
+
             regrowPlantsTickCounter = 0;
 
             return InteractionResult.sidedSuccess(this.level().isClientSide);

@@ -8,7 +8,18 @@ public class FloweringMoobloomModel extends GeoModel<FloweringMoobloom> {
 
     public enum Variant {
         ALLIUM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_allium.png")),
-        AZURE_BLUET(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_azure_bluet.png"));
+        AZURE_BLUET(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_azure_bluet.png")),
+        BLUE_ORCHID(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_blue_orchid.png")),
+        CORNFLOWER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_cornflower.png")),
+        DANDELION(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_dandelion.png")),
+        LILY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_lily_of_the_valley.png")),
+        OXEYE_DAISY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_oxeye_daisy.png")),
+        POPPY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_poppy.png")),
+        TULIP(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_tulip.png")),
+        LILAC(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_lilac.png")),
+        PEONY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_peony.png")),
+        ROSE_BUSH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_rose_bush.png")),
+        SUNFLOWER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/moobloom_sunflower.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {

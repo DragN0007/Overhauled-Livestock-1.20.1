@@ -443,7 +443,7 @@ public class SpawnReplacer {
             }
 
             if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FLOWER_FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS)) {
-                if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                if (event.getLevel().getRandom().nextDouble() < 0.30) {
                     FloweringMoobloom moobloom = EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
                     if (moobloom != null) {
