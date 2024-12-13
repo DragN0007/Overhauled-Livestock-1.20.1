@@ -70,6 +70,15 @@ public class LOItemGroup {
                         output.accept(LOItems.EGG.get());
                         output.accept(LOItems.GENDER_TEST_STRIP.get());
 
+                        output.accept(LOItems.OVERWORLD_UNICORN_HORN.get());
+                        output.accept(LOItems.NETHER_UNICORN_HORN.get());
+                        output.accept(LOItems.END_UNICORN_HORN.get());
+                    }).build());
+
+    public static final RegistryObject<CreativeModeTab> LIVESTOCK_OVERHAUL_FOOD_GROUP = CREATIVE_MODE_TABS.register("overhauled_livestock_food",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(LOItems.LIVESTOCK_OVERHAUL_FOOD.get())).title(Component.translatable("itemGroup.overhauled_livestock_food"))
+                    .displayItems((displayParameters, output) -> {
+
                         output.accept(Items.MILK_BUCKET);
                         output.accept(LOItems.SHEEP_MILK_BUCKET.get());
                         output.accept(LOItems.LLAMA_MILK_BUCKET.get());
@@ -84,8 +93,16 @@ public class LOItemGroup {
                         output.accept(LOItems.SHEEP_CHEESE.get());
                         output.accept(LOItems.LLAMA_CHEESE.get());
                         output.accept(LOItems.GOAT_CHEESE.get());
-                        
+
                         output.accept(LOItems.EGG_SALAD.get());
+
+                        output.accept(LOItems.GRAIN_SOUP.get());
+                        output.accept(LOItems.POTATO_SOUP.get());
+                        output.accept(LOItems.GLOW_BERRY_SOUP.get());
+                        output.accept(LOItems.PUMPKIN_SOUP.get());
+                        output.accept(LOItems.CARROT_SOUP.get());
+                        output.accept(LOItems.MELON_SOUP.get());
+                        output.accept(LOItems.SWEET_BERRY_SOUP.get());
 
                         output.accept(LOItems.BEEF_RIB_STEAK.get());
                         output.accept(LOItems.BEEF_SIRLOIN_STEAK.get());
@@ -157,10 +174,6 @@ public class LOItemGroup {
                         output.accept(LOItems.COOKED_UNICORN.get());
                         output.accept(LOItems.COOKED_UNICORN_RIB_STEAK.get());
                         output.accept(LOItems.COOKED_UNICORN_SIRLOIN_STEAK.get());
-
-                        output.accept(LOItems.OVERWORLD_UNICORN_HORN.get());
-                        output.accept(LOItems.NETHER_UNICORN_HORN.get());
-                        output.accept(LOItems.END_UNICORN_HORN.get());
                     }).build());
 
     public static void register(IEventBus eventBus) {

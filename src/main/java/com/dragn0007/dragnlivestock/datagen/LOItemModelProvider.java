@@ -18,6 +18,7 @@ public class LOItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(LOItems.LIVESTOCK_OVERHAUL);
+        simpleItem(LOItems.LIVESTOCK_OVERHAUL_FOOD);
 
         simpleItem(LOItems.OVERWORLD_UNICORN_SPAWN_EGG);
         simpleItem(LOItems.NETHER_UNICORN_SPAWN_EGG);
@@ -45,6 +46,14 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.EGG);
 
         simpleItem(LOItems.COVERED_WAGON);
+
+        simpleItem(LOItems.GLOW_BERRY_SOUP);
+        simpleItem(LOItems.GRAIN_SOUP);
+        simpleItem(LOItems.CARROT_SOUP);
+        simpleItem(LOItems.SWEET_BERRY_SOUP);
+        simpleItem(LOItems.POTATO_SOUP);
+        simpleItem(LOItems.PUMPKIN_SOUP);
+        simpleItem(LOItems.MELON_SOUP);
 
         simpleItem(LOItems.SHEEP_MILK_BUCKET);
         simpleItem(LOItems.LLAMA_MILK_BUCKET);

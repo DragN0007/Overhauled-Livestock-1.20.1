@@ -2,7 +2,10 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -20,6 +23,12 @@ public class OMountScreen extends AbstractContainerScreen<OMountMenu> {
     public OMountScreen(OMountMenu oMountMenu, Inventory inventory, Component component) {
         super(oMountMenu, inventory, component);
         this.oMount = oMountMenu.oMount;
+    }
+
+    @Override
+    protected void init() {
+        this.leftPos = (this.width - this.imageWidth) / 2;
+        this.topPos = (this.height - this.imageHeight) / 2;
     }
 
     public void renderBg(GuiGraphics graphics, float f, int i, int j) {
@@ -67,5 +76,6 @@ public class OMountScreen extends AbstractContainerScreen<OMountMenu> {
         super.render(graphics, i, i1, v);
         this.renderTooltip(graphics, i, i1);
     }
+
 }
 

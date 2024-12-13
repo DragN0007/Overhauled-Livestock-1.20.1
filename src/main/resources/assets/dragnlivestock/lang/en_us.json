@@ -1,5 +1,6 @@
 {
   "itemGroup.overhauled_livestock": "Overhauled Livestock",
+  "itemGroup.overhauled_livestock_food": "Overhauled Livestock: Food",
 
   "tooltip.dragnlivestock.not_functional.tooltip": "This item isn't fully functional yet.",
   "tooltip.dragnlivestock.for_horses.tooltip": "For horses!",
@@ -121,7 +122,7 @@
   "item.dragnlivestock.female_gender_test_strip": "Female Test Strip",
   "tooltip.dragnlivestock.male_test.tooltip": "This animal is male!",
   "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
-  "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Equines, Camels, Rabbits, Llamas, and Oxen.",
+  "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Equines, Camels, Rabbits, Llamas, Sheep and Oxen.",
 
   "item.dragnlivestock.egg": "Egg",
   "item.dragnlivestock.fertilized_egg": "Fertilized Egg",
@@ -141,6 +142,14 @@
   "item.dragnlivestock.goat_cheese": "Goat Cheese",
 
   "item.dragnlivestock.egg_salad": "Egg Salad",
+
+  "item.dragnlivestock.carrot_soup": "Carrot Soup",
+  "item.dragnlivestock.glow_berry_soup": "Glow Berry Soup",
+  "item.dragnlivestock.melon_soup": "Melon Soup",
+  "item.dragnlivestock.potato_soup": "Potato Soup",
+  "item.dragnlivestock.pumpkin_soup": "Pumpkin Soup",
+  "item.dragnlivestock.sweet_berry_soup": "Sweet Berry Soup",
+  "item.dragnlivestock.grain_soup": "Grain Soup",
 
   "item.dragnlivestock.beef_sirloin_steak": "Beef Sirloin Steak",
   "item.dragnlivestock.beef_rib_steak": "Beef Rib Steak",

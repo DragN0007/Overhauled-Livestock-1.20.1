@@ -32,7 +32,6 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloo
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomModel;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomRender;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.*;
@@ -65,7 +64,6 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheepHornLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -280,7 +278,7 @@ public class SpawnReplacer {
                 return;
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     WheatMoobloom moobloom = EntityTypes.WHEAT_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -307,7 +305,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.TAIGA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SNOWY_TAIGA)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.TAIGA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SNOWY_TAIGA))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     SweetBerryMoobloom moobloom = EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -334,7 +332,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     PumpkinMoobloom moobloom = EntityTypes.PUMPKIN_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -361,7 +359,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     PotatoMoobloom moobloom = EntityTypes.POTATO_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -388,7 +386,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     MelonMoobloom moobloom = EntityTypes.MELON_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -415,7 +413,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     GlowBerryMoobloom moobloom = EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -442,7 +440,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FLOWER_FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FLOWER_FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.30) {
                     FloweringMoobloom moobloom = EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -469,7 +467,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     CarrotMoobloom moobloom = EntityTypes.CARROT_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -496,7 +494,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     BeetrootMoobloom moobloom = EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -523,7 +521,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.BIRCH_FOREST)) {
+            if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.BIRCH_FOREST))) {
                 if (event.getLevel().getRandom().nextDouble() < 0.02) {
                     AzaleaMoobloom moobloom = EntityTypes.AZALEA_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
@@ -744,8 +742,11 @@ public class SpawnReplacer {
                 int randomVariant = event.getLevel().getRandom().nextInt(OSheepModel.Variant.values().length);
                 oSheep.setVariant(randomVariant);
 
-                int randomGender = event.getLevel().getRandom().nextInt(OSheepHornLayer.HornOverlay.values().length);
-                oSheep.setHornVariant(randomGender);
+                int randomBreed = event.getLevel().getRandom().nextInt(OSheep.Breed.values().length);
+                oSheep.setBreed(randomBreed);
+
+                int randomGender = event.getLevel().getRandom().nextInt(OSheep.Gender.values().length);
+                oSheep.setGender(randomGender);
 
                 if (event.getLevel().isClientSide) {
                     vanillasheep.remove(Entity.RemovalReason.DISCARDED);

@@ -460,7 +460,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	public boolean canParent() {
-		return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+		return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && this.isInLove();
 	}
 
 	public boolean canMate(Animal animal) {

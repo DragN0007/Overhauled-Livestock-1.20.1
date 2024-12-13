@@ -22,6 +22,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_GOATS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_FROGS;
     public static final ForgeConfigSpec.BooleanValue SPAWN_GRUBS;
+    public static final ForgeConfigSpec.BooleanValue SPAWN_MOOBLOOMS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BIPRODUCTS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BREEDING;
     public static final ForgeConfigSpec.BooleanValue ANIMALS_HERDING_ENABLED;
@@ -82,6 +83,9 @@ public class LivestockOverhaulCommonConfig {
 
         SPAWN_GRUBS = BUILDER.comment("Should Grubs spawn?")
                 .define("Spawn Grubs", true);
+
+        SPAWN_MOOBLOOMS = BUILDER.comment("Should Mooblooms have a chance to spawn alongside O-Cows?")
+                .define("Spawn Mooblooms", true);
         BUILDER.pop();
 
         BUILDER.push("Miscellaneous");

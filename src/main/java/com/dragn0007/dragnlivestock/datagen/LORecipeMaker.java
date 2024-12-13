@@ -20,6 +20,96 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CARROT_SOUP.get())
+                .requires(Items.CARROT)
+                .requires(Items.CARROT)
+                .requires(Items.CARROT)
+                .requires(Items.CARROT)
+                .requires(Items.CARROT)
+                .requires(Items.CARROT)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GLOW_BERRY_SOUP.get())
+                .requires(Items.GLOW_BERRIES)
+                .requires(Items.GLOW_BERRIES)
+                .requires(Items.GLOW_BERRIES)
+                .requires(Items.GLOW_BERRIES)
+                .requires(Items.GLOW_BERRIES)
+                .requires(Items.GLOW_BERRIES)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MELON_SOUP.get())
+                .requires(Items.MELON_SLICE)
+                .requires(Items.MELON_SLICE)
+                .requires(Items.MELON_SLICE)
+                .requires(Items.MELON_SLICE)
+                .requires(Items.MELON_SLICE)
+                .requires(Items.MELON_SLICE)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.POTATO_SOUP.get())
+                .requires(Items.POTATO)
+                .requires(Items.POTATO)
+                .requires(Items.POTATO)
+                .requires(Items.POTATO)
+                .requires(Items.POTATO)
+                .requires(Items.POTATO)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PUMPKIN_SOUP.get())
+                .requires(Items.PUMPKIN)
+                .requires(Items.PUMPKIN)
+                .requires(Items.PUMPKIN)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.SWEET_BERRY_SOUP.get())
+                .requires(Items.SWEET_BERRIES)
+                .requires(Items.SWEET_BERRIES)
+                .requires(Items.SWEET_BERRIES)
+                .requires(Items.SWEET_BERRIES)
+                .requires(Items.SWEET_BERRIES)
+                .requires(Items.SWEET_BERRIES)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GRAIN_SOUP.get())
+                .requires(Items.WHEAT)
+                .requires(Items.WHEAT)
+                .requires(Items.WHEAT)
+                .requires(Items.WHEAT)
+                .requires(Items.WHEAT)
+                .requires(LOTags.Items.MILK)
+                .requires(Items.BOWL)
+                .unlockedBy("has_bowl", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOWL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MANE_SCISSORS.get())
                 .define('A', Items.IRON_INGOT)
                 .define('B', Items.IRON_NUGGET)

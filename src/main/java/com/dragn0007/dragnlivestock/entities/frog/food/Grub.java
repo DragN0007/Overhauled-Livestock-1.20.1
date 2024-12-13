@@ -171,7 +171,7 @@ public class Grub extends Animal implements GeoEntity {
 	}
 
 	public boolean canParent() {
-		return !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+		return !this.isBaby() && this.isInLove();
 	}
 
 	public boolean canMate(Animal animal) {

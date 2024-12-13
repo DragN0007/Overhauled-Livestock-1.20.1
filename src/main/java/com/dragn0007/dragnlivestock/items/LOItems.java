@@ -274,6 +274,21 @@ public class LOItems {
     public static final RegistryObject<Item> COOKED_COD_FILLET = ITEMS.register("cooked_cod_fillet",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).build())));
 
+    public static final RegistryObject<Item> GRAIN_SOUP = ITEMS.register("grain_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+    public static final RegistryObject<Item> PUMPKIN_SOUP = ITEMS.register("pumpkin_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+    public static final RegistryObject<Item> CARROT_SOUP = ITEMS.register("carrot_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+    public static final RegistryObject<Item> POTATO_SOUP = ITEMS.register("potato_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+    public static final RegistryObject<Item> MELON_SOUP = ITEMS.register("melon_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+    public static final RegistryObject<Item> GLOW_BERRY_SOUP = ITEMS.register("glow_berry_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+    public static final RegistryObject<Item> SWEET_BERRY_SOUP = ITEMS.register("sweet_berry_soup",
+            () -> new BowlFoodItem(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(6).build())));
+
     public static final RegistryObject<Item> UNICORN = ITEMS.register("unicorn",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).effect(new MobEffectInstance(MobEffects.REGENERATION, 600, 0), 0.8F).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0), 0.8F).saturationMod(1).build())));
     public static final RegistryObject<Item> UNICORN_RIB_STEAK = ITEMS.register("unicorn_rib_steak",
@@ -311,6 +326,9 @@ public class LOItems {
 
     //Mod Item Tab Icon (UNOBTAINABLE)
     public static final RegistryObject<Item> LIVESTOCK_OVERHAUL = ITEMS.register("livestock_overhaul",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> LIVESTOCK_OVERHAUL_FOOD = ITEMS.register("livestock_overhaul_food",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

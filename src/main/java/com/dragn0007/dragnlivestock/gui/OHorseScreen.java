@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -17,6 +18,10 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     public final OHorse oHorse;
     protected int breedLabelX;
     protected int breedLabelY;
+    protected int baseColorLabelX;
+    protected int baseColorLabelY;
+    protected int markingLabelX;
+    protected int markingLabelY;
 
     public OHorseScreen(OHorseMenu oHorseMenu, Inventory inventory, Component component) {
         super(oHorseMenu, inventory, component);
@@ -30,6 +35,12 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
         breedLabelX = leftPos + 1;
         breedLabelY = topPos - 8;
+
+        baseColorLabelX = leftPos + 1;
+        baseColorLabelY = topPos + 170;
+
+        markingLabelX = leftPos + 1;
+        markingLabelY = topPos + 180;
     }
 
     public void renderBg(GuiGraphics graphics, float f, int i, int j) {
@@ -81,6 +92,11 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oHorse);
 
         renderBreedLabel(graphics);
+
+        if (LivestockOverhaulClientConfig.HORSE_COAT_GUI.get()) {
+            renderBaseCoatLabel(graphics);
+            renderMarkingLabel(graphics);
+        }
     }
 
     @Override
@@ -110,9 +126,43 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 7: return "American Quarter (Stock)";
             case 8: return "Percheron (Draft)";
             case 9: return "Selle Francais (Warmblood)";
-            default: return "Unknown";
+            default: return "Base";
         }
     }
+
+    private void renderBaseCoatLabel(GuiGraphics graphics) {
+        String text = this.oHorse.getTextureResource().toString(); //texture name
+        String noFillerText = text.replaceAll(".+horse_", ""); //remove 'horse_' and anything before it
+        String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
+        String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
+        String addSpacesWhenApplicableText = noPNGText.replace("warm", "warm ");
+        String labelText = "Base Coat: " + addSpacesWhenApplicableText.toUpperCase(); //print just the coat name
+
+        String noTextureText = "Base Coat: " + "No Coat Found.";
+
+        if (this.oHorse.getTextureResource() == null) {
+            graphics.drawString(this.font, noTextureText, baseColorLabelX, baseColorLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, labelText, baseColorLabelX, baseColorLabelY, 0xFFFFFF, false);
+        }
+    }
+
+    private void renderMarkingLabel(GuiGraphics graphics) {
+        String text = this.oHorse.getOverlayLocation().toString();
+        String noFillerText = text.replaceAll(".+overlay_", "");
+        String noUnderscoresText = noFillerText.replaceAll("_", " ");
+        String noPNGText = noUnderscoresText.replace(".png", "");
+        String labelText = "Marking(s): " + noPNGText.toUpperCase();
+
+        String noTextureText = "Marking(s): " + "No Marking Found.";
+
+        if (this.oHorse.getTextureResource() == null) {
+            graphics.drawString(this.font, noTextureText, markingLabelX, markingLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, labelText, markingLabelX, markingLabelY, 0xFFFFFF, false);
+        }
+    }
+
 }
 
 

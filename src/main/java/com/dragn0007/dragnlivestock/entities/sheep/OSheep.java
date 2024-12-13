@@ -276,9 +276,23 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			}
 		}
 
+		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		}
+
+		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		}
+
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() &&
 				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale))) {
+						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.SHEEP_MILK_BUCKET.get().getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
@@ -363,31 +377,31 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	}
 
 
-
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 
 	public ResourceLocation getTextureLocation() {
 		return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 
-	public ResourceLocation getHornsLocation() {
-		return OSheepHornLayer.HornOverlay.hornOverlayFromOrdinal(getHornVariant()).resourceLocation;
+	public int getBreedLocation() {
+		return Breed.values().length;
 	}
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
-	public int getHornVariant() {
-		return this.entityData.get(HORNS);
+
+	public int getBreed() {
+		return this.entityData.get(BREED);
 	}
 
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 
-	public void setHornVariant(int overlayVariant) {
-		this.entityData.set(HORNS, overlayVariant);
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
 	@Override
@@ -397,8 +411,12 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			setVariant(tag.getInt("Variant"));
 		}
 
-		if (tag.contains("Horns")) {
-			setHornVariant(tag.getInt("Horns"));
+		if (tag.contains("Breed")) {
+			setBreed(tag.getInt("Breed"));
+		}
+
+		if (tag.contains("Gender")) {
+			this.setGender(tag.getInt("Gender"));
 		}
 
 		this.setSheared(tag.getBoolean("Sheared"));
@@ -410,17 +428,19 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
-		tag.putInt("Horns", getHornVariant());
+		tag.putInt("Breed", getBreed());
 		tag.putBoolean("Sheared", this.isSheared());
 		tag.putByte("Color", (byte)this.getColor().getId());
+		tag.putInt("Gender", this.getGender());
 	}
 
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
-		this.entityData.define(HORNS, 0);
 		this.entityData.define(DATA_WOOL_ID, (byte)0);
+		this.entityData.define(BREED, 0);
+		this.entityData.define(GENDER, 0);
 	}
 
 	@Override
@@ -431,15 +451,37 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		}
 		Random random = new Random();
 		setVariant(random.nextInt(OSheepModel.Variant.values().length));
-		setHornVariant(random.nextInt(OSheepHornLayer.HornOverlay.values().length));
+		setBreed(random.nextInt(OSheep.Breed.values().length));
+		this.setGender(random.nextInt(OSheep.Gender.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
-	boolean isFemale = this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.NONE.resourceLocation) || this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.SHORT.resourceLocation);
-	boolean isMale = this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.LONG.resourceLocation) || this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.CURLY.resourceLocation);
+	public enum Gender {
+		FEMALE,
+		MALE
+	}
+
+	public boolean isFemale() {
+		return this.getGender() == 0;
+	}
+
+	public boolean isMale() {
+		return this.getGender() == 1;
+	}
+
+	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+
+	public int getGender() {
+		return this.entityData.get(GENDER);
+	}
+
+	public void setGender(int gender) {
+		this.entityData.set(GENDER, gender);
+	}
+
 	public boolean canParent() {
-		return !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+		return !this.isBaby() && this.isInLove();
 	}
 
 	public boolean canMate(Animal animal) {
@@ -448,58 +490,68 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		} else if (!(animal instanceof OSheep)) {
 			return false;
 		} else {
-			OSheep partner = (OSheep) animal;
-
-			if (!this.canParent() || !partner.canParent()) {
-				return false;
-			}
-
-			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				boolean partnerIsFemale = partner.getHornsLocation().equals(OSheepHornLayer.HornOverlay.NONE.resourceLocation) || partner.getHornsLocation().equals(OSheepHornLayer.HornOverlay.SHORT.resourceLocation);
-				boolean partnerIsMale = partner.getHornsLocation().equals(OSheepHornLayer.HornOverlay.LONG.resourceLocation) || partner.getHornsLocation().equals(OSheepHornLayer.HornOverlay.CURLY.resourceLocation);
-
-				boolean isFemale = this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.NONE.resourceLocation) || this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.SHORT.resourceLocation);
-				boolean isMale = this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.LONG.resourceLocation) || this.getHornsLocation().equals(OSheepHornLayer.HornOverlay.CURLY.resourceLocation);
-
-				return (isFemale && partnerIsMale) || (isMale && partnerIsFemale);
+			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				return this.canParent() && ((OSheep) animal).canParent();
 			} else {
-				return true;
+				OSheep partner = (OSheep) animal;
+				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+					return true;
+				}
+
+				boolean partnerIsFemale = partner.isFemale();
+				boolean partnerIsMale = partner.isMale();
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+					return isFemale();
+				}
 			}
 		}
+		return false;
 	}
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		OSheep oSheep1 = (OSheep) ageableMob;
+		OSheep oSheep = (OSheep) ageableMob;
 		if (ageableMob instanceof OSheep) {
-			OSheep oSheep = (OSheep) ageableMob;
-			oSheep1 = EntityTypes.O_SHEEP_ENTITY.get().create(serverLevel);
+			OSheep oSheep1 = (OSheep) ageableMob;
+			oSheep = EntityTypes.O_SHEEP_ENTITY.get().create(serverLevel);
 
 			int i = this.random.nextInt(9);
 			int variant;
 			if (i < 4) {
 				variant = this.getVariant();
 			} else if (i < 8) {
-				variant = oSheep.getVariant();
+				variant = oSheep1.getVariant();
 			} else {
 				variant = this.random.nextInt(OSheepModel.Variant.values().length);
 			}
 
-			int k = this.random.nextInt(5);
-			int horns;
-			if (k < 2) {
-				horns = this.getHornVariant();
-			} else if (k < 4) {
-				horns = oSheep.getHornVariant();
+			int j = this.random.nextInt(9);
+			int breed;
+			if (j < 4) {
+				breed = this.getBreedLocation();
+			} else if (j < 8) {
+				breed = oSheep1.getBreedLocation();
 			} else {
-				horns = this.random.nextInt(OSheepHornLayer.HornOverlay.values().length);
+				breed = this.random.nextInt(OSheep.Breed.values().length);
 			}
 
-			oSheep1.setVariant(variant);
-			oSheep1.setHornVariant(horns);
+			int gender;
+			gender = this.random.nextInt(OSheep.Gender.values().length);
+
+			oSheep.setVariant(variant);
+			oSheep.setBreed(breed);
+			oSheep.setGender(gender);
 		}
 
-		return oSheep1;
+		return oSheep;
+	}
+
+	public enum Breed {
+		DEFAULT,
+		RACKA,
+		JACOB,
+		DORPER;
 	}
 
 	public DyeColor getColor() {
@@ -530,4 +582,5 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			this.ageUp(60);
 		}
 	}
+
 }

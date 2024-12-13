@@ -428,7 +428,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	}
 
 	public boolean canParent() {
-		return !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+		return !this.isBaby() && this.isInLove();
 	}
 
 	public boolean canMate(Animal animal) {

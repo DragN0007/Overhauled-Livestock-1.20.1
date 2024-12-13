@@ -99,7 +99,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     @Override
     public boolean canParent() {
-        return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+        return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.isInLove();
     }
 
     public boolean isShoe(ItemStack itemStack) {

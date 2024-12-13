@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -54,6 +56,13 @@ public class SweetBerryMoobloom extends AbstractMoobloom implements GeoEntity {
             this.spawnAtLocation(Items.SWEET_BERRIES);
             regrowPlantsTickCounter = 0;
 
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
+        if (itemStack.is(Items.BOWL) && !this.isBaby()) {
+            player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
+            ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.SWEET_BERRY_SOUP.get().getDefaultInstance());
+            player.setItemInHand(hand, itemstack1);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
