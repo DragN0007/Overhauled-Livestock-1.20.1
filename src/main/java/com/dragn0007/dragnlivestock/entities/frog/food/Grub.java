@@ -76,6 +76,7 @@ public class Grub extends Animal implements GeoEntity {
 
 		if (itemStack.is(LOItems.GRUB_SWEATER.get()) && !hasSweater()) {
 			this.setHasSweater(true);
+			this.playSound(SoundEvents.WOOL_BREAK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
