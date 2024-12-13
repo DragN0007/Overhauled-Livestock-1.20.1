@@ -1,4 +1,4 @@
-// 1.20.1	2024-12-13T00:55:42.5019757	Item Models: dragnlivestock
+// 1.20.1	2024-12-13T01:29:27.4072478	Item Models: dragnlivestock
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
@@ -61,6 +61,7 @@ def202f3c75d1d82bed748faef831ad4967de2e5 assets/dragnlivestock/models/item/gold_
 c061aeaa06c2e8f515e8f0a6379bdd6ecc6ca242 assets/dragnlivestock/models/item/grain_soup.json
 1c2fc93004d7f5e8223c12d7c315e56102b2e18d assets/dragnlivestock/models/item/griffith_inspired_horse_armor.json
 d466130c0261eeaa8459999a06c688e7d522a9c6 assets/dragnlivestock/models/item/grub.json
+9381cf27e5894c300a4ee9012dfa62c3a7a98ab9 assets/dragnlivestock/models/item/grub_sweater.json
 ff9cde1d2cd4752358cdf96a39b7c764533faa4e assets/dragnlivestock/models/item/horse.json
 f73888aec1433210817c55495832680e88f032bb assets/dragnlivestock/models/item/horse_rib_steak.json
 183cbd4cbc71019f7535164682b2615675f55515 assets/dragnlivestock/models/item/horse_sirloin_steak.json

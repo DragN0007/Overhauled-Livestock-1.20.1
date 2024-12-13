@@ -20,6 +20,15 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GRUB_SWEATER.get())
+                .requires(Items.RED_WOOL)
+                .requires(Items.RED_WOOL)
+                .requires(Items.RED_WOOL)
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.RED_WOOL)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CARROT_SOUP.get())
                 .requires(Items.CARROT)
                 .requires(Items.CARROT)

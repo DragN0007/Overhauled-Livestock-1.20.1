@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.entities.cow.moobloom.potato;
 import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloomModel;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

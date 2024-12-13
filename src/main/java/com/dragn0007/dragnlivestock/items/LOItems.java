@@ -96,6 +96,8 @@ public class LOItems {
             () -> new MaleGenderTestKit(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FEMALE_GENDER_TEST_STRIP = ITEMS.register("female_gender_test_strip",
             () -> new FemaleGenderTestKit(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GRUB_SWEATER = ITEMS.register("grub_sweater",
+            () -> new GrubSweaterItem(new Item.Properties()));
 
     public static final RegistryObject<Item> MANE_SCISSORS = ITEMS.register("mane_scissors",
             () -> new HairScissorItem(new Item.Properties().stacksTo(1)));

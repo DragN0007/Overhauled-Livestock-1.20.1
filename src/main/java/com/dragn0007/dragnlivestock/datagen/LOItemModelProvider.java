@@ -29,6 +29,8 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR);
         simpleItem(LOItems.BLACK_SADDLE);
 
+        simpleItem(LOItems.GRUB_SWEATER);
+
         simpleItem(LOItems.NETHERITE_HORSESHOE);
         simpleItem(LOItems.DIAMOND_HORSESHOE);
         simpleItem(LOItems.GOLD_HORSESHOE);

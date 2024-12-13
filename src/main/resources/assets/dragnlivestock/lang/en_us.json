@@ -4,6 +4,7 @@
 
   "tooltip.dragnlivestock.not_functional.tooltip": "This item isn't fully functional yet.",
   "tooltip.dragnlivestock.for_horses.tooltip": "For horses!",
+  "tooltip.dragnlivestock.grub_sweater.tooltip": "Grubs get cold too.",
 
   "item.dragnlivestock.o_horse_spawn_egg": "O-Horse Spawn Egg",
   "entity.dragnlivestock.o_horse": "O-Horse",
@@ -109,6 +110,7 @@
 
 
   "item.dragnlivestock.brand_tag": "Brand Tag",
+  "item.dragnlivestock.grub_sweater": "Grub Sweater",
 
   "item.dragnlivestock.netherite_horse_armor": "Netherite Horse Armor",
   "item.dragnlivestock.griffith_inspired_horse_armor": "Griffith-Inspired Horse Armor",

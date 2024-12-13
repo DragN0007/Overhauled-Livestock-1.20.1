@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.frog.food;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -11,12 +12,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -24,6 +28,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -53,6 +58,28 @@ public class Grub extends Animal implements GeoEntity {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 2.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.16D);
+	}
+
+	private boolean hasSweater = false;
+
+	public boolean hasSweater() {
+		return this.hasSweater;
+	}
+
+	public boolean removeWhenFarAway(double v) {
+		return !this.hasSweater();
+	}
+
+	@Override
+	public @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
+		ItemStack itemStack = player.getItemInHand(hand);
+
+		if (itemStack.is(LOItems.GRUB_SWEATER.get()) && !hasSweater()) {
+			this.setHasSweater(true);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
+		return super.mobInteract(player, hand);
 	}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(Tags.Items.CROPS);
@@ -137,6 +164,14 @@ public class Grub extends Animal implements GeoEntity {
 		this.entityData.set(VARIANT, variant);
 	}
 
+	public boolean getHasSweater() {
+		return this.hasSweater;
+	}
+
+	public void setHasSweater(boolean sweater) {
+		this.hasSweater = sweater;
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -144,12 +179,17 @@ public class Grub extends Animal implements GeoEntity {
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
 		}
+
+		if (tag.contains("HasSweater")) {
+			setHasSweater(tag.getBoolean("HasSweater"));
+		}
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
+		tag.putBoolean("HasSweater", getHasSweater());
 	}
 
 	@Override

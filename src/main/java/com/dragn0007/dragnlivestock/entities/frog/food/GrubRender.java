@@ -9,6 +9,7 @@ public class GrubRender extends GeoEntityRenderer<Grub> {
 
     public GrubRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new GrubModel());
+        this.addRenderLayer(new GrubSweaterLayer(this));
     }
 
     @Override
