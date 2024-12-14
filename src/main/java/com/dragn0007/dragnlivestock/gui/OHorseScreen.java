@@ -52,19 +52,19 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         graphics.blit(HORSE_INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7 || this.oHorse.getBreed() == 9)) { //stock or warmblood
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7 || this.oHorse.getBreed() == 9 || this.oHorse.getBreed() == 10)) { //stock or warmblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 54, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5 || this.oHorse.getBreed() == 8)) { //draft or coldblood
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5 || this.oHorse.getBreed() == 8 || this.oHorse.getBreed() == 12)) { //draft or coldblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 3 || this.oHorse.getBreed() == 6)) { //pony
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 3 || this.oHorse.getBreed() == 6 || this.oHorse.getBreed() == 11)) { //pony
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 72, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 4)) { //racer
+        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 4 || this.oHorse.getBreed() == 13)) { //racer
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 18, 54);
         }
 
@@ -126,7 +126,11 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 7: return "American Quarter (Stock)";
             case 8: return "Percheron (Draft)";
             case 9: return "Selle Francais (Warmblood)";
-            default: return "Base";
+            case 10: return "Marwari (Warmblood)";
+            case 11: return "Mongolian (Pony)";
+            case 12: return "Shire (Draft)";
+            case 13: return "Ahkal-Teke (Racer)";
+            default: return "Unknown";
         }
     }
 
