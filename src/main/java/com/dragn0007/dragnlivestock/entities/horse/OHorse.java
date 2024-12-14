@@ -164,7 +164,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseHealth = 24.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.AHKAL_TEKE.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
 			baseHealth = 15.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
@@ -227,7 +227,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseStrength = 0.2F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.AHKAL_TEKE.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		}
@@ -290,7 +290,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.AHKAL_TEKE.resourceLocation)) {
+		if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
 			baseSpeed = 0.25F;
 			return baseSpeed + multiplier;
 		}
@@ -376,7 +376,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				offsetY = 1.5;
 			}
 
-			if (getModelResource().equals(BreedModel.AHKAL_TEKE.resourceLocation)) {
+			if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
 				offsetY = 1.1;
 			}
 

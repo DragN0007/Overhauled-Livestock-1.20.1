@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.rabbit;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -352,12 +353,16 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
+	}
+	public int getBreed() {
+		return this.entityData.get(BREED);
 	}
 
 	public void setVariant(int variant) {
@@ -385,6 +390,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
 
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -408,6 +417,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
 	}
 
 	@Override
@@ -422,6 +435,8 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 
 		tag.putInt("Gender", this.getGender());
+
+		tag.putInt("Breed", this.getBreed());
 	}
 
 	@Override
@@ -434,6 +449,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		setVariant(random.nextInt(ORabbitModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(ORabbit.Gender.values().length));
+		this.setBreed(random.nextInt(Breed.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -444,6 +460,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT_TEXTURE, ORabbitModel.Variant.BLACK.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, ORabbitMarkingLayer.Overlay.NONE.resourceLocation);
 	}
@@ -527,15 +544,43 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				overlay = this.random.nextInt(ORabbitMarkingLayer.Overlay.values().length);
 			}
 
+			int k = this.random.nextInt(5);
+			int breed;
+			if (j < 2) {
+				breed = this.getOverlayVariant();
+			} else if (j < 4) {
+				breed = oRabbit1.getOverlayVariant();
+			} else {
+				breed = this.random.nextInt(Breed.values().length);
+			}
+
 			int gender;
 			gender = this.random.nextInt(ORabbit.Gender.values().length);
 
 			oRabbit.setVariant(variant);
 			oRabbit.setOverlayVariant(overlay);
 			oRabbit.setGender(gender);
+			oRabbit.setBreed(breed);
 		}
 
 		return oRabbit;
+	}
+
+	public enum Breed {
+		DEFAULT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_overhauled.geo.json")),
+		GIANT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_giant.geo.json")),
+		DWARF(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_dwarf.geo.json")),
+		LOP(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_lop.geo.json"));
+
+		public final ResourceLocation resourceLocation;
+
+		Breed(ResourceLocation resourceLocation) {
+			this.resourceLocation = resourceLocation;
+		}
+
+		public static Breed breedFromOrdinal(int ordinal) {
+			return Breed.values()[ordinal % Breed.values().length];
+		}
 	}
 
 }

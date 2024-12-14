@@ -17,7 +17,7 @@ public enum BreedModel {
     MARWARI(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_marwari.geo.json")),
     MONGOLIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_mongolian.geo.json")),
     SHIRE(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_shire.geo.json")),
-    AHKAL_TEKE(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_ahkal_teke.geo.json"));
+    AKHAL_TEKE(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_ahkal_teke.geo.json"));
 
     public final ResourceLocation resourceLocation;
 

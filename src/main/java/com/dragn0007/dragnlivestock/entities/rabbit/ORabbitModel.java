@@ -1,7 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.rabbit;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import net.minecraft.resources.ResourceLocation;
+import org.antlr.v4.runtime.atn.SemanticContext;
 import software.bernie.geckolib.model.GeoModel;
 
 public class ORabbitModel extends GeoModel<ORabbit> {
@@ -27,12 +29,12 @@ public class ORabbitModel extends GeoModel<ORabbit> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_overhauled.geo.json");
+//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_overhauled.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/rabbit_overhauled.animation.json");
 
     @Override
     public ResourceLocation getModelResource(ORabbit object) {
-        return MODEL;
+        return ORabbit.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

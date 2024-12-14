@@ -716,6 +716,9 @@ public class SpawnReplacer {
                 int randomGender = event.getLevel().getRandom().nextInt(ORabbit.Gender.values().length);
                 oRabbit.setGender(randomGender);
 
+                int randomBreed = event.getLevel().getRandom().nextInt(ORabbit.Breed.values().length);
+                oRabbit.setBreed(randomBreed);
+
                 if (event.getLevel().isClientSide) {
                     vanillarabbit.remove(Entity.RemovalReason.DISCARDED);
                 }

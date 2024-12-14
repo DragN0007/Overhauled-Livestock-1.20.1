@@ -129,7 +129,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 10: return "Marwari (Warmblood)";
             case 11: return "Mongolian (Pony)";
             case 12: return "Shire (Draft)";
-            case 13: return "Ahkal-Teke (Racer)";
+            case 13: return "Akhal-Teke (Racer)";
             default: return "Unknown";
         }
     }
