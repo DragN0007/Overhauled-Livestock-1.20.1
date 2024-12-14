@@ -1,11 +1,11 @@
 package com.dragn0007.dragnlivestock.entities.cow;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
+import com.dragn0007.dragnlivestock.entities.horse.BreedModel;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -18,7 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -36,8 +35,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -54,16 +51,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class OCow extends Animal implements GeoEntity, Chestable, ContainerListener {
-
-	public static final EntityDataAccessor<Boolean> CHESTED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+public class OCow extends Animal implements GeoEntity {
 
 	public OCow leader;
 	public int herdSize = 1;
 
 	public OCow(EntityType<? extends OCow> type, Level level) {
 		super(type, level);
-		this.updateInventory();
 	}
 
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
@@ -113,9 +107,6 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	public float getStepHeight() {
 		return 1F;
 	}
-
-	public SimpleContainer inventory;
-	public LazyOptional<?> itemHandler = null;
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -214,46 +205,6 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		});
 	}
 
-	public void updateInventory() {
-		SimpleContainer tempInventory = this.inventory;
-		this.inventory = new SimpleContainer(this.getInventorySize());
-
-		if (tempInventory != null) {
-			tempInventory.removeListener(this);
-			int maxSize = Math.min(tempInventory.getContainerSize(), this.inventory.getContainerSize());
-
-			for (int i = 0; i < maxSize; i++) {
-				ItemStack itemStack = tempInventory.getItem(i);
-				if (!itemStack.isEmpty()) {
-					this.inventory.setItem(i, itemStack.copy());
-				}
-			}
-		}
-		this.inventory.addListener(this);
-		this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.inventory));
-	}
-
-	@Override
-	public void invalidateCaps() {
-		super.invalidateCaps();
-		if (this.itemHandler != null) {
-			LazyOptional<?> oldHandler = this.itemHandler;
-			this.itemHandler = null;
-			oldHandler.invalidate();
-		}
-	}
-
-	@Override
-	public void dropEquipment() {
-		if (!this.level().isClientSide) {
-			super.dropEquipment();
-			if (this.isChested()) {
-				this.spawnAtLocation(Items.CHEST);
-			}
-			Containers.dropContents(this.level(), this, this.inventory);
-		}
-	}
-
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
@@ -270,6 +221,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 			return super.mobInteract(player, hand);
 		}
 	}
+
 	public SoundEvent getAmbientSound() {
 		super.getAmbientSound();
 		return SoundEvents.COW_AMBIENT;
@@ -302,14 +254,14 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		return OCowHornLayer.HornOverlay.hornOverlayFromOrdinal(getHornVariant()).resourceLocation;
 	}
 
-	public ResourceLocation getUddersLocation() {
-		return OCowUdderLayer.Overlay.overlayFromOrdinal(getUdderVariant()).resourceLocation;
+	public ResourceLocation getModelResource() {
+		return Breed.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> UDDERS = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -320,8 +272,8 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	public int getHornVariant() {
 		return this.entityData.get(HORNS);
 	}
-	public int getUdderVariant() {
-		return this.entityData.get(UDDERS);
+	public int getBreed() {
+		return this.entityData.get(BREED);
 	}
 
 	public void setVariant(int variant) {
@@ -333,8 +285,8 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 	public void setHornVariant(int hornVariant) {
 		this.entityData.set(HORNS, hornVariant);
 	}
-	public void setUdderVariant(int udderVariant) {
-		this.entityData.set(UDDERS, udderVariant);
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
 	@Override
@@ -353,15 +305,13 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 			setHornVariant(tag.getInt("Horns"));
 		}
 
-		if (tag.contains("Chested")) {
-			this.setChested(tag.getBoolean("Chested"));
-		}
-
 		if (tag.contains("Gender")) {
 			setGender(tag.getInt("Gender"));
 		}
 
-		this.updateInventory();
+		if (tag.contains("Breed")) {
+			setBreed(tag.getInt("Breed"));
+		}
 	}
 
 	@Override
@@ -375,7 +325,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 
 		tag.putInt("Gender", getGender());
 
-		tag.putBoolean("Chested", this.isChested());
+		tag.putInt("Breed", getBreed());
 	}
 
 	@Override
@@ -389,6 +339,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
 		setHornVariant(random.nextInt(OCowHornLayer.HornOverlay.values().length));
 		setGender(random.nextInt(Gender.values().length));
+		setBreed(random.nextInt(Breed.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -400,8 +351,7 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(HORNS, 0);
 		this.entityData.define(GENDER, 0);
-		this.entityData.define(UDDERS, 0);
-		this.entityData.define(CHESTED, false);
+		this.entityData.define(BREED, 0);
 	}
 
 	public enum Gender {
@@ -503,6 +453,16 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 					horns = this.random.nextInt(OCowHornLayer.HornOverlay.values().length);
 				}
 
+				int m = this.random.nextInt(5);
+				int breed;
+				if (m < 2) {
+					breed = this.getBreed();
+				} else if (m < 4) {
+					breed = oCow1.getBreed();
+				} else {
+					breed = this.random.nextInt(Breed.values().length);
+				}
+
 				int udders;
 				udders = this.random.nextInt(Gender.values().length);
 
@@ -510,45 +470,27 @@ public class OCow extends Animal implements GeoEntity, Chestable, ContainerListe
 				oCow.setOverlayVariant(overlay);
 				oCow.setHornVariant(horns);
 				oCow.setGender(udders);
+				oCow.setBreed(breed);
 			}
 		}
 
 		return oCow;
 	}
 
-	public int getInventorySize() {
-		return this.isChested() ? 51 : 1;
-	}
+	public enum Breed {
+		ANUGUS(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_large.geo.json")),
+		LONGHORN(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_overhaul.geo.json")),
+		BRAHMAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_large.geo.json")),
+		MINI(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_mini.geo.json"));
 
-	@Override
-	public boolean isChestable() {
-		return this.isAlive() && !this.isBaby();
-	}
+		public final ResourceLocation resourceLocation;
 
-	@Override
-	public void equipChest(@Nullable SoundSource soundSource) {
-		if (soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.MULE_CHEST, soundSource, 0.5f, 1f);
+		Breed(ResourceLocation resourceLocation) {
+			this.resourceLocation = resourceLocation;
 		}
-	}
 
-	@Override
-	public boolean isChested() {
-		return this.entityData.get(CHESTED);
-	}
-
-	public void setChested(boolean chested) {
-		this.entityData.set(CHESTED, chested);
-	}
-
-	@Override
-	public void containerChanged(Container container) {
-		boolean flag = this.isChested();
-		if(!this.level().isClientSide) {
-			this.setChested(!this.inventory.getItem(0).isEmpty());
-		}
-		if(this.tickCount > 20 && !flag && this.isChestable()) {
-			this.playSound(SoundEvents.MULE_CHEST, 0.5f, 1f);
+		public static Breed breedFromOrdinal(int ordinal) {
+			return Breed.values()[ordinal % Breed.values().length];
 		}
 	}
 

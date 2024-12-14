@@ -82,6 +82,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Random;
+
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SpawnReplacer {
 
@@ -566,6 +568,9 @@ public class SpawnReplacer {
 
                 int randomGender = event.getLevel().getRandom().nextInt(OCow.Gender.values().length);
                 oCow.setGender(randomGender);
+
+                int randomBreed = event.getLevel().getRandom().nextInt(OCow.Breed.values().length);
+                oCow.setBreed(randomBreed);
 
                 if (event.getLevel().isClientSide) {
                     vanillacow.remove(Entity.RemovalReason.DISCARDED);

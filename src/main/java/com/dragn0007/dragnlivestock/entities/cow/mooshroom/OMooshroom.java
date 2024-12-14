@@ -84,16 +84,10 @@ public class OMooshroom extends OCow implements GeoEntity {
     public ResourceLocation getMushroomsLocation() {
         return OMooshroomMushroomLayer.Overlay.overlayFromOrdinal(getMushroomVariant()).resourceLocation;
     }
-
-    public ResourceLocation getUddersLocation() {
-        return OMooshroomUdderLayer.Overlay.overlayFromOrdinal(getUdderVariant()).resourceLocation;
-    }
-
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> MUSHROOMS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> UDDERS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
 
     public int getVariant() {
         return this.entityData.get(VARIANT);
@@ -107,9 +101,6 @@ public class OMooshroom extends OCow implements GeoEntity {
     public int getMushroomVariant() {
         return this.entityData.get(MUSHROOMS);
     }
-    public int getUdderVariant() {
-        return this.entityData.get(UDDERS);
-    }
 
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
@@ -122,9 +113,6 @@ public class OMooshroom extends OCow implements GeoEntity {
     }
     public void setMushroomVariant(int mushroomVariant) {
         this.entityData.set(MUSHROOMS, mushroomVariant);
-    }
-    public void setUdderVariant(int udderVariant) {
-        this.entityData.set(UDDERS, udderVariant);
     }
 
     @Override
@@ -150,8 +138,6 @@ public class OMooshroom extends OCow implements GeoEntity {
         if (tag.contains("Gender")) {
             setGender(tag.getInt("Gender"));
         }
-
-        this.updateInventory();
     }
 
     @Override
@@ -193,7 +179,6 @@ public class OMooshroom extends OCow implements GeoEntity {
         this.entityData.define(OVERLAY, 0);
         this.entityData.define(HORNS, 0);
         this.entityData.define(MUSHROOMS, 0);
-        this.entityData.define(UDDERS, 0);
         this.entityData.define(GENDER, 0);
     }
 

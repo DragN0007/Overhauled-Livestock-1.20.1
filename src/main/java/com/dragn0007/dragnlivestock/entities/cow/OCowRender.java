@@ -13,7 +13,6 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
         super(renderManager, new OCowModel());
         this.addRenderLayer(new OCowMarkingLayer(this));
         this.addRenderLayer(new OCowHornLayer(this));
-        this.addRenderLayer(new OCowUdderLayer(this));
     }
 
     @Override
@@ -39,6 +38,46 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             model.getBone("utters").ifPresent(b -> b.setHidden(true));
         } else {
             model.getBone("utters").ifPresent(b -> b.setHidden(false));
+        }
+
+        if (entity.getBreed() == 0) {
+            model.getBone("fluff").ifPresent(b -> b.setHidden(false));
+            model.getBone("fluff2").ifPresent(b -> b.setHidden(false));
+            model.getBone("fluff3").ifPresent(b -> b.setHidden(false));
+            model.getBone("hump").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
+        }
+
+        if (entity.getBreed() == 1) {
+            model.getBone("fluff").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff2").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff3").ifPresent(b -> b.setHidden(true));
+            model.getBone("hump").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
+        }
+
+        if (entity.getBreed() == 2) {
+            model.getBone("fluff").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff2").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff3").ifPresent(b -> b.setHidden(true));
+            model.getBone("hump").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
+        }
+
+        if (entity.getBreed() == 3) {
+            model.getBone("fluff").ifPresent(b -> b.setHidden(false));
+            model.getBone("fluff2").ifPresent(b -> b.setHidden(false));
+            model.getBone("fluff3").ifPresent(b -> b.setHidden(false));
+            model.getBone("hump").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

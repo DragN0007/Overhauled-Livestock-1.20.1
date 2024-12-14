@@ -18,7 +18,8 @@ public class OCowHornLayer extends GeoRenderLayer<OCow> {
 
     @Override
     public void render(PoseStack poseStack, OCow animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderType renderMarkingType = RenderType.entityCutout(((OCow)animatable).getHornsLocation());
+
+        RenderType renderMarkingType = RenderType.entityCutout(animatable.getHornsLocation());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);
         poseStack.translate(0.0d, 0.0d, 0.0d);

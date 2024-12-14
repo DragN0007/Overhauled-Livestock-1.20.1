@@ -169,8 +169,6 @@ public class SweetBerryMoobloom extends AbstractMoobloom implements GeoEntity {
         if (tag.contains("Horns")) {
             setHornVariant(tag.getInt("Horns"));
         }
-
-        this.updateInventory();
     }
 
     @Override

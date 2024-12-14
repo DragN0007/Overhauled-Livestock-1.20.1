@@ -1,8 +1,12 @@
 package com.dragn0007.dragnlivestock.entities.cow;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.BreedModel;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
+
+import java.time.Month;
 
 public class OCowModel extends GeoModel<OCow> {
 
@@ -26,15 +30,17 @@ public class OCowModel extends GeoModel<OCow> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_overhaul.geo.json");
+//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_overhaul.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/cow_overhaul.animation.json");
 
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_cow_overhaul.geo.json");
+
     @Override
     public ResourceLocation getModelResource(OCow object) {
-        if(object.isBaby())
+        if (object.isBaby()) {
             return BABY_MODEL;
-        return MODEL;
+        }
+        return OCow.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

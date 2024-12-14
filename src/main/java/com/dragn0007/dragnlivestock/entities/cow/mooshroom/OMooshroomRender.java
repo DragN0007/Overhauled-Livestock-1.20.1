@@ -14,7 +14,6 @@ public class OMooshroomRender extends GeoEntityRenderer<OMooshroom> {
         this.addRenderLayer(new OMooshroomHornLayer(this));
         this.addRenderLayer(new OMooshroomMarkingLayer(this));
         this.addRenderLayer(new OMooshroomMushroomLayer(this));
-        this.addRenderLayer(new OMooshroomUdderLayer(this));
     }
 
     @Override
