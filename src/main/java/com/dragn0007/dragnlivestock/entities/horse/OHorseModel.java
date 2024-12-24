@@ -88,7 +88,7 @@ public class OHorseModel extends GeoModel<OHorse> {
     public ResourceLocation getModelResource(OHorse object) {
         if (object.isBaby()) {
             return BABY_MODEL;
-        } else if (!object.isBaby() && month == Month.DECEMBER && (day == 2 || day == 25)) {
+        } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25)) {
             return REINDEER_MODEL;
         }
         return BreedModel.breedFromOrdinal(object.getBreed()).resourceLocation;
@@ -96,7 +96,7 @@ public class OHorseModel extends GeoModel<OHorse> {
 
     @Override
     public ResourceLocation getTextureResource(OHorse object) {
-        if (month == Month.DECEMBER && (day == 2 || day == 25)) {
+        if (month == Month.DECEMBER && (day == 24 || day == 25)) {
             return object.getReindeerTextureResource();
         }
         return object.getTextureResource();

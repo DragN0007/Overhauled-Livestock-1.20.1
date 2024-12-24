@@ -47,6 +47,8 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -320,6 +322,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
 
+			LocalDate date = LocalDate.now();
+			Month month = date.getMonth();
+			int day = date.getDayOfMonth();
+
 			double offsetX = 0;
 			double offsetY = 1.1;
 			double offsetZ = -0.2;
@@ -378,6 +384,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
 				offsetY = 1.1;
+			}
+
+			if (month == Month.DECEMBER && (day == 24 || day == 25)) {
+				offsetY = 1.2;
 			}
 
 

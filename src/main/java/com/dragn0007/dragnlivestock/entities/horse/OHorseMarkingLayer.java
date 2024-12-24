@@ -26,7 +26,7 @@ public class OHorseMarkingLayer extends GeoRenderLayer<OHorse> {
         int day = currentDate.getDayOfMonth();
         Month month = currentDate.getMonth();
 
-        if (month == Month.DECEMBER && (day == 2 || day == 25)) {
+        if (month == Month.DECEMBER && (day == 24 || day == 25)) {
             return;
         }
 
