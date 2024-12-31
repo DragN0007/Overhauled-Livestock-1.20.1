@@ -37,7 +37,7 @@ import java.util.stream.Stream;
 public class LOWorldEvents {
     @SubscribeEvent
     public static void onSaplingGrowTreeEvent(SaplingGrowTreeEvent event) {
-        if(LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get()) {
+        if(LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() || !LivestockOverhaulCommonConfig.REPLACE_BEES.get()) {
             return;
         }
 
@@ -169,7 +169,7 @@ public class LOWorldEvents {
 
     @SubscribeEvent
     public static void onChunkLoadEvent(ChunkEvent.Load event) {
-        if(LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get()) {
+        if(LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() || !LivestockOverhaulCommonConfig.REPLACE_BEES.get()) {
             return;
         }
 

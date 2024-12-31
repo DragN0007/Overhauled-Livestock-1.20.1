@@ -10,6 +10,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ModifiableBiomeInfo;
 
@@ -21,6 +22,10 @@ public record CreatureSpawnGeneration(HolderSet<Biome> biomes) implements BiomeM
             new MobSpawnSettings.SpawnerData(EntityTypes.GRUB_ENTITY.get(), 10, 1, 2)
     );
 
+    public static List<MobSpawnSettings.SpawnerData> CARIBOU_SPAWNS = List.of(
+            new MobSpawnSettings.SpawnerData(EntityTypes.CARIBOU_ENTITY.get(), 1, 1, 2)
+    );
+
     @Override
     public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
         if(phase == Phase.ADD && biomes.contains(biome)) {
@@ -29,6 +34,11 @@ public record CreatureSpawnGeneration(HolderSet<Biome> biomes) implements BiomeM
             if(LivestockOverhaulCommonConfig.SPAWN_GRUBS.get() &&
                     (biome.is(Biomes.FLOWER_FOREST) || biome.is(Biomes.JUNGLE) || biome.is(Biomes.LUSH_CAVES) || biome.is(Biomes.SWAMP) || biome.is(Biomes.MANGROVE_SWAMP))) {
                 spawner.addAll(GRUB_SPAWNS);
+            }
+
+            if(LivestockOverhaulCommonConfig.SPAWN_CARIBOU.get() &&
+                    (biome.is(Tags.Biomes.IS_SNOWY) || biome.is(Tags.Biomes.IS_CONIFEROUS))) {
+                spawner.addAll(CARIBOU_SPAWNS);
             }
         }
     }

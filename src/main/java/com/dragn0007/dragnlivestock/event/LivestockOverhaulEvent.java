@@ -6,6 +6,8 @@ import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.bee.OBeeRenderer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelRender;
+import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
+import com.dragn0007.dragnlivestock.entities.caribou.CaribouRender;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenRender;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
@@ -102,6 +104,8 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorse.createBaseHorseAttributes().build());
         event.put(EntityTypes.O_FROG_ENTITY.get(), OFrog.createAttributes().build());
 
+        event.put(EntityTypes.CARIBOU_ENTITY.get(), Caribou.createBaseHorseAttributes().build());
+
         event.put(EntityTypes.GRUB_ENTITY.get(), Grub.createAttributes().build());
 
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
@@ -142,6 +146,8 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatRender::new);
         EntityRenderers.register(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorseRender::new);
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
+
+        EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);
 
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);

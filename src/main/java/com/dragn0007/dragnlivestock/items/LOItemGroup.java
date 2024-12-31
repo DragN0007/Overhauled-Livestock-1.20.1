@@ -48,6 +48,7 @@ public class LOItemGroup {
                         output.accept(LOItems.CARROT_MOOBLOOM_SPAWN_EGG.get());
                         output.accept(LOItems.BEETROOT_MOOBLOOM_SPAWN_EGG.get());
                         output.accept(LOItems.AZALEA_MOOBLOOM_SPAWN_EGG.get());
+                        output.accept(LOItems.CARIBOU_SPAWN_EGG.get());
                         output.accept(LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());
@@ -169,6 +170,13 @@ public class LOItemGroup {
                         output.accept(LOItems.COD_FILLET.get());
                         output.accept(LOItems.COOKED_SALMON_FILLET.get());
                         output.accept(LOItems.COOKED_COD_FILLET.get());
+
+                        output.accept(LOItems.CARIBOU.get());
+                        output.accept(LOItems.CARIBOU_RIB_STEAK.get());
+                        output.accept(LOItems.CARIBOU_SIRLOIN_STEAK.get());
+                        output.accept(LOItems.COOKED_CARIBOU.get());
+                        output.accept(LOItems.COOKED_CARIBOU_RIB_STEAK.get());
+                        output.accept(LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get());
 
                         output.accept(LOItems.UNICORN.get());
                         output.accept(LOItems.UNICORN_RIB_STEAK.get());

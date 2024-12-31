@@ -1,12 +1,8 @@
 package com.dragn0007.dragnlivestock.entities.cow;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.horse.BreedModel;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
-
-import java.time.Month;
 
 public class OCowModel extends GeoModel<OCow> {
 

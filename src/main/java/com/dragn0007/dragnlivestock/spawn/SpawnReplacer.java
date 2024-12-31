@@ -82,8 +82,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Random;
-
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SpawnReplacer {
 
@@ -677,8 +675,7 @@ public class SpawnReplacer {
         }
 
         //Bee
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_BEES.get() &&
-                (event.getEntity() instanceof Bee bee && !(bee instanceof OBee))) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_BEES.get() && (event.getEntity() instanceof Bee bee && !(bee instanceof OBee))) {
 
             OBee oBee = EntityTypes.O_BEE_ENTITY.get().create(event.getLevel());
 

@@ -137,6 +137,13 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.COOKED_SALMON_FILLET);
         simpleItem(LOItems.COOKED_COD_FILLET);
 
+        advancedItem(LOItems.CARIBOU, "horse");
+        advancedItem(LOItems.CARIBOU_RIB_STEAK, "horse_rib_steak");
+        advancedItem(LOItems.CARIBOU_SIRLOIN_STEAK, "horse_sirloin_steak");
+        advancedItem(LOItems.COOKED_CARIBOU, "cooked_horse");
+        advancedItem(LOItems.COOKED_CARIBOU_RIB_STEAK, "cooked_horse_rib_steak");
+        advancedItem(LOItems.COOKED_CARIBOU_SIRLOIN_STEAK, "cooked_horse_sirloin_steak");
+
         simpleItem(LOItems.UNICORN);
         simpleItem(LOItems.UNICORN_RIB_STEAK);
         simpleItem(LOItems.UNICORN_SIRLOIN_STEAK);
@@ -153,5 +160,11 @@ public class LOItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(LivestockOverhaul.MODID,"item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder advancedItem(RegistryObject<Item> item, String getTextureName) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(LivestockOverhaul.MODID,"item/" + getTextureName));
     }
 }

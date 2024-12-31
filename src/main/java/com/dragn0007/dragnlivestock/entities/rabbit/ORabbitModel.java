@@ -1,9 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.rabbit;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import net.minecraft.resources.ResourceLocation;
-import org.antlr.v4.runtime.atn.SemanticContext;
 import software.bernie.geckolib.model.GeoModel;
 
 public class ORabbitModel extends GeoModel<ORabbit> {

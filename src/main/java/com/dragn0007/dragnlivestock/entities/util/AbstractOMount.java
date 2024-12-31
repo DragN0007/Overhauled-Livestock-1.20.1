@@ -62,6 +62,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return blockState.is(LOTags.Blocks.SAND);
     }
 
+    public boolean isOnSnow() {
+        BlockState blockState = this.level().getBlockState(this.blockPosition().below());
+        return blockState.is(Blocks.SNOW) || blockState.is(Blocks.SNOW_BLOCK) || blockState.is(Blocks.POWDER_SNOW);
+    }
+
     public void applySlownessEffect() {
         MobEffect slownessEffect = MobEffect.byId(2);
         MobEffectInstance slownessEffectInstance = new MobEffectInstance(slownessEffect, 200, 1, false, false);

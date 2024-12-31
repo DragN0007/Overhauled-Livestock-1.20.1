@@ -63,6 +63,9 @@
   "item.dragnlivestock.grub_spawn_egg": "Grub Spawn Egg",
   "entity.dragnlivestock.grub": "Grub",
 
+  "item.dragnlivestock.caribou_spawn_egg": "Caribou Spawn Egg",
+  "entity.dragnlivestock.caribou": "Caribou",
+
   "item.dragnlivestock.wheat_moobloom_spawn_egg": "Wheat Moobloom Spawn Egg",
   "entity.dragnlivestock.wheat_moobloom": "Wheat Moobloom",
 
@@ -195,6 +198,13 @@
   "item.dragnlivestock.cooked_chevon": "Cooked Chevon",
   "item.dragnlivestock.cooked_chevon_loin": "Cooked Chevon Loin",
   "item.dragnlivestock.cooked_chevon_rib": "Cooked Chevon Rib",
+
+  "item.dragnlivestock.caribou": "Caribou",
+  "item.dragnlivestock.caribou_sirloin_steak": "Caribou Sirloin Steak",
+  "item.dragnlivestock.caribou_rib_steak": "Caribou Rib Steak",
+  "item.dragnlivestock.cooked_caribou": "Cooked Caribou",
+  "item.dragnlivestock.cooked_caribou_sirloin_steak": "Cooked Sirloin Steak",
+  "item.dragnlivestock.cooked_caribou_rib_steak": "Cooked Caribou Rib Steak",
 
   "item.dragnlivestock.fish_oil": "Fish Oil",
   "item.dragnlivestock.roe": "Salmon Roe",

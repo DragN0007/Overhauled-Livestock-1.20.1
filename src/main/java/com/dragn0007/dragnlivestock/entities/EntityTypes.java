@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities;
 
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
@@ -252,5 +253,11 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,1.5f)
                     .build(new ResourceLocation(MODID,"azalea_moobloom").toString()));
+
+    public static final RegistryObject<EntityType<Caribou>> CARIBOU_ENTITY = ENTITY_TYPES.register("caribou",
+            () -> EntityType.Builder.of(Caribou::new,
+                            MobCategory.CREATURE)
+                    .sized(1.5f,2f)
+                    .build(new ResourceLocation(MODID,"caribou").toString()));
 }
 
