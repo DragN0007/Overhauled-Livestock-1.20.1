@@ -783,7 +783,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.setGender(random.nextInt(Gender.values().length));
 		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
 
-		if (spawnType == MobSpawnType.SPAWN_EGG) {
+		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
 			this.setBreed(random.nextInt(BreedModel.values().length));
 		}
 

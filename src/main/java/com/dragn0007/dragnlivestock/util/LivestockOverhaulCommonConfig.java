@@ -32,6 +32,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> LLAMA_HERD_MAX;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HERD_MAX;
     public static final ForgeConfigSpec.BooleanValue USE_VANILLA_LOOT;
+    public static final ForgeConfigSpec.BooleanValue NATURAL_HORSE_BREEDS;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -117,6 +118,9 @@ public class LivestockOverhaulCommonConfig {
 
         USE_VANILLA_LOOT = BUILDER.comment("Should O-Animals use vanilla loot instead of the loot included in the mod?")
                 .define("Use Vanilla Animal Loot", false);
+
+        NATURAL_HORSE_BREEDS = BUILDER.comment("Should O-Horses be able to spawn with any breed naturally? (They spawn only as wild Mustangs by default)")
+                .define("Naturally Spawning O-Horse Breeds", false);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

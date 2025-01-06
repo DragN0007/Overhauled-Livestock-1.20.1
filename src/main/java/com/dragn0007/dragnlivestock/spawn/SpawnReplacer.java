@@ -43,6 +43,7 @@ import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
+import com.dragn0007.dragnlivestock.entities.horse.BreedModel;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
@@ -169,6 +170,13 @@ public class SpawnReplacer {
 
                 int randomChristmasVariant = event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length);
                 oHorse.setReindeerVariant(randomChristmasVariant);
+
+                if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
+                    int randomBreedIfConfigured = event.getLevel().getRandom().nextInt(BreedModel.values().length);
+                    oHorse.setBreed(randomBreedIfConfigured);
+                } else {
+                    oHorse.setBreed(0);
+                }
 
                 //tfc compat
                 CompoundTag tfcTag = new CompoundTag();
