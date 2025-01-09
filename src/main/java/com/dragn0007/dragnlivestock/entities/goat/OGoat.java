@@ -122,7 +122,7 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
-			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
+			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.O_WOLVES);
 			boolean isHerdingDog = livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS);
 			boolean isWolf = livingEntity instanceof Wolf;
 			return isOWolf || isWolf || isHerdingDog;

@@ -98,9 +98,10 @@ public class OCow extends Animal implements GeoEntity {
 			boolean isHorse = livingEntity.getType().is(LOTags.Entity_Types.HORSES);
 			boolean isRHGHorse = livingEntity.getType().is(LOTags.Entity_Types.RHG_HORSES);
 			boolean isSWEMHorse = livingEntity.getType().is(LOTags.Entity_Types.SWEM_HORSES);
-			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
+			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.O_WOLVES);
+			boolean isHerdingDog = livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS);
 			boolean isWolf = livingEntity instanceof Wolf;
-			return isHorse || isRHGHorse || isSWEMHorse || isOWolf || isWolf;
+			return isHorse || isRHGHorse || isSWEMHorse || isOWolf || isWolf || isHerdingDog;
 		}));
 	}
 
