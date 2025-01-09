@@ -89,8 +89,9 @@ public class OChicken extends Animal implements GeoEntity {
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
 			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.WOLVES);
 			boolean isOCat = livingEntity.getType().is(LOTags.Entity_Types.CATS);
+			boolean isHuntingDog = livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS);
 			boolean isWolf = livingEntity instanceof Wolf;
-			return isOWolf || isWolf || isOCat;
+			return isOWolf || isWolf || isOCat || isHuntingDog;
 		}));
 	}
 
@@ -283,7 +284,7 @@ public class OChicken extends Animal implements GeoEntity {
 			return false;
 		}
 
-		if (hasBred) {
+		if (hasBred || eggsLaid >= MAX_EGGS) {
 			return false;
 		}
 

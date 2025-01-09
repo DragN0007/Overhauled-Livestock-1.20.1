@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.caribou;
 
-import com.dragn0007.dragnlivestock.entities.horse.*;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

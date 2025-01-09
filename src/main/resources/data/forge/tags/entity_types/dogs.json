@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "dragnpets:doberman",
+    "dragnpets:border_collie",
+    "dragnpets:labrador",
+    "dragnpets:great_pyrenees",
+    "dragnpets:husky"
+  ]
+}

@@ -2,13 +2,18 @@ package com.dragn0007.dragnlivestock.entities.sheep;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.Maps;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -27,6 +32,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.Donkey;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -41,6 +47,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -114,6 +121,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(8, new EatGrassGoal(this));
+		this.goalSelector.addGoal(3, new SheepFollowHerdLeaderGoal(this));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
 			boolean isHorse = livingEntity.getType().is(LOTags.Entity_Types.HORSES);
@@ -133,10 +141,10 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		return this.leader != null && this.leader.isAlive();
 	}
 
-	public OSheep startFollowing(OSheep cow) {
-		this.leader = cow;
-		cow.addFollower();
-		return cow;
+	public OSheep startFollowing(OSheep oSheep) {
+		this.leader = oSheep;
+		oSheep.addFollower();
+		return oSheep;
 	}
 
 	public void stopFollowing() {
@@ -164,7 +172,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 				this.herdSize = 1;
 			}
 		}
-
 	}
 
 	public int getMaxHerdSize() {
