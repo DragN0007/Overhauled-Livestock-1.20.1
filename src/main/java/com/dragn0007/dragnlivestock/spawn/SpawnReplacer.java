@@ -692,7 +692,7 @@ public class SpawnReplacer {
             oBee.copyPosition(bee);
             oBee.setCustomName(bee.getCustomName());
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla bee with an O-Bee!");
+            System.out.println("[Livestock Overhaul]: Replaced a vanilla bee with an O-Bee!");
 
             event.setCanceled(true);
         }
@@ -1266,12 +1266,12 @@ public class SpawnReplacer {
         }
 
         //Bee
-        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_BEES.get() && event.getEntity() instanceof OBee oBee) {
+        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_BEES.get() && event.getEntity() instanceof OBee oBee1) {
             Bee bee = EntityType.BEE.create(event.getLevel());
-            oBee.remove(Entity.RemovalReason.DISCARDED);
+            oBee1.remove(Entity.RemovalReason.DISCARDED);
             event.getLevel().addFreshEntity(bee);
-            bee.copyPosition(oBee);
-            bee.setCustomName(oBee.getCustomName());
+            bee.copyPosition(oBee1);
+            bee.setCustomName(oBee1.getCustomName());
             event.setCanceled(true);
         }
 

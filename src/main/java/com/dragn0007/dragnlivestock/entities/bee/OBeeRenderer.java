@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
+import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -9,6 +10,7 @@ public class OBeeRenderer extends GeoEntityRenderer<OBee> {
 
     public OBeeRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OBeeModel());
+        this.addRenderLayer(new BeePollenLayer(this));
     }
 
     @Override
