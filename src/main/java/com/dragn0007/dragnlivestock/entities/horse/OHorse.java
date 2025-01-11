@@ -13,6 +13,7 @@ import com.dragn0007.dragnlivestock.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -32,6 +33,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -303,6 +305,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return ((double) 0.45F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
 	}
 
+	@Override
 	protected int getInventorySize() {
 		if (this.hasChest()) {
 		    if (this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12) {
@@ -754,6 +757,21 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Tail")) {
 			this.setTailType(tag.getInt("Tail"));
 		}
+
+		this.createInventory();
+		if (this.hasChest()) {
+			ListTag listtag = tag.getList("Items", 10);
+
+			for(int i = 0; i < listtag.size(); ++i) {
+				CompoundTag compoundtag = listtag.getCompound(i);
+				int j = compoundtag.getByte("Slot") & 255;
+				if (j >= 2 && j < this.inventory.getContainerSize()) {
+					this.inventory.setItem(j, ItemStack.of(compoundtag));
+				}
+			}
+		}
+
+		this.updateContainerEquipment();
 	}
 
 	@Override
@@ -768,6 +786,22 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
 		tag.putInt("Tail", this.getTailType());
+
+		if (this.hasChest()) {
+			ListTag listtag = new ListTag();
+
+			for(int i = 2; i < this.inventory.getContainerSize(); ++i) {
+				ItemStack itemstack = this.inventory.getItem(i);
+				if (!itemstack.isEmpty()) {
+					CompoundTag compoundtag = new CompoundTag();
+					compoundtag.putByte("Slot", (byte)i);
+					itemstack.save(compoundtag);
+					listtag.add(compoundtag);
+				}
+			}
+
+			tag.put("Items", listtag);
+		}
 	}
 
 	@Override
