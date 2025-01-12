@@ -445,6 +445,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 //		controllers.add(new AnimationController<>(this, "stanceController", 5, this::stancePredicate));
 	}
 
+	public int alternateIdleTimer = this.random.nextInt(200) + 500;
+
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
@@ -484,6 +486,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			} else {
 				if (this.isVehicle()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+//				} else if (--this.alternateIdleTimer <= 0) {
+//					controller.setAnimation(RawAnimation.begin().then("idle5", Animation.LoopType.PLAY_ONCE));
+//					this.alternateIdleTimer = this.random.nextInt(200) + 500;
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
 				}
