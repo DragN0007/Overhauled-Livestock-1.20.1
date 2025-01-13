@@ -3,7 +3,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
 
-public enum BreedModel {
+public enum HorseBreedModel {
     MUSTANG(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_overhauled.geo.json")),
     ARDENNES(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_ardennes.geo.json")),
     KLADRUBER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_kladruber.geo.json")),
@@ -21,12 +21,12 @@ public enum BreedModel {
 
     public final ResourceLocation resourceLocation;
 
-    BreedModel(ResourceLocation resourceLocation) {
+    HorseBreedModel(ResourceLocation resourceLocation) {
         this.resourceLocation = resourceLocation;
     }
 
-    public static BreedModel breedFromOrdinal(int ordinal) {
-        return BreedModel.values()[ordinal % BreedModel.values().length];
+    public static HorseBreedModel breedFromOrdinal(int ordinal) {
+        return HorseBreedModel.values()[ordinal % HorseBreedModel.values().length];
     }
 
 }

@@ -227,12 +227,12 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
 			double offsetX = 0;
-			double offsetY = 0.8;
-			double offsetZ = -0.2;
+			double offsetY = 0.65;
+			double offsetZ = -0.1;
 
 			if (this.isJumping()) {
 //				offsetY = 1.7;
-				offsetZ = -0.8;
+				offsetZ = -0.4;
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -405,8 +405,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 				boolean partnerIsFemale = partner.isFemale();
 				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent() && ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -416,8 +415,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		AbstractOMount abstracthorse;
-		if (ageableMob instanceof OHorse) {
-			OHorse horse = (OHorse) ageableMob;
+		if (ageableMob instanceof OHorse horse) {
 
 			abstracthorse = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
@@ -434,6 +432,21 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 			((OMule) abstracthorse).setOverlayVariant(selectedOverlay);
 			((OMule) abstracthorse).setVariant(random.nextInt(OMuleModel.Variant.values().length));
+
+			//horse parent is stock, warmblood or racer
+			if (horse.getBreed() == 0 || horse.getBreed() == 2 || horse.getBreed() == 4 || horse.getBreed() == 7 || horse.getBreed() == 9 || horse.getBreed() == 10 || horse.getBreed() == 13) {
+				((OMule) abstracthorse).setBreed(0);
+			}
+
+			//horse parent is pony
+			if (horse.getBreed() == 3 || horse.getBreed() == 6 || horse.getBreed() == 11) {
+				((OMule) abstracthorse).setBreed(1);
+			}
+
+			//horse parent is draft
+			if (horse.getBreed() == 1 || horse.getBreed() == 5 || horse.getBreed() == 8 || horse.getBreed() == 12) {
+				((OMule) abstracthorse).setBreed(2);
+			}
 
 		} else {
 			ODonkey donkey = (ODonkey) ageableMob;

@@ -40,10 +40,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class OMule extends AbstractOMount implements GeoEntity {
-	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
 
 	@Override
 	public Vec3 getLeashOffset() {
@@ -236,6 +232,19 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			double offsetY = 1.2;
 			double offsetZ = -0.2;
 
+			if (getModelResource().equals(MuleBreedModel.STOCK.resourceLocation)) {
+				offsetY = 0.85;
+			}
+
+			if (getModelResource().equals(MuleBreedModel.MINI.resourceLocation)) {
+				offsetY = 0.6;
+				offsetZ = -0.1;
+			}
+
+			if (getModelResource().equals(MuleBreedModel.DRAFT.resourceLocation)) {
+				offsetY = 1.25;
+			}
+
 			if (this.isJumping()) {
 //				offsetY = 1.7;
 				offsetZ = -0.8;
@@ -284,6 +293,12 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		return SoundEvents.MULE_ANGRY;
 	}
 
+	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+
 	public ResourceLocation getTextureResource() {
 		return this.entityData.get(VARIANT_TEXTURE);
 	}
@@ -292,12 +307,19 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		return this.entityData.get(OVERLAY_TEXTURE);
 	}
 
+	public ResourceLocation getModelResource() {
+		return MuleBreedModel.breedFromOrdinal(getBreed()).resourceLocation;
+	}
+
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
 
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
+	}
+	public int getBreed() {
+		return this.entityData.get(BREED);
 	}
 
 	public void setVariant(int variant) {
@@ -308,6 +330,10 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
 		this.entityData.set(OVERLAY, variant);
+	}
+
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
 	public void setVariantTexture(String variant) {
@@ -349,6 +375,10 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
 	}
 
 	@Override
@@ -359,6 +389,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Gender", this.getGender());
+		tag.putInt("Breed", this.getBreed());
 	}
 
 	@Override
@@ -384,6 +415,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT_TEXTURE, OMuleModel.Variant.DEFAULT.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.NONE.resourceLocation);
 		this.entityData.define(GENDER, 0);
+		this.entityData.define(BREED, 0);
 	}
 
 

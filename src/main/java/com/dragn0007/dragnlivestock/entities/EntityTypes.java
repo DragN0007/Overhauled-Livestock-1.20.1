@@ -57,7 +57,7 @@ public class EntityTypes {
     public static final RegistryObject<EntityType<ODonkey>> O_DONKEY_ENTITY = ENTITY_TYPES.register("o_donkey",
             () -> EntityType.Builder.of(ODonkey::new,
                             MobCategory.CREATURE)
-                    .sized(1.5f,2f)
+                    .sized(1.5f,1.1f)
                     .build(new ResourceLocation(MODID,"o_donkey").toString()));
 
     public static final RegistryObject<EntityType<OMule>> O_MULE_ENTITY = ENTITY_TYPES.register("o_mule",

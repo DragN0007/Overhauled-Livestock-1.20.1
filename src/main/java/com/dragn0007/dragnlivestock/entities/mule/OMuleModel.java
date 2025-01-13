@@ -30,9 +30,10 @@ public class OMuleModel extends GeoModel<OMule> {
 //    public static final ResourceLocation BABY_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/baby_horse.animation.json");
     @Override
     public ResourceLocation getModelResource(OMule object) {
-        if(object.isBaby())
+        if (object.isBaby()) {
             return BABY_MODEL;
-        return MODEL;
+        }
+        return MuleBreedModel.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

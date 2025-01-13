@@ -91,7 +91,7 @@ public class OHorseModel extends GeoModel<OHorse> {
         } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25)) {
             return REINDEER_MODEL;
         }
-        return BreedModel.breedFromOrdinal(object.getBreed()).resourceLocation;
+        return HorseBreedModel.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

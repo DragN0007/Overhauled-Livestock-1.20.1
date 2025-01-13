@@ -116,59 +116,59 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public float generateRandomMaxHealth() {
 		float baseHealth;
-		if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MUSTANG.resourceLocation)) {
 			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.ARDENNES.resourceLocation)) {
 			baseHealth = 20.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.KLADRUBER.resourceLocation)) {
 			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.FJORD.resourceLocation)) {
 			baseHealth = 14.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.THOROUGHBRED.resourceLocation)) {
 			baseHealth = 13.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.FRIESIAN.resourceLocation)) {
 			baseHealth = 18.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.IRISH_COB.resourceLocation)) {
 			baseHealth = 18.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.AMERICAN_QUARTER.resourceLocation)) {
 			baseHealth = 16.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.PERCHERON.resourceLocation)) {
 			baseHealth = 24.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.SELLE_FRANCAIS.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.SELLE_FRANCAIS.resourceLocation)) {
 			baseHealth = 17.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.MARWARI.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MARWARI.resourceLocation)) {
 			baseHealth = 18.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.MONGOLIAN.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MONGOLIAN.resourceLocation)) {
 			baseHealth = 20.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.SHIRE.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.SHIRE.resourceLocation)) {
 			baseHealth = 24.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
-		if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.AKHAL_TEKE.resourceLocation)) {
 			baseHealth = 15.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		}
@@ -179,59 +179,59 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double baseStrength = 0.4F;
 		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.25D;
 
-		if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MUSTANG.resourceLocation)) {
 			baseStrength = 0.5F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.ARDENNES.resourceLocation)) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.KLADRUBER.resourceLocation)) {
 			baseStrength = 0.4F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.FJORD.resourceLocation)) {
 			baseStrength = 0.35F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.THOROUGHBRED.resourceLocation)) {
 			baseStrength = 0.35F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.FRIESIAN.resourceLocation)) {
 			baseStrength = 0.35F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.IRISH_COB.resourceLocation)) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.AMERICAN_QUARTER.resourceLocation)) {
 			baseStrength = 0.4F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.SELLE_FRANCAIS.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.SELLE_FRANCAIS.resourceLocation)) {
 			baseStrength = 0.55F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.PERCHERON.resourceLocation)) {
 			baseStrength = 0.25F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.MARWARI.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MARWARI.resourceLocation)) {
 			baseStrength = 0.4F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.MONGOLIAN.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MONGOLIAN.resourceLocation)) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.SHIRE.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.SHIRE.resourceLocation)) {
 			baseStrength = 0.2F;
 			return baseStrength + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.AKHAL_TEKE.resourceLocation)) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		}
@@ -242,59 +242,59 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double baseSpeed = 0.0F;
 		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.30D;
 
-		if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MUSTANG.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.ARDENNES.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.KLADRUBER.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.FJORD.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.THOROUGHBRED.resourceLocation)) {
 			baseSpeed = 0.25F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.FRIESIAN.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.IRISH_COB.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.AMERICAN_QUARTER.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.SELLE_FRANCAIS.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.SELLE_FRANCAIS.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.PERCHERON.resourceLocation)) {
 			baseSpeed = 0.15F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.MARWARI.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MARWARI.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.MONGOLIAN.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.MONGOLIAN.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.SHIRE.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.SHIRE.resourceLocation)) {
 			baseSpeed = 0.2F;
 			return baseSpeed + multiplier;
 		}
-		if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
+		if (getModelResource().equals(HorseBreedModel.AKHAL_TEKE.resourceLocation)) {
 			baseSpeed = 0.25F;
 			return baseSpeed + multiplier;
 		}
@@ -333,59 +333,59 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			double offsetY = 1.1;
 			double offsetZ = -0.2;
 
-			if (getModelResource().equals(BreedModel.MUSTANG.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.MUSTANG.resourceLocation)) {
 				offsetY = 1.0;
 			}
 
-			if (getModelResource().equals(BreedModel.ARDENNES.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.ARDENNES.resourceLocation)) {
 				offsetY = 1.1;
 			}
 
-			if (getModelResource().equals(BreedModel.KLADRUBER.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.KLADRUBER.resourceLocation)) {
 				offsetY = 1.15;
 			}
 
-			if (getModelResource().equals(BreedModel.FJORD.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.FJORD.resourceLocation)) {
 				offsetY = 0.85;
 			}
 
-			if (getModelResource().equals(BreedModel.THOROUGHBRED.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.THOROUGHBRED.resourceLocation)) {
 				offsetY = 1.2;
 			}
 
-			if (getModelResource().equals(BreedModel.FRIESIAN.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.FRIESIAN.resourceLocation)) {
 				offsetY = 1.25;
 			}
 
-			if (getModelResource().equals(BreedModel.IRISH_COB.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.IRISH_COB.resourceLocation)) {
 				offsetY = 0.95;
 			}
 
-			if (getModelResource().equals(BreedModel.AMERICAN_QUARTER.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.AMERICAN_QUARTER.resourceLocation)) {
 				offsetY = 1.0;
 			}
 
-			if (getModelResource().equals(BreedModel.PERCHERON.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.PERCHERON.resourceLocation)) {
 				offsetY = 1.43;
 			}
 
-			if (getModelResource().equals(BreedModel.SELLE_FRANCAIS.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.SELLE_FRANCAIS.resourceLocation)) {
 				offsetY = 1.1;
 			}
 
-			if (getModelResource().equals(BreedModel.MARWARI.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.MARWARI.resourceLocation)) {
 				offsetY = 1.1;
 			}
 
-			if (getModelResource().equals(BreedModel.MONGOLIAN.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.MONGOLIAN.resourceLocation)) {
 				offsetY = 0.85;
 			}
 
-			if (getModelResource().equals(BreedModel.SHIRE.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.SHIRE.resourceLocation)) {
 				offsetY = 1.5;
 			}
 
-			if (getModelResource().equals(BreedModel.AKHAL_TEKE.resourceLocation)) {
+			if (getModelResource().equals(HorseBreedModel.AKHAL_TEKE.resourceLocation)) {
 				offsetY = 1.1;
 			}
 
@@ -670,7 +670,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public ResourceLocation getModelResource() {
-		return BreedModel.breedFromOrdinal(getBreed()).resourceLocation;
+		return HorseBreedModel.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
 
@@ -823,7 +823,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
 
 		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-			this.setBreed(random.nextInt(BreedModel.values().length));
+			this.setBreed(random.nextInt(HorseBreedModel.values().length));
 		}
 
 		//tfc compat
@@ -865,8 +865,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 				boolean partnerIsFemale = partner.isFemale();
 				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent() && ((this.isFemale() && partnerIsMale) || (this.isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -877,8 +876,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		AbstractOMount abstracthorse;
-		if (ageableMob instanceof ODonkey) {
-			ODonkey donkey = (ODonkey) ageableMob;
+		if (ageableMob instanceof ODonkey donkey) {
 
 			abstracthorse = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
@@ -895,6 +893,21 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			((OMule) abstracthorse).setOverlayVariant(selectedOverlay);
 			((OMule) abstracthorse).setVariant(random.nextInt(OMuleModel.Variant.values().length));
+
+			//horse parent is stock, warmblood or racer
+			if (this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 7 || this.getBreed() == 9 || this.getBreed() == 10 || this.getBreed() == 13) {
+				((OMule) abstracthorse).setBreed(0);
+			}
+
+			//horse parent is pony
+			if (this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11) {
+				((OMule) abstracthorse).setBreed(1);
+			}
+
+			//horse parent is draft
+			if (this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12) {
+				((OMule) abstracthorse).setBreed(2);
+			}
 
 		} else {
 			OHorse horse = (OHorse) ageableMob;
@@ -923,7 +936,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			int k = this.random.nextInt(4);
 			int breed;
 			if (k == 0) {
-				breed = this.random.nextInt(BreedModel.values().length);
+				breed = this.random.nextInt(HorseBreedModel.values().length);
 			} else {
 				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : horse.getBreed();
 			}
