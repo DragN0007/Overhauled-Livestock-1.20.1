@@ -5,6 +5,8 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
+import com.dragn0007.dragnlivestock.gui.CaribouMenu;
+import com.dragn0007.dragnlivestock.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -169,7 +171,7 @@ public class Caribou extends AbstractOMount implements GeoEntity {
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
 			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-				return new OMountMenu(containerId, inventory, this.inventory, this);
+				return new CaribouMenu(containerId, inventory, this.inventory, this);
 			}, this.getDisplayName()), (data) -> {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());

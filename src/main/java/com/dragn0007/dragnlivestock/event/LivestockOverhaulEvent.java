@@ -67,10 +67,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
 import com.dragn0007.dragnlivestock.entities.unicorn.*;
 import com.dragn0007.dragnlivestock.entities.wagons.covered.CoveredWagonRender;
-import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
-import com.dragn0007.dragnlivestock.gui.OHorseScreen;
-import com.dragn0007.dragnlivestock.gui.OMountScreen;
-import com.dragn0007.dragnlivestock.gui.OxScreen;
+import com.dragn0007.dragnlivestock.gui.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
@@ -171,6 +168,10 @@ public class LivestockOverhaulEvent {
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);
         MenuScreens.register(LOMenuTypes.O_MOUNT_MENU.get(), OMountScreen::new);
+        MenuScreens.register(LOMenuTypes.O_MULE_MENU.get(), OMuleScreen::new);
+        MenuScreens.register(LOMenuTypes.O_DONKEY_MENU.get(), ODonkeyScreen::new);
+        MenuScreens.register(LOMenuTypes.O_CAMEL_MENU.get(), OCamelScreen::new);
+        MenuScreens.register(LOMenuTypes.O_CARIBOU_MENU.get(), CaribouScreen::new);
 
         //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
