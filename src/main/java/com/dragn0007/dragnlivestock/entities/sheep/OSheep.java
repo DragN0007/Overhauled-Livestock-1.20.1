@@ -80,15 +80,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
 	}
 
-	public static float[] createSheepColor(DyeColor p_29866_) {
-		if (p_29866_ == DyeColor.WHITE) {
-			return new float[]{0.9019608F, 0.9019608F, 0.9019608F};
-		} else {
-			float[] afloat = p_29866_.getTextureDiffuseColors();
-			return new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
-		}
-	}
-
 	public OSheep(EntityType<? extends OSheep> type, Level level) {
 		super(type, level);
 	}
@@ -164,6 +155,14 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();
 	}
 
+	public int replenishMilkCounter = 0;
+
+	private boolean milked = false;
+
+	public boolean wasMilked() {
+		return this.milked;
+	}
+
 	public void tick() {
 		super.tick();
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
@@ -171,6 +170,12 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			if (list.size() <= 1) {
 				this.herdSize = 1;
 			}
+		}
+
+		replenishMilkCounter++;
+
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+			this.setMilked(false);
 		}
 	}
 
@@ -297,7 +302,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			return InteractionResult.SUCCESS;
 		}
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() &&
+		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) &&
 				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
@@ -411,6 +416,14 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.entityData.set(BREED, breed);
 	}
 
+	public boolean getMilked() {
+		return this.milked;
+	}
+
+	public void setMilked(boolean milked) {
+		this.milked = milked;
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -426,6 +439,10 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			this.setGender(tag.getInt("Gender"));
 		}
 
+		if (tag.contains("Milked")) {
+			setMilked(tag.getBoolean("Milked"));
+		}
+
 		this.setSheared(tag.getBoolean("Sheared"));
 
 		this.setColor(DyeColor.byId(tag.getByte("Color")));
@@ -439,6 +456,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		tag.putBoolean("Sheared", this.isSheared());
 		tag.putByte("Color", (byte)this.getColor().getId());
 		tag.putInt("Gender", this.getGender());
+		tag.putBoolean("Milked", getMilked());
 	}
 
 	@Override

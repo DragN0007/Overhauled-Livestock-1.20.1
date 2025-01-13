@@ -207,7 +207,7 @@ public class OCow extends Animal implements GeoEntity {
 
 		replenishMilkCounter++;
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get()) {
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
 			this.setMilked(false);
 		}
 	}
@@ -223,7 +223,7 @@ public class OCow extends Animal implements GeoEntity {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get())
+		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())
 				&& (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 				(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 

@@ -57,7 +57,7 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(Items.BOWL) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get())) {
+        if (itemStack.is(Items.BOWL) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())) {
             player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.BEETROOT_SOUP.getDefaultInstance());
             player.setItemInHand(hand, itemstack1);

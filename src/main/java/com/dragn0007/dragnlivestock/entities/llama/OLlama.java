@@ -211,6 +211,14 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		});
 	}
 
+	public int replenishMilkCounter = 0;
+
+	private boolean milked = false;
+
+	public boolean wasMilked() {
+		return this.milked;
+	}
+
 	@Override
 	public void tick() {
 		super.tick();
@@ -220,6 +228,12 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			if (list.size() <= 1) {
 				this.herdSize = 1;
 			}
+		}
+
+		replenishMilkCounter++;
+
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+			this.setMilked(false);
 		}
 	}
 
@@ -302,7 +316,9 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			return InteractionResult.SUCCESS;
 		}
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
+		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) &&
+				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.LLAMA_MILK_BUCKET.get().getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
@@ -351,6 +367,14 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		this.entityData.set(OVERLAY, variant);
 	}
 
+	public boolean getMilked() {
+		return this.milked;
+	}
+
+	public void setMilked(boolean milked) {
+		this.milked = milked;
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -377,6 +401,10 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			this.setGender(tag.getInt("Gender"));
 		}
 
+		if (tag.contains("Milked")) {
+			setMilked(tag.getBoolean("Milked"));
+		}
+
 		this.updateContainerEquipment();
 		this.updateInventory();
 		super.readAdditionalSaveData(tag);
@@ -398,6 +426,8 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		}
 
 		tag.putInt("Gender", this.getGender());
+
+		tag.putBoolean("Milked", getMilked());
 	}
 
 	@Override
