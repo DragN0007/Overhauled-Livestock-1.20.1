@@ -55,13 +55,16 @@ public class OMooshroom extends OCow implements GeoEntity {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.BOWL) && !this.isBaby() &&
-                (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+        if (itemstack.is(Items.BOWL) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get())
+                && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
                         (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 
             player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MUSHROOM_STEW.getDefaultInstance());
             player.setItemInHand(hand, itemstack1);
+            replenishMilkCounter = 0;
+            setMilked(true);
+
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
             return super.mobInteract(player, hand);

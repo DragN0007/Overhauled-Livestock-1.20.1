@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -50,10 +51,12 @@ public class GlowBerryMoobloom extends AbstractMoobloom implements GeoEntity {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(Items.BOWL) && !this.isBaby()) {
+        if (itemStack.is(Items.BOWL) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get())) {
             player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.GLOW_BERRY_SOUP.get().getDefaultInstance());
             player.setItemInHand(hand, itemstack1);
+            replenishMilkCounter = 0;
+            setMilked(true);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 

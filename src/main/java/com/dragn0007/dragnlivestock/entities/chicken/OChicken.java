@@ -46,7 +46,7 @@ import java.util.Random;
 
 public class OChicken extends Animal implements GeoEntity {
 
-	public int eggTime = this.random.nextInt(6000) + 6000;
+	public int eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 	public boolean isChickenJockey;
 
 	@Override
@@ -146,7 +146,7 @@ public class OChicken extends Animal implements GeoEntity {
 		if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && !this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation)))) {
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.spawnAtLocation(LOItems.EGG.get());
-			this.eggTime = this.random.nextInt(6000) + 6000;
+			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 		}
 
 	}

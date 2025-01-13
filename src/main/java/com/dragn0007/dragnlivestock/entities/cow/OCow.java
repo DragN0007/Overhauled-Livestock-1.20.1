@@ -169,17 +169,6 @@ public class OCow extends Animal implements GeoEntity {
 		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();
 	}
 
-	public void tick() {
-		super.tick();
-		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
-			List<? extends OCow> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(20.0D, 20.0D, 20.0D));
-			if (list.size() <= 1) {
-				this.herdSize = 1;
-			}
-		}
-
-	}
-
 	public int getMaxHerdSize() {
 		return LivestockOverhaulCommonConfig.COW_HERD_MAX.get();
 	}
@@ -207,16 +196,42 @@ public class OCow extends Animal implements GeoEntity {
 		});
 	}
 
+	public void tick() {
+		super.tick();
+		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
+			List<? extends OCow> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(20.0D, 20.0D, 20.0D));
+			if (list.size() <= 1) {
+				this.herdSize = 1;
+			}
+		}
+
+		replenishMilkCounter++;
+
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get()) {
+			this.setMilked(false);
+		}
+	}
+
+	public int replenishMilkCounter = 0;
+
+	private boolean milked = false;
+
+	public boolean wasMilked() {
+		return this.milked;
+	}
+
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() &&
-				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.COW_MILK_COOLDOWN.get())
+				&& (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+				(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 
 			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
+			replenishMilkCounter = 0;
+			setMilked(true);
 
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else {
@@ -291,6 +306,14 @@ public class OCow extends Animal implements GeoEntity {
 		this.entityData.set(BREED, breed);
 	}
 
+	public boolean getMilked() {
+		return this.milked;
+	}
+
+	public void setMilked(boolean milked) {
+		this.milked = milked;
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -314,6 +337,10 @@ public class OCow extends Animal implements GeoEntity {
 		if (tag.contains("Breed")) {
 			setBreed(tag.getInt("Breed"));
 		}
+
+		if (tag.contains("Milked")) {
+			setMilked(tag.getBoolean("Milked"));
+		}
 	}
 
 	@Override
@@ -328,6 +355,8 @@ public class OCow extends Animal implements GeoEntity {
 		tag.putInt("Gender", getGender());
 
 		tag.putInt("Breed", getBreed());
+
+		tag.putBoolean("Milked", getMilked());
 	}
 
 	@Override
