@@ -10,7 +10,8 @@ public class OGoatModel extends GeoModel<OGoat> {
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat.png")),
         GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_grey.png")),
         RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_red.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_brown.png"));
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_brown.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_black.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
