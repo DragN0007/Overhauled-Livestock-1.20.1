@@ -91,13 +91,13 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:1.20.1-47.2.0" // 47.2.0 is Recommended
+    minecraft "net.minecraftforge:forge:1.20.1-47.2.6" // 47.2.0 is Recommended
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
 
 //    implementation fg.deobf("curse.maven:patchouli-306770:4966125")
 //    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
 //    implementation fg.deobf("curse.maven:jade-324717:5876199")
-    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
+//    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
 }
 
 tasks.named('processResources', ProcessResources).configure {

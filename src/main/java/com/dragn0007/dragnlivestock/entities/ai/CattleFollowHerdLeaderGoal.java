@@ -3,24 +3,29 @@ package com.dragn0007.dragnlivestock.entities.ai;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.datafixers.DataFixUtils;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 public class CattleFollowHerdLeaderGoal extends Goal {
-   public static final int INTERVAL_TICKS = 200;
    public final OCow mob;
    public int timeToRecalcPath;
    public int nextStartTick;
+   public final float stopDistance;
+   private final PathNavigation navigation;
 
-   public CattleFollowHerdLeaderGoal(OCow p_25249_) {
-      this.mob = p_25249_;
-      this.nextStartTick = this.nextStartTick(p_25249_);
+   public CattleFollowHerdLeaderGoal(OCow oCow, float stopDist) {
+      this.mob = oCow;
+      this.stopDistance = stopDist;
+      this.navigation = mob.getNavigation();
+      this.nextStartTick = this.nextStartTick(oCow);
    }
 
    public int nextStartTick(OCow cow) {
-      return reducedTickDelay(200 + cow.getRandom().nextInt(200) % 20);
+      return reducedTickDelay(100 + cow.getRandom().nextInt(100) % 20);
    }
 
    public boolean canUse() {
@@ -36,7 +41,7 @@ public class CattleFollowHerdLeaderGoal extends Goal {
          Predicate<OCow> predicate = (follower) -> {
             return follower.canBeFollowed() || !follower.isFollower();
          };
-         List<? extends OCow> list = this.mob.level().getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
+         List<? extends OCow> list = this.mob.level().getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(40D, 40D, 40D), predicate);
          OCow OCow = DataFixUtils.orElse(list.stream().filter(com.dragn0007.dragnlivestock.entities.cow.OCow::canBeFollowed).findAny(), this.mob);
          OCow.addFollowers(list.stream().filter((cow) -> {
             return !cow.isFollower();
@@ -46,7 +51,7 @@ public class CattleFollowHerdLeaderGoal extends Goal {
    }
 
    public boolean canContinueToUse() {
-      return this.mob.isFollower() && this.mob.inRangeOfLeader() && LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get();
+      return this.mob.isFollower() && this.mob.inRangeOfLeader() && LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get() && this.mob.distanceToSqr(this.mob.leader) > (double)(this.stopDistance * this.stopDistance);
    }
 
    public void start() {
@@ -63,4 +68,5 @@ public class CattleFollowHerdLeaderGoal extends Goal {
          this.mob.pathToLeader();
       }
    }
+
 }

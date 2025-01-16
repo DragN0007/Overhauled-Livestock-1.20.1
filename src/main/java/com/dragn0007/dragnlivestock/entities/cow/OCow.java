@@ -92,7 +92,7 @@ public class OCow extends Animal implements GeoEntity {
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(3, new CattleFollowHerdLeaderGoal(this));
+		this.goalSelector.addGoal(3, new CattleFollowHerdLeaderGoal(this, 16.0F));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
 			boolean isHorse = livingEntity.getType().is(LOTags.Entity_Types.HORSES);
@@ -142,6 +142,8 @@ public class OCow extends Animal implements GeoEntity {
 		return this.geoCache;
 	}
 
+	public float stopDistance = 6.0F;
+
 	public boolean isFollower() {
 		return this.leader != null && this.leader.isAlive();
 	}
@@ -178,7 +180,7 @@ public class OCow extends Animal implements GeoEntity {
 	}
 
 	public boolean inRangeOfLeader() {
-		return this.distanceToSqr(this.leader) <= 121.0D;
+		return this.distanceToSqr(this.leader) <= 120.0D;
 	}
 
 	public void pathToLeader() {
