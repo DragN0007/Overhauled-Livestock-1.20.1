@@ -69,7 +69,6 @@ public class LOItemGroup {
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
 
-                        output.accept(LOItems.EGG.get());
                         output.accept(LOItems.FERTILIZED_EGG.get());
                         output.accept(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
                         output.accept(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
@@ -102,6 +101,8 @@ public class LOItemGroup {
                         output.accept(LOItems.SHEEP_CHEESE.get());
                         output.accept(LOItems.LLAMA_CHEESE.get());
                         output.accept(LOItems.GOAT_CHEESE.get());
+
+                        output.accept(LOItems.EGG.get());
 
                         output.accept(LOItems.EGG_SALAD.get());
 
