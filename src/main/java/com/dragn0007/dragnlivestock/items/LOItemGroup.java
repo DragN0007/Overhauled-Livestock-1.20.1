@@ -69,8 +69,14 @@ public class LOItemGroup {
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
 
-                        output.accept(LOItems.FERTILIZED_EGG.get());
                         output.accept(LOItems.EGG.get());
+                        output.accept(LOItems.FERTILIZED_EGG.get());
+                        output.accept(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
+                        output.accept(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
+                        output.accept(LOItems.FERTILIZED_MARANS_EGG.get());
+                        output.accept(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
+                        output.accept(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
+
                         output.accept(LOItems.GENDER_TEST_STRIP.get());
 
                         output.accept(LOItems.OVERWORLD_UNICORN_HORN.get());

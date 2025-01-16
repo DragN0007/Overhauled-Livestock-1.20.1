@@ -127,6 +127,16 @@ public class LOItems {
 
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_AMERAUCANA_EGG = ITEMS.register("fertilized_ameraucana_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_CREAM_LEGBAR_EGG = ITEMS.register("fertilized_cream_legbar_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_MARANS_EGG = ITEMS.register("fertilized_marans_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_OLIVE_EGGER_EGG = ITEMS.register("fertilized_olive_egger_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_SUSSEX_SILKIE_EGG = ITEMS.register("fertilized_sussex_silkie_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
 

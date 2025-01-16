@@ -45,6 +45,11 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.FEMALE_GENDER_TEST_STRIP);
 
         simpleItem(LOItems.FERTILIZED_EGG);
+        simpleItem(LOItems.FERTILIZED_AMERAUCANA_EGG);
+        simpleItem(LOItems.FERTILIZED_CREAM_LEGBAR_EGG);
+        simpleItem(LOItems.FERTILIZED_MARANS_EGG);
+        simpleItem(LOItems.FERTILIZED_OLIVE_EGGER_EGG);
+        simpleItem(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG);
         simpleItem(LOItems.EGG);
 
         simpleItem(LOItems.COVERED_WAGON);

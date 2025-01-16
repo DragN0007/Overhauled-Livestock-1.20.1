@@ -606,8 +606,37 @@ public class SpawnReplacer {
                 oChicken.setCustomName(vanillachicken.getCustomName());
                 oChicken.setAge(vanillachicken.getAge());
 
-                int randomVariant = event.getLevel().getRandom().nextInt(OChickenModel.Variant.values().length);
-                oChicken.setVariant(randomVariant);
+                int randomGender = event.getLevel().getRandom().nextInt(OChicken.Gender.values().length);
+                oChicken.setGender(randomGender);
+
+                if (oChicken.isFemale()) {
+                    int randomVariant = 6 + event.getLevel().getRandom().nextInt(9);
+                    oChicken.setVariant(randomVariant);
+                }
+
+                if (oChicken.isMale() && oChicken.getBreed() == 0) {
+                    oChicken.setVariant(0);
+                }
+
+                if (oChicken.isMale() && oChicken.getBreed() == 1) {
+                    oChicken.setVariant(10);
+                }
+
+                if (oChicken.isMale() && oChicken.getBreed() == 2) {
+                    oChicken.setVariant(11);
+                }
+
+                if (oChicken.isMale() && oChicken.getBreed() == 3) {
+                    oChicken.setVariant(12);
+                }
+
+                if (oChicken.isMale() && oChicken.getBreed() == 4) {
+                    oChicken.setVariant(13);
+                }
+
+                if (oChicken.isMale() && oChicken.getBreed() == 5) {
+                    oChicken.setVariant(14);
+                }
 
                 int randomOverlayVariant = event.getLevel().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
                 oChicken.setOverlayVariant(randomOverlayVariant);

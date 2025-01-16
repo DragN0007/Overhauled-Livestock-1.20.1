@@ -1,6 +1,8 @@
 package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -30,7 +32,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TurtleEggBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -42,6 +47,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 public class OChicken extends Animal implements GeoEntity {
@@ -59,12 +65,23 @@ public class OChicken extends Animal implements GeoEntity {
 		super(type, level);
 	}
 
+	private static final ResourceLocation MEAT_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_meat_chicken");
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_chicken");
+	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_chicken");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/chicken");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
+		}
+		if (this.getBreed() == 1 || this.getBreed() == 3) { //meat chickens
+			return MEAT_LOOT_TABLE;
+		}
+		if (this.getBreed() == 2 || this.getBreed() == 5) { //normal chickens
+			return LOOT_TABLE;
+		}
+		if (this.getBreed() == 0 || this.getBreed() == 4) { //mini chickens
+			return MINI_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}
@@ -143,7 +160,7 @@ public class OChicken extends Animal implements GeoEntity {
 			this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
 		}
 
-		if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && !this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation)))) {
+		if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.spawnAtLocation(LOItems.EGG.get());
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
@@ -191,8 +208,13 @@ public class OChicken extends Animal implements GeoEntity {
 		return OChickenMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
 
+	public ResourceLocation getModelResource() {
+		return OChicken.Breed.breedFromOrdinal(getBreed()).resourceLocation;
+	}
+
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -200,12 +222,18 @@ public class OChicken extends Animal implements GeoEntity {
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
+	public int getBreed() {
+		return this.entityData.get(BREED);
+	}
 
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 	public void setOverlayVariant(int overlayVariant) {
 		this.entityData.set(OVERLAY, overlayVariant);
+	}
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
 	@Override
@@ -220,6 +248,14 @@ public class OChicken extends Animal implements GeoEntity {
 			setOverlayVariant(tag.getInt("Overlay"));
 		}
 
+		if (tag.contains("Breed")) {
+			setBreed(tag.getInt("Breed"));
+		}
+
+		if (tag.contains("Gender")) {
+			setGender(tag.getInt("Gender"));
+		}
+
 		this.isChickenJockey = tag.getBoolean("IsChickenJockey");
 		if (tag.contains("EggLayTime")) {
 			this.eggTime = tag.getInt("EggLayTime");
@@ -230,11 +266,10 @@ public class OChicken extends Animal implements GeoEntity {
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
-
 		tag.putInt("Overlay", getOverlayVariant());
-
+		tag.putInt("Breed", getBreed());
+		tag.putInt("Gender", getGender());
 		tag.putBoolean("IsChickenJockey", this.isChickenJockey);
-
 		tag.putInt("EggLayTime", this.eggTime);
 	}
 
@@ -245,10 +280,59 @@ public class OChicken extends Animal implements GeoEntity {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		setVariant(random.nextInt(OChickenModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+		setBreed(random.nextInt(OChicken.Breed.values().length));
+		setGender(random.nextInt(OChicken.Gender.values().length));
+
+		if (this.isFemale()) {
+			int randomVariant = 6 + this.getRandom().nextInt(9);
+			this.setVariant(randomVariant);
+		}
+
+		if (this.isMale() && this.getBreed() == 0) {
+			setVariant(0);
+		}
+
+		if (this.isMale() && this.getBreed() == 1) {
+			setVariant(1);
+		}
+
+		if (this.isMale() && this.getBreed() == 2) {
+			setVariant(2);
+		}
+
+		if (this.isMale() && this.getBreed() == 3) {
+			setVariant(3);
+		}
+
+		if (this.isMale() && this.getBreed() == 4) {
+			setVariant(4);
+		}
+
+		if (this.isMale() && this.getBreed() == 5) {
+			setVariant(5);
+		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+	}
+
+	public enum Breed {
+		LEGHORN(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_overhauled.geo.json")),
+		AMERAUCANA(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_ameraucana.geo.json")),
+		CREAM_LEGBAR(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_cream_legbar.geo.json")),
+		MARANS(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_marans.geo.json")),
+		OLIVE_EGGER(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_olive_egger.geo.json")),
+		SUSSEX_SILKIE(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_sussex_silkie.geo.json"));
+
+		public final ResourceLocation resourceLocation;
+
+		Breed(ResourceLocation resourceLocation) {
+			this.resourceLocation = resourceLocation;
+		}
+
+		public static OChicken.Breed breedFromOrdinal(int ordinal) {
+			return OChicken.Breed.values()[ordinal % OChicken.Breed.values().length];
+		}
 	}
 
 	@Override
@@ -256,106 +340,128 @@ public class OChicken extends Animal implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(BREED, 0);
+		this.entityData.define(GENDER, 0);
 	}
 
 	public boolean canParent() {
 		return !this.isBaby() && this.isInLove();
 	}
 
-	boolean isFemale = !this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-	boolean isMale = this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-
-	private static final int COOLDOWN_TIME = 100;
-	private int cooldownTicks = 0;
-	private boolean eggDropped = false;
-	private boolean hasBred = false;
-	private int eggsLaid = 0;
-	private static final int MAX_EGGS = 4;
-
-	@Override
-	public boolean canMate(Animal animal) {
-		if (animal == this || !(animal instanceof OChicken)) {
-			return false;
-		}
-
-		OChicken partner = (OChicken) animal;
-
-		if (!this.canParent() || !partner.canParent()) {
-			return false;
-		}
-
-		if (hasBred || eggsLaid >= MAX_EGGS) {
-			return false;
-		}
-
-		boolean partnerIsFemale = !partner.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-		boolean partnerIsMale = partner.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-
-		boolean isFemale = !this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-		boolean isMale = this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-
-		if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-			return (isFemale && partnerIsMale) || (isMale && partnerIsFemale);
-		} else {
-			return true;
-		}
+	public enum Gender {
+		FEMALE,
+		MALE
 	}
+
+	public boolean isFemale() {
+		return this.getGender() == 0;
+	}
+
+	public boolean isMale() {
+		return this.getGender() == 1;
+	}
+
+	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
+
+	public int getGender() {
+		return this.entityData.get(GENDER);
+	}
+
+	public void setGender(int gender) {
+		this.entityData.set(GENDER, gender);
+	}
+
+	public boolean canMate(Animal animal) {
+		if (animal == this) {
+			return false;
+		} else if (!(animal instanceof OChicken)) {
+			return false;
+		} else {
+			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				return this.canParent() && ((OChicken) animal).canParent();
+			} else {
+				OChicken partner = (OChicken) animal;
+				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+					return true;
+				}
+
+				boolean partnerIsFemale = partner.isFemale();
+				boolean partnerIsMale = partner.isMale();
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+					return isFemale();
+				}
+			}
+		}
+		return false;
+	}
+
+	public int eggsLaid = 0;
+	public int eggLayCooldown = 0;
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		boolean isFemale = !this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-		boolean isMale = this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
 
-		if (isMale || eggDropped || cooldownTicks > 0 || eggsLaid >= MAX_EGGS) {
+		if (this.isMale() || !this.isInLove() || !this.isAlive() || eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
 			return null;
 		}
 
-		if (!isFemale) {
-			return null;
-		}
-
+		eggsLaid++;
 		dropFertilizedEgg(serverLevel);
-		eggDropped = true;
-		cooldownTicks = COOLDOWN_TIME;
-		hasBred = true;
-
 		return null;
 	}
 
-	@Override
 	public void tick() {
-		if (cooldownTicks > 0) {
-			cooldownTicks--;
-
-			if (cooldownTicks == 0) {
-				eggDropped = false;
-				hasBred = false;
-				eggsLaid = 0;
-			}
-		}
-
 		super.tick();
+
+		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 100) {
+			eggsLaid = 0;
+			eggLayCooldown = 0;
+		}
 	}
 
 	private void dropFertilizedEgg(ServerLevel serverLevel) {
-		boolean isFemale = !this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-		boolean isMale = this.getTextureResource().equals(OChickenModel.Variant.ROOSTER.resourceLocation);
-
-		if (!isFemale || eggsLaid >= MAX_EGGS) {
+		if (!this.isFemale() || !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
 			return;
 		}
 
-		if (isMale) {
-			return;
+		if(this.isFemale() && this.getBreed() == 0) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
 		}
 
-		ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
-		ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-		serverLevel.addFreshEntity(eggEntity);
+		if(this.isFemale() && this.getBreed() == 1) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+		}
+
+		if(this.isFemale() && this.getBreed() == 2) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+		}
+
+		if(this.isFemale() && this.getBreed() == 3) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_MARANS_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+		}
+
+		if(this.isFemale() && this.getBreed() == 4) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+		}
+
+		if(this.isFemale() && this.getBreed() == 5) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+		}
 
 		serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 1.0F, 1.0F);
-
-		eggsLaid++;
 	}
 
 

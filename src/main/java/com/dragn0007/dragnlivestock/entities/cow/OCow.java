@@ -61,12 +61,24 @@ public class OCow extends Animal implements GeoEntity {
 		super(type, level);
 	}
 
+
+	private static final ResourceLocation MEAT_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_beef_cow");
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
+	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_cow");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
+		}
+		if (this.getBreed() == 0 || this.getBreed() == 1) { //beef cattle
+			return MEAT_LOOT_TABLE;
+		}
+		if (this.getBreed() == 2) { //normal cattle
+			return LOOT_TABLE;
+		}
+		if (this.getBreed() == 3) { //mini cattle
+			return MINI_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

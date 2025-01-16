@@ -34,6 +34,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue USE_VANILLA_LOOT;
     public static final ForgeConfigSpec.BooleanValue NATURAL_HORSE_BREEDS;
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_TIME;
+    public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_AMOUNT;
     public static final ForgeConfigSpec.ConfigValue<Integer> MILKING_COOLDOWN;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
@@ -124,11 +125,14 @@ public class LivestockOverhaulCommonConfig {
         NATURAL_HORSE_BREEDS = BUILDER.comment("Should O-Horses be able to spawn with any breed naturally? (They spawn only as wild Mustangs by default)")
                 .define("Naturally Spawning O-Horse Breeds", false);
 
-        CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an egg. (Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.)")
+        CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
                 .define("Chicken Egg Lay Cooldown", 12000);
 
-        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk an O-Cow, O-Sheep, O-Llama, O-Mooshroom, or Moobloom. (Default is 12000 ticks, or 10 minutes)")
+        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk an O-Cow, O-Sheep, O-Llama, O-Mooshroom, or Moobloom. Default is 12000 ticks, or 10 minutes")
                 .define("Milking Cooldown", 12000);
+
+        CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
+                .define("Chicken Egg Lay Amount", 3);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

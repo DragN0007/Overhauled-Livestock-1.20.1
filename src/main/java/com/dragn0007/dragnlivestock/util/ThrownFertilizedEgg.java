@@ -2,6 +2,8 @@ package com.dragn0007.dragnlivestock.util;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
+import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.chicken.OChickenModel;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -52,16 +54,146 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
          }
 
          for (int j = 0; j < i; ++j) {
-            OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-            chicken.setAge(-24000);
-            chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+            if (getItem().is(LOItems.FERTILIZED_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-            int randomVariant = this.level().getRandom().nextInt(23);
-            chicken.setVariant(randomVariant);
-            int randomOverlayVariant = this.level().getRandom().nextInt(31);
-            chicken.setOverlayVariant(randomOverlayVariant);
+               if (chicken.isFemale()) {
+                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
+                  chicken.setVariant(randomVariant);
+               }
 
-            this.level().addFreshEntity(chicken);
+               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
+               chicken.setOverlayVariant(randomOverlayVariant);
+
+               chicken.setBreed(0);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(0);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_AMERAUCANA_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
+               if (chicken.isFemale()) {
+                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
+                  chicken.setVariant(randomVariant);
+               }
+
+               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
+               chicken.setOverlayVariant(randomOverlayVariant);
+
+               chicken.setBreed(1);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(1);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
+               if (chicken.isFemale()) {
+                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
+                  chicken.setVariant(randomVariant);
+               }
+
+               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
+               chicken.setOverlayVariant(randomOverlayVariant);
+
+               chicken.setBreed(2);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(2);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_MARANS_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
+               if (chicken.isFemale()) {
+                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
+                  chicken.setVariant(randomVariant);
+               }
+
+               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
+               chicken.setOverlayVariant(randomOverlayVariant);
+
+               chicken.setBreed(3);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(3);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
+               if (chicken.isFemale()) {
+                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
+                  chicken.setVariant(randomVariant);
+               }
+
+               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
+               chicken.setOverlayVariant(randomOverlayVariant);
+
+               chicken.setBreed(4);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(4);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
+               if (chicken.isFemale()) {
+                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
+                  chicken.setVariant(randomVariant);
+               }
+
+               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
+               chicken.setOverlayVariant(randomOverlayVariant);
+               chicken.setBreed(5);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(5);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
          }
 
          this.level().broadcastEntityEvent(this, (byte) 3);

@@ -130,7 +130,12 @@
   "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Equines, Camels, Rabbits, Llamas, Sheep and Oxen.",
 
   "item.dragnlivestock.egg": "Egg",
-  "item.dragnlivestock.fertilized_egg": "Fertilized Egg",
+  "item.dragnlivestock.fertilized_egg": "Fertilized Leghorn Chicken Egg",
+  "item.dragnlivestock.fertilized_ameraucana_egg": "Fertilized Ameraucana Chicken Egg",
+  "item.dragnlivestock.fertilized_cream_legbar_egg": "Fertilized Cream Legbar Chicken Egg",
+  "item.dragnlivestock.fertilized_marans_egg": "Fertilized Marans Chicken Egg",
+  "item.dragnlivestock.fertilized_olive_egger_egg": "Fertilized Olive Egger Chicken Egg",
+  "item.dragnlivestock.fertilized_sussex_silkie_egg": "Fertilized Sussex Silkie Chicken Egg",
 
   "item.dragnlivestock.sheep_milk_bucket": "Sheep Milk Bucket",
   "item.dragnlivestock.llama_milk_bucket": "Llama Milk Bucket",
