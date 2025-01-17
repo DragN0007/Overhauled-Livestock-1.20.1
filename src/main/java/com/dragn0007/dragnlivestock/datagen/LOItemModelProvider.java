@@ -52,7 +52,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG);
         simpleItem(LOItems.EGG);
 
-        simpleItem(LOItems.COVERED_WAGON);
+//        simpleItem(LOItems.COVERED_WAGON);
 
         simpleItem(LOItems.GLOW_BERRY_SOUP);
         simpleItem(LOItems.GRAIN_SOUP);
@@ -77,6 +77,10 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.GOAT_MILK_JUG);
 
         simpleItem(LOItems.EGG_SALAD);
+        simpleItem(LOItems.OMELETTE);
+        simpleItem(LOItems.CHEESECAKE);
+        simpleItem(LOItems.BERRY_GLAZED_PORK_RIB_CHOP);
+        simpleItem(LOItems.BERRY_GLAZED_MUTTON_RIB);
 
         simpleItem(LOItems.BEEF_RIB_STEAK);
         simpleItem(LOItems.BEEF_SIRLOIN_STEAK);

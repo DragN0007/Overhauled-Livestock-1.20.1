@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:cheese"
+    },
+    "B": {
+      "tag": "forge:milk"
+    },
+    "C": {
+      "tag": "forge:egg"
+    },
+    "D": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "DCD",
+    "BAB"
+  ],
+  "result": {
+    "item": "dragnlivestock:cheesecake"
+  },
+  "show_notification": true
+}

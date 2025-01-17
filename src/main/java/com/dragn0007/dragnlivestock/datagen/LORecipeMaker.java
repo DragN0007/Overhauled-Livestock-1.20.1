@@ -20,6 +20,46 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.OMELETTE.get(), 1)
+                .requires(LOTags.Items.EGG)
+                .requires(LOTags.Items.EGG)
+                .requires(LOTags.Items.VEGETABLES)
+                .unlockedBy("has_egg", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.EGG)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CHEESECAKE.get())
+                .define('A', LOTags.Items.CHEESE)
+                .define('B', LOTags.Items.MILK)
+                .define('C', LOTags.Items.EGG)
+                .define('D', Items.SUGAR)
+                .pattern("BBB")
+                .pattern("DCD")
+                .pattern("BAB")
+                .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.MILK).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BERRY_GLAZED_PORK_RIB_CHOP.get(), 1)
+                .requires(LOItems.COOKED_PORK_RIB_CHOP.get())
+                .requires(Items.SWEET_BERRIES)
+                .unlockedBy("has_berries", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SWEET_BERRIES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BERRY_GLAZED_MUTTON_RIB.get(), 1)
+                .requires(LOItems.COOKED_MUTTON_RIB.get())
+                .requires(Items.SWEET_BERRIES)
+                .unlockedBy("has_berries", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SWEET_BERRIES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GRUB_SWEATER.get())
                 .requires(Items.RED_WOOL)
                 .requires(Items.RED_WOOL)

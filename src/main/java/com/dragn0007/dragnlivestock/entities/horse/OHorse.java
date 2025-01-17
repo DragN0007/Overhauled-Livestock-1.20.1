@@ -58,10 +58,14 @@ import java.util.stream.Stream;
 public class OHorse extends AbstractOMount implements GeoEntity {
 
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse");
+	private static final ResourceLocation CREATE_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse_create");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
+		}
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && ModList.get().isLoaded("create")) {
 			return VANILLA_LOOT_TABLE;
 		}
 		return LOOT_TABLE;

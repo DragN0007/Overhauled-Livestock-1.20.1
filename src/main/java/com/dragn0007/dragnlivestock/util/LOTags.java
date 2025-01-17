@@ -41,6 +41,7 @@ public class LOTags {
         public static final TagKey<Item> CHEESE = forgeTag("cheese");
         public static final TagKey<Item> MILK = forgeTag("milk");
         public static final TagKey<Item> EGG = forgeTag("egg");
+        public static final TagKey<Item> VEGETABLES = forgeTag("vegetables");
 
         public static final TagKey<Item> SADDLE = forgeTag("saddle");
 

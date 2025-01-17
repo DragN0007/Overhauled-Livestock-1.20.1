@@ -140,7 +140,7 @@ public class LOItems {
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
 
-    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
+//    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
 
 
     //Food/ Items
@@ -171,6 +171,14 @@ public class LOItems {
 
     public static final RegistryObject<Item> EGG_SALAD = ITEMS.register("egg_salad",
             () -> new BowlFoodItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).build()).stacksTo(1).craftRemainder(Items.BOWL)));
+    public static final RegistryObject<Item> OMELETTE = ITEMS.register("omelette",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(1).build())));
+    public static final RegistryObject<Item> CHEESECAKE = ITEMS.register("cheesecake",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(1).build())));
+    public static final RegistryObject<Item> BERRY_GLAZED_PORK_RIB_CHOP = ITEMS.register("berry_glazed_pork_rib_chop",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(1).build())));
+    public static final RegistryObject<Item> BERRY_GLAZED_MUTTON_RIB = ITEMS.register("berry_glazed_mutton_rib",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationMod(1).build())));
 
     public static final RegistryObject<Item> BEEF_RIB_STEAK = ITEMS.register("beef_rib_steak",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1).build())));

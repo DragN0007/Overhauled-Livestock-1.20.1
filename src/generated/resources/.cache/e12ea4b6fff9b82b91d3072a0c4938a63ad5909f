@@ -1,6 +1,8 @@
-// 1.20.1	2025-01-16T02:04:48.2230496	Item Models: dragnlivestock
+// 1.20.1	2025-01-17T04:39:58.4396032	Item Models: dragnlivestock
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
+0257e7bccee123a3dd96871ff0f364f3bdea00d3 assets/dragnlivestock/models/item/berry_glazed_mutton_rib.json
+1640478dd896c578d4e2d362ee4d82cd7b5f1547 assets/dragnlivestock/models/item/berry_glazed_pork_rib_chop.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
 298bb09c7a0dac180b33323bceffb5b280c6988e assets/dragnlivestock/models/item/brand_tag.json
 62f869a782f29f80af02c6136cd1b8104fd5d68d assets/dragnlivestock/models/item/camel.json
@@ -11,6 +13,7 @@ f73888aec1433210817c55495832680e88f032bb assets/dragnlivestock/models/item/carib
 183cbd4cbc71019f7535164682b2615675f55515 assets/dragnlivestock/models/item/caribou_sirloin_steak.json
 866db40b4ba212903cba4d22949046806a2ec54d assets/dragnlivestock/models/item/carrot_soup.json
 a76d5b386b443e4528485b013a014c6a1bfc9f49 assets/dragnlivestock/models/item/cheese.json
+4ced1d4d6942f3c8bbf35d56f8be6e1ae7957255 assets/dragnlivestock/models/item/cheesecake.json
 acebc249cc7b03c5e82fff9c5b1825b50da55c34 assets/dragnlivestock/models/item/chevon.json
 9c6ff7d0b99084af509c0fa55b942b0ae6db4e2a assets/dragnlivestock/models/item/chevon_loin.json
 b7b4e7dc8af2067f26f705772be6c08fd378bec4 assets/dragnlivestock/models/item/chevon_rib.json
@@ -94,6 +97,7 @@ faa5fbf626b59f66f58da078888b8f3dfb090625 assets/dragnlivestock/models/item/llama
 5e2a90815a2ba656c94b9105dcf6a025a460ca53 assets/dragnlivestock/models/item/netherite_horse_armor.json
 0fbe0b949487957ede137cf7e45d539b0873feee assets/dragnlivestock/models/item/nether_unicorn_horn.json
 1058c3dd4635d69dd07c4ced5fc9de9a18e9b9a6 assets/dragnlivestock/models/item/nether_unicorn_spawn_egg.json
+0b64a76e98a7480c8f0939fe2c7b6a434e612b4e assets/dragnlivestock/models/item/omelette.json
 4b04e86b8aa2f271ccbf2ff2165a19b2b5005eee assets/dragnlivestock/models/item/overworld_unicorn_horn.json
 79d5263ec1d8389110f0546e74175322849ba41f assets/dragnlivestock/models/item/overworld_unicorn_spawn_egg.json
 8f0aee23c0f156952f74758c9156be92b078228e assets/dragnlivestock/models/item/pork_rib_chop.json

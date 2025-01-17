@@ -105,6 +105,10 @@ public class LOItemGroup {
                         output.accept(LOItems.EGG.get());
 
                         output.accept(LOItems.EGG_SALAD.get());
+                        output.accept(LOItems.OMELETTE.get());
+                        output.accept(LOItems.CHEESECAKE.get());
+                        output.accept(LOItems.BERRY_GLAZED_PORK_RIB_CHOP.get());
+                        output.accept(LOItems.BERRY_GLAZED_MUTTON_RIB.get());
 
                         output.accept(LOItems.GRAIN_SOUP.get());
                         output.accept(LOItems.POTATO_SOUP.get());
