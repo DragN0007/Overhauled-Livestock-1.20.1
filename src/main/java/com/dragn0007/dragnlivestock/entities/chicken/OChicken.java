@@ -155,8 +155,32 @@ public class OChicken extends Animal implements GeoEntity {
 		}
 
 		if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+
+			if (this.getBreed() == 0) {
+				this.spawnAtLocation(LOItems.EGG.get());
+			}
+
+			if (this.getBreed() == 1) {
+				this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
+			}
+
+			if (this.getBreed() == 2) {
+				this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
+			}
+
+			if (this.getBreed() == 3) {
+				this.spawnAtLocation(LOItems.MARANS_EGG.get());
+			}
+
+			if (this.getBreed() == 4) {
+				this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
+			}
+
+			if (this.getBreed() == 5) {
+				this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+			}
+
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-			this.spawnAtLocation(LOItems.EGG.get());
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 		}
 

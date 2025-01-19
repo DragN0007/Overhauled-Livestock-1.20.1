@@ -137,8 +137,19 @@ public class LOItems {
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> FERTILIZED_SUSSEX_SILKIE_EGG = ITEMS.register("fertilized_sussex_silkie_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",
-            () -> new Item((new Item.Properties()).stacksTo(64)));
+             () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> AMERAUCANA_EGG = ITEMS.register("ameraucana_egg",
+             () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> CREAM_LEGBAR_EGG = ITEMS.register("cream_legbar_egg",
+             () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> MARANS_EGG = ITEMS.register("marans_egg",
+             () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> OLIVE_EGGER_EGG = ITEMS.register("olive_egger_egg",
+             () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> SUSSEX_SILKIE_EGG = ITEMS.register("sussex_silkie_egg",
+             () -> new Item((new Item.Properties()).stacksTo(64)));
 
 //    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
 

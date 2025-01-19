@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "dragnlivestock:item/fertilized_egg"
+    "layer0": "dragnlivestock:item/fertilized_olive_egger_egg"
   }
 }

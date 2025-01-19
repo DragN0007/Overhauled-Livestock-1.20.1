@@ -50,7 +50,13 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.FERTILIZED_MARANS_EGG);
         simpleItem(LOItems.FERTILIZED_OLIVE_EGGER_EGG);
         simpleItem(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG);
-        simpleItem(LOItems.EGG);
+
+        advancedItem(LOItems.EGG, "fertilized_egg");
+        advancedItem(LOItems.AMERAUCANA_EGG, "fertilized_ameraucana_egg");
+        advancedItem(LOItems.CREAM_LEGBAR_EGG, "fertilized_cream_legbar_egg");
+        advancedItem(LOItems.MARANS_EGG, "fertilized_marans_egg");
+        advancedItem(LOItems.OLIVE_EGGER_EGG, "fertilized_olive_egger_egg");
+        advancedItem(LOItems.SUSSEX_SILKIE_EGG, "fertilized_sussex_silkie_egg");
 
 //        simpleItem(LOItems.COVERED_WAGON);
 

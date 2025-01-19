@@ -3,6 +3,12 @@
   "values": [
     "minecraft:egg",
     "dragnlivestock:egg",
+    "dragnlivestock:ameraucana_egg",
+    "dragnlivestock:cream_legbar_egg",
+    "dragnlivestock:marans_egg",
+    "dragnlivestock:olive_egger_egg",
+    "dragnlivestock:sussex_silkie_egg",
+
     "dragnlivestock:fertilized_egg",
     "dragnlivestock:fertilized_ameraucana_egg",
     "dragnlivestock:fertilized_cream_legbar_egg",

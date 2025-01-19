@@ -103,6 +103,11 @@ public class LOItemGroup {
                         output.accept(LOItems.GOAT_CHEESE.get());
 
                         output.accept(LOItems.EGG.get());
+                        output.accept(LOItems.AMERAUCANA_EGG.get());
+                        output.accept(LOItems.CREAM_LEGBAR_EGG.get());
+                        output.accept(LOItems.MARANS_EGG.get());
+                        output.accept(LOItems.OLIVE_EGGER_EGG.get());
+                        output.accept(LOItems.SUSSEX_SILKIE_EGG.get());
 
                         output.accept(LOItems.EGG_SALAD.get());
                         output.accept(LOItems.OMELETTE.get());

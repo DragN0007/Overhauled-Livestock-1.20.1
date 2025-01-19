@@ -129,7 +129,13 @@
   "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
   "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Equines, Camels, Rabbits, Llamas, Sheep and Oxen.",
 
-  "item.dragnlivestock.egg": "Egg",
+  "item.dragnlivestock.egg": "Leghorn Chicken Egg",
+  "item.dragnlivestock.ameraucana_egg": "Ameraucana Chicken Egg",
+  "item.dragnlivestock.cream_legbar_egg": "Cream Legbar Chicken Egg",
+  "item.dragnlivestock.marans_egg": "Marans Chicken Egg",
+  "item.dragnlivestock.olive_egger_egg": "Olive Egger Chicken Egg",
+  "item.dragnlivestock.sussex_silkie_egg": "Sussex Silkie Chicken Egg",
+
   "item.dragnlivestock.fertilized_egg": "Fertilized Leghorn Chicken Egg",
   "item.dragnlivestock.fertilized_ameraucana_egg": "Fertilized Ameraucana Chicken Egg",
   "item.dragnlivestock.fertilized_cream_legbar_egg": "Fertilized Cream Legbar Chicken Egg",
