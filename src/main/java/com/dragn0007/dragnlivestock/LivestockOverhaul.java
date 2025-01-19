@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock;
 
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
@@ -7,6 +8,7 @@ import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.spawn.CreatureSpawnGeneration;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ISystemReportExtender;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -24,6 +27,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
 
@@ -43,6 +47,7 @@ public class LivestockOverhaul
 
         LOItems.register(eventBus);
         LOItemGroup.register(eventBus);
+        LOBlocks.register(eventBus);
         EntityTypes.ENTITY_TYPES.register(eventBus);
         LOMenuTypes.register(eventBus);
         BIOME_MODIFIER_SERIALIZERS.register(eventBus);
@@ -52,6 +57,9 @@ public class LivestockOverhaul
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, LivestockOverhaulCommonConfig.SPEC, "livestock-overhaul-common.toml");
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
+        System.out.println("[DragN's Livestock Overhaul!] Issues Page: https://github.com/DragN0007/Overhauled-Livestock/issues");
     }
 
     public static final EntityDataSerializer<ResourceLocation> RESOURCE_LOCATION = new EntityDataSerializer<>() {
