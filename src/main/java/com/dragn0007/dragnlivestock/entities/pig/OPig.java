@@ -2,6 +2,8 @@ package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -13,6 +15,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -21,6 +25,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -110,6 +115,24 @@ public class OPig extends Animal implements GeoEntity {
 		return PlayState.CONTINUE;
 	}
 
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+
+		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		} else if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		} else {
+			return super.mobInteract(player, hand);
+		}
+	}
+
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
@@ -152,13 +175,8 @@ public class OPig extends Animal implements GeoEntity {
 		return OPigMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
 
-	public ResourceLocation getTusksLocation() {
-		return OPigTuskLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-	}
-
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> TUSKS = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -166,18 +184,12 @@ public class OPig extends Animal implements GeoEntity {
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
-	public int getTusksVariant() {
-		return this.entityData.get(TUSKS);
-	}
 
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 	public void setOverlayVariant(int overlayVariant) {
 		this.entityData.set(OVERLAY, overlayVariant);
-	}
-	public void setTusksVariant(int tusksVariant) {
-		this.entityData.set(TUSKS, tusksVariant);
 	}
 
 	@Override
@@ -192,8 +204,8 @@ public class OPig extends Animal implements GeoEntity {
 			setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (tag.contains("Tusks")) {
-			setTusksVariant(tag.getInt("Tusks"));
+		if (tag.contains("Gender")) {
+			setGender(tag.getInt("Gender"));
 		}
 	}
 
@@ -204,7 +216,7 @@ public class OPig extends Animal implements GeoEntity {
 
 		tag.putInt("Overlay", getOverlayVariant());
 
-		tag.putInt("Tusks", getTusksVariant());
+		tag.putInt("Gender", getGender());
 	}
 
 	@Override
@@ -216,7 +228,7 @@ public class OPig extends Animal implements GeoEntity {
 		Random random = new Random();
 		setVariant(random.nextInt(OPigModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
-		setTusksVariant(random.nextInt(OPigTuskLayer.Overlay.values().length));
+		setGender(Gender.values().length);
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -226,7 +238,30 @@ public class OPig extends Animal implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(TUSKS, 0);
+		this.entityData.define(GENDER, 0);
+	}
+
+	public enum Gender {
+		FEMALE,
+		MALE
+	}
+
+	public boolean isFemale() {
+		return this.getGender() == 0;
+	}
+
+	public boolean isMale() {
+		return this.getGender() == 1;
+	}
+
+	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
+
+	public int getGender() {
+		return this.entityData.get(GENDER);
+	}
+
+	public void setGender(int gender) {
+		this.entityData.set(GENDER, gender);
 	}
 
 	public boolean canParent() {
@@ -239,24 +274,23 @@ public class OPig extends Animal implements GeoEntity {
 		} else if (!(animal instanceof OPig)) {
 			return false;
 		} else {
-			OPig partner = (OPig) animal;
-
-			if (!this.canParent() || !partner.canParent()) {
-				return false;
-			}
-
-			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				boolean partnerIsFemale = partner.getTusksLocation().equals(OPigTuskLayer.Overlay.FEMALE.resourceLocation);
-				boolean partnerIsMale = partner.getTusksLocation().equals(OPigTuskLayer.Overlay.MALE.resourceLocation);
-
-				boolean isFemale = this.getTusksLocation().equals(OPigTuskLayer.Overlay.FEMALE.resourceLocation);
-				boolean isMale = this.getTusksLocation().equals(OPigTuskLayer.Overlay.MALE.resourceLocation);
-
-				return (isFemale && partnerIsMale) || (isMale && partnerIsFemale);
+			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				return this.canParent() && ((OPig) animal).canParent();
 			} else {
-				return true;
+				OPig partner = (OPig) animal;
+				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+					return true;
+				}
+
+				boolean partnerIsFemale = partner.isFemale();
+				boolean partnerIsMale = partner.isMale();
+				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
+						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
+					return isFemale();
+				}
 			}
 		}
+		return false;
 	}
 
 	@Override
@@ -287,12 +321,12 @@ public class OPig extends Animal implements GeoEntity {
 				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);
 			}
 
-			int tusks;
-			tusks = this.random.nextInt(OPigTuskLayer.Overlay.values().length);
+			int gender;
+			gender = this.random.nextInt(OPig.Gender.values().length);
 
 			oPig1.setVariant(variant);
 			oPig1.setOverlayVariant(overlay);
-			oPig1.setTusksVariant(tusks);
+			oPig1.setGender(gender);
 		}
 
 		return oPig1;

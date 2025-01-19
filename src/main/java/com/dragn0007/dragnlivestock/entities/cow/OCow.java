@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
@@ -236,6 +237,20 @@ public class OCow extends Animal implements GeoEntity {
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
+
+		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		}
+
+		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		}
 
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())
 				&& (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||

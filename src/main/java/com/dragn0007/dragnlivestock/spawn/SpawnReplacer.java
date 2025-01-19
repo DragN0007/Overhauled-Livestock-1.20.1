@@ -57,7 +57,6 @@ import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.pig.OPigMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
-import com.dragn0007.dragnlivestock.entities.pig.OPigTuskLayer;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
@@ -893,8 +892,8 @@ public class SpawnReplacer {
                     int randomOverlayVariant = event.getLevel().getRandom().nextInt(OPigMarkingLayer.Overlay.values().length);
                     oPig.setOverlayVariant(randomOverlayVariant);
 
-                    int randomTusks = event.getLevel().getRandom().nextInt(OPigTuskLayer.Overlay.values().length);
-                    oPig.setTusksVariant(randomTusks);
+                    int randomGender = event.getLevel().getRandom().nextInt(OPig.Gender.values().length);
+                    oPig.setGender(randomGender);
 
                     if (event.getLevel().isClientSide) {
                         vanillapig.remove(Entity.RemovalReason.DISCARDED);

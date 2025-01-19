@@ -16,6 +16,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -184,6 +187,24 @@ public class OChicken extends Animal implements GeoEntity {
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 		}
 
+	}
+
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+
+		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		} else if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
+			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			player.setItemInHand(hand, itemstack1);
+			return InteractionResult.SUCCESS;
+		} else {
+			return super.mobInteract(player, hand);
+		}
 	}
 
 	public SoundEvent getAmbientSound() {

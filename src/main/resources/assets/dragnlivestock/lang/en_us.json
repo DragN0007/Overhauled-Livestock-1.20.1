@@ -5,6 +5,9 @@
   "tooltip.dragnlivestock.not_functional.tooltip": "This item isn't fully functional yet.",
   "tooltip.dragnlivestock.for_horses.tooltip": "For horses!",
   "tooltip.dragnlivestock.grub_sweater.tooltip": "Grubs get cold too.",
+  "tooltip.dragnlivestock.male_test.tooltip": "This animal is male!",
+  "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
+  "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Animals that have genders.",
 
   "item.dragnlivestock.o_horse_spawn_egg": "O-Horse Spawn Egg",
   "entity.dragnlivestock.o_horse": "O-Horse",
@@ -125,9 +128,6 @@
   "item.dragnlivestock.gender_test_strip": "Gender Test Strip",
   "item.dragnlivestock.male_gender_test_strip": "Male Test Strip",
   "item.dragnlivestock.female_gender_test_strip": "Female Test Strip",
-  "tooltip.dragnlivestock.male_test.tooltip": "This animal is male!",
-  "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
-  "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Equines, Camels, Rabbits, Llamas, Sheep and Oxen.",
 
   "item.dragnlivestock.egg": "Leghorn Chicken Egg",
   "item.dragnlivestock.ameraucana_egg": "Ameraucana Chicken Egg",
