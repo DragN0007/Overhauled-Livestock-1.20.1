@@ -253,6 +253,9 @@
   "item.dragnlivestock.nether_unicorn_horn": "Nether Unicorn Horn",
   "item.dragnlivestock.end_unicorn_horn": "End Unicorn Horn",
 
+  "block.dragnlivestock.fish_trap": "Fish Trap",
+  "container.dragnlivestock.fish_trap": "Fish Trap",
+
   "key.dragnlivestock.categories.dragnlivestock": "DragN's Livestock Overhaul",
   "key.dragnlivestock.horse_speed_up": "Speed Up - Horse",
   "key.dragnlivestock.horse_slow_down": "Slow Down - Horse",

@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.blocks;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.blocks.custom.FishTrapBlock;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
@@ -21,7 +22,7 @@ public class LOBlocks {
 
 
 //    public static final RegistryObject<Block> FISH_TRAP = registerBlock("fish_trap",
-//            () -> new Block(Block.Properties.copy(Blocks.SCAFFOLDING).noCollission()));
+//            () -> new FishTrapBlock());
 
 
     protected static <T extends Block>RegistryObject<T> registerBlockWithoutItem(String name, Supplier<T> block){
