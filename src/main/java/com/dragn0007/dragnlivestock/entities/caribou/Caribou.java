@@ -138,8 +138,8 @@ public class Caribou extends AbstractOMount implements GeoEntity {
 		if (this.hasPassenger(entity)) {
 
 			double offsetX = 0;
-			double offsetY = 1.2;
-			double offsetZ = 0;
+			double offsetY = 1.25;
+			double offsetZ = -0.1;
 
 			if (this.isJumping()) {
 //				offsetY = 1.7;
