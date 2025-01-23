@@ -156,7 +156,8 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         String noFillerText = text.replaceAll(".+overlay_", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
-        String labelText = "Marking(s): " + noPNGText.toUpperCase();
+        String addPinkNoseText = noPNGText.replace("pink", "pink-nosed");
+        String labelText = "Marking(s): " + addPinkNoseText.toUpperCase();
 
         String noTextureText = "Marking(s): " + "No Marking Found.";
 

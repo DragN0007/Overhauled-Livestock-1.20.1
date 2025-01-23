@@ -618,6 +618,9 @@ public class SpawnReplacer {
                     oChicken.setCustomName(vanillachicken.getCustomName());
                     oChicken.setAge(vanillachicken.getAge());
 
+                    int randomBreed = event.getLevel().getRandom().nextInt(OChicken.Breed.values().length);
+                    oChicken.setBreed(randomBreed);
+
                     int randomGender = event.getLevel().getRandom().nextInt(OChicken.Gender.values().length);
                     oChicken.setGender(randomGender);
 
