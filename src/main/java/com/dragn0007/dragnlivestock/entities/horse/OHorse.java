@@ -81,7 +81,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public Vec3 getLeashOffset() {
-		return new Vec3(0D, (double) this.getEyeHeight() * 0.9F, (double) (this.getBbWidth() * 1.1F));
+		return new Vec3(0D, (double) this.getEyeHeight() * 0.8F, (double) (this.getBbWidth() * 1.2F));
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
 	}
 
