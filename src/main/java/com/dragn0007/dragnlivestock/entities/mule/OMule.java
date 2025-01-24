@@ -180,7 +180,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
-				if (this.isVehicle()) {
+				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));

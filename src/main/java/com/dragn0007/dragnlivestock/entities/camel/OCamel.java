@@ -215,7 +215,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 			}
 
 		} else {
-			if (this.isSaddled() && !this.isVehicle()) {
+			if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 				controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(1.0);
 			} else {

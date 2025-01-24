@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
@@ -102,6 +103,8 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	@Override
 	public void registerGoals() {
 		super.registerGoals();
+		this.goalSelector.addGoal(0, new GroundTieGoal(this));
+
 		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
@@ -184,7 +187,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
-				if (this.isVehicle()) {
+				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
@@ -224,9 +227,9 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
-			this.getNavigation().stop();
-		}
+//		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
+//			this.getNavigation().stop();
+//		}
 
 		if (this.isOnSand()) {
 			if (!this.hasSlownessEffect()) {

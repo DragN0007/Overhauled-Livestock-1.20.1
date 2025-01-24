@@ -10,6 +10,8 @@ logoFile="livestock_overhaul_logo.png"
 authors="DragN0007"
 description='''
 An overhaul for livestock & farm animals!
+
+Dev BETA, do not distribute.
 '''
 [[dependencies.dragnlivestock]]
 modId = "forge"

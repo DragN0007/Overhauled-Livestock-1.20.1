@@ -496,11 +496,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
-				if (this.isVehicle()) {
+				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-//				} else if (--this.alternateIdleTimer <= 0) {
-//					controller.setAnimation(RawAnimation.begin().then("idle5", Animation.LoopType.PLAY_ONCE));
-//					this.alternateIdleTimer = this.random.nextInt(200) + 500;
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
 				}
