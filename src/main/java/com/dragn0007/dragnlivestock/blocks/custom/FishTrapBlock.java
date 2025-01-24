@@ -5,8 +5,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluid;
 
 public class FishTrapBlock extends FishTrapBlockEntity implements SimpleWaterloggedBlock {

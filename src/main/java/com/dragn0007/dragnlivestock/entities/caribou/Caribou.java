@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.caribou;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
@@ -90,6 +91,8 @@ public class Caribou extends AbstractOMount implements GeoEntity {
 	@Override
 	public void registerGoals() {
 		super.registerGoals();
+		this.goalSelector.addGoal(0, new GroundTieGoal(this));
+
 		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
@@ -289,9 +292,9 @@ public class Caribou extends AbstractOMount implements GeoEntity {
 	public void tick() {
 		super.tick();
 
-		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
-			this.getNavigation().stop();
-		}
+//		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
+//			this.getNavigation().stop();
+//		}
 		
 		if (this.isOnSand()) {
 			if (!this.hasSlownessEffect()) {
