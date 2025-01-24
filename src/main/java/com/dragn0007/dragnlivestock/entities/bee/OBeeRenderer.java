@@ -14,10 +14,46 @@ public class OBeeRenderer extends GeoEntityRenderer<OBee> {
 
     @Override
     public void render(OBee animatable, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if(animatable.isBaby()) {
+
+        if (animatable.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         } else {
             poseStack.scale(1F, 1F, 1F);
+        }
+
+        if(!animatable.isBaby()) {
+
+            if (animatable.getVariant() == 0) {
+                poseStack.scale(1F, 1F, 1F);
+            }
+
+            if (animatable.getVariant() == 1) {
+                poseStack.scale(0.6F, 0.6F, 0.6F);
+            }
+
+            if (animatable.getVariant() == 2) {
+                poseStack.scale(1F, 1F, 1F);
+            }
+
+            if (animatable.getVariant() == 3) {
+                poseStack.scale(0.6F, 0.6F, 0.6F);
+            }
+
+            if (animatable.getVariant() == 4) {
+                poseStack.scale(0.6F, 0.6F, 0.6F);
+            }
+
+            if (animatable.getVariant() == 5) {
+                poseStack.scale(0.8F, 0.8F, 0.8F);
+            }
+
+            if (animatable.getVariant() == 6) {
+                poseStack.scale(0.6F, 0.6F, 0.6F);
+            }
+
+            if (animatable.getVariant() == 7) {
+                poseStack.scale(1.1F, 1.1F, 1.1F);
+            }
         }
         super.render(animatable, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }

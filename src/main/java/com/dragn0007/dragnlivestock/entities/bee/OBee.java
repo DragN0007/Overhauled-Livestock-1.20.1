@@ -1,6 +1,8 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -108,5 +110,16 @@ public class OBee extends Bee implements GeoEntity {
 
 	public OBee getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		return EntityTypes.O_BEE_ENTITY.get().create(serverLevel);
+	}
+
+	public enum Breed {
+		BEE,
+		ASHY_MINING_BEE,
+		GARDEN_BEE,
+		HONEY_BEE,
+		RED_MASON_BEE,
+		RED_TAILED_BEE,
+		TAWNY_MINING_BEE,
+		TREE_BEE,
 	}
 }

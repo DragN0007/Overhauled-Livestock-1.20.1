@@ -9,7 +9,7 @@ public class OBeeModel extends GeoModel<OBee> {
     public enum Variant {
         BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/bumble_bee.png")),
         ASHY_MINING_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/ashy_mining_bee.png")),
-        GARDEB_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/garden_bumble_bee.png")),
+        GARDEN_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/garden_bumble_bee.png")),
         HONEY_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/honey_bee.png")),
         RED_MASON_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/red_mason_bee.png")),
         RED_TAILED_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/red_tailed_bumble_bee.png")),

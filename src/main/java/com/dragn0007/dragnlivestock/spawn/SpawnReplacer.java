@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.spawn;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
+import com.dragn0007.dragnlivestock.entities.bee.OBeeModel;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
@@ -772,7 +773,10 @@ public class SpawnReplacer {
             oBee.copyPosition(bee);
             oBee.setCustomName(bee.getCustomName());
 
-            System.out.println("[Livestock Overhaul]: Replaced a vanilla bee with an O-Bee!");
+            int randomVariant = event.getLevel().getRandom().nextInt(OBeeModel.Variant.values().length);
+            oBee.setVariant(randomVariant);
+
+//            System.out.println("[Livestock Overhaul]: Replaced a vanilla bee with an O-Bee!");
 
             event.setCanceled(true);
         }
