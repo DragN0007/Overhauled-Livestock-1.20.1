@@ -7,6 +7,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -48,6 +49,11 @@ public class LOItemGroup {
                         output.accept(LOItems.CARROT_MOOBLOOM_SPAWN_EGG.get());
                         output.accept(LOItems.BEETROOT_MOOBLOOM_SPAWN_EGG.get());
                         output.accept(LOItems.AZALEA_MOOBLOOM_SPAWN_EGG.get());
+
+                        if (ModList.get().isLoaded("thatsjustpeachy")) {
+                            output.accept(LOItems.PEACH_MOOBLOOM_SPAWN_EGG.get());
+                        }
+
                         output.accept(LOItems.CARIBOU_SPAWN_EGG.get());
                         output.accept(LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());

@@ -25,6 +25,8 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMo
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloom;
@@ -547,6 +549,33 @@ public class SpawnReplacer {
                             event.getLevel().addFreshEntity(moobloom);
 
                             int randomVariant = event.getLevel().getRandom().nextInt(AzaleaMoobloomModel.Variant.values().length);
+                            moobloom.setVariant(randomVariant);
+
+                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                            moobloom.setOverlayVariant(randomOverlayVariant);
+
+                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
+                            moobloom.setHornVariant(randomHorns);
+
+                            if (event.getLevel().isClientSide) {
+                                vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                            }
+
+                            event.getLevel().addFreshEntity(moobloom);
+                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        }
+                    }
+                }
+
+                if (ModList.get().isLoaded("thatsjustpeachy") && LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA_PLATEAU) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.WINDSWEPT_SAVANNA))) {
+                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
+                        PeachMoobloom moobloom = EntityTypes.PEACH_MOOBLOOM_ENTITY.get().create(event.getLevel());
+
+                        if (moobloom != null) {
+                            moobloom.copyPosition(vanillacow);
+                            event.getLevel().addFreshEntity(moobloom);
+
+                            int randomVariant = event.getLevel().getRandom().nextInt(PeachMoobloomModel.Variant.values().length);
                             moobloom.setVariant(randomVariant);
 
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);

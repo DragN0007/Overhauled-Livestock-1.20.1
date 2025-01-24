@@ -12,6 +12,7 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot.CarrotMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering.FloweringMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
@@ -258,5 +259,11 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,2f)
                     .build(new ResourceLocation(MODID,"caribou").toString()));
+
+    public static final RegistryObject<EntityType<PeachMoobloom>> PEACH_MOOBLOOM_ENTITY = ENTITY_TYPES.register("peach_moobloom",
+            () -> EntityType.Builder.of(PeachMoobloom::new,
+                            MobCategory.CREATURE)
+                    .sized(1.5f,1.5f)
+                    .build(new ResourceLocation(MODID,"peach_moobloom").toString()));
 }
 

@@ -95,6 +95,7 @@ dependencies {
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
 
     //compat stuff
+//    implementation fg.deobf("curse.maven:thats-just-peachy-912726:5367423")
 //    implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 //    implementation fg.deobf("curse.maven:patchouli-306770:4966125")
 //    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")

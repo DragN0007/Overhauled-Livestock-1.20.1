@@ -85,6 +85,8 @@ public class LOItems {
             () -> new ForgeSpawnEggItem(EntityTypes.BEETROOT_MOOBLOOM_ENTITY, 0xb6484c, 0x71160d, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> AZALEA_MOOBLOOM_SPAWN_EGG = ITEMS.register("azalea_moobloom_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.AZALEA_MOOBLOOM_ENTITY, 0x6c8031, 0xd07be3, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> PEACH_MOOBLOOM_SPAWN_EGG = ITEMS.register("peach_moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.PEACH_MOOBLOOM_ENTITY, 0xffd6c3, 0xffe9dd, new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> CARIBOU_SPAWN_EGG = ITEMS.register("caribou_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.CARIBOU_ENTITY, 0x846957, 0xfff7ed, new Item.Properties().stacksTo(64)));

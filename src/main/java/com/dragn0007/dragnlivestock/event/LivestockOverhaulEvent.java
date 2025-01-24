@@ -26,6 +26,8 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMo
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloomRender;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloomRender;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloomRender;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloomRender;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloom;
@@ -120,6 +122,7 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.CARROT_MOOBLOOM_ENTITY.get(), CarrotMoobloom.createAttributes().build());
         event.put(EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get(), BeetrootMoobloom.createAttributes().build());
         event.put(EntityTypes.AZALEA_MOOBLOOM_ENTITY.get(), AzaleaMoobloom.createAttributes().build());
+        event.put(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloom.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -161,6 +164,7 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.CARROT_MOOBLOOM_ENTITY.get(), CarrotMoobloomRender::new);
         EntityRenderers.register(EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get(), BeetrootMoobloomRender::new);
         EntityRenderers.register(EntityTypes.AZALEA_MOOBLOOM_ENTITY.get(), AzaleaMoobloomRender::new);
+        EntityRenderers.register(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloomRender::new);
 
 //        EntityRenderers.register(EntityTypes.COVERED_WAGON_ENTITY.get(), CoveredWagonRender::new);
 
