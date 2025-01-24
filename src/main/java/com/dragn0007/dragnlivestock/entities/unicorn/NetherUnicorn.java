@@ -139,7 +139,7 @@ public class NetherUnicorn extends OHorse implements GeoEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (this.isSaddled() && !this.isVehicle() || this.isLeashed()) {
+		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 			this.getNavigation().stop();
 		}
 	}
