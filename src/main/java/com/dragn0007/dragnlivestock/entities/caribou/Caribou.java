@@ -99,11 +99,15 @@ public class Caribou extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
-			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.O_WOLVES);
 			boolean isHuntingDog = livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS);
 			boolean isWolf = livingEntity instanceof Wolf;
-			return isOWolf || isWolf || isHuntingDog;
+			return isWolf || isHuntingDog;
 		}));
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
+				(entity.getType().is(LOTags.Entity_Types.O_WOLVES) && !this.isTamed()) ||
+						(entity.getType().is(LOTags.Entity_Types.O_WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+		));
 	}
 
 	public float generateRandomMaxHealth() {
