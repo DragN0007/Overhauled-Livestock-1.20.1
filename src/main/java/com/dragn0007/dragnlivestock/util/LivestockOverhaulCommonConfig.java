@@ -135,7 +135,7 @@ public class LivestockOverhaulCommonConfig {
         CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
                 .define("Chicken Egg Lay Amount", 3);
 
-        GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted? (Will run the ground tie animation visually even when false)")
+        GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
                 .define("Ground Tie When Dismounted", true);
         BUILDER.pop();
 
