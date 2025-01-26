@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -10,22 +11,31 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
+
+import java.text.DecimalFormat;
 
 public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
     public static final ResourceLocation MULE_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/o_horse.png");
-    public final OMule OMule;
+    public final OMule oMule;
     protected int breedLabelX;
     protected int breedLabelY;
     protected int baseColorLabelX;
     protected int baseColorLabelY;
     protected int markingLabelX;
     protected int markingLabelY;
+    protected int speedLabelX;
+    protected int speedLabelY;
+    protected int jumpStrengthLabelX;
+    protected int jumpStrengthLabelY;
+    protected int healthLabelX;
+    protected int healthLabelY;
 
     public OMuleScreen(OMuleMenu oMuleMenu, Inventory inventory, Component component) {
         super(oMuleMenu, inventory, component);
-        this.OMule = oMuleMenu.oMule;
+        this.oMule = oMuleMenu.oMule;
     }
 
     @Override
@@ -41,6 +51,15 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
         markingLabelX = leftPos + 1;
         markingLabelY = topPos + 180;
+
+        jumpStrengthLabelX = leftPos + 1;
+        jumpStrengthLabelY = topPos + 190;
+
+        speedLabelX = leftPos + 1;
+        speedLabelY = topPos + 200;
+
+        healthLabelX = leftPos + 1;
+        healthLabelY = topPos + 210;
     }
 
     public void renderBg(GuiGraphics graphics, float f, int i, int j) {
@@ -52,11 +71,11 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
         graphics.blit(MULE_INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        if (this.OMule.isSaddleable()) {
+        if (this.oMule.isSaddleable()) {
             graphics.blit(MULE_INVENTORY_LOCATION, x + 7, y + 17, 18, this.imageHeight + 54, 18, 18);
         }
 
-        if (this.OMule.canWearArmor()) {
+        if (this.oMule.canWearArmor()) {
             graphics.blit(MULE_INVENTORY_LOCATION, x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
         }
 
@@ -64,21 +83,24 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 //            graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 53, 54, this.imageHeight + 54, 18, 18);
 //        }
 
-        if (this.OMule.isFemale()) {
+        if (this.oMule.isFemale()) {
             graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
         }
 
-        if (this.OMule.isMale()) {
+        if (this.oMule.isMale()) {
             graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 98, this.imageHeight + 54, 8, 8);
         }
 
-        InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.OMule);
+        InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oMule);
 
         renderBreedLabel(graphics);
 
         if (LivestockOverhaulClientConfig.HORSE_COAT_GUI.get()) {
             renderBaseCoatLabel(graphics);
             renderMarkingLabel(graphics);
+            renderSpeedLabel(graphics);
+            renderJumpStrengthLabel(graphics);
+            renderHealthLabel(graphics);
         }
     }
 
@@ -91,7 +113,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     }
 
     private void renderBreedLabel(GuiGraphics graphics) {
-        String breedText = getBreedText(this.OMule.getBreed());
+        String breedText = getBreedText(this.oMule.getBreed());
         String labelText = "Body Type: " + breedText;
 
         graphics.drawString(this.font, labelText, breedLabelX, breedLabelY, 0xFFFFFF, false);
@@ -107,7 +129,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     }
 
     private void renderBaseCoatLabel(GuiGraphics graphics) {
-        String text = this.OMule.getTextureResource().toString(); //texture name
+        String text = this.oMule.getTextureResource().toString(); //texture name
         String noFillerText = text.replaceAll(".+mule_", ""); //remove 'mule_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
@@ -116,7 +138,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
         String noTextureText = "Base Coat: " + "No Coat Found.";
 
-        if (this.OMule.getTextureResource() == null) {
+        if (this.oMule.getTextureResource() == null) {
             graphics.drawString(this.font, noTextureText, baseColorLabelX, baseColorLabelY, 0xFFFFFF, false);
         } else {
             graphics.drawString(this.font, labelText, baseColorLabelX, baseColorLabelY, 0xFFFFFF, false);
@@ -124,7 +146,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     }
 
     private void renderMarkingLabel(GuiGraphics graphics) {
-        String text = this.OMule.getOverlayLocation().toString();
+        String text = this.oMule.getOverlayLocation().toString();
         String noFillerText = text.replaceAll(".+overlay_", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
@@ -133,11 +155,59 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
         String noTextureText = "Marking(s): " + "No Marking Found.";
 
-        if (this.OMule.getTextureResource() == null) {
+        if (this.oMule.getTextureResource() == null) {
             graphics.drawString(this.font, noTextureText, markingLabelX, markingLabelY, 0xFFFFFF, false);
         } else {
             graphics.drawString(this.font, labelText, markingLabelX, markingLabelY, 0xFFFFFF, false);
         }
+    }
+
+
+    //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v
+    //https://github.com/Snownee/Jade/blob/1.20-forge/src/main/java/snownee/jade/addon/vanilla/HorseStatsProvider.java#L51
+    //These calculations are placed in this manner so that the numbers will match up with Jade's tooltip.
+    //If use of this code and/ or these calculations are no longer permitted, for any reason, please contact me
+    // at DragN0007 on Curseforge or dragn0007.jar on Discord. I will remove them, no questions asked. :)
+    public static double getJumpHeight(double jump) {
+        return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
+    }
+
+    public static final double MAX_JUMP_HEIGHT = getJumpHeight(OHorse.MAX_JUMP_STRENGTH);
+    public static final double MAX_MOVEMENT_SPEED = OHorse.MAX_MOVEMENT_SPEED * 42.16;
+
+    //This code is slightly altered to fit as a label rather than a tooltip
+    private void renderSpeedLabel(GuiGraphics graphics) {
+
+        double speed = oMule.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 42.16;
+
+        DecimalFormat limitDec = new DecimalFormat("#.###");
+        String num = limitDec.format(speed);
+        String labelText = "Speed: " + num;
+
+        graphics.drawString(this.font, labelText, speedLabelX, speedLabelY, 0xFFFFFF, false);
+    }
+
+    //This code is slightly altered to fit as a label rather than a tooltip
+    private void renderJumpStrengthLabel(GuiGraphics graphics) {
+
+        oMule.getAttributes().hasAttribute(Attributes.JUMP_STRENGTH);
+        double jumpStrength = oMule.getAttributeBaseValue(Attributes.JUMP_STRENGTH);
+        double jumpHeight = getJumpHeight(jumpStrength);
+
+        DecimalFormat limitDec = new DecimalFormat("#.###");
+        String num = limitDec.format(jumpHeight);
+        String labelText = "Jump Strength: " + num;
+
+        graphics.drawString(this.font, labelText, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
+    }
+    //End of CC-Licensed code ^
+
+
+    private void renderHealthLabel(GuiGraphics graphics) {
+        String text = String.valueOf(this.oMule.getMaxHealth());
+        String labelText = "Max Health: " + text;
+
+        graphics.drawString(this.font, labelText, healthLabelX, healthLabelY, 0xFFFFFF, false);
     }
 
 }

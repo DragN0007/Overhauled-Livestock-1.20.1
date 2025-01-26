@@ -15,8 +15,8 @@ public class LivestockOverhaulClientConfig {
         MINIMAL_HORSE_ARMOR = BUILDER.comment("Should horse armor be 'lighter' visually? This doesn't change the protection the armor gives.")
                 .define("Minimal Horse Armor", false);
 
-        HORSE_COAT_GUI = BUILDER.comment("Should horse coat & marking names show up in their GUI?")
-                .define("Horse Coat GUI Text", true);
+        HORSE_COAT_GUI = BUILDER.comment("Should coats, markings, speed, jump strength and health show up in some O-Mount GUIs?")
+                .define("Mount GUI Extras", true);
 
         BUILDER.pop();
 
