@@ -963,6 +963,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 				int betterHealth = (int) Math.max(horse.getHealth(), this.random.nextInt(20) + 40);
 				((OHorse) abstracthorse).setHealth(betterHealth);
+
+			//generate random stats of the breed standard of the baby if the breed is random
+			} else if (k == 0) {
+				((OHorse) abstracthorse).generateRandomJumpStrength();
+				((OHorse) abstracthorse).generateRandomSpeed();
+				((OHorse) abstracthorse).generateRandomMaxHealth();
+
 			} else {
 				((OHorse) abstracthorse).setSpeed(horse.getSpeed());
 				((OHorse) abstracthorse).setHealth(horse.getHealth());
