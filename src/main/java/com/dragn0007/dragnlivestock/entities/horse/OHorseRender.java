@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,9 +29,18 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isSaddled()) {
+            if (entity.isSaddled() && (LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get() && LivestockOverhaulClientConfig.LEGACY_HORSE_SADDLES.get())) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
+                model.getBone("extras").ifPresent(b -> b.setHidden(false));
+                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
+                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
+                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
+                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
+            } else if (entity.isSaddled() && (!LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get() || !LivestockOverhaulClientConfig.LEGACY_HORSE_SADDLES.get())) {
+                model.getBone("saddle").ifPresent(b -> b.setHidden(false));
+                model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
+                model.getBone("extras").ifPresent(b -> b.setHidden(true));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
@@ -38,6 +48,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             } else {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(true));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
+                model.getBone("extras").ifPresent(b -> b.setHidden(true));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));

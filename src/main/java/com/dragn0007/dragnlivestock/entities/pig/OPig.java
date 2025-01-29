@@ -298,7 +298,6 @@ public class OPig extends Animal implements GeoEntity {
 		if (ageableMob instanceof OPig) {
 			OPig oPig = (OPig) ageableMob;
 			oPig1 = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
-			oPig1 = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
 
 			int i = this.random.nextInt(9);
 			int variant;
