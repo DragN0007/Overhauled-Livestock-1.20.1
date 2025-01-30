@@ -402,7 +402,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (month == Month.DECEMBER && (day == 24 || day == 25)) {
-				offsetY = 1.2;
+				offsetY = 1.25;
 			}
 
 
