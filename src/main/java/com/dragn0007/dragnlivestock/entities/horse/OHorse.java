@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.ai.MountLookAtPlayerGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
@@ -13,6 +14,7 @@ import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -109,7 +111,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 0.0F));
+		this.goalSelector.addGoal(7, new MountLookAtPlayerGoal(this, Player.class, 0.0F));
 
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
@@ -457,7 +459,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 //		controllers.add(new AnimationController<>(this, "stanceController", 5, this::stancePredicate));
 	}
 
-	public int alternateIdleTimer = this.random.nextInt(200) + 500;
+	public int alternateIdleTimer = 0;
 
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
@@ -496,13 +498,17 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
-				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
+				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get() && alternateIdleTimer < 500) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+//				} else if (alternateIdleTimer >= 500) {
+//					controller.setAnimation(RawAnimation.begin().then("idle5", Animation.LoopType.PLAY_ONCE));
+//					alternateIdleTimer = 0;
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
 				}
 				controller.setAnimationSpeed(1.0);
 			}
+
 		}
 		return PlayState.CONTINUE;
 	}
@@ -622,6 +628,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.removeSlownessEffect();
 			}
 		}
+
+		alternateIdleTimer++;
+
 	}
 
 	@Override

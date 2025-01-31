@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -71,6 +72,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public static final EntityDataAccessor<Integer> DATA_CARPET_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
     protected boolean shouldEmote;
+
+    public boolean isGroundTied() {
+        return this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get();
+    }
 
     public boolean isOnSand() {
         BlockState blockState = this.level().getBlockState(this.blockPosition().below());

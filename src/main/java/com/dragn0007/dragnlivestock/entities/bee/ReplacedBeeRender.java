@@ -4,24 +4,21 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.level.Level;
+import software.bernie.example.client.model.entity.ReplacedCreeperModel;
+import software.bernie.example.entity.ReplacedCreeperEntity;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
 public class ReplacedBeeRender extends GeoReplacedEntityRenderer<Bee, ReplacedBee> {
+
     public ReplacedBeeRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ReplacedBeeModel(), new ReplacedBee());
     }
-
-//    public ReplacedBeeRenderer(EntityRendererProvider.Context renderManager, GeoModel<ReplacedBee> model, ReplacedBee animatable) {
-//        super(renderManager, model, animatable, new ReplacedBeeModel(), new ReplacedBee(EntityType.BEE, animatable.level()));
-//        this.addRenderLayer(new ReplacedBeePollenLayer(this));
-//    }
-
-//    public ReplacedBeeRender(EntityRendererProvider.Context renderManager, Bee animatable) {
-//        super(renderManager, new ReplacedBeeModel(), new ReplacedBee(EntityType.BEE, animatable.level()));
-//        this.addRenderLayer(new ReplacedBeePollenLayer(this));
-//    }
 
     @Override
     public void preRender(PoseStack poseStack, ReplacedBee animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {

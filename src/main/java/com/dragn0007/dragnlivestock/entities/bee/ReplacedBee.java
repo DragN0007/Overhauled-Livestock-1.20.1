@@ -1,7 +1,11 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoReplacedEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -13,13 +17,8 @@ public class ReplacedBee implements GeoReplacedEntity {
 
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-
 //	public ReplacedBee(EntityType<? extends Bee> entityType, Level level) {
 //		super(entityType, level);
-//	}
-
-//	public ReplacedBee(Bee mob) {
-//		this.mob = mob;
 //	}
 
 //	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
@@ -112,8 +111,27 @@ public class ReplacedBee implements GeoReplacedEntity {
 //		this.entityData.define(VARIANT, 0);
 //	}
 //
+//	@Override
 //	public OBee getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-//		return EntityTypes.O_BEE_ENTITY.get().create(serverLevel);
+//		OBee oBee = (OBee) ageableMob;
+//		if (ageableMob instanceof OBee) {
+//			OBee mob = (OBee) ageableMob;
+//			oBee = EntityTypes.O_BEE_ENTITY.get().create(serverLevel);
+//
+//			int i = this.random.nextInt(9);
+//			int variant;
+//			if (i < 4) {
+//				variant = this.getVariant();
+//			} else if (i < 8) {
+//				variant = mob.getVariant();
+//			} else {
+//				variant = this.random.nextInt(OBeeModel.Variant.values().length);
+//			}
+//
+//			oBee.setVariant(variant);
+//		}
+//
+//		return oBee;
 //	}
 
 	public enum Breed {
