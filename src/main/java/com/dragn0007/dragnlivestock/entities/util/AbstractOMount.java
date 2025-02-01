@@ -368,7 +368,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
-
         if(this.isBaby()) {
             return super.mobInteract(player, hand);
         } else {

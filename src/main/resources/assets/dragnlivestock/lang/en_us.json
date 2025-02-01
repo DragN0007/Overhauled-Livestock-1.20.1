@@ -8,6 +8,7 @@
   "tooltip.dragnlivestock.male_test.tooltip": "This animal is male!",
   "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
   "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Animals that have genders.",
+  "tooltip.dragnlivestock.two_seater.tooltip": "Only \"Draft\" and \"Coldblood\" horse breeds can comfortably carry two players!",
 
   "item.dragnlivestock.o_horse_spawn_egg": "O-Horse Spawn Egg",
   "entity.dragnlivestock.o_horse": "O-Horse",

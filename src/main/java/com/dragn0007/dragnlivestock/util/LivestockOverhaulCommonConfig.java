@@ -37,6 +37,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_AMOUNT;
     public static final ForgeConfigSpec.ConfigValue<Integer> MILKING_COOLDOWN;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
+//    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
+//    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -134,6 +136,12 @@ public class LivestockOverhaulCommonConfig {
 
         CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
                 .define("Chicken Egg Lay Amount", 3);
+
+//        MAX_PIG_BABIES = BUILDER.comment("Maximum amount of babies O-Pigs can have after breeding. Default is 3.")
+//                .define("Max Pig Babies", 3);
+//
+//        MAX_RABBIT_BABIES = BUILDER.comment("Maximum amount of babies O-Rabbits can have after breeding. Default is 3.")
+//                .define("Max Rabbit Babies", 3);
 
         GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
                 .define("Ground Tie When Dismounted", true);

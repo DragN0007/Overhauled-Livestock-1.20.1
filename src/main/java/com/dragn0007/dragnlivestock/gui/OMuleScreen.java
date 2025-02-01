@@ -172,9 +172,6 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
         return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
     }
 
-    public static final double MAX_JUMP_HEIGHT = getJumpHeight(OHorse.MAX_JUMP_STRENGTH);
-    public static final double MAX_MOVEMENT_SPEED = OHorse.MAX_MOVEMENT_SPEED * 42.16;
-
     //This code is slightly altered to fit as a label rather than a tooltip
     private void renderSpeedLabel(GuiGraphics graphics) {
 

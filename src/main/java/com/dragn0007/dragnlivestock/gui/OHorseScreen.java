@@ -2,8 +2,6 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,8 +12,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
@@ -73,19 +73,19 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         graphics.blit(HORSE_INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7 || this.oHorse.getBreed() == 9 || this.oHorse.getBreed() == 10)) { //stock or warmblood
+        if (this.oHorse.hasChest() && (this.oHorse.isStockBreed()) || this.oHorse.isWarmbloodedBreed()) { //stock or warmblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 54, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5 || this.oHorse.getBreed() == 8 || this.oHorse.getBreed() == 12)) { //draft or coldblood
+        if (this.oHorse.hasChest() && this.oHorse.isDraftBreed()) { //draft or coldblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 3 || this.oHorse.getBreed() == 6 || this.oHorse.getBreed() == 11)) { //pony
+        if (this.oHorse.hasChest() && this.oHorse.isPonyBreed()) { //pony
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 72, 54);
         }
 
-        if (this.oHorse.hasChest() && (this.oHorse.getBreed() == 4 || this.oHorse.getBreed() == 13)) { //racer
+        if (this.oHorse.hasChest() && this.oHorse.isRacingBreed()) { //racer
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 18, 54);
         }
 
@@ -201,9 +201,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     public static double getJumpHeight(double jump) {
         return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
     }
-
-    public static final double MAX_JUMP_HEIGHT = getJumpHeight(OHorse.MAX_JUMP_STRENGTH);
-    public static final double MAX_MOVEMENT_SPEED = OHorse.MAX_MOVEMENT_SPEED * 42.16;
 
     //This code is slightly altered to fit as a label rather than a tooltip
     private void renderSpeedLabel(GuiGraphics graphics) {

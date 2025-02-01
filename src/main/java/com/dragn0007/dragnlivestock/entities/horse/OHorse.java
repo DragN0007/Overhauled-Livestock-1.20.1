@@ -14,9 +14,10 @@ import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -26,6 +27,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -319,17 +322,62 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return ((double) 0.45F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
 	}
 
+	public boolean isDraftBreed() {
+		return this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12;
+	}
+
+	public boolean isPonyBreed() {
+		return this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11;
+	}
+
+	public boolean isStockBreed() {
+		return this.getBreed() == 0 || this.getBreed() == 7;
+	}
+
+	public boolean isWarmbloodedBreed() {
+		return this.getBreed() == 2 || this.getBreed() == 9 || this.getBreed() == 10;
+	}
+
+	public boolean isRacingBreed() {
+		return this.getBreed() == 4 || this.getBreed() == 13;
+	}
+
+	@Override
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack itemStack = player.getItemInHand(hand);
+
+		if (!this.isDraftBreed() && this.hasPassenger(player)) {
+			player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.two_seater.tooltip").withStyle(ChatFormatting.GOLD), true);
+			return InteractionResult.PASS;
+		}
+		return super.mobInteract(player, hand);
+	}
+
+	@Override
+	protected boolean canAddPassenger(Entity entity) {
+		return this.getPassengers().size() < 2;
+	}
+
+	@Override
+	public LivingEntity getControllingPassenger() {
+		LivingEntity firstPassenger = (LivingEntity) this.getFirstPassenger();
+		if (firstPassenger != null && this.isSaddled()) {
+			return firstPassenger;
+		}
+		return null;
+	}
+
 	@Override
 	protected int getInventorySize() {
 		if (this.hasChest()) {
-		    if (this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12) {
-				return 17; //draft or coldblood
-			} else if (this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11) {
-				return 14; //pony
-			} else if (this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 7 || this.getBreed() == 9 || this.getBreed() == 10) {
-				return 11; //stock or warmblood
-			} else if (this.getBreed() == 4 || this.getBreed() == 13) {
-				return 5; //racer
+		    if (this.isDraftBreed()) {
+				return 17;
+			} else if (this.isPonyBreed()) {
+				return 14;
+			} else if (this.isStockBreed() || this.isWarmbloodedBreed()) {
+				return 11;
+			} else if (this.isRacingBreed()) {
+				return 5;
 			}
 		}
 		return super.getInventorySize();
@@ -344,15 +392,25 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			int day = date.getDayOfMonth();
 
 			double offsetX = 0;
-			double offsetY = 1.1;
+			double offsetY = 1.0;
 			double offsetZ = -0.2;
+
+			int i = this.getPassengers().indexOf(entity);
 
 			if (getModelResource().equals(HorseBreedModel.MUSTANG.resourceLocation)) {
 				offsetY = 1.0;
 			}
 
 			if (getModelResource().equals(HorseBreedModel.ARDENNES.resourceLocation)) {
-				offsetY = 1.1;
+				switch (i) {
+					case 0:
+						offsetY = 1.1;
+						break;
+					case 1:
+						offsetY = 1.1;
+						offsetZ = -1.2;
+						break;
+				}
 			}
 
 			if (getModelResource().equals(HorseBreedModel.KLADRUBER.resourceLocation)) {
@@ -368,7 +426,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getModelResource().equals(HorseBreedModel.FRIESIAN.resourceLocation)) {
-				offsetY = 1.25;
+				switch (i) {
+					case 0:
+						offsetY = 1.25;
+						break;
+					case 1:
+						offsetY = 1.25;
+						offsetZ = -1.2;
+						break;
+				}
 			}
 
 			if (getModelResource().equals(HorseBreedModel.IRISH_COB.resourceLocation)) {
@@ -380,7 +446,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getModelResource().equals(HorseBreedModel.PERCHERON.resourceLocation)) {
-				offsetY = 1.43;
+				switch (i) {
+					case 0:
+						offsetY = 1.43;
+						break;
+					case 1:
+						offsetY = 1.43;
+						offsetZ = -1.2;
+						break;
+				}
 			}
 
 			if (getModelResource().equals(HorseBreedModel.SELLE_FRANCAIS.resourceLocation)) {
@@ -396,7 +470,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getModelResource().equals(HorseBreedModel.SHIRE.resourceLocation)) {
-				offsetY = 1.5;
+				switch (i) {
+					case 0:
+						offsetY = 1.5;
+						break;
+					case 1:
+						offsetY = 1.5;
+						offsetZ = -1.2;
+						break;
+				}
 			}
 
 			if (getModelResource().equals(HorseBreedModel.AKHAL_TEKE.resourceLocation)) {
@@ -410,7 +492,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			if (this.isJumping()) {
 //				offsetY = 1.7;
-				offsetZ = -0.6;
+				offsetZ = -0.4;
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());

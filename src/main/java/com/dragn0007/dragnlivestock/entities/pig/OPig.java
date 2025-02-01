@@ -292,11 +292,15 @@ public class OPig extends Animal implements GeoEntity {
 		return false;
 	}
 
+//	public int maxBabyAmount = LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get();
+
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OPig oPig1 = (OPig) ageableMob;
 		if (ageableMob instanceof OPig) {
 			OPig oPig = (OPig) ageableMob;
+//			int babyAmount = this.random.nextInt(maxBabyAmount) + 1;
+
 			oPig1 = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
 
 			int i = this.random.nextInt(9);
@@ -326,7 +330,6 @@ public class OPig extends Animal implements GeoEntity {
 			oPig1.setOverlayVariant(overlay);
 			oPig1.setGender(gender);
 		}
-
 		return oPig1;
 	}
 

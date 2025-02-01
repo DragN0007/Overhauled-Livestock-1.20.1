@@ -72,7 +72,7 @@ public class OHorseMenu extends AbstractContainerMenu {
 //            }
 //        });
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 0 || this.oHorse.getBreed() == 2 || this.oHorse.getBreed() == 7 || this.oHorse.getBreed() == 9 || this.oHorse.getBreed() == 10)) { //stock or warmblood
+        if(this.oHorse.hasChest() && (this.oHorse.isStockBreed() || this.oHorse.isWarmbloodedBreed())) { //stock or warmblood
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 3; x++) {
                     this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
@@ -80,7 +80,7 @@ public class OHorseMenu extends AbstractContainerMenu {
             }
         }
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 1 || this.oHorse.getBreed() == 5 || this.oHorse.getBreed() == 8 || this.oHorse.getBreed() == 12)) { //draft or coldblood
+        if(this.oHorse.hasChest() && this.oHorse.isDraftBreed()) { //draft or coldblood
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 5; x++) {
                     this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
@@ -88,7 +88,7 @@ public class OHorseMenu extends AbstractContainerMenu {
             }
         }
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 3 || this.oHorse.getBreed() == 6 || this.oHorse.getBreed() == 11)) { //pony
+        if(this.oHorse.hasChest() && this.oHorse.isPonyBreed()) { //pony
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 4; x++) {
                     this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
@@ -96,7 +96,7 @@ public class OHorseMenu extends AbstractContainerMenu {
             }
         }
 
-        if(this.oHorse.hasChest() && (this.oHorse.getBreed() == 4 || this.oHorse.getBreed() == 13)) { //racer
+        if(this.oHorse.hasChest() && this.oHorse.isRacingBreed()) { //racer
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 1; x++) {
                     this.addSlot(new Slot(this.container, oHorseSlots++, 80 + x * 18, 18 + y * 18));
