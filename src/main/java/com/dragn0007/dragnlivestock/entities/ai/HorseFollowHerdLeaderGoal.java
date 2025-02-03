@@ -24,9 +24,9 @@ public class HorseFollowHerdLeaderGoal extends Goal {
    }
 
    public boolean canUse() {
-      if (this.mob.hasFollowers() && !mob.isSaddled() && !mob.isLeashed() || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get()) {
+      if (this.mob.hasFollowers() && (!mob.isSaddled() || !mob.isLeashed() || !this.mob.isGroundTied()) || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get()) {
          return false;
-      } else if (this.mob.isFollower()) {
+      } else if (this.mob.isFollower() && (!this.mob.isGroundTied() || !mob.isSaddled() || !mob.isLeashed())) {
          return true;
       } else if (this.nextStartTick > 0) {
          --this.nextStartTick;
@@ -46,7 +46,7 @@ public class HorseFollowHerdLeaderGoal extends Goal {
    }
 
    public boolean canContinueToUse() {
-      return this.mob.isFollower() && this.mob.inRangeOfLeader() && !mob.isSaddled() && !mob.isLeashed() && LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get();
+      return this.mob.isFollower() && this.mob.inRangeOfLeader() && (!mob.isSaddled() || !mob.isLeashed() || !this.mob.isGroundTied()) && LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get();
    }
 
    public void start() {
@@ -58,7 +58,7 @@ public class HorseFollowHerdLeaderGoal extends Goal {
    }
 
    public void tick() {
-      if (--this.timeToRecalcPath <= 0) {
+      if (--this.timeToRecalcPath <= 0 && (!mob.isSaddled() || !mob.isLeashed() || !this.mob.isGroundTied())) {
          this.timeToRecalcPath = this.adjustedTickDelay(10);
          this.mob.pathToLeader();
       }

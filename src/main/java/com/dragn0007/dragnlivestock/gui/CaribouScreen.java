@@ -74,6 +74,10 @@ public class CaribouScreen extends AbstractContainerScreen<CaribouMenu> {
             graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
         }
 
+        if (this.caribou.hasChest()) {
+            graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
+        }
+
 //        if (this.oCamel.canWearShoes()) {
 //            graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 53, 54, this.imageHeight + 54, 18, 18);
 //        }

@@ -6,8 +6,10 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -19,6 +21,71 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("AAA")
+                .pattern("A A")
+                .pattern("B B")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.LEATHER_HORSE_ARMOR)
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .pattern("  A")
+                .pattern("AAA")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CHAINMAIL_HORSE_ARMOR.get())
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.CHAIN)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.IRON_HORSE_ARMOR)
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.IRON_INGOT)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GOLD_INGOT)
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.GOLD_INGOT)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DIAMOND)
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.DIAMOND)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.OMELETTE.get(), 1)
                 .requires(LOTags.Items.EGG)

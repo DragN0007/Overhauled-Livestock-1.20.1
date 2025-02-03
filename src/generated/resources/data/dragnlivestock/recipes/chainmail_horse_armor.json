@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "  C",
+    "CCC",
+    "ABA"
+  ],
+  "result": {
+    "item": "dragnlivestock:chainmail_horse_armor"
+  },
+  "show_notification": true
+}

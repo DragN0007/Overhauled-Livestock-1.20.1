@@ -664,23 +664,23 @@ public class SpawnReplacer {
                     }
 
                     if (oChicken.isMale() && oChicken.getBreed() == 1) {
-                        oChicken.setVariant(10);
+                        oChicken.setVariant(1);
                     }
 
                     if (oChicken.isMale() && oChicken.getBreed() == 2) {
-                        oChicken.setVariant(11);
+                        oChicken.setVariant(2);
                     }
 
                     if (oChicken.isMale() && oChicken.getBreed() == 3) {
-                        oChicken.setVariant(12);
+                        oChicken.setVariant(3);
                     }
 
                     if (oChicken.isMale() && oChicken.getBreed() == 4) {
-                        oChicken.setVariant(13);
+                        oChicken.setVariant(4);
                     }
 
                     if (oChicken.isMale() && oChicken.getBreed() == 5) {
-                        oChicken.setVariant(14);
+                        oChicken.setVariant(5);
                     }
 
                     int randomOverlayVariant = event.getLevel().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);

@@ -25,6 +25,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.END_UNICORN_SPAWN_EGG);
 
         simpleItem(LOItems.BRAND_TAG);
+        simpleItem(LOItems.CHAINMAIL_HORSE_ARMOR);
         simpleItem(LOItems.NETHERITE_HORSE_ARMOR);
         simpleItem(LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR);
         simpleItem(LOItems.BLACK_SADDLE);

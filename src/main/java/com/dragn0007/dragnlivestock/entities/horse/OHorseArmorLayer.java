@@ -44,6 +44,8 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
         if (LivestockOverhaulClientConfig.MINIMAL_HORSE_ARMOR.get()) {
             if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_leather.png");
+            } else if (armorItemStack.getItem() == LOItems.CHAINMAIL_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_chainmail.png");
             } else if (armorItemStack.getItem() == Items.IRON_HORSE_ARMOR) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_iron.png");
             } else if (armorItemStack.getItem() == Items.GOLDEN_HORSE_ARMOR) {
@@ -58,6 +60,8 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
         } else {
             if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_leather.png");
+            } else if (armorItemStack.getItem() == LOItems.CHAINMAIL_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_chainmail.png");
             } else if (armorItemStack.getItem() == Items.IRON_HORSE_ARMOR) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_iron.png");
             } else if (armorItemStack.getItem() == Items.GOLDEN_HORSE_ARMOR) {

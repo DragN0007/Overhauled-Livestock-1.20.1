@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "  C",
+    "CCC",
+    "ABA"
+  ],
+  "result": {
+    "item": "minecraft:iron_horse_armor"
+  },
+  "show_notification": true
+}

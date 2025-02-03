@@ -124,6 +124,8 @@ public class LOItems {
             () -> new HorseArmorItem(15, "netherite", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> GRIFFITH_INSPIRED_HORSE_ARMOR = ITEMS.register("griffith_inspired_horse_armor",
             () -> new HorseArmorItem(15, "griffth", (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> CHAINMAIL_HORSE_ARMOR = ITEMS.register("chainmail_horse_armor",
+            () -> new HorseArmorItem(4, "chainmail", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> BLACK_SADDLE = ITEMS.register("black_saddle",
             () -> new SaddleItem(new Item.Properties()));
 

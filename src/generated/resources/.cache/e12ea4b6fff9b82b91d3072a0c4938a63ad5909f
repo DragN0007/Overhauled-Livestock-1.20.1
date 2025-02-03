@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-19T00:11:29.1615583	Item Models: dragnlivestock
+// 1.20.1	2025-02-03T03:48:44.7134842	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
@@ -13,6 +13,7 @@ ff9cde1d2cd4752358cdf96a39b7c764533faa4e assets/dragnlivestock/models/item/carib
 f73888aec1433210817c55495832680e88f032bb assets/dragnlivestock/models/item/caribou_rib_steak.json
 183cbd4cbc71019f7535164682b2615675f55515 assets/dragnlivestock/models/item/caribou_sirloin_steak.json
 866db40b4ba212903cba4d22949046806a2ec54d assets/dragnlivestock/models/item/carrot_soup.json
+d13fa131145a0cdbca0f76d6f7b06f47685cb55c assets/dragnlivestock/models/item/chainmail_horse_armor.json
 a76d5b386b443e4528485b013a014c6a1bfc9f49 assets/dragnlivestock/models/item/cheese.json
 4ced1d4d6942f3c8bbf35d56f8be6e1ae7957255 assets/dragnlivestock/models/item/cheesecake.json
 acebc249cc7b03c5e82fff9c5b1825b50da55c34 assets/dragnlivestock/models/item/chevon.json

@@ -21,23 +21,6 @@ public class ReplacedBee implements GeoReplacedEntity {
 //		super(entityType, level);
 //	}
 
-//	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-//
-//		AnimationController<T> controller = tAnimationState.getController();
-//
-//		if(tAnimationState.isMoving()) {
-//			controller.setAnimation(RawAnimation.begin().then("flap", Animation.LoopType.LOOP));
-//		} else {
-//			if (!tAnimationState.isMoving() && !this.onGround()) {
-//				controller.setAnimation(RawAnimation.begin().then("idle_flap", Animation.LoopType.LOOP));
-//			} else {
-//				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-//			}
-//		}
-//
-//		return PlayState.CONTINUE;
-//	}
-
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 
 		AnimationController<T> controller = tAnimationState.getController();

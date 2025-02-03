@@ -115,7 +115,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
 		this.goalSelector.addGoal(7, new MountLookAtPlayerGoal(this, Player.class, 0.0F));
-
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -639,7 +638,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 //	}
 
 	public boolean isFollower() {
-		return this.leader != null && this.leader.isAlive();
+		return this.leader != null && this.leader.isAlive() && (!this.isSaddled() || !this.isLeashed() || !this.isGroundTied());
 	}
 
 	public void startFollowing(OHorse horse) {
@@ -661,7 +660,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public boolean canBeFollowed() {
-		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();
+		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize() && (!this.isSaddled() || !this.isLeashed() || !this.isGroundTied());
 	}
 
 	public int getMaxHerdSize() {
@@ -677,7 +676,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public void pathToLeader() {
-		if (this.isFollower()) {
+		if (this.isFollower() && (!this.isSaddled() || !this.isLeashed() || !this.isGroundTied())) {
 			this.getNavigation().moveTo(this.leader, 1.0D);
 		}
 	}
@@ -1074,7 +1073,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public enum Mane {
 		DEFAULT,
 		BUTTONS,
-		SHORT;
+		SHORT,
+		LONG;
 
 		public Mane next() {
 			return Mane.values()[(this.ordinal() + 1) % Mane.values().length];
@@ -1091,6 +1091,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public boolean hasShortMane() {
 		return this.getManeType() == 2;
+	}
+
+	public boolean hasLongMane() {
+		return this.getManeType() == 3;
 	}
 
 	public enum Tail {

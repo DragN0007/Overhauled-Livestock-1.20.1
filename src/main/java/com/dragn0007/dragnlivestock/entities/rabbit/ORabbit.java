@@ -60,12 +60,23 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		super(type, level);
 	}
 
+	private static final ResourceLocation MEAT_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_meat_rabbit");
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_rabbit");
+	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_rabbit");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/rabbit");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
+		}
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 1) { //meat rabbits
+			return MEAT_LOOT_TABLE;
+		}
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 3) { //normal rabbits
+			return LOOT_TABLE;
+		}
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 2) { //mini rabbits
+			return MINI_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

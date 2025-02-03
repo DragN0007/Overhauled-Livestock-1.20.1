@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -40,18 +41,38 @@ public class ODonkeyArmorLayer extends GeoRenderLayer<ODonkey> {
 
         ResourceLocation resourceLocation = null;
 
-        if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_leather.png");
-        } else if (armorItemStack.getItem() == Items.IRON_HORSE_ARMOR) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_iron.png");
-        } else if (armorItemStack.getItem() == Items.GOLDEN_HORSE_ARMOR) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_gold.png");
-        } else if (armorItemStack.getItem() == Items.DIAMOND_HORSE_ARMOR) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_diamond.png");
-        } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_netherite.png");
+        if (LivestockOverhaulClientConfig.MINIMAL_HORSE_ARMOR.get()) {
+            if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_leather.png");
+            } else if (armorItemStack.getItem() == LOItems.CHAINMAIL_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_chainmail.png");
+            } else if (armorItemStack.getItem() == Items.IRON_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_iron.png");
+            } else if (armorItemStack.getItem() == Items.GOLDEN_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_gold.png");
+            } else if (armorItemStack.getItem() == Items.DIAMOND_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_diamond.png");
+            } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_netherite.png");
+            } else {
+                return;
+            }
         } else {
-            return;
+            if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_leather.png");
+            } else if (armorItemStack.getItem() == LOItems.CHAINMAIL_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_chainmail.png");
+            } else if (armorItemStack.getItem() == Items.IRON_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_iron.png");
+            } else if (armorItemStack.getItem() == Items.GOLDEN_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_gold.png");
+            } else if (armorItemStack.getItem() == Items.DIAMOND_HORSE_ARMOR) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_diamond.png");
+            } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_netherite.png");
+            } else {
+                return;
+            }
         }
 
         RenderType renderType1 = RenderType.entityCutout(resourceLocation);

@@ -70,6 +70,7 @@ public class LOItemGroup {
                         output.accept(LOItems.MANE_SCISSORS.get());
                         output.accept(LOItems.TAIL_SCISSORS.get());
 
+                        output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
 //                        output.accept(LOItems.BLACK_SADDLE.get());
 
