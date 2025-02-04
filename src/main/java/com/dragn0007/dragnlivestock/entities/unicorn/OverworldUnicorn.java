@@ -61,23 +61,20 @@ public class OverworldUnicorn extends OHorse implements GeoEntity {
 	}
 
 	@Override
-	public void randomizeAttributes() {
+	public void randomizeOHorseAttributes() {
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.generateRandomMaxHealth());
 		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.generateRandomSpeed());
 		this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomJumpStrength());
 	}
 
-	@Override
 	public float generateRandomMaxHealth() {
 		return 24.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
 	}
 
-	@Override
 	public double generateRandomJumpStrength() {
 		return (double)0.8F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D;
 	}
 
-	@Override
 	public double generateRandomSpeed() {
 		return ((double)0.65F + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
 	}
@@ -192,7 +189,7 @@ public class OverworldUnicorn extends OHorse implements GeoEntity {
 		setVariant(random.nextInt(OverworldUnicornModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OverworldUnicornHornLayer.Overlay.values().length));
 
-		this.randomizeAttributes();
+		this.randomizeOHorseAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 

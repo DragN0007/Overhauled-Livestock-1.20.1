@@ -157,9 +157,7 @@ public class SpawnReplacer {
                     oHorse.setCustomName(vanillaHorse.getCustomName());
                     oHorse.setOwnerUUID(vanillaHorse.getOwnerUUID());
                     oHorse.setAge(vanillaHorse.getAge());
-                    oHorse.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oHorse.generateRandomMaxHealth());
-                    oHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oHorse.generateRandomSpeed());
-                    oHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oHorse.generateRandomJumpStrength());
+                    oHorse.randomizeOHorseAttributes();
 
                     //set random variants on-spawn
                     int randomVariant = event.getLevel().getRandom().nextInt(OHorseModel.Variant.values().length);

@@ -84,7 +84,7 @@ public class LivestockOverhaulEvent {
 
     @SubscribeEvent
     public static void entityAttrbiuteCreationEvent(EntityAttributeCreationEvent event) {
-        event.put(EntityTypes.O_HORSE_ENTITY.get(), OHorse.createBaseHorseAttributes().build());
+        event.put(EntityTypes.O_HORSE_ENTITY.get(), OHorse.createBaseOHorseAttributes().build());
         event.put(EntityTypes.O_COW_ENTITY.get(), OCow.createAttributes().build());
         event.put(EntityTypes.O_CHICKEN_ENTITY.get(), OChicken.createAttributes().build());
         event.put(EntityTypes.O_SALMON_ENTITY.get(), OSalmon.createAttributes().build());

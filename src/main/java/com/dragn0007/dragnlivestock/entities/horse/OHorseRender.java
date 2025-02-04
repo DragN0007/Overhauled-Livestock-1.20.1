@@ -110,11 +110,23 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             model.getBone("mane").ifPresent(b -> b.setScaleZ(0.5F));
         }
 
-//        if (entity.hasLongMane()) {
-//            model.getBone("roached_mane").ifPresent(b -> b.setHidden(true));
-//            model.getBone("button_mane").ifPresent(b -> b.setHidden(true));
-//            model.getBone("long_mane").ifPresent(b -> b.setHidden(false));
-//        }
+        if (entity.hasShortMane()) {
+            model.getBone("roached_mane").ifPresent(b -> b.setHidden(false));
+            model.getBone("button_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("long_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("mane").ifPresent(b -> b.setScaleZ(0.5F));
+        }
+
+        if (entity.hasLongMane()) {
+            model.getBone("roached_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("button_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("long_mane").ifPresent(b -> b.setHidden(false));
+        }
+        if (entity.hasNoMane()) {
+            model.getBone("roached_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("button_mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("long_mane").ifPresent(b -> b.setHidden(true));
+        }
 
         if (entity.hasDefaultTail()) {
             model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
@@ -141,6 +153,13 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             model.getBone("tail").ifPresent(b -> b.setScaleY(0.7F));
             model.getBone("tail").ifPresent(b -> b.setScaleX(1.1F));
             model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            model.getBone("tail_bottom").ifPresent(b -> b.setHidden(true));
+        }
+
+        if (entity.hasTiedTail()) {
+            model.getBone("tail").ifPresent(b -> b.setScaleY(0.9F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(0.7F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(0.7F));
             model.getBone("tail_bottom").ifPresent(b -> b.setHidden(true));
         }
 
