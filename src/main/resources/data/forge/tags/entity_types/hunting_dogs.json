@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "dragnpets:labrador"
+
+    {
+      "id": "dragnpets:labrador",
+      "required": false
+    }
+
   ]
 }

@@ -46,18 +46,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
 
-    public static final float MAX_MOVEMENT_SPEED = (float)generateSpeed(() -> {
-        return 1.0D;
-    });
-    public static final float MIN_JUMP_STRENGTH = (float)generateJumpStrength(() -> {
-        return 0.0D;
-    });
-    public static final float MAX_JUMP_STRENGTH = (float)generateJumpStrength(() -> {
-        return 1.0D;
-    });
-    public static final float MIN_HEALTH = generateMaxHealth((p_272505_) -> {
-        return 0;
-    });
     public static final float MAX_HEALTH = generateMaxHealth((p_272504_) -> {
         return p_272504_ - 1;
     });

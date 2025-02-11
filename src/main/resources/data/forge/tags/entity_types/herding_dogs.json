@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "dragnpets:border_collie"
+
+    {
+      "id": "dragnpets:border_collie",
+      "required": false
+    }
+
   ]
 }

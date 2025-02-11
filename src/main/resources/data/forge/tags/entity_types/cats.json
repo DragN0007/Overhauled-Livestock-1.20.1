@@ -1,7 +1,16 @@
 {
   "replace": false,
   "values": [
-    "dragnpets:o_cat",
-    "dragnpets:o_ocelot"
+
+    {
+      "id": "dragnpets:o_cat",
+      "required": false
+    },
+
+    {
+      "id": "dragnpets:o_ocelot",
+      "required": false
+    }
+
   ]
 }

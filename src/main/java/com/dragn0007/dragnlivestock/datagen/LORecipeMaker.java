@@ -562,6 +562,28 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.PORK_TENDERLOIN.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_TENDERLOIN.get(), 0.35F, 600)
                 .unlockedBy("has_pork_tenderloin", has(LOItems.PORK_TENDERLOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_tenderloin_campfire_cooking"));
 
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CARIBOU.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU.get(), 0.35F, 100)
+                .unlockedBy("has_caribou", has(LOItems.CARIBOU.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CARIBOU.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU.get(), 0.35F, 200)
+                .unlockedBy("has_caribou", has(LOItems.CARIBOU.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CARIBOU.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU.get(), 0.35F, 600)
+                .unlockedBy("has_caribou", has(LOItems.CARIBOU.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CARIBOU_RIB_STEAK.get()),RecipeCategory.MISC,  LOItems.COOKED_CARIBOU_RIB_STEAK.get(), 0.35F, 100)
+                .unlockedBy("has_caribou_rib_steak", has(LOItems.CARIBOU_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_rib_steak_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CARIBOU_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_RIB_STEAK.get(), 0.35F, 200)
+                .unlockedBy("has_caribou_rib_steak", has(LOItems.CARIBOU_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_rib_steak_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CARIBOU_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_RIB_STEAK.get(), 0.35F, 600)
+                .unlockedBy("has_caribou_rib_steak", has(LOItems.CARIBOU_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_rib_steak_campfire_cooking"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CARIBOU_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get(), 0.35F, 100)
+                .unlockedBy("has_caribou_sirloin_steak", has(LOItems.CARIBOU_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_sirloin_steak_smoking"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CARIBOU_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get(), 0.35F, 200)
+                .unlockedBy("has_caribou_sirloin_steak", has(LOItems.CARIBOU_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_sirloin_steak_smelting"));
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CARIBOU_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get(), 0.35F, 600)
+                .unlockedBy("has_caribou_sirloin_steak", has(LOItems.CARIBOU_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_sirloin_steak_campfire_cooking"));
+
+
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 100)
                 .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 200)

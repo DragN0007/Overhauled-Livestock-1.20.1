@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_caribou_rib_steak": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:caribou_rib_steak"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragnlivestock:cooked_caribou_rib_steak_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_caribou_rib_steak",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragnlivestock:cooked_caribou_rib_steak_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

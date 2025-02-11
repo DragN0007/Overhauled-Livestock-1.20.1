@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "swem:swem_horse"
+
+    {
+      "id": "swem:swem_horse",
+      "required": false
+    }
+
   ]
 }

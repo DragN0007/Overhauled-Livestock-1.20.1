@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "horse_colors:horse_felinoid"
+
+    {
+      "id": "horse_colors:horse_felinoid",
+      "required": false
+    }
+
   ]
 }
