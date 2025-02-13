@@ -1,0 +1,34 @@
+{
+  "name": "Gender Information",
+  "icon": "dragnlivestock:gender_test_strip",
+  "category": "dragnlivestock:genders_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There’s a “Gender Test Strip” item that can be used on equines, camels, llamas and rabbits. It can be crafted with 2 paper, and will turn pink or blue based on the gender of the right-clicked animal. You can reuse the strips by crafting them back into blank ones."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "-Horses, Mules, Donkeys & Camels will have a small gender icon in their GUIs. $(br2)-Female cows will have udders. All cows can have the same horn types, so the only gender identifier is udders. Female cows can also be milked. $(br2)-Sheep should be gendered via Gender Test Strips, as horns no longer determine gender. (Horns now only determine breed)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "-Male pigs will have tusks, females will not. $(br2)-Male chickens have large, long tails, and females have short tails. The breed of the laid egg is determined by the hen, NOT the rooster. $(br2)-Rabbits have no dimorphism. Test strips are the best way to go."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "-Llamas have no dimorphism. Test strips are the best way to go. $(br2)-Bees have no gender and can be bred normally. $(br2)-Mountain Goats have two types of horns. Large, curly horns indicate a male, and thin, straight horns indicate a female."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "-Frogs have no gender. Because the chemicals in the water are turning the frogs gay. $(br2)-Mooblooms are visually all female and $(l)cannot be bred.$() $(br2)-Caribou have a gender icon in their GUI. Otherwise, females have smaller antlers than males."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:gender_test_strip"
+      },
+      "text": "The $(l)Gender Test Strip$() is used to tell the genders of animals who may have no dimorphism, or are babies."
+    }
+  ]
+}

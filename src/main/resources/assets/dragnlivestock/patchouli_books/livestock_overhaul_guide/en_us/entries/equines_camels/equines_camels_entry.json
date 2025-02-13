@@ -1,0 +1,15 @@
+{
+  "name": "Equines & Camels",
+  "icon": "dragnlivestock:gold_horseshoe",
+  "category": "dragnlivestock:mount_controls_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)CTRL$() - Speed Up Gait $(br2)$(l)Left ALT$() - Slow Down Gait $(br2)$(l)B$() - Bow Emote $(br2)$(l)P$() - Piaffe Emote"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Along with speeding up and slowing down, equines and camels can do some emotes."
+    }
+  ]
+}

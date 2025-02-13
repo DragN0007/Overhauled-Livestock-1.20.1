@@ -1,0 +1,17 @@
+{
+  "name": "New Foods",
+  "icon": "dragnlivestock:omelette",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:egg_salad",
+      "recipe2": "dragnlivestock:omelette"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:cheesecake",
+      "recipe2": "dragnlivestock:berry_glazed_mutton_rib"
+    }
+  ]
+}

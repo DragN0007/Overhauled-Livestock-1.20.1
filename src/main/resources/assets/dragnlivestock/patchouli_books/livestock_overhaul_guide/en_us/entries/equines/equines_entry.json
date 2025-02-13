@@ -1,0 +1,15 @@
+{
+  "name": "Equines",
+  "icon": "dragnlivestock:iron_horseshoe",
+  "category": "dragnlivestock:mount_controls_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)CTRL$() - Speed Up Gait $(br2)$(l)Left ALT$() - Slow Down Gait $(br2)$(l)B$() - Bow Emote $(br2)$(l)P$() - Piaffe Emote G - Wave Emote $(br2)$(l)L$() - Levade Emote $(br2)$(l)Down Arrow (whilst walking)$() - Spanish Walk (Horses Only)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Along with speeding up and slowing down, equines can do quite a few emotes."
+    }
+  ]
+}

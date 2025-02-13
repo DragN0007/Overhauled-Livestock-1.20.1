@@ -1,0 +1,28 @@
+{
+  "name": "Milk & Cheese",
+  "icon": "dragnlivestock:cow_milk_jug",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:cow_milk_jug",
+      "recipe2": "dragnlivestock:sheep_milk_jug"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:llama_milk_jug",
+      "recipe2": "dragnlivestock:goat_milk_jug"
+    },
+    {
+      "type": "patchouli:smelting",
+      "recipe": "dragnlivestock:cheese_smelting",
+      "recipe2": "dragnlivestock:sheep_cheese_smelting"
+    },
+    {
+      "type": "patchouli:smelting",
+      "recipe": "dragnlivestock:llama_cheese_smelting",
+      "recipe2": "dragnlivestock:goat_cheese_smelting",
+      "text": "Milk Jugs give you a better ratio of milk (x3 Jugs per Bucket), and are used to make cheese."
+    }
+  ]
+}

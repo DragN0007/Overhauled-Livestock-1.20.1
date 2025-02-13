@@ -84,15 +84,24 @@ repositories {
             includeGroupByRegex("software\\.bernie.*")
             includeGroup("com.eliotlash.mclib")
         }
-        maven {
+
+    maven {
             url 'https://www.cursemaven.com'
         }
+
+    maven {
+            url 'https://maven.blamejared.com'
+        }
+
     }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:1.20.1-47.2.0" // 47.2.0 is Recommended
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
+
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
 
     //compat stuff
 //    implementation fg.deobf("curse.maven:thats-just-peachy-912726:5367423")

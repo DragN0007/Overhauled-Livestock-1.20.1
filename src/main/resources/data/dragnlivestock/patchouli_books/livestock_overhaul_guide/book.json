@@ -1,0 +1,8 @@
+{
+  "name": "Livestock Guide",
+  "landing_text": "Welcome to DragN's Livestock Overhaul! $(br)Need the Wiki instead? $(br)https://github.com/DragN0007/Overhauled-Livestock/wiki",
+  "version": 1,
+  "creative_tab": "dragnlivestock:overhauled_livestock",
+  "model":"dragnlivestock:livestock_overhaul_guide",
+  "use_resource_pack": true
+}

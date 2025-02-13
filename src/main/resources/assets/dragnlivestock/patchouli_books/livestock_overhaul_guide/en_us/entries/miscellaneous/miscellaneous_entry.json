@@ -1,0 +1,26 @@
+{
+  "name": "Miscellaneous",
+  "icon": "dragnlivestock:gender_test_strip",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:gender_test_strip",
+      "recipe2": "dragnlivestock:grub_sweater"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:mane_scissors",
+      "recipe2": "dragnlivestock:tail_scissors"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:overworld_unicorn_spawn_egg",
+      "recipe2": "dragnlivestock:nether_unicorn_spawn_egg"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:end_unicorn_spawn_egg"
+    }
+  ]
+}

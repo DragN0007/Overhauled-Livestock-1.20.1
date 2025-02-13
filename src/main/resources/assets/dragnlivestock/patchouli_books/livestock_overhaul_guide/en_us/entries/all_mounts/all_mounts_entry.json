@@ -1,0 +1,15 @@
+{
+  "name": "All Mounts",
+  "icon": "dragnlivestock:diamond_horseshoe",
+  "category": "dragnlivestock:mount_controls_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)CTRL$() - Speed Up Gait $(br2)$(l)Left ALT$() - Slow Down Gait"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "All controllable O-Mounts can speed up and slow down in gait. Usually, this includes a Walk, Run, and Sprint."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "O-Cows",
+  "icon": "dragnlivestock:cow_milk_jug",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Cows drop lots of meat, leather, and bones. They also come in over 400 different variants (horns included). Cows can be milked to make cheese. $(br2)O-Cows naturally run from O-Horses, and herd with eachother. You can use this to your advantage to drive up to 8 cattle in a herd with your horse."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The milking cooldown on O-Cows is 10 minutes. However, this is configurable."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O-Cows can come in 5 different breeds: $(br2)Angus, Longhorn, Brahman, Mini and Highland."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_cow{Variant:0}",
+      "name": "The O-Cow",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A black angus heifer with no markings."
+    }
+  ]
+}

@@ -29,3 +29,9 @@ mandatory=true
 versionRange = "[4.4.4,)"
 ordering="NONE"
 side="BOTH"
+[[dependencies.dragnlivestock]]
+modId="patchouli"
+mandatory=false
+versionRange = "[1.20.1-84,)"
+ordering="NONE"
+side="BOTH"

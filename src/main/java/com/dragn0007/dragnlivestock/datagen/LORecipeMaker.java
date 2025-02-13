@@ -64,7 +64,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(Items.LEATHER).build()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GOLD_INGOT)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GOLDEN_HORSE_ARMOR)
                 .define('A', Items.LEATHER)
                 .define('B', ItemTags.WOOL_CARPETS)
                 .define('C', Items.GOLD_INGOT)
@@ -75,7 +75,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(Items.LEATHER).build()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DIAMOND)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DIAMOND_HORSE_ARMOR)
                 .define('A', Items.LEATHER)
                 .define('B', ItemTags.WOOL_CARPETS)
                 .define('C', Items.DIAMOND)

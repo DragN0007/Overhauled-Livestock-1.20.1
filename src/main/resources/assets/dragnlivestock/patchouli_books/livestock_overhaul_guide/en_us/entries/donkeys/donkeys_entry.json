@@ -1,0 +1,34 @@
+{
+  "name": "O-Donkey & O-Mule",
+  "icon": "minecraft:chest",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Donkeys/ O-Mules can still carry chests, but they can also be armored. They also protect your livestock from wolves, running them off from your herd(s). $(br2) O-Donkeys and O-Mules can come in as many patterns as horses. However, wild donkeys spawn naturally plain. To get a patterned donkey, you’ll have to breed it over a few generations."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Baby O-Mules can take on the pattern from the horse parent or the donkey parent. $(br2)O-Donkeys come in no breeds, but O-Mules can come in 3 body types: $(br2)Miniature (bred with a Pony parent), Stock (bred with a Stock, Warmblood, or Racer horse parent), Draft (bred with a Draft or Coldblood horse parent)"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_donkey{Variant:0}",
+      "name": "The O-Donkey",
+      "default_rotation": 45,
+      "scale": 0.75,
+      "rotate": "false",
+      "text": "A donkey with no markings."
+    },
+
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_mule{Variant:0}",
+      "name": "The O-Mule",
+      "default_rotation": 45,
+      "scale": 1,
+      "rotate": "false",
+      "text": "A mule with no markings."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Saddles & Horse Armor",
+  "icon": "minecraft:saddle",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:saddle"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:leather_horse_armor",
+      "recipe2": "dragnlivestock:chainmail_horse_armor"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:iron_horse_armor",
+      "recipe2": "minecraft:golden_horse_armor"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:diamond_horse_armor",
+      "text": "LO adds new recipes for both existing horse armors and new ones, plus saddles. $(br)Netherite Horse Armor can be made the same way other Netherite armors are made in a Smithing Table."
+    }
+  ]
+}
