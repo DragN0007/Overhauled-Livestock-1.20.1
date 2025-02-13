@@ -14,16 +14,14 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -40,6 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
@@ -59,6 +58,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.7D, AttributeModifier.Operation.MULTIPLY_TOTAL); // KEEP THIS NEGATIVE. It is calculated by adding 1. So -0.1 actually means 0.9
 
     public static final EntityDataAccessor<Integer> DATA_CARPET_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.OPTIONAL_UUID);
+
     protected boolean shouldEmote;
 
     public boolean isGroundTied() {
@@ -376,6 +377,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         super.defineSynchedData();
         this.entityData.define(DATA_CARPET_ID, -1);
         this.entityData.define(DATA_ID_CHEST, false);
+        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
     }
 
     @Override
@@ -404,6 +406,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         compoundTag.putBoolean("ChestedHorse", this.hasChest());
         if (this.hasChest()) {
             ListTag listtag = new ListTag();
+        }
+
+        if (this.getOwnerUUID() != null) {
+            compoundTag.putUUID("Owner", this.getOwnerUUID());
         }
     }
 
@@ -442,6 +448,36 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.setChest(compoundTag.getBoolean("ChestedHorse"));
 
         this.updateContainerEquipment();
+
+        UUID uuid;
+        if (compoundTag.hasUUID("Owner")) {
+            uuid = compoundTag.getUUID("Owner");
+        } else {
+            String s = compoundTag.getString("Owner");
+            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
+        }
+
+        if (uuid != null) {
+            try {
+                this.setOwnerUUID(uuid);
+                this.setTamed(true);
+            } catch (Throwable throwable) {
+                this.setTamed(false);
+            }
+        }
+    }
+
+    @Nullable
+    public UUID getOwnerUUID() {
+        return this.entityData.get(DATA_OWNERUUID_ID).orElse((UUID)null);
+    }
+
+    public void setOwnerUUID(@Nullable UUID p_21817_) {
+        this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(p_21817_));
+    }
+
+    public boolean isOwnedBy(LivingEntity p_21831_) {
+        return p_21831_ == this.getOwner();
     }
 
     @Override

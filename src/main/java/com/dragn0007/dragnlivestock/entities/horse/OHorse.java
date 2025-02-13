@@ -59,6 +59,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public class OHorse extends AbstractOMount implements GeoEntity {

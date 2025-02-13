@@ -10,12 +10,15 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
+import java.util.UUID;
 
 public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
@@ -34,6 +37,8 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     protected int jumpStrengthLabelY;
     protected int healthLabelX;
     protected int healthLabelY;
+//    protected int ownerLabelX;
+//    protected int ownerLabelY;
 
     public OHorseScreen(OHorseMenu oHorseMenu, Inventory inventory, Component component) {
         super(oHorseMenu, inventory, component);
@@ -44,6 +49,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     protected void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
+
+//        ownerLabelX = leftPos + 1;
+//        ownerLabelY = topPos - 18;
 
         breedLabelX = leftPos + 1;
         breedLabelY = topPos - 8;
@@ -113,6 +121,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oHorse);
 
         renderBreedLabel(graphics);
+//        renderOwnerLabel(graphics);
 
         if (LivestockOverhaulClientConfig.HORSE_COAT_GUI.get()) {
             renderBaseCoatLabel(graphics);
@@ -191,6 +200,15 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             graphics.drawString(this.font, labelText, markingLabelX, markingLabelY, 0xFFFFFF, false);
         }
     }
+
+//    private void renderOwnerLabel(GuiGraphics graphics) {
+//        String playerOwnerName = String.valueOf(this.oHorse.getOwner().getDisplayName());
+//        String labelText = "Tamed By: " + playerOwnerName;
+//
+//        String unknownOwnerText = "Tamed By: [Unknown Player]";
+//
+//        graphics.drawString(this.font, labelText, ownerLabelX, ownerLabelY, 0xFFFFFF, false);
+//    }
 
 
     //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v
