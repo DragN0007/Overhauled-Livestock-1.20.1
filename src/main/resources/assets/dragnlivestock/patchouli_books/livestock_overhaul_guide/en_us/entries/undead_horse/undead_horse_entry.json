@@ -1,0 +1,15 @@
+{
+  "name": "O-Undead Horse",
+  "icon": "minecraft:rotten_flesh",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Undead Horses replace both Skeleton and Zombie horses. You can see some of their rotted, exposed bone on the surface of their skin, and they’re also… dusty. $(br2)Undead Horses can do pretty much everything a normal horse can do. However, they don’t have quite as much health, and they aren’t very fast. They can, however, walk atop powdered snow!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Undead Horses can’t have markings/ patterns like normal horses. They can, however, come in all of the same base colors as O-Horses."
+    }
+  ]
+}

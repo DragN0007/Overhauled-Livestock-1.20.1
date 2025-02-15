@@ -1,0 +1,20 @@
+{
+  "name": "O-Llama",
+  "icon": "minecraft:white_carpet",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Llamas can carry your items just like vanilla llamas. They can also be milked for llama cheese, and killed for meat and wool."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_llama{Variant:2}",
+      "name": "The O-Llama",
+      "default_rotation": 45,
+      "scale": 0.6,
+      "rotate": "false",
+      "text": "A brown llama with no markings."
+    }
+  ]
+}

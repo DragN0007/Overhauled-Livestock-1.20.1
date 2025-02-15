@@ -1,0 +1,15 @@
+{
+  "name": "Moobloom",
+  "icon": "minecraft:poppy",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Crop Mooblooms, such as Wheat, Pumpkin, Melon, Beetroot, Carrot, Potato, and Sweet Berry Mooblooms grow their same crop type within a 5x5 radius around them twice as fast as usual crop growth. Just let them wander the field and they'll grow their crops faster than normal! $(br)You can shear all of the Mooblooms to get crops or flowers from them. They'll regrow them in a short amount of time."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mooblooms come in lots of different plant variants. These include: $(br)Wheat (2% Chance in Plains). Can be milked with a Bowl. $(br)-Pumpkin (2% Chance in Forests). Can be milked with a Bowl. $(br)-Melon (2% Chance in Jungles, Sparse Jungles, and Savannahs). Can be milked with a Bowl. $(br)-Carrot (2% Chance in Plains). Can be milked with a Bowl. $(br)-Beetroot (2% Chance in Meadows). Can be milked with a Bowl. $(br)-Potato (2% Chance in Meadows). Can be milked with a Bowl. $(br)-Sweet Berry (2% Chance in Taigas and Snowy Taigas). Can be milked with a Bowl. $(br)-Glow Berry (2% Chance in Swamps and Dark Forests). Can be milked with a Bowl. $(br)-Azalea (2% Chance in Forests and Birch Forests). Cannot be milked. $(br)-Most Natural Flowers (30% Chance in Flower Forests and Sunflower Plains). Cannot be milked. $(br)-Peach (2% Chance in Savannahs as long as That's Just Peachy is installed). Can be milked with a Glass Bottle."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "Extras",
+  "icon": "minecraft:heart_of_the_sea",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:grub{Variant:0}",
+      "name": "The Grub",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A grub, used to feed O-Frogs to breed them."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:grub"
+      },
+      "text": "The Grub item, dropped from a grub when killed."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:overworld_unicorn{Variant:0}",
+      "name": "The Overworld Unicorn",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "An Overworld Unicorn, crafted from an Overworld Unicorn Amulet."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:nether_unicorn{Variant:0}",
+      "name": "The Nether Unicorn",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A Nether Unicorn, crafted from a Nether Unicorn Amulet."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:end_unicorn{Variant:0}",
+      "name": "The End Unicorn",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "An End Unicorn, crafted from an End Unicorn Amulet."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:headless_horseman{Variant:0}",
+      "name": "The Headless Horseman",
+      "default_rotation": 45,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "The Headless Horseman, occasionally found roaming the night on his steed."
+    }
+  ]
+}

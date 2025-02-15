@@ -1,0 +1,21 @@
+{
+  "name": "Caribou",
+  "icon": "minecraft:red_wool",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Caribou were added shortly after the Christmas Patch due to a large influx of players who loved the reindeer models that visually replaced O-Horses for the 24th and 25th of December, and wanted to keep them in the game for more than just Christmas. They work very similarly to O-Horses and can be tamed, ridden, and have saddlebags. They can be killed for Caribou Meat, bones and leather. They spawn in snowy and taiga biomes."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:caribou{Variant:0,Gender:1}",
+      "name": "The Caribou",
+      "default_rotation": 45,
+      "scale": 0.7,
+      "offset": 0.4,
+      "rotate": "false",
+      "text": "A male, bay reindeer with no markings."
+    }
+  ]
+}

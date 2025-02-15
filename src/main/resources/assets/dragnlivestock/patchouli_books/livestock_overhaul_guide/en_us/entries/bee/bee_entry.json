@@ -1,0 +1,20 @@
+{
+  "name": "O-Bee",
+  "icon": "minecraft:honeycomb",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Bees do the same things as vanilla bees. However, they're much smaller and can come in 7 different species. $(br2)Some species, such as the Honey Bee, are even smaller than the average Bumblebee."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_bee{Variant:0}",
+      "name": "The O-Bee",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A normal Bumblebee."
+    }
+  ]
+}

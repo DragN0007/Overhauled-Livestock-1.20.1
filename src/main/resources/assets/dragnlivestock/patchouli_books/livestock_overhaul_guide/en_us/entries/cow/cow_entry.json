@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The milking cooldown on O-Cows is 10 minutes. However, this is configurable."
+      "text": "The milking cooldown on O-Cows is 10 minutes. However, this is configurable in the livestock-overhaul-common.toml."
     },
     {
       "type": "patchouli:text",

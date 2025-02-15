@@ -1,0 +1,20 @@
+{
+  "name": "O-Camel",
+  "icon": "minecraft:cactus",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Camels are exclusive to 1.20.1(+) versions. They drop meat, leather, and bones, and can be saddled and ridden, along with carpeted. Camels are far faster than horses on sand, and can be right-clicked with a bucket every 5 minutes~ for water. Camels are also immune to cactus damage. $(br2)They come in lots of different patterns and colors. You can tame and breed Camels with cacti."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_camel{Variant:5}",
+      "name": "The O-Camel",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A cream camel with no markings."
+    }
+  ]
+}

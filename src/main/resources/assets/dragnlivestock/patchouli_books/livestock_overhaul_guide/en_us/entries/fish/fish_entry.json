@@ -1,0 +1,36 @@
+{
+  "name": "O-Fish",
+  "icon": "dragnlivestock:roe",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Salmon and O-Cod drop themselves still, but they also drop bonemeal, fish oil, and sometimes roe. Fish Oil can be used for weak regeneration, and two fillets can be crafted from Cod or Salmon."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_salmon{Variant:0}",
+      "name": "The O-Salmon",
+      "default_rotation": 45,
+      "scale": 0.6,
+      "rotate": "false",
+      "text": "A salmon."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_cod{Variant:0}",
+      "name": "The O-Cod",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A cod."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:roe"
+      },
+      "text": "$(l)Roe$() can be eaten or placed down to spawn baby fish fry. Both cod and salmon can drop roe."
+    }
+  ]
+}

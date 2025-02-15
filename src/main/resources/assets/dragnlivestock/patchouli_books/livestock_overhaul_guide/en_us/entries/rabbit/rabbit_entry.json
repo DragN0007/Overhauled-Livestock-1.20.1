@@ -1,0 +1,20 @@
+{
+  "name": "O-Rabbits",
+  "icon": "minecraft:carrot",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Rabbits drop rabbit hide and meat. They can also be bred to have different patterns and tamed with veggies. While they won’t follow you, you can make them stay by right-clicking them. $(br2)O-Rabbits can come in 4 different breeds: $(br2)Default, Lop, Dwarf and Giant."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_rabbit{Variant:3, Breed:3}",
+      "name": "The O-Rabbit",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A grey lop bunny with no markings."
+    }
+  ]
+}

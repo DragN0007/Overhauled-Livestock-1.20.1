@@ -1,0 +1,31 @@
+{
+  "name": "O-Chicken",
+  "icon": "dragnlivestock:egg",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Chickens drop meat, feathers, and bones. They also come in many different variants, and lay eggs like usual. $(br2)Chickens come in 6 different breeds and lay 3 eggs when bred. $(br)Leghorn (White Eggs), Ameraucana (Teal Eggs), Cream Legbar (Blue Eggs), Marans (Chocolate Brown Eggs), Olive Egger (Olive Eggs), Sussex Silkie (Cream Eggs)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The egg laying cooldown on O-Chickens is 10-15 minutes rather than the vanilla 5-10 minutes. However, this is configurable in the livestock-overhaul-common.toml."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_chicken{Variant:3,Breed:3}",
+      "name": "The O-Chicken",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A marans rooster with no markings."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:marans_egg"
+      },
+      "text": "$(l)Fertilized Eggs$() can be thrown to hatch chicks, and are obtained by breeding a Rooster and a Hen."
+    }
+  ]
+}

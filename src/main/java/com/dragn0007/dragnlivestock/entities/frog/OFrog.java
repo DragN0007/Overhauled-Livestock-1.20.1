@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.frog;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.FrogSitOnBlockGoal;
+import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -265,62 +267,44 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	public boolean canMate(Animal animal) {
-		if (animal == this || this.hasBred) {
+		if (animal == this) {
 			return false;
 		} else
 			return animal instanceof OFrog;
 	}
 
-	private static final int COOLDOWN_TIME = 100;
-	private int cooldownTicks = 0;
-	private boolean eggDropped = false;
-	private boolean hasBred = false;
-	private int eggsLaid = 0;
-	private static final int MAX_EGGS = 4;
+	public int eggsLaid = 0;
+	public int eggLayCooldown = 0;
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 
-		if (eggDropped || cooldownTicks > 0 || eggsLaid >= MAX_EGGS) {
+		if (!this.isInLove() || !this.isAlive() || eggsLaid >= 2) {
 			return null;
 		}
 
+		eggsLaid++;
 		dropFertilizedEgg(serverLevel);
-		eggDropped = true;
-		cooldownTicks = COOLDOWN_TIME;
-		hasBred = true;
-
 		return null;
 	}
 
-	@Override
 	public void tick() {
-		if (cooldownTicks > 0) {
-			cooldownTicks--;
-
-			if (cooldownTicks == 0) {
-				eggDropped = false;
-				hasBred = false;
-				eggsLaid = 0;
-			}
-		}
-
 		super.tick();
+
+		if (eggsLaid >= 2 && eggLayCooldown >= 100) {
+			eggsLaid = 0;
+			eggLayCooldown = 0;
+		}
 	}
 
 	private void dropFertilizedEgg(ServerLevel serverLevel) {
 
-		if (eggsLaid >= MAX_EGGS) {
-			return;
-		}
-
-		ItemStack fertilizedEgg = new ItemStack(Blocks.FROGSPAWN);
+		ItemStack fertilizedEgg = new ItemStack(Items.FROGSPAWN);
 		ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 		serverLevel.addFreshEntity(eggEntity);
 
 		serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.FROG_LAY_SPAWN, SoundSource.NEUTRAL, 1.0F, 1.0F);
-
-		eggsLaid++;
 	}
+
 
 }

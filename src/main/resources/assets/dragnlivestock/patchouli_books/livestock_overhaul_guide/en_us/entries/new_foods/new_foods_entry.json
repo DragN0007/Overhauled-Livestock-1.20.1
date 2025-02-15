@@ -12,6 +12,11 @@
       "type": "patchouli:crafting",
       "recipe": "dragnlivestock:cheesecake",
       "recipe2": "dragnlivestock:berry_glazed_mutton_rib"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:salmon_fillet",
+      "recipe2": "dragnlivestock:cod_fillet"
     }
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "name": "O-Pig",
+  "icon": "dragnlivestock:pork_tenderloin",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vanilla pigs and O-Pigs have a lot in common. The only difference is that O-Pigs drop a lot of meat, and they come in lots of different variants."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_pig{Variant:4}",
+      "name": "The O-Pig",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A pink pig with no markings."
+    }
+  ]
+}

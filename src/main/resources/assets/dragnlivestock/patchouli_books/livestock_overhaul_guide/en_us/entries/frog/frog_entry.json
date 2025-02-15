@@ -1,0 +1,20 @@
+{
+  "name": "O-Frog",
+  "icon": "minecraft:frogspawn",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Frogs act quite a bit like their vanilla counterparts. However, they’re now modeled after tree frogs instead, and come in many different colors, patterns, and eye colors. O-Frogs drop Frog Legs which can be cooked. $(br2)Any frog can be bred with any other frog; they don’t have genders. Frogs can be bred with Grubs (which can be found in swamps and flower forests). They will drop frog spawn when breeding, of which the player can pick up and place where they please. $(br2)Tadpole models are revamped to be much smaller than the original ones. They look the same otherwise."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_frog{Variant:4}",
+      "name": "The O-Frog",
+      "default_rotation": 45,
+      "scale": 0.8,
+      "rotate": "false",
+      "text": "A dark green frog with no markings or colored eyes."
+    }
+  ]
+}
