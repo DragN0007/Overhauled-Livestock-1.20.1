@@ -30,6 +30,9 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
     protected int jumpStrengthLabelY;
     protected int healthLabelX;
     protected int healthLabelY;
+    protected int genderFLabelX;
+    protected int genderMLabelX;
+    protected int genderLabelY;
 
     public ODonkeyScreen(ODonkeyMenu oDonkeyMenu, Inventory inventory, Component component) {
         super(oDonkeyMenu, inventory, component);
@@ -40,6 +43,10 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
     protected void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
+
+        genderFLabelX = leftPos + 140;
+        genderMLabelX = leftPos + 152;
+        genderLabelY = topPos - 8;
 
         baseColorLabelX = leftPos + 1;
         baseColorLabelY = topPos + 170;
@@ -99,6 +106,10 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
             renderJumpStrengthLabel(graphics);
             renderHealthLabel(graphics);
         }
+
+        if (LivestockOverhaulClientConfig.ACCESSIBILITY_GENDER_IDENTIFIER.get()) {
+            renderGenderLabel(graphics);
+        }
     }
 
     @Override
@@ -139,6 +150,20 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
             graphics.drawString(this.font, noTextureText, markingLabelX, markingLabelY, 0xFFFFFF, false);
         } else {
             graphics.drawString(this.font, labelText, markingLabelX, markingLabelY, 0xFFFFFF, false);
+        }
+    }
+
+    private void renderGenderLabel(GuiGraphics graphics) {
+        String female = "FEMALE";
+        String male = "MALE";
+        String error = "NBT Error";
+
+        if (this.oDonkey.getGender() == 0) {
+            graphics.drawString(this.font, female, genderFLabelX, genderLabelY, 0xFFFFFF, false);
+        } else if (this.oDonkey.getGender() == 1) {
+            graphics.drawString(this.font, male, genderMLabelX, genderLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
         }
     }
 

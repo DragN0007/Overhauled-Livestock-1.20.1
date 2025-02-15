@@ -10,6 +10,7 @@ public class LivestockOverhaulClientConfig {
     public static final ForgeConfigSpec.BooleanValue HORSE_COAT_GUI;
     public static final ForgeConfigSpec.BooleanValue HORSE_SADDLE_EXTRAS;
     public static final ForgeConfigSpec.BooleanValue LEGACY_HORSE_SADDLES;
+    public static final ForgeConfigSpec.BooleanValue ACCESSIBILITY_GENDER_IDENTIFIER;
 
     static {
         BUILDER.push("Client");
@@ -25,6 +26,9 @@ public class LivestockOverhaulClientConfig {
 
         LEGACY_HORSE_SADDLES = BUILDER.comment("Should horse saddles take on the old, 'legacy' design? (Pre-2.1)")
                 .define("Legacy Horse Saddles", false);
+
+        ACCESSIBILITY_GENDER_IDENTIFIER = BUILDER.comment("Should text that states the gender of an O-Mount render along with the colored dot?")
+                .define("Visual Accessibility Gender Text", false);
 
         BUILDER.pop();
 

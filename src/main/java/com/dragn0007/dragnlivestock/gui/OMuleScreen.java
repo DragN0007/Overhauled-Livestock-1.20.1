@@ -32,6 +32,9 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     protected int jumpStrengthLabelY;
     protected int healthLabelX;
     protected int healthLabelY;
+    protected int genderFLabelX;
+    protected int genderMLabelX;
+    protected int genderLabelY;
 
     public OMuleScreen(OMuleMenu oMuleMenu, Inventory inventory, Component component) {
         super(oMuleMenu, inventory, component);
@@ -42,6 +45,10 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     protected void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
+
+        genderFLabelX = leftPos + 140;
+        genderMLabelX = leftPos + 152;
+        genderLabelY = topPos - 8;
 
         breedLabelX = leftPos + 1;
         breedLabelY = topPos - 8;
@@ -106,6 +113,10 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
             renderJumpStrengthLabel(graphics);
             renderHealthLabel(graphics);
         }
+
+        if (LivestockOverhaulClientConfig.ACCESSIBILITY_GENDER_IDENTIFIER.get()) {
+            renderGenderLabel(graphics);
+        }
     }
 
     @Override
@@ -163,6 +174,20 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
             graphics.drawString(this.font, noTextureText, markingLabelX, markingLabelY, 0xFFFFFF, false);
         } else {
             graphics.drawString(this.font, labelText, markingLabelX, markingLabelY, 0xFFFFFF, false);
+        }
+    }
+
+    private void renderGenderLabel(GuiGraphics graphics) {
+        String female = "FEMALE";
+        String male = "MALE";
+        String error = "NBT Error";
+
+        if (this.oMule.getGender() == 0) {
+            graphics.drawString(this.font, female, genderFLabelX, genderLabelY, 0xFFFFFF, false);
+        } else if (this.oMule.getGender() == 1) {
+            graphics.drawString(this.font, male, genderMLabelX, genderLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
         }
     }
 

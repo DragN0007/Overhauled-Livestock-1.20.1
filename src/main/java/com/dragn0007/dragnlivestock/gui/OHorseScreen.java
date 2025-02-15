@@ -39,6 +39,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     protected int healthLabelY;
 //    protected int ownerLabelX;
 //    protected int ownerLabelY;
+    protected int genderFLabelX;
+    protected int genderMLabelX;
+    protected int genderLabelY;
 
     public OHorseScreen(OHorseMenu oHorseMenu, Inventory inventory, Component component) {
         super(oHorseMenu, inventory, component);
@@ -52,6 +55,10 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
 //        ownerLabelX = leftPos + 1;
 //        ownerLabelY = topPos - 18;
+
+        genderFLabelX = leftPos + 140;
+        genderMLabelX = leftPos + 152;
+        genderLabelY = topPos - 8;
 
         breedLabelX = leftPos + 1;
         breedLabelY = topPos - 8;
@@ -130,6 +137,10 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             renderJumpStrengthLabel(graphics);
             renderHealthLabel(graphics);
         }
+
+        if (LivestockOverhaulClientConfig.ACCESSIBILITY_GENDER_IDENTIFIER.get()) {
+            renderGenderLabel(graphics);
+        }
     }
 
     @Override
@@ -137,7 +148,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         this.renderBackground(graphics);
         super.render(graphics, i, i1, v);
         this.renderTooltip(graphics, i, i1);
-        this.renderBreedLabel(graphics);
     }
 
     private void renderBreedLabel(GuiGraphics graphics) {
@@ -198,6 +208,20 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             graphics.drawString(this.font, noTextureText, markingLabelX, markingLabelY, 0xFFFFFF, false);
         } else {
             graphics.drawString(this.font, labelText, markingLabelX, markingLabelY, 0xFFFFFF, false);
+        }
+    }
+
+    private void renderGenderLabel(GuiGraphics graphics) {
+        String female = "FEMALE";
+        String male = "MALE";
+        String error = "NBT Error";
+
+        if (this.oHorse.getGender() == 0) {
+            graphics.drawString(this.font, female, genderFLabelX, genderLabelY, 0xFFFFFF, false);
+        } else if (this.oHorse.getGender() == 1) {
+            graphics.drawString(this.font, male, genderMLabelX, genderLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
         }
     }
 
