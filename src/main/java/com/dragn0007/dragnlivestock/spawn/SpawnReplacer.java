@@ -70,6 +70,8 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -79,10 +81,19 @@ import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.extensions.IForgeBlockEntity;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SpawnReplacer {
@@ -90,6 +101,38 @@ public class SpawnReplacer {
     // This class falls under the LGPL license, as stated in the CODE_LICENSE.txt
     // Some of this code was referenced from Realistic Horse Genetics. Please check them out, too! :)
     // https://github.com/sekelsta/horse-colors  |  https://www.curseforge.com/minecraft/mc-mods/realistic-horse-genetics
+
+
+    //NOTE(EVGLX): The following beehive-specific code should not be used elsewhere, but I'm keeping it public because private functionality is stupid
+    public static Map<BeehiveBlockEntity, CompoundTag> beehivesToUpdate = new HashMap<>();
+    public static void handleBeehiveData(BlockEntity blockEntity) {
+        if(blockEntity instanceof BeehiveBlockEntity beehiveBlockEntity) {
+            CompoundTag beehiveData = beehiveBlockEntity.serializeNBT();
+            ListTag stored = beehiveData.getList("Bees", 10);
+            for (Tag beeData : stored) {
+                CompoundTag entityData = ((CompoundTag) beeData).getCompound("EntityData");
+                String id = entityData.getString("id");
+                if (id.equals("minecraft:bee")) {
+                    entityData.putString("id", MODID + ":o_bee"); /** see {@link Entity#getEncodeId()}  */
+                }
+            }
+            beehivesToUpdate.put(beehiveBlockEntity, beehiveData);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        if(event.phase == TickEvent.Phase.END) {
+            if(!beehivesToUpdate.isEmpty()) {
+                // Beehives which need updates are added to beehivesToUpdate, then updated as the final step of the server tick in which they were marked.
+                // This prevents updating the beehive mid-tick basically. <Arraylist>.clear() cannot be used while the beehive is iterating, only add/remove.
+                beehivesToUpdate.forEach(IForgeBlockEntity::deserializeNBT);
+                beehivesToUpdate.clear();
+            }
+        }
+    }
+
+
 
     @SubscribeEvent
     public static void onSpawn(EntityJoinLevelEvent event) {
@@ -762,19 +805,26 @@ public class SpawnReplacer {
         }
 
         //Bee
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_BEES.get() && (event.getEntity() instanceof Bee bee && !(bee instanceof OBee))) {
-
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_BEES.get() &&
+                (event.getEntity().getClass() == Bee.class)) {
+            Bee bee = (Bee) event.getEntity();
             OBee oBee = EntityTypes.O_BEE_ENTITY.get().create(event.getLevel());
+            if(oBee != null) {
+                oBee.setCustomName(bee.getCustomName());
+                oBee.deserializeNBT(bee.serializeNBT());
 
-            bee.remove(Entity.RemovalReason.DISCARDED);
-            event.getLevel().addFreshEntity(oBee);
-            oBee.copyPosition(bee);
-            oBee.setCustomName(bee.getCustomName());
+                bee.remove(Entity.RemovalReason.DISCARDED);
+                event.getLevel().addFreshEntity(oBee);
 
-            int randomVariant = event.getLevel().getRandom().nextInt(OBeeModel.Variant.values().length);
-            oBee.setVariant(randomVariant);
+                int randomSpecies = event.getLevel().getRandom().nextInt(OBeeModel.Variant.values().length);
+                oBee.setVariant(randomSpecies);
 
-//            System.out.println("[Livestock Overhaul]: Replaced a vanilla bee with an O-Bee!");
+                // we need to handle beehive data and replace it with oBee data
+                if(oBee.getHivePos() != null) {
+                    BlockEntity blockEntity = event.getLevel().getBlockEntity(oBee.getHivePos());
+                    handleBeehiveData(blockEntity);
+                }
+            }
 
             event.setCanceled(true);
         }
