@@ -23,7 +23,7 @@
     {
       "type": "patchouli:spotlight",
       "item": {
-        "item": "dragnlivestock:marans_egg"
+        "item": "dragnlivestock:fertilized_marans_egg"
       },
       "text": "$(l)Fertilized Eggs$() can be thrown to hatch chicks, and are obtained by breeding a Rooster and a Hen."
     }

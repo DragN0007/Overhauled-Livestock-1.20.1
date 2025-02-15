@@ -108,8 +108,27 @@ public class OBee extends Bee implements GeoEntity {
 		this.entityData.define(VARIANT, 0);
 	}
 
+	@Override
 	public OBee getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return EntityTypes.O_BEE_ENTITY.get().create(serverLevel);
+		OBee oBee = (OBee) ageableMob;
+		if (ageableMob instanceof OBee) {
+			OBee mob = (OBee) ageableMob;
+			oBee = EntityTypes.O_BEE_ENTITY.get().create(serverLevel);
+
+			int i = this.random.nextInt(9);
+			int variant;
+			if (i < 4) {
+				variant = this.getVariant();
+			} else if (i < 8) {
+				variant = mob.getVariant();
+			} else {
+				variant = this.random.nextInt(OBeeModel.Variant.values().length);
+			}
+
+			oBee.setVariant(variant);
+		}
+
+		return oBee;
 	}
 
 	public enum Breed {

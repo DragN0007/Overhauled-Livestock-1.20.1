@@ -4,7 +4,6 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.bee.OBeeRenderer;
-import com.dragn0007.dragnlivestock.entities.bee.ReplacedBeeRender;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelRender;
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
@@ -179,6 +178,5 @@ public class LivestockOverhaulEvent {
 
         //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
-        EntityRenderers.register(EntityType.BEE, ReplacedBeeRender::new);
     }
 }
