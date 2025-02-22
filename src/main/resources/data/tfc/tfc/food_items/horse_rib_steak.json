@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:horse_rib_steak"
+  },
+  "hunger": 5,
+  "saturation": 0,
+  "decay_modifier": 2,
+  "protein": 4
+}

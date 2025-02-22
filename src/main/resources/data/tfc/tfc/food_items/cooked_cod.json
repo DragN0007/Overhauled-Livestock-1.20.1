@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:cooked_cod"
+  },
+  "hunger": 4,
+  "saturation": 1,
+  "decay_modifier": 2.25,
+  "protein": 2
+}

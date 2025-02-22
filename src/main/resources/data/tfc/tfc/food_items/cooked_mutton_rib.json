@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cooked_mutton_rib"
+  },
+  "hunger": 5,
+  "saturation": 2,
+  "decay_modifier": 2.25,
+  "protein": 3.5
+}

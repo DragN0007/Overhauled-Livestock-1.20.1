@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -64,6 +65,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
@@ -139,15 +141,12 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() &&
+		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) &&
 				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-
-			player.playSound(SoundEvents.GOAT_MILK, 1.0F, 1.0F);
+			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.GOAT_MILK_BUCKET.get().getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
-
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
 		if (this.isTamed()) {
@@ -188,6 +187,24 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 
 		} else {
 			return super.mobInteract(player, hand);
+		}
+	}
+
+	public int replenishMilkCounter = 0;
+
+	private boolean milked = false;
+
+	public boolean wasMilked() {
+		return this.milked;
+	}
+
+	public void tick() {
+		super.tick();
+
+		replenishMilkCounter++;
+
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+			this.setMilked(false);
 		}
 	}
 
@@ -313,6 +330,14 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		this.entityData.set(VARIANT, variant);
 	}
 
+	public boolean getMilked() {
+		return this.milked;
+	}
+
+	public void setMilked(boolean milked) {
+		this.milked = milked;
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -327,6 +352,10 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Gender")) {
 			setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("Milked")) {
+			setMilked(tag.getBoolean("Milked"));
+		}
 	}
 
 	@Override
@@ -336,8 +365,8 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		tag.putBoolean("IsScreamingGoat", this.isScreamingGoat());
 		tag.putBoolean("HasLeftHorn", this.hasLeftHorn());
 		tag.putBoolean("HasRightHorn", this.hasRightHorn());
-
 		tag.putInt("Gender", getGender());
+		tag.putBoolean("Milked", getMilked());
 	}
 
 	@Override

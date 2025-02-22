@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cooked_horse_sirloin_steak"
+  },
+  "hunger": 5,
+  "saturation": 0,
+  "decay_modifier": 1.3,
+  "protein": 4
+}

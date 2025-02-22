@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cooked_llama_rib"
+  },
+  "hunger": 4,
+  "saturation": 2,
+  "decay_modifier": 1.3,
+  "protein": 3
+}

@@ -21,6 +21,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -77,17 +78,16 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public void applySlownessEffect() {
-        MobEffect slownessEffect = MobEffect.byId(2);
-        MobEffectInstance slownessEffectInstance = new MobEffectInstance(slownessEffect, 200, 1, false, false);
+        MobEffectInstance slownessEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 1, false, false);
         this.addEffect(slownessEffectInstance);
     }
 
     public boolean hasSlownessEffect() {
-        return this.hasEffect(MobEffect.byId(2));
+        return this.hasEffect(MobEffects.MOVEMENT_SLOWDOWN);
     }
 
     public void removeSlownessEffect() {
-        this.removeEffect(MobEffect.byId(2));
+        this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
     }
 
     public AbstractOMount(EntityType<? extends AbstractOMount> entityType, Level level) {

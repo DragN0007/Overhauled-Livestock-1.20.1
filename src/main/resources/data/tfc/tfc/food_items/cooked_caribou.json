@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cooked_caribou"
+  },
+  "hunger": 4,
+  "saturation": 1,
+  "decay_modifier": 1.3,
+  "protein": 3
+}

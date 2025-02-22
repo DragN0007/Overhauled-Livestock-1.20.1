@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "minecraft:salmon"
+  },
+  "hunger": 4,
+  "saturation": 0,
+  "decay_modifier": 3,
+  "protein": 1
+}

@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cooked_camel_loin"
+  },
+  "hunger": 5,
+  "saturation": 2,
+  "decay_modifier": 1.3,
+  "protein": 3
+}

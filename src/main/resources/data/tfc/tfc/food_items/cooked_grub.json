@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cooked_grub"
+  },
+  "hunger": 2,
+  "saturation": 1,
+  "decay_modifier": 1.3,
+  "protein": 2
+}

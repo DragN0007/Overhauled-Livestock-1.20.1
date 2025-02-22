@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
@@ -232,6 +233,32 @@ public class ModCompatSpawnReplacer {
 
                 event.getLevel().addFreshEntity(frog);
                 tfcFrog.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        // TerraFirmaCraft Frog -> Vanilla (so it can be converted into an O-Variant)
+        if (LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() &&
+                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "rabbit"))) {
+
+            Entity tfcRabbit = event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Rabbit rabbit = EntityType.RABBIT.create(event.getLevel());
+            if (rabbit != null) {
+                rabbit.copyPosition(tfcRabbit);
+                rabbit.setCustomName(tfcRabbit.getCustomName());
+
+                if (event.getLevel().isClientSide) {
+                    tfcRabbit.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(rabbit);
+                tfcRabbit.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }

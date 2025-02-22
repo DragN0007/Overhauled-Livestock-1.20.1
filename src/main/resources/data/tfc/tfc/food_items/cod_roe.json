@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:cod_roe"
+  },
+  "hunger": 2,
+  "saturation": 0,
+  "decay_modifier": 2,
+  "protein": 0.5
+}

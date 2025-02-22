@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:sheep_milk_jug"
+  },
+  "hunger": 0,
+  "saturation": 0,
+  "decay_modifier": 3,
+  "protein": 1
+}

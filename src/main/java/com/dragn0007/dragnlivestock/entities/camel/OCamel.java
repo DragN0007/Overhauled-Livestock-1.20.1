@@ -27,6 +27,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -371,17 +372,16 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	}
 
 	private void applySpeedEffect() {
-		MobEffect speedEffect = MobEffect.byId(1);
-		MobEffectInstance speedEffectInstance = new MobEffectInstance(speedEffect, 200, 0, false, false);
+		MobEffectInstance speedEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0, false, false);
 		this.addEffect(speedEffectInstance);
 	}
 
 	private boolean hasSpeedEffect() {
-		return this.hasEffect(MobEffect.byId(1));
+		return this.hasEffect(MobEffects.MOVEMENT_SPEED);
 	}
 
 	private void removeSpeedEffect() {
-		this.removeEffect(MobEffect.byId(1));
+		this.removeEffect(MobEffects.MOVEMENT_SPEED);
 	}
 
 	public boolean isOnGrass() {
@@ -390,17 +390,16 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	}
 
 	public void applySlownessEffect() {
-		MobEffect slownessEffect = MobEffect.byId(2);
-		MobEffectInstance slownessEffectInstance = new MobEffectInstance(slownessEffect, 200, 1, false, false);
+		MobEffectInstance slownessEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 1, false, false);
 		this.addEffect(slownessEffectInstance);
 	}
 
 	public boolean hasSlownessEffect() {
-		return this.hasEffect(MobEffect.byId(2));
+		return this.hasEffect(MobEffects.MOVEMENT_SLOWDOWN);
 	}
 
 	public void removeSlownessEffect() {
-		this.removeEffect(MobEffect.byId(2));
+		this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
 	}
 
 	@Override

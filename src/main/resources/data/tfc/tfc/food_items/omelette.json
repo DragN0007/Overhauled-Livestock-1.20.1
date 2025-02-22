@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:omelette"
+  },
+  "hunger": 5,
+  "saturation": 0,
+  "decay_modifier": 3,
+  "protein": 2,
+  "vegetables": 1
+}
