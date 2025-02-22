@@ -451,7 +451,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				offsetY = 1.0;
 			}
 
-			if (getBreed() == 9) {
+			if (getBreed() == 8) {
 				switch (i) {
 					case 0:
 						offsetY = 1.43;
@@ -463,7 +463,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				}
 			}
 
-			if (getBreed() == 8) {
+			if (getBreed() == 9) {
 				offsetY = 1.1;
 			}
 
