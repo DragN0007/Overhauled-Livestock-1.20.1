@@ -82,6 +82,7 @@ public class LOItemGroup {
                         output.accept(LOItems.FERTILIZED_MARANS_EGG.get());
                         output.accept(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
                         output.accept(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
+                        output.accept(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
 
                         output.accept(LOItems.GENDER_TEST_STRIP.get());
 
@@ -115,6 +116,7 @@ public class LOItemGroup {
                         output.accept(LOItems.MARANS_EGG.get());
                         output.accept(LOItems.OLIVE_EGGER_EGG.get());
                         output.accept(LOItems.SUSSEX_SILKIE_EGG.get());
+                        output.accept(LOItems.AYAM_CEMANI_EGG.get());
 
                         output.accept(LOItems.EGG_SALAD.get());
                         output.accept(LOItems.OMELETTE.get());

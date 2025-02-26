@@ -195,6 +195,26 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             }
          }
 
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get())) {
+               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+               chicken.setAge(-24000);
+               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
+               chicken.setBreed(6);
+
+               if (chicken.isMale()) {
+                  chicken.setVariant(15);
+               }
+
+               if (chicken.isFemale()) {
+                  chicken.setVariant(16);
+               }
+
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
          this.level().broadcastEntityEvent(this, (byte) 3);
          this.discard();
       }

@@ -1,5 +1,6 @@
-// 1.20.1	2025-02-03T03:48:44.7134842	Item Models: dragnlivestock
+// 1.20.1	2025-02-26T05:59:52.785002	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
+8110dbd2ae71c3e53b1df0eea1d1fa7db2c7aa50 assets/dragnlivestock/models/item/ayam_cemani_egg.json
 5f4e6a7bde3f453e03ad61c3ccee97f81c8d09e4 assets/dragnlivestock/models/item/beef_rib_steak.json
 d2601873ae29066e6ee1f597cf8b1f21d3bae439 assets/dragnlivestock/models/item/beef_sirloin_steak.json
 0257e7bccee123a3dd96871ff0f364f3bdea00d3 assets/dragnlivestock/models/item/berry_glazed_mutton_rib.json
@@ -61,6 +62,7 @@ e79cd9f4d463e22d730991bd1ab271974b08f9f6 assets/dragnlivestock/models/item/egg.j
 d3bdc96002268d6153721325fac97b9ccf4d1697 assets/dragnlivestock/models/item/end_unicorn_spawn_egg.json
 a061e12d0f7bd522c3ed8e36a293920e9b114ac4 assets/dragnlivestock/models/item/female_gender_test_strip.json
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/fertilized_ameraucana_egg.json
+8110dbd2ae71c3e53b1df0eea1d1fa7db2c7aa50 assets/dragnlivestock/models/item/fertilized_ayam_cemani_egg.json
 22006df7ab3f345486b46019cad624525c15153c assets/dragnlivestock/models/item/fertilized_cream_legbar_egg.json
 e79cd9f4d463e22d730991bd1ab271974b08f9f6 assets/dragnlivestock/models/item/fertilized_egg.json
 78143501a0a5088d369c633bdc3788ec453c88fa assets/dragnlivestock/models/item/fertilized_marans_egg.json

@@ -689,7 +689,7 @@ public class SpawnReplacer {
                     oChicken.setCustomName(vanillachicken.getCustomName());
                     oChicken.setAge(vanillachicken.getAge());
 
-                    int randomBreed = event.getLevel().getRandom().nextInt(OChicken.Breed.values().length);
+                    int randomBreed = event.getLevel().getRandom().nextInt(5);
                     oChicken.setBreed(randomBreed);
 
                     int randomGender = event.getLevel().getRandom().nextInt(OChicken.Gender.values().length);
@@ -722,6 +722,10 @@ public class SpawnReplacer {
 
                     if (oChicken.isMale() && oChicken.getBreed() == 5) {
                         oChicken.setVariant(5);
+                    }
+
+                    if (oChicken.isMale() && oChicken.getBreed() == 6) {
+                        oChicken.setVariant(15); //this isnt supposed to happen, but just in case
                     }
 
                     int randomOverlayVariant = event.getLevel().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);

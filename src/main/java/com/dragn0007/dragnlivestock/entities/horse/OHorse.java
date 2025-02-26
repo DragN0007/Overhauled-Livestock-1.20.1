@@ -928,11 +928,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setBreed(random.nextInt(HorseBreedModel.values().length));
 		}
 
-		//tfc compat
-		if (ModList.get().isLoaded("tfc")) {
-			this.setTamed(true);
-		}
-
 		this.randomizeOHorseAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}

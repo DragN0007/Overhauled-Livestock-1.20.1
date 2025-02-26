@@ -141,6 +141,8 @@ public class LOItems {
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> FERTILIZED_SUSSEX_SILKIE_EGG = ITEMS.register("fertilized_sussex_silkie_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_AYAM_CEMANI_EGG = ITEMS.register("fertilized_ayam_cemani_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
 
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",
              () -> new Item((new Item.Properties()).stacksTo(64)));
@@ -154,6 +156,8 @@ public class LOItems {
              () -> new Item((new Item.Properties()).stacksTo(64)));
     public static final RegistryObject<Item> SUSSEX_SILKIE_EGG = ITEMS.register("sussex_silkie_egg",
              () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> AYAM_CEMANI_EGG = ITEMS.register("ayam_cemani_egg",
+            () -> new Item((new Item.Properties()).stacksTo(1)));
 
 //    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
 

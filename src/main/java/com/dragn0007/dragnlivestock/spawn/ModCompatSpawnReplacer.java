@@ -5,10 +5,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.animal.Rabbit;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.Donkey;
@@ -238,7 +235,7 @@ public class ModCompatSpawnReplacer {
             }
         }
 
-        // TerraFirmaCraft Frog -> Vanilla (so it can be converted into an O-Variant)
+        // TerraFirmaCraft Rabbit -> Vanilla (so it can be converted into an O-Variant)
         if (LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() &&
                 ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "rabbit"))) {
 
@@ -259,6 +256,58 @@ public class ModCompatSpawnReplacer {
 
                 event.getLevel().addFreshEntity(rabbit);
                 tfcRabbit.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        // TerraFirmaCraft Cod -> Vanilla (so it can be converted into an O-Variant)
+        if (LivestockOverhaulCommonConfig.REPLACE_COD.get() &&
+                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "cod"))) {
+
+            Entity tfcCod = event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Cod cod = EntityType.COD.create(event.getLevel());
+            if (cod != null) {
+                cod.copyPosition(tfcCod);
+                cod.setCustomName(tfcCod.getCustomName());
+
+                if (event.getLevel().isClientSide) {
+                    tfcCod.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(cod);
+                tfcCod.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        // TerraFirmaCraft Salmon -> Vanilla (so it can be converted into an O-Variant)
+        if (LivestockOverhaulCommonConfig.REPLACE_SALMON.get() &&
+                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "salmon"))) {
+
+            Entity tfcSalmon = event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Salmon salmon = EntityType.SALMON.create(event.getLevel());
+            if (salmon != null) {
+                salmon.copyPosition(tfcSalmon);
+                salmon.setCustomName(tfcSalmon.getCustomName());
+
+                if (event.getLevel().isClientSide) {
+                    tfcSalmon.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(salmon);
+                tfcSalmon.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }

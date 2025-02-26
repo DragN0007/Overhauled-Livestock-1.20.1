@@ -23,6 +23,8 @@ public class OChickenModel extends GeoModel<OChicken> {
         SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_silver.png")),
         BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_blue.png")),
         DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_dark_brown.png")),
+        AYAM_CEMANI_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_ayam_cemani_rooster.png")),
+        AYAM_CEMANI(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_ayam_cemani.png")),
         ;
 
         //Add new entries to bottom when mod is public, else chickens will change textures during update.

@@ -183,6 +183,10 @@ public class OChicken extends Animal implements GeoEntity {
 				this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
 			}
 
+			if (this.getBreed() == 6) {
+				this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+			}
+
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 		}
@@ -352,6 +356,15 @@ public class OChicken extends Animal implements GeoEntity {
 			setVariant(5);
 		}
 
+		if (this.isMale() && this.getBreed() == 6) {
+			setVariant(15);
+		}
+
+		if (this.isFemale() && this.getBreed() == 6) {
+			setVariant(16);
+		}
+
+
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -361,7 +374,8 @@ public class OChicken extends Animal implements GeoEntity {
 		CREAM_LEGBAR(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_cream_legbar.geo.json")),
 		MARANS(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_marans.geo.json")),
 		OLIVE_EGGER(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_olive_egger.geo.json")),
-		SUSSEX_SILKIE(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_sussex_silkie.geo.json"));
+		SUSSEX_SILKIE(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_sussex_silkie.geo.json")),
+		AYAM_CEMANI(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_ameraucana.geo.json"));
 
 		public final ResourceLocation resourceLocation;
 
@@ -464,6 +478,8 @@ public class OChicken extends Animal implements GeoEntity {
 			return;
 		}
 
+		int rareChickenChance = this.random.nextInt(48);
+
 		if(this.isFemale() && this.getBreed() == 0) {
 			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
 			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
@@ -498,6 +514,19 @@ public class OChicken extends Animal implements GeoEntity {
 			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
 			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 			serverLevel.addFreshEntity(eggEntity);
+		}
+
+		if(this.isFemale() && this.getBreed() == 6) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+		}
+
+		if(this.isFemale() && rareChickenChance <= 1) {
+			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
+			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+			serverLevel.addFreshEntity(eggEntity);
+			eggsLaid = 3;
 		}
 
 		serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 1.0F, 1.0F);
