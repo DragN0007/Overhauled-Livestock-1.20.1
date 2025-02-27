@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "There’s a “Gender Test Strip” item that can be used on equines, camels, llamas and rabbits. It can be crafted with 2 paper, and will turn pink or blue based on the gender of the right-clicked animal. You can reuse the strips by crafting them back into blank ones."
+      "text": "There’s a “Gender Test Strip” item that can be used on any animal with gender compatibility. It can be crafted with 2 paper, and will turn pink or blue based on the gender of the right-clicked animal. You can reuse the strips by crafting them back into blank ones."
     },
     {
       "type": "patchouli:text",

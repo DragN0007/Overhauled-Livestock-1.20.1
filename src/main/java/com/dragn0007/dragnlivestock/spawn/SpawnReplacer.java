@@ -222,13 +222,6 @@ public class SpawnReplacer {
                         oHorse.setBreed(0);
                     }
 
-                    //tfc compat
-                    CompoundTag tfcTag = new CompoundTag();
-
-                    if (ModList.get().isLoaded("tfc")) {
-                        oHorse.setTamed(true);
-                    }
-
                     //discard vanilla horse once it's been successfully replaced on client and server
                     if (event.getLevel().isClientSide) {
                         vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
