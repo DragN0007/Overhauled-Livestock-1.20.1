@@ -1,6 +1,11 @@
 package com.dragn0007.dragnlivestock.spawn;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
+import com.dragn0007.dragnlivestock.entities.caribou.CaribouMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.caribou.CaribouModel;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -308,6 +313,41 @@ public class ModCompatSpawnReplacer {
 
                 event.getLevel().addFreshEntity(salmon);
                 tfcSalmon.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        // TerraFirmaCraft Caribou -> LO Caribou
+        if (LivestockOverhaulCommonConfig.SPAWN_CARIBOU.get() &&
+                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "caribou"))) {
+
+            Entity tfcCaribou = event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Caribou caribou = EntityTypes.CARIBOU_ENTITY.get().create(event.getLevel());
+            if (caribou != null) {
+                caribou.copyPosition(tfcCaribou);
+                caribou.setCustomName(tfcCaribou.getCustomName());
+
+                int randomVariant = event.getLevel().getRandom().nextInt(CaribouModel.Variant.values().length);
+                caribou.setVariant(randomVariant);
+
+                int randomOverlayVariant = event.getLevel().getRandom().nextInt(CaribouMarkingLayer.Overlay.values().length);
+                caribou.setOverlayVariant(randomOverlayVariant);
+
+                int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
+                caribou.setGender(randomGender);
+
+                if (event.getLevel().isClientSide) {
+                    tfcCaribou.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(caribou);
+                tfcCaribou.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }
