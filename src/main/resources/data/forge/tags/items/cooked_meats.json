@@ -12,6 +12,9 @@
     "minecraft:cooked_mutton",
     "dragnlivestock:cooked_mutton_loin",
     "dragnlivestock:cooked_mutton_rib",
+    "dragnlivestock:cooked_llama",
+    "dragnlivestock:cooked_llama_loin",
+    "dragnlivestock:cooked_llama_rib",
     "minecraft:cooked_porkchop",
     "dragnlivestock:cooked_pork_tenderloin",
     "dragnlivestock:cooked_pork_rib_chop",
@@ -26,6 +29,9 @@
     "dragnlivestock:cooked_chevon",
     "dragnlivestock:cooked_chevon_loin",
     "dragnlivestock:cooked_chevon_rib",
-    "dragnlivestock:cooked_frog"
+    "dragnlivestock:cooked_frog",
+    "dragnlivestock:cooked_caribou",
+    "dragnlivestock:cooked_caribou_sirloin_steak",
+    "dragnlivestock:cooked_caribou_rib_steak"
   ]
 }

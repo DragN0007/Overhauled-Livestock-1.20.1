@@ -1,0 +1,21 @@
+{
+  "name": "Aging Cheese",
+  "icon": "dragnlivestock:cheese",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Cheese can be made by crafting Raw Cheese and placing it down to age. The aging process generally takes around two days."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:cheese",
+      "recipe2": "dragnlivestock:sheep_cheese"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:llama_cheese",
+      "recipe2": "dragnlivestock:goat_cheese"
+    }
+  ]
+}

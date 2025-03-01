@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dragnlivestock:block/raw_pork_jerky_hanging",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "dragnlivestock:block/raw_pork_jerky_hanging"
+    },
+    "facing=south": {
+      "model": "dragnlivestock:block/raw_pork_jerky_hanging",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dragnlivestock:block/raw_pork_jerky_hanging",
+      "y": 270
+    }
+  }
+}

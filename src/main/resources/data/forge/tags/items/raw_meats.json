@@ -12,6 +12,9 @@
     "minecraft:mutton",
     "dragnlivestock:mutton_loin",
     "dragnlivestock:mutton_rib",
+    "dragnlivestock:llama",
+    "dragnlivestock:llama_loin",
+    "dragnlivestock:llama_rib",
     "minecraft:porkchop",
     "dragnlivestock:pork_tenderloin",
     "dragnlivestock:pork_rib_chop",
@@ -26,6 +29,9 @@
     "dragnlivestock:chevon",
     "dragnlivestock:chevon_loin",
     "dragnlivestock:chevon_rib",
-    "dragnlivestock:frog"
+    "dragnlivestock:frog",
+    "dragnlivestock:caribou",
+    "dragnlivestock:caribou_sirloin_steak",
+    "dragnlivestock:caribou_rib_steak"
   ]
 }

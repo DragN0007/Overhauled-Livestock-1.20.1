@@ -30,6 +30,8 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR);
         simpleItem(LOItems.BLACK_SADDLE);
 
+        simpleItem(LOItems.UTILITY_KNIFE);
+
         simpleItem(LOItems.GRUB_SWEATER);
 
         simpleItem(LOItems.NETHERITE_HORSESHOE);
@@ -90,6 +92,21 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.CHEESECAKE);
         simpleItem(LOItems.BERRY_GLAZED_PORK_RIB_CHOP);
         simpleItem(LOItems.BERRY_GLAZED_MUTTON_RIB);
+
+        simpleItem(LOItems.BEEF_STRIPS);
+        simpleItem(LOItems.BEEF_JERKY);
+        simpleItem(LOItems.CHICKEN_STRIPS);
+        simpleItem(LOItems.CHICKEN_JERKY);
+        simpleItem(LOItems.PORK_STRIPS);
+        simpleItem(LOItems.PORK_JERKY);
+        simpleItem(LOItems.MUTTON_STRIPS);
+        simpleItem(LOItems.MUTTON_JERKY);
+        simpleItem(LOItems.FISH_STRIPS);
+        simpleItem(LOItems.FISH_JERKY);
+        simpleItem(LOItems.GAME_STRIPS);
+        simpleItem(LOItems.GAME_JERKY);
+        simpleItem(LOItems.GENERIC_STRIPS);
+        simpleItem(LOItems.GENERIC_JERKY);
 
         simpleItem(LOItems.BEEF_RIB_STEAK);
         simpleItem(LOItems.BEEF_SIRLOIN_STEAK);

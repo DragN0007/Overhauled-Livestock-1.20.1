@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -20,6 +21,73 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BEEF_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_BEEF_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CHICKEN_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_CHICKEN_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PORK_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_PORK_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MUTTON_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_MUTTON_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.FISH_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_FISH_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GAME_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_GAME_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GENERIC_STRIPS.get(), 2)
+                .requires(LOItems.UTILITY_KNIFE.get())
+                .requires(LOTags.Items.MAKES_GENERIC_JERKY)
+                .unlockedBy("has_knife", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.UTILITY_KNIFE.get())
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.UTILITY_KNIFE.get())
+                .define('A', Tags.Items.STONE)
+                .define('B', Items.STICK)
+                .pattern(" A")
+                .pattern("B ")
+                .unlockedBy("has_stone", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Tags.Items.STONE).build()))
+                .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
                 .define('A', Items.LEATHER)

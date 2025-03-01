@@ -1,0 +1,6 @@
+{
+  "parent": "dragnlivestock:block/parent/jerky",
+  "textures": {
+    "jerky": "dragnlivestock:item/mutton_strips"
+  }
+}

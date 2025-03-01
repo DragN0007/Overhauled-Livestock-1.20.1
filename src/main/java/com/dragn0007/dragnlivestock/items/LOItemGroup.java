@@ -65,6 +65,8 @@ public class LOItemGroup {
 //                        output.accept(LOItems.IRON_HORSESHOE.get());
 //                        output.accept(LOItems.STONE_HORSESHOE.get());
 
+                        output.accept(LOItems.UTILITY_KNIFE.get());
+
                         output.accept(LOItems.GRUB_SWEATER.get());
 
                         output.accept(LOItems.MANE_SCISSORS.get());
@@ -209,6 +211,21 @@ public class LOItemGroup {
                         output.accept(LOItems.COOKED_UNICORN.get());
                         output.accept(LOItems.COOKED_UNICORN_RIB_STEAK.get());
                         output.accept(LOItems.COOKED_UNICORN_SIRLOIN_STEAK.get());
+
+                        output.accept(LOItems.BEEF_STRIPS.get());
+                        output.accept(LOItems.BEEF_JERKY.get());
+                        output.accept(LOItems.CHICKEN_STRIPS.get());
+                        output.accept(LOItems.CHICKEN_JERKY.get());
+                        output.accept(LOItems.PORK_STRIPS.get());
+                        output.accept(LOItems.PORK_JERKY.get());
+                        output.accept(LOItems.MUTTON_STRIPS.get());
+                        output.accept(LOItems.MUTTON_JERKY.get());
+                        output.accept(LOItems.FISH_STRIPS.get());
+                        output.accept(LOItems.FISH_JERKY.get());
+                        output.accept(LOItems.GAME_STRIPS.get());
+                        output.accept(LOItems.GAME_JERKY.get());
+                        output.accept(LOItems.GENERIC_STRIPS.get());
+                        output.accept(LOItems.GENERIC_JERKY.get());
                     }).build());
 
     public static void register(IEventBus eventBus) {

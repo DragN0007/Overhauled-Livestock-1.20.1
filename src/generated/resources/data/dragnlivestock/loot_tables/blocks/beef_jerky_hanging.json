@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dragnlivestock:beef_jerky"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "dragnlivestock:blocks/beef_jerky_hanging"
+}

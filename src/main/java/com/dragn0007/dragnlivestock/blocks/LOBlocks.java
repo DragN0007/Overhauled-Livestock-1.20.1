@@ -1,10 +1,16 @@
 package com.dragn0007.dragnlivestock.blocks;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.blocks.custom.DriedJerky;
+import com.dragn0007.dragnlivestock.blocks.custom.RawBeefJerky;
+import com.dragn0007.dragnlivestock.blocks.custom.RawChickenJerky;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,6 +25,21 @@ public class LOBlocks {
 
 //    public static final RegistryObject<Block> FISH_TRAP = registerBlock("fish_trap",
 //            () -> new FishTrapBlock());
+
+    public static final RegistryObject<Block> RAW_BEEF_JERKY_HANGING = registerBlockWithoutItem("raw_beef_jerky_hanging", RawBeefJerky::new);
+    public static final RegistryObject<Block> BEEF_JERKY_HANGING = registerBlockWithoutItem("beef_jerky_hanging", DriedJerky::new);
+    public static final RegistryObject<Block> RAW_CHICKEN_JERKY_HANGING = registerBlockWithoutItem("raw_chicken_jerky_hanging", RawChickenJerky::new);
+    public static final RegistryObject<Block> CHICKEN_JERKY_HANGING = registerBlockWithoutItem("chicken_jerky_hanging", DriedJerky::new);
+    public static final RegistryObject<Block> RAW_PORK_JERKY_HANGING = registerBlockWithoutItem("raw_pork_jerky_hanging", RawChickenJerky::new);
+    public static final RegistryObject<Block> PORK_JERKY_HANGING = registerBlockWithoutItem("pork_jerky_hanging", DriedJerky::new);
+    public static final RegistryObject<Block> RAW_MUTTON_JERKY_HANGING = registerBlockWithoutItem("raw_mutton_jerky_hanging", RawChickenJerky::new);
+    public static final RegistryObject<Block> MUTTON_JERKY_HANGING = registerBlockWithoutItem("mutton_jerky_hanging", DriedJerky::new);
+    public static final RegistryObject<Block> RAW_FISH_JERKY_HANGING = registerBlockWithoutItem("raw_fish_jerky_hanging", RawChickenJerky::new);
+    public static final RegistryObject<Block> FISH_JERKY_HANGING = registerBlockWithoutItem("fish_jerky_hanging", DriedJerky::new);
+    public static final RegistryObject<Block> RAW_GAME_JERKY_HANGING = registerBlockWithoutItem("raw_game_jerky_hanging", RawChickenJerky::new);
+    public static final RegistryObject<Block> GAME_JERKY_HANGING = registerBlockWithoutItem("game_jerky_hanging", DriedJerky::new);
+    public static final RegistryObject<Block> RAW_GENERIC_JERKY_HANGING = registerBlockWithoutItem("raw_generic_jerky_hanging", RawChickenJerky::new);
+    public static final RegistryObject<Block> GENERIC_JERKY_HANGING = registerBlockWithoutItem("generic_jerky_hanging", DriedJerky::new);
 
 
     protected static <T extends Block>RegistryObject<T> registerBlockWithoutItem(String name, Supplier<T> block){

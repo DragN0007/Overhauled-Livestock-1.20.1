@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:stone"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " A",
+    "B "
+  ],
+  "result": {
+    "item": "dragnlivestock:utility_knife"
+  },
+  "show_notification": true
+}

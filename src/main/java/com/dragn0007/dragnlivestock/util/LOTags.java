@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.util;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -31,6 +32,14 @@ public class LOTags {
         public static final TagKey<Item> COOKED_LLAMA = forgeTag("cooked_llama");
         public static final TagKey<Item> COOKED_UNICORN = forgeTag("cooked_unicorn");
 
+        public static final TagKey<Item> MAKES_BEEF_JERKY = tag("makes_beef_jerky");
+        public static final TagKey<Item> MAKES_CHICKEN_JERKY = tag("makes_chicken_jerky");
+        public static final TagKey<Item> MAKES_PORK_JERKY = tag("makes_pork_jerky");
+        public static final TagKey<Item> MAKES_MUTTON_JERKY = tag("makes_mutton_jerky");
+        public static final TagKey<Item> MAKES_FISH_JERKY = tag("makes_fish_jerky");
+        public static final TagKey<Item> MAKES_GAME_JERKY = tag("makes_game_jerky");
+        public static final TagKey<Item> MAKES_GENERIC_JERKY = tag("makes_generic_jerky");
+
         public static final TagKey<Item> RAW_MEATS = forgeTag("cooked_fishes");
         public static final TagKey<Item> COOKED_MEATS = forgeTag("cooked_meats");
 
@@ -49,6 +58,9 @@ public class LOTags {
 
         public static TagKey<Item> forgeTag (String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
+        }
+        public static TagKey<Item> tag (String name) {
+            return ItemTags.create(new ResourceLocation(LivestockOverhaul.MODID, name));
         }
     }
 

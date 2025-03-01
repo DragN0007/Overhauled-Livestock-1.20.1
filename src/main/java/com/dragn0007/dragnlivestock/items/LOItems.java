@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.items;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.custom.*;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -101,6 +102,10 @@ public class LOItems {
             () -> new MaleGenderTestKit(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FEMALE_GENDER_TEST_STRIP = ITEMS.register("female_gender_test_strip",
             () -> new FemaleGenderTestKit(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> UTILITY_KNIFE = ITEMS.register("utility_knife",
+            () -> new UtilityKnifeItem());
+
     public static final RegistryObject<Item> GRUB_SWEATER = ITEMS.register("grub_sweater",
             () -> new GrubSweaterItem(new Item.Properties()));
 
@@ -198,6 +203,35 @@ public class LOItems {
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(12).saturationMod(1).build())));
     public static final RegistryObject<Item> BERRY_GLAZED_MUTTON_RIB = ITEMS.register("berry_glazed_mutton_rib",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationMod(1).build())));
+
+    public static final RegistryObject<Item> BEEF_STRIPS = ITEMS.register("beef_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_BEEF_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> BEEF_JERKY = ITEMS.register("beef_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(9).saturationMod(1).build())));
+    public static final RegistryObject<Item> CHICKEN_STRIPS = ITEMS.register("chicken_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_CHICKEN_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> CHICKEN_JERKY = ITEMS.register("chicken_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).build())));
+    public static final RegistryObject<Item> PORK_STRIPS = ITEMS.register("pork_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_PORK_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> PORK_JERKY = ITEMS.register("pork_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(9).saturationMod(1).build())));
+    public static final RegistryObject<Item> MUTTON_STRIPS = ITEMS.register("mutton_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_MUTTON_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> MUTTON_JERKY = ITEMS.register("mutton_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).build())));
+    public static final RegistryObject<Item> FISH_STRIPS = ITEMS.register("fish_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_FISH_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> FISH_JERKY = ITEMS.register("fish_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(1).build())));
+    public static final RegistryObject<Item> GAME_STRIPS = ITEMS.register("game_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_GAME_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> GAME_JERKY = ITEMS.register("game_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(9).saturationMod(1).build())));
+    public static final RegistryObject<Item> GENERIC_STRIPS = ITEMS.register("generic_strips",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_GENERIC_JERKY_HANGING.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(2).build())));
+    public static final RegistryObject<Item> GENERIC_JERKY = ITEMS.register("generic_jerky",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(9).saturationMod(1).build())));
 
     public static final RegistryObject<Item> BEEF_RIB_STEAK = ITEMS.register("beef_rib_steak",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(1).build())));

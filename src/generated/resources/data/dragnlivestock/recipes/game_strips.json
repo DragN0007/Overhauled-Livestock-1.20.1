@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dragnlivestock:utility_knife"
+    },
+    {
+      "tag": "dragnlivestock:makes_game_jerky"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "dragnlivestock:game_strips"
+  }
+}

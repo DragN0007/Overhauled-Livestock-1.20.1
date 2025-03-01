@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:mutton",
+    "dragnlivestock:mutton_loin",
+    "dragnlivestock:mutton_rib",
+    "dragnlivestock:llama",
+    "dragnlivestock:llama_loin",
+    "dragnlivestock:llama_rib",
+    "dragnlivestock:chevon",
+    "dragnlivestock:chevon_loin",
+    "dragnlivestock:chevon_rib"
+  ]
+}

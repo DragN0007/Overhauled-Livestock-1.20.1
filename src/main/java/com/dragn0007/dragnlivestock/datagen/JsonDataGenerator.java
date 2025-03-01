@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.datagen;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.datagen.biglooter.LOLootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -22,5 +23,6 @@ public class JsonDataGenerator {
 
         generator.addProvider(event.includeServer(), new LORecipeMaker(packOutput));
         generator.addProvider(event.includeClient(), new LOItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeServer(), LOLootTableProvider.create(packOutput));
     }
 }

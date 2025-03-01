@@ -1,0 +1,38 @@
+{
+  "name": "Jerky & Meat Drying",
+  "icon": "dragnlivestock:beef_jerky",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Meat can be dried into Jerky by crafting Meat Strips and hanging them up on a wall or other surface to dry. The drying process generally takes around two days."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:beef_jerky"
+      },
+      "text": "Dried Meat doesn't have to be cooked, making it a great source of food for those who may be low on coal - as long as you don't mind waiting a couple days."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:utility_knife",
+      "recipe2": "dragnlivestock:generic_strips"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:beef_strips",
+      "recipe2": "dragnlivestock:chicken_strips"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:pork_strips",
+      "recipe2": "dragnlivestock:mutton_strips"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:fish_strips",
+      "recipe2": "dragnlivestock:game_strips"
+    }
+  ]
+}
