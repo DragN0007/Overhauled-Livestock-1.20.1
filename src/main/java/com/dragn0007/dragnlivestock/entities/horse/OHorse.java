@@ -496,7 +496,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 
 			if (this.isJumping()) {
-//				offsetY = 1.7;
 				offsetZ = -0.4;
 			}
 
@@ -543,14 +542,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
 		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
 		controllers.add(new AnimationController<>(this, "emoteController", 5, this::emotePredicate));
-//		controllers.add(new AnimationController<>(this, "stanceController", 5, this::stancePredicate));
 	}
-
-	public int alternateIdleTimer = 0;
 
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
+		double currentSpeed = this.getDeltaMovement().lengthSqr();
+		double speedThreshold = 0.015;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -564,7 +562,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving) {
-				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
@@ -585,11 +583,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
-				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get() && alternateIdleTimer < 500) {
+				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-//				} else if (alternateIdleTimer >= 500) {
-//					controller.setAnimation(RawAnimation.begin().then("idle5", Animation.LoopType.PLAY_ONCE));
-//					alternateIdleTimer = 0;
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
 				}
@@ -626,22 +621,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		return PlayState.CONTINUE;
 	}
-
-//	private <T extends GeoAnimatable> PlayState stancePredicate(AnimationState<T> tAnimationState) {
-//
-//		AnimationController<T> controller = tAnimationState.getController();
-//
-//		if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_REINING_TOGGLE.isDown()) {
-//			controller.setAnimation(RawAnimation.begin().then("head_down", Animation.LoopType.LOOP));
-//
-//		} else if(!this.isVehicle() || LivestockOverhaulClientEvent.CLEAR.isDown()) {
-//			controller.forceAnimationReset();
-//			controller.stop();
-//			return PlayState.STOP;
-//		}
-//
-//		return PlayState.CONTINUE;
-//	}
 
 	public boolean isFollower() {
 		return this.leader != null && this.leader.isAlive() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());
@@ -715,8 +694,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.removeSlownessEffect();
 			}
 		}
-
-		alternateIdleTimer++;
 
 	}
 
