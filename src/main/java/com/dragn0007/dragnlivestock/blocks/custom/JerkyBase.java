@@ -5,16 +5,44 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.Tags;
 
 public class JerkyBase extends HorizontalDirectionalBlock {
 
-    public int dryTime = 48000;
+    public static final IntegerProperty DRY_TIME = IntegerProperty.create("dry_time", 0, 9);
+
+    protected IntegerProperty getDryTimeProperty() {
+        return DRY_TIME;
+    }
+
+    public int getMaxDryTime() {
+        return 8;
+    }
+
+    public int getDryTime(BlockState state) {
+        return state.getValue(this.getDryTimeProperty());
+    }
+
+    public BlockState getStateForDryTime(int i) {
+        return this.defaultBlockState().setValue(this.getDryTimeProperty(), Integer.valueOf(i));
+    }
+
+    public boolean isRandomlyTicking(BlockState state) {
+        return true;
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(DRY_TIME).add(HorizontalDirectionalBlock.FACING);
+    }
 
     public VoxelShape NORTH;
     public VoxelShape EAST;
@@ -36,10 +64,6 @@ public class JerkyBase extends HorizontalDirectionalBlock {
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter blockReader, BlockPos pos, CollisionContext context) {

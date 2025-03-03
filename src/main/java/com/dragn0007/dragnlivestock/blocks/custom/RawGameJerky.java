@@ -38,36 +38,32 @@ public class RawGameJerky extends JerkyBase {
     public RawGameJerky() {
         super(NORTH, EAST, SOUTH, WEST,
                 Properties.of().sound(SoundType.FUNGUS).strength(0.2F).pushReaction(PushReaction.DESTROY).noOcclusion().noCollission().randomTicks());
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
-
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
-        this.tick(state, level, pos, source);
-    }
-
-    @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        level.scheduleTick(pos, this, dryTime);
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(this.getDryTimeProperty(), 0));
     }
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
 
-        if (dryTime > 0) {
-            level.scheduleTick(pos, this, 1);
-        }
+        if (!level.isAreaLoaded(pos, 1)) return;
 
-        --dryTime;
+        int i = this.getDryTime(state);
 
-        if (--dryTime <= 0) {
+        if (i <= this.getMaxDryTime()) {
             BlockState blockState = level.getBlockState(pos);
             Direction facingDirection = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
-            BlockState state1 = LOBlocks.GAME_JERKY_HANGING.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, facingDirection);
+            BlockState newState = this.getStateForDryTime(i + 1).setValue(BlockStateProperties.HORIZONTAL_FACING, facingDirection);
+            level.setBlockAndUpdate(pos, newState);
+
+        }
+
+        if (i >= this.getMaxDryTime()) {
+            BlockState blockState = level.getBlockState(pos);
+            Direction facingDirection = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            BlockState state1 = LOBlocks.BEEF_JERKY_HANGING.get().defaultBlockState()
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING, facingDirection)
+                    .setValue(this.getDryTimeProperty(), 0);
             level.setBlockAndUpdate(pos, state1);
         }
 
