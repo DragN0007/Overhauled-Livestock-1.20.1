@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
@@ -42,7 +43,7 @@ public class OxMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, oxSlots++, 8, 18) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.is(ItemTags.WOOL_CARPETS)) {
+                if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
                     return !this.hasItem() && OxMenu.this.ox.canWearArmor();
                 }
                 return false;

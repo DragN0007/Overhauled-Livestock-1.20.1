@@ -45,7 +45,7 @@ public class OHorseMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack itemStack) {
                 if (itemStack.getItem() instanceof HorseArmorItem) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
-                } else if (itemStack.is(ItemTags.WOOL_CARPETS)) {
+                } else if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
                 return false;

@@ -56,6 +56,8 @@ public class LOTags {
 
         public static final TagKey<Item> SWEM_CANTAZARITE_POTION = forgeTag("swem_cantazarite_potion");
 
+        public static final TagKey<Item> CAN_PLACE_ON_O_MOUNTS = tag("can_place_on_o_mounts");
+
         public static TagKey<Item> forgeTag (String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
         }
