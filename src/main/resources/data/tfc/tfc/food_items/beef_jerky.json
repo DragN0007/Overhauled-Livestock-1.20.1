@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:beef_jerky"
+  },
+  "hunger": 4,
+  "saturation": 0,
+  "decay_modifier": 0.3,
+  "protein": 2
+}

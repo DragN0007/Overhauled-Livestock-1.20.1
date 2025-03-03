@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "item": "dragnlivestock:pork_strips"
+  },
+  "hunger": 4,
+  "saturation": 0,
+  "decay_modifier": 2,
+  "protein": 2
+}
