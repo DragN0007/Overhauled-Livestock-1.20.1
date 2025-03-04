@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.camel;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.HorseBreedModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
@@ -32,9 +33,9 @@ public class OCamelModel extends GeoModel<OCamel> {
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_camel.geo.json");
     @Override
     public ResourceLocation getModelResource(OCamel object) {
-        if(object.isBaby())
+        if(object.isBaby() && object.getBreed() == 0)
             return BABY_MODEL;
-        return MODEL;
+        return OCamel.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

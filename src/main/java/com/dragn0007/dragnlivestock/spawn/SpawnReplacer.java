@@ -1064,6 +1064,9 @@ public class SpawnReplacer {
                     int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                     oCamel.setGender(randomGender);
 
+                    int randomBreed = event.getLevel().getRandom().nextInt(OCamel.Breed.values().length);
+                    oCamel.setBreed(randomBreed);
+
                     if (event.getLevel().isClientSide) {
                         vanillacamel.remove(Entity.RemovalReason.DISCARDED);
                     }

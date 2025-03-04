@@ -3,6 +3,8 @@ package com.dragn0007.dragnlivestock.entities.camel;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
+import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.gui.OCamelMenu;
@@ -62,10 +64,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class OCamel extends AbstractOMount implements GeoEntity {
-	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OCamel.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OCamel.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
 
 	public OCamel(EntityType<? extends OCamel> type, Level level) {
 		super(type, level);
@@ -401,25 +399,56 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
 	}
 
+	public Vec3 calcOffset ( double x, double y, double z){
+		double rad = this.getYRot() * Math.PI / 180;
+
+		double xOffset = this.position().x + (x * Math.cos(rad) - z * Math.sin(rad));
+		double yOffset = this.position().y + y;
+		double zOffset = this.position().z + (x * Math.sin(rad) + z * Math.cos(rad));
+
+		return new Vec3(xOffset, yOffset, zOffset);
+	}
+
 	@Override
-	public void positionRider(Entity entity, MoveFunction moveFunction) {
-		if (this.hasPassenger(entity)) {
-			double offsetX = 0;
-			double offsetY = 1.6;
-			double offsetZ = -0.2;
-
-			double radYaw = Math.toRadians(this.getYRot());
-
-			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
-			double offsetYRotated = offsetY;
-			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
-			double x = this.getX() + offsetXRotated;
-			double y = this.getY() + offsetYRotated;
-			double z = this.getZ() + offsetZRotated;
-
-			entity.setPos(x, y, z);
+	public boolean canAddPassenger(Entity entity) {
+		if (this.getBreed() == 0) {
+			return this.getPassengers().size() < 1;
 		}
+		if (this.getBreed() == 1) {
+			return this.getPassengers().size() < 2;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+		int i = this.getPassengers().indexOf(entity);
+		if(getBreed() == 0) {
+			switch (i) {
+				case 0:
+					entity.setPos(this.calcOffset(0, 1.6, -0.2));
+					break;
+			}
+		}
+		if(getBreed() == 1) {
+			switch (i) {
+				case 0:
+					entity.setPos(this.calcOffset(0, 2.15, -0.4));
+					break;
+				case 1:
+					entity.setPos(this.calcOffset(0, 1.6, -1.0));
+					break;
+			}
+		}
+	}
+
+	@Override
+	public LivingEntity getControllingPassenger() {
+		if (this.isTamed() && this.isSaddled()) {
+			return (LivingEntity) this.getFirstPassenger();
+		}
+		return null;
 	}
 
 	@Override
@@ -452,6 +481,12 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	}
 
 
+	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OCamel.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OCamel.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
+
 	public ResourceLocation getTextureResource() {
 		return this.entityData.get(VARIANT_TEXTURE);
 	}
@@ -468,6 +503,10 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		return this.entityData.get(OVERLAY);
 	}
 
+	public int getBreed() {
+		return this.entityData.get(BREED);
+	}
+
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT_TEXTURE, OCamelModel.Variant.variantFromOrdinal(variant).resourceLocation);
 		this.entityData.set(VARIANT, variant);
@@ -476,6 +515,10 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY_TEXTURE, OCamelMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
 		this.entityData.set(OVERLAY, variant);
+	}
+
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
 	public void setVariantTexture(String variant) {
@@ -521,6 +564,10 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
 	}
 
 	@Override
@@ -532,6 +579,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("FilledHumpsTime", this.filledHumpsTime);
 		tag.putInt("Gender", this.getGender());
+		tag.putInt("Breed", this.getBreed());
 	}
 
 	@Override
@@ -544,6 +592,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		this.setVariant(random.nextInt(OCamelModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OCamelMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
+		this.setBreed(random.nextInt(Breed.values().length));
 
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -564,6 +613,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT_TEXTURE, OCamelModel.Variant.DESERT.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OCamelMarkingLayer.Overlay.NONE.resourceLocation);
 	}
@@ -620,11 +670,41 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 				overlay = this.random.nextInt(OCamelMarkingLayer.Overlay.values().length);
 			}
 
+			int k = this.random.nextInt(5);
+			int breed;
+			if (k < 2) {
+				breed = this.getBreed();
+			} else if (k < 4) {
+				breed = oCamel1.getBreed();
+			} else {
+				breed = this.random.nextInt(Breed.values().length);
+			}
+
+			int gender;
+			gender = this.random.nextInt(Gender.values().length);
+
 			oCamel.setVariant(variant);
 			oCamel.setOverlayVariant(overlay);
+			oCamel.setGender(gender);
+			oCamel.setBreed(breed);
 		}
 
 		return oCamel;
+	}
+
+	public enum Breed {
+		BACTRIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel.geo.json")),
+		DROMEDARY(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel_dromedary.geo.json"));
+
+		public final ResourceLocation resourceLocation;
+
+		Breed(ResourceLocation resourceLocation) {
+			this.resourceLocation = resourceLocation;
+		}
+
+		public static OCamel.Breed breedFromOrdinal(int ordinal) {
+			return OCamel.Breed.values()[ordinal % OCamel.Breed.values().length];
+		}
 	}
 
 }
