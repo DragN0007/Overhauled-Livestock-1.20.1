@@ -10,8 +10,10 @@ import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -256,6 +258,19 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
+		if (itemstack.isEmpty() && this.canAddPassenger(this)) {
+			this.doPlayerRide(player);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
+		if(this.isVehicle()) {
+			if (this.canAddPassenger(this)) {
+				this.doPlayerRide(player);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+			return super.mobInteract(player, hand);
+		}
+
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() && --this.filledHumpsTime <= 0) {
 			player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.WATER_BUCKET.getDefaultInstance());
@@ -333,14 +348,9 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 		return super.hurt(damageSource, v);
 	}
 
-	//ground tie
 	@Override
 	public void tick() {
 		super.tick();
-
-//		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
-//			this.getNavigation().stop();
-//		}
 
 		if (this.isOnSand()) {
 			if (!this.hasSpeedEffect()) {
@@ -413,8 +423,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	public boolean canAddPassenger(Entity entity) {
 		if (this.getBreed() == 0) {
 			return this.getPassengers().size() < 1;
-		}
-		if (this.getBreed() == 1) {
+		} else if (this.getBreed() == 1) {
 			return this.getPassengers().size() < 2;
 		} else {
 			return false;
@@ -431,6 +440,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 					break;
 			}
 		}
+
 		if(getBreed() == 1) {
 			switch (i) {
 				case 0:

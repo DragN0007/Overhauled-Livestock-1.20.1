@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.20.1-2.2'
+version = '1.20.1-2.3'
 group = mod_group_id
 
 base {
@@ -99,9 +99,9 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:1.20.1-47.3.0" // 47.2.0 is Recommended
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
-
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
+//
+//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
+//    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
 
     //compat stuff
 //    implementation fg.deobf("curse.maven:thats-just-peachy-912726:5367423")

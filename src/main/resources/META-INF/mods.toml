@@ -4,7 +4,7 @@ license="All Rights Reserved, DragN0007"
 #issueTrackerURL="https://discord.gg/2WznNTtVac"
 [[mods]]
 modId="dragnlivestock"
-version="${2.2}"
+version="${2.3}"
 displayName="DragN's Livestock Overhaul!"
 logoFile="livestock_overhaul_logo.png"
 authors="DragN0007"
