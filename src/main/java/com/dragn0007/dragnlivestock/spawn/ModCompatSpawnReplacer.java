@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.Donkey;
@@ -348,6 +349,32 @@ public class ModCompatSpawnReplacer {
 
                 event.getLevel().addFreshEntity(caribou);
                 tfcCaribou.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        // TerraFirmaCraft Camel -> Vanilla
+        if (LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() &&
+                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "camel"))) {
+
+            Entity tfcCamel = event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Camel camel = EntityType.CAMEL.create(event.getLevel());
+            if (camel != null) {
+                camel.copyPosition(tfcCamel);
+                camel.setCustomName(tfcCamel.getCustomName());
+
+                if (event.getLevel().isClientSide) {
+                    tfcCamel.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(camel);
+                tfcCamel.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }

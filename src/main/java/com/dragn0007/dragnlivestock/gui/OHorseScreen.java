@@ -83,7 +83,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         graphics.blit(HORSE_INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
 
-        if (this.oHorse.hasChest() && (this.oHorse.isStockBreed()) || this.oHorse.isWarmbloodedBreed()) { //stock or warmblood
+        if (this.oHorse.hasChest() && (this.oHorse.isStockBreed() || this.oHorse.isWarmbloodedBreed())) { //stock or warmblood
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 54, 54);
         }
 

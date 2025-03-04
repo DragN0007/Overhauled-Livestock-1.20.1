@@ -70,6 +70,12 @@
   "item.dragnlivestock.caribou_spawn_egg": "Caribou Spawn Egg",
   "entity.dragnlivestock.caribou": "Caribou",
 
+  "item.dragnlivestock.trader_mule_spawn_egg": "Trader Mule Spawn Egg",
+  "entity.dragnlivestock.trader_mule": "Trader Mule",
+
+  "item.dragnlivestock.livestock_trader_spawn_egg": "Livestock Trader Spawn Egg",
+  "entity.dragnlivestock.livestock_trader": "Livestock Trader",
+
   "item.dragnlivestock.wheat_moobloom_spawn_egg": "Wheat Moobloom Spawn Egg",
   "entity.dragnlivestock.wheat_moobloom": "Wheat Moobloom",
 

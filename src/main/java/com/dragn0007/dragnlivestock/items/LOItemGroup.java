@@ -55,6 +55,8 @@ public class LOItemGroup {
                         }
 
                         output.accept(LOItems.CARIBOU_SPAWN_EGG.get());
+                        output.accept(LOItems.LIVESTOCK_TRADER_SPAWN_EGG.get());
+                        output.accept(LOItems.TRADER_MULE_SPAWN_EGG.get());
                         output.accept(LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());
                         output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());

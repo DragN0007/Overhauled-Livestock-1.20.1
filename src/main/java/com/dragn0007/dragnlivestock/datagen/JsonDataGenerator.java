@@ -24,5 +24,6 @@ public class JsonDataGenerator {
         generator.addProvider(event.includeServer(), new LORecipeMaker(packOutput));
         generator.addProvider(event.includeClient(), new LOItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), LOLootTableProvider.create(packOutput));
+        generator.addProvider(event.includeServer(), new LOPoiTags(packOutput, lookupProvider, existingFileHelper));
     }
 }

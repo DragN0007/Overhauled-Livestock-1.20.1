@@ -35,6 +35,8 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.EndUnicorn;
 import com.dragn0007.dragnlivestock.entities.unicorn.NetherUnicorn;
 import com.dragn0007.dragnlivestock.entities.unicorn.OverworldUnicorn;
+import com.dragn0007.dragnlivestock.entities.villager.LivestockTrader;
+import com.dragn0007.dragnlivestock.entities.villager.TraderMule;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -65,6 +67,12 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,2f)
                     .build(new ResourceLocation(MODID,"o_mule").toString()));
+
+    public static final RegistryObject<EntityType<TraderMule>> TRADER_MULE_ENTITY = ENTITY_TYPES.register("trader_mule",
+            () -> EntityType.Builder.of(TraderMule::new,
+                            MobCategory.CREATURE)
+                    .sized(1.5f,2f)
+                    .build(new ResourceLocation(MODID,"trader_mule").toString()));
 
     public static final RegistryObject<EntityType<OCow>> O_COW_ENTITY = ENTITY_TYPES.register("o_cow",
             () -> EntityType.Builder.of(OCow::new,
@@ -161,6 +169,12 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(0.3f, 0.3f)
                     .build(new ResourceLocation(MODID,"grub").toString()));
+
+    public static final RegistryObject<EntityType<LivestockTrader>> LIVESTOCK_TRADER_ENTITY = ENTITY_TYPES.register("livestock_trader",
+            () -> EntityType.Builder.of(LivestockTrader::new,
+                            MobCategory.CREATURE)
+                    .sized(0.6F, 1.95F)
+                    .build(new ResourceLocation(MODID,"livestock_trader").toString()));
 
 
     public static final RegistryObject<EntityType<OverworldUnicorn>> OVERWORLD_UNICORN_ENTITY = ENTITY_TYPES.register("overworld_unicorn",

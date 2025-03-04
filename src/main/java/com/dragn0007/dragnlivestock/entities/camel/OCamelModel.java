@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.camel;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.horse.HorseBreedModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

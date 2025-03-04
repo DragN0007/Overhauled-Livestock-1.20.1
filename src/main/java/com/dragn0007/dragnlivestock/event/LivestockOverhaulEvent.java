@@ -68,9 +68,13 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmonRender;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
 import com.dragn0007.dragnlivestock.entities.unicorn.*;
+import com.dragn0007.dragnlivestock.entities.villager.LivestockTrader;
+import com.dragn0007.dragnlivestock.entities.villager.LivestockTraderRenderer;
+import com.dragn0007.dragnlivestock.entities.villager.TraderMule;
 import com.dragn0007.dragnlivestock.gui.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.WanderingTraderRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -103,6 +107,8 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.O_FROG_ENTITY.get(), OFrog.createAttributes().build());
 
         event.put(EntityTypes.CARIBOU_ENTITY.get(), Caribou.createBaseHorseAttributes().build());
+        event.put(EntityTypes.LIVESTOCK_TRADER_ENTITY.get(), LivestockTrader.createMobAttributes().build());
+        event.put(EntityTypes.TRADER_MULE_ENTITY.get(), TraderMule.createBaseHorseAttributes().build());
 
         event.put(EntityTypes.GRUB_ENTITY.get(), Grub.createAttributes().build());
 
@@ -147,6 +153,8 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
         EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);
+        EntityRenderers.register(EntityTypes.LIVESTOCK_TRADER_ENTITY.get(), LivestockTraderRenderer::new);
+        EntityRenderers.register(EntityTypes.TRADER_MULE_ENTITY.get(), OMuleRender::new);
 
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);
