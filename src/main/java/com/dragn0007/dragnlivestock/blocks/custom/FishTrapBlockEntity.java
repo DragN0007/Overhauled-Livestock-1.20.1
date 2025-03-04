@@ -1,27 +1,42 @@
 package com.dragn0007.dragnlivestock.blocks.custom;
 
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class FishTrapBlockEntity extends BaseContainerBlockEntity implements MenuProvider {
 
-    public int fishTick = 0;
-
     public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
 
-    protected FishTrapBlockEntity(BlockEntityType<?> p_155076_, BlockPos p_155077_, BlockState p_155078_) {
-        super(p_155076_, p_155077_, p_155078_);
+    protected FishTrapBlockEntity(BlockEntityType<?> entityType, BlockPos blockPos, BlockState state) {
+        super(entityType, blockPos, state);
     }
+
+    public int catchTime = 200;
 
     @Override
     protected Component getDefaultName() {
@@ -48,6 +63,8 @@ public class FishTrapBlockEntity extends BaseContainerBlockEntity implements Men
         return true;
     }
 
+
+
     @Override
     public ItemStack getItem(int p_18941_) {
         return null;
@@ -70,7 +87,7 @@ public class FishTrapBlockEntity extends BaseContainerBlockEntity implements Men
 
     @Override
     public boolean stillValid(Player p_18946_) {
-        return false;
+        return true;
     }
 
     @Override

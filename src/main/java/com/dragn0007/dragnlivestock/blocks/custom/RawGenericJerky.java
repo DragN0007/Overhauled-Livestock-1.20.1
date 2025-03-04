@@ -60,7 +60,7 @@ public class RawGenericJerky extends JerkyBase {
         if (i >= this.getMaxDryTime()) {
             BlockState blockState = level.getBlockState(pos);
             Direction facingDirection = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
-            BlockState state1 = LOBlocks.BEEF_JERKY_HANGING.get().defaultBlockState()
+            BlockState state1 = LOBlocks.GENERIC_JERKY_HANGING.get().defaultBlockState()
                     .setValue(BlockStateProperties.HORIZONTAL_FACING, facingDirection)
                     .setValue(this.getDryTimeProperty(), 0);
             level.setBlockAndUpdate(pos, state1);

@@ -77,6 +77,11 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.LLAMA_MILK_BUCKET);
         simpleItem(LOItems.GOAT_MILK_BUCKET);
 
+        simpleItem(LOItems.RAW_CHEESE);
+        simpleItem(LOItems.RAW_SHEEP_CHEESE);
+        simpleItem(LOItems.RAW_LLAMA_CHEESE);
+        simpleItem(LOItems.RAW_GOAT_CHEESE);
+
         simpleItem(LOItems.CHEESE);
         simpleItem(LOItems.SHEEP_CHEESE);
         simpleItem(LOItems.LLAMA_CHEESE);

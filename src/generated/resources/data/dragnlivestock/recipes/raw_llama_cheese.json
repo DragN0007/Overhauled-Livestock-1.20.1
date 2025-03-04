@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dragnlivestock:llama_milk_jug"
+    },
+    {
+      "item": "dragnlivestock:llama_milk_jug"
+    }
+  ],
+  "result": {
+    "item": "dragnlivestock:raw_llama_cheese"
+  }
+}

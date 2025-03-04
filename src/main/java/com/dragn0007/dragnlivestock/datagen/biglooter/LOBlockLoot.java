@@ -30,6 +30,15 @@ public class LOBlockLoot extends BlockLootSubProvider {
         dropOther(LOBlocks.GAME_JERKY_HANGING.get(), LOItems.GAME_JERKY.get());
         dropOther(LOBlocks.RAW_GENERIC_JERKY_HANGING.get(), LOItems.GENERIC_STRIPS.get());
         dropOther(LOBlocks.GENERIC_JERKY_HANGING.get(), LOItems.GENERIC_JERKY.get());
+
+        dropOther(LOBlocks.RAW_CHEESE.get(), LOItems.RAW_CHEESE.get());
+        dropOther(LOBlocks.CHEESE.get(), LOItems.CHEESE.get());
+        dropOther(LOBlocks.RAW_SHEEP_CHEESE.get(), LOItems.RAW_SHEEP_CHEESE.get());
+        dropOther(LOBlocks.SHEEP_CHEESE.get(), LOItems.SHEEP_CHEESE.get());
+        dropOther(LOBlocks.RAW_LLAMA_CHEESE.get(), LOItems.RAW_LLAMA_CHEESE.get());
+        dropOther(LOBlocks.LLAMA_CHEESE.get(), LOItems.LLAMA_CHEESE.get());
+        dropOther(LOBlocks.RAW_GOAT_CHEESE.get(), LOItems.RAW_GOAT_CHEESE.get());
+        dropOther(LOBlocks.GOAT_CHEESE.get(), LOItems.GOAT_CHEESE.get());
     }
 
     @Override

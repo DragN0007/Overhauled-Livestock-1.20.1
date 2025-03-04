@@ -107,6 +107,11 @@ public class LOItemGroup {
                         output.accept(LOItems.LLAMA_MILK_JUG.get());
                         output.accept(LOItems.GOAT_MILK_JUG.get());
 
+                        output.accept(LOItems.RAW_CHEESE.get());
+                        output.accept(LOItems.RAW_SHEEP_CHEESE.get());
+                        output.accept(LOItems.RAW_LLAMA_CHEESE.get());
+                        output.accept(LOItems.RAW_GOAT_CHEESE.get());
+
                         output.accept(LOItems.CHEESE.get());
                         output.accept(LOItems.SHEEP_CHEESE.get());
                         output.accept(LOItems.LLAMA_CHEESE.get());

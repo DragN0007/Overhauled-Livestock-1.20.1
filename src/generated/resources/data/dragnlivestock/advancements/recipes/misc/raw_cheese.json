@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "dragnlivestock:cow_milk_jug"
-            ]
+            "tag": "forge:milk"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:cheese_smelting"
+        "recipe": "dragnlivestock:raw_cheese"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:cheese_smelting"
+      "dragnlivestock:raw_cheese"
     ]
   },
   "sends_telemetry_event": false

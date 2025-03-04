@@ -161,6 +161,11 @@
   "item.dragnlivestock.llama_milk_jug": "Llama Milk Jug",
   "item.dragnlivestock.goat_milk_jug": "Goat Milk Jug",
 
+  "item.dragnlivestock.raw_cheese": "Raw Cheese",
+  "item.dragnlivestock.raw_sheep_cheese": "Raw Sheep Cheese",
+  "item.dragnlivestock.raw_llama_cheese": "Raw Llama Cheese",
+  "item.dragnlivestock.raw_goat_cheese": "Raw Goat Cheese",
+
   "item.dragnlivestock.cheese": "Cheese",
   "item.dragnlivestock.sheep_cheese": "Sheep Cheese",
   "item.dragnlivestock.llama_cheese": "Llama Cheese",
@@ -264,6 +269,15 @@
 
   "block.dragnlivestock.fish_trap": "Fish Trap",
   "container.dragnlivestock.fish_trap": "Fish Trap",
+
+  "block.dragnlivestock.raw_cheese": "Raw Cheese",
+  "block.dragnlivestock.cheese": "Cheese",
+  "block.dragnlivestock.raw_sheep_cheese": "Raw Sheep Cheese",
+  "block.dragnlivestock.sheep_cheese": "Sheep Cheese",
+  "block.dragnlivestock.raw_llama_cheese": "Raw Llama Cheese",
+  "block.dragnlivestock.llama_cheese": "Llama Cheese",
+  "block.dragnlivestock.raw_goat_cheese": "Raw Goat Cheese",
+  "block.dragnlivestock.goat_cheese": "Goat Cheese",
 
   "item.dragnlivestock.beef_strips": "Beef Strips",
   "item.dragnlivestock.beef_jerky": "Beef Jerky",

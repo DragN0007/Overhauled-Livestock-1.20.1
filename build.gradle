@@ -108,7 +108,7 @@ dependencies {
 //    implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
 //    implementation fg.deobf("curse.maven:patchouli-306770:4966125")
 //    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
-//    implementation fg.deobf("curse.maven:jade-324717:5876199")
+    implementation fg.deobf("curse.maven:jade-324717:5876199")
 //    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
 //    implementation fg.deobf("curse.maven:jei-238222:6075247")
 }

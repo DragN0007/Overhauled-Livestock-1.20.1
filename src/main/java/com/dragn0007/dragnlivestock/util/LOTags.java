@@ -88,6 +88,7 @@ public class LOTags {
 
         public static final TagKey<Block> SAND = forgeTag("sand");
         public static final TagKey<Block> DIRT = forgeTag("dirt");
+        public static final TagKey<Block> RABBIT_HUTCHES = forgeTag("rabbit_hutches");
 
         public static TagKey<Block> forgeTag (String name) {
             return BlockTags.create(new ResourceLocation("forge", name));

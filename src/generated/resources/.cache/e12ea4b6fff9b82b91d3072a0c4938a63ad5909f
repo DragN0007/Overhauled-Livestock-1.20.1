@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-01T05:05:16.7888472	Item Models: dragnlivestock
+// 1.20.1	2025-03-03T23:59:23.9128579	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 8110dbd2ae71c3e53b1df0eea1d1fa7db2c7aa50 assets/dragnlivestock/models/item/ayam_cemani_egg.json
 60a0aeb7386f8691cbe20488e207b0fb5497c437 assets/dragnlivestock/models/item/beef_jerky.json
@@ -125,6 +125,10 @@ dd7d0744a1c4fe65a7e1f5db4bd7404305763623 assets/dragnlivestock/models/item/pork_
 6e1131265300e1ae10942ddc81a00176ae8171b6 assets/dragnlivestock/models/item/potato_soup.json
 54116c9d91dec24d8d8a2043905a7b1a8f483f3d assets/dragnlivestock/models/item/pumpkin_soup.json
 feae65ba521db68548af83c15ec55a01ea6fc77a assets/dragnlivestock/models/item/rabbit_thigh.json
+791fddd5ac6d2d9855dc8ffbc7b794ab0cfc8741 assets/dragnlivestock/models/item/raw_cheese.json
+9ff096927b5a4082b354cc0e1f4ef02e42848c41 assets/dragnlivestock/models/item/raw_goat_cheese.json
+3121f2fec90fa6e6f4b5f199722340b4e3fe27ad assets/dragnlivestock/models/item/raw_llama_cheese.json
+8c8e6a5807572140d89bca90e425ba67e0b609ff assets/dragnlivestock/models/item/raw_sheep_cheese.json
 c2185571ebed61efc6bbe9c600903dd08fff3eb3 assets/dragnlivestock/models/item/roe.json
 333cf09c1564d97751a2a3ddf503b7bf63ef18f6 assets/dragnlivestock/models/item/salmon_fillet.json
 6d268126f3b968c0813ab58d42c081303c080f5b assets/dragnlivestock/models/item/sheep_cheese.json

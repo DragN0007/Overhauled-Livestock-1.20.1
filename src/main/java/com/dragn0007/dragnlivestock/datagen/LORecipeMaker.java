@@ -22,6 +22,38 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RAW_CHEESE.get())
+                .requires(LOItems.COW_MILK_JUG.get())
+                .requires(LOItems.COW_MILK_JUG.get())
+                .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.MILK)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RAW_SHEEP_CHEESE.get())
+                .requires(LOItems.SHEEP_MILK_JUG.get())
+                .requires(LOItems.SHEEP_MILK_JUG.get())
+                .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.MILK)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RAW_LLAMA_CHEESE.get())
+                .requires(LOItems.LLAMA_MILK_JUG.get())
+                .requires(LOItems.LLAMA_MILK_JUG.get())
+                .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.MILK)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RAW_GOAT_CHEESE.get())
+                .requires(LOItems.GOAT_MILK_JUG.get())
+                .requires(LOItems.GOAT_MILK_JUG.get())
+                .unlockedBy("has_milk", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.MILK)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BEEF_STRIPS.get(), 2)
                 .requires(LOItems.UTILITY_KNIFE.get())
@@ -602,18 +634,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .unlockedBy("has_grub", has(LOItems.GRUB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_grub_smelting"));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.GRUB.get()), RecipeCategory.MISC, LOItems.COOKED_GRUB.get(), 0.35F, 600)
                 .unlockedBy("has_grub", has(LOItems.GRUB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_grub_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.COW_MILK_JUG.get()), RecipeCategory.MISC, LOItems.CHEESE.get(), 0.35F, 200)
-                .unlockedBy("has_milk", has(LOItems.COW_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cheese_smelting"));
-
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.SHEEP_MILK_JUG.get()), RecipeCategory.MISC, LOItems.SHEEP_CHEESE.get(), 0.35F, 200)
-                .unlockedBy("has_sheep_milk", has(LOItems.SHEEP_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "sheep_cheese_smelting"));
-
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.LLAMA_MILK_JUG.get()), RecipeCategory.MISC, LOItems.LLAMA_CHEESE.get(), 0.35F, 200)
-                .unlockedBy("has_llama_milk", has(LOItems.LLAMA_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "llama_cheese_smelting"));
-
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.GOAT_MILK_JUG.get()), RecipeCategory.MISC, LOItems.GOAT_CHEESE.get(), 0.35F, 200)
-                .unlockedBy("has_goat_milk", has(LOItems.GOAT_MILK_JUG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "goat_cheese_smelting"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.PORK_RIB_CHOP.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_RIB_CHOP.get(), 0.35F, 100)
                 .unlockedBy("has_pork_rib_chop", has(LOItems.PORK_RIB_CHOP.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_rib_chop_smoking"));

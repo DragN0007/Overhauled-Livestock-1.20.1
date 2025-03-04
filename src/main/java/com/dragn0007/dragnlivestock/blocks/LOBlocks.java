@@ -1,9 +1,7 @@
 package com.dragn0007.dragnlivestock.blocks;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.blocks.custom.DriedJerky;
-import com.dragn0007.dragnlivestock.blocks.custom.RawBeefJerky;
-import com.dragn0007.dragnlivestock.blocks.custom.RawChickenJerky;
+import com.dragn0007.dragnlivestock.blocks.custom.*;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -22,6 +20,15 @@ public class LOBlocks {
 
 //    public static final RegistryObject<Block> FISH_TRAP = registerBlock("fish_trap",
 //            () -> new FishTrapBlock());
+
+    public static final RegistryObject<Block> RAW_CHEESE = registerBlockWithoutItem("raw_cheese", RawCheese::new);
+    public static final RegistryObject<Block> CHEESE = registerBlockWithoutItem("cheese", AgedCheese::new);
+    public static final RegistryObject<Block> RAW_SHEEP_CHEESE = registerBlockWithoutItem("raw_sheep_cheese", RawSheepCheese::new);
+    public static final RegistryObject<Block> SHEEP_CHEESE = registerBlockWithoutItem("sheep_cheese", AgedCheese::new);
+    public static final RegistryObject<Block> RAW_LLAMA_CHEESE = registerBlockWithoutItem("raw_llama_cheese", RawLlamaCheese::new);
+    public static final RegistryObject<Block> LLAMA_CHEESE = registerBlockWithoutItem("llama_cheese", AgedCheese::new);
+    public static final RegistryObject<Block> RAW_GOAT_CHEESE = registerBlockWithoutItem("raw_goat_cheese", RawGoatCheese::new);
+    public static final RegistryObject<Block> GOAT_CHEESE = registerBlockWithoutItem("goat_cheese", AgedCheese::new);
 
     public static final RegistryObject<Block> RAW_BEEF_JERKY_HANGING = registerBlockWithoutItem("raw_beef_jerky_hanging", RawBeefJerky::new);
     public static final RegistryObject<Block> BEEF_JERKY_HANGING = registerBlockWithoutItem("beef_jerky_hanging", DriedJerky::new);

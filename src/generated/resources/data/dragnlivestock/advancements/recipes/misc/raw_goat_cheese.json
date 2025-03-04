@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_llama_milk": {
+    "has_milk": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "dragnlivestock:llama_milk_jug"
-            ]
+            "tag": "forge:milk"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:llama_cheese_smelting"
+        "recipe": "dragnlivestock:raw_goat_cheese"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_llama_milk",
+      "has_milk",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:llama_cheese_smelting"
+      "dragnlivestock:raw_goat_cheese"
     ]
   },
   "sends_telemetry_event": false

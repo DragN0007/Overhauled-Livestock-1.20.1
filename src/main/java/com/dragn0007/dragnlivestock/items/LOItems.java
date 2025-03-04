@@ -184,14 +184,23 @@ public class LOItems {
     public static final RegistryObject<Item> GOAT_MILK_JUG = ITEMS.register("goat_milk_jug",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> RAW_CHEESE = ITEMS.register("raw_cheese",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(4).build())));
+    public static final RegistryObject<Item> RAW_SHEEP_CHEESE = ITEMS.register("raw_sheep_cheese",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_SHEEP_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(4).build())));
+    public static final RegistryObject<Item> RAW_LLAMA_CHEESE = ITEMS.register("raw_llama_cheese",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_LLAMA_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(4).build())));
+    public static final RegistryObject<Item> RAW_GOAT_CHEESE = ITEMS.register("raw_goat_cheese",
+            () -> new ItemNameBlockItem(LOBlocks.RAW_GOAT_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(4).build())));
+
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
+            () -> new ItemNameBlockItem(LOBlocks.CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
     public static final RegistryObject<Item> SHEEP_CHEESE = ITEMS.register("sheep_cheese",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
+            () -> new ItemNameBlockItem(LOBlocks.SHEEP_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
     public static final RegistryObject<Item> LLAMA_CHEESE = ITEMS.register("llama_cheese",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
+            () -> new ItemNameBlockItem(LOBlocks.LLAMA_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
     public static final RegistryObject<Item> GOAT_CHEESE = ITEMS.register("goat_cheese",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
+            () -> new ItemNameBlockItem(LOBlocks.GOAT_CHEESE.get(), new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).effect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 0.8F).build())));
 
     public static final RegistryObject<Item> EGG_SALAD = ITEMS.register("egg_salad",
             () -> new BowlFoodItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1).build()).stacksTo(1).craftRemainder(Items.BOWL)));

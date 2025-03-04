@@ -1,0 +1,6 @@
+{
+  "parent": "dragnlivestock:block/parent/cheese",
+  "textures": {
+    "cheese": "dragnlivestock:block/goat_cheese"
+  }
+}
