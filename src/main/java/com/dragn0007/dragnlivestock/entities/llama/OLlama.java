@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.LlamaFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -65,7 +66,7 @@ import java.util.stream.Stream;
 
 public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable, ContainerListener, RangedAttackMob {
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT, Blocks.HAY_BLOCK.asItem());
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_LLAMA_EATS);
 	public static final EntityDataAccessor<Integer> DATA_STRENGTH_ID = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_SWAG_ID = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
 	boolean didSpit;
@@ -610,22 +611,19 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		return FOOD_ITEMS.test(p_30832_);
 	}
 
-	public boolean handleEating(Player p_30796_, ItemStack p_30797_) {
+	@Override
+	public boolean handleEating(Player player, ItemStack stack) {
 		int i = 0;
 		int j = 0;
 		float f = 0.0F;
 		boolean flag = false;
-		if (p_30797_.is(Items.WHEAT)) {
-			i = 10;
-			j = 3;
-			f = 2.0F;
-		} else if (p_30797_.is(Blocks.HAY_BLOCK.asItem())) {
+		if (stack.is(LOTags.Items.O_LLAMA_EATS)) {
 			i = 90;
 			j = 6;
 			f = 10.0F;
 			if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
 				flag = true;
-				this.setInLove(p_30796_);
+				this.setInLove(player);
 			}
 		}
 
@@ -655,13 +653,14 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			if (!this.isSilent()) {
 				SoundEvent soundevent = this.getEatingSound();
 				if (soundevent != null) {
-					this.level().playSound((Player)null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+					this.level().playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
 				}
 			}
 		}
 
 		return flag;
 	}
+
 
 	public boolean isImmobile() {
 		return this.isDeadOrDying() || this.isEating();

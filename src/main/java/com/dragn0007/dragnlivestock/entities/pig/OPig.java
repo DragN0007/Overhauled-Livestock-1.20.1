@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.pig;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -73,7 +74,7 @@ public class OPig extends Animal implements GeoEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.18D);
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.POTATO, Items.BEETROOT);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_PIG_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));

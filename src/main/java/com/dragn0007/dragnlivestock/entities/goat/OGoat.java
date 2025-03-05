@@ -133,8 +133,7 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		return super.calculateFallDamage(p_149389_, p_149390_) - 10;
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.MELON_SLICE, Items.APPLE, Items.BREAD, Items.CARROT, Items.POTATO, Items.SWEET_BERRIES);
-	private static final Set<Item> TAME_FOOD = Sets.newHashSet(Items.WHEAT);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_GOAT_EATS);
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
@@ -159,7 +158,7 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (TAME_FOOD.contains(itemstack.getItem())) {
+		if (this.isFood(itemstack)) {
 			int i = this.getAge();
 			if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
 				this.usePlayerItem(player, hand, itemstack);
@@ -168,7 +167,7 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (!this.isTamed() && TAME_FOOD.contains(itemstack.getItem())) {
+		if (!this.isTamed() && this.isFood(itemstack)) {
 			if (!player.getAbilities().instabuild) {
 				itemstack.shrink(1);
 			}
@@ -263,8 +262,8 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 	protected void playStepSound(BlockPos p_149382_, BlockState p_149383_) {
 		this.playSound(SoundEvents.GOAT_STEP, 0.15F, 1.0F);
 	}
-	public boolean isFood(ItemStack p_28271_) {
-		return FOOD_ITEMS.test(p_28271_);
+	public boolean isFood(ItemStack stack) {
+		return FOOD_ITEMS.test(stack);
 	}
 
 	public boolean isScreamingGoat() {

@@ -89,7 +89,7 @@ public class OChicken extends Animal implements GeoEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.16F);
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_CHICKEN_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));

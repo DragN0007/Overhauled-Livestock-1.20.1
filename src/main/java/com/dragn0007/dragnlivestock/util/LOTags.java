@@ -14,6 +14,20 @@ public class LOTags {
 
     public static class Items {
 
+        public static final TagKey<Item> O_BEE_EATS = tag("o_bee_eats");
+        public static final TagKey<Item> O_CAMEL_EATS = tag("o_camel_eats");
+        public static final TagKey<Item> CARIBOU_EATS = tag("caribou_eats");
+        public static final TagKey<Item> O_CHICKEN_EATS = tag("o_chicken_eats");
+        public static final TagKey<Item> O_COW_EATS = tag("o_cow_eats");
+        public static final TagKey<Item> O_FROG_EATS = tag("o_frog_eats");
+        public static final TagKey<Item> O_GOAT_EATS = tag("o_goat_eats");
+        public static final TagKey<Item> O_HORSE_EATS = tag("o_horse_eats");
+        public static final TagKey<Item> O_LLAMA_EATS = tag("o_llama_eats");
+        public static final TagKey<Item> O_PIG_EATS = tag("o_pig_eats");
+        public static final TagKey<Item> O_RABBIT_EATS = tag("o_rabbit_eats");
+        public static final TagKey<Item> O_SHEEP_EATS = tag("o_sheep_eats");
+        public static final TagKey<Item> GRUB_EATS = tag("grub_eats");
+
         public static final TagKey<Item> RAW_CHICKEN = forgeTag("raw_chicken");
         public static final TagKey<Item> RAW_PORK = forgeTag("raw_pork");
         public static final TagKey<Item> RAW_MUTTON = forgeTag("raw_mutton");

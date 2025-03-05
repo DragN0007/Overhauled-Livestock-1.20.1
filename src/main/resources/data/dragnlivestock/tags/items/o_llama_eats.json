@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:wheat",
+    "minecraft:hay_block",
+
+    {
+      "id": "#forge:vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#forge:wheat",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/grains",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/fruits",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/vegetables",
+      "required": false
+    }
+  ]
+}

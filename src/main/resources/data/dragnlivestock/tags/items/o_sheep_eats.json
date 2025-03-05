@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:wheat",
+
+    {
+      "id": "#forge:vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#forge:wheat",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/grains",
+      "required": false
+    }
+  ]
+}

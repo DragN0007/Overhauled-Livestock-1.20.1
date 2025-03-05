@@ -7,6 +7,7 @@ import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -15,6 +16,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -31,12 +33,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -51,6 +55,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public static final float MAX_HEALTH = generateMaxHealth((p_272504_) -> {
         return p_272504_ - 1;
     });
+
+    public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_HORSE_EATS);
+    public boolean isFood(ItemStack stack) {
+        return FOOD_ITEMS.test(stack);
+    }
 
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
     public static final UUID SHOE_MODIFIER_UUID = UUID.fromString("d9b2d63d-5baf-4f2d-9e24-d80b02e6d17c");
@@ -603,4 +612,55 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     double x = this.getX() - this.xo;
     double z = this.getZ() - this.zo;
     public boolean isMoving = (x * x + z * z) > 0.0001;
+
+    @Override
+    public boolean handleEating(Player player, ItemStack stack) {
+        int i = 0;
+        int j = 0;
+        float f = 0.0F;
+        boolean flag = false;
+        if (stack.is(LOTags.Items.O_HORSE_EATS)) {
+            i = 90;
+            j = 6;
+            f = 10.0F;
+            if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
+                flag = true;
+                this.setInLove(player);
+            }
+        }
+
+        if (this.getHealth() < this.getMaxHealth() && f > 0.0F) {
+            this.heal(f);
+            flag = true;
+        }
+
+        if (this.isBaby() && i > 0) {
+            this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+            if (!this.level().isClientSide) {
+                this.ageUp(i);
+            }
+
+            flag = true;
+        }
+
+        if (j > 0 && (flag || !this.isTamed()) && this.getTemper() < this.getMaxTemper()) {
+            flag = true;
+            if (!this.level().isClientSide) {
+                this.modifyTemper(j);
+            }
+        }
+
+        if (flag) {
+            this.gameEvent(GameEvent.ENTITY_INTERACT);
+            if (!this.isSilent()) {
+                SoundEvent soundevent = this.getEatingSound();
+                if (soundevent != null) {
+                    this.level().playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+                }
+            }
+        }
+
+        return flag;
+    }
+
 }

@@ -94,7 +94,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 				.add(Attributes.MOVEMENT_SPEED, 0.18F);
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.WHEAT);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_SHEEP_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));

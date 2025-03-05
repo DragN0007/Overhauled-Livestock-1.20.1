@@ -1,0 +1,48 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:wheat_seeds",
+    "minecraft:beetroot_seeds",
+    "minecraft:melon_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:carrot",
+    "minecraft:beetroot",
+    "minecraft:potato",
+    "minecraft:sweet_berries",
+
+    {
+      "id": "#forge:vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#forge:seeds",
+      "required": false
+    },
+
+    {
+      "id": "#forge:fruits",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/grains",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/fruits",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:seeds",
+      "required": false
+    }
+  ]
+}

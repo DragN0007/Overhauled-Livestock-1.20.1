@@ -75,7 +75,7 @@ public class OFrog extends Animal implements GeoEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.18D);
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOItems.GRUB.get());
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_FROG_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));

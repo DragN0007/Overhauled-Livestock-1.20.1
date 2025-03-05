@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:carrot",
+    "minecraft:beetroot",
+    "minecraft:apple",
+    "minecraft:melon_slice",
+    "minecraft:sweet_berries",
+
+    {
+      "id": "#forge:vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#forge:wheat",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/grains",
+      "required": false
+    }
+  ]
+}

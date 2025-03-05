@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "dragnlivestock:grub",
+
+    {
+      "id": "#tfc:frog_food",
+      "required": false
+    }
+  ]
+}

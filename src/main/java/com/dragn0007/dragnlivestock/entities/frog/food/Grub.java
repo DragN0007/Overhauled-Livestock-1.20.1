@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.frog.food;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -83,7 +84,7 @@ public class Grub extends Animal implements GeoEntity {
 		return super.mobInteract(player, hand);
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Tags.Items.CROPS);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.GRUB_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));

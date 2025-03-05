@@ -93,7 +93,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.16F);
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.MELON_SLICE, Items.APPLE, Items.BEETROOT, Items.GOLDEN_CARROT, Blocks.DANDELION);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_RABBIT_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -137,8 +137,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		}
 	}
 
-	private static final Set<Item> TAME_FOOD = Sets.newHashSet(Items.CARROT, Items.MELON_SLICE, Items.APPLE, Items.BEETROOT, Items.GOLDEN_CARROT);
-
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
@@ -158,7 +156,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		}
 
 		if (this.level().isClientSide) {
-			boolean flag = this.isOwnedBy(player) || this.isTame() || TAME_FOOD.contains(itemstack.getItem()) && !this.isTame();
+			boolean flag = this.isOwnedBy(player) || this.isTame() || this.isFood(itemstack) && !this.isTame();
 			return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
 		} else {
 			if (this.isTame()) {
@@ -185,7 +183,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 					return interactionresult;
 				}
 
-			} else if (TAME_FOOD.contains(itemstack.getItem())) {
+			} else if (this.isFood(itemstack)) {
 				if (!player.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
@@ -228,12 +226,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(1.5);
 			}
+		} else if (this.isInSittingPose()) {
+			controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
 		} else {
 			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-		}
-
-		if (this.isOrderedToSit() && !tAnimationState.isMoving()) {
-			controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
 		}
 
 		return PlayState.CONTINUE;

@@ -1,0 +1,36 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:golden_apple",
+    "minecraft:enchanted_golden_apple",
+    "minecraft:golden_carrot",
+    "minecraft:apple",
+    "minecraft:carrot",
+    "minecraft:sugar",
+
+    {
+      "id": "#forge:vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#forge:fruits",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/grains",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/fruits",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:foods/vegetables",
+      "required": false
+    }
+  ]
+}

@@ -96,6 +96,11 @@ public class OCow extends Animal implements GeoEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.17F);
 	}
 
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_COW_EATS);
+	public boolean isFood(ItemStack stack) {
+		return FOOD_ITEMS.test(stack);
+	}
+
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));

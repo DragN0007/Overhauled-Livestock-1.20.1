@@ -1,0 +1,40 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:beetroot",
+    "minecraft:potato",
+    "minecraft:carrot",
+    "minecraft:melon_slice",
+    "minecraft:pumpkin",
+
+    {
+      "id": "#forge:vegetables",
+      "required": false
+    },
+
+    {
+      "id": "#forge:fruits",
+      "required": false
+    },
+
+    {
+      "id": "#forge:crops",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:grains",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:fruits",
+      "required": false
+    },
+
+    {
+      "id": "#tfc:vegetables",
+      "required": false
+    }
+  ]
+}

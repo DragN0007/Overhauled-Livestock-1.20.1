@@ -112,8 +112,8 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.DEAD_BUSH, Items.CACTUS, Blocks.HAY_BLOCK.asItem());
 
 	@Override
-	public boolean isFood(ItemStack itemStack) {
-		return FOOD_ITEMS.test(itemStack);
+	public boolean isFood(ItemStack stack) {
+		return FOOD_ITEMS.test(stack);
 	}
 
 	@Override
@@ -278,22 +278,18 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public boolean handleEating(Player p_30796_, ItemStack p_30797_) {
+	public boolean handleEating(Player player, ItemStack stack) {
 		int i = 0;
 		int j = 0;
 		float f = 0.0F;
 		boolean flag = false;
-		if (p_30797_.is(Items.HAY_BLOCK)) {
-			i = 10;
-			j = 3;
-			f = 2.0F;
-		} else if (p_30797_.is(Blocks.CACTUS.asItem())) {
+		if (stack.is(LOTags.Items.O_CAMEL_EATS)) {
 			i = 90;
 			j = 6;
 			f = 10.0F;
 			if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
 				flag = true;
-				this.setInLove(p_30796_);
+				this.setInLove(player);
 			}
 		}
 
