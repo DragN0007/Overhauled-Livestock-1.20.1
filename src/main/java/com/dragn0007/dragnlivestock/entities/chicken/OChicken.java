@@ -73,13 +73,13 @@ public class OChicken extends Animal implements GeoEntity {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 1 || this.getBreed() == 3) { //meat chickens
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1 || this.getBreed() == 3)) {
 			return MEAT_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 2 || this.getBreed() == 5) { //normal chickens
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 2 || this.getBreed() == 5)) {
 			return LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 4) { //mini chickens
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 0 || this.getBreed() == 4)) {
 			return MINI_LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {
