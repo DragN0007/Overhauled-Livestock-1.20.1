@@ -70,6 +70,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse");
 	private static final ResourceLocation CREATE_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse_create");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
+	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/horse");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -77,6 +78,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && ModList.get().isLoaded("create")) {
 			return CREATE_LOOT_TABLE;
+		}
+		if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

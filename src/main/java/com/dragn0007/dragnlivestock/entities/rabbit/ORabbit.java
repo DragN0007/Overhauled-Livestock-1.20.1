@@ -39,6 +39,7 @@ import net.minecraft.world.level.block.CarrotBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -64,19 +65,23 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_rabbit");
 	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_rabbit");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/rabbit");
+	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/rabbit");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 1) { //meat rabbits
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 1 || this.getBreed() == 3) { //meat chickens
 			return MEAT_LOOT_TABLE;
 		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 3) { //normal rabbits
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 2 || this.getBreed() == 5) { //normal chickens
 			return LOOT_TABLE;
 		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 2) { //mini rabbits
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 4) { //mini chickens
 			return MINI_LOOT_TABLE;
+		}
+		if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

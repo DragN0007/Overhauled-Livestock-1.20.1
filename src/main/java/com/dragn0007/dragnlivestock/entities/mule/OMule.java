@@ -35,6 +35,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -62,10 +63,14 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mule");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/mule");
+	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/mule");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
+		}
+		if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

@@ -22,6 +22,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -42,10 +43,14 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_salmon");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/salmon");
+	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_salmon");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
+		}
+		if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

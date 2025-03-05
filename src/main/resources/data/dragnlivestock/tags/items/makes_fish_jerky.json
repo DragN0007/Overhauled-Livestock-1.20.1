@@ -4,6 +4,61 @@
     "minecraft:salmon",
     "dragnlivestock:salmon_fillet",
     "minecraft:cod",
-    "dragnlivestock:cod_fillet"
+    "dragnlivestock:cod_fillet",
+
+    {
+      "id": "tfc:food/salmon",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/cod",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/calamari",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/tropical_fish",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/shellfish",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/crappie",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/smallmouth_bass",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/largemouth_bass",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/lake_trout",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/rainbow_trout",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/bluegill",
+      "required": false
+    }
   ]
 }

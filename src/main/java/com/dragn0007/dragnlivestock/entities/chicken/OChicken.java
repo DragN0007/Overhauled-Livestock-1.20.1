@@ -35,6 +35,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -66,19 +67,23 @@ public class OChicken extends Animal implements GeoEntity {
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_chicken");
 	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_chicken");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/chicken");
+	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/chicken");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 1 || this.getBreed() == 3) { //meat chickens
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 1 || this.getBreed() == 3) { //meat chickens
 			return MEAT_LOOT_TABLE;
 		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 2 || this.getBreed() == 5) { //normal chickens
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 2 || this.getBreed() == 5) { //normal chickens
 			return LOOT_TABLE;
 		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 4) { //mini chickens
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 4) { //mini chickens
 			return MINI_LOOT_TABLE;
+		}
+		if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
 	}

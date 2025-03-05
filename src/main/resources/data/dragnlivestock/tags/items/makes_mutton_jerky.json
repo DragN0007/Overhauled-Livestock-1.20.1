@@ -9,6 +9,26 @@
     "dragnlivestock:llama_rib",
     "dragnlivestock:chevon",
     "dragnlivestock:chevon_loin",
-    "dragnlivestock:chevon_rib"
+    "dragnlivestock:chevon_rib",
+
+    {
+      "id": "tfc:food/mutton",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/chevon",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/llama",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/alpaca",
+      "required": false
+    }
   ]
 }

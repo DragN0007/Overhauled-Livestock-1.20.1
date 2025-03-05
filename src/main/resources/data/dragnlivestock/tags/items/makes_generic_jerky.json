@@ -12,6 +12,56 @@
     "dragnlivestock:camel",
     "dragnlivestock:camel_loin",
     "dragnlivestock:camel_rib",
-    "dragnlivestock:frog"
+    "dragnlivestock:frog",
+
+    {
+      "id": "tfc:food/horse_meat",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/rabbit",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/camelidae",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/frog_legs",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/hyena",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/fox",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/gran_feline",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/wolf",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/turtle",
+      "required": false
+    },
+
+    {
+      "id": "tfc:food/bear",
+      "required": false
+    }
   ]
 }

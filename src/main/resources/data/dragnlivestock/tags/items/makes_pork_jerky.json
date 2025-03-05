@@ -3,6 +3,11 @@
   "values": [
     "minecraft:porkchop",
     "dragnlivestock:pork_tenderloin",
-    "dragnlivestock:pork_rib_chop"
+    "dragnlivestock:pork_rib_chop",
+
+    {
+      "id": "tfc:food/pork",
+      "required": false
+    }
   ]
 }

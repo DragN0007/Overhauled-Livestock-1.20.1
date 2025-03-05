@@ -1,19 +1,6 @@
 {
   "replace": false,
   "values": [
-    "dragnlivestock:cooked_beef_sirloin_steak",
-    "dragnlivestock:cooked_beef_rib_steak",
-    "dragnlivestock:cooked_chicken_thigh",
-    "dragnlivestock:cooked_horse",
-    "dragnlivestock:cooked_horse_sirloin_steak",
-    "dragnlivestock:cooked_horse_rib_steak",
-    "dragnlivestock:cooked_mutton_loin",
-    "dragnlivestock:cooked_mutton_rib",
-    "dragnlivestock:cooked_pork_tenderloin",
-    "dragnlivestock:cooked_pork_rib_chop",
-    "dragnlivestock:cooked_rabbit_thigh",
-    "dragnlivestock:cooked_unicorn",
-    "dragnlivestock:cooked_unicorn_sirloin_steak",
-    "dragnlivestock:cooked_unicorn_rib_steak"
+    "#forge:cooked_meats"
   ]
 }

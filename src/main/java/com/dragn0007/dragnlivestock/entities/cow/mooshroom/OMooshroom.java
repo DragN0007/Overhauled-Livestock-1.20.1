@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 
@@ -41,14 +42,17 @@ public class OMooshroom extends OCow implements GeoEntity {
 
     private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mooshroom");
     private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/mooshroom");
+    private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
     @Override
     public @NotNull ResourceLocation getDefaultLootTable() {
         if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
             return VANILLA_LOOT_TABLE;
         }
+        if (ModList.get().isLoaded("tfc")) {
+            return TFC_LOOT_TABLE;
+        }
         return LOOT_TABLE;
     }
-
     public float getWalkTargetValue(BlockPos p_28933_, LevelReader p_28934_) {
         return p_28934_.getBlockState(p_28933_.below()).is(Blocks.MYCELIUM) ? 10.0F : p_28934_.getPathfindingCostFromLightLevels(p_28933_);
     }
