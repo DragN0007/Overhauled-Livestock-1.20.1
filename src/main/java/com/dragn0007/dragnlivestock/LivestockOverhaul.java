@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock;
 
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.villager.LivestockTrader;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -22,6 +21,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -42,6 +42,7 @@ public class LivestockOverhaul
     public LivestockOverhaul()
     {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
         LOItems.register(eventBus);
         LOItemGroup.register(eventBus);
@@ -49,7 +50,6 @@ public class LivestockOverhaul
         EntityTypes.ENTITY_TYPES.register(eventBus);
         LOMenuTypes.register(eventBus);
         BIOME_MODIFIER_SERIALIZERS.register(eventBus);
-        LivestockTrader.register(eventBus);
 
         GeckoLib.initialize();
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, LivestockOverhaulClientConfig.SPEC, "livestock-overhaul-client.toml");
@@ -59,6 +59,11 @@ public class LivestockOverhaul
 
         System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
         System.out.println("[DragN's Livestock Overhaul!] Issues Page: https://github.com/DragN0007/Overhauled-Livestock/issues");
+    }
+
+    private void setup(final FMLCommonSetupEvent event) {
+//        LivestockTrader.registerTrades();
+//        OVillagerTradingManager.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     public static final EntityDataSerializer<ResourceLocation> RESOURCE_LOCATION = new EntityDataSerializer<>() {

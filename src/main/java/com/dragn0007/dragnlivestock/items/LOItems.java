@@ -58,10 +58,6 @@ public class LOItems {
             () -> new ForgeSpawnEggItem(EntityTypes.O_FROG_ENTITY, 0x9cc15c, 0xc34f31, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> GRUB_SPAWN_EGG = ITEMS.register("grub_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.GRUB_ENTITY, 0xf0f1c3, 0xc9bb8d, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> LIVESTOCK_TRADER_SPAWN_EGG = ITEMS.register("livestock_trader_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.LIVESTOCK_TRADER_ENTITY, 0x5a3f37, 0xa42222, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> TRADER_MULE_SPAWN_EGG = ITEMS.register("trader_mule_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.TRADER_MULE_ENTITY, 0x502c1a, 0x381f17, new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> OVERWORLD_UNICORN_SPAWN_EGG = ITEMS.register("overworld_unicorn_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.OVERWORLD_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));

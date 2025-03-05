@@ -56,7 +56,6 @@ import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseSkel
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
-import com.dragn0007.dragnlivestock.entities.mule.OMuleMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.pig.OPigMarkingLayer;
@@ -69,36 +68,21 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import com.dragn0007.dragnlivestock.entities.villager.LivestockTrader;
-import com.dragn0007.dragnlivestock.entities.villager.TraderMule;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.village.poi.PoiManager;
-import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
-import net.minecraft.world.entity.npc.WanderingTrader;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -106,11 +90,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
@@ -1248,75 +1229,6 @@ public class SpawnReplacer {
                     event.setCanceled(true);
                 }
             }
-        }
-
-
-        //Livestock Trader
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.SPAWN_LIVESTOCK_TRADER.get() && (event.getEntity() instanceof WanderingTrader || event.getEntity() instanceof TraderLlama) && event.getLevel().getRandom().nextDouble() < 0.50) {
-
-            if (event.getEntity().getClass() == WanderingTrader.class) {
-                WanderingTrader wanderingTrader = (WanderingTrader) event.getEntity();
-
-                if (event.getLevel().isClientSide) {
-                    return;
-                }
-
-                LivestockTrader livestockTrader = EntityTypes.LIVESTOCK_TRADER_ENTITY.get().create(event.getLevel());
-                if (livestockTrader != null) {
-                    livestockTrader.copyPosition(wanderingTrader);
-
-                    livestockTrader.setCustomName(wanderingTrader.getCustomName());
-
-                    if (event.getLevel().isClientSide) {
-                        wanderingTrader.remove(Entity.RemovalReason.DISCARDED);
-                    }
-
-                    event.getLevel().addFreshEntity(livestockTrader);
-                    wanderingTrader.remove(Entity.RemovalReason.DISCARDED);
-
-                    event.setCanceled(true);
-                }
-            }
-
-            if (event.getEntity().getClass() == TraderLlama.class) {
-                TraderLlama traderLlama = (TraderLlama) event.getEntity();
-
-                if (event.getLevel().isClientSide) {
-                    return;
-                }
-
-                TraderMule traderMule = EntityTypes.TRADER_MULE_ENTITY.get().create(event.getLevel());
-                if (traderMule != null) {
-                    traderMule.copyPosition(traderLlama);
-
-                    traderMule.setCustomName(traderLlama.getCustomName());
-                    traderMule.setAge(traderLlama.getAge());
-
-                    int randomVariant = event.getLevel().getRandom().nextInt(OMuleModel.Variant.values().length);
-                    traderMule.setVariant(randomVariant);
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OMuleMarkingLayer.Overlay.values().length);
-                    traderMule.setOverlayVariant(randomOverlayVariant);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                    traderMule.setGender(randomGender);
-
-                    traderMule.setBreed(2); //draft mule
-                    traderMule.setChest(true); //give it saddlebags
-                    traderMule.setTamed(true);
-                    traderMule.setItemSlot(EquipmentSlot.CHEST, Items.CYAN_CARPET.getDefaultInstance());
-
-                    if (event.getLevel().isClientSide) {
-                        traderLlama.remove(Entity.RemovalReason.DISCARDED);
-                    }
-
-                    event.getLevel().addFreshEntity(traderMule);
-                    traderLlama.remove(Entity.RemovalReason.DISCARDED);
-
-                    event.setCanceled(true);
-                }
-            }
-
         }
 
 
