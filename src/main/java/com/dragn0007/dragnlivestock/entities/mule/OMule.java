@@ -7,7 +7,9 @@ import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.gui.OMuleMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -20,6 +22,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -225,13 +228,12 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.shouldEmote = true;
 	}
 
-	//ground tie
+	public int maxSprint = 40 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
+	public int sprintTick = maxSprint;
+
 	@Override
 	public void tick() {
 		super.tick();
-//		if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.isLeashed() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
-//			this.getNavigation().stop();
-//		}
 
 		if (this.isOnSand()) {
 			if (!this.hasSlownessEffect()) {
@@ -241,6 +243,42 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			if (this.hasSlownessEffect()) {
 				this.removeSlownessEffect();
 			}
+		}
+
+		if (this.getBreed() == 0) {
+			maxSprint += 800;
+		}
+
+		if (this.getBreed() == 1) {
+			maxSprint += 0;
+		}
+
+		if (this.getBreed() == 2) {
+			maxSprint += 600;
+		}
+
+		Entity controllingPassenger = this.getControllingPassenger();
+		Player player = (Player) controllingPassenger;
+		int sprintLeftInSeconds = sprintTick / 20;
+
+		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger()) {
+			sprintTick--;
+			if (controllingPassenger instanceof Player && !(sprintTick <= 0)) {
+				player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
+			}
+		}
+
+		if (!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && sprintTick < maxSprint) {
+			sprintTick++;
+		}
+
+		if (sprintTick <= 0 && this.hasControllingPassenger()) {
+			AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
+			this.handleSpeedRequest(-1);
+			movementSpeed.removeModifier(SPRINT_SPEED_MOD);
+			player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
+		} else if (player == null || !this.hasControllingPassenger()) {
+			return;
 		}
 	}
 

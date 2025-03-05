@@ -32,6 +32,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -674,6 +675,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		});
 	}
 
+	public int maxSprint = 40 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
+	public int sprintTick = maxSprint;
+
 	@Override
 	public void tick() {
 		super.tick();
@@ -695,6 +699,49 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
+		if (isWarmbloodedBreed()) {
+			maxSprint += 1200;
+		}
+
+		if (isStockBreed()) {
+			maxSprint += 600;
+		}
+
+		if (isRacingBreed()) {
+			maxSprint += 0;
+		}
+
+		if (isPonyBreed()) {
+			maxSprint += 200;
+		}
+
+		if (isDraftBreed()) {
+			maxSprint += 400;
+		}
+
+		Entity controllingPassenger = this.getControllingPassenger();
+		Player player = (Player) controllingPassenger;
+		int sprintLeftInSeconds = sprintTick / 20;
+
+		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger()) {
+			sprintTick--;
+			if (controllingPassenger instanceof Player && !(sprintTick <= 0)) {
+				player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
+			}
+		}
+
+		if (!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && sprintTick < maxSprint) {
+			sprintTick++;
+		}
+
+		if (sprintTick <= 0 && this.hasControllingPassenger()) {
+			AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
+			this.handleSpeedRequest(-1);
+			movementSpeed.removeModifier(SPRINT_SPEED_MOD);
+			player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
+		} else if (player == null || !this.hasControllingPassenger()) {
+			return;
+		}
 	}
 
 	@Override

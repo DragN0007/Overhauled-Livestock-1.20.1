@@ -1,0 +1,15 @@
+{
+  "name": "Endurance & Sprinting",
+  "icon": "dragnlivestock:saddle",
+  "category": "dragnlivestock:mount_controls_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Equines, such as Horses, Mules, and Donkeys have Sprint Modifiers. A horse's breed determines how long it can run at full speed. $(br2)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": ""
+    }
+  ]
+}

@@ -32,8 +32,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     protected int jumpStrengthLabelY;
     protected int healthLabelX;
     protected int healthLabelY;
-//    protected int ownerLabelX;
-//    protected int ownerLabelY;
     protected int genderFLabelX;
     protected int genderMLabelX;
     protected int genderLabelY;
@@ -47,9 +45,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     protected void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
-
-//        ownerLabelX = leftPos + 1;
-//        ownerLabelY = topPos - 18;
 
         genderFLabelX = leftPos + 140;
         genderMLabelX = leftPos + 152;
@@ -123,7 +118,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oHorse);
 
         renderBreedLabel(graphics);
-//        renderOwnerLabel(graphics);
 
         if (LivestockOverhaulClientConfig.HORSE_COAT_GUI.get()) {
             renderBaseCoatLabel(graphics);
@@ -219,15 +213,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
         }
     }
-
-//    private void renderOwnerLabel(GuiGraphics graphics) {
-//        String playerOwnerName = String.valueOf(this.oHorse.getOwner().getDisplayName());
-//        String labelText = "Tamed By: " + playerOwnerName;
-//
-//        String unknownOwnerText = "Tamed By: [Unknown Player]";
-//
-//        graphics.drawString(this.font, labelText, ownerLabelX, ownerLabelY, 0xFFFFFF, false);
-//    }
 
 
     //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v

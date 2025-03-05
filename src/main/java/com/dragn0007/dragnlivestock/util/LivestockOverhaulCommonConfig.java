@@ -40,6 +40,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
+public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -140,6 +141,9 @@ public class LivestockOverhaulCommonConfig {
 
         CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
                 .define("Chicken Egg Lay Amount", 3);
+
+        BASE_HORSE_SPRINT_TIME = BUILDER.comment("Base time an O-Horse can run for at full speed, in seconds. Default is 45s.")
+                .define("Base Horse Sprint Time", 45);
 
 //        MAX_PIG_BABIES = BUILDER.comment("Maximum amount of babies O-Pigs can have after breeding. Default is 3.")
 //                .define("Max Pig Babies", 3);

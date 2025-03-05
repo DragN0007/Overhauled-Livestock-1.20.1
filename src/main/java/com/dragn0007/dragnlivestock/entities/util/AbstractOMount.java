@@ -599,4 +599,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
         }
     }
+
+    double x = this.getX() - this.xo;
+    double z = this.getZ() - this.zo;
+    public boolean isMoving = (x * x + z * z) > 0.0001;
 }
