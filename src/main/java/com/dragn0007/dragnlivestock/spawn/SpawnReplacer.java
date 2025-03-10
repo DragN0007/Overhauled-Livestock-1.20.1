@@ -1117,7 +1117,7 @@ public class SpawnReplacer {
         }
 
         //Undead Horse
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof SkeletonHorse) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && event.getEntity() instanceof SkeletonHorse) {
 
             if (event.getEntity().getClass() == SkeletonHorse.class) {
                 SkeletonHorse skeletonHorse = (SkeletonHorse) event.getEntity();
@@ -1155,7 +1155,7 @@ public class SpawnReplacer {
             }
         }
 
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof ZombieHorse) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && event.getEntity() instanceof ZombieHorse) {
 
             if (event.getEntity().getClass() == ZombieHorse.class) {
                 ZombieHorse zombieHorse = (ZombieHorse) event.getEntity();

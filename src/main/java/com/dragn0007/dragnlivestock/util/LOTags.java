@@ -82,11 +82,7 @@ public class LOTags {
 
     public static class Entity_Types {
         public static final TagKey<EntityType<?>> HORSES = forgeTag("horses");
-        public static final TagKey<EntityType<?>> RHG_HORSES = forgeTag("rhg_horses");
-        public static final TagKey<EntityType<?>> SWEM_HORSES = forgeTag("swem_horses");
-        public static final TagKey<EntityType<?>> O_WOLVES = forgeTag("o_wolves");
         public static final TagKey<EntityType<?>> WOLVES = forgeTag("wolves");
-        public static final TagKey<EntityType<?>> O_FOXES = forgeTag("o_foxes");
         public static final TagKey<EntityType<?>> FOXES = forgeTag("foxes");
         public static final TagKey<EntityType<?>> CATS = forgeTag("cats");
         public static final TagKey<EntityType<?>> HERDING_DOGS = forgeTag("herding_dogs");
