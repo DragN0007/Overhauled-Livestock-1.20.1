@@ -251,7 +251,7 @@ public class OCamel extends AbstractOMount implements GeoEntity {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
-		if (itemstack.isEmpty() && this.canAddPassenger(this)) {
+		if (itemstack.isEmpty() && this.canAddPassenger(this) && !player.isCrouching()) {
 			this.doPlayerRide(player);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}

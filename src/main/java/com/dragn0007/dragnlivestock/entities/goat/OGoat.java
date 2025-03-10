@@ -514,7 +514,7 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public void equipSaddle(@Nullable SoundSource p_30546_) {
+	public void equipSaddle(@Nullable SoundSource source) {
 	}
 
 	@Override

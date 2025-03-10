@@ -31,6 +31,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -49,6 +50,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
+
+    public SimpleContainer getInventory() {
+        return inventory;
+    }
 
     public net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
 
@@ -195,17 +200,14 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
-    public void equipSaddle(@Nullable SoundSource p_30546_) {
-        this.inventory.setItem(0, new ItemStack(Items.SADDLE));
-
-        if (this.isGoat(this)) {
-        return;
+    public void equipSaddle(@Nullable SoundSource source) {
+        if (!isHorse(this) && !isMule(this) && !isDonkey(this) && !isGoat(this)) {
+            this.inventory.setItem(0, new ItemStack(Items.SADDLE));
         }
-    }
 
-    @Override
-    public boolean hasChest() {
-        return this.entityData.get(DATA_ID_CHEST);
+        if (isHorse(this) || isMule(this) || isDonkey(this)|| isGoat(this)) {
+            return;
+        }
     }
 
     @Override

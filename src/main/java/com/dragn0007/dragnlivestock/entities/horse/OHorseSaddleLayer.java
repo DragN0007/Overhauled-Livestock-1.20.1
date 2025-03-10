@@ -1,6 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,11 +11,20 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SaddleItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
@@ -30,6 +42,25 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
         } else {
             return;
         }
+
+//        SimpleContainer inventory = animatable.getInventory();
+//        ItemStack itemStack = inventory.getItem(0);
+//
+//        if (inventory.isEmpty()) {
+//            return;
+//        }
+//
+//        if (animatable.isSaddled() && LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get() && !LivestockOverhaulClientConfig.LEGACY_HORSE_SADDLES.get()) {
+//            if (animatable.getInventory().getItem(0).is(Items.SADDLE)) {
+//                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/horse_saddle.png");
+//            } else if (animatable.getInventory().getItem(0).is(LOItems.BLACK_SADDLE.get())) {
+//                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/black_horse_saddle.png");
+//            } else if (animatable.getInventory().getItem(0).is(LOItems.WHITE_SADDLE.get())) {
+//                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/black_horse_saddle.png");
+//            } else {
+//                return;
+//            }
+//        }
 
         RenderType renderType1 = RenderType.entityCutout(resourceLocation);
         poseStack.pushPose();

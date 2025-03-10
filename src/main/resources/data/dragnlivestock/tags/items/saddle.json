@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:saddle",
+    "dragnlivestock:black_saddle",
+    "dragnlivestock:white_saddle"
+  ]
+}

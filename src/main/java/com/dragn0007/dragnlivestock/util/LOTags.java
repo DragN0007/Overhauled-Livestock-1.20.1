@@ -66,7 +66,7 @@ public class LOTags {
         public static final TagKey<Item> EGG = forgeTag("egg");
         public static final TagKey<Item> VEGETABLES = forgeTag("vegetables");
 
-        public static final TagKey<Item> SADDLE = forgeTag("saddle");
+        public static final TagKey<Item> SADDLE = tag("saddle");
 
         public static final TagKey<Item> SWEM_CANTAZARITE_POTION = forgeTag("swem_cantazarite_potion");
 

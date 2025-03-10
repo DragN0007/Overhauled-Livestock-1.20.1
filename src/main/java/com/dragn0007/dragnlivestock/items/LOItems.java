@@ -133,6 +133,8 @@ public class LOItems {
             () -> new HorseArmorItem(4, "chainmail", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> BLACK_SADDLE = ITEMS.register("black_saddle",
             () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_SADDLE = ITEMS.register("white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));

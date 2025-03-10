@@ -22,6 +22,24 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_SADDLE.get())
+//                .requires(Items.SADDLE)
+//                .requires(Items.BLACK_DYE)
+//                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+//                        .of(Items.SADDLE)
+//                        .build()))
+//                .save(pFinishedRecipeConsumer);
+//
+//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_SADDLE.get())
+//                .requires(Items.SADDLE)
+//                .requires(Items.WHITE_DYE)
+//                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+//                        .of(Items.SADDLE)
+//                        .build()))
+//                .save(pFinishedRecipeConsumer);
+
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RAW_CHEESE.get())
                 .requires(LOItems.COW_MILK_JUG.get())
                 .requires(LOItems.COW_MILK_JUG.get())
