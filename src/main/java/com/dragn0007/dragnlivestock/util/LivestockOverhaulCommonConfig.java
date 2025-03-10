@@ -21,6 +21,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_CAMELS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_GOATS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_FROGS;
+    public static final ForgeConfigSpec.BooleanValue REPLACE_UNDEAD_HORSES;
     public static final ForgeConfigSpec.BooleanValue SPAWN_GRUBS;
     public static final ForgeConfigSpec.BooleanValue SPAWN_MOOBLOOMS;
     public static final ForgeConfigSpec.BooleanValue SPAWN_CARIBOU;
@@ -99,6 +100,9 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
 
         SPAWN_CARIBOU = BUILDER.comment("Should Caribou spawn?")
                 .define("Spawn Caribou", true);
+
+        REPLACE_UNDEAD_HORSES = BUILDER.comment("Should undead horses be replaced by O-Undead Horses?")
+                .define("Replace Undead Horses", true);
 
         SPAWN_LIVESTOCK_TRADER = BUILDER.comment("Should Livestock Traders have a chance to replace Wandering Traders?")
                 .define("Spawn Livestock Traders", true);

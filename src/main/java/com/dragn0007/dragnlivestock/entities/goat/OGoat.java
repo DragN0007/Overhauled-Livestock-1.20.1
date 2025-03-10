@@ -40,6 +40,7 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -127,11 +128,13 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
-			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.O_WOLVES);
 			boolean isHerdingDog = livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS);
-			boolean isWolf = livingEntity instanceof Wolf;
-			return isOWolf || isWolf || isHerdingDog;
+			return isHerdingDog;
 		}));
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame())
+		));
 	}
 
 	protected int calculateFallDamage(float p_149389_, float p_149390_) {

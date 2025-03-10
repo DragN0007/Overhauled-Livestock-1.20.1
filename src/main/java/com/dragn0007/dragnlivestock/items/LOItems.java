@@ -337,7 +337,7 @@ public class LOItems {
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(1).build())));
 
     public static final RegistryObject<Item> GRUB = ITEMS.register("grub",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).effect(new MobEffectInstance(MobEffects.CONFUSION, 600, 0), 0.8F).saturationMod(1).build())));
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).effect(new MobEffectInstance(MobEffects.CONFUSION, 600, 0), 1F).saturationMod(1).build())));
     public static final RegistryObject<Item> COOKED_GRUB = ITEMS.register("cooked_grub",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(1).build())));
 

@@ -93,15 +93,21 @@ public class OFrog extends Animal implements GeoEntity {
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
-			boolean isOWolf = livingEntity.getType().is(LOTags.Entity_Types.O_WOLVES);
-			boolean isOCat = livingEntity.getType().is(LOTags.Entity_Types.CATS);
-			boolean isHuntingDog = livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS);
-			boolean isFox = livingEntity.getType().is(LOTags.Entity_Types.FOXES);
-			boolean isOFox = livingEntity.getType().is(LOTags.Entity_Types.O_FOXES);
-			boolean isWolf = livingEntity instanceof Wolf;
-			return isOWolf || isWolf || isOCat || isHuntingDog || isFox || isOFox;
-		}));
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.WOLVES))
+		);
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.CATS))
+		);
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS))
+		);
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.FOXES))
+		);
 	}
 
 	@Override

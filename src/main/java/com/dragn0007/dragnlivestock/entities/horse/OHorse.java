@@ -110,7 +110,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.generateRandomOHorseMaxHealth());
 		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.generateRandomOHorseSpeed());
 		this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomOHorseJumpStrength());
-//		this.getAttribute(LOAttributes.ENDURANCE).setBaseValue(this.generateRandomEndurance());
 	}
 
 	@Override
@@ -127,14 +126,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
-			boolean isWolf = livingEntity instanceof Wolf;
-			return isWolf;
-		}));
-
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
-				(entity.getType().is(LOTags.Entity_Types.O_WOLVES) && !this.isTamed()) ||
-						(entity.getType().is(LOTags.Entity_Types.O_WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
+						(entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 	}
 
