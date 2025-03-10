@@ -201,13 +201,19 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     @Override
     public void equipSaddle(@Nullable SoundSource source) {
-        if (!isHorse(this) && !isMule(this) && !isDonkey(this) && !isGoat(this)) {
-            this.inventory.setItem(0, new ItemStack(Items.SADDLE));
-        }
+        this.inventory.setItem(0, new ItemStack(Items.SADDLE));
 
-        if (isHorse(this) || isMule(this) || isDonkey(this)|| isGoat(this)) {
+        if (isGoat(this)) {
             return;
         }
+
+//        if (!isHorse(this) && !isMule(this) && !isDonkey(this) && !isGoat(this)) {
+//            this.inventory.setItem(0, new ItemStack(Items.SADDLE));
+//        }
+//
+//        if (isHorse(this) || isMule(this) || isDonkey(this)|| isGoat(this)) {
+//            return;
+//        }
     }
 
     @Override
