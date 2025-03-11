@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.20.1-2.4'
+version = '1.20.1-2.4.1'
 group = mod_group_id
 
 base {
@@ -102,9 +102,6 @@ dependencies {
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
-//
-//    implementation fg.deobf("curse.maven:dragns-livestock-overhaul-pets-addon-1175609:6279103")
-//    implementation fg.deobf("curse.maven:dragns-livestock-overhaul-permafrost-1209316:6278724")
 
     //compat stuff
 //    implementation fg.deobf("curse.maven:thats-just-peachy-912726:5367423")
