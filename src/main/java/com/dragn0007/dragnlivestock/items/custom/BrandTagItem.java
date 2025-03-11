@@ -2,11 +2,7 @@ package com.dragn0007.dragnlivestock.items.custom;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -16,29 +12,20 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BrandTagItem extends Item {
-   public BrandTagItem(Properties properties) {
+
+   public final DyeColor color;
+
+   public BrandTagItem(DyeColor dyeColor, Properties properties) {
       super(properties);
+      this.color = dyeColor;
    }
 
-   public InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity entity, InteractionHand hand) {
-      if (itemStack.hasCustomHoverName() && !(entity instanceof Player)) {
-         if (!player.level().isClientSide && entity.isAlive()) {
-            entity.setCustomName(itemStack.getHoverName());
-            if (entity instanceof Mob) {
-               ((Mob)entity).setPersistenceRequired();
-            }
-
-            itemStack.shrink(1);
-         }
-
-         return InteractionResult.sidedSuccess(player.level().isClientSide);
-      } else {
-         return InteractionResult.PASS;
-      }
+   public DyeColor getColor() {
+      return this.color;
    }
 
    @Override
    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-      pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.not_functional.tooltip").withStyle(ChatFormatting.GRAY));
+      pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.brand_tag.tooltip").withStyle(ChatFormatting.GOLD));
    }
 }

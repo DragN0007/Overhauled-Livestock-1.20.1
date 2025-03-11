@@ -13,6 +13,7 @@ public class CarrotMoobloomRender extends GeoEntityRenderer<CarrotMoobloom> {
         super(renderManager, new CarrotMoobloomModel());
         this.addRenderLayer(new CarrotMoobloomMarkingLayer(this));
         this.addRenderLayer(new CarrotMoobloomHornLayer(this));
+        this.addRenderLayer(new CarrotMoobloomBrandTagLayer(this));
     }
 
     @Override

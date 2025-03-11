@@ -13,6 +13,7 @@ public class WheatMoobloomRender extends GeoEntityRenderer<WheatMoobloom> {
         super(renderManager, new WheatMoobloomModel());
         this.addRenderLayer(new WheatMoobloomMarkingLayer(this));
         this.addRenderLayer(new WheatMoobloomHornLayer(this));
+        this.addRenderLayer(new WheatMoobloomBrandTagLayer(this));
     }
 
     @Override

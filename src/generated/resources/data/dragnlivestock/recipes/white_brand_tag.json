@@ -3,13 +3,17 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "minecraft:saddle"
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:paper"
     },
     {
       "item": "minecraft:white_dye"
     }
   ],
   "result": {
-    "item": "dragnlivestock:white_saddle"
+    "count": 12,
+    "item": "dragnlivestock:white_brand_tag"
   }
 }

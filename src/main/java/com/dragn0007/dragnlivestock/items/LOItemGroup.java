@@ -67,6 +67,23 @@ public class LOItemGroup {
 
                         output.accept(LOItems.UTILITY_KNIFE.get());
 
+                        output.accept(LOItems.BLACK_BRAND_TAG.get());
+                        output.accept(LOItems.BLUE_BRAND_TAG.get());
+                        output.accept(LOItems.BROWN_BRAND_TAG.get());
+                        output.accept(LOItems.CYAN_BRAND_TAG.get());
+                        output.accept(LOItems.GREEN_BRAND_TAG.get());
+                        output.accept(LOItems.GREY_BRAND_TAG.get());
+                        output.accept(LOItems.LIGHT_BLUE_BRAND_TAG.get());
+                        output.accept(LOItems.LIGHT_GREY_BRAND_TAG.get());
+                        output.accept(LOItems.LIME_BRAND_TAG.get());
+                        output.accept(LOItems.MAGENTA_BRAND_TAG.get());
+                        output.accept(LOItems.ORANGE_BRAND_TAG.get());
+                        output.accept(LOItems.PINK_BRAND_TAG.get());
+                        output.accept(LOItems.PURPLE_BRAND_TAG.get());
+                        output.accept(LOItems.RED_BRAND_TAG.get());
+                        output.accept(LOItems.WHITE_BRAND_TAG.get());
+                        output.accept(LOItems.YELLOW_BRAND_TAG.get());
+
                         output.accept(LOItems.GRUB_SWEATER.get());
 
                         output.accept(LOItems.MANE_SCISSORS.get());

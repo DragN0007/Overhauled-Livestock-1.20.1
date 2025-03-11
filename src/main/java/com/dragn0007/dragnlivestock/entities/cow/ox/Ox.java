@@ -1,9 +1,13 @@
 package com.dragn0007.dragnlivestock.entities.cow.ox;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
+import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +19,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -28,6 +35,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -47,7 +55,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class Ox extends AbstractOMount implements GeoEntity {
+public class Ox extends AbstractOMount implements GeoEntity, Taggable {
 
 	public Ox(EntityType<? extends Ox> type, Level level) {
 		super(type, level);
@@ -106,6 +114,35 @@ public class Ox extends AbstractOMount implements GeoEntity {
 				data.writeInt(this.getId());
 			});
 		}
+	}
+
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		Item item = itemstack.getItem();
+
+		if (item instanceof BrandTagItem) {
+			setTagged(true);
+			this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+			BrandTagItem tagItem = (BrandTagItem)item;
+			DyeColor color = tagItem.getColor();
+			if (color != this.getBrandTagColor()) {
+				this.setBrandTagColor(color);
+				if (!player.getAbilities().instabuild) {
+					itemstack.shrink(1);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
+			}
+		}
+
+		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+			if (this.isTagged()) {
+				this.setTagged(false);
+				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+		}
+
+		return super.mobInteract(player, hand);
 	}
 
 	@Override
@@ -241,6 +278,31 @@ public class Ox extends AbstractOMount implements GeoEntity {
 		this.entityData.set(HORNS, hornVariant);
 	}
 
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public DyeColor getBrandTagColor() {
+		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
+	}
+	public void setBrandTagColor(DyeColor color) {
+		this.entityData.set(BRAND_TAG_COLOR, color.getId());
+	}
+	@Override
+	public boolean isTaggable() {
+		return this.isAlive() && !this.isBaby();
+	}
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
+	}
+	@Override
+	public boolean isTagged() {
+		return this.entityData.get(TAGGED);
+	}
+	public void setTagged(boolean tagged) {
+		this.entityData.set(TAGGED, tagged);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -252,6 +314,12 @@ public class Ox extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Horns")) {
 			setHornVariant(tag.getInt("Horns"));
 		}
+
+		if(tag.contains("Tagged")) {
+			this.setTagged(tag.getBoolean("Tagged"));
+		}
+
+		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
 	@Override
@@ -260,6 +328,10 @@ public class Ox extends AbstractOMount implements GeoEntity {
 		tag.putInt("Variant", getVariant());
 
 		tag.putInt("Horns", getHornVariant());
+
+		tag.putBoolean("Tagged", this.isTagged());
+
+		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 	}
 
 	@Override
@@ -276,12 +348,16 @@ public class Ox extends AbstractOMount implements GeoEntity {
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(HORNS, 0);
 		this.entityData.define(GENDER, 1);
+		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+		this.entityData.define(TAGGED, false);
 	}
 
 	@Override

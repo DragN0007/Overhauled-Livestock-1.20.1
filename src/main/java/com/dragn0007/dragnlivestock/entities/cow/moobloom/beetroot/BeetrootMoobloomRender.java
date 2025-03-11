@@ -13,6 +13,7 @@ public class BeetrootMoobloomRender extends GeoEntityRenderer<BeetrootMoobloom> 
         super(renderManager, new BeetrootMoobloomModel());
         this.addRenderLayer(new BeetrootMoobloomMarkingLayer(this));
         this.addRenderLayer(new BeetrootMoobloomHornLayer(this));
+        this.addRenderLayer(new BeetrootMoobloomBrandTagLayer(this));
     }
 
     @Override

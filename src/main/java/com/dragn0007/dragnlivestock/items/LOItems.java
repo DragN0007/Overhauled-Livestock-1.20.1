@@ -94,8 +94,40 @@ public class LOItems {
 
 
     //Misc
-    public static final RegistryObject<Item> BRAND_TAG = ITEMS.register("brand_tag",
-            () -> new BrandTagItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_BRAND_TAG = ITEMS.register("black_brand_tag",
+            () -> new BrandTagItem(DyeColor.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_BRAND_TAG = ITEMS.register("blue_brand_tag",
+            () -> new BrandTagItem(DyeColor.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_BRAND_TAG = ITEMS.register("brown_brand_tag",
+            () -> new BrandTagItem(DyeColor.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_BRAND_TAG = ITEMS.register("cyan_brand_tag",
+            () -> new BrandTagItem(DyeColor.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_BRAND_TAG = ITEMS.register("green_brand_tag",
+            () -> new BrandTagItem(DyeColor.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> GREY_BRAND_TAG = ITEMS.register("grey_brand_tag",
+            () -> new BrandTagItem(DyeColor.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_BRAND_TAG = ITEMS.register("light_blue_brand_tag",
+            () -> new BrandTagItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_BRAND_TAG = ITEMS.register("light_grey_brand_tag",
+            () -> new BrandTagItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIME_BRAND_TAG = ITEMS.register("lime_brand_tag",
+            () -> new BrandTagItem(DyeColor.LIME, new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_BRAND_TAG = ITEMS.register("magenta_brand_tag",
+            () -> new BrandTagItem(DyeColor.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_BRAND_TAG = ITEMS.register("orange_brand_tag",
+            () -> new BrandTagItem(DyeColor.ORANGE, new Item.Properties()));
+    public static final RegistryObject<Item> PINK_BRAND_TAG = ITEMS.register("pink_brand_tag",
+            () -> new BrandTagItem(DyeColor.PINK, new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_BRAND_TAG = ITEMS.register("purple_brand_tag",
+            () -> new BrandTagItem(DyeColor.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> RED_BRAND_TAG = ITEMS.register("red_brand_tag",
+            () -> new BrandTagItem(DyeColor.RED, new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_BRAND_TAG = ITEMS.register("white_brand_tag",
+            () -> new BrandTagItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_BRAND_TAG = ITEMS.register("yellow_brand_tag",
+            () -> new BrandTagItem(DyeColor.YELLOW, new Item.Properties()));
+
+
     public static final RegistryObject<Item> GENDER_TEST_STRIP = ITEMS.register("gender_test_strip",
             () -> new GenderTestKit(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> MALE_GENDER_TEST_STRIP = ITEMS.register("male_gender_test_strip",

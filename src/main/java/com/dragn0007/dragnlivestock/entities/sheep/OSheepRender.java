@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.sheep;
 
+import com.dragn0007.dragnlivestock.entities.pig.OPigBrandTagLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,6 +12,7 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
     public OSheepRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OSheepModel());
+        this.addRenderLayer(new OSheepBrandTagLayer(this));
     }
 
     @Override

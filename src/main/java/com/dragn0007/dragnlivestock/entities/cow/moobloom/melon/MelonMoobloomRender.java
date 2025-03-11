@@ -13,6 +13,7 @@ public class MelonMoobloomRender extends GeoEntityRenderer<MelonMoobloom> {
         super(renderManager, new MelonMoobloomModel());
         this.addRenderLayer(new MelonMoobloomMarkingLayer(this));
         this.addRenderLayer(new MelonMoobloomHornLayer(this));
+        this.addRenderLayer(new MelonMoobloomBrandTagLayer(this));
     }
 
     @Override

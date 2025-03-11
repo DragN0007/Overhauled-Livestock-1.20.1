@@ -24,7 +24,6 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.NETHER_UNICORN_SPAWN_EGG);
         simpleItem(LOItems.END_UNICORN_SPAWN_EGG);
 
-        simpleItem(LOItems.BRAND_TAG);
         simpleItem(LOItems.CHAINMAIL_HORSE_ARMOR);
         simpleItem(LOItems.NETHERITE_HORSE_ARMOR);
         simpleItem(LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR);
@@ -32,6 +31,23 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.WHITE_SADDLE);
 
         simpleItem(LOItems.UTILITY_KNIFE);
+
+        simpleItem(LOItems.BLACK_BRAND_TAG);
+        simpleItem(LOItems.BLUE_BRAND_TAG);
+        simpleItem(LOItems.BROWN_BRAND_TAG);
+        simpleItem(LOItems.CYAN_BRAND_TAG);
+        simpleItem(LOItems.GREEN_BRAND_TAG);
+        simpleItem(LOItems.GREY_BRAND_TAG);
+        simpleItem(LOItems.LIGHT_BLUE_BRAND_TAG);
+        simpleItem(LOItems.LIGHT_GREY_BRAND_TAG);
+        simpleItem(LOItems.LIME_BRAND_TAG);
+        simpleItem(LOItems.MAGENTA_BRAND_TAG);
+        simpleItem(LOItems.ORANGE_BRAND_TAG);
+        simpleItem(LOItems.PINK_BRAND_TAG);
+        simpleItem(LOItems.PURPLE_BRAND_TAG);
+        simpleItem(LOItems.RED_BRAND_TAG);
+        simpleItem(LOItems.WHITE_BRAND_TAG);
+        simpleItem(LOItems.YELLOW_BRAND_TAG);
 
         simpleItem(LOItems.GRUB_SWEATER);
 

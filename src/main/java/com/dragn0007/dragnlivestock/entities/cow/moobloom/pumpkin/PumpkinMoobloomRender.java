@@ -13,6 +13,7 @@ public class PumpkinMoobloomRender extends GeoEntityRenderer<PumpkinMoobloom> {
         super(renderManager, new PumpkinMoobloomModel());
         this.addRenderLayer(new PumpkinMoobloomMarkingLayer(this));
         this.addRenderLayer(new PumpkinMoobloomHornLayer(this));
+        this.addRenderLayer(new PumpkinMoobloomBrandTagLayer(this));
     }
 
     @Override

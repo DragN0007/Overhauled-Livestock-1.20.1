@@ -2,13 +2,15 @@ package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.DebugPackets;
@@ -39,13 +41,8 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -68,9 +65,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Random;
-import java.util.Set;
 
-public class OGoat extends AbstractOMount implements GeoEntity {
+public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	public static final EntityDimensions LONG_JUMPING_DIMENSIONS = EntityDimensions.scalable(0.9F, 1.3F).scale(0.7F);
 	protected static final ImmutableList<SensorType<? extends Sensor<? super OGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
@@ -145,6 +141,29 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
+		Item item = itemstack.getItem();
+
+		if (item instanceof BrandTagItem) {
+			setTagged(true);
+			this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+			BrandTagItem tagItem = (BrandTagItem)item;
+			DyeColor color = tagItem.getColor();
+			if (color != this.getBrandTagColor()) {
+				this.setBrandTagColor(color);
+				if (!player.getAbilities().instabuild) {
+					itemstack.shrink(1);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
+			}
+		}
+
+		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+			if (this.isTagged()) {
+				this.setTagged(false);
+				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+		}
 
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) &&
 				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
@@ -343,6 +362,32 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		this.milked = milked;
 	}
 
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public DyeColor getBrandTagColor() {
+		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
+	}
+	public void setBrandTagColor(DyeColor color) {
+		this.entityData.set(BRAND_TAG_COLOR, color.getId());
+	}
+	@Override
+	public boolean isTaggable() {
+		return this.isAlive() && !this.isBaby();
+	}
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
+	}
+	@Override
+	public boolean isTagged() {
+		return this.entityData.get(TAGGED);
+	}
+	public void setTagged(boolean tagged) {
+		this.entityData.set(TAGGED, tagged);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -361,6 +406,12 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Milked")) {
 			setMilked(tag.getBoolean("Milked"));
 		}
+
+		if(tag.contains("Tagged")) {
+			this.setTagged(tag.getBoolean("Tagged"));
+		}
+
+		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
 	@Override
@@ -372,6 +423,8 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		tag.putBoolean("HasRightHorn", this.hasRightHorn());
 		tag.putInt("Gender", getGender());
 		tag.putBoolean("Milked", getMilked());
+		tag.putBoolean("Tagged", this.isTagged());
+		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 	}
 
 	@Override
@@ -382,6 +435,8 @@ public class OGoat extends AbstractOMount implements GeoEntity {
 		this.entityData.define(DATA_IS_SCREAMING_GOAT, false);
 		this.entityData.define(DATA_HAS_LEFT_HORN, true);
 		this.entityData.define(DATA_HAS_RIGHT_HORN, true);
+		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+		this.entityData.define(TAGGED, false);
 	}
 
 	@Override

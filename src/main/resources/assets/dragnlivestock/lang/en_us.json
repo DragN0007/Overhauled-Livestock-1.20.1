@@ -9,6 +9,7 @@
   "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
   "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Animals that have genders.",
   "tooltip.dragnlivestock.two_seater.tooltip": "Only \"Draft\" and \"Coldblood\" horse breeds can comfortably carry two players!",
+  "tooltip.dragnlivestock.brand_tag.tooltip": "Can be used on Cows, Cow Variants, Sheep, Goats, Pigs, Chickens, Caribou, and Camels.",
 
   "tooltip.dragnlivestock.wandering.tooltip": "Your Companion is Wandering",
   "tooltip.dragnlivestock.following.tooltip": "Your Companion is Following",
@@ -130,7 +131,23 @@
 
   "item.dragnlivestock.utility_knife": "Utility Knife",
 
-  "item.dragnlivestock.brand_tag": "Brand Tag",
+  "item.dragnlivestock.black_brand_tag": "Black Brand Tag",
+  "item.dragnlivestock.blue_brand_tag": "Blue Brand Tag",
+  "item.dragnlivestock.brown_brand_tag": "Brown Brand Tag",
+  "item.dragnlivestock.cyan_brand_tag": "Cyan Brand Tag",
+  "item.dragnlivestock.green_brand_tag": "Green Brand Tag",
+  "item.dragnlivestock.grey_brand_tag": "Grey Brand Tag",
+  "item.dragnlivestock.light_blue_brand_tag": "Light Blue Brand Tag",
+  "item.dragnlivestock.light_grey_brand_tag": "Light Grey Brand Tag",
+  "item.dragnlivestock.lime_brand_tag": "Lime Brand Tag",
+  "item.dragnlivestock.magenta_brand_tag": "Magenta Brand Tag",
+  "item.dragnlivestock.orange_brand_tag": "Orange Brand Tag",
+  "item.dragnlivestock.pink_brand_tag": "Pink Brand Tag",
+  "item.dragnlivestock.purple_brand_tag": "Purple Brand Tag",
+  "item.dragnlivestock.red_brand_tag": "Red Brand Tag",
+  "item.dragnlivestock.white_brand_tag": "White Brand Tag",
+  "item.dragnlivestock.yellow_brand_tag": "Yellow Brand Tag",
+
   "item.dragnlivestock.grub_sweater": "Grub Sweater",
 
   "item.dragnlivestock.chainmail_horse_armor": "Chainmail Horse Armor",

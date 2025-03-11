@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_saddle": {
+    "has_paper": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:saddle"
+              "minecraft:paper"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:black_saddle"
+        "recipe": "dragnlivestock:yellow_brand_tag"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_saddle",
+      "has_paper",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:black_saddle"
+      "dragnlivestock:yellow_brand_tag"
     ]
   },
   "sends_telemetry_event": false

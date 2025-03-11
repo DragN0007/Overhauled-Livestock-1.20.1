@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.ox;
 
+import com.dragn0007.dragnlivestock.entities.cow.OCowBrandTagLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,6 +13,7 @@ public class OxRender extends GeoEntityRenderer<Ox> {
     public OxRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OxModel());
         this.addRenderLayer(new OxHornLayer(this));
+        this.addRenderLayer(new OxBrandTagLayer(this));
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,9 +21,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -43,8 +42,31 @@ public class CarrotMoobloom extends AbstractMoobloom implements GeoEntity {
     @Override
     public @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+        Item item = itemStack.getItem();
 
-        if (itemStack.is(Items.SHEARS) && (!isPlantsSheared() || regrowPlantsTickCounter >= 4800)) {
+        if (item instanceof BrandTagItem) {
+            setTagged(true);
+            this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+            BrandTagItem tagItem = (BrandTagItem)item;
+            DyeColor color = tagItem.getColor();
+            if (color != this.getBrandTagColor()) {
+                this.setBrandTagColor(color);
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
+                }
+            }
+        }
+
+        if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+            if (this.isTagged()) {
+                this.setTagged(false);
+                this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+        }
+
+        if (itemStack.is(Items.SHEARS) && (!isPlantsSheared() || regrowPlantsTickCounter >= 4800) && !player.isShiftKeyDown()) {
             this.setPlantsSheared(true);
             this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             this.spawnAtLocation(Items.CARROT);

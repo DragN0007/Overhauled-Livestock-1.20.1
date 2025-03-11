@@ -13,6 +13,7 @@ public class GlowBerryMoobloomRender extends GeoEntityRenderer<GlowBerryMoobloom
         super(renderManager, new GlowBerryMoobloomModel());
         this.addRenderLayer(new GlowBerryMoobloomMarkingLayer(this));
         this.addRenderLayer(new GlowBerryMoobloomHornLayer(this));
+        this.addRenderLayer(new GlowBerryMoobloomBrandTagLayer(this));
     }
 
     @Override

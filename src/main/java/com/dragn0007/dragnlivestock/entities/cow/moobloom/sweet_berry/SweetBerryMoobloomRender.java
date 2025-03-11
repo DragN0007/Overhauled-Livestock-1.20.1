@@ -13,6 +13,7 @@ public class SweetBerryMoobloomRender extends GeoEntityRenderer<SweetBerryMooblo
         super(renderManager, new SweetBerryMoobloomModel());
         this.addRenderLayer(new SweetBerryMoobloomMarkingLayer(this));
         this.addRenderLayer(new SweetBerryMoobloomHornLayer(this));
+        this.addRenderLayer(new SweetBerryMoobloomBrandTagLayer(this));
     }
 
     @Override

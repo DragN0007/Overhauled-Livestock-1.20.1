@@ -10,6 +10,7 @@ public class OGoatRender extends GeoEntityRenderer<OGoat> {
     public OGoatRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OGoatModel());
         this.addRenderLayer(new OGoatCarpetLayer(this));
+        this.addRenderLayer(new OGoatBrandTagLayer(this));
     }
 
     @Override

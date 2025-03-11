@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "dragnlivestock:item/brand_tag"
+    "layer0": "dragnlivestock:item/light_grey_brand_tag"
   }
 }

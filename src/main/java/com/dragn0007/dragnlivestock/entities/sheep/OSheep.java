@@ -3,7 +3,10 @@ package com.dragn0007.dragnlivestock.entities.sheep;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.Maps;
@@ -27,14 +30,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -60,7 +59,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class OSheep extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable, GeoEntity {
+public class OSheep extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable, GeoEntity, Taggable {
 
 	public static final int EAT_ANIMATION_TICKS = 100;
 
@@ -276,7 +275,31 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
-		if (itemstack.getItem() == Items.SHEARS) {
+		Item item = itemstack.getItem();
+
+		if (item instanceof BrandTagItem) {
+			setTagged(true);
+			this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+			BrandTagItem tagItem = (BrandTagItem)item;
+			DyeColor color = tagItem.getColor();
+			if (color != this.getBrandTagColor()) {
+				this.setBrandTagColor(color);
+				if (!player.getAbilities().instabuild) {
+					itemstack.shrink(1);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
+			}
+		}
+
+		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+			if (this.isTagged()) {
+				this.setTagged(false);
+				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+		}
+
+		if ((itemstack.getItem() == Items.SHEARS) && !player.isShiftKeyDown()) {
 			if (!this.level().isClientSide && this.readyForShearing()) {
 				List<ItemStack> drops = this.onSheared(player, itemstack, this.level(), this.blockPosition(), 0);
 				for (ItemStack drop : drops) {
@@ -427,6 +450,32 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.milked = milked;
 	}
 
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public DyeColor getBrandTagColor() {
+		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
+	}
+	public void setBrandTagColor(DyeColor color) {
+		this.entityData.set(BRAND_TAG_COLOR, color.getId());
+	}
+	@Override
+	public boolean isTaggable() {
+		return this.isAlive() && !this.isBaby();
+	}
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
+	}
+	@Override
+	public boolean isTagged() {
+		return this.entityData.get(TAGGED);
+	}
+	public void setTagged(boolean tagged) {
+		this.entityData.set(TAGGED, tagged);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -449,6 +498,12 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.setSheared(tag.getBoolean("Sheared"));
 
 		this.setColor(DyeColor.byId(tag.getByte("Color")));
+
+		if(tag.contains("Tagged")) {
+			this.setTagged(tag.getBoolean("Tagged"));
+		}
+
+		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
 	@Override
@@ -460,6 +515,8 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		tag.putByte("Color", (byte)this.getColor().getId());
 		tag.putInt("Gender", this.getGender());
 		tag.putBoolean("Milked", getMilked());
+		tag.putBoolean("Tagged", this.isTagged());
+		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 	}
 
 	@Override
@@ -469,6 +526,8 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.entityData.define(DATA_WOOL_ID, (byte)0);
 		this.entityData.define(BREED, 0);
 		this.entityData.define(GENDER, 0);
+		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+		this.entityData.define(TAGGED, false);
 	}
 
 	@Override

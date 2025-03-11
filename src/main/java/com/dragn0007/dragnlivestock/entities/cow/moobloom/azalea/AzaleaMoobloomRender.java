@@ -13,6 +13,7 @@ public class AzaleaMoobloomRender extends GeoEntityRenderer<AzaleaMoobloom> {
         super(renderManager, new AzaleaMoobloomModel());
         this.addRenderLayer(new AzaleaMoobloomMarkingLayer(this));
         this.addRenderLayer(new AzaleaMoobloomHornLayer(this));
+        this.addRenderLayer(new AzaleaMoobloomBrandTagLayer(this));
     }
 
     @Override

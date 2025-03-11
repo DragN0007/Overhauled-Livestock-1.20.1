@@ -13,6 +13,7 @@ public class PotatoMoobloomRender extends GeoEntityRenderer<PotatoMoobloom> {
         super(renderManager, new PotatoMoobloomModel());
         this.addRenderLayer(new PotatoMoobloomMarkingLayer(this));
         this.addRenderLayer(new PotatoMoobloomHornLayer(this));
+        this.addRenderLayer(new PotatoMoobloomBrandTagLayer(this));
     }
 
     @Override

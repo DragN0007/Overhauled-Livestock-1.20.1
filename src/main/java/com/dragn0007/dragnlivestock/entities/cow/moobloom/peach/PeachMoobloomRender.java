@@ -13,6 +13,7 @@ public class PeachMoobloomRender extends GeoEntityRenderer<PeachMoobloom> {
         super(renderManager, new PeachMoobloomModel());
         this.addRenderLayer(new PeachMoobloomMarkingLayer(this));
         this.addRenderLayer(new PeachMoobloomHornLayer(this));
+        this.addRenderLayer(new PeachMoobloomBrandTagLayer(this));
     }
 
     @Override

@@ -13,6 +13,7 @@ public class FloweringMoobloomRender extends GeoEntityRenderer<FloweringMoobloom
         super(renderManager, new FloweringMoobloomModel());
         this.addRenderLayer(new FloweringMoobloomMarkingLayer(this));
         this.addRenderLayer(new FloweringMoobloomHornLayer(this));
+        this.addRenderLayer(new FloweringMoobloomBrandTagLayer(this));
     }
 
     @Override

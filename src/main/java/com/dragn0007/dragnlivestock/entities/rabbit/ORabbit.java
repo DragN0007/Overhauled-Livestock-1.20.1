@@ -6,7 +6,6 @@ import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -26,10 +25,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -54,7 +55,6 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.Random;
-import java.util.Set;
 
 public class ORabbit extends TamableAnimal implements GeoEntity {
 
