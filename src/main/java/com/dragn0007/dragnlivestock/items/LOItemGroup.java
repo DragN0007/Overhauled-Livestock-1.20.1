@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.items;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -88,6 +89,18 @@ public class LOItemGroup {
 
                         output.accept(LOItems.MANE_SCISSORS.get());
                         output.accept(LOItems.TAIL_SCISSORS.get());
+
+                        output.accept(LOBlocks.ACACIA_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.BAMBOO_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.BIRCH_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.CHERRY_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.CRIMSON_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.DARK_OAK_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.JUNGLE_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.MANGROVE_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.OAK_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.SPRUCE_RABBIT_HUTCH.get());
+                        output.accept(LOBlocks.WARPED_RABBIT_HUTCH.get());
 
                         output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());

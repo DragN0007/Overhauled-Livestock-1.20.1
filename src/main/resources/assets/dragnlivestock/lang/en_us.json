@@ -294,6 +294,18 @@
   "item.dragnlivestock.nether_unicorn_horn": "Nether Unicorn Horn",
   "item.dragnlivestock.end_unicorn_horn": "End Unicorn Horn",
 
+  "block.dragnlivestock.acacia_rabbit_hutch": "Acacia Rabbit Hutch",
+  "block.dragnlivestock.bamboo_rabbit_hutch": "Bamboo Rabbit Hutch",
+  "block.dragnlivestock.birch_rabbit_hutch": "Birch Rabbit Hutch",
+  "block.dragnlivestock.cherry_rabbit_hutch": "Cherry Rabbit Hutch",
+  "block.dragnlivestock.crimson_rabbit_hutch": "Crimson Rabbit Hutch",
+  "block.dragnlivestock.dark_oak_rabbit_hutch": "Dark Oak Rabbit Hutch",
+  "block.dragnlivestock.jungle_rabbit_hutch": "Jungle Rabbit Hutch",
+  "block.dragnlivestock.mangrove_rabbit_hutch": "Mangrove Rabbit Hutch",
+  "block.dragnlivestock.oak_rabbit_hutch": "Oak Rabbit Hutch",
+  "block.dragnlivestock.spruce_rabbit_hutch": "Spruce Rabbit Hutch",
+  "block.dragnlivestock.warped_rabbit_hutch": "Warped Rabbit Hutch",
+
   "block.dragnlivestock.fish_trap": "Fish Trap",
   "container.dragnlivestock.fish_trap": "Fish Trap",
 

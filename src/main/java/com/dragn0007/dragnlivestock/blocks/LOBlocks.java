@@ -21,6 +21,19 @@ public class LOBlocks {
 //    public static final RegistryObject<Block> FISH_TRAP = registerBlock("fish_trap",
 //            () -> new FishTrapBlock());
 
+
+    public static final RegistryObject<Block> ACACIA_RABBIT_HUTCH = registerBlock("acacia_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> BAMBOO_RABBIT_HUTCH = registerBlock("bamboo_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> BIRCH_RABBIT_HUTCH = registerBlock("birch_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> CHERRY_RABBIT_HUTCH = registerBlock("cherry_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> CRIMSON_RABBIT_HUTCH = registerBlock("crimson_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> DARK_OAK_RABBIT_HUTCH = registerBlock("dark_oak_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> JUNGLE_RABBIT_HUTCH = registerBlock("jungle_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> MANGROVE_RABBIT_HUTCH = registerBlock("mangrove_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> OAK_RABBIT_HUTCH = registerBlock("oak_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> SPRUCE_RABBIT_HUTCH = registerBlock("spruce_rabbit_hutch", RabbitHutch::new);
+    public static final RegistryObject<Block> WARPED_RABBIT_HUTCH = registerBlock("warped_rabbit_hutch", RabbitHutch::new);
+
     public static final RegistryObject<Block> RAW_CHEESE = registerBlockWithoutItem("raw_cheese", RawCheese::new);
     public static final RegistryObject<Block> CHEESE = registerBlockWithoutItem("cheese", AgedCheese::new);
     public static final RegistryObject<Block> RAW_SHEEP_CHEESE = registerBlockWithoutItem("raw_sheep_cheese", RawSheepCheese::new);

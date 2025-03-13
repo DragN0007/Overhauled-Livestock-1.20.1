@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dragnlivestock:block/mangrove_rabbit_hutch",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "dragnlivestock:block/mangrove_rabbit_hutch"
+    },
+    "facing=south": {
+      "model": "dragnlivestock:block/mangrove_rabbit_hutch",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dragnlivestock:block/mangrove_rabbit_hutch",
+      "y": 270
+    }
+  }
+}

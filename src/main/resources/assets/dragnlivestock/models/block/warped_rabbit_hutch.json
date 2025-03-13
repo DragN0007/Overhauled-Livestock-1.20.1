@@ -1,0 +1,6 @@
+{
+  "parent": "dragnlivestock:block/parent/rabbit_hutch",
+  "textures": {
+    "hutch": "dragnlivestock:block/warped_rabbit_hutch"
+  }
+}
