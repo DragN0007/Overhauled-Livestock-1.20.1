@@ -50,9 +50,9 @@ import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
 
-    public SimpleContainer getInventory() {
-        return inventory;
-    }
+//    public SimpleContainer getInventory() {
+//        return inventory;
+//    }
 
     public net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
 
@@ -213,6 +213,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 //        if (isHorse(this) || isMule(this) || isDonkey(this)|| isGoat(this)) {
 //            return;
 //        }
+    }
+
+    @Override
+    public boolean hasChest() {
+        return this.entityData.get(DATA_ID_CHEST);
     }
 
     @Override
@@ -424,6 +429,18 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         compoundTag.putBoolean("ChestedHorse", this.hasChest());
         if (this.hasChest()) {
             ListTag listtag = new ListTag();
+
+            for(int i = 2; i < this.inventory.getContainerSize(); ++i) {
+                ItemStack itemstack = this.inventory.getItem(i);
+                if (!itemstack.isEmpty()) {
+                    CompoundTag compoundtag = new CompoundTag();
+                    compoundtag.putByte("Slot", (byte)i);
+                    itemstack.save(compoundtag);
+                    listtag.add(compoundtag);
+                }
+            }
+
+            compoundTag.put("Items", listtag);
         }
 
         if (this.getOwnerUUID() != null) {
@@ -464,6 +481,18 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         this.setChest(compoundTag.getBoolean("ChestedHorse"));
+        this.createInventory();
+        if (this.hasChest()) {
+            ListTag listtag = compoundTag.getList("Items", 10);
+
+            for(int i = 0; i < listtag.size(); ++i) {
+                CompoundTag compoundtag = listtag.getCompound(i);
+                int j = compoundtag.getByte("Slot") & 255;
+                if (j >= 2 && j < this.inventory.getContainerSize()) {
+                    this.inventory.setItem(j, ItemStack.of(compoundtag));
+                }
+            }
+        }
 
         this.updateContainerEquipment();
 

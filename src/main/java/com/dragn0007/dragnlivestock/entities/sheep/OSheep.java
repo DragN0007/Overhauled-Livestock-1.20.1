@@ -126,7 +126,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame())
 		));
 	}
-
 	public OSheep leader;
 	public int herdSize = 1;
 
