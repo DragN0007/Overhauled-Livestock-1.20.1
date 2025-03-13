@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:birch_log"
+    },
+    "B": {
+      "item": "minecraft:birch_planks"
+    },
+    "C": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "dragnlivestock:birch_rabbit_hutch"
+  },
+  "show_notification": true
+}

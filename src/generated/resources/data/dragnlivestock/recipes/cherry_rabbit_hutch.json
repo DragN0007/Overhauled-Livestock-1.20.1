@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:cherry_log"
+    },
+    "B": {
+      "item": "minecraft:cherry_planks"
+    },
+    "C": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "dragnlivestock:cherry_rabbit_hutch"
+  },
+  "show_notification": true
+}

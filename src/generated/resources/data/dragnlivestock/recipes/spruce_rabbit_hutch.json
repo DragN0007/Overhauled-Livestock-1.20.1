@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:spruce_log"
+    },
+    "B": {
+      "item": "minecraft:spruce_planks"
+    },
+    "C": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "dragnlivestock:spruce_rabbit_hutch"
+  },
+  "show_notification": true
+}

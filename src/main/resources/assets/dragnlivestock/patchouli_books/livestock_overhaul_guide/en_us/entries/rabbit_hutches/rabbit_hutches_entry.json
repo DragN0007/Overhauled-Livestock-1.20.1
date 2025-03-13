@@ -1,0 +1,43 @@
+{
+  "name": "Rabbit Hutches",
+  "icon": "dragnlivestock:spruce_rabbit_hutch",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:spruce_rabbit_hutch"
+      },
+      "text": "Rabbit Hutches come in all wood types and can be used to keep Rabbits, or other small animals, contained and safe from predators. Shift-right-click to open or close the door of a Rabbit Hutch."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:acacia_rabbit_hutch",
+      "recipe2": "dragnlivestock:bamboo_rabbit_hutch"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:birch_rabbit_hutch",
+      "recipe2": "dragnlivestock:cherry_rabbit_hutch"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:crimson_rabbit_hutch",
+      "recipe2": "dragnlivestock:dark_oak_rabbit_hutch"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:jungle_rabbit_hutch",
+      "recipe2": "dragnlivestock:mangrove_rabbit_hutch"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:oak_rabbit_hutch",
+      "recipe2": "dragnlivestock:spruce_rabbit_hutch"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:warped_rabbit_hutch"
+    }
+  ]
+}

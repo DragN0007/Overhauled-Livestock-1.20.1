@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:crimson_stem"
+    },
+    "B": {
+      "item": "minecraft:crimson_planks"
+    },
+    "C": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCB",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "dragnlivestock:crimson_rabbit_hutch"
+  },
+  "show_notification": true
+}

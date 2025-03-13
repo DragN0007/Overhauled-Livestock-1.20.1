@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.datagen;
 
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -9,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
@@ -21,6 +23,129 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.ACACIA_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.ACACIA_LOG)
+                .define('B', Blocks.ACACIA_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.ACACIA_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.BAMBOO_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.BAMBOO_BLOCK)
+                .define('B', Blocks.BAMBOO_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.BAMBOO_BLOCK).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.BIRCH_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.BIRCH_LOG)
+                .define('B', Blocks.BIRCH_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.BIRCH_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.CHERRY_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.CHERRY_LOG)
+                .define('B', Blocks.CHERRY_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.CHERRY_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.CRIMSON_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.CRIMSON_STEM)
+                .define('B', Blocks.CRIMSON_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.CRIMSON_STEM).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.DARK_OAK_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.DARK_OAK_LOG)
+                .define('B', Blocks.DARK_OAK_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.DARK_OAK_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.JUNGLE_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.JUNGLE_LOG)
+                .define('B', Blocks.JUNGLE_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.JUNGLE_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.MANGROVE_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.MANGROVE_LOG)
+                .define('B', Blocks.MANGROVE_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.MANGROVE_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.OAK_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.OAK_LOG)
+                .define('B', Blocks.OAK_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.OAK_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.SPRUCE_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.SPRUCE_LOG)
+                .define('B', Blocks.SPRUCE_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.SPRUCE_LOG).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.WARPED_RABBIT_HUTCH.get(), 4)
+                .define('A', Blocks.WARPED_STEM)
+                .define('B', Blocks.WARPED_PLANKS)
+                .define('C', Items.STICK)
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("BBB")
+                .unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Blocks.WARPED_STEM).build()))
+                .save(pFinishedRecipeConsumer);
+
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_BRAND_TAG.get(), 12)
                 .requires(Items.STRING)
