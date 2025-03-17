@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#dragnlivestock:makes_beef_jerky",
+    "#dragnlivestock:makes_chicken_jerky",
+    "#dragnlivestock:makes_pork_jerky",
+    "#dragnlivestock:makes_mutton_jerky",
+    "#dragnlivestock:makes_fish_jerky",
+    "#dragnlivestock:makes_game_jerky",
+    "#dragnlivestock:makes_generic_jerky"
+  ]
+}
