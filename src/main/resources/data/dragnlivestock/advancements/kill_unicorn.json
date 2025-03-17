@@ -1,0 +1,70 @@
+{
+  "criteria": {
+    "dragnlivestock:overworld_unicorn": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "dragnlivestock:overworld_unicorn"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "dragnlivestock:nether_unicorn": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "dragnlivestock:nether_unicorn"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "dragnlivestock:end_unicorn": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "dragnlivestock:end_unicorn"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Kill a Unicorn."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dragnlivestock:overworld_unicorn_horn",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Dream Killer"
+    }
+  },
+  "requirements": [
+    [
+      "dragnlivestock:overworld_unicorn",
+      "dragnlivestock:nether_unicorn",
+      "dragnlivestock:end_unicorn"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

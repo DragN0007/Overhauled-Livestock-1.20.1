@@ -96,7 +96,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 3.0D)
-				.add(Attributes.MOVEMENT_SPEED, 0.16F);
+				.add(Attributes.MOVEMENT_SPEED, 0.25F);
 	}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_RABBIT_EATS);
@@ -234,10 +234,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (tAnimationState.isMoving()) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(1.8);
+				controller.setAnimationSpeed(2.2);
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(1.5);
+				controller.setAnimationSpeed(1.7);
 			}
 		} else if (this.isInSittingPose()) {
 			controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));

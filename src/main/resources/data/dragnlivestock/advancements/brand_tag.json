@@ -1,0 +1,43 @@
+{
+  "display": {
+    "icon": {
+      "item": "dragnlivestock:yellow_brand_tag"
+    },
+    "title": "Rancher",
+    "description": "Obtain a Brand Tag.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:yellow_brand_tag",
+              "dragnlivestock:black_brand_tag",
+              "dragnlivestock:blue_brand_tag",
+              "dragnlivestock:brown_brand_tag",
+              "dragnlivestock:cyan_brand_tag",
+              "dragnlivestock:green_brand_tag",
+              "dragnlivestock:grey_brand_tag",
+              "dragnlivestock:light_blue_brand_tag",
+              "dragnlivestock:light_grey_brand_tag",
+              "dragnlivestock:lime_brand_tag",
+              "dragnlivestock:magenta_brand_tag",
+              "dragnlivestock:orange_brand_tag",
+              "dragnlivestock:pink_brand_tag",
+              "dragnlivestock:purple_brand_tag",
+              "dragnlivestock:red_brand_tag",
+              "dragnlivestock:white_brand_tag"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": []
+}

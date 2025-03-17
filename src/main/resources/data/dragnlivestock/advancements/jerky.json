@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "item": "dragnlivestock:beef_jerky"
+    },
+    "title": "What a Jerk!",
+    "description": "Dry some Jerky.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:beef_jerky",
+              "dragnlivestock:chicken_jerky",
+              "dragnlivestock:pork_jerky",
+              "dragnlivestock:mutton_jerky",
+              "dragnlivestock:fish_jerky",
+              "dragnlivestock:game_jerky",
+              "dragnlivestock:generic_jerky"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": []
+}

@@ -1,0 +1,40 @@
+{
+  "criteria": {
+    "dragnlivestock:caribou": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "dragnlivestock:caribou"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Kill a Caribou."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dragnlivestock:caribou_rib_steak",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Big Game Hunter"
+    }
+  },
+  "requirements": [
+    [
+      "dragnlivestock:caribou"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

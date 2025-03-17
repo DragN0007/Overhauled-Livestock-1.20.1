@@ -276,13 +276,14 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 
 		Item item = itemstack.getItem();
 
-		if (item instanceof BrandTagItem) {
+		if (item instanceof BrandTagItem && this.isTaggable()) {
 			setTagged(true);
 			this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
 			BrandTagItem tagItem = (BrandTagItem)item;
 			DyeColor color = tagItem.getColor();
 			if (color != this.getBrandTagColor()) {
 				this.setBrandTagColor(color);
+				itemstack.shrink(1);
 				if (!player.getAbilities().instabuild) {
 					itemstack.shrink(1);
 					return InteractionResult.sidedSuccess(this.level().isClientSide);

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "dragnlivestock:ayam_cemani_egg"
+    },
+    "title": "Oblong Void",
+    "description": "Obtain a rare Fertilized Ayam Cemani chicken egg.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:fertilized_ayam_cemani_egg"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": []
+}

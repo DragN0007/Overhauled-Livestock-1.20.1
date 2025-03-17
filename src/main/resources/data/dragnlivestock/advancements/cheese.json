@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "item": "dragnlivestock:cheese"
+    },
+    "title": "Chedda Master",
+    "description": "Age some cheese.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnlivestock:cheese",
+              "dragnlivestock:sheep_cheese",
+              "dragnlivestock:llama_cheese",
+              "dragnlivestock:goat_cheese"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": []
+}
