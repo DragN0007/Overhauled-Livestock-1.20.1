@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.blocks.custom;
 
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.PushReaction;
@@ -14,74 +15,58 @@ public class RabbitHutch extends RabbitHutchBase {
 
     public static final VoxelShape NORTH = Stream.of(
             Block.box(0, 15, 0, 16, 16, 16),
-            Block.box(1, 0, 1, 15, 16, 1),
-            Block.box(15, 0, 1, 15, 16, 15),
-            Block.box(1, 0, 15, 15, 16, 15),
-            Block.box(1, 0, 1, 1, 16, 15),
+            Block.box(1, 0, 0, 15, 16, 2),
+            Block.box(14, 0, 1, 16, 16, 15),
+            Block.box(1, 0, 14, 15, 16, 16),
+            Block.box(0, 0, 1, 2, 16, 15),
             Block.box(0, 0, 0, 16, 1, 16),
             Block.box(14, 0, 14, 16, 16, 16),
             Block.box(0, 0, 14, 2, 16, 16),
             Block.box(0, 0, 0, 2, 16, 2),
-            Block.box(14, 0, 0, 16, 16, 2),
-            Block.box(14.5, 1, 2, 15.5, 15, 14),
-            Block.box(0.5, 1, 2, 1.5, 15, 14),
-            Block.box(2, 1, 0.5, 14, 15, 1.5),
-            Block.box(2, 1, 14.5, 14, 15, 15.5)
+            Block.box(14, 0, 0, 16, 16, 2)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape EAST = Stream.of(
             Block.box(0, 15, 0, 16, 16, 16),
-            Block.box(1, 0, 1, 15, 16, 1),
-            Block.box(15, 0, 1, 15, 16, 15),
-            Block.box(1, 0, 15, 15, 16, 15),
-            Block.box(1, 0, 1, 1, 16, 15),
+            Block.box(1, 0, 0, 15, 16, 2),
+            Block.box(14, 0, 1, 16, 16, 15),
+            Block.box(1, 0, 14, 15, 16, 16),
+            Block.box(0, 0, 1, 2, 16, 15),
             Block.box(0, 0, 0, 16, 1, 16),
             Block.box(14, 0, 14, 16, 16, 16),
             Block.box(0, 0, 14, 2, 16, 16),
             Block.box(0, 0, 0, 2, 16, 2),
-            Block.box(14, 0, 0, 16, 16, 2),
-            Block.box(14.5, 1, 2, 15.5, 15, 14),
-            Block.box(0.5, 1, 2, 1.5, 15, 14),
-            Block.box(2, 1, 0.5, 14, 15, 1.5),
-            Block.box(2, 1, 14.5, 14, 15, 15.5)
+            Block.box(14, 0, 0, 16, 16, 2)
     ).reduce((v1, v2) -> Shapes.join(v1, v2,BooleanOp.OR)).get();
 
     public static final VoxelShape SOUTH = Stream.of(
             Block.box(0, 15, 0, 16, 16, 16),
-            Block.box(1, 0, 1, 15, 16, 1),
-            Block.box(15, 0, 1, 15, 16, 15),
-            Block.box(1, 0, 15, 15, 16, 15),
-            Block.box(1, 0, 1, 1, 16, 15),
+            Block.box(1, 0, 0, 15, 16, 2),
+            Block.box(14, 0, 1, 16, 16, 15),
+            Block.box(1, 0, 14, 15, 16, 16),
+            Block.box(0, 0, 1, 2, 16, 15),
             Block.box(0, 0, 0, 16, 1, 16),
             Block.box(14, 0, 14, 16, 16, 16),
             Block.box(0, 0, 14, 2, 16, 16),
             Block.box(0, 0, 0, 2, 16, 2),
-            Block.box(14, 0, 0, 16, 16, 2),
-            Block.box(14.5, 1, 2, 15.5, 15, 14),
-            Block.box(0.5, 1, 2, 1.5, 15, 14),
-            Block.box(2, 1, 0.5, 14, 15, 1.5),
-            Block.box(2, 1, 14.5, 14, 15, 15.5)
+            Block.box(14, 0, 0, 16, 16, 2)
     ).reduce((v1, v2) -> Shapes.join(v1, v2,BooleanOp.OR)).get();
 
     public static final VoxelShape WEST = Stream.of(
             Block.box(0, 15, 0, 16, 16, 16),
-            Block.box(1, 0, 1, 15, 16, 1),
-            Block.box(15, 0, 1, 15, 16, 15),
-            Block.box(1, 0, 15, 15, 16, 15),
-            Block.box(1, 0, 1, 1, 16, 15),
+            Block.box(1, 0, 0, 15, 16, 2),
+            Block.box(14, 0, 1, 16, 16, 15),
+            Block.box(1, 0, 14, 15, 16, 16),
+            Block.box(0, 0, 1, 2, 16, 15),
             Block.box(0, 0, 0, 16, 1, 16),
             Block.box(14, 0, 14, 16, 16, 16),
             Block.box(0, 0, 14, 2, 16, 16),
             Block.box(0, 0, 0, 2, 16, 2),
-            Block.box(14, 0, 0, 16, 16, 2),
-            Block.box(14.5, 1, 2, 15.5, 15, 14),
-            Block.box(0.5, 1, 2, 1.5, 15, 14),
-            Block.box(2, 1, 0.5, 14, 15, 1.5),
-            Block.box(2, 1, 14.5, 14, 15, 15.5)
+            Block.box(14, 0, 0, 16, 16, 2)
     ).reduce((v1, v2) -> Shapes.join(v1, v2,BooleanOp.OR)).get();
 
     public RabbitHutch() {
-        super(NORTH, EAST, SOUTH, WEST, Properties.copy(Blocks.OAK_PLANKS).noOcclusion().pushReaction(PushReaction.IGNORE));
+        super(NORTH, EAST, SOUTH, WEST, Properties.copy(Blocks.OAK_PLANKS).noOcclusion().pushReaction(PushReaction.IGNORE), SoundEvents.CHERRY_WOOD_FENCE_GATE_CLOSE, SoundEvents.CHERRY_WOOD_FENCE_GATE_OPEN);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 

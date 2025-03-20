@@ -30,8 +30,8 @@ public class LOBlockLoot extends BlockLootSubProvider {
 
         dropOther(LOBlocks.RAW_BEEF_JERKY_HANGING.get(), LOItems.BEEF_STRIPS.get());
         dropOther(LOBlocks.BEEF_JERKY_HANGING.get(), LOItems.BEEF_JERKY.get());
-        dropOther(LOBlocks.RAW_CHICKEN_JERKY_HANGING.get(), LOItems.BEEF_STRIPS.get());
-        dropOther(LOBlocks.CHICKEN_JERKY_HANGING.get(), LOItems.BEEF_JERKY.get());
+        dropOther(LOBlocks.RAW_CHICKEN_JERKY_HANGING.get(), LOItems.CHICKEN_STRIPS.get());
+        dropOther(LOBlocks.CHICKEN_JERKY_HANGING.get(), LOItems.CHICKEN_JERKY.get());
         dropOther(LOBlocks.RAW_PORK_JERKY_HANGING.get(), LOItems.PORK_STRIPS.get());
         dropOther(LOBlocks.PORK_JERKY_HANGING.get(), LOItems.PORK_JERKY.get());
         dropOther(LOBlocks.RAW_MUTTON_JERKY_HANGING.get(), LOItems.MUTTON_STRIPS.get());

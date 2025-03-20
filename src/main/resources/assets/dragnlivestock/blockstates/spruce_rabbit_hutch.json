@@ -1,18 +1,41 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,open=false": {
       "model": "dragnlivestock:block/spruce_rabbit_hutch",
+      "uvlock": true,
       "y": 90
     },
-    "facing=north": {
-      "model": "dragnlivestock:block/spruce_rabbit_hutch"
+    "facing=east,open=true": {
+      "model": "dragnlivestock:block/spruce_rabbit_hutch_open",
+      "uvlock": true,
+      "y": 90
     },
-    "facing=south": {
+    "facing=north,open=false": {
       "model": "dragnlivestock:block/spruce_rabbit_hutch",
+      "uvlock": true
+    },
+    "facing=north,open=true": {
+      "model": "dragnlivestock:block/spruce_rabbit_hutch_open",
+      "uvlock": true
+    },
+    "facing=south,open=false": {
+      "model": "dragnlivestock:block/spruce_rabbit_hutch",
+      "uvlock": true,
       "y": 180
     },
-    "facing=west": {
+    "facing=south,open=true": {
+      "model": "dragnlivestock:block/spruce_rabbit_hutch_open",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,open=false": {
       "model": "dragnlivestock:block/spruce_rabbit_hutch",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,open=true": {
+      "model": "dragnlivestock:block/spruce_rabbit_hutch_open",
+      "uvlock": true,
       "y": 270
     }
   }
