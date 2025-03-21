@@ -1,0 +1,18 @@
+{
+  "name": "Rodeo Harness",
+  "icon": "dragnlivestock:rodeo_harness",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Rodeo Harness is a harness that can be placed in the armor slot of O-Horses. When equipped, it allows a horse, regardless of if it's tamed, to buck players off. $(br2)When a horse is wearing a Rodeo Harness, it'll be weary of other mounted horses and mules, allowing mounted players to guide it around the arena/ area."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:rodeo_harness"
+      },
+      "text": "The $(l)Rodeo Harness$() can be used on O-Horses to allow them to buck players off freely, regardless of tame status."
+    }
+  ]
+}

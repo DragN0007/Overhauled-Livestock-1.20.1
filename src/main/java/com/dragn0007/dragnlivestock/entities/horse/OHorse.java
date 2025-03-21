@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.MountLookAtPlayerGoal;
+import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
@@ -38,6 +39,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -114,6 +116,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(0, new GroundTieGoal(this));
 
 		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(1, new ORunAroundLikeCrazyGoal(this, 1.3F));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
@@ -125,6 +128,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
 				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
 						(entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+		));
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.3F, 1.3F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && livingEntity instanceof AbstractHorse && ((AbstractHorse) livingEntity).isSaddled() && livingEntity.isVehicle() && (this.isWearingHarness() || !this.isTamed())
+		));
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.3F, 1.3F, livingEntity ->
+				livingEntity instanceof OMule && livingEntity.isVehicle() && ((OMule) livingEntity).isSaddled() && (this.isWearingHarness() || !this.isTamed())
 		));
 	}
 
@@ -555,7 +566,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if (this.isJumping()) {
+		if ((!this.isTamed() || this.isWearingHarness()) && this.isVehicle() && !this.isJumping()) {
+			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
+			controller.setAnimationSpeed(1.3);
+		} else if (this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
 			controller.setAnimationSpeed(1.0);
 		} else {

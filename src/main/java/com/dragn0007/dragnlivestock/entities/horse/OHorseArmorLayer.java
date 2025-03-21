@@ -35,7 +35,7 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
 
         ItemStack armorItemStack = armorSlots.get(2);
 
-        if (armorItemStack.isEmpty() || !(armorItemStack.getItem() instanceof HorseArmorItem)) {
+        if (armorItemStack.isEmpty()) {
             return;
         }
 
@@ -54,6 +54,8 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_diamond.png");
             } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_netherite.png");
+            } else if (armorItemStack.getItem() == LOItems.RODEO_HARNESS.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/rodeo_harness.png");
             } else {
                 return;
             }
@@ -70,6 +72,8 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_diamond.png");
             } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_netherite.png");
+            } else if (armorItemStack.getItem() == LOItems.RODEO_HARNESS.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/rodeo_harness.png");
             } else {
                 return;
             }

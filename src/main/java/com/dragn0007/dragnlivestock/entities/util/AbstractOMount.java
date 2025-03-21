@@ -20,6 +20,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -45,6 +46,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,6 +65,24 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_HORSE_EATS);
     public boolean isFood(ItemStack stack) {
         return FOOD_ITEMS.test(stack);
+    }
+
+    public int getTemper() {
+        return this.temper;
+    }
+
+    public void setTemper(int temper) {
+            this.temper = temper;
+    }
+
+    public int modifyTemper(int p_30654_) {
+        int i = Mth.clamp(this.getTemper() + p_30654_, 0, this.getMaxTemper());
+        this.setTemper(i);
+        return i;
+    }
+
+    public boolean isWearingHarness() {
+        return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.RODEO_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
@@ -232,7 +252,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     @Override
     public boolean isArmor(ItemStack itemStack) {
-        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(ItemTags.WOOL_CARPETS);
+        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS);
     }
 
     @Override

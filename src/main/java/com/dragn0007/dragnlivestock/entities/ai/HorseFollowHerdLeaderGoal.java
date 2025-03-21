@@ -24,9 +24,9 @@ public class HorseFollowHerdLeaderGoal extends Goal {
    }
 
    public boolean canUse() {
-      if (this.mob.hasFollowers() && (!mob.isSaddled() && !mob.isLeashed() && !this.mob.isGroundTied()) || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get()) {
+      if (this.mob.hasFollowers() || this.mob.isWearingHarness() || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get() || this.mob.isGroundTied()) {
          return false;
-      } else if (this.mob.isFollower() && (!this.mob.isGroundTied() && !mob.isSaddled() && !mob.isLeashed())) {
+      } else if (this.mob.isFollower() && (!this.mob.isGroundTied() && !this.mob.isSaddled() && !this.mob.isLeashed())) {
          return true;
       } else if (this.nextStartTick > 0) {
          --this.nextStartTick;

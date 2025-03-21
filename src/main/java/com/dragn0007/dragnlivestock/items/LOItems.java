@@ -167,6 +167,8 @@ public class LOItems {
             () -> new SaddleItem(new Item.Properties()));
     public static final RegistryObject<Item> WHITE_SADDLE = ITEMS.register("white_saddle",
             () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RODEO_HARNESS = ITEMS.register("rodeo_harness",
+            () -> new RodeoHarnessItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
