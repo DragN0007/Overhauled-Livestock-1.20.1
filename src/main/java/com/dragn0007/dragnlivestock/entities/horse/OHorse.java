@@ -2,10 +2,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.ai.MountLookAtPlayerGoal;
-import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
+import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
@@ -124,6 +121,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.addGoal(1, new SleepyGoal(this));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
 				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
@@ -597,6 +595,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			} else {
 				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				} else if (this.isSleeping()) {
+					controller.setAnimation(RawAnimation.begin().then("idle_sleep", Animation.LoopType.LOOP));
+				} else if (this.isSleeping() && !this.isVehicle() && this.isFollower()) {
+					controller.setAnimation(RawAnimation.begin().then("sleep", Animation.LoopType.LOOP));
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
 				}
@@ -710,6 +712,20 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
+		if (this.level().isNight() && !this.isVehicle()) {
+			this.setSleeping(true);
+		}
+
+//		if (--this.sleepCounter <= 0 && this.shouldSleep()) {
+//			this.staySleepingCounter++;
+//			setSleeping(true);
+//			if (this.staySleepingCounter >= 1200) {
+//				this.sleepCounter = this.random.nextInt(300) + 300;
+//				this.staySleepingCounter = 0;
+//				setSleeping(false);
+//			}
+//		}
+
 		if (isWarmbloodedBreed()) {
 			maxSprint += 1200;
 		}
@@ -732,7 +748,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		Entity controllingPassenger = this.getControllingPassenger();
 		Player player = (Player) controllingPassenger;
-		int sprintLeftInSeconds = sprintTick / 20;
+		int sprintLeftInSeconds = sprintTick / 40;
 
 		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger()) {
 			sprintTick--;

@@ -70,7 +70,7 @@ public class ORunAroundLikeCrazyGoal extends Goal {
 
          Entity passenger = this.horse.getFirstPassenger();
          Player player = (Player) passenger;
-         float stayedOnInSeconds = secondsStayedOnTick / 20.0f;
+         float stayedOnInSeconds = secondsStayedOnTick / 5f;
 
          if (passenger instanceof Player && !(secondsStayedOnTick <= 0)) {
             player.displayClientMessage(Component.translatable("Stayed On: " + stayedOnInSeconds + "s").withStyle(ChatFormatting.GOLD), true);

@@ -291,7 +291,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		Random random = new Random();
 		setVariant(random.nextInt(OPigModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
-		setGender(Gender.values().length);
+		setGender(random.nextInt(Gender.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
