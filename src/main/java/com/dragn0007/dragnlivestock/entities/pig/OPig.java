@@ -27,6 +27,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -358,14 +359,28 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		return false;
 	}
 
-//	public int maxBabyAmount = LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get();
+	public int maxBabyAmount = LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get();
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
+
+	public void tick() {
+		super.tick();
+		if (babiesBirthed >= LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get() && babyCooldown >= 20) {
+			babiesBirthed = 0;
+			babyCooldown = 0;
+		}
+	}
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OPig oPig1 = (OPig) ageableMob;
-		if (ageableMob instanceof OPig) {
+		if (ageableMob instanceof OPig && babiesBirthed <= LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get()) {
+
+			if (this.isMale() || !this.isInLove() || !this.isAlive() || babiesBirthed >= LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get()) {
+				return null;
+			}
+
 			OPig oPig = (OPig) ageableMob;
-//			int babyAmount = this.random.nextInt(maxBabyAmount) + 1;
 
 			oPig1 = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
 
@@ -396,6 +411,8 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			oPig1.setOverlayVariant(overlay);
 			oPig1.setGender(gender);
 		}
+
+		babiesBirthed++;
 		return oPig1;
 	}
 

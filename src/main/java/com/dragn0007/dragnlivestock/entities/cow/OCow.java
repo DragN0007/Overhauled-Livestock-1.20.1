@@ -75,10 +75,10 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 2) {
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4) {
 			return MEAT_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1)) {
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1) || this.getBreed() == 5) {
 			return LOOT_TABLE;
 		}
 		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 3)) {
@@ -340,6 +340,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -353,6 +354,9 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	public int getBreed() {
 		return this.entityData.get(BREED);
 	}
+	public int getHornType() {
+		return this.entityData.get(HORN_TYPE);
+	}
 
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
@@ -362,6 +366,9 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	}
 	public void setHornVariant(int hornVariant) {
 		this.entityData.set(HORNS, hornVariant);
+	}
+	public void setHornType(int hornType) {
+		this.entityData.set(HORN_TYPE, hornType);
 	}
 	public void setBreed(int breed) {
 		this.entityData.set(BREED, breed);
@@ -415,6 +422,10 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			setHornVariant(tag.getInt("Horns"));
 		}
 
+		if (tag.contains("HornType")) {
+			setHornType(tag.getInt("HornType"));
+		}
+
 		if (tag.contains("Gender")) {
 			setGender(tag.getInt("Gender"));
 		}
@@ -443,6 +454,8 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 
 		tag.putInt("Horns", getHornVariant());
 
+		tag.putInt("HornType", getHornType());
+
 		tag.putInt("Gender", getGender());
 
 		tag.putInt("Breed", getBreed());
@@ -454,6 +467,12 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 	}
 
+	public enum HornType {
+		ONE,
+		TWO,
+		THREE
+	}
+
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
@@ -463,9 +482,15 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		Random random = new Random();
 		setVariant(random.nextInt(OCowModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
-		setHornVariant(random.nextInt(OCowHornLayer.HornOverlay.values().length));
 		setGender(random.nextInt(Gender.values().length));
 		setBreed(random.nextInt(Breed.values().length));
+
+		if (this.getBreed() == 4) {
+			setHornVariant(2);
+			setHornType(random.nextInt(HornType.values().length));
+		} else {
+			setHornVariant(random.nextInt(OCowHornLayer.HornOverlay.values().length));
+		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -482,6 +507,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		this.entityData.define(BREED, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
+		this.entityData.define(HORN_TYPE, 0);
 	}
 
 	public enum Gender {
@@ -611,7 +637,9 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		ANUGUS(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_large.geo.json")),
 		LONGHORN(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_overhaul.geo.json")),
 		BRAHMAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_large.geo.json")),
-		MINI(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_mini.geo.json"));
+		MINI(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_mini.geo.json")),
+		WATUSI(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_watusi.geo.json")),
+		CORRIENTE(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_corriente.geo.json"));
 
 		public final ResourceLocation resourceLocation;
 

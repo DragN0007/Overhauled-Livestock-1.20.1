@@ -81,6 +81,42 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
         }
 
+        if (entity.getBreed() == 4) {
+            model.getBone("fluff").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff2").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff3").ifPresent(b -> b.setHidden(true));
+            model.getBone("hump").ifPresent(b -> b.setHidden(true));
+
+            if (entity.getHornType() == 0) {
+                model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
+            }
+
+            if (entity.getHornType() == 1) {
+                model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
+            }
+
+            if (entity.getHornType() == 2) {
+                model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
+            }
+
+        }
+
+        if (entity.getBreed() == 5) {
+            model.getBone("fluff").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff2").ifPresent(b -> b.setHidden(true));
+            model.getBone("fluff3").ifPresent(b -> b.setHidden(true));
+            model.getBone("hump").ifPresent(b -> b.setHidden(true));
+            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
+            model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
+        }
+
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

@@ -688,7 +688,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		});
 	}
 
-	public int maxSprint = 40 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
+	public int maxSprint = 20 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
 	public int sprintTick = maxSprint;
 
 	@Override
@@ -748,7 +748,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		Entity controllingPassenger = this.getControllingPassenger();
 		Player player = (Player) controllingPassenger;
-		int sprintLeftInSeconds = sprintTick / 40;
+		int sprintLeftInSeconds = sprintTick / 20;
 
 		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger()) {
 			sprintTick--;
