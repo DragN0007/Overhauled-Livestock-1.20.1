@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "O-Cows can come in 5 different breeds: $(br2)Angus, Longhorn, Brahman, Mini and Highland."
+      "text": "O-Cows can come in 7 different breeds: $(br2)Angus, Longhorn, Brahman, Mini, Highland, Watusi and Corriente."
     },
     {
       "type": "patchouli:entity",
