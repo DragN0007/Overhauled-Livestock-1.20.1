@@ -19,7 +19,6 @@ import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -46,7 +45,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

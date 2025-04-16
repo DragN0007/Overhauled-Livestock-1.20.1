@@ -1,16 +1,15 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
-import java.util.EnumSet;
-
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.EnumSet;
 
 public class ORunAroundLikeCrazyGoal extends Goal {
    private final AbstractOMount horse;

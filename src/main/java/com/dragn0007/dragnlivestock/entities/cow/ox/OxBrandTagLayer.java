@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.ox;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

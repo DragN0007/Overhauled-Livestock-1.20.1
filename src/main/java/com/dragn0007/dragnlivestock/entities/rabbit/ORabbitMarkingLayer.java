@@ -47,7 +47,8 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
         STRIPED_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_striped_black.png")),
         STRIPED_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_striped_white.png")),
         TIPPED_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_tipped_black.png")),
-        TIPPED_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_tipped_white.png"));
+        TIPPED_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_tipped_white.png")),
+        CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_clover.png"));
 
         //Add new entries to bottom when mod is public, else rabbits will change textures during update.
 

@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
