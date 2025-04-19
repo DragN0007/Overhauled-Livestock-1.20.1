@@ -241,13 +241,15 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		}
 
 		Entity controllingPassenger = this.getControllingPassenger();
-		Player player = (Player) controllingPassenger;
+		Entity entity = controllingPassenger;
 		int sprintLeftInSeconds = sprintTick / 20;
 
 		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger()) {
 			sprintTick--;
-			if (controllingPassenger instanceof Player && !(sprintTick <= 0)) {
-				player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
+			if (controllingPassenger != null && !(sprintTick <= 0)) {
+				if (controllingPassenger instanceof Player player) {
+					player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
+				}
 			}
 		}
 
@@ -255,12 +257,16 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			sprintTick++;
 		}
 
-		if (sprintTick <= 0 && this.hasControllingPassenger()) {
+		if (sprintTick <= 0 && controllingPassenger != null) {
 			AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
 			this.handleSpeedRequest(-1);
 			movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-			player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
-		} else if (player == null || !this.hasControllingPassenger()) {
+			if (controllingPassenger != null) {
+				if (controllingPassenger instanceof Player player) {
+					player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
+				}
+			}
+		} else if (entity == null || !this.hasControllingPassenger()) {
 			return;
 		}
 	}

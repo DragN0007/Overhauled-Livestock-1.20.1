@@ -57,6 +57,7 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -121,7 +122,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
-		this.goalSelector.addGoal(1, new SleepyGoal(this));
+//		this.goalSelector.addGoal(1, new SleepyGoal(this));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
 				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
@@ -747,13 +748,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		Entity controllingPassenger = this.getControllingPassenger();
-		Player player = (Player) controllingPassenger;
+		Entity entity = controllingPassenger;
 		int sprintLeftInSeconds = sprintTick / 20;
 
 		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger()) {
 			sprintTick--;
-			if (controllingPassenger instanceof Player && !(sprintTick <= 0)) {
-				player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
+			if (controllingPassenger != null && !(sprintTick <= 0)) {
+				if (controllingPassenger instanceof Player player) {
+					player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
+				}
 			}
 		}
 
@@ -761,12 +764,16 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			sprintTick++;
 		}
 
-		if (sprintTick <= 0 && this.hasControllingPassenger()) {
+		if (sprintTick <= 0 && controllingPassenger != null) {
 			AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
 			this.handleSpeedRequest(-1);
 			movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-			player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
-		} else if (player == null || !this.hasControllingPassenger()) {
+			if (controllingPassenger != null) {
+				if (controllingPassenger instanceof Player player) {
+					player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
+				}
+			}
+		} else if (entity == null || !this.hasControllingPassenger()) {
 			return;
 		}
 	}
