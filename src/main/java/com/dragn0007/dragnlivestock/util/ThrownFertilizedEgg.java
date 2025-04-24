@@ -56,6 +56,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                if (chicken.isFemale()) {
@@ -80,6 +81,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_AMERAUCANA_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                if (chicken.isFemale()) {
@@ -104,6 +106,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                if (chicken.isFemale()) {
@@ -128,6 +131,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_MARANS_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                if (chicken.isFemale()) {
@@ -152,6 +156,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                if (chicken.isFemale()) {
@@ -176,6 +181,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                if (chicken.isFemale()) {
@@ -199,6 +205,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             if (getItem().is(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get())) {
                OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
                chicken.setAge(-24000);
+               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                chicken.setBreed(6);

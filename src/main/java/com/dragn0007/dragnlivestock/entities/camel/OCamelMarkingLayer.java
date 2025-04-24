@@ -33,7 +33,7 @@ public class OCamelMarkingLayer extends GeoRenderLayer<OCamel> {
     }
 
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_none.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/none.png")),
         BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_bald.png")),
         BLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_blotched.png")),
         HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_half_splash.png")),

@@ -33,7 +33,7 @@ public class NetherUnicornHornLayer extends GeoRenderLayer<NetherUnicorn> {
     }
 
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_none.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/none.png")),
         FIRE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_fire.png")),
         GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_gold.png")),
         MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_mahogany.png")),

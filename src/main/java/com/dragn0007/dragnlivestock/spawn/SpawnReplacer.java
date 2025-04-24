@@ -200,25 +200,33 @@ public class SpawnReplacer {
                     oHorse.setAge(vanillaHorse.getAge());
                     oHorse.randomizeOHorseAttributes();
 
-                    //set random variants on-spawn
-                    int randomVariant = event.getLevel().getRandom().nextInt(OHorseModel.Variant.values().length);
-                    oHorse.setVariant(randomVariant);
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OHorseMarkingLayer.Overlay.values().length);
-                    oHorse.setOverlayVariant(randomOverlayVariant);
+                    int randomChristmasVariant = event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length);
+                    oHorse.setReindeerVariant(randomChristmasVariant);
 
                     int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                     oHorse.setGender(randomGender);
 
-                    int randomChristmasVariant = event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length);
-                    oHorse.setReindeerVariant(randomChristmasVariant);
-
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-                        int randomBreedIfConfigured = event.getLevel().getRandom().nextInt(HorseBreedModel.values().length);
-                        oHorse.setBreed(randomBreedIfConfigured);
+                        int randomBreed = event.getLevel().getRandom().nextInt(HorseBreedModel.values().length);
+                        oHorse.setBreed(randomBreed);
+
+                        int randomMane = 1 + event.getLevel().getRandom().nextInt(4);
+                        oHorse.setManeType(randomMane);
+
+                        int randomTail = 1 + event.getLevel().getRandom().nextInt(4);
+                        oHorse.setTailType(randomTail);
+
                     } else {
                         oHorse.setBreed(0);
+                        oHorse.setManeType(2);
+                        int randomTail = 1 + event.getLevel().getRandom().nextInt(4);
+                        oHorse.setTailType(randomTail);
                     }
+
+                    oHorse.setColorByBreed();
+                    oHorse.setMarkingByBreed();
+                    oHorse.setFeatheringByBreed();
+                    oHorse.setEyeColorByChance();
 
                     //discard vanilla horse once it's been successfully replaced on client and server
                     if (event.getLevel().isClientSide) {

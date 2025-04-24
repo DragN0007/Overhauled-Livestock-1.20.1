@@ -37,6 +37,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_TIME;
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_AMOUNT;
     public static final ForgeConfigSpec.ConfigValue<Integer> MILKING_COOLDOWN;
+    public static final ForgeConfigSpec.BooleanValue HORSE_HAIR_GROWTH;
+    public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HAIR_GROWTH_TIME;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
@@ -144,6 +146,12 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
 
         BASE_HORSE_SPRINT_TIME = BUILDER.comment("Base time an O-Horse can run for at full speed, in seconds. Default is 45s.")
                 .define("Base Horse Sprint Time", 45);
+
+        HORSE_HAIR_GROWTH = BUILDER.comment("Should O-Horses's manes and tails be able to grow over time?")
+                .define("Horse Hair Growth Progression", true);
+
+        HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. Default is 72000.")
+                .define("Horse Hair Growth Time", 72000);
 
         MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
                 .define("NON FUNCTIONAL", 3);

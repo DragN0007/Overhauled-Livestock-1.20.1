@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -39,19 +40,25 @@ public class OHorseShoeLayer extends GeoRenderLayer<OHorse> {
 
         ResourceLocation resourceLocation = null;
 
-        if (armorItemStack.getItem() == LOItems.STONE_HORSESHOE.get()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/stone_horseshoe.png");
-        } else if (armorItemStack.getItem() == LOItems.IRON_HORSESHOE.get()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/iron_horseshoe.png");
-        } else if (armorItemStack.getItem() == LOItems.GOLD_HORSESHOE.get()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/gold_horseshoe.png");
-        } else if (armorItemStack.getItem() == LOItems.DIAMOND_HORSESHOE.get()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/diamond_horseshoe.png");
-        } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/netherite_horseshoe.png");
+        if (animatable.isSaddled() && LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get()) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
         } else {
             return;
         }
+
+//        if (armorItemStack.getItem() == LOItems.STONE_HORSESHOE.get()) {
+//            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
+//        } else if (armorItemStack.getItem() == LOItems.IRON_HORSESHOE.get()) {
+//            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/iron_horseshoes.png");
+//        } else if (armorItemStack.getItem() == LOItems.GOLD_HORSESHOE.get()) {
+//            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/gold_horseshoes.png");
+//        } else if (armorItemStack.getItem() == LOItems.DIAMOND_HORSESHOE.get()) {
+//            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/diamond_horseshoes.png");
+//        } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
+//            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/netherite_horseshoes.png");
+//        } else {
+//            return;
+//        }
 
         RenderType renderType1 = RenderType.entityCutout(resourceLocation);
         poseStack.pushPose();

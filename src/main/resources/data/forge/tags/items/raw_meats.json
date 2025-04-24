@@ -32,6 +32,13 @@
     "dragnlivestock:frog",
     "dragnlivestock:caribou",
     "dragnlivestock:caribou_sirloin_steak",
-    "dragnlivestock:caribou_rib_steak"
+    "dragnlivestock:caribou_rib_steak",
+    "dragnlivestock:beef_strips",
+    "dragnlivestock:chicken_strips",
+    "dragnlivestock:pork_strips",
+    "dragnlivestock:mutton_strips",
+    "dragnlivestock:fish_strips",
+    "dragnlivestock:generic_strips",
+    "dragnlivestock:game_strips"
   ]
 }

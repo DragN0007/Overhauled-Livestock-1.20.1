@@ -1,0 +1,15 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "tag": "forge:raw_meats"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "book": "dragnlivestock:livestock_overhaul_guide"
+}

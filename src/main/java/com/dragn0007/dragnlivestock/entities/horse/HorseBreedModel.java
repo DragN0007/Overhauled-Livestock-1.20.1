@@ -4,7 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
 
 public enum HorseBreedModel {
-    MUSTANG(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_overhauled.geo.json")),
+    MUSTANG(new ResourceLocation(LivestockOverhaul.MODID, "geo/o_horse.geo.json")),
     ARDENNES(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_ardennes.geo.json")),
     KLADRUBER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_kladruber.geo.json")),
     FJORD(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_fjord.geo.json")),

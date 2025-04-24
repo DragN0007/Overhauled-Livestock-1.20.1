@@ -33,7 +33,7 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
     }
 
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_none.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/none.png")),
         BLOTCHED_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_blotched_black.png")),
         BLOTCHED_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_blotched_white.png")),
         DALMATION(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/overlay_dalmation.png")),

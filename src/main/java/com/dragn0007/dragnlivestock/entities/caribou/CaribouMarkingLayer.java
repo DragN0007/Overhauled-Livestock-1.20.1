@@ -34,7 +34,7 @@ public class CaribouMarkingLayer extends GeoRenderLayer<Caribou> {
     }
 
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/overlay_none.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/none.png")),
         BLANKET(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_blanket.png")),
         FULL_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_full_socks.png")),
         PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_piebald.png")),

@@ -168,11 +168,10 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     private void renderBaseCoatLabel(GuiGraphics graphics) {
         String text = this.oHorse.getTextureResource().toString(); //texture name
-        String noFillerText = text.replaceAll(".+horse_", ""); //remove 'horse_' and anything before it
+        String noFillerText = text.replaceAll(".+horse/", ""); //remove 'horse_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
-        String addSpacesWhenApplicableText = noPNGText.replace("warm", "warm ");
-        String labelText = "Base Coat: " + addSpacesWhenApplicableText.toUpperCase(); //print just the coat name
+        String labelText = "Base Coat: " + noPNGText.toUpperCase(); //print just the coat name
 
         String noTextureText = "Base Coat: " + "No Coat Found.";
 
@@ -185,7 +184,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     private void renderMarkingLabel(GuiGraphics graphics) {
         String text = this.oHorse.getOverlayLocation().toString();
-        String noFillerText = text.replaceAll(".+overlay_", "");
+        String noFillerText = text.replaceAll(".+overlay/", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
         String addPinkNoseText = noPNGText.replace("pink", "pink-nosed");

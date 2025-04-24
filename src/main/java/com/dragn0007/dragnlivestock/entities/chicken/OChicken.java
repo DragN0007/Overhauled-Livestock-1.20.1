@@ -198,7 +198,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			}
 
 			if (this.getBreed() == 6) {
-				this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+				this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
 			}
 
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);

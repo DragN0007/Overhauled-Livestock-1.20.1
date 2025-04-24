@@ -57,7 +57,6 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -118,7 +117,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.goalSelector.addGoal(7, new MountLookAtPlayerGoal(this, Player.class, 0.0F));
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -406,12 +404,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			double offsetX = 0;
 			double offsetY = 1.0;
-			double offsetZ = -0.2;
+			double offsetZ = -0.05;
 
 			int i = this.getPassengers().indexOf(entity);
 
 			if (getBreed() == 0) {
-				offsetY = 1.0;
+				offsetY = 1.03;
 			}
 
 			if (getBreed() == 1) {
@@ -585,13 +583,17 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
+				} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.81 * controller.getAnimationSpeed() + animationSpeed));
+
 				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
 				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
@@ -601,7 +603,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				} else if (this.isSleeping() && !this.isVehicle() && this.isFollower()) {
 					controller.setAnimation(RawAnimation.begin().then("sleep", Animation.LoopType.LOOP));
 				} else {
-					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
+					controller.setAnimation(RawAnimation.begin().then("ground_tie", Animation.LoopType.LOOP));
 				}
 				controller.setAnimationSpeed(1.0);
 			}
@@ -691,6 +693,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public int maxSprint = 20 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
 	public int sprintTick = maxSprint;
+	public int maneGrowthTick = 0;
+	public int tailGrowthTick = 0;
 
 	@Override
 	public void tick() {
@@ -713,9 +717,24 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.level().isNight() && !this.isVehicle()) {
-			this.setSleeping(true);
+		maneGrowthTick++;
+		tailGrowthTick++;
+
+		if (!this.isBaby()) {
+			if (maneGrowthTick >= LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH_TIME.get() && this.getManeType() > 1) {
+				this.setManeType(this.getManeType() - 1);
+				maneGrowthTick = 0;
+			}
+
+			if (tailGrowthTick >= LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH_TIME.get() && this.getTailType() > 1) {
+				this.setTailType(this.getTailType() - 1);
+				tailGrowthTick = 0;
+			}
 		}
+
+//		if (this.level().isNight() && !this.isVehicle()) {
+//			this.setSleeping(true);
+//		}
 
 //		if (--this.sleepCounter <= 0 && this.shouldSleep()) {
 //			this.staySleepingCounter++;
@@ -813,6 +832,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OHorse.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 
 
@@ -832,10 +852,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return HorseBreedModel.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
+	public ResourceLocation getEyeTextureResource() {
+		return OHorseEyeLayer.EyeOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
+	}
+
 
 	public int getReindeerVariant() {
 		return this.entityData.get(REINDEER_VARIANT);
 	}
+
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
@@ -846,6 +871,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public int getBreed() {
 		return this.entityData.get(BREED);
+	}
+
+	public int getEyeVariant() {
+		return this.entityData.get(EYES);
 	}
 
 	public void setReindeerVariant(int reindeerVariant) {
@@ -866,6 +895,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(BREED, breed);
 	}
 
+	public void setEyeVariant(int eyeVariant) {
+		this.entityData.set(EYES, eyeVariant);
+	}
+
 	public void setVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
@@ -880,6 +913,16 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			resourceLocation = OHorseMarkingLayer.Overlay.NONE.resourceLocation;
 		}
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
+	}
+
+	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+
+	public int getFeathering() {
+		return this.entityData.get(FEATHERING);
+	}
+
+	public void setFeathering(int feathering) {
+		this.entityData.set(FEATHERING, feathering);
 	}
 
 	@Override
@@ -922,6 +965,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setTailType(tag.getInt("Tail"));
 		}
 
+		if (tag.contains("Feathering")) {
+			this.setFeathering(tag.getInt("Feathering"));
+		}
+
+		if (tag.contains("Eyes")) {
+			this.setEyeVariant(tag.getInt("Eyes"));
+		}
+
 		this.createInventory();
 		if (this.hasChest()) {
 			ListTag listtag = tag.getList("Items", 10);
@@ -950,6 +1001,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
 		tag.putInt("Tail", this.getTailType());
+		tag.putInt("Feathering", this.getFeathering());
+		tag.putInt("Eyes", this.getEyeVariant());
 
 		if (this.hasChest()) {
 			ListTag listtag = new ListTag();
@@ -976,14 +1029,23 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		Random random = new Random();
-		this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
-		this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
-		this.setGender(random.nextInt(Gender.values().length));
-		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
 
-		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-			this.setBreed(random.nextInt(HorseBreedModel.values().length));
-		}
+		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
+		this.setGender(random.nextInt(Gender.values().length));
+		this.setColorByBreed();
+//		this.setMarkingByBreed();
+		this.setFeatheringByBreed();
+		this.setEyeColorByChance();
+
+		int randomMane = 1 + this.getRandom().nextInt(3);
+		this.setManeType(randomMane);
+
+		int randomTail = 1 + this.getRandom().nextInt(3);
+		this.setTailType(randomTail);
+
+//		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
+//			this.setBreed(random.nextInt(HorseBreedModel.values().length));
+//		}
 
 		this.randomizeOHorseAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -1001,6 +1063,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(REINDEER_VARIANT, 0);
 		this.entityData.define(MANE_TYPE, 0);
 		this.entityData.define(TAIL_TYPE, 0);
+		this.entityData.define(FEATHERING, 0);
+		this.entityData.define(EYES, 0);
 	}
 
 	public boolean canMate(Animal animal) {
@@ -1067,44 +1131,68 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			OHorse horse = (OHorse) ageableMob;
 			foal = EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
-			int variant;
-			if (i < 4) {
-				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = horse.getVariant();
-			} else {
-				variant = this.random.nextInt(OHorseModel.Variant.values().length);
-			}
-
-			int j = this.random.nextInt(5);
-			int overlay;
-			if (j < 2) {
-				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
-				overlay = horse.getOverlayVariant();
-			} else {
-				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
-			}
-
 			int k = this.random.nextInt(4);
-			int breed;
+//			int breed;
+//			if (k == 0) {
+//				breed = this.random.nextInt(HorseBreedModel.values().length);
+//			} else {
+//				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : horse.getBreed();
+//			}
+//			((OHorse) foal).setBreed(breed);
+
+			if (!(k == 0)) {
+				int i = this.random.nextInt(14);
+				int variant;
+				if (i < 6) {
+					variant = this.getVariant();
+				} else if (i < 12) {
+					variant = horse.getVariant();
+				} else {
+					variant = this.random.nextInt(OHorseModel.Variant.values().length);
+				}
+
+				((OHorse) foal).setVariant(variant);
+			}
+
+//			if (!(k == 0)) {
+//				int j = this.random.nextInt(10);
+//				int overlay;
+//				if (j < 4) {
+//					overlay = this.getOverlayVariant();
+//				} else if (j < 8) {
+//					overlay = horse.getOverlayVariant();
+//				} else {
+//					overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
+//				}
+//
+//				((OHorse) foal).setOverlayVariant(overlay);
+//			}
+
 			if (k == 0) {
-				breed = this.random.nextInt(HorseBreedModel.values().length);
+				((OHorse) foal).setColorByBreed();
+				((OHorse) foal).setMarkingByBreed();
+			}
+
+			int l = this.random.nextInt(11);
+			int eyes;
+			if (l < 5) {
+				eyes = this.getEyeVariant();
+			} else if (l < 10) {
+				eyes = horse.getEyeVariant();
 			} else {
-				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : horse.getBreed();
+				eyes = this.random.nextInt(OHorseEyeLayer.EyeOverlay.values().length);
 			}
 
 			int gender;
 			gender = this.random.nextInt(OHorse.Gender.values().length);
 
-			((OHorse) foal).setVariant(variant);
-			((OHorse) foal).setOverlayVariant(overlay);
-			((OHorse) foal).setBreed(breed);
+			((OHorse) foal).setEyeVariant(eyes);
+			((OHorse) foal).setFeatheringByBreed();
 			foal.setGender(gender);
+			((OHorse) foal).setManeType(3);
+			((OHorse) foal).setTailType(2);
 
-			if (this.random.nextInt(4) == 0) {
-				int randomJumpStrength = (int) Math.max(horse.generateRandomOHorseJumpStrength(), this.random.nextInt(10) + 10);
+			if (this.random.nextInt(3) >= 1) {
 				((OHorse) foal).generateRandomOHorseJumpStrength();
 
 				int betterSpeed = (int) Math.max(horse.getSpeed(), this.random.nextInt(10) + 20);
@@ -1124,10 +1212,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public enum Mane {
-		ROACHED,
 		BUTTONS,
-		SHORT,
 		LONG,
+		ROACHED,
+		SHORT,
 		NONE;
 
 		public Mane next() {
@@ -1135,56 +1223,16 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 	}
 
-	public boolean hasDefaultMane() {
-		return this.getManeType() == 0;
-	}
-
-	public boolean hasButtonMane() {
-		return this.getManeType() == 1;
-	}
-
-	public boolean hasShortMane() {
-		return this.getManeType() == 2;
-	}
-
-	public boolean hasLongMane() {
-		return this.getManeType() == 3;
-	}
-
-	public boolean hasNoMane() {
-		return this.getManeType() == 4;
-	}
-
 	public enum Tail {
-		DEFAULT,
-		SHORT,
+		TIED,
 		LONG,
-		TUCKED,
-		TIED;
+		AVERAGE,
+		SHORT,
+		TUCKED;
 
 		public Tail next() {
 			return Tail.values()[(this.ordinal() + 1) % Tail.values().length];
 		}
-	}
-
-	public boolean hasDefaultTail() {
-		return this.getTailType() == 0;
-	}
-
-	public boolean hasLongTail() {
-		return this.getTailType() == 1;
-	}
-
-	public boolean hasShortTail() {
-		return this.getTailType() == 2;
-	}
-
-	public boolean hasTuckedTail() {
-		return this.getTailType() == 3;
-	}
-
-	public boolean hasTiedTail() {
-		return this.getTailType() == 4;
 	}
 
 	public static final EntityDataAccessor<Integer> MANE_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
@@ -1206,5 +1254,135 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void setTailType(int tail) {
 		this.entityData.set(TAIL_TYPE, tail);
 	}
+
+	public enum Feathering {
+		NONE,
+		HALF,
+		FULL;
+		public Feathering next() {
+			return Feathering.values()[(this.ordinal() + 1) % Feathering.values().length];
+		}
+	}
+
+	public void setFeatheringByBreed() {
+
+		//warmbloods are more likely to have half or no feathering, but have a very small chance of having full.
+		if (this.isWarmbloodedBreed()) {
+			if (random.nextDouble() < 0.05) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.05) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.50) {
+				this.setFeathering(0);
+			} else {
+				this.setFeathering(0);
+			}
+		}
+
+		//drafts almost always have full feathering, but have small chances of having half, or a very small chance of having none.
+		if (this.isDraftBreed()) {
+			if (random.nextDouble() < 0.05) {
+				this.setFeathering(0);
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.30) {
+				this.setFeathering(2);
+			} else {
+				this.setFeathering(2);
+			}
+		}
+
+		//ponies are more likely to have half or full feathering, but have a small chance of having none.
+		if (this.isPonyBreed()) {
+			if (random.nextDouble() < 0.15) {
+				this.setFeathering(0);
+			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() > 0.50) {
+				this.setFeathering(1);
+			} else {
+				this.setFeathering(1);
+			}
+		}
+
+		//racing horses almost always have no feathering, but have a very small chance of having half or none.
+		if (this.isRacingBreed()) {
+			if (random.nextDouble() < 0.03) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() < 0.08 && random.nextDouble() > 0.03) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.08) {
+				this.setFeathering(0);
+			} else {
+				this.setFeathering(0);
+			}
+		}
+
+		//stock horses almost always have no feathering, but have a small chance of having half or a very small chance of having full.
+		if (this.isStockBreed()) {
+			if (random.nextDouble() < 0.03) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() < 0.20 && random.nextDouble() > 0.03) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.20) {
+				this.setFeathering(0);
+			} else {
+				this.setFeathering(0);
+			}
+		}
+
+	}
+
+	public void setEyeColorByChance() {
+
+		//white and mostly-white or bald horses have a better chance of gaining blue or green eyes
+		if (this.getVariant() == 24 || this.getOverlayVariant() == 2 || this.getOverlayVariant() == 8
+				|| this.getOverlayVariant() == 9 || this.getOverlayVariant() == 10 || this.getOverlayVariant() == 15
+				|| this.getOverlayVariant() == 17 || this.getOverlayVariant() == 20 || this.getOverlayVariant() == 24
+				|| this.getOverlayVariant() == 26) {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9)); //heterochromic
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6); //green
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.10) {
+				this.setEyeVariant(5); //blue
+			} else if (random.nextDouble() > 0.30) {
+				this.setEyeVariant(this.getRandom().nextInt(4)); //random (between dark brown and dark blue)
+			} else {
+				this.setEyeVariant(0);
+			}
+		} else {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9));
+			} else if (random.nextDouble() < 0.03 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6);
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.03) {
+				this.setEyeVariant(5);
+			} else if (random.nextDouble() > 0.10) {
+				this.setEyeVariant(this.getRandom().nextInt(4));
+			} else {
+				this.setEyeVariant(0);
+			}
+		}
+
+	}
+
+	public void setColorByBreed() {
+
+		if (this.getBreed() == 0) { //mustangs can come in any color naturally
+			this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
+		}
+
+	}
+
+	public void setMarkingByBreed() {
+
+		if (this.getBreed() == 0) { //mustangs can come in any pattern naturally
+			this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+		}
+
+	}
+
+
 
 }

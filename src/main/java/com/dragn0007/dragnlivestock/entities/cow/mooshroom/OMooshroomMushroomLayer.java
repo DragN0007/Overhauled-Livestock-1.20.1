@@ -32,7 +32,7 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
                 1, 1, 1, 1);
     }
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_none.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/none.png")),
         BROWN_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_brown_full.png")),
         RED_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_red_full.png")),
         BROWN_HALF(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_brown_half.png")),

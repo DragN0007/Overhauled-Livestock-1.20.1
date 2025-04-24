@@ -10,43 +10,37 @@ import java.time.Month;
 public class OHorseModel extends GeoModel<OHorse> {
 
     public enum Variant {
-        BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_bay.png")),
-        BAY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_bay_roan.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_black.png")),
-        BLOOD_BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_blood_bay.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_blue.png")),
-        BLUE_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_blue_roan.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_brown.png")),
-        BUCKSKIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_buckskin.png")),
-        CHAMPAGNE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_champagne.png")),
-        CHOCOLATE_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_chocolate_roan.png")),
-        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_chestnut.png")),
-        CREAMY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_creamy.png")),
-        DARK_BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_dark_bay.png")),
-        DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_darkbrown.png")),
-        FJORD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_fjord.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_grey.png")),
-        GRULLO_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_grullo_dun.png")),
-        IVORY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_ivory.png")),
-        LIVER_CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_liverchestnut.png")),
-        PALAMINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_palamino.png")),
-        PALAMINO_ORANGE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_palamino_orange.png")),
-        SEAL_BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_seal_bay.png")),
-        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_strawberry.png")),
-        WARM_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_warmblack.png")),
-        WARM_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_warmgrey.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_white.png")),
-        DAPPLE_BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_dapple_blue.png")),
-        DAPPLE_BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_dapple_brown.png")),
-        DAPPLE_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_dapple_grey.png")),
-
-        DAPPLE_RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_dapple_red.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_cream.png")),
-        RED_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_red_dun.png")),
-        BAY_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_bay_dun.png")),
-        GRULLA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_grulla.png")),
-        BLUE_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_blue_dun.png")),
-        CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_cinnamon.png"));
+        BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/bay.png")),
+        BAY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/bay_roan.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/black.png")),
+        BLOOD_BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/blood_bay.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/blue.png")),
+        BLUE_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/blue_roan.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/brown.png")),
+        BUCKSKIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/buckskin.png")),
+        CHAMPAGNE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/champagne.png")),
+        CHOCOLATE_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/chocolate_roan.png")),
+        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/chestnut.png")),
+        CREAMY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/creamy.png")),
+        DARK_BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/dark_bay.png")),
+        DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/dark_brown.png")),
+        FJORD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/fjord.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/grey.png")),
+        IVORY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/ivory.png")),
+        LIVER_CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/liver_chestnut.png")),
+        PALAMINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/palamino.png")),
+        PALAMINO_ORANGE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/palamino_orange.png")),
+        SEAL_BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/seal_bay.png")),
+        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/strawberry.png")),
+        WARM_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/warm_black.png")),
+        WARM_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/warm_grey.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/white.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/cream.png")),
+        RED_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/red_dun.png")),
+        BAY_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/bay_dun.png")),
+        GRULLA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/grulla.png")),
+        BLUE_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/blue_dun.png")),
+        CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/cinnamon.png"));
 
         //Add new entries to bottom when mod is public, else horses will change textures during update.
 
@@ -77,9 +71,9 @@ public class OHorseModel extends GeoModel<OHorse> {
         }
     }
 
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_horse_overhauled.geo.json");
-    public static final ResourceLocation REINDEER_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/reindeer.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_horse.geo.json");
+    public static final ResourceLocation REINDEER_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/caribou.geo.json");
 
     LocalDate date = LocalDate.now();
     Month month = date.getMonth();
