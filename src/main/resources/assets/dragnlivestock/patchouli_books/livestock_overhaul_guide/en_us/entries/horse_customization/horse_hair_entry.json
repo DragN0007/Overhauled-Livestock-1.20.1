@@ -5,24 +5,24 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Horses' manes and tails can be changed with Mane or Tail Scissors. When 'cut', their manes and tails simply switch through the different types. This has no cooldown."
+      "text": "O-Horses' manes and tails grow over time. Wild horses may come in all sorts of mane and tail combinations. You can set the mane or tail to Button Braids or Tied by shift-clicking an O-Horse, or vice-versa."
     },{
       "type": "patchouli:text",
-      "text": "Mane Types: $(br)Roached (Default), Button Braids, Short, Long, None. $(br2)Tail Types: $(br)Natural (Default), Short, Long, Tucked, Tied."
+      "text": "Mane Types: $(br)Short, Roached, Long, None, Button Braids. $(br2)Tail Types: $(br)Very Short, Short, Natural, Long, Tied."
     },
     {
       "type": "patchouli:spotlight",
       "item": {
         "item": "dragnlivestock:mane_scissors"
       },
-      "text": "The $(l)Mane Scissors$() are used to cycle through the mane types on O-Horses."
+      "text": "The $(l)Mane Scissors$() are used to cut the manes of O-Horses."
     },
     {
       "type": "patchouli:spotlight",
       "item": {
         "item": "dragnlivestock:tail_scissors"
       },
-      "text": "The $(l)Tail Scissors$() are used to cycle through the tail types on O-Horses."
+      "text": "The $(l)Tail Scissors$() are used to cut the tails of O-Horses."
     }
   ]
 }

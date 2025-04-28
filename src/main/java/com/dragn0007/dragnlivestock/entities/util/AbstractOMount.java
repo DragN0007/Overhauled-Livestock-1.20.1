@@ -313,14 +313,13 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         OHorse oHorse = (OHorse) this;
 
         if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.isHorse(this)) {
-            if (player.isShiftKeyDown()) {
-                if (oHorse.getManeType() > 0 && oHorse.getManeType() < 4) {
+            if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
+                if (oHorse.getManeType() <= 3) {
                     oHorse.setManeType(0);
                 } if (oHorse.getManeType() == 0) {
                     oHorse.setManeType(3);
                 }
-            }
-            if (oHorse.getManeType() < 4 || !LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
+            } else if ((!player.isShiftKeyDown() && oHorse.getManeType() < 4) || !LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 OHorse.Mane currentMane = OHorse.Mane.values()[oHorse.getManeType()];
                 OHorse.Mane nextMane = currentMane.next();
                 oHorse.maneGrowthTick = 0;
@@ -331,14 +330,13 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
-            if (player.isShiftKeyDown()) {
-                if (oHorse.getTailType() > 0 && oHorse.getTailType() < 4) {
+            if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
+                if (oHorse.getTailType() <= 3) {
                     oHorse.setTailType(0);
                 } if (oHorse.getTailType() == 0) {
                     oHorse.setTailType(3);
                 }
-            }
-            if (oHorse.getTailType() < 4 || !LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
+            } else if ((!player.isShiftKeyDown() && oHorse.getTailType() < 4) || !LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 OHorse.Tail currentTail = OHorse.Tail.values()[oHorse.getTailType()];
                 OHorse.Tail nextTail = currentTail.next();
                 oHorse.tailGrowthTick = 0;
