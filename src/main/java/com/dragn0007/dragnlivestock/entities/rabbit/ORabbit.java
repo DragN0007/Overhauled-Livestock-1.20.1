@@ -471,7 +471,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		setVariant(random.nextInt(ORabbitModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(ORabbit.Gender.values().length));
-		this.setBreed(random.nextInt(Breed.values().length));
+		this.setBreed(random.nextInt(RabbitBreed.Breed.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -573,7 +573,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			} else if (j < 4) {
 				breed = oRabbit1.getOverlayVariant();
 			} else {
-				breed = this.random.nextInt(Breed.values().length);
+				breed = this.random.nextInt(RabbitBreed.Breed.values().length);
 			}
 
 			int gender;
@@ -586,23 +586,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		}
 
 		return oRabbit;
-	}
-
-	public enum Breed {
-		DEFAULT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_overhauled.geo.json")),
-		GIANT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_giant.geo.json")),
-		DWARF(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_dwarf.geo.json")),
-		LOP(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit_lop.geo.json"));
-
-		public final ResourceLocation resourceLocation;
-
-		Breed(ResourceLocation resourceLocation) {
-			this.resourceLocation = resourceLocation;
-		}
-
-		public static Breed breedFromOrdinal(int ordinal) {
-			return Breed.values()[ordinal % Breed.values().length];
-		}
 	}
 
 }

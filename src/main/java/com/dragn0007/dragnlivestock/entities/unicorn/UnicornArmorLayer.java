@@ -21,13 +21,13 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class NetherUnicornArmorLayer extends GeoRenderLayer<NetherUnicorn> {
-    public NetherUnicornArmorLayer(GeoRenderer<NetherUnicorn> entityRendererIn) {
+public class UnicornArmorLayer extends GeoRenderLayer<Unicorn> {
+    public UnicornArmorLayer(GeoRenderer<Unicorn> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, NetherUnicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, Unicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
         if (armorSlots == null || armorSlots.size() <= 2) {
             return;

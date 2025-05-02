@@ -292,16 +292,16 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			double offsetY = 1.2;
 			double offsetZ = -0.2;
 
-			if (getModelResource().equals(MuleBreedModel.STOCK.resourceLocation)) {
+			if (getModelResource().equals(MuleBreed.STOCK.resourceLocation)) {
 				offsetY = 0.85;
 			}
 
-			if (getModelResource().equals(MuleBreedModel.MINI.resourceLocation)) {
+			if (getModelResource().equals(MuleBreed.MINI.resourceLocation)) {
 				offsetY = 0.6;
 				offsetZ = -0.1;
 			}
 
-			if (getModelResource().equals(MuleBreedModel.DRAFT.resourceLocation)) {
+			if (getModelResource().equals(MuleBreed.DRAFT.resourceLocation)) {
 				offsetY = 1.25;
 			}
 
@@ -368,7 +368,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	public ResourceLocation getModelResource() {
-		return MuleBreedModel.breedFromOrdinal(getBreed()).resourceLocation;
+		return MuleBreed.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
 	public int getVariant() {

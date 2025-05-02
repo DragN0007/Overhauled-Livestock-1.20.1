@@ -650,7 +650,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.setVariant(random.nextInt(OCamelModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OCamelMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
-		this.setBreed(random.nextInt(Breed.values().length));
+		this.setBreed(random.nextInt(CamelBreed.Breed.values().length));
 
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -737,7 +737,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 			} else if (k < 4) {
 				breed = oCamel1.getBreed();
 			} else {
-				breed = this.random.nextInt(Breed.values().length);
+				breed = this.random.nextInt(CamelBreed.Breed.values().length);
 			}
 
 			int gender;
@@ -750,21 +750,6 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		return oCamel;
-	}
-
-	public enum Breed {
-		BACTRIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel.geo.json")),
-		DROMEDARY(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel_dromedary.geo.json"));
-
-		public final ResourceLocation resourceLocation;
-
-		Breed(ResourceLocation resourceLocation) {
-			this.resourceLocation = resourceLocation;
-		}
-
-		public static OCamel.Breed breedFromOrdinal(int ordinal) {
-			return OCamel.Breed.values()[ordinal % OCamel.Breed.values().length];
-		}
 	}
 
 }

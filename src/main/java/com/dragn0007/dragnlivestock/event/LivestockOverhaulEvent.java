@@ -67,7 +67,8 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonRender;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
-import com.dragn0007.dragnlivestock.entities.unicorn.*;
+import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
+import com.dragn0007.dragnlivestock.entities.unicorn.UnicornRender;
 import com.dragn0007.dragnlivestock.gui.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -108,9 +109,7 @@ public class LivestockOverhaulEvent {
 
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
 
-        event.put(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicorn.createBaseHorseAttributes().build());
-        event.put(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicorn.createBaseHorseAttributes().build());
-        event.put(EntityTypes.END_UNICORN_ENTITY.get(), EndUnicorn.createBaseHorseAttributes().build());
+        event.put(EntityTypes.UNICORN_ENTITY.get(), Unicorn.createBaseHorseAttributes().build());
 
         event.put(EntityTypes.WHEAT_MOOBLOOM_ENTITY.get(), WheatMoobloom.createAttributes().build());
         event.put(EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get(), SweetBerryMoobloom.createAttributes().build());
@@ -149,9 +148,7 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);
 
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
-        EntityRenderers.register(EntityTypes.OVERWORLD_UNICORN_ENTITY.get(), OverworldUnicornRender::new);
-        EntityRenderers.register(EntityTypes.NETHER_UNICORN_ENTITY.get(), NetherUnicornRender::new);
-        EntityRenderers.register(EntityTypes.END_UNICORN_ENTITY.get(), EndUnicornRender::new);
+        EntityRenderers.register(EntityTypes.UNICORN_ENTITY.get(), UnicornRender::new);
         EntityRenderers.register(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorsemanRender::new);
 
         EntityRenderers.register(EntityTypes.WHEAT_MOOBLOOM_ENTITY.get(), WheatMoobloomRender::new);

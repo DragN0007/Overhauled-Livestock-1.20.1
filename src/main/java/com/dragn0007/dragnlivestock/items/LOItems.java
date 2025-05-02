@@ -59,12 +59,8 @@ public class LOItems {
     public static final RegistryObject<Item> GRUB_SPAWN_EGG = ITEMS.register("grub_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.GRUB_ENTITY, 0xf0f1c3, 0xc9bb8d, new Item.Properties().stacksTo(64)));
 
-    public static final RegistryObject<Item> OVERWORLD_UNICORN_SPAWN_EGG = ITEMS.register("overworld_unicorn_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.OVERWORLD_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> NETHER_UNICORN_SPAWN_EGG = ITEMS.register("nether_unicorn_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.NETHER_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> END_UNICORN_SPAWN_EGG = ITEMS.register("end_unicorn_spawn_egg",
-         () -> new ForgeSpawnEggItem(EntityTypes.END_UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> UNICORN_SPAWN_EGG = ITEMS.register("unicorn_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> WHEAT_MOOBLOOM_SPAWN_EGG = ITEMS.register("wheat_moobloom_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.WHEAT_MOOBLOOM_ENTITY, 0xe3c16a, 0xa69553, new Item.Properties().stacksTo(64)));

@@ -15,7 +15,7 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
-public class EndUnicornCarpetLayer extends GeoRenderLayer<EndUnicorn> {
+public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
     public static final ResourceLocation[] TEXTURE_LOCATION = new ResourceLocation[]{
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/white.png"),
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/orange.png"),
@@ -35,12 +35,12 @@ public class EndUnicornCarpetLayer extends GeoRenderLayer<EndUnicorn> {
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/black.png")
     };
 
-    public EndUnicornCarpetLayer(GeoRenderer<EndUnicorn> entityRendererIn) {
+    public UnicornCarpetLayer(GeoRenderer<Unicorn> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, EndUnicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, Unicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         DyeColor dyeColor = animatable.getCarpet();
         ResourceLocation resourceLocation = null;
 

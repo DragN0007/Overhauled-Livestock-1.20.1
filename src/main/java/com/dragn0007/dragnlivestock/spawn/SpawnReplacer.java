@@ -4,16 +4,14 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.bee.OBeeModel;
+import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
-import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.cow.OCowModel;
+import com.dragn0007.dragnlivestock.entities.cow.*;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloom;
@@ -45,9 +43,8 @@ import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
-import com.dragn0007.dragnlivestock.entities.horse.HorseBreedModel;
+import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorse;
@@ -63,6 +60,7 @@ import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
+import com.dragn0007.dragnlivestock.entities.rabbit.RabbitBreed;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
@@ -207,7 +205,7 @@ public class SpawnReplacer {
                     oHorse.setGender(randomGender);
 
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-                        int randomBreed = event.getLevel().getRandom().nextInt(HorseBreedModel.values().length);
+                        int randomBreed = event.getLevel().getRandom().nextInt(HorseBreed.values().length);
                         oHorse.setBreed(randomBreed);
 
                         int randomMane = 1 + event.getLevel().getRandom().nextInt(4);
@@ -651,7 +649,7 @@ public class SpawnReplacer {
                     int randomGender = event.getLevel().getRandom().nextInt(OCow.Gender.values().length);
                     oCow.setGender(randomGender);
 
-                    int randomBreed = event.getLevel().getRandom().nextInt(OCow.Breed.values().length);
+                    int randomBreed = event.getLevel().getRandom().nextInt(CowBreed.Breed.values().length);
                     oCow.setBreed(randomBreed);
 
                     if (oCow.getBreed() == 4) {
@@ -864,7 +862,7 @@ public class SpawnReplacer {
                     int randomGender = event.getLevel().getRandom().nextInt(ORabbit.Gender.values().length);
                     oRabbit.setGender(randomGender);
 
-                    int randomBreed = event.getLevel().getRandom().nextInt(ORabbit.Breed.values().length);
+                    int randomBreed = event.getLevel().getRandom().nextInt(RabbitBreed.Breed.values().length);
                     oRabbit.setBreed(randomBreed);
 
                     if (event.getLevel().isClientSide) {
@@ -1076,7 +1074,7 @@ public class SpawnReplacer {
                     int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
                     oCamel.setGender(randomGender);
 
-                    int randomBreed = event.getLevel().getRandom().nextInt(OCamel.Breed.values().length);
+                    int randomBreed = event.getLevel().getRandom().nextInt(CamelBreed.Breed.values().length);
                     oCamel.setBreed(randomBreed);
 
                     if (event.getLevel().isClientSide) {

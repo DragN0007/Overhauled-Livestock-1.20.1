@@ -33,7 +33,7 @@ public class OMuleModel extends GeoModel<OMule> {
         if (object.isBaby()) {
             return BABY_MODEL;
         }
-        return MuleBreedModel.breedFromOrdinal(object.getBreed()).resourceLocation;
+        return MuleBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

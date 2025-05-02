@@ -32,9 +32,7 @@ import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
-import com.dragn0007.dragnlivestock.entities.unicorn.EndUnicorn;
-import com.dragn0007.dragnlivestock.entities.unicorn.NetherUnicorn;
-import com.dragn0007.dragnlivestock.entities.unicorn.OverworldUnicorn;
+import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -163,23 +161,11 @@ public class EntityTypes {
                     .build(new ResourceLocation(MODID,"grub").toString()));
 
 
-    public static final RegistryObject<EntityType<OverworldUnicorn>> OVERWORLD_UNICORN_ENTITY = ENTITY_TYPES.register("overworld_unicorn",
-            () -> EntityType.Builder.of(OverworldUnicorn::new,
+    public static final RegistryObject<EntityType<Unicorn>> UNICORN_ENTITY = ENTITY_TYPES.register("unicorn",
+            () -> EntityType.Builder.of(Unicorn::new,
                             MobCategory.CREATURE)
                     .sized(1.5f,2f)
-                    .build(new ResourceLocation(MODID,"overworld_unicorn").toString()));
-
-    public static final RegistryObject<EntityType<NetherUnicorn>> NETHER_UNICORN_ENTITY = ENTITY_TYPES.register("nether_unicorn",
-            () -> EntityType.Builder.of(NetherUnicorn::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,2f)
-                    .build(new ResourceLocation(MODID,"nether_unicorn").toString()));
-
-    public static final RegistryObject<EntityType<EndUnicorn>> END_UNICORN_ENTITY = ENTITY_TYPES.register("end_unicorn",
-            () -> EntityType.Builder.of(EndUnicorn::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,2f)
-                    .build(new ResourceLocation(MODID,"end_unicorn").toString()));
+                    .build(new ResourceLocation(MODID,"unicorn").toString()));
 
     public static final RegistryObject<EntityType<HeadlessHorseman>> HEADLESS_HORSEMAN_ENTITY = ENTITY_TYPES.register("headless_horseman",
             () -> EntityType.Builder.of(HeadlessHorseman::new,

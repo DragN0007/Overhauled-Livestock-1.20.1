@@ -289,7 +289,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	public ResourceLocation getModelResource() {
-		return OChicken.Breed.breedFromOrdinal(getBreed()).resourceLocation;
+		return ChickenBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
@@ -395,7 +395,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 		setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
-		setBreed(random.nextInt(OChicken.Breed.values().length));
+		setBreed(random.nextInt(ChickenBreed.Breed.values().length));
 		setGender(random.nextInt(OChicken.Gender.values().length));
 
 		if (this.isFemale()) {
@@ -437,26 +437,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
-	}
-
-	public enum Breed {
-		LEGHORN(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_overhauled.geo.json")),
-		AMERAUCANA(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_ameraucana.geo.json")),
-		CREAM_LEGBAR(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_cream_legbar.geo.json")),
-		MARANS(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_marans.geo.json")),
-		OLIVE_EGGER(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_olive_egger.geo.json")),
-		SUSSEX_SILKIE(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_sussex_silkie.geo.json")),
-		AYAM_CEMANI(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_ameraucana.geo.json"));
-
-		public final ResourceLocation resourceLocation;
-
-		Breed(ResourceLocation resourceLocation) {
-			this.resourceLocation = resourceLocation;
-		}
-
-		public static OChicken.Breed breedFromOrdinal(int ordinal) {
-			return OChicken.Breed.values()[ordinal % OChicken.Breed.values().length];
-		}
 	}
 
 	@Override

@@ -333,7 +333,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	}
 
 	public ResourceLocation getModelResource() {
-		return Breed.breedFromOrdinal(getBreed()).resourceLocation;
+		return CowBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
@@ -483,7 +483,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		setVariant(random.nextInt(OCowModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
 		setGender(random.nextInt(Gender.values().length));
-		setBreed(random.nextInt(Breed.values().length));
+		setBreed(random.nextInt(CowBreed.Breed.values().length));
 
 		if (this.getBreed() == 4) {
 			setHornVariant(2);
@@ -616,7 +616,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 				} else if (m < 4) {
 					breed = oCow1.getBreed();
 				} else {
-					breed = this.random.nextInt(Breed.values().length);
+					breed = this.random.nextInt(CowBreed.Breed.values().length);
 				}
 
 				int udders;
@@ -631,25 +631,6 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		}
 
 		return oCow;
-	}
-
-	public enum Breed {
-		ANUGUS(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_large.geo.json")),
-		LONGHORN(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_overhaul.geo.json")),
-		BRAHMAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_large.geo.json")),
-		MINI(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_mini.geo.json")),
-		WATUSI(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_watusi.geo.json")),
-		CORRIENTE(new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_corriente.geo.json"));
-
-		public final ResourceLocation resourceLocation;
-
-		Breed(ResourceLocation resourceLocation) {
-			this.resourceLocation = resourceLocation;
-		}
-
-		public static Breed breedFromOrdinal(int ordinal) {
-			return Breed.values()[ordinal % Breed.values().length];
-		}
 	}
 
 }

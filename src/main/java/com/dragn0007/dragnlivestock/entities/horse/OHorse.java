@@ -2,7 +2,9 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.ai.*;
+import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
@@ -25,8 +27,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -835,7 +835,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public ResourceLocation getModelResource() {
-		return HorseBreedModel.breedFromOrdinal(getBreed()).resourceLocation;
+		return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 
 	public ResourceLocation getEyeTextureResource() {
@@ -1121,7 +1121,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			int k = this.random.nextInt(4);
 			int breed;
 			if (k == 0) {
-				breed = this.random.nextInt(HorseBreedModel.values().length);
+				breed = this.random.nextInt(HorseBreed.values().length);
 			} else {
 				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : horse.getBreed();
 			}
