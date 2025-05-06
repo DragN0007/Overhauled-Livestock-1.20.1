@@ -36,7 +36,7 @@ public class OCowModel extends GeoModel<OCow> {
         if (object.isBaby()) {
             return BABY_MODEL;
         }
-        return OCow.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
+        return CowBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

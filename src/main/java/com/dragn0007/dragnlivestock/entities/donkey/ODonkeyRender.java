@@ -29,7 +29,7 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isSaddled() && (LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get() && LivestockOverhaulClientConfig.LEGACY_HORSE_SADDLES.get())) {
+            if (entity.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
                 model.getBone("extras").ifPresent(b -> b.setHidden(false));
@@ -37,7 +37,7 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
-            } else if (entity.isSaddled() && (!LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get() || !LivestockOverhaulClientConfig.LEGACY_HORSE_SADDLES.get())) {
+            } else if (entity.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
                 model.getBone("extras").ifPresent(b -> b.setHidden(true));

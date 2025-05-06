@@ -24,6 +24,17 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RODEO_HARNESS.get())
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("A A")
+                .pattern("BAB")
+                .pattern("A A")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.ACACIA_RABBIT_HUTCH.get(), 4)
                 .define('A', Blocks.ACACIA_LOG)
                 .define('B', Blocks.ACACIA_PLANKS)
@@ -677,42 +688,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(Items.PAPER)
                         .build()))
                 .save(pFinishedRecipeConsumer, "gender_test_strip_from_female");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get())
-                .define('A', LOTags.Items.RAW_HORSE)
-                .define('B', Items.ENCHANTED_GOLDEN_APPLE)
-                .define('C', Items.HEART_OF_THE_SEA)
-                .define('D', Items.DIAMOND_BLOCK)
-                .pattern("ADA")
-                .pattern("BCB")
-                .pattern("ADA")
-                .unlockedBy("has_heart_of_sea", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.HEART_OF_THE_SEA).build()))
-                .save(pFinishedRecipeConsumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.NETHER_UNICORN_SPAWN_EGG.get())
-                .define('A', LOTags.Items.RAW_HORSE)
-                .define('B', Items.NETHERITE_INGOT)
-                .define('C', Items.NETHER_STAR)
-                .define('D', Items.DIAMOND_BLOCK)
-                .pattern("ADA")
-                .pattern("BCB")
-                .pattern("ADA")
-                .unlockedBy("has_nether_star", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.NETHER_STAR).build()))
-                .save(pFinishedRecipeConsumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.END_UNICORN_SPAWN_EGG.get())
-                .define('A', LOTags.Items.RAW_HORSE)
-                .define('B', Items.END_ROD)
-                .define('C', Items.DRAGON_BREATH)
-                .define('D', Items.DIAMOND_BLOCK)
-                .pattern("ADA")
-                .pattern("BCB")
-                .pattern("ADA")
-                .unlockedBy("has_dragon_breath", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.DRAGON_BREATH).build()))
-                .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CAKE)
                 .define('A', LOTags.Items.MILK)

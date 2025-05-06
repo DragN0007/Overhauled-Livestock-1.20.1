@@ -40,7 +40,7 @@ public class UnicornShoeLayer extends GeoRenderLayer<Unicorn> {
 
         ResourceLocation resourceLocation = null;
 
-        if (animatable.isSaddled() && LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get()) {
+        if (animatable.isSaddled()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
         } else {
             return;

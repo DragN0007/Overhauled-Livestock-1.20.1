@@ -12,15 +12,6 @@
       "type": "patchouli:crafting",
       "recipe": "dragnlivestock:mane_scissors",
       "recipe2": "dragnlivestock:tail_scissors"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "dragnlivestock:overworld_unicorn_spawn_egg",
-      "recipe2": "dragnlivestock:nether_unicorn_spawn_egg"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "dragnlivestock:end_unicorn_spawn_egg"
     }
   ]
 }

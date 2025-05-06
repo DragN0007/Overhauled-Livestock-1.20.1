@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.custom.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -454,11 +455,24 @@ public class LOItems {
             ));
 
 
-    //Mod Item Tab Icon (UNOBTAINABLE)
+    //Icons (UNOBTAINABLE)
     public static final RegistryObject<Item> LIVESTOCK_OVERHAUL = ITEMS.register("livestock_overhaul",
             () -> new Item(new Item.Properties()));
-
     public static final RegistryObject<Item> LIVESTOCK_OVERHAUL_FOOD = ITEMS.register("livestock_overhaul_food",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HORSE_COLORS = ITEMS.register("horse_colors",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HORSE_MARKINGS = ITEMS.register("horse_markings",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HORSE_BREEDS = ITEMS.register("horse_breeds",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HORSE_EYES = ITEMS.register("horse_eyes",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COW_COLORS = ITEMS.register("cow_colors",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COW_MARKINGS = ITEMS.register("cow_markings",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COW_BREEDS = ITEMS.register("cow_breeds",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

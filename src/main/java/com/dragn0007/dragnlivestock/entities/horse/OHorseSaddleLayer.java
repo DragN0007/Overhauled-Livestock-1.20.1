@@ -25,7 +25,7 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
 
         ResourceLocation resourceLocation = null;
 
-        if (animatable.isSaddled() && LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get()) {
+        if (animatable.isSaddled()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/horse_saddle.png");
         } else {
             return;

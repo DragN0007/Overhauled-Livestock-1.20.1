@@ -90,6 +90,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
@@ -205,8 +206,13 @@ public class SpawnReplacer {
                     oHorse.setGender(randomGender);
 
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-                        int randomBreed = event.getLevel().getRandom().nextInt(HorseBreed.values().length);
-                        oHorse.setBreed(randomBreed);
+                        if (!ModList.get().isLoaded("deadlydinos")) {
+                            int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+                            int randomIndex = new Random().nextInt(breeds.length);
+                            oHorse.setBreed(breeds[randomIndex]);
+                        } else {
+                            oHorse.setBreed(event.getLevel().getRandom().nextInt(HorseBreed.values().length));
+                        }
 
                         int randomMane = 1 + event.getLevel().getRandom().nextInt(4);
                         oHorse.setManeType(randomMane);

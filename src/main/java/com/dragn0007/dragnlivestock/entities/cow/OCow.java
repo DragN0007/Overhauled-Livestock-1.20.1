@@ -65,9 +65,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	}
 
 
-	private static final ResourceLocation MEAT_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_beef_cow");
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
-	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_cow");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
 	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
 	@Override
@@ -75,19 +73,25 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4) {
-			return MEAT_LOOT_TABLE;
-		}
 		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1) || this.getBreed() == 5) {
 			return LOOT_TABLE;
-		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 3)) {
-			return MINI_LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
+	}
+
+	public boolean isMeatBreed() {
+		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4;
+	}
+
+	public boolean isNormalBreed() {
+		return this.getBreed() == 1 || this.getBreed() == 5;
+	}
+
+	public boolean isDairyOrMiniBreed() {
+		return this.getBreed() == 3;
 	}
 
 	@Override
@@ -631,6 +635,38 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		}
 
 		return oCow;
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+			if (this.isMeatBreed()) {
+				if (random.nextDouble() < 0.40) {
+					this.spawnAtLocation(Items.BEEF, 2);
+					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get(), 2);
+					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get(), 2);
+					this.spawnAtLocation(Items.LEATHER, 2);
+				} else if (random.nextDouble() > 0.40) {
+					this.spawnAtLocation(Items.BEEF);
+					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
+					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+			if (this.isNormalBreed()) {
+				if (random.nextDouble() < 0.15) {
+					this.spawnAtLocation(Items.BEEF);
+					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
+					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+		}
 	}
 
 }

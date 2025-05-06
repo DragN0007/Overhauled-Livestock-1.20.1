@@ -26,20 +26,20 @@ public class OHorseShoeLayer extends GeoRenderLayer<OHorse> {
 
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
-        if (armorSlots.size() <= 2) {
-            return;
-        }
-
-        ItemStack armorItemStack = armorSlots.get(2);
-
-        if (armorItemStack.isEmpty() || !(armorItemStack.getItem() instanceof HorseShoeItem)) {
-            return;
-        }
+//        List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
+//        if (armorSlots.size() <= 2) {
+//            return;
+//        }
+//
+//        ItemStack armorItemStack = armorSlots.get(2);
+//
+//        if (armorItemStack.isEmpty() || !(armorItemStack.getItem() instanceof HorseShoeItem)) {
+//            return;
+//        }
 
         ResourceLocation resourceLocation = null;
 
-        if (animatable.isSaddled() && LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get()) {
+        if (animatable.isSaddled()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
         } else {
             return;

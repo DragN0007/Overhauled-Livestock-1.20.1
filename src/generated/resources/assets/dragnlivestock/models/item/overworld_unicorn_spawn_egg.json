@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "dragnlivestock:item/overworld_unicorn_spawn_egg"
-  }
-}

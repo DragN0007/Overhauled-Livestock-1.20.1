@@ -1,0 +1,19 @@
+{
+  "name": "Horse Markings",
+  "icon": "dragnlivestock:horse_markings",
+  "category": "dragnlivestock:horse_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The markings of a horse usually depend on it's breed. Some breeds may generally be solid, while others may often come with large patterns. All horses have the potential to come with markings, but some have much higher chances than others."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:horse_markings"
+      },
+      "text": "Different horse breeds gain different chances of having certain markings.",
+      "title": "Markings"
+    }
+  ]
+}

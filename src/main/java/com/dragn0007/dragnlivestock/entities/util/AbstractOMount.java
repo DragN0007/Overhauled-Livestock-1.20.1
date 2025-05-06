@@ -314,9 +314,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
         if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.isHorse(this)) {
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
-                if (oHorse.getManeType() <= 3) {
+                if (oHorse.getManeType() == 3 || oHorse.getManeType() == 2) {
                     oHorse.setManeType(0);
-                } if (oHorse.getManeType() == 0) {
+                } else if (oHorse.getManeType() == 0) {
                     oHorse.setManeType(3);
                 }
             } else if ((!player.isShiftKeyDown() && oHorse.getManeType() < 4) || !LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
@@ -331,9 +331,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
         if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
-                if (oHorse.getTailType() <= 3) {
+                if (oHorse.getTailType() == 3 || oHorse.getTailType() == 2) {
                     oHorse.setTailType(0);
-                } if (oHorse.getTailType() == 0) {
+                } else if (oHorse.getTailType() == 0) {
                     oHorse.setTailType(3);
                 }
             } else if ((!player.isShiftKeyDown() && oHorse.getTailType() < 4) || !LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
@@ -662,20 +662,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public boolean isHorse(Entity entity) {
         return entity.getType() == EntityTypes.O_HORSE_ENTITY.get();
     }
-    public boolean isDonkey(Entity entity) {
-        return entity.getType() == EntityTypes.O_DONKEY_ENTITY.get();
-    }
-    public boolean isMule(Entity entity) {
-        return entity.getType() == EntityTypes.O_MULE_ENTITY.get();
-    }
     public boolean isGoat(Entity entity) {
         return entity.getType() == EntityTypes.O_GOAT_ENTITY.get();
-    }
-
-    public boolean isUnicorn(Entity entity) {
-        return entity.getType() == EntityTypes.OVERWORLD_UNICORN_ENTITY.get()
-                || entity.getType() == EntityTypes.NETHER_UNICORN_ENTITY.get()
-                || entity.getType() == EntityTypes.END_UNICORN_ENTITY.get();
     }
 
     public void handleSpeedRequest(int speedMod) {

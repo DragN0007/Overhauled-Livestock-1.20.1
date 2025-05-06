@@ -25,7 +25,7 @@ public class ODonkeySaddleLayer extends GeoRenderLayer<ODonkey> {
 
         ResourceLocation resourceLocation = null;
 
-        if (animatable.isSaddled() && LivestockOverhaulClientConfig.HORSE_SADDLE_EXTRAS.get() && !LivestockOverhaulClientConfig.LEGACY_HORSE_SADDLES.get()) {
+        if (animatable.isSaddled()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/horse_saddle.png");
         } else {
             return;

@@ -41,18 +41,14 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_salmon");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/salmon");
 	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_salmon");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		}
 		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
 		}
-		return LOOT_TABLE;
+		return VANILLA_LOOT_TABLE;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

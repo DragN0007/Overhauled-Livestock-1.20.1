@@ -1,0 +1,101 @@
+{
+  "name": "Horse Eye Colors",
+  "icon": "dragnlivestock:horse_eyes",
+  "category": "dragnlivestock:horse_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The color of a horse usually depends on it's colors and markings. Light-colored horses gain a higher chance of having blue or green eyes."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:0, Mane:3, Tail:2}",
+      "name": "Dark Brown (0)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Common"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:1, Mane:3, Tail:2}",
+      "name": "Brown (1)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Common"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:2, Mane:3, Tail:2}",
+      "name": "Amber (2)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Common"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:3, Mane:3, Tail:2}",
+      "name": "Gold (3)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Common"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:4, Mane:3, Tail:2}",
+      "name": "Dark Blue (4)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Common"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:5, Mane:3, Tail:2}",
+      "name": "Light Blue (5)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Uncommon"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:6, Mane:3, Tail:2}",
+      "name": "Green (6)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Uncommon"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:7, Mane:3, Tail:2}",
+      "name": "Blue & Gold (7)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Rare"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:8, Mane:3, Tail:2}",
+      "name": "Brown & Green (8)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Rare"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Eyes:9, Mane:3, Tail:2}",
+      "name": "Brown & Blue (9)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true",
+      "text": "Rare"
+    }
+  ]
+}

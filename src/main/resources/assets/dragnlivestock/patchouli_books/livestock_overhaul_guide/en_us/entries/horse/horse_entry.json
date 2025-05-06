@@ -1,28 +1,23 @@
 {
-  "name": "O-Horses",
-  "icon": "minecraft:saddle",
-  "category": "dragnlivestock:animals_category",
+  "name": "O-Horse",
+  "icon": "dragnlivestock:o_horse_spawn_egg",
+  "category": "dragnlivestock:horse_category",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Horses can carry your saddlebags, as they’re quite a bit bigger than vanilla horses. They also have the potential to run faster, depending on if you find yourself a swift one. O-Horses, when saddled, stay where you left them (ground tie) and don’t wander off, unlike their vanilla counterparts. $(br2)Overhauled horses come in over 1700+ different variant-marking combinations and multiple different breeds."
+      "text": "Type: Overhaul $(br)Tamable: Yes $(br)Chest-able: Yes $(br)Drops: Horse Meat, Leather"
     },
     {
       "type": "patchouli:text",
-      "text": "The Mustang spawns naturally in the world and can be bred for a 1-in-5 chance of getting a random breed. $(br2)You can place armor or carpets on your horses, mules and donkeys. You can also customize your O-Horse's mane and/or tail with Mane Scissors and Tail Scissors respectively. $(br2)To remove chests, simply shear them off with Shears."
+      "text": "The Mustang horse spawns naturally in the world and can be bred for a 1-in-5 chance of getting a random breed. $(br2)You can place armor or carpets on your horses, mules and donkeys. You can also customize and cut your O-Horse's mane and/or tail with Mane Scissors and Tail Scissors respectively. $(br2)To remove chests, simply shear them off with Shears."
     },
     {
-      "type": "patchouli:text",
-      "text": "O-Horses can be bred to have a chance of having a foal of a different breed. These breeds include: $(br2)Mustang, Ardennes, Kladruber, Fjord, Thoroughbred, Friesian, Irish Cob, American Quarter, Percheron, Selle Francais, Marwari, Mongolian, Shire, and Akhal-Teke."
-    },
-    {
-      "type": "patchouli:entity",
-      "entity": "dragnlivestock:o_horse{Variant:10}",
-      "name": "The O-Horse",
-      "default_rotation": 45,
-      "scale": 1,
-      "rotate": "false",
-      "text": "A chestnut mustang with no markings."
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:horse_breeds"
+      },
+      "text": "O-Horses are a great upgrade to vanilla horses due to their new versatility.",
+      "title": "O-Horse"
     }
   ]
 }

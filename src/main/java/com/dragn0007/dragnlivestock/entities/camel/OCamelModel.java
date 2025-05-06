@@ -34,7 +34,7 @@ public class OCamelModel extends GeoModel<OCamel> {
     public ResourceLocation getModelResource(OCamel object) {
         if(object.isBaby() && object.getBreed() == 0)
             return BABY_MODEL;
-        return OCamel.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
+        return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

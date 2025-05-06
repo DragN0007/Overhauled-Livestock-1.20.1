@@ -1,0 +1,363 @@
+{
+  "name": "Horse Markings",
+  "icon": "dragnlivestock:horse_markings",
+  "category": "dragnlivestock:horse_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The markings of a horse usually depends on it's breed."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:0, Mane:3, Tail:2}",
+      "name": "Solid (0)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:1, Mane:3, Tail:2}",
+      "name": "Appaloosa (1)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:2, Mane:3, Tail:2}",
+      "name": "Bald (2)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:3, Mane:3, Tail:2}",
+      "name": "Blanket Appaloosa (3)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:4, Mane:3, Tail:2}",
+      "name": "Blaze (4)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:5, Mane:3, Tail:2}",
+      "name": "Fleabitten (5)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:6, Mane:3, Tail:2}",
+      "name": "Full Socks (6)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:7, Mane:3, Tail:2}",
+      "name": "Half Socks (7)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:8, Mane:3, Tail:2}",
+      "name": "Overo (8)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:9, Mane:3, Tail:2}",
+      "name": "Overo Splash (9)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:10, Mane:3, Tail:2}",
+      "name": "Paint (10)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:11, Mane:3, Tail:2}",
+      "name": "Reverse Half Socks (11)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:12, Mane:3, Tail:2}",
+      "name": "Reverse Full Socks (12)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:13, Mane:3, Tail:2}",
+      "name": "Roan (13)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:14, Mane:3, Tail:2}",
+      "name": "Snip (14)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:15, Mane:3, Tail:2}",
+      "name": "Splash Overo (15)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:16, Mane:3, Tail:2}",
+      "name": "Splashed (16)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:17, Mane:3, Tail:2}",
+      "name": "Splash Paint (17)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:18, Mane:3, Tail:2}",
+      "name": "Spotted (18)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:19, Mane:3, Tail:2}",
+      "name": "Star (19)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:20, Mane:3, Tail:2}",
+      "name": "Tobiano (20)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:21, Mane:3, Tail:2}",
+      "name": "Half Silver (21)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:22, Mane:3, Tail:2}",
+      "name": "Full Silver (22)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:23, Mane:3, Tail:2}",
+      "name": "Coronet Socks (23)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:24, Mane:3, Tail:2}",
+      "name": "Few Spot Leopard (24)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:25, Mane:3, Tail:2}",
+      "name": "Leopard (25)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:26, Mane:3, Tail:2}",
+      "name": "Full White (26)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:27, Mane:3, Tail:2}",
+      "name": "Rabicano (27)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:28, Mane:3, Tail:2}",
+      "name": "Snowcap (28)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:29, Mane:3, Tail:2}",
+      "name": "Half Bald (29)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:30, Mane:3, Tail:2}",
+      "name": "Dapples (30)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:31, Mane:3, Tail:2}",
+      "name": "Pink-Nose Appaloosa (31)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:32, Mane:3, Tail:2}",
+      "name": "Pink-Nose Bald (32)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:33, Mane:3, Tail:2}",
+      "name": "Pink-Nose Blaze (33)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:34, Mane:3, Tail:2}",
+      "name": "Pink-Nose Few Spot Leopard (34)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:35, Mane:3, Tail:2}",
+      "name": "Pink-Nose Half Bald (35)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:36, Mane:3, Tail:2}",
+      "name": "Pink-Nose Leopard (36)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:37, Mane:3, Tail:2}",
+      "name": "Pink-Nose Overo (37)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:38, Mane:3, Tail:2}",
+      "name": "Pink-Nose Full White (38)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:39, Mane:3, Tail:2}",
+      "name": "Pink-Nose Snip (39)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:40, Mane:3, Tail:2}",
+      "name": "Pink-Nose Splash Overo (40)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:41, Mane:3, Tail:2}",
+      "name": "Pink-Nose Spotted (41)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:42, Mane:3, Tail:2}",
+      "name": "Reverse Half Silver (42)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:43, Mane:3, Tail:2}",
+      "name": "Reverse Full Silver (43)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    }
+  ]
+}

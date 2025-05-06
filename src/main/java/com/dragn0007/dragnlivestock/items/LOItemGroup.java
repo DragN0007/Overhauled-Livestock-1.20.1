@@ -55,9 +55,7 @@ public class LOItemGroup {
                         }
 
                         output.accept(LOItems.CARIBOU_SPAWN_EGG.get());
-                        output.accept(LOItems.OVERWORLD_UNICORN_SPAWN_EGG.get());
-                        output.accept(LOItems.NETHER_UNICORN_SPAWN_EGG.get());
-                        output.accept(LOItems.END_UNICORN_SPAWN_EGG.get());
+                        output.accept(LOItems.UNICORN_SPAWN_EGG.get());
 
 //                        output.accept(LOItems.NETHERITE_HORSESHOE.get());
 //                        output.accept(LOItems.DIAMOND_HORSESHOE.get());

@@ -1,0 +1,137 @@
+{
+  "name": "Horse Breeds",
+  "icon": "dragnlivestock:horse_breeds",
+  "category": "dragnlivestock:horse_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The natural breed of wild O-Horses is the Mustang, regardless of biome, unless configured otherwise. $(br)Some breeds come with different chances for feathering around their hooves. These are just general chances; every breed has a very small chance of getting any feathering type. $(br2)-Stock: Generally None $(br)-Warmblood: Half or None $(br)-Draft/ Coldblood: Full or Half $(br)-Pony: Full or Half $(br)-Racer: Generally None"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Overlay:17, Breed:0, Mane:3, Tail:2, Feathering:1}",
+      "name": "Mustang (0)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Mustangs (Stock) can come in any color or pattern naturally."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:6, Overlay:7, Breed:1, Mane:3, Tail:2, Feathering:2}",
+      "name": "Ardennes (1)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Ardennes (Draft) usually come in Bays, Browns and Greys. They can come in smaller markings and often with socks."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:4, Overlay:0, Breed:2, Mane:3, Tail:2}",
+      "name": "Kladruber (2)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Kladrubers (Warmblood) usually come in Blacks, Blues and Greys. They usually come in solid colors, but can have smaller markings."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:14, Overlay:0, Breed:3, Mane:3, Tail:2}",
+      "name": "Fjord (3)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Fjords (Pony) usually come in the classic Fjord coloring. They usually come solid."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:0, Overlay:4, Breed:4, Mane:3, Tail:2}",
+      "name": "Thoroughbred (4)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Thoroughbreds (Racer) usually come in Bays, Browns and Blacks. They can come in a wide array of markings, but are often solid or lightly-marked."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:2, Overlay:0, Breed:5, Mane:3, Tail:2, Feathering:1}",
+      "name": "Friesian (5)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Friesians (Coldblood) typically only come in Black. They almost never come with markings."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:213, Overlay:37, Breed:6, Mane:3, Tail:2, Feathering:2}",
+      "name": "Irish Cob (6)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Irish Cobs (Draft) can come in pretty much any color, and often have large, white markings."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:7, Overlay:10, Breed:7, Mane:3, Tail:2}",
+      "name": "American Quarter (7)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "American Quarters (Stock) can come in pretty much any color or marking."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:15, Overlay:30, Breed:8, Mane:3, Tail:2, Feathering:2}",
+      "name": "Percheron (8)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Percheron (Draft) usually come in Greys. They can come with dapples, small markings, or solid."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:1, Overlay:0, Breed:9, Mane:3, Tail:2}",
+      "name": "Selle Francais (9)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Selle Francais (Warmblood) usually come in Bay. They usually come solid or with small markings or socks."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:17, Overlay:0, Breed:10, Mane:3, Tail:2}",
+      "name": "Marwari (10)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Marwari (Warmblood) can come in pretty much any color, and are often solid."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:28, Overlay:14, Breed:11, Mane:3, Tail:2, Feathering:1}",
+      "name": "Mongolian (11)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Mongolians (Pony) can come in pretty much any color, but most often come in Duns, and can come with small markings or socks."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:22, Overlay:6, Breed:12, Mane:3, Tail:2, Feathering:2}",
+      "name": "Shire (12)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Shires (Draft) usually come in Browns, Blacks and Bays. They may have small markings or socks."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:25, Overlay:0, Breed:13, Mane:3, Tail:2}",
+      "name": "Akhal Teke (13)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "false",
+      "text": "Akhal Tekes (Racer) usually come in Creams and other light colors. They're generally solid."
+    }
+  ]
+}

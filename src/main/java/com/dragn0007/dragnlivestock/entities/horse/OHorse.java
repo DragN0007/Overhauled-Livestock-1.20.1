@@ -12,6 +12,7 @@ import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
@@ -38,12 +39,15 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -330,7 +334,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public boolean isDraftBreed() {
-		return this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12;
+		return this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12 || this.getBreed() == 14;
 	}
 
 	public boolean isPonyBreed() {
@@ -395,7 +399,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			double offsetX = 0;
 			double offsetY = 1.0;
-			double offsetZ = -0.05;
+			double offsetZ = -0.055;
 
 			int i = this.getPassengers().indexOf(entity);
 
@@ -406,21 +410,21 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (getBreed() == 1) {
 				switch (i) {
 					case 0:
-						offsetY = 1.12;
+						offsetY = 1.05;
 						break;
 					case 1:
-						offsetY = 1.1;
+						offsetY = 1.05;
 						offsetZ = -1.23;
 						break;
 				}
 			}
 
 			if (getBreed() == 2) {
-				offsetY = 1.15;
+				offsetY = 1.2;
 			}
 
 			if (getBreed() == 3) {
-				offsetY = 0.85;
+				offsetY = 0.9;
 			}
 
 			if (getBreed() == 4) {
@@ -430,7 +434,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (getBreed() == 5) {
 				switch (i) {
 					case 0:
-						offsetY = 1.25;
+						offsetY = 1.3;
 						break;
 					case 1:
 						offsetY = 1.25;
@@ -440,44 +444,52 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 6) {
-				offsetY = 0.95;
+				switch (i) {
+					case 0:
+						offsetY = 0.97;
+						break;
+					case 1:
+						offsetY = 0.97;
+						offsetZ = -1.2;
+						break;
+				}
 			}
 
 			if (getBreed() == 7) {
-				offsetY = 1.0;
+				offsetY = 1.05;
 			}
 
 			if (getBreed() == 8) {
 				switch (i) {
 					case 0:
-						offsetY = 1.43;
+						offsetY = 1.4;
 						break;
 					case 1:
-						offsetY = 1.43;
+						offsetY = 1.4;
 						offsetZ = -1.2;
 						break;
 				}
 			}
 
 			if (getBreed() == 9) {
-				offsetY = 1.1;
+				offsetY = 1.05;
 			}
 
 			if (getBreed() == 10) {
-				offsetY = 1.1;
+				offsetY = 1.05;
 			}
 
 			if (getBreed() == 11) {
-				offsetY = 0.85;
+				offsetY = 0.8;
 			}
 
 			if (getBreed() == 12) {
 				switch (i) {
 					case 0:
-						offsetY = 1.5;
+						offsetY = 1.45;
 						break;
 					case 1:
-						offsetY = 1.5;
+						offsetY = 1.45;
 						offsetZ = -1.2;
 						break;
 				}
@@ -485,6 +497,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			if (getBreed() == 13) {
 				offsetY = 1.1;
+			}
+
+			if (getBreed() == 14) {
+				offsetY = 1.33;
 			}
 
 			if (month == Month.DECEMBER && (day == 24 || day == 25)) {
@@ -504,11 +520,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			entity.setPos(x, y, z);
 		}
 	}
-
-	//TODO
-//	public boolean canWearShoes() {
-//		return true;
-//	}
 
 	@Override
 	public void openInventory(Player player) {
@@ -571,7 +582,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 				} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.81 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
 				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
@@ -579,7 +590,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
 				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
@@ -915,6 +926,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
+
 		if (tag.contains("Reindeer_Variant")) {
 			this.setReindeerVariant(tag.getInt("Reindeer_Variant"));
 		}
@@ -934,11 +949,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Overlay_Texture")) {
 			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
-
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
-		}
-
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
@@ -978,12 +988,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
 		tag.putInt("Tail", this.getTailType());
@@ -1016,10 +1026,20 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		Random random = new Random();
 
+		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
+			if (!ModList.get().isLoaded("deadlydinos")) {
+				int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+				int randomIndex = new Random().nextInt(breeds.length);
+				this.setBreed(breeds[randomIndex]);
+			} else {
+				this.setBreed(random.nextInt(HorseBreed.values().length));
+			}
+		}
+
 		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
 		this.setColorByBreed();
-//		this.setMarkingByBreed();
+		this.setMarkingByBreed();
 		this.setFeatheringByBreed();
 		this.setEyeColorByChance();
 
@@ -1029,11 +1049,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		int randomTail = 1 + this.getRandom().nextInt(3);
 		this.setTailType(randomTail);
 
-		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-//			this.setBreed(random.nextInt(HorseBreedModel.values().length));
-			this.setBreed(random.nextInt(4));
-		}
-
 		this.randomizeOHorseAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -1041,9 +1056,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(BREED, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(VARIANT_TEXTURE, OHorseModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OHorseMarkingLayer.Overlay.NONE.resourceLocation);
@@ -1121,7 +1136,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			int k = this.random.nextInt(4);
 			int breed;
 			if (k == 0) {
-				breed = this.random.nextInt(HorseBreed.values().length);
+				if (!ModList.get().isLoaded("deadlydinos")) {
+					int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+					int randomIndex = new Random().nextInt(breeds.length);
+					breed = (breeds[randomIndex]);
+				} else {
+					breed = this.random.nextInt(HorseBreed.values().length);
+				}
 			} else {
 				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : horse.getBreed();
 			}
@@ -1407,6 +1428,129 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
+		if (this.getBreed() == 4) { //thoroughbreds can come in any color naturally, aside from fjord coloring. they usually come in bays
+			if (random.nextDouble() < 0.40) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.40) {
+				int[] variants = {0, 1, 2, 3, 6, 10, 12, 13, 17, 20, 21, 22, 26};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) { //friesians usually just come in black
+			if (random.nextDouble() < 0.02) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.02) {
+				this.setVariant(2);
+			}
+		}
+
+		if (this.getBreed() == 6) { //irish cobs can come in any color naturally, aside from fjord coloring
+			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+
+		if (this.getBreed() == 7) { //american quarters can come in any color naturally, aside from fjord coloring
+			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+
+		if (this.getBreed() == 8) { //percherons usually just come in blacks and greys
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {2, 4, 5, 9, 15, 22, 23, 24, 29};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 9) { //selle francais can come in any color naturally, aside from fjord coloring. they usually come in bays
+			if (random.nextDouble() < 0.20) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				int[] variants = {0, 1, 2, 3, 6, 10, 12, 13, 17, 20, 21, 22, 26};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 10) { //marwaris can come in any color naturally, aside from fjord coloring
+			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+
+		if (this.getBreed() == 11) { //mongolian ponies can come in any color naturally, aside from fjord coloring. they usually come in duns or bays
+			if (random.nextDouble() < 0.20) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				int[] variants = {0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 12) { //shires usually come in greys or browns
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {0, 2, 4, 6, 10, 12, 13, 15, 17, 21, 22, 23, 24};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 13) { //ahkal tekes usually come in creams or other light colors
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {7, 8, 11, 15, 16, 18, 19, 23, 24, 25, 26, 27, 19, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 14) { //american soliders usually come in blacks or greys but can be other colors as well
+			if (random.nextDouble() < 0.40) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.40) {
+				int[] variants = {2, 4, 5, 9, 15, 22, 23, 24, 29};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setMarkingByBreed() {
@@ -1415,8 +1559,184 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
 		}
 
+		if (this.getBreed() == 1) { //ardennes can come in any pattern naturally, but often come with socks or a face marking (or no markings)
+			if (random.nextDouble() < 0.20) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.20) {
+				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) { //kaldrubers usually don't come with markings, or with very small ones
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
+				int[] variants = {0, 4, 14, 19, 21, 22, 23, 29, 33, 35, 38, 41, 42};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.30) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 3) { //fjords usually don't come with markings, or with very small ones
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {0, 4, 14, 19, 21, 22, 23, 29, 33, 35, 39, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 4) { //thoroughbreds can come in any pattern naturally, but usually come in solids
+			if (random.nextDouble() < 0.30) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //friesians usually come in solids
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 6) { //irish cobs usually come with large markings
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				int[] variants = {1, 3, 6, 8, 9, 10, 12, 15, 16, 17, 20, 24, 25, 27, 28, 30, 31, 34, 36, 37, 40};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 7) { //american quarters can come in any pattern naturally
+			this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+		}
+
+		if (this.getBreed() == 8) { //percherons usually come with small markings
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 9) { //selle francias can come in any pattern naturally, but usually come in solids or with socks
+			if (random.nextDouble() < 0.20) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.20) {
+				int[] variants = {0, 4, 6, 7, 14, 19, 21, 22, 23, 29, 32, 33, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 10) { //marwaris usually come in solids
+			if (random.nextDouble() < 0.20) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 11) { //mongolian ponies can come in solids and, sometimes, any marking
+			if (random.nextDouble() < 0.50) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.50) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 12) { //shires usually come with small markings or socks
+			if (random.nextDouble() < 0.07) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.07) {
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 13) { //ahkal tekes usually come in solids
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 14) { //american soldiers usually come with small markings or socks
+			if (random.nextDouble() < 0.30) {
+				this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
+	//drops extra loot based on animal size
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
 
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+			if (this.isDraftBreed()) {
+				if (random.nextDouble() < 0.40) {
+					this.spawnAtLocation(LOItems.HORSE.get(), 2);
+					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get(), 2);
+					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get(), 2);
+					this.spawnAtLocation(Items.LEATHER, 2);
+				} else if (random.nextDouble() > 0.40) {
+					this.spawnAtLocation(LOItems.HORSE.get());
+					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get());
+					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+			if (this.isWarmbloodedBreed()) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.HORSE.get());
+					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get());
+					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+			if (this.isStockBreed()) {
+				if (random.nextDouble() < 0.10) {
+					this.spawnAtLocation(LOItems.HORSE.get());
+					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get());
+					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+			if (ModList.get().isLoaded("create")) {
+				ResourceLocation resourceLocation = new ResourceLocation("create", "superglue");
+				Item createSuperglue = ForgeRegistries.ITEMS.getValue(resourceLocation);
+				if (random.nextDouble() < 0.25) {
+					this.spawnAtLocation(createSuperglue.getDefaultInstance());
+				}
+			}
+
+		}
+	}
 
 }

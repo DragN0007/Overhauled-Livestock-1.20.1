@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Horses' manes and tails grow over time. Wild horses may come in all sorts of mane and tail combinations. You can set the mane or tail to Button Braids or Tied by shift-clicking an O-Horse, or vice-versa."
+      "text": "O-Horses' manes and tails grow over time. Wild horses may come in all sorts of mane and tail combinations. You can set the mane or tail to Button Braids or Tied by shift-clicking an O-Horse, as long as it's tail and/ or mane aren't too long or too short, or vice-versa."
     },{
       "type": "patchouli:text",
       "text": "Mane Types: $(br)Short, Roached, Long, None, Button Braids. $(br2)Tail Types: $(br)Very Short, Short, Natural, Long, Tied."

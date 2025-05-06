@@ -8,8 +8,6 @@ public class LivestockOverhaulClientConfig {
 
     public static final ForgeConfigSpec.BooleanValue MINIMAL_HORSE_ARMOR;
     public static final ForgeConfigSpec.BooleanValue HORSE_COAT_GUI;
-    public static final ForgeConfigSpec.BooleanValue HORSE_SADDLE_EXTRAS;
-    public static final ForgeConfigSpec.BooleanValue LEGACY_HORSE_SADDLES;
     public static final ForgeConfigSpec.BooleanValue RENDER_BRAND_TAGS;
     public static final ForgeConfigSpec.BooleanValue CHICKEN_LEG_BAND;
     public static final ForgeConfigSpec.BooleanValue CHICKEN_NECK_TAG;
@@ -23,12 +21,6 @@ public class LivestockOverhaulClientConfig {
 
         HORSE_COAT_GUI = BUILDER.comment("Should coats, markings, speed, jump strength and health show up on certain O-Mount GUIs?")
                 .define("Mount GUI Extras", true);
-
-        HORSE_SADDLE_EXTRAS = BUILDER.comment("Should horse saddles include a breast collar & hip straps?")
-                .define("Horse Saddle Extras", true);
-
-        LEGACY_HORSE_SADDLES = BUILDER.comment("Should horse saddles take on the old, 'legacy' design? (Pre-2.1)")
-                .define("Legacy Horse Saddles", false);
 
         RENDER_BRAND_TAGS = BUILDER.comment("Should Brand Tags render on animals that have been tagged?")
                 .define("Render Brand Tags", true);

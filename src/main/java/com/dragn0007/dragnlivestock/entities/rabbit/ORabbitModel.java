@@ -34,7 +34,7 @@ public class ORabbitModel extends GeoModel<ORabbit> {
 
     @Override
     public ResourceLocation getModelResource(ORabbit object) {
-        return ORabbit.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
+        return RabbitBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

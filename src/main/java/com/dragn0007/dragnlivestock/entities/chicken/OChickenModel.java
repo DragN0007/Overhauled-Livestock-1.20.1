@@ -47,7 +47,7 @@ public class OChickenModel extends GeoModel<OChicken> {
     public ResourceLocation getModelResource(OChicken object) {
         if(object.isBaby())
             return BABY_MODEL;
-        return OChicken.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
+        return ChickenBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override

@@ -25,7 +25,7 @@ public class OPigModel extends GeoModel<OPig> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/pig_overhaul.geo.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/pig/pig_overhaul.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/pig_overhaul.animation.json");
 
     @Override

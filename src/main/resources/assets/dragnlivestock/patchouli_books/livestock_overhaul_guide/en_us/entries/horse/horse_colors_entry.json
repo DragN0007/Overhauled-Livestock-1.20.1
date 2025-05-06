@@ -1,0 +1,259 @@
+{
+  "name": "Horse Colors",
+  "icon": "dragnlivestock:horse_colors",
+  "category": "dragnlivestock:horse_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The color of a horse usually depends on it's breed."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:0, Mane:3, Tail:2}",
+      "name": "Bay (0)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:1, Mane:3, Tail:2}",
+      "name": "Bay Roan (1)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:2, Mane:3, Tail:2}",
+      "name": "Black (2)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:3, Mane:3, Tail:2}",
+      "name": "Blood Bay (3)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:4, Mane:3, Tail:2}",
+      "name": "Blue (4)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:5, Mane:3, Tail:2}",
+      "name": "Blue Roan (5)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:6, Mane:3, Tail:2}",
+      "name": "Brown (6)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:7, Mane:3, Tail:2}",
+      "name": "Buckskin (7)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:8, Mane:3, Tail:2}",
+      "name": "Champagne (8)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:9, Mane:3, Tail:2}",
+      "name": "Chocolate Roan (9)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:10, Mane:3, Tail:2}",
+      "name": "Chestnut (10)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:11, Mane:3, Tail:2}",
+      "name": "Creamy (11)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:12, Mane:3, Tail:2}",
+      "name": "Dark Bay (12)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:13, Mane:3, Tail:2}",
+      "name": "Dark Brown (13)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:14, Mane:3, Tail:2}",
+      "name": "Fjord (14)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:15, Mane:3, Tail:2}",
+      "name": "Grey (15)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:16, Mane:3, Tail:2}",
+      "name": "Ivory (16)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:17, Mane:3, Tail:2}",
+      "name": "Liver Chestnut (17)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:18, Mane:3, Tail:2}",
+      "name": "Palamino (18)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:19, Mane:3, Tail:2}",
+      "name": "Orange-Back Palamino (19)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:20, Mane:3, Tail:2}",
+      "name": "Seal Bay (20)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:21, Mane:3, Tail:2}",
+      "name": "Strawberry (21)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:22, Mane:3, Tail:2}",
+      "name": "Warm Black (22)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:23, Mane:3, Tail:2}",
+      "name": "Warm Grey (23)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:24, Mane:3, Tail:2}",
+      "name": "White (24)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:25, Mane:3, Tail:2}",
+      "name": "Cream (25)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:26, Mane:3, Tail:2}",
+      "name": "Red Dun (26)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:27, Mane:3, Tail:2}",
+      "name": "Bay Dun (27)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:28, Mane:3, Tail:2}",
+      "name": "Grulla (28)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:29, Mane:3, Tail:2}",
+      "name": "Blue Dun (29)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dragnlivestock:o_horse{Variant:30, Mane:3, Tail:2}",
+      "name": "Cinnamon (30)",
+      "default_rotation": 70,
+      "scale": 0.7,
+      "rotate": "true"
+    }
+  ]
+}

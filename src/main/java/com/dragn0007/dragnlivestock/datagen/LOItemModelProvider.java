@@ -19,10 +19,15 @@ public class LOItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(LOItems.LIVESTOCK_OVERHAUL);
         simpleItem(LOItems.LIVESTOCK_OVERHAUL_FOOD);
+        simpleItem(LOItems.HORSE_COLORS);
+        simpleItem(LOItems.HORSE_MARKINGS);
+        simpleItem(LOItems.HORSE_BREEDS);
+        simpleItem(LOItems.HORSE_EYES);
+        simpleItem(LOItems.COW_COLORS);
+        simpleItem(LOItems.COW_MARKINGS);
+        simpleItem(LOItems.COW_BREEDS);
 
-        simpleItem(LOItems.OVERWORLD_UNICORN_SPAWN_EGG);
-        simpleItem(LOItems.NETHER_UNICORN_SPAWN_EGG);
-        simpleItem(LOItems.END_UNICORN_SPAWN_EGG);
+        simpleItem(LOItems.UNICORN_SPAWN_EGG);
 
         simpleItem(LOItems.CHAINMAIL_HORSE_ARMOR);
         simpleItem(LOItems.NETHERITE_HORSE_ARMOR);
