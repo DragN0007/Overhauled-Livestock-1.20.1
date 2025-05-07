@@ -4,7 +4,6 @@ public class SheepBreed {
 
     public enum Breed {
         GULF_COAST,
-        MANX_LOAGHTAN,
         NORFOLK,
         DORSET,
         JACOB,

@@ -64,6 +64,41 @@ public class LOItemGroup {
 //                        output.accept(LOItems.STONE_HORSESHOE.get());
 
                         output.accept(LOItems.UTILITY_KNIFE.get());
+                        output.accept(LOItems.SPINDLE.get());
+
+                        output.accept(LOItems.BLACK_WOOL_STAPLE.get());
+                        output.accept(LOItems.BLUE_WOOL_STAPLE.get());
+                        output.accept(LOItems.BROWN_WOOL_STAPLE.get());
+                        output.accept(LOItems.CYAN_WOOL_STAPLE.get());
+                        output.accept(LOItems.GREEN_WOOL_STAPLE.get());
+                        output.accept(LOItems.GREY_WOOL_STAPLE.get());
+                        output.accept(LOItems.LIGHT_BLUE_WOOL_STAPLE.get());
+                        output.accept(LOItems.LIGHT_GREY_WOOL_STAPLE.get());
+                        output.accept(LOItems.LIME_WOOL_STAPLE.get());
+                        output.accept(LOItems.MAGENTA_WOOL_STAPLE.get());
+                        output.accept(LOItems.ORANGE_WOOL_STAPLE.get());
+                        output.accept(LOItems.PINK_WOOL_STAPLE.get());
+                        output.accept(LOItems.PURPLE_WOOL_STAPLE.get());
+                        output.accept(LOItems.RED_WOOL_STAPLE.get());
+                        output.accept(LOItems.WHITE_WOOL_STAPLE.get());
+                        output.accept(LOItems.YELLOW_WOOL_STAPLE.get());
+
+                        output.accept(LOItems.BLACK_WOOL_DYE.get());
+                        output.accept(LOItems.BLUE_WOOL_DYE.get());
+                        output.accept(LOItems.BROWN_WOOL_DYE.get());
+                        output.accept(LOItems.CYAN_WOOL_DYE.get());
+                        output.accept(LOItems.GREEN_WOOL_DYE.get());
+                        output.accept(LOItems.GREY_WOOL_DYE.get());
+                        output.accept(LOItems.LIGHT_BLUE_WOOL_DYE.get());
+                        output.accept(LOItems.LIGHT_GREY_WOOL_DYE.get());
+                        output.accept(LOItems.LIME_WOOL_DYE.get());
+                        output.accept(LOItems.MAGENTA_WOOL_DYE.get());
+                        output.accept(LOItems.ORANGE_WOOL_DYE.get());
+                        output.accept(LOItems.PINK_WOOL_DYE.get());
+                        output.accept(LOItems.PURPLE_WOOL_DYE.get());
+                        output.accept(LOItems.RED_WOOL_DYE.get());
+                        output.accept(LOItems.WHITE_WOOL_DYE.get());
+                        output.accept(LOItems.YELLOW_WOOL_DYE.get());
 
                         output.accept(LOItems.BLACK_BRAND_TAG.get());
                         output.accept(LOItems.BLUE_BRAND_TAG.get());

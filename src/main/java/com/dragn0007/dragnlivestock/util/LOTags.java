@@ -54,6 +54,8 @@ public class LOTags {
         public static final TagKey<Item> MAKES_GAME_JERKY = tag("makes_game_jerky");
         public static final TagKey<Item> MAKES_GENERIC_JERKY = tag("makes_generic_jerky");
 
+        public static final TagKey<Item> WOOL_STAPLES = tag("wool_staples");
+
         public static final TagKey<Item> RAW_MEATS = forgeTag("cooked_fishes");
         public static final TagKey<Item> COOKED_MEATS = forgeTag("cooked_meats");
 

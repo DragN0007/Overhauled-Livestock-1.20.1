@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.datagen;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -23,6 +24,734 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.BLACK_WOOL, 8)
+                .define('A', LOItems.BLACK_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "black_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.BLUE_WOOL, 8)
+                .define('A', LOItems.BLUE_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "blue_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.BROWN_WOOL, 8)
+                .define('A', LOItems.BROWN_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "brown_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.CYAN_WOOL, 8)
+                .define('A', LOItems.CYAN_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "cyan_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GREEN_WOOL, 8)
+                .define('A', LOItems.GREEN_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "green_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GRAY_WOOL, 8)
+                .define('A', LOItems.GREY_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "gray_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.LIGHT_BLUE_WOOL, 8)
+                .define('A', LOItems.LIGHT_BLUE_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "light_blue_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.LIGHT_GRAY_WOOL, 8)
+                .define('A', LOItems.LIGHT_GREY_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "light_grey_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.LIME_WOOL, 8)
+                .define('A', LOItems.LIME_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "lime_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.MAGENTA_WOOL, 8)
+                .define('A', LOItems.MAGENTA_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "magenta_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.ORANGE_WOOL, 8)
+                .define('A', LOItems.ORANGE_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "orange_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.PINK_WOOL, 8)
+                .define('A', LOItems.PINK_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "pink_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.PURPLE_WOOL, 8)
+                .define('A', LOItems.PURPLE_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "purple_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.RED_WOOL, 8)
+                .define('A', LOItems.RED_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "red_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.WHITE_WOOL, 8)
+                .define('A', LOItems.WHITE_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "white_wool_from_wool_dye_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.YELLOW_WOOL, 8)
+                .define('A', LOItems.YELLOW_WOOL_DYE.get())
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "yellow_wool_from_wool_dye_8"));
+
+
+
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BLACK_WOOL, 2)
+                .requires(LOItems.BLACK_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"black_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BLUE_WOOL, 2)
+                .requires(LOItems.BLUE_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"blue_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BROWN_WOOL, 2)
+                .requires(LOItems.BROWN_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"brown_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.CYAN_WOOL, 2)
+                .requires(LOItems.CYAN_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"cyan_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GREEN_WOOL, 2)
+                .requires(LOItems.GREEN_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"green_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GRAY_WOOL, 2)
+                .requires(LOItems.GREY_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"gray_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_BLUE_WOOL, 2)
+                .requires(LOItems.LIGHT_BLUE_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"light_blue_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_GRAY_WOOL, 2)
+                .requires(LOItems.LIGHT_GREY_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"light_gray_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIME_WOOL, 2)
+                .requires(LOItems.LIME_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"lime_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MAGENTA_WOOL, 2)
+                .requires(LOItems.MAGENTA_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"magenta_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.ORANGE_WOOL, 2)
+                .requires(LOItems.ORANGE_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"orange_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PINK_WOOL, 2)
+                .requires(LOItems.PINK_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"pink_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_WOOL, 2)
+                .requires(LOItems.PURPLE_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"purple_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.RED_WOOL, 2)
+                .requires(LOItems.RED_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"red_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_WOOL, 2)
+                .requires(LOItems.WHITE_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"white_wool_from_staple"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.YELLOW_WOOL, 2)
+                .requires(LOItems.YELLOW_WOOL_STAPLE.get())
+                .requires(LOItems.SPINDLE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID,"yellow_wool_from_staple"));
+
+
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.BLACK_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLUE_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.BLUE_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BROWN_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.BROWN_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CYAN_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.CYAN_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GREEN_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.GREEN_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GREY_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.GREY_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIGHT_BLUE_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.LIGHT_BLUE_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIGHT_GREY_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.LIGHT_GREY_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIME_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.LIME_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MAGENTA_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.MAGENTA_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.ORANGE_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.ORANGE_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PINK_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.PINK_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PURPLE_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.PURPLE_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RED_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.RED_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.WHITE_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.YELLOW_WOOL_STAPLE.get())
+                .requires(LOTags.Items.WOOL_STAPLES)
+                .requires(LOItems.YELLOW_WOOL_DYE.get())
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.BLACK_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "black_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.BLUE_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "blue_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.BROWN_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "brown_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.CYAN_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "cyan_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.GREEN_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "green_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.GREY_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "grey_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.LIGHT_BLUE_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "light_blue_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.LIGHT_GREY_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "light_grey_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.LIME_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "lime_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.MAGENTA_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "magenta_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.ORANGE_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "orange_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.PINK_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "pink_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.PURPLE_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "purple_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.RED_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "red_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.WHITE_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "white_wool_staple_8"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_WOOL_STAPLE.get(), 8)
+                .define('A', LOItems.YELLOW_WOOL_DYE.get())
+                .define('B', LOTags.Items.WOOL_STAPLES)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("BBB")
+                .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOTags.Items.WOOL_STAPLES).build()))
+                .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, "yellow_wool_staple_8"));
+
+
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_WOOL_DYE.get(), 8)
+                .requires(Items.BLACK_DYE)
+                .requires(Items.BLACK_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BLACK_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLUE_WOOL_DYE.get(), 8)
+                .requires(Items.BLUE_DYE)
+                .requires(Items.BLUE_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BLUE_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BROWN_WOOL_DYE.get(), 8)
+                .requires(Items.BROWN_DYE)
+                .requires(Items.BROWN_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BROWN_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CYAN_WOOL_DYE.get(), 8)
+                .requires(Items.CYAN_DYE)
+                .requires(Items.CYAN_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.CYAN_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GREEN_WOOL_DYE.get(), 8)
+                .requires(Items.GREEN_DYE)
+                .requires(Items.GREEN_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.GREEN_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GREY_WOOL_DYE.get(), 8)
+                .requires(Items.GRAY_DYE)
+                .requires(Items.GRAY_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.GRAY_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIGHT_BLUE_WOOL_DYE.get(), 8)
+                .requires(Items.LIGHT_BLUE_DYE)
+                .requires(Items.LIGHT_BLUE_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LIGHT_BLUE_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIGHT_GREY_WOOL_DYE.get(), 8)
+                .requires(Items.LIGHT_GRAY_DYE)
+                .requires(Items.LIGHT_GRAY_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LIGHT_GRAY_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIME_WOOL_DYE.get(), 8)
+                .requires(Items.LIME_DYE)
+                .requires(Items.LIME_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LIME_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MAGENTA_WOOL_DYE.get(), 8)
+                .requires(Items.MAGENTA_DYE)
+                .requires(Items.MAGENTA_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.MAGENTA_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.ORANGE_WOOL_DYE.get(), 8)
+                .requires(Items.ORANGE_DYE)
+                .requires(Items.ORANGE_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.ORANGE_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PINK_WOOL_DYE.get(), 8)
+                .requires(Items.PINK_DYE)
+                .requires(Items.PINK_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.PINK_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PURPLE_WOOL_DYE.get(), 8)
+                .requires(Items.PURPLE_DYE)
+                .requires(Items.PURPLE_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.PURPLE_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RED_WOOL_DYE.get(), 8)
+                .requires(Items.RED_DYE)
+                .requires(Items.RED_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.RED_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_WOOL_DYE.get(), 8)
+                .requires(Items.WHITE_DYE)
+                .requires(Items.WHITE_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.WHITE_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.YELLOW_WOOL_DYE.get(), 8)
+                .requires(Items.YELLOW_DYE)
+                .requires(Items.YELLOW_DYE)
+                .unlockedBy("has_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.YELLOW_DYE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPINDLE.get())
+                .define('A', Items.STICK)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("BAB")
+                .pattern(" A ")
+                .pattern(" A ")
+                .unlockedBy("has_stick", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.STICK).build()))
+                .save(pFinishedRecipeConsumer);
+
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RODEO_HARNESS.get())
                 .define('A', Items.LEATHER)

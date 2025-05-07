@@ -1,0 +1,26 @@
+{
+  "name": "Wool Processing",
+  "icon": "dragnlivestock:white_wool_staple",
+  "category": "dragnlivestock:recipes_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Staples of Wool can be obtained by shearing an O-Sheep. Some sheep may have different colors of wool, such as White, Black, Brown, and Greys. $(br2)In order to get Wool Blocks, you must process the Staples of Wool with a Spindle. You can get 2 Wool Blocks per Staple. $(br2)You can also craft Wool Dye as a more efficient alternative to normal dye."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:spindle",
+      "recipe2": "dragnlivestock:black_wool_dye"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:white_wool_staple",
+      "recipe2": "dragnlivestock:black_wool_staple_8"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:white_wool_from_staple",
+      "recipe2": "dragnlivestock:black_wool_from_wool_dye_8"
+    }
+  ]
+}

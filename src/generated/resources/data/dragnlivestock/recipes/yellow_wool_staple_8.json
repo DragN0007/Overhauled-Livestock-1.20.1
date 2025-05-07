@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "dragnlivestock:yellow_wool_dye"
+    },
+    "B": {
+      "tag": "dragnlivestock:wool_staples"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BAB",
+    "BBB"
+  ],
+  "result": {
+    "count": 8,
+    "item": "dragnlivestock:yellow_wool_staple"
+  },
+  "show_notification": true
+}

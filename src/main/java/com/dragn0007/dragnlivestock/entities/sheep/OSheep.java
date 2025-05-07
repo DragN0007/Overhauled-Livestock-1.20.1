@@ -3,14 +3,11 @@ package com.dragn0007.dragnlivestock.entities.sheep;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import com.google.common.collect.Maps;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -31,18 +28,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -54,20 +48,11 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class OSheep extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable, GeoEntity, Taggable {
-
-	public static final int EAT_ANIMATION_TICKS = 100;
-
-	public static final EntityDataAccessor<Byte> DATA_WOOL_ID = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BYTE);
-
-	public static final Map<DyeColor, ItemLike> ITEM_BY_DYE = Util.make(Maps.newEnumMap(DyeColor.class), (p_29841_) -> {
-		p_29841_.put(DyeColor.WHITE, Blocks.WHITE_WOOL);
-	});
+public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public Vec3 getLeashOffset() {
@@ -110,7 +95,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(8, new EatGrassGoal(this));
 		this.goalSelector.addGoal(3, new SheepFollowHerdLeaderGoal(this));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
@@ -164,6 +148,8 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		return this.milked;
 	}
 
+	public int regrowWoolCounter = 0;
+
 	public void tick() {
 		super.tick();
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
@@ -171,6 +157,12 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			if (list.size() <= 1) {
 				this.herdSize = 1;
 			}
+		}
+
+		regrowWoolCounter++;
+
+		if (regrowWoolCounter >= 1200) {
+			this.setSheared(false);
 		}
 
 		replenishMilkCounter++;
@@ -207,70 +199,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		});
 	}
 
-	public class EatGrassGoal extends Goal {
-		public final OSheep sheep;
-		public int eatAnimationTick;
-
-		public EatGrassGoal(OSheep sheep) {
-			this.sheep = sheep;
-			this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
-		}
-
-		@Override
-		public boolean canUse() {
-			return sheep.onGround() && sheep.getRandom().nextInt(100) < 10;
-		}
-
-		@Override
-		public void start() {
-			eatAnimationTick = 0;
-			sheep.getNavigation().stop();
-		}
-
-		@Override
-		public void tick() {
-			eatAnimationTick++;
-			if (eatAnimationTick >= EAT_ANIMATION_TICKS) {
-				sheep.eatGrass();
-				eatAnimationTick = 0;
-			}
-		}
-
-		@Override
-		public boolean canContinueToUse() {
-			return eatAnimationTick < EAT_ANIMATION_TICKS;
-		}
-	}
-
-	public void eatGrass() {
-		if (this.isBaby()) {
-			this.ageUp(60);
-		}
-		this.setSheared(false);
-	}
-
-	public boolean isShearable(@Nonnull ItemStack item, Level world, BlockPos pos) {
-		return readyForShearing();
-	}
-
-	@Override
-	@Nonnull
-	public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
-		world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
-		this.gameEvent(GameEvent.SHEAR, player);
-		if (!world.isClientSide) {
-			this.setSheared(true);
-			int i = 1 + this.random.nextInt(3);
-
-			List<ItemStack> items = new ArrayList<>();
-			for (int j = 0; j < i; ++j) {
-				items.add(new ItemStack(ITEM_BY_DYE.get(this.getColor())));
-			}
-			return items;
-		}
-		return Collections.emptyList();
-	}
-
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
@@ -301,14 +229,16 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 
 		if ((itemstack.getItem() == Items.SHEARS) && !player.isShiftKeyDown()) {
 			if (!this.level().isClientSide && this.readyForShearing()) {
-				List<ItemStack> drops = this.onSheared(player, itemstack, this.level(), this.blockPosition(), 0);
-				for (ItemStack drop : drops) {
-					this.spawnAtLocation(drop);
+				if (itemstack.is(Items.SHEARS) && (!isSheared() || regrowWoolCounter >= 4800)) {
+					this.setSheared(true);
+					this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+
+					this.dropWoolByColorAndMarking();
+
+					regrowWoolCounter = 0;
+
+					return InteractionResult.SUCCESS;
 				}
-				itemstack.hurtAndBreak(1, player, (p_29923_) -> {
-					p_29923_.broadcastBreakEvent(hand);
-				});
-				return InteractionResult.SUCCESS;
 			} else {
 				return InteractionResult.CONSUME;
 			}
@@ -337,19 +267,6 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else {
 			return super.mobInteract(player, hand);
-		}
-	}
-
-	public void shear(SoundSource p_29819_) {
-		this.level().playSound((Player)null, this, SoundEvents.SHEEP_SHEAR, p_29819_, 1.0F, 1.0F);
-		this.setSheared(true);
-		int i = 1 + this.random.nextInt(3);
-
-		for(int j = 0; j < i; ++j) {
-			ItemEntity itementity = this.spawnAtLocation(ITEM_BY_DYE.get(this.getColor()), 1);
-			if (itementity != null) {
-				itementity.setDeltaMovement(itementity.getDeltaMovement().add((double)((this.random.nextFloat() - this.random.nextFloat()) * 0.1F), (double)(this.random.nextFloat() * 0.05F), (double)((this.random.nextFloat() - this.random.nextFloat()) * 0.1F)));
-			}
 		}
 	}
 
@@ -423,7 +340,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	}
 
 	public int getBreedLocation() {
-		return Breed.values().length;
+		return SheepBreed.Breed.values().length;
 	}
 
 	public int getVariant() {
@@ -450,8 +367,39 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		this.milked = milked;
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public ResourceLocation getOverlayLocation() {
+		return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+	}
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int overlayVariant) {
+		this.entityData.set(OVERLAY, overlayVariant);
+	}
+
+	public ResourceLocation getWoolLocation() {
+		return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
+	}
+	public int getWoolVariant() {
+		return this.entityData.get(WOOL_COLOR);
+	}
+	public void setWoolVariant(int overlayVariant) {
+		this.entityData.set(WOOL_COLOR, overlayVariant);
+	}
+
+	public int getHornVariant() {
+		return this.entityData.get(HORN_TYPE);
+	}
+	public void setHornVariant(int overlayVariant) {
+		this.entityData.set(HORN_TYPE, overlayVariant);
+	}
+
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> WOOL_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
 	}
@@ -483,6 +431,18 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			setVariant(tag.getInt("Variant"));
 		}
 
+		if (tag.contains("Overlay")) {
+			setOverlayVariant(tag.getInt("Overlay"));
+		}
+
+		if (tag.contains("Wool")) {
+			setWoolVariant(tag.getInt("Wool"));
+		}
+
+		if (tag.contains("Horn")) {
+			setHornVariant(tag.getInt("Horn"));
+		}
+
 		if (tag.contains("Breed")) {
 			setBreed(tag.getInt("Breed"));
 		}
@@ -497,11 +457,10 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 
 		this.setSheared(tag.getBoolean("Sheared"));
 
-		this.setColor(DyeColor.byId(tag.getByte("Color")));
-
 		if(tag.contains("Tagged")) {
 			this.setTagged(tag.getBoolean("Tagged"));
 		}
+
 
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
@@ -510,9 +469,11 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
+		tag.putInt("Overlay", getOverlayVariant());
+		tag.putInt("Wool", getWoolVariant());
+		tag.putInt("Horn", getHornVariant());
 		tag.putInt("Breed", getBreed());
-		tag.putBoolean("Sheared", this.isSheared());
-		tag.putByte("Color", (byte)this.getColor().getId());
+		tag.putBoolean("Sheared", this.getSheared());
 		tag.putInt("Gender", this.getGender());
 		tag.putBoolean("Milked", getMilked());
 		tag.putBoolean("Tagged", this.isTagged());
@@ -523,7 +484,9 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
-		this.entityData.define(DATA_WOOL_ID, (byte)0);
+		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(WOOL_COLOR, 0);
+		this.entityData.define(HORN_TYPE, 0);
 		this.entityData.define(BREED, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
@@ -537,8 +500,8 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
+		setBreed(random.nextInt(SheepBreed.Breed.values().length));
 		setVariant(random.nextInt(OSheepModel.Variant.values().length));
-		setBreed(random.nextInt(OSheep.Breed.values().length));
 		this.setGender(random.nextInt(OSheep.Gender.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -620,7 +583,7 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 			} else if (j < 8) {
 				breed = oSheep1.getBreedLocation();
 			} else {
-				breed = this.random.nextInt(OSheep.Breed.values().length);
+				breed = this.random.nextInt(SheepBreed.Breed.values().length);
 			}
 
 			int gender;
@@ -634,40 +597,106 @@ public class OSheep extends Animal implements Shearable, net.minecraftforge.comm
 		return oSheep;
 	}
 
-	public enum Breed {
-		DEFAULT,
-		RACKA,
-		JACOB,
-		DORPER;
-	}
-
-	public DyeColor getColor() {
-		return DyeColor.byId(this.entityData.get(DATA_WOOL_ID) & 15);
-	}
-
-	public void setColor(DyeColor color) {
-		byte b0 = this.entityData.get(DATA_WOOL_ID);
-		this.entityData.set(DATA_WOOL_ID, (byte)(b0 & 240 | color.getId() & 15));
-	}
+	private boolean sheared = false;
 
 	public boolean isSheared() {
-		return (this.entityData.get(DATA_WOOL_ID) & 16) != 0;
+		return this.sheared;
 	}
 
-	public void setSheared(boolean p_29879_) {
-		byte b0 = this.entityData.get(DATA_WOOL_ID);
-		if (p_29879_) {
-			this.entityData.set(DATA_WOOL_ID, (byte)(b0 | 16));
-		} else {
-			this.entityData.set(DATA_WOOL_ID, (byte)(b0 & -17));
+	public boolean getSheared() {
+		return this.sheared;
+	}
+
+	public void setSheared(boolean sheared) {
+		this.sheared = sheared;
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+
+			if (!this.isSheared()) {
+				this.dropWoolByColorAndMarking();
+			}
+
+
 		}
 	}
 
-	public void ate() {
-		this.setSheared(false);
-		if (this.isBaby()) {
-			this.ageUp(60);
+	public void dropWoolByColorAndMarking() {
+
+		if (this.getWoolVariant() == 0) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 3);
+			} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
+			}
 		}
+
+		if (this.getWoolVariant() == 1) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 3);
+			} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
+			}
+		}
+
+		if (this.getWoolVariant() == 2) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 3);
+			} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
+			}
+		}
+
+		if (this.getWoolVariant() == 3) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 3);
+			} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
+			}
+		}
+
+		if (this.getWoolVariant() == 4) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 3);
+			} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
+			}
+		}
+
+		if (this.getWoolVariant() == 5) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
+			} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+			}
+		}
+
+
+		if (this.getOverlayVariant() == 1) {
+			if (random.nextDouble() < 0.20) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+			}
+		}
+
 	}
 
 }

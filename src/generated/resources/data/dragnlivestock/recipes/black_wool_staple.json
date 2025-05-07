@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "dragnlivestock:wool_staples"
+    },
+    {
+      "item": "dragnlivestock:black_wool_dye"
+    }
+  ],
+  "result": {
+    "item": "dragnlivestock:black_wool_staple"
+  }
+}

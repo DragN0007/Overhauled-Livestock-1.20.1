@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_staple": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "dragnlivestock:wool_staples"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragnlivestock:light_grey_wool_staple_8"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_staple",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragnlivestock:light_grey_wool_staple_8"
+    ]
+  },
+  "sends_telemetry_event": false
+}

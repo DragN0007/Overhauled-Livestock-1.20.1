@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "dragnlivestock:red_wool_staple",
+    "dragnlivestock:orange_wool_staple",
+    "dragnlivestock:yellow_wool_staple",
+    "dragnlivestock:lime_wool_staple",
+    "dragnlivestock:green_wool_staple",
+    "dragnlivestock:cyan_wool_staple",
+    "dragnlivestock:light_blue_wool_staple",
+    "dragnlivestock:blue_wool_staple",
+    "dragnlivestock:purple_wool_staple",
+    "dragnlivestock:magenta_wool_staple",
+    "dragnlivestock:pink_wool_staple",
+    "dragnlivestock:white_wool_staple",
+    "dragnlivestock:light_grey_wool_staple",
+    "dragnlivestock:grey_wool_staple",
+    "dragnlivestock:black_wool_staple",
+    "dragnlivestock:brown_wool_staple"
+  ]
+}

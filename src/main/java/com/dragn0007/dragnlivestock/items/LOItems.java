@@ -124,6 +124,72 @@ public class LOItems {
     public static final RegistryObject<Item> YELLOW_BRAND_TAG = ITEMS.register("yellow_brand_tag",
             () -> new BrandTagItem(DyeColor.YELLOW, new Item.Properties()));
 
+    public static final RegistryObject<Item> BLACK_WOOL_DYE = ITEMS.register("black_wool_dye",
+            () -> new WoolDyeItem(DyeColor.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_WOOL_DYE = ITEMS.register("blue_wool_dye",
+            () -> new WoolDyeItem(DyeColor.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_WOOL_DYE = ITEMS.register("brown_wool_dye",
+            () -> new WoolDyeItem(DyeColor.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_WOOL_DYE = ITEMS.register("cyan_wool_dye",
+            () -> new WoolDyeItem(DyeColor.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_WOOL_DYE = ITEMS.register("green_wool_dye",
+            () -> new WoolDyeItem(DyeColor.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> GREY_WOOL_DYE = ITEMS.register("grey_wool_dye",
+            () -> new WoolDyeItem(DyeColor.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_WOOL_DYE = ITEMS.register("light_blue_wool_dye",
+            () -> new WoolDyeItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_WOOL_DYE = ITEMS.register("light_grey_wool_dye",
+            () -> new WoolDyeItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIME_WOOL_DYE = ITEMS.register("lime_wool_dye",
+            () -> new WoolDyeItem(DyeColor.LIME, new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_WOOL_DYE = ITEMS.register("magenta_wool_dye",
+            () -> new WoolDyeItem(DyeColor.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_WOOL_DYE = ITEMS.register("orange_wool_dye",
+            () -> new WoolDyeItem(DyeColor.ORANGE, new Item.Properties()));
+    public static final RegistryObject<Item> PINK_WOOL_DYE = ITEMS.register("pink_wool_dye",
+            () -> new WoolDyeItem(DyeColor.PINK, new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_WOOL_DYE = ITEMS.register("purple_wool_dye",
+            () -> new WoolDyeItem(DyeColor.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> RED_WOOL_DYE = ITEMS.register("red_wool_dye",
+            () -> new WoolDyeItem(DyeColor.RED, new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_WOOL_DYE = ITEMS.register("white_wool_dye",
+            () -> new WoolDyeItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_WOOL_DYE = ITEMS.register("yellow_wool_dye",
+            () -> new WoolDyeItem(DyeColor.YELLOW, new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_WOOL_STAPLE = ITEMS.register("black_wool_staple",
+            () -> new WoolStapleItem(DyeColor.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_WOOL_STAPLE = ITEMS.register("blue_wool_staple",
+            () -> new WoolStapleItem(DyeColor.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_WOOL_STAPLE = ITEMS.register("brown_wool_staple",
+            () -> new WoolStapleItem(DyeColor.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_WOOL_STAPLE = ITEMS.register("cyan_wool_staple",
+            () -> new WoolStapleItem(DyeColor.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_WOOL_STAPLE = ITEMS.register("green_wool_staple",
+            () -> new WoolStapleItem(DyeColor.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> GREY_WOOL_STAPLE = ITEMS.register("grey_wool_staple",
+            () -> new WoolStapleItem(DyeColor.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_WOOL_STAPLE = ITEMS.register("light_blue_wool_staple",
+            () -> new WoolStapleItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_WOOL_STAPLE = ITEMS.register("light_grey_wool_staple",
+            () -> new WoolStapleItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIME_WOOL_STAPLE = ITEMS.register("lime_wool_staple",
+            () -> new WoolStapleItem(DyeColor.LIME, new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_WOOL_STAPLE = ITEMS.register("magenta_wool_staple",
+            () -> new WoolStapleItem(DyeColor.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_WOOL_STAPLE = ITEMS.register("orange_wool_staple",
+            () -> new WoolStapleItem(DyeColor.ORANGE, new Item.Properties()));
+    public static final RegistryObject<Item> PINK_WOOL_STAPLE = ITEMS.register("pink_wool_staple",
+            () -> new WoolStapleItem(DyeColor.PINK, new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_WOOL_STAPLE = ITEMS.register("purple_wool_staple",
+            () -> new WoolStapleItem(DyeColor.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> RED_WOOL_STAPLE = ITEMS.register("red_wool_staple",
+            () -> new WoolStapleItem(DyeColor.RED, new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_WOOL_STAPLE = ITEMS.register("white_wool_staple",
+            () -> new WoolStapleItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_WOOL_STAPLE = ITEMS.register("yellow_wool_staple",
+            () -> new WoolStapleItem(DyeColor.YELLOW, new Item.Properties()));
+
 
     public static final RegistryObject<Item> GENDER_TEST_STRIP = ITEMS.register("gender_test_strip",
             () -> new GenderTestKit(new Item.Properties().stacksTo(64)));
@@ -134,6 +200,8 @@ public class LOItems {
 
     public static final RegistryObject<Item> UTILITY_KNIFE = ITEMS.register("utility_knife",
             () -> new UtilityKnifeItem());
+    public static final RegistryObject<Item> SPINDLE = ITEMS.register("spindle",
+            () -> new SpindleItem());
 
     public static final RegistryObject<Item> GRUB_SWEATER = ITEMS.register("grub_sweater",
             () -> new GrubSweaterItem(new Item.Properties()));

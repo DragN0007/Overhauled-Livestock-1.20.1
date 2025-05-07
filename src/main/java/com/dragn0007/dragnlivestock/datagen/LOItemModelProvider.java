@@ -37,6 +37,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.RODEO_HARNESS);
 
         simpleItem(LOItems.UTILITY_KNIFE);
+        simpleItem(LOItems.SPINDLE);
 
         simpleItem(LOItems.BLACK_BRAND_TAG);
         simpleItem(LOItems.BLUE_BRAND_TAG);
@@ -54,6 +55,40 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.RED_BRAND_TAG);
         simpleItem(LOItems.WHITE_BRAND_TAG);
         simpleItem(LOItems.YELLOW_BRAND_TAG);
+
+        simpleItem(LOItems.BLACK_WOOL_STAPLE);
+        simpleItem(LOItems.BLUE_WOOL_STAPLE);
+        simpleItem(LOItems.BROWN_WOOL_STAPLE);
+        simpleItem(LOItems.CYAN_WOOL_STAPLE);
+        simpleItem(LOItems.GREEN_WOOL_STAPLE);
+        simpleItem(LOItems.GREY_WOOL_STAPLE);
+        simpleItem(LOItems.LIGHT_BLUE_WOOL_STAPLE);
+        simpleItem(LOItems.LIGHT_GREY_WOOL_STAPLE);
+        simpleItem(LOItems.LIME_WOOL_STAPLE);
+        simpleItem(LOItems.MAGENTA_WOOL_STAPLE);
+        simpleItem(LOItems.ORANGE_WOOL_STAPLE);
+        simpleItem(LOItems.PINK_WOOL_STAPLE);
+        simpleItem(LOItems.PURPLE_WOOL_STAPLE);
+        simpleItem(LOItems.RED_WOOL_STAPLE);
+        simpleItem(LOItems.WHITE_WOOL_STAPLE);
+        simpleItem(LOItems.YELLOW_WOOL_STAPLE);
+
+        simpleItem(LOItems.BLACK_WOOL_DYE);
+        simpleItem(LOItems.BLUE_WOOL_DYE);
+        simpleItem(LOItems.BROWN_WOOL_DYE);
+        simpleItem(LOItems.CYAN_WOOL_DYE);
+        simpleItem(LOItems.GREEN_WOOL_DYE);
+        simpleItem(LOItems.GREY_WOOL_DYE);
+        simpleItem(LOItems.LIGHT_BLUE_WOOL_DYE);
+        simpleItem(LOItems.LIGHT_GREY_WOOL_DYE);
+        simpleItem(LOItems.LIME_WOOL_DYE);
+        simpleItem(LOItems.MAGENTA_WOOL_DYE);
+        simpleItem(LOItems.ORANGE_WOOL_DYE);
+        simpleItem(LOItems.PINK_WOOL_DYE);
+        simpleItem(LOItems.PURPLE_WOOL_DYE);
+        simpleItem(LOItems.RED_WOOL_DYE);
+        simpleItem(LOItems.WHITE_WOOL_DYE);
+        simpleItem(LOItems.YELLOW_WOOL_DYE);
 
         simpleItem(LOItems.GRUB_SWEATER);
 

@@ -12,6 +12,8 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
     public OSheepRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OSheepModel());
         this.addRenderLayer(new OSheepBrandTagLayer(this));
+        this.addRenderLayer(new OSheepWoolLayer(this));
+        this.addRenderLayer(new OSheepMarkingLayer(this));
     }
 
     @Override
@@ -19,23 +21,25 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
         if (entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
-            model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
-            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
-            model.getBone("Horns3").ifPresent(b -> b.setHidden(true));
-            model.getBone("Horns4").ifPresent(b -> b.setHidden(true));
+            model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
+            model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+            model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
+            model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
+            model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
         } else {
-            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
-            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
-            model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
-            model.getBone("Horns4").ifPresent(b -> b.setHidden(false));
+            model.getBone("dorset_horns").ifPresent(b -> b.setHidden(false));
+            model.getBone("racka_horns").ifPresent(b -> b.setHidden(false));
+            model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(false));
+            model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(false));
+            model.getBone("jacob_horns").ifPresent(b -> b.setHidden(false));
         }
 
         if (!entity.isBaby() && entity.isSheared()) {
-            model.getBone("Wool1").ifPresent(b -> b.setHidden(true));
-            model.getBone("Wool2").ifPresent(b -> b.setHidden(true));
+            model.getBone("wool_body").ifPresent(b -> b.setHidden(true));
+            model.getBone("wool_neck").ifPresent(b -> b.setHidden(true));
         } else {
-            model.getBone("Wool1").ifPresent(b -> b.setHidden(false));
-            model.getBone("Wool2").ifPresent(b -> b.setHidden(false));
+            model.getBone("wool_body").ifPresent(b -> b.setHidden(false));
+            model.getBone("wool_neck").ifPresent(b -> b.setHidden(false));
         }
 
         if (entity.getBreed() == 0 && entity.isMale()) {
