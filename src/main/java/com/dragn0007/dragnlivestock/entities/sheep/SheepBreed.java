@@ -7,6 +7,7 @@ public class SheepBreed {
         NORFOLK,
         DORSET,
         JACOB,
+        RACKA,
         CALIFORNIA_RED;
 
         public static Breed breedFromOrdinal(int ordinal) {

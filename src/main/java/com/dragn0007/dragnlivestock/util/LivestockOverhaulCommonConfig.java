@@ -37,8 +37,12 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_TIME;
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_AMOUNT;
     public static final ForgeConfigSpec.ConfigValue<Integer> MILKING_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DAIRY_MILKING_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> SHEEP_WOOL_REGROWTH_TIME;
     public static final ForgeConfigSpec.BooleanValue HORSE_HAIR_GROWTH;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HAIR_GROWTH_TIME;
+    public static final ForgeConfigSpec.BooleanValue SPAWN_BY_BREED;
+    public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
@@ -108,8 +112,8 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
 
         BUILDER.push("Miscellaneous");
 
-        GENDERS_AFFECT_BIPRODUCTS = BUILDER.comment("Should an animal's gender affect the ability to get bi-products from it?")
-                .define("Genders Affect Bi-Products", true);
+        GENDERS_AFFECT_BIPRODUCTS = BUILDER.comment("Should an animal's gender affect the ability to get byproducts from it?")
+                .define("Genders Affect Byproducts", true);
 
         GENDERS_AFFECT_BREEDING = BUILDER.comment("Should an animal's gender affect how it breeds?")
                 .define("Genders Affect Breeding", true);
@@ -138,8 +142,14 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
         CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
                 .define("Chicken Egg Lay Cooldown", 12000);
 
-        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk an O-Cow, O-Sheep, O-Llama, O-Mooshroom, or Moobloom. Default is 12000 ticks, or 10 minutes")
-                .define("Milking Cooldown", 12000);
+        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk an O-Cow, O-Sheep, O-Llama, O-Mooshroom, or Moobloom. Default is 48000 ticks, or 40 minutes.")
+                .define("Average Milking Cooldown", 48000);
+
+        DAIRY_MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a Dairy-Breed O-Cow. Default is 12000 ticks, or 10 minutes.")
+                .define("Dairy Cow Milking Cooldown", 12000);
+
+        SHEEP_WOOL_REGROWTH_TIME = BUILDER.comment("Amount of time, in ticks, that you must wait to shear an O-Sheep. Default is 24000 ticks, or 20 minutes.")
+                .define("Sheep Wool Regrowth Time", 24000);
 
         CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
                 .define("Chicken Egg Lay Amount", 3);
@@ -152,6 +162,12 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
 
         HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. Default is 72000.")
                 .define("Horse Hair Growth Time", 72000);
+
+        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed?")
+                .define("Spawn By Breed", true);
+
+        EYES_BY_COLOR = BUILDER.comment("Should O-Animals' eye colors, if applicable, depend on their coat/ coloring?")
+                .define("Eye Colors By Coat Color/ Markings", true);
 
         MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
                 .define("NON FUNCTIONAL", 3);
@@ -166,7 +182,7 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
         BUILDER.push("Uninstalling");
         FAILSAFE_REPLACER =
                 BUILDER.comment("Should all O-Animals be converted back into a vanilla counterpart? " +
-                                "WARNING: This should be used *sparingly*, and only when needed/ if this mod is about to be removed.")
+                                "\nWARNING: This should be used *sparingly*, and only when needed/ if this mod is about to be removed.")
                         .define("Failsafe O-Animal -> Vanilla Animal Converter", false);
         BUILDER.pop();
 

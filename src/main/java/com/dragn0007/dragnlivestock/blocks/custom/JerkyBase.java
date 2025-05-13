@@ -15,14 +15,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class JerkyBase extends HorizontalDirectionalBlock {
 
-    public static final IntegerProperty DRY_TIME = IntegerProperty.create("dry_time", 0, 9);
+    public static final IntegerProperty DRY_TIME = IntegerProperty.create("dry_time", 0, 17);
 
     protected IntegerProperty getDryTimeProperty() {
         return DRY_TIME;
     }
 
     public int getMaxDryTime() {
-        return 8;
+        return 16;
     }
 
     public int getDryTime(BlockState state) {

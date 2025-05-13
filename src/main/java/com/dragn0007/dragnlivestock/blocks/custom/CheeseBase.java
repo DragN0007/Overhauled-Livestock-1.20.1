@@ -14,14 +14,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CheeseBase extends HorizontalDirectionalBlock {
 
-    public static final IntegerProperty AGE_TIME = IntegerProperty.create("age_time", 0, 13);
+    public static final IntegerProperty AGE_TIME = IntegerProperty.create("age_time", 0, 17);
 
     protected IntegerProperty getAgeTimeProperty() {
         return AGE_TIME;
     }
 
     public int getMaxAgeTime() {
-        return 12;
+        return 16;
     }
 
     public int getAgeTime(BlockState state) {

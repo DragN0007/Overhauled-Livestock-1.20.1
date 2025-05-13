@@ -63,9 +63,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		super(type, level);
 	}
 
-	private static final ResourceLocation MEAT_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_meat_chicken");
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_chicken");
-	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_chicken");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/chicken");
 	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/chicken");
 	@Override
@@ -73,19 +71,25 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1 || this.getBreed() == 3)) {
-			return MEAT_LOOT_TABLE;
-		}
 		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 2 || this.getBreed() == 5)) {
 			return LOOT_TABLE;
-		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 0 || this.getBreed() == 4)) {
-			return MINI_LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
+	}
+
+	public boolean isMeatBreed() {
+		return this.getBreed() == 1 || this.getBreed() == 3;
+	}
+
+	public boolean isNormalBreed() {
+		return this.getBreed() == 3 || this.getBreed() == 5;
+	}
+
+	public boolean isMiniBreed() {
+		return this.getBreed() == 0 || this.getBreed() == 4;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -171,35 +175,43 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
 		}
 
-		if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 
-			if (this.getBreed() == 0) {
-				this.spawnAtLocation(LOItems.EGG.get());
-			}
+				if (this.getBreed() == 0) {
+					this.spawnAtLocation(LOItems.EGG.get());
+				}
 
-			if (this.getBreed() == 1) {
-				this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
-			}
+				if (this.getBreed() == 1) {
+					this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
+				}
 
-			if (this.getBreed() == 2) {
-				this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
-			}
+				if (this.getBreed() == 2) {
+					this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
+				}
 
-			if (this.getBreed() == 3) {
-				this.spawnAtLocation(LOItems.MARANS_EGG.get());
-			}
+				if (this.getBreed() == 3) {
+					this.spawnAtLocation(LOItems.MARANS_EGG.get());
+				}
 
-			if (this.getBreed() == 4) {
-				this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
-			}
+				if (this.getBreed() == 4) {
+					this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
+				}
 
-			if (this.getBreed() == 5) {
-				this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
-			}
+				if (this.getBreed() == 5) {
+					this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+				}
 
-			if (this.getBreed() == 6) {
-				this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
+				if (this.getBreed() == 6) {
+					this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
+				}
+
+				this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+				this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 			}
+		} else if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+
+			this.spawnAtLocation(Items.EGG);
 
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
@@ -609,5 +621,31 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 	public void setChickenJockey(boolean p_28274_) {
 		this.isChickenJockey = p_28274_;
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+			if (this.isMeatBreed()) {
+				if (random.nextDouble() < 0.40) {
+					this.spawnAtLocation(Items.CHICKEN, 2);
+					this.spawnAtLocation(Items.FEATHER, 2);
+				} else if (random.nextDouble() > 0.40) {
+					this.spawnAtLocation(Items.CHICKEN);
+					this.spawnAtLocation(Items.FEATHER);
+				}
+			}
+
+			if (this.isNormalBreed()) {
+				if (random.nextDouble() < 0.15) {
+					this.spawnAtLocation(Items.CHICKEN);
+					this.spawnAtLocation(Items.FEATHER);
+				}
+			}
+
+		}
 	}
 }

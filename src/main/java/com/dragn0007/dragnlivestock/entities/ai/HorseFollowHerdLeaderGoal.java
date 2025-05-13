@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.datafixers.DataFixUtils;
 import net.minecraft.world.entity.ai.goal.Goal;
 
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class HorseFollowHerdLeaderGoal extends Goal {
-   public static final int INTERVAL_TICKS = 200;
    public final OHorse mob;
    public int timeToRecalcPath;
    public int nextStartTick;
@@ -19,14 +17,14 @@ public class HorseFollowHerdLeaderGoal extends Goal {
       this.nextStartTick = this.nextStartTick(p_25249_);
    }
 
-   public int nextStartTick(OHorse cow) {
-      return reducedTickDelay(200 + cow.getRandom().nextInt(200) % 20);
+   public int nextStartTick(OHorse mob) {
+      return reducedTickDelay(200 + mob.getRandom().nextInt(200) % 20);
    }
 
    public boolean canUse() {
-      if (this.mob.hasFollowers() || this.mob.isWearingHarness() || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get() || this.mob.isGroundTied()) {
+      if (this.mob.hasFollowers()) {
          return false;
-      } else if (this.mob.isFollower() && (!this.mob.isGroundTied() && !this.mob.isSaddled() && !this.mob.isLeashed())) {
+      } else if (this.mob.isFollower()) {
          return true;
       } else if (this.nextStartTick > 0) {
          --this.nextStartTick;
@@ -38,15 +36,15 @@ public class HorseFollowHerdLeaderGoal extends Goal {
          };
          List<? extends OHorse> list = this.mob.level().getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
          OHorse OHorse = DataFixUtils.orElse(list.stream().filter(com.dragn0007.dragnlivestock.entities.horse.OHorse::canBeFollowed).findAny(), this.mob);
-         OHorse.addFollowers(list.stream().filter((cow) -> {
-            return !cow.isFollower();
+         OHorse.addFollowers(list.stream().filter((mob) -> {
+            return !mob.isFollower();
          }));
          return this.mob.isFollower();
       }
    }
 
    public boolean canContinueToUse() {
-      return this.mob.isFollower() && this.mob.inRangeOfLeader() && (!mob.isSaddled() && !mob.isLeashed() && !this.mob.isGroundTied()) && LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get();
+      return this.mob.isFollower() && this.mob.inRangeOfLeader();
    }
 
    public void start() {
@@ -58,9 +56,21 @@ public class HorseFollowHerdLeaderGoal extends Goal {
    }
 
    public void tick() {
-      if (--this.timeToRecalcPath <= 0 && (!mob.isSaddled() && !mob.isLeashed() && !this.mob.isGroundTied())) {
+      if (--this.timeToRecalcPath <= 0) {
          this.timeToRecalcPath = this.adjustedTickDelay(10);
-         this.mob.pathToLeader();
+
+         OHorse leader = this.mob.leader;
+         if (leader != null) {
+            double distanceSq = this.mob.distanceToSqr(leader);
+            double minDistanceSq = 3.0D * 3.0D;
+
+            if (distanceSq > minDistanceSq) {
+               this.mob.pathToLeader();
+            } else {
+               this.mob.getNavigation().stop();
+            }
+         }
       }
    }
+
 }

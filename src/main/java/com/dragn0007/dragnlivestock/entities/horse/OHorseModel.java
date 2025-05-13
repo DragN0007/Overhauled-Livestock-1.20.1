@@ -2,12 +2,34 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.GeoModel;
+import net.minecraft.util.Mth;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-public class OHorseModel extends GeoModel<OHorse> {
+public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
+
+    public OHorseModel() {
+        super(new ResourceLocation(LivestockOverhaul.MODID, "o_horse"), true);
+    }
+
+    @Override
+    public void setCustomAnimations(OHorse animatable, long instanceId, AnimationState<OHorse> animationState) {
+
+        CoreGeoBone neck = getAnimationProcessor().getBone("neck");
+
+        if (neck != null) {
+            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+            neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
+            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
+            neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        }
+    }
 
     public enum Variant {
         BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/bay.png")),

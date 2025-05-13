@@ -38,7 +38,7 @@ public class OChickenModel extends GeoModel<OChicken> {
         }
     }
 
-//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken_overhauled.geo.json");
+//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_chicken.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/chicken_overhauled.animation.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_chicken_overhauled.geo.json");
     public static final ResourceLocation BABY_TEXTURE = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/baby_chicken.png");

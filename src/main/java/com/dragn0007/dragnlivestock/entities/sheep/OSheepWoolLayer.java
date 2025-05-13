@@ -20,7 +20,7 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
     public void render(PoseStack poseStack, OSheep animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         RenderType renderMarkingType = RenderType.entityCutout(((OSheep)animatable).getWoolLocation());
         poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
+        poseStack.scale(1.0F, 1.0F, 1.0F);
         poseStack.translate(0.0d, 0.0d, 0.0d);
         poseStack.popPose();
         getRenderer().reRender(getDefaultBakedModel(animatable),

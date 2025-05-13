@@ -121,6 +121,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
+		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 12.0F));
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -1038,10 +1039,22 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
-		this.setColorByBreed();
-		this.setMarkingByBreed();
-		this.setFeatheringByBreed();
-		this.setEyeColorByChance();
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColorByBreed();
+			this.setMarkingByBreed();
+			this.setFeatheringByBreed();
+		} else {
+			this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+			this.setFeathering(random.nextInt(Feathering.values().length));
+		}
+
+		if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+			this.setEyeColorByChance();
+		} else {
+			this.setEyeVariant(random.nextInt(OHorseEyeLayer.EyeOverlay.values().length));
+		}
 
 		int randomMane = 1 + this.getRandom().nextInt(3);
 		this.setManeType(randomMane);

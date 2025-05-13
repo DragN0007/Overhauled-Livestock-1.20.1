@@ -43,9 +43,7 @@ import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
-import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.horse.*;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorse;
 import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseModel;
@@ -65,6 +63,7 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
+import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
@@ -145,47 +144,21 @@ public class SpawnReplacer {
                     return;
                 }
 
-                if (event.getLevel().isNight()) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(event.getLevel());
+                if (event.getLevel().isNight() && event.getLevel().getRandom().nextDouble() < 0.02) {
+                    HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(event.getLevel());
 
-                        if (headlessHorseman != null) {
-                            headlessHorseman.copyPosition(vanillaHorse);
-                            event.getLevel().addFreshEntity(headlessHorseman);
+                    if (headlessHorseman != null) {
+                        headlessHorseman.copyPosition(vanillaHorse);
+                        event.getLevel().addFreshEntity(headlessHorseman);
 
-                            headlessHorseman.setVariant(0);
+                        headlessHorseman.setVariant(0);
 
-                            if (event.getLevel().isClientSide) {
-                                vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
-                            }
-
-                            event.getLevel().addFreshEntity(headlessHorseman);
+                        if (event.getLevel().isClientSide) {
                             vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
                         }
-                    }
-                }
 
-                if (event.getLevel().isNight()) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        OUndeadHorse undeadHorse = EntityTypes.O_UNDEAD_HORSE_ENTITY.get().create(event.getLevel());
-
-                        if (undeadHorse != null) {
-                            undeadHorse.copyPosition(vanillaHorse);
-                            event.getLevel().addFreshEntity(undeadHorse);
-
-                            int randomVariant = event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length);
-                            undeadHorse.setVariant(randomVariant);
-
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length);
-                            undeadHorse.setOverlayVariant(randomOverlayVariant);
-
-                            if (event.getLevel().isClientSide) {
-                                vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
-                            }
-
-                            event.getLevel().addFreshEntity(undeadHorse);
-                            vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
-                        }
+                        event.getLevel().addFreshEntity(headlessHorseman);
+                        vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
                     }
                 }
 
@@ -199,12 +172,10 @@ public class SpawnReplacer {
                     oHorse.setAge(vanillaHorse.getAge());
                     oHorse.randomizeOHorseAttributes();
 
-                    int randomChristmasVariant = event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length);
-                    oHorse.setReindeerVariant(randomChristmasVariant);
+                    oHorse.setReindeerVariant(event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length));
+                    oHorse.setGender(event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length));
 
-                    int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                    oHorse.setGender(randomGender);
-
+                    //spawn breeds except for compat-only ones if the config allows it
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
                         if (!ModList.get().isLoaded("deadlydinos")) {
                             int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
@@ -214,23 +185,30 @@ public class SpawnReplacer {
                             oHorse.setBreed(event.getLevel().getRandom().nextInt(HorseBreed.values().length));
                         }
 
-                        int randomMane = 1 + event.getLevel().getRandom().nextInt(4);
-                        oHorse.setManeType(randomMane);
-
-                        int randomTail = 1 + event.getLevel().getRandom().nextInt(4);
-                        oHorse.setTailType(randomTail);
-
+                        oHorse.setManeType(1 + event.getLevel().getRandom().nextInt(4));
+                        oHorse.setTailType(1 + event.getLevel().getRandom().nextInt(4));
                     } else {
                         oHorse.setBreed(0);
                         oHorse.setManeType(2);
-                        int randomTail = 1 + event.getLevel().getRandom().nextInt(4);
-                        oHorse.setTailType(randomTail);
+                        oHorse.setTailType(1 + event.getLevel().getRandom().nextInt(4));
                     }
 
-                    oHorse.setColorByBreed();
-                    oHorse.setMarkingByBreed();
-                    oHorse.setFeatheringByBreed();
-                    oHorse.setEyeColorByChance();
+                    //spawn markings and colors by breed if the config allows it
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oHorse.setColorByBreed();
+                        oHorse.setMarkingByBreed();
+                        oHorse.setFeatheringByBreed();
+                    } else {
+                        oHorse.setVariant(event.getLevel().getRandom().nextInt(OHorseModel.Variant.values().length));
+                        oHorse.setOverlayVariant(event.getLevel().getRandom().nextInt(OHorseMarkingLayer.Overlay.values().length));
+                        oHorse.setFeathering(event.getLevel().getRandom().nextInt(OHorse.Feathering.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                        oHorse.setEyeColorByChance();
+                    } else {
+                        oHorse.setEyeVariant(event.getLevel().getRandom().nextInt(OHorseEyeLayer.EyeOverlay.values().length));
+                    }
 
                     //discard vanilla horse once it's been successfully replaced on client and server
                     if (event.getLevel().isClientSide) {
@@ -905,7 +883,7 @@ public class SpawnReplacer {
                     int randomVariant = event.getLevel().getRandom().nextInt(OSheepModel.Variant.values().length);
                     oSheep.setVariant(randomVariant);
 
-                    int randomBreed = event.getLevel().getRandom().nextInt(OSheep.Breed.values().length);
+                    int randomBreed = event.getLevel().getRandom().nextInt(SheepBreed.Breed.values().length);
                     oSheep.setBreed(randomBreed);
 
                     int randomGender = event.getLevel().getRandom().nextInt(OSheep.Gender.values().length);
@@ -1155,11 +1133,8 @@ public class SpawnReplacer {
                     oUndeadHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oUndeadHorse.generateRandomSpeed());
                     oUndeadHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oUndeadHorse.generateRandomJumpStrength());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length);
-                    oUndeadHorse.setVariant(randomVariant);
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length);
-                    oUndeadHorse.setOverlayVariant(randomOverlayVariant);
+                    oUndeadHorse.setVariant(event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length));
+                    oUndeadHorse.setOverlayVariant(event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length));
 
                     if (event.getLevel().isClientSide) {
                         skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
@@ -1193,11 +1168,8 @@ public class SpawnReplacer {
                     oUndeadHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oUndeadHorse.generateRandomSpeed());
                     oUndeadHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oUndeadHorse.generateRandomJumpStrength());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length);
-                    oUndeadHorse.setVariant(randomVariant);
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length);
-                    oUndeadHorse.setOverlayVariant(randomOverlayVariant);
+                    oUndeadHorse.setVariant(event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length));
+                    oUndeadHorse.setOverlayVariant(event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length));
 
                     if (event.getLevel().isClientSide) {
                         zombieHorse.remove(Entity.RemovalReason.DISCARDED);
