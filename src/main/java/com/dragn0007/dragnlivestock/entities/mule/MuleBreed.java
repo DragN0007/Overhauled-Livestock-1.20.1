@@ -4,9 +4,9 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
 
 public enum MuleBreed {
-    STOCK(new ResourceLocation(LivestockOverhaul.MODID, "geo/mule/mule_overhauled.geo.json")),
-    MINI(new ResourceLocation(LivestockOverhaul.MODID, "geo/mule/mule_mini.geo.json")),
-    DRAFT(new ResourceLocation(LivestockOverhaul.MODID, "geo/mule/mule_draft.geo.json"));
+    STOCK(new ResourceLocation(LivestockOverhaul.MODID, "geo/mule/o_mule.geo.json")),
+    MINI(new ResourceLocation(LivestockOverhaul.MODID, "geo/mule/mini.geo.json")),
+    DRAFT(new ResourceLocation(LivestockOverhaul.MODID, "geo/mule/draft.geo.json"));
 
     public final ResourceLocation resourceLocation;
 

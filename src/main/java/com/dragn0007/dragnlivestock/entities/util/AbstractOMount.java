@@ -41,6 +41,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -81,6 +82,52 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public boolean isWearingHarness() {
         return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.RODEO_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
+    }
+
+    protected void tickRidden(Player player, Vec3 vec3) {
+        Vec2 vec2 = this.getRiddenRotation(player);
+
+        //bringing back the old horse head turning feature, because who thought getting rid of it was a good idea
+
+        float degrees = Mth.wrapDegrees(vec2.y - this.getYRot());
+        float playerXRot = vec2.x;
+        this.setXRot(vec2.x);
+        this.xRotO = this.getXRot();
+        float yRot = this.getYRot();
+        float maxHeadYRot = 25.0f;
+        this.yHeadRot = yRot + Mth.clamp(degrees, -maxHeadYRot, maxHeadYRot);
+        this.setXRot(playerXRot);
+        this.xRotO = this.getXRot();
+
+        if (LivestockOverhaulCommonConfig.OLD_HORSE_TURNING.get()) {
+            if (Math.abs(degrees) > maxHeadYRot) {
+                float turnSpeed = 8.0f;
+                float yaw = yRot + Mth.clamp(degrees, -turnSpeed, turnSpeed);
+                this.setYRot(yaw);
+                this.yRotO = yaw;
+                this.yBodyRot = yaw;
+            } else {
+                this.yBodyRot = yRot;
+            }
+        } else {
+            this.setRot(vec2.y, vec2.x);
+            this.yRotO = this.yBodyRot = this.yHeadRot = this.getYRot();
+        }
+
+        if (this.isControlledByLocalInstance()) {
+            if (vec3.z <= 0.0D) {
+                this.gallopSoundCounter = 0;
+            }
+
+            if (this.onGround()) {
+                this.setIsJumping(false);
+                if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
+                    this.executeRidersJump(this.playerJumpPendingScale, vec3);
+                }
+
+                this.playerJumpPendingScale = 0.0F;
+            }
+        }
     }
 
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
@@ -310,9 +357,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        OHorse oHorse = (OHorse) this;
-
         if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.isHorse(this)) {
+            OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getManeType() == 3 || oHorse.getManeType() == 2) {
                     oHorse.setManeType(0);
@@ -330,6 +376,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
+            OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getTailType() == 3 || oHorse.getTailType() == 2) {
                     oHorse.setTailType(0);

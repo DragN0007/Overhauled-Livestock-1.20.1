@@ -61,9 +61,7 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
 import com.dragn0007.dragnlivestock.entities.rabbit.RabbitBreed;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
-import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
+import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
@@ -133,6 +131,7 @@ public class SpawnReplacer {
     @SubscribeEvent
     public static void onSpawn(EntityJoinLevelEvent event) {
 
+        Random random = new Random();
 
         //Horse
         if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof Horse) {
@@ -172,8 +171,8 @@ public class SpawnReplacer {
                     oHorse.setAge(vanillaHorse.getAge());
                     oHorse.randomizeOHorseAttributes();
 
-                    oHorse.setReindeerVariant(event.getLevel().getRandom().nextInt(OHorseModel.ReindeerVariant.values().length));
-                    oHorse.setGender(event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length));
+                    oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
+                    oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
 
                     //spawn breeds except for compat-only ones if the config allows it
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
@@ -182,15 +181,15 @@ public class SpawnReplacer {
                             int randomIndex = new Random().nextInt(breeds.length);
                             oHorse.setBreed(breeds[randomIndex]);
                         } else {
-                            oHorse.setBreed(event.getLevel().getRandom().nextInt(HorseBreed.values().length));
+                            oHorse.setBreed(random.nextInt(HorseBreed.values().length));
                         }
 
-                        oHorse.setManeType(1 + event.getLevel().getRandom().nextInt(4));
-                        oHorse.setTailType(1 + event.getLevel().getRandom().nextInt(4));
+                        oHorse.setManeType(1 + random.nextInt(4));
+                        oHorse.setTailType(1 + random.nextInt(4));
                     } else {
                         oHorse.setBreed(0);
                         oHorse.setManeType(2);
-                        oHorse.setTailType(1 + event.getLevel().getRandom().nextInt(4));
+                        oHorse.setTailType(1 + random.nextInt(4));
                     }
 
                     //spawn markings and colors by breed if the config allows it
@@ -199,15 +198,15 @@ public class SpawnReplacer {
                         oHorse.setMarkingByBreed();
                         oHorse.setFeatheringByBreed();
                     } else {
-                        oHorse.setVariant(event.getLevel().getRandom().nextInt(OHorseModel.Variant.values().length));
-                        oHorse.setOverlayVariant(event.getLevel().getRandom().nextInt(OHorseMarkingLayer.Overlay.values().length));
-                        oHorse.setFeathering(event.getLevel().getRandom().nextInt(OHorse.Feathering.values().length));
+                        oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
+                        oHorse.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+                        oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
                         oHorse.setEyeColorByChance();
                     } else {
-                        oHorse.setEyeVariant(event.getLevel().getRandom().nextInt(OHorseEyeLayer.EyeOverlay.values().length));
+                        oHorse.setEyeVariant(random.nextInt(OHorseEyeLayer.EyeOverlay.values().length));
                     }
 
                     //discard vanilla horse once it's been successfully replaced on client and server
@@ -877,20 +876,19 @@ public class SpawnReplacer {
                 if (oSheep != null) {
                     oSheep.copyPosition(vanillasheep);
 
-                    oSheep.setCustomName(vanillasheep.getCustomName());
-                    oSheep.setAge(vanillasheep.getAge());
+                    oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
+                    oSheep.setGender(random.nextInt(OSheep.Gender.values().length));
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OSheepModel.Variant.values().length);
-                    oSheep.setVariant(randomVariant);
-
-                    int randomBreed = event.getLevel().getRandom().nextInt(SheepBreed.Breed.values().length);
-                    oSheep.setBreed(randomBreed);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(OSheep.Gender.values().length);
-                    oSheep.setGender(randomGender);
-
-                    if (event.getLevel().isClientSide) {
-                        vanillasheep.remove(Entity.RemovalReason.DISCARDED);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oSheep.setColorByBreed();
+                        oSheep.setWoolColorByBreed();
+                        oSheep.setMarkingsByBreed();
+                        oSheep.setHornsByBreed();
+                    } else {
+                        oSheep.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+                        oSheep.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+                        oSheep.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+                        oSheep.setHornVariant(random.nextInt(OSheep.BreedHorns.values().length));
                     }
 
                     event.getLevel().addFreshEntity(oSheep);

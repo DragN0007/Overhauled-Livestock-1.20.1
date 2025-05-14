@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.datafixers.DataFixUtils;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -64,7 +65,18 @@ public class CattleFollowHerdLeaderGoal extends Goal {
    public void tick() {
       if (--this.timeToRecalcPath <= 0) {
          this.timeToRecalcPath = this.adjustedTickDelay(10);
-         this.mob.pathToLeader();
+
+         OCow leader = this.mob.leader;
+         if (leader != null) {
+            double distanceSq = this.mob.distanceToSqr(leader);
+            double minDistanceSq = 3.0D * 3.0D;
+
+            if (distanceSq > minDistanceSq) {
+               this.mob.pathToLeader();
+            } else {
+               this.mob.getNavigation().stop();
+            }
+         }
       }
    }
 

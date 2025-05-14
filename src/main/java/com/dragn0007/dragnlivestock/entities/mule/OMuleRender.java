@@ -20,26 +20,25 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
     @Override
     public void preRender(PoseStack poseStack, OMule entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
-        if (!entity.isBaby()) {
+        model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
 
-            if (entity.hasChest()) {
+        if (!animatable.isBaby()) {
+            if (animatable.hasChest()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isSaddled()) {
+            if (animatable.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
-                model.getBone("extras").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
-            } else if (entity.isSaddled()) {
+            } else if (animatable.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
-                model.getBone("extras").ifPresent(b -> b.setHidden(true));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
@@ -54,28 +53,48 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isWearingArmor()) {
+            if (animatable.isWearingArmor()) {
                 model.getBone("body_armor").ifPresent(b -> b.setHidden(false));
                 model.getBone("neck_armor").ifPresent(b -> b.setHidden(false));
-                model.getBone("head_armor").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("body_armor").ifPresent(b -> b.setHidden(true));
                 model.getBone("neck_armor").ifPresent(b -> b.setHidden(true));
-                model.getBone("head_armor").ifPresent(b -> b.setHidden(true));
             }
         }
 
-        if(entity.isBaby()) {
-            model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
-            model.getBone("saddle").ifPresent(b -> b.setHidden(true));
-            model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
-            model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
-            model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
-            model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
-            model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
-            model.getBone("body_armor").ifPresent(b -> b.setHidden(true));
-            model.getBone("neck_armor").ifPresent(b -> b.setHidden(true));
-            model.getBone("head_armor").ifPresent(b -> b.setHidden(true));
+        if (animatable.getFeathering() == 0) {
+            model.getBone("front_right_feathering").ifPresent(b -> b.setHidden(true));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setHidden(true));
+            model.getBone("back_right_feathering").ifPresent(b -> b.setHidden(true));
+            model.getBone("back_left_feathering").ifPresent(b -> b.setHidden(true));
+        }
+
+        if (animatable.getFeathering() == 1) {
+            model.getBone("front_right_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("back_right_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("back_left_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("front_right_feathering").ifPresent(b -> b.setScaleY(0.6F));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setScaleY(0.6F));
+            model.getBone("back_right_feathering").ifPresent(b -> b.setScaleY(0.6F));
+            model.getBone("back_left_feathering").ifPresent(b -> b.setScaleY(0.6F));
+            model.getBone("front_right_feathering").ifPresent(b -> b.setPosY(-3.5F));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setPosY(-3.5F));
+            model.getBone("back_right_feathering").ifPresent(b -> b.setPosY(-3.5F));
+            model.getBone("back_left_feathering").ifPresent(b -> b.setPosY(-3.5F));
+            model.getBone("front_right_feathering").ifPresent(b -> b.setPosZ(-0.8F));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setPosZ(-0.8F));
+        }
+
+        if (animatable.getFeathering() == 2) {
+            model.getBone("front_right_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("back_right_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("back_left_feathering").ifPresent(b -> b.setHidden(false));
+            model.getBone("front_right_feathering").ifPresent(b -> b.setScaleY(1F));
+            model.getBone("front_left_feathering").ifPresent(b -> b.setScaleY(1F));
+            model.getBone("back_right_feathering").ifPresent(b -> b.setScaleY(1F));
+            model.getBone("back_left_feathering").ifPresent(b -> b.setScaleY(1F));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

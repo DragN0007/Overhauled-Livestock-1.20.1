@@ -2,8 +2,13 @@ package com.dragn0007.dragnlivestock.entities.mule;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseEyeLayer;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OMuleMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -150,6 +155,8 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
+		double currentSpeed = this.getDeltaMovement().lengthSqr();
+		double speedThreshold = 0.015;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -158,35 +165,51 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(this.isJumping()) {
+		if ((!this.isTamed() || this.isWearingHarness()) && this.isVehicle() && !this.isJumping()) {
+			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
+			controller.setAnimationSpeed(1.3);
+		} else if (this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
 			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving) {
-				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
 				} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
 				} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
-				} else {
+				} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else {
 				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				} else if (this.isSleeping()) {
+					controller.setAnimation(RawAnimation.begin().then("idle_sleep", Animation.LoopType.LOOP));
+				} else if (this.isSleeping() && !this.isVehicle()) {
+					controller.setAnimation(RawAnimation.begin().then("sleep", Animation.LoopType.LOOP));
 				} else {
-					controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
+					controller.setAnimation(RawAnimation.begin().then("ground_tie", Animation.LoopType.LOOP));
 				}
 				controller.setAnimationSpeed(1.0);
 			}
+
 		}
 		return PlayState.CONTINUE;
 	}
@@ -358,6 +381,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 
 	public ResourceLocation getTextureResource() {
 		return this.entityData.get(VARIANT_TEXTURE);
@@ -369,6 +393,9 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 	public ResourceLocation getModelResource() {
 		return MuleBreed.breedFromOrdinal(getBreed()).resourceLocation;
+	}
+	public ResourceLocation getEyeTextureResource() {
+		return OMuleEyeLayer.EyeOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
 	}
 
 	public int getVariant() {
@@ -382,6 +409,10 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		return this.entityData.get(BREED);
 	}
 
+	public int getEyeVariant() {
+		return this.entityData.get(EYES);
+	}
+
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT_TEXTURE, OMuleModel.Variant.variantFromOrdinal(variant).resourceLocation);
 		this.entityData.set(VARIANT, variant);
@@ -392,6 +423,10 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.entityData.set(OVERLAY, variant);
 	}
 
+	public void setEyeVariant(int eyeVariant) {
+		this.entityData.set(EYES, eyeVariant);
+	}
+
 	public void setBreed(int breed) {
 		this.entityData.set(BREED, breed);
 	}
@@ -399,7 +434,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	public void setVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
-			resourceLocation = OMuleModel.Variant.DEFAULT.resourceLocation;
+			resourceLocation = OMuleModel.Variant.RUST.resourceLocation;
 		}
 		this.entityData.set(VARIANT_TEXTURE, resourceLocation);
 	}
@@ -410,6 +445,16 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			resourceLocation = OMuleMarkingLayer.Overlay.NONE.resourceLocation;
 		}
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
+	}
+
+	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+
+	public int getFeathering() {
+		return this.entityData.get(FEATHERING);
+	}
+
+	public void setFeathering(int feathering) {
+		this.entityData.set(FEATHERING, feathering);
 	}
 
 	@Override
@@ -439,6 +484,14 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Breed")) {
 			this.setBreed(tag.getInt("Breed"));
 		}
+
+		if (tag.contains("Feathering")) {
+			this.setFeathering(tag.getInt("Feathering"));
+		}
+
+		if (tag.contains("Eyes")) {
+			this.setEyeVariant(tag.getInt("Eyes"));
+		}
 	}
 
 	@Override
@@ -450,6 +503,8 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Breed", this.getBreed());
+		tag.putInt("Feathering", this.getFeathering());
+		tag.putInt("Eyes", this.getEyeVariant());
 	}
 
 	@Override
@@ -459,9 +514,21 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		this.setVariant(random.nextInt(OMuleModel.Variant.values().length));
-		this.setOverlayVariant(random.nextInt(OMuleMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
+		this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
+		this.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setFeatheringByBreed();
+		} else {
+			this.setFeathering(random.nextInt(OHorse.Feathering.values().length));
+		}
+
+		if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+			this.setEyeColorByChance();
+		} else {
+			this.setEyeVariant(random.nextInt(OHorseEyeLayer.EyeOverlay.values().length));
+		}
 
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -472,12 +539,89 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(VARIANT_TEXTURE, OMuleModel.Variant.DEFAULT.resourceLocation);
+		this.entityData.define(VARIANT_TEXTURE, OMuleModel.Variant.RUST.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.NONE.resourceLocation);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BREED, 0);
+		this.entityData.define(FEATHERING, 0);
+		this.entityData.define(EYES, 0);
 	}
 
+	public void setFeatheringByBreed() {
+
+		if (this.getBreed() == 0) {
+			if (random.nextDouble() < 0.05) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.05) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.50) {
+				this.setFeathering(0);
+			} else {
+				this.setFeathering(0);
+			}
+		}
+
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.05) {
+				this.setFeathering(0);
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.30) {
+				this.setFeathering(2);
+			} else {
+				this.setFeathering(2);
+			}
+		}
+
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.15) {
+				this.setFeathering(0);
+			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() > 0.50) {
+				this.setFeathering(1);
+			} else {
+				this.setFeathering(1);
+			}
+		}
+
+	}
+
+	public void setEyeColorByChance() {
+
+		//white, cream and mostly-white or bald mules have a better chance of gaining blue or green eyes
+		if (this.getVariant() == 24 || this.getVariant() == 25 || this.getOverlayVariant() == 2 || this.getOverlayVariant() == 8
+				|| this.getOverlayVariant() == 9 || this.getOverlayVariant() == 10 || this.getOverlayVariant() == 15
+				|| this.getOverlayVariant() == 17 || this.getOverlayVariant() == 20 || this.getOverlayVariant() == 24
+				|| this.getOverlayVariant() == 26 || this.getOverlayVariant() == 32 || this.getOverlayVariant() == 34
+				|| this.getOverlayVariant() == 36 || this.getOverlayVariant() == 37 || this.getOverlayVariant() == 38
+				|| this.getOverlayVariant() == 39) {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9)); //heterochromic
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6); //green
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.10) {
+				this.setEyeVariant(5); //blue
+			} else if (random.nextDouble() > 0.30) {
+				this.setEyeVariant(this.getRandom().nextInt(4)); //random (between dark brown and dark blue)
+			} else {
+				this.setEyeVariant(0);
+			}
+		} else {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9));
+			} else if (random.nextDouble() < 0.03 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6);
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.03) {
+				this.setEyeVariant(5);
+			} else if (random.nextDouble() > 0.10) {
+				this.setEyeVariant(this.getRandom().nextInt(4));
+			} else {
+				this.setEyeVariant(0);
+			}
+		}
+
+	}
 
 	@Override
 	public boolean canMate(Animal animal) {

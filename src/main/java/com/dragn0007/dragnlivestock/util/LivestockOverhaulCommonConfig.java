@@ -43,6 +43,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HAIR_GROWTH_TIME;
     public static final ForgeConfigSpec.BooleanValue SPAWN_BY_BREED;
     public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
+    public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
@@ -163,11 +164,15 @@ public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
         HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. Default is 72000.")
                 .define("Horse Hair Growth Time", 72000);
 
-        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed?")
+        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed and gender?")
                 .define("Spawn By Breed", true);
 
         EYES_BY_COLOR = BUILDER.comment("Should O-Animals' eye colors, if applicable, depend on their coat/ coloring?")
                 .define("Eye Colors By Coat Color/ Markings", true);
+
+        OLD_HORSE_TURNING = BUILDER.comment("Should O-Horses and other mounts turn their heads similarly to old 1.12 horses when ridden?" +
+                        "\nTurning this off will make mounts use the post-1.12 turning, which is simply just pivoting in place.")
+                .define("Advanced Horse Turning", true);
 
         MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
                 .define("NON FUNCTIONAL", 3);

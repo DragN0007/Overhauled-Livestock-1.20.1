@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.sheep;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -27,7 +28,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -97,16 +97,16 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(3, new SheepFollowHerdLeaderGoal(this));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
 			boolean isHerdingDog = livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS);
 			return isHerdingDog;
 		}));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle())
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof Animal && livingEntity.isVehicle())
 		));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame())
 		));
 	}
@@ -141,13 +141,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public int replenishMilkCounter = 0;
-
-	private boolean milked = false;
-
-	public boolean wasMilked() {
-		return this.milked;
-	}
-
 	public int regrowWoolCounter = 0;
 
 	public void tick() {
@@ -161,7 +154,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		regrowWoolCounter++;
 
-		if (regrowWoolCounter >= 24000) {
+		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
 			this.setSheared(false);
 		}
 
@@ -227,21 +220,12 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
-		if ((itemstack.getItem() == Items.SHEARS) && !player.isShiftKeyDown()) {
-			if (!this.level().isClientSide && this.readyForShearing()) {
-				if (itemstack.is(Items.SHEARS) && (!isSheared() || regrowWoolCounter >= 4800)) {
-					this.setSheared(true);
-					this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-
-					this.dropWoolByColorAndMarking();
-
-					regrowWoolCounter = 0;
-
-					return InteractionResult.SUCCESS;
-				}
-			} else {
-				return InteractionResult.CONSUME;
-			}
+		if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() && (!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get())) {
+			player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
+			this.setSheared(true);
+			this.dropWoolByColorAndMarking();
+			regrowWoolCounter = 0;
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
 		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
@@ -268,10 +252,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		} else {
 			return super.mobInteract(player, hand);
 		}
-	}
-
-	public boolean readyForShearing() {
-		return this.isAlive() && !this.isSheared() && !this.isBaby();
 	}
 
 	@Override
@@ -359,14 +339,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(BREED, breed);
 	}
 
-	public boolean getMilked() {
-		return this.milked;
-	}
-
-	public void setMilked(boolean milked) {
-		this.milked = milked;
-	}
-
 	public ResourceLocation getOverlayLocation() {
 		return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
@@ -390,8 +362,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public int getHornVariant() {
 		return this.entityData.get(HORN_TYPE);
 	}
-	public void setHornVariant(int overlayVariant) {
-		this.entityData.set(HORN_TYPE, overlayVariant);
+	public void setHornVariant(int hornVariant) {
+		this.entityData.set(HORN_TYPE, hornVariant);
 	}
 
 
@@ -400,6 +372,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
 	}
@@ -424,6 +398,20 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(TAGGED, tagged);
 	}
 
+	public boolean isSheared() {
+		return this.entityData.get(SHEARED);
+	}
+	public void setSheared(boolean sheared) {
+		this.entityData.set(SHEARED, sheared);
+	}
+
+	public boolean wasMilked() {
+		return this.entityData.get(MILKED);
+	}
+	public void setMilked(boolean milked) {
+		this.entityData.set(MILKED, milked);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -439,8 +427,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			setWoolVariant(tag.getInt("Wool"));
 		}
 
-		if (tag.contains("Horn")) {
-			setHornVariant(tag.getInt("Horn"));
+		if (tag.contains("HornType")) {
+			setHornVariant(tag.getInt("HornType"));
 		}
 
 		if (tag.contains("Breed")) {
@@ -452,11 +440,19 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 
 		if (tag.contains("Milked")) {
-			setMilked(tag.getBoolean("Milked"));
+			this.setMilked(tag.getBoolean("Milked"));
+		}
+
+		if (tag.contains("MilkedTime")) {
+			this.replenishMilkCounter = tag.getInt("MilkedTime");
 		}
 
 		if (tag.contains("Sheared")) {
 			this.setSheared(tag.getBoolean("Sheared"));
+		}
+
+		if (tag.contains("ShearedTime")) {
+			this.regrowWoolCounter = tag.getInt("ShearedTime");
 		}
 
 		if(tag.contains("Tagged")) {
@@ -472,11 +468,13 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
 		tag.putInt("Wool", getWoolVariant());
-		tag.putInt("Horn", getHornVariant());
+		tag.putInt("HornType", getHornVariant());
 		tag.putInt("Breed", getBreed());
-		tag.putBoolean("Sheared", this.getSheared());
 		tag.putInt("Gender", this.getGender());
-		tag.putBoolean("Milked", getMilked());
+		tag.putBoolean("Sheared", this.isSheared());
+		tag.putInt("ShearedTime", this.regrowWoolCounter);
+		tag.putBoolean("Milked", this.wasMilked());
+		tag.putInt("MilkedTime", this.replenishMilkCounter);
 		tag.putBoolean("Tagged", this.isTagged());
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 	}
@@ -492,6 +490,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
+		this.entityData.define(SHEARED, false);
+		this.entityData.define(MILKED, false);
 	}
 
 	@Override
@@ -610,20 +610,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		return oSheep;
 	}
 
-	private boolean sheared = false;
-
-	public boolean isSheared() {
-		return this.sheared;
-	}
-
-	public boolean getSheared() {
-		return this.sheared;
-	}
-
-	public void setSheared(boolean sheared) {
-		this.sheared = sheared;
-	}
-
 	@Override
 	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
@@ -635,8 +621,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
 
-
-
 		}
 
 	}
@@ -646,7 +630,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		//skin color generally does not affect dropped wool color, just the wool variant.
 		//however, breed can affect wool and skin color
 
-		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			if (this.getWoolVariant() == 0 && !(this.getOverlayVariant() == 3)) {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 3);
@@ -893,6 +877,50 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 1) { //norfolk tend to come with black skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 2) { //dorset tend to come with white skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setVariant(5);
+			}
+		}
+
+		if (this.getBreed() == 3) { //jacob tend to come with black or brown skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 2};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //racka tend to come with black, tan or white skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) { //california red tend to come with red skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setVariant(3);
+			}
+		}
+
 	}
 
 	public void setWoolColorByBreed() {
@@ -905,13 +933,113 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 1) { //norfolk tend to come with white wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setWoolVariant(5);
+			}
+		}
+
+		if (this.getBreed() == 2) { //dorset tend to come with white, tan or brown wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {1, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setWoolVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //jacob tend to come with black, white, tan or brown wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 1, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setWoolVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //racka tend to come with black, white, or tan wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setWoolVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //california red tend to come with brown, white, or tan wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {1, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setWoolVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setMarkingsByBreed() {
 
 		if (this.getBreed() == 0) { //gulf coast don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 1) { //norfolk don't often come with markings, and if they do, theyre small
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 2) { //dorset don't often come with markings, and if they do, theyre small
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 3) { //jacob come with all sorts of different patterns
+			this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+		}
+
+		if (this.getBreed() == 4) { //racka don't often come with markings, and if they do, theyre small
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //california red don't often come with markings, and if they do, theyre small
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -928,7 +1056,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		if (this.getBreed() == 0) { //gulf coast can come with small, curly horns. usually males, but sometimes females too
 			if (this.isFemale()) {
 				if (random.nextDouble() < 0.02) {
-					this.setHornVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+					this.setHornVariant(random.nextInt(BreedHorns.values().length));
 				} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.30) {
 					this.setHornVariant(1);
 				} else if (random.nextDouble() > 0.30) {
@@ -936,7 +1064,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				}
 			} else if (this.isMale()) {
 				if (random.nextDouble() < 0.02) {
-					this.setHornVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+					this.setHornVariant(random.nextInt(BreedHorns.values().length));
 				} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.15) {
 					this.setHornVariant(0);
 				} else if (random.nextDouble() > 0.15) {
@@ -944,12 +1072,107 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				}
 			}
 
+			if (this.getBreed() == 1) { //norfolk can come with large, curly horns. usually males, but sometimes females too
+				if (this.isFemale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.30) {
+						this.setHornVariant(2);
+					} else if (random.nextDouble() > 0.30) {
+						this.setHornVariant(0);
+					}
+				} else if (this.isMale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.15) {
+						this.setHornVariant(0);
+					} else if (random.nextDouble() > 0.15) {
+						this.setHornVariant(2);
+					}
+				}
+			}
+
+			if (this.getBreed() == 2) { //dorset can come with large, curly horns. usually males, but sometimes females too
+				if (this.isFemale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.30) {
+						this.setHornVariant(3);
+					} else if (random.nextDouble() > 0.30) {
+						this.setHornVariant(0);
+					}
+				} else if (this.isMale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.15) {
+						this.setHornVariant(0);
+					} else if (random.nextDouble() > 0.15) {
+						this.setHornVariant(3);
+					}
+				}
+			}
+
+			if (this.getBreed() == 3) { //jacob can come with two sets of horns. usually males, but sometimes females too
+				if (this.isFemale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.20) {
+						this.setHornVariant(4);
+					} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.setHornVariant(2);
+					} else if (random.nextDouble() > 0.50) {
+						this.setHornVariant(0);
+					}
+				} else if (this.isMale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.10) {
+						this.setHornVariant(0);
+					} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
+						this.setHornVariant(2);
+					} else if (random.nextDouble() > 0.30) {
+						this.setHornVariant(4);
+					}
+				}
+			}
+
+			if (this.getBreed() == 4) { //racka can come with long, straight horns. usually males, but sometimes females too
+				if (this.isFemale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.20) {
+						this.setHornVariant(5);
+					} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.setHornVariant(2);
+					} else if (random.nextDouble() > 0.50) {
+						this.setHornVariant(0);
+					}
+				} else if (this.isMale()) {
+					if (random.nextDouble() < 0.02) {
+						this.setHornVariant(random.nextInt(BreedHorns.values().length));
+					} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.10) {
+						this.setHornVariant(0);
+					} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
+						this.setHornVariant(2);
+					} else if (random.nextDouble() > 0.30) {
+						this.setHornVariant(5);
+					}
+				}
+			}
+
+			if (this.getBreed() == 5) { //california red dont come with horns
+				if (random.nextDouble() < 0.02) {
+					this.setHornVariant(random.nextInt(BreedHorns.values().length));
+				} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.15) {
+					this.setHornVariant(0);
+				}
+			}
 
 		}
 
 	}
 
-	enum BreedHorns {
+	public enum BreedHorns {
 		NONE,
 		GULF_COAST,
 		NORFOLK,
