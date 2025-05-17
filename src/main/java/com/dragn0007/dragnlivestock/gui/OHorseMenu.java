@@ -44,8 +44,6 @@ public class OHorseMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack itemStack) {
                 if (itemStack.getItem() instanceof HorseArmorItem) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
-                } else if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
-                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
                 return false;
             }
@@ -53,6 +51,21 @@ public class OHorseMenu extends AbstractContainerMenu {
             @Override
             public boolean isActive() {
                 return OHorseMenu.this.oHorse.canWearArmor();
+            }
+        });
+
+        this.addSlot(new Slot(this.container, oHorseSlots++, 8, 54) {
+            @Override
+            public boolean mayPlace(ItemStack itemStack) {
+                if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
+                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean isActive() {
+                return true;
             }
         });
 

@@ -66,6 +66,45 @@ public class LOItemGroup {
                         output.accept(LOItems.UTILITY_KNIFE.get());
                         output.accept(LOItems.SPINDLE.get());
 
+                        output.accept(LOItems.GRUB_SWEATER.get());
+
+                        output.accept(LOItems.MANE_SCISSORS.get());
+                        output.accept(LOItems.TAIL_SCISSORS.get());
+
+//                        output.accept(LOBlocks.ACACIA_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.BAMBOO_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.BIRCH_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.CHERRY_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.CRIMSON_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.DARK_OAK_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.JUNGLE_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.MANGROVE_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.OAK_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.SPRUCE_RABBIT_HUTCH.get());
+//                        output.accept(LOBlocks.WARPED_RABBIT_HUTCH.get());
+
+                        output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
+                        output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
+//                        output.accept(LOItems.BLACK_SADDLE.get());
+//                        output.accept(LOItems.WHITE_SADDLE.get());
+                        output.accept(LOItems.RODEO_HARNESS.get());
+
+//                        output.accept(LOItems.COVERED_WAGON.get());
+
+                        output.accept(LOItems.FERTILIZED_EGG.get());
+                        output.accept(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
+                        output.accept(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
+                        output.accept(LOItems.FERTILIZED_MARANS_EGG.get());
+                        output.accept(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
+                        output.accept(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
+                        output.accept(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
+
+                        output.accept(LOItems.GENDER_TEST_STRIP.get());
+
+                        output.accept(LOItems.OVERWORLD_UNICORN_HORN.get());
+                        output.accept(LOItems.NETHER_UNICORN_HORN.get());
+                        output.accept(LOItems.END_UNICORN_HORN.get());
+
                         output.accept(LOItems.BLACK_WOOL_STAPLE.get());
                         output.accept(LOItems.BLUE_WOOL_STAPLE.get());
                         output.accept(LOItems.BROWN_WOOL_STAPLE.get());
@@ -117,44 +156,73 @@ public class LOItemGroup {
                         output.accept(LOItems.WHITE_BRAND_TAG.get());
                         output.accept(LOItems.YELLOW_BRAND_TAG.get());
 
-                        output.accept(LOItems.GRUB_SWEATER.get());
+                        output.accept(LOItems.BLACK_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.BLUE_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.BROWN_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.CYAN_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.GREEN_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.GREY_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.LIGHT_BLUE_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.LIGHT_GREY_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.LIME_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.MAGENTA_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.ORANGE_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.PINK_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.PURPLE_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.RED_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.WHITE_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.YELLOW_MEDIEVAL_BLANKET.get());
 
-                        output.accept(LOItems.MANE_SCISSORS.get());
-                        output.accept(LOItems.TAIL_SCISSORS.get());
+                        output.accept(LOItems.BLACK_MODERN_BLANKET.get());
+                        output.accept(LOItems.BLUE_MODERN_BLANKET.get());
+                        output.accept(LOItems.BROWN_MODERN_BLANKET.get());
+                        output.accept(LOItems.CYAN_MODERN_BLANKET.get());
+                        output.accept(LOItems.GREEN_MODERN_BLANKET.get());
+                        output.accept(LOItems.GREY_MODERN_BLANKET.get());
+                        output.accept(LOItems.LIGHT_BLUE_MODERN_BLANKET.get());
+                        output.accept(LOItems.LIGHT_GREY_MODERN_BLANKET.get());
+                        output.accept(LOItems.LIME_MODERN_BLANKET.get());
+                        output.accept(LOItems.MAGENTA_MODERN_BLANKET.get());
+                        output.accept(LOItems.ORANGE_MODERN_BLANKET.get());
+                        output.accept(LOItems.PINK_MODERN_BLANKET.get());
+                        output.accept(LOItems.PURPLE_MODERN_BLANKET.get());
+                        output.accept(LOItems.RED_MODERN_BLANKET.get());
+                        output.accept(LOItems.WHITE_MODERN_BLANKET.get());
+                        output.accept(LOItems.YELLOW_MODERN_BLANKET.get());
 
-//                        output.accept(LOBlocks.ACACIA_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.BAMBOO_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.BIRCH_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.CHERRY_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.CRIMSON_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.DARK_OAK_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.JUNGLE_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.MANGROVE_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.OAK_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.SPRUCE_RABBIT_HUTCH.get());
-//                        output.accept(LOBlocks.WARPED_RABBIT_HUTCH.get());
+                        output.accept(LOItems.BLACK_RACING_BLANKET.get());
+                        output.accept(LOItems.BLUE_RACING_BLANKET.get());
+                        output.accept(LOItems.BROWN_RACING_BLANKET.get());
+                        output.accept(LOItems.CYAN_RACING_BLANKET.get());
+                        output.accept(LOItems.GREEN_RACING_BLANKET.get());
+                        output.accept(LOItems.GREY_RACING_BLANKET.get());
+                        output.accept(LOItems.LIGHT_BLUE_RACING_BLANKET.get());
+                        output.accept(LOItems.LIGHT_GREY_RACING_BLANKET.get());
+                        output.accept(LOItems.LIME_RACING_BLANKET.get());
+                        output.accept(LOItems.MAGENTA_RACING_BLANKET.get());
+                        output.accept(LOItems.ORANGE_RACING_BLANKET.get());
+                        output.accept(LOItems.PINK_RACING_BLANKET.get());
+                        output.accept(LOItems.PURPLE_RACING_BLANKET.get());
+                        output.accept(LOItems.RED_RACING_BLANKET.get());
+                        output.accept(LOItems.WHITE_RACING_BLANKET.get());
+                        output.accept(LOItems.YELLOW_RACING_BLANKET.get());
 
-                        output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
-                        output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
-//                        output.accept(LOItems.BLACK_SADDLE.get());
-//                        output.accept(LOItems.WHITE_SADDLE.get());
-                        output.accept(LOItems.RODEO_HARNESS.get());
-
-//                        output.accept(LOItems.COVERED_WAGON.get());
-
-                        output.accept(LOItems.FERTILIZED_EGG.get());
-                        output.accept(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
-                        output.accept(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
-                        output.accept(LOItems.FERTILIZED_MARANS_EGG.get());
-                        output.accept(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
-                        output.accept(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
-                        output.accept(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
-
-                        output.accept(LOItems.GENDER_TEST_STRIP.get());
-
-                        output.accept(LOItems.OVERWORLD_UNICORN_HORN.get());
-                        output.accept(LOItems.NETHER_UNICORN_HORN.get());
-                        output.accept(LOItems.END_UNICORN_HORN.get());
+                        output.accept(LOItems.BLACK_WESTERN_BLANKET.get());
+                        output.accept(LOItems.BLUE_WESTERN_BLANKET.get());
+                        output.accept(LOItems.BROWN_WESTERN_BLANKET.get());
+                        output.accept(LOItems.CYAN_WESTERN_BLANKET.get());
+                        output.accept(LOItems.GREEN_WESTERN_BLANKET.get());
+                        output.accept(LOItems.GREY_WESTERN_BLANKET.get());
+                        output.accept(LOItems.LIGHT_BLUE_WESTERN_BLANKET.get());
+                        output.accept(LOItems.LIGHT_GREY_WESTERN_BLANKET.get());
+                        output.accept(LOItems.LIME_WESTERN_BLANKET.get());
+                        output.accept(LOItems.MAGENTA_WESTERN_BLANKET.get());
+                        output.accept(LOItems.ORANGE_WESTERN_BLANKET.get());
+                        output.accept(LOItems.PINK_WESTERN_BLANKET.get());
+                        output.accept(LOItems.PURPLE_WESTERN_BLANKET.get());
+                        output.accept(LOItems.RED_WESTERN_BLANKET.get());
+                        output.accept(LOItems.WHITE_WESTERN_BLANKET.get());
+                        output.accept(LOItems.YELLOW_WESTERN_BLANKET.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> LIVESTOCK_OVERHAUL_FOOD_GROUP = CREATIVE_MODE_TABS.register("overhauled_livestock_food",

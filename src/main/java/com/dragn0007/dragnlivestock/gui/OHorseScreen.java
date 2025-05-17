@@ -101,11 +101,8 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
         if (this.oHorse.canWearArmor()) {
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
+            graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 53, 36, this.imageHeight + 54, 18, 18);
         }
-
-//        if (this.oHorse.canWearShoes()) {
-//            graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 53, 54, this.imageHeight + 54, 18, 18);
-//        }
 
         if (this.oHorse.isFemale()) {
             graphics.blit(HORSE_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);

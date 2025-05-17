@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -689,9 +690,19 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Nullable
-    public static DyeColor getDyeColor(ItemStack p_30836_) {
-        Block block = Block.byItem(p_30836_.getItem());
-        return block instanceof WoolCarpetBlock ? ((WoolCarpetBlock)block).getColor() : null;
+    public static DyeColor getDyeColor(ItemStack stack) {
+        Block block = Block.byItem(stack.getItem());
+        Item item = stack.getItem();
+
+        if (block instanceof WoolCarpetBlock) {
+            return ((WoolCarpetBlock)block).getColor();
+        }
+
+        if (item instanceof BlanketItem) {
+            return ((BlanketItem)item).getColor();
+        }
+
+        return null;
     }
 
     @Nullable

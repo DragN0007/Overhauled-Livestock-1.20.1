@@ -252,6 +252,74 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.OVERWORLD_UNICORN_HORN);
         simpleItem(LOItems.NETHER_UNICORN_HORN);
         simpleItem(LOItems.END_UNICORN_HORN);
+
+        simpleItem(LOItems.BLACK_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.BLUE_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.BROWN_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.CYAN_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.GREEN_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.GREY_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.LIGHT_BLUE_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.LIGHT_GREY_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.LIME_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.MAGENTA_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.ORANGE_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.PINK_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.PURPLE_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.RED_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.WHITE_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.YELLOW_MEDIEVAL_BLANKET);
+
+        simpleItem(LOItems.BLACK_MODERN_BLANKET);
+        simpleItem(LOItems.BLUE_MODERN_BLANKET);
+        simpleItem(LOItems.BROWN_MODERN_BLANKET);
+        simpleItem(LOItems.CYAN_MODERN_BLANKET);
+        simpleItem(LOItems.GREEN_MODERN_BLANKET);
+        simpleItem(LOItems.GREY_MODERN_BLANKET);
+        simpleItem(LOItems.LIGHT_BLUE_MODERN_BLANKET);
+        simpleItem(LOItems.LIGHT_GREY_MODERN_BLANKET);
+        simpleItem(LOItems.LIME_MODERN_BLANKET);
+        simpleItem(LOItems.MAGENTA_MODERN_BLANKET);
+        simpleItem(LOItems.ORANGE_MODERN_BLANKET);
+        simpleItem(LOItems.PINK_MODERN_BLANKET);
+        simpleItem(LOItems.PURPLE_MODERN_BLANKET);
+        simpleItem(LOItems.RED_MODERN_BLANKET);
+        simpleItem(LOItems.WHITE_MODERN_BLANKET);
+        simpleItem(LOItems.YELLOW_MODERN_BLANKET);
+
+        simpleItem(LOItems.BLACK_RACING_BLANKET);
+        simpleItem(LOItems.BLUE_RACING_BLANKET);
+        simpleItem(LOItems.BROWN_RACING_BLANKET);
+        simpleItem(LOItems.CYAN_RACING_BLANKET);
+        simpleItem(LOItems.GREEN_RACING_BLANKET);
+        simpleItem(LOItems.GREY_RACING_BLANKET);
+        simpleItem(LOItems.LIGHT_BLUE_RACING_BLANKET);
+        simpleItem(LOItems.LIGHT_GREY_RACING_BLANKET);
+        simpleItem(LOItems.LIME_RACING_BLANKET);
+        simpleItem(LOItems.MAGENTA_RACING_BLANKET);
+        simpleItem(LOItems.ORANGE_RACING_BLANKET);
+        simpleItem(LOItems.PINK_RACING_BLANKET);
+        simpleItem(LOItems.PURPLE_RACING_BLANKET);
+        simpleItem(LOItems.RED_RACING_BLANKET);
+        simpleItem(LOItems.WHITE_RACING_BLANKET);
+        simpleItem(LOItems.YELLOW_RACING_BLANKET);
+
+        simpleItem(LOItems.BLACK_WESTERN_BLANKET);
+        simpleItem(LOItems.BLUE_WESTERN_BLANKET);
+        simpleItem(LOItems.BROWN_WESTERN_BLANKET);
+        simpleItem(LOItems.CYAN_WESTERN_BLANKET);
+        simpleItem(LOItems.GREEN_WESTERN_BLANKET);
+        simpleItem(LOItems.GREY_WESTERN_BLANKET);
+        simpleItem(LOItems.LIGHT_BLUE_WESTERN_BLANKET);
+        simpleItem(LOItems.LIGHT_GREY_WESTERN_BLANKET);
+        simpleItem(LOItems.LIME_WESTERN_BLANKET);
+        simpleItem(LOItems.MAGENTA_WESTERN_BLANKET);
+        simpleItem(LOItems.ORANGE_WESTERN_BLANKET);
+        simpleItem(LOItems.PINK_WESTERN_BLANKET);
+        simpleItem(LOItems.PURPLE_WESTERN_BLANKET);
+        simpleItem(LOItems.RED_WESTERN_BLANKET);
+        simpleItem(LOItems.WHITE_WESTERN_BLANKET);
+        simpleItem(LOItems.YELLOW_WESTERN_BLANKET);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
