@@ -109,7 +109,7 @@ public class EntityTypes {
     public static final RegistryObject<EntityType<OSheep>> O_SHEEP_ENTITY = ENTITY_TYPES.register("o_sheep",
             () -> EntityType.Builder.of(OSheep::new,
                             MobCategory.CREATURE)
-                    .sized(1f,1f)
+                    .sized(0.8f,0.8f)
                     .build(new ResourceLocation(MODID,"o_sheep").toString()));
 
     public static final RegistryObject<EntityType<OPig>> O_PIG_ENTITY = ENTITY_TYPES.register("o_pig",

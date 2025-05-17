@@ -32,72 +32,72 @@
     },
 
     {
-      "id": "swemaddendum:irish_draught_steed",
+      "id": "swemaddendum:irish_draught",
       "required": false
     },
 
     {
-      "id": "swemaddendum:shire_steed",
+      "id": "swemaddendum:shire",
       "required": false
     },
 
     {
-      "id": "swemaddendum:arabian_steed",
+      "id": "swemaddendum:arabian",
       "required": false
     },
 
     {
-      "id": "swemaddendum:american_quarter_steed",
+      "id": "swemaddendum:american_quarter",
       "required": false
     },
 
     {
-      "id": "swemaddendum:breton_steed",
+      "id": "swemaddendum:breton",
       "required": false
     },
 
     {
-      "id": "swemaddendum:friesian_steed",
+      "id": "swemaddendum:friesian",
       "required": false
     },
 
     {
-      "id": "swemaddendum:kladruber_steed",
+      "id": "swemaddendum:kladruber",
       "required": false
     },
 
     {
-      "id": "swemaddendum:knabstrupper_steed",
+      "id": "swemaddendum:knabstrupper",
       "required": false
     },
 
     {
-      "id": "swemaddendum:marwari_steed",
+      "id": "swemaddendum:marwari",
       "required": false
     },
 
     {
-      "id": "swemaddendum:mustang_steed",
+      "id": "swemaddendum:mustang",
       "required": false
     },
 
     {
-      "id": "swemaddendum:thoroughbred_steed",
+      "id": "swemaddendum:thoroughbred",
       "required": false
     },
 
     {
-      "id": "swemaddendum:turkoman_steed",
+      "id": "swemaddendum:turkoman",
       "required": false
     },
 
     {
-      "id": "swemaddendum:warmblood_steed",
+      "id": "swemaddendum:warmblood",
       "required": false
     },
 
     {
-      "id": "swemaddendum:pegasus_steed",
+      "id": "swemaddendum:pegasus",
       "required": false
     }
   ]

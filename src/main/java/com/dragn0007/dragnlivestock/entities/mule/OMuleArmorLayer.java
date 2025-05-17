@@ -54,6 +54,10 @@ public class OMuleArmorLayer extends GeoRenderLayer<OMule> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_diamond.png");
             } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_netherite.png");
+            } else if (armorItemStack.getItem() == LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_minimal_griffith.png");
+            } else if (armorItemStack.getItem() == LOItems.RODEO_HARNESS.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/rodeo_harness.png");
             } else {
                 return;
             }
@@ -70,6 +74,10 @@ public class OMuleArmorLayer extends GeoRenderLayer<OMule> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_diamond.png");
             } else if (armorItemStack.getItem() == LOItems.NETHERITE_HORSE_ARMOR.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_netherite.png");
+            } else if (armorItemStack.getItem() == LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/horse_armor_griffith.png");
+            } else if (armorItemStack.getItem() == LOItems.RODEO_HARNESS.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/rodeo_harness.png");
             } else {
                 return;
             }

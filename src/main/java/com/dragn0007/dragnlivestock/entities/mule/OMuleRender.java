@@ -12,9 +12,12 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
     public OMuleRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OMuleModel());
         this.addRenderLayer(new OMuleMarkingLayer(this));
+        this.addRenderLayer(new OMuleEyeLayer(this));
+        this.addRenderLayer(new OMuleArmorLayer(this));
         this.addRenderLayer(new OMuleCarpetLayer(this));
         this.addRenderLayer(new OMuleArmorLayer(this));
         this.addRenderLayer(new OMuleSaddleLayer(this));
+        this.addRenderLayer(new OMuleShoeLayer(this));
     }
 
     @Override

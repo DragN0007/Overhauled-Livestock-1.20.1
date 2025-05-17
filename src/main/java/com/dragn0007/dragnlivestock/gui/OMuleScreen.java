@@ -144,7 +144,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
     private void renderBaseCoatLabel(GuiGraphics graphics) {
         String text = this.oMule.getTextureResource().toString(); //texture name
-        String noFillerText = text.replaceAll(".+mule_", ""); //remove 'mule_' and anything before it
+        String noFillerText = text.replaceAll(".+mule/", ""); //remove 'mule_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
         String replaceDefault = noPNGText.replace("default", "red");
@@ -161,7 +161,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
     private void renderMarkingLabel(GuiGraphics graphics) {
         String text = this.oMule.getOverlayLocation().toString();
-        String noFillerText = text.replaceAll(".+overlay_", "");
+        String noFillerText = text.replaceAll(".+overlay/", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
         String addPinkNoseText = noPNGText.replace("pink", "pink-nosed");

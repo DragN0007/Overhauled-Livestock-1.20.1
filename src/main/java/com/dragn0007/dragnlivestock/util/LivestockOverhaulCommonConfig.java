@@ -47,7 +47,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
-public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
+    public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {

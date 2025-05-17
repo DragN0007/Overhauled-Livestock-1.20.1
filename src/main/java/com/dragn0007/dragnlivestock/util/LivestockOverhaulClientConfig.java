@@ -9,6 +9,7 @@ public class LivestockOverhaulClientConfig {
     public static final ForgeConfigSpec.BooleanValue MINIMAL_HORSE_ARMOR;
     public static final ForgeConfigSpec.BooleanValue HORSE_COAT_GUI;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_TIMER;
+    public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_HUD;
     public static final ForgeConfigSpec.BooleanValue RENDER_BRAND_TAGS;
     public static final ForgeConfigSpec.BooleanValue CHICKEN_LEG_BAND;
     public static final ForgeConfigSpec.BooleanValue CHICKEN_NECK_TAG;
@@ -24,7 +25,10 @@ public class LivestockOverhaulClientConfig {
                 .define("Mount GUI Extras", true);
 
         HORSE_SPRINT_TIMER = BUILDER.comment("Should the sprint timer render on equines? *Note that this does not disable the mechanic itself, just the visual timer.")
-                .define("Visual Horse Sprint Timer", true);
+                .define("Visual Horse Sprint Timer", false);
+
+        HORSE_SPRINT_HUD = BUILDER.comment("Should the sprint HUD render on equines? *Note that this does not disable the mechanic itself, just the visual bar.")
+                .define("Visual Horse Sprint HUD", true);
 
         RENDER_BRAND_TAGS = BUILDER.comment("Should Brand Tags render on animals that have been tagged?")
                 .define("Render Brand Tags", true);

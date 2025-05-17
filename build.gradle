@@ -103,10 +103,12 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
 
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
     //compat stuff
 
     //nbtenks made by gotenks
-    implementation fg.deobf("curse.maven:nbtenks-1255827:6482486")
+    implementation fg.deobf("curse.maven:nbtenks-1255827:6514118")
 
     implementation fg.deobf("curse.maven:jade-324717:5876199")
     implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
@@ -132,6 +134,11 @@ tasks.named('processResources', ProcessResources).configure {
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
+}
+
+mixin {
+    add sourceSets.main, 'mixins.dragnlivestock.refmap.json'
+    config 'mixins.dragnlivestock.json'
 }
 
 tasks.named('jar', Jar).configure {

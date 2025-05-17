@@ -1,8 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -197,34 +196,40 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		return FOOD_ITEMS.test(p_28271_);
 	}
 
-	// Generates the base texture
-	public ResourceLocation getTextureLocation() {
-		return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
 
-	public ResourceLocation getOverlayLocation() {
-		return OPigMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
+	public int getBreedLocation() {
+		return PigBreed.Breed.values().length;
+	}
+	public int getBreed() {
+		return this.entityData.get(BREED);
+	}
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
-
+	public ResourceLocation getTextureLocation() {
+		return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
+	}
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
+	public ResourceLocation getOverlayLocation() {return OPigMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
 	}
 	public void setOverlayVariant(int overlayVariant) {
 		this.entityData.set(OVERLAY, overlayVariant);
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
 	}
@@ -234,12 +239,6 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	@Override
 	public boolean isTaggable() {
 		return this.isAlive() && !this.isBaby();
-	}
-	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
 	}
 	@Override
 	public boolean isTagged() {
@@ -252,6 +251,10 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
 
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
@@ -275,6 +278,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
 		tag.putInt("Gender", getGender());
@@ -291,6 +295,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		Random random = new Random();
 		setVariant(random.nextInt(OPigModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+		setBreed(random.nextInt(PigBreed.Breed.values().length));
 		setGender(random.nextInt(Gender.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -299,11 +304,19 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
+	}
+
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
 	}
 
 	public enum Gender {
@@ -372,47 +385,55 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		OPig oPig1 = (OPig) ageableMob;
-		if (ageableMob instanceof OPig && babiesBirthed <= LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get()) {
-
-			if (this.isMale() || !this.isInLove() || !this.isAlive() || babiesBirthed >= LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get()) {
-				return null;
-			}
-
-			OPig oPig = (OPig) ageableMob;
-
-			oPig1 = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
-
-			int i = this.random.nextInt(9);
-			int variant;
-			if (i < 4) {
-				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = oPig.getVariant();
-			} else {
-				variant = this.random.nextInt(OPigModel.Variant.values().length);
-			}
-
-			int j = this.random.nextInt(5);
-			int overlay;
-			if (j < 2) {
-				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
-				overlay = oPig.getOverlayVariant();
-			} else {
-				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);
-			}
-
-			int gender;
-			gender = this.random.nextInt(OPig.Gender.values().length);
-
-			oPig1.setVariant(variant);
-			oPig1.setOverlayVariant(overlay);
-			oPig1.setGender(gender);
-		}
-
-		babiesBirthed++;
-		return oPig1;
+//		OPig piglet;
+//		OPig partner = (OPig) ageableMob;
+//		piglet = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
+//
+//		int breedChance = this.random.nextInt(5);
+//		int breed;
+//		if (breedChance == 0) {
+//			breed = this.random.nextInt(PigBreed.Breed.values().length);
+//		} else {
+//			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+//		}
+//		piglet.setBreed(breed);
+//
+//		if (!(breedChance == 0)) {
+//			int variantChance = this.random.nextInt(14);
+//			int variant;
+//			if (variantChance < 6) {
+//				variant = this.getVariant();
+//			} else if (variantChance < 12) {
+//				variant = partner.getVariant();
+//			} else {
+//				variant = this.random.nextInt(OHorseModel.Variant.values().length);
+//			}
+//			piglet.setVariant(variant);
+//		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+//			((OPig) piglet).setColorByBreed();
+//		}
+//
+//		if (!(breedChance == 0)) {
+//			int overlayChance = this.random.nextInt(10);
+//			int overlay;
+//			if (overlayChance < 4) {
+//				overlay = this.getOverlayVariant();
+//			} else if (overlayChance < 8) {
+//				overlay = partner.getOverlayVariant();
+//			} else {
+//				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
+//			}
+//			piglet.setVariant(overlay);
+//		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+//			((OPig) piglet).setMarkingByBreed();
+//		}
+//
+//		int gender;
+//		gender = this.random.nextInt(OPig.Gender.values().length);
+//		piglet.setGender(gender);
+//
+//		return piglet;
+		return ageableMob;
 	}
 
 }

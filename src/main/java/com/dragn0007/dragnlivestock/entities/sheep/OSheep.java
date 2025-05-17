@@ -312,36 +312,30 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-
-	public ResourceLocation getTextureLocation() {
-		return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-
 	public int getBreedLocation() {
 		return SheepBreed.Breed.values().length;
 	}
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-
 	public int getBreed() {
 		return this.entityData.get(BREED);
 	}
-
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
-
 	public void setBreed(int breed) {
 		this.entityData.set(BREED, breed);
 	}
 
-	public ResourceLocation getOverlayLocation() {
-		return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public ResourceLocation getTextureLocation() {
+		return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
+	public void setVariant(int variant) {
+		this.entityData.set(VARIANT, variant);
+	}
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
+	public ResourceLocation getOverlayLocation() {return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
@@ -349,6 +343,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(OVERLAY, overlayVariant);
 	}
 
+	public static final EntityDataAccessor<Integer> WOOL_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getWoolLocation() {
 		return OSheepWoolLayer.Overlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
 	}
@@ -359,6 +354,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(WOOL_COLOR, overlayVariant);
 	}
 
+	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public int getHornVariant() {
 		return this.entityData.get(HORN_TYPE);
 	}
@@ -366,14 +362,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(HORN_TYPE, hornVariant);
 	}
 
-
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> WOOL_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
 	}
@@ -385,12 +375,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		return this.isAlive() && !this.isBaby();
 	}
 	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
-	}
-	@Override
 	public boolean isTagged() {
 		return this.entityData.get(TAGGED);
 	}
@@ -398,6 +382,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(TAGGED, tagged);
 	}
 
+	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public boolean isSheared() {
 		return this.entityData.get(SHEARED);
 	}
@@ -405,6 +390,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(SHEARED, sheared);
 	}
 
+	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public boolean wasMilked() {
 		return this.entityData.get(MILKED);
 	}
@@ -415,6 +401,10 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+		if (tag.contains("Breed")) {
+			setBreed(tag.getInt("Breed"));
+		}
+
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
 		}
@@ -429,10 +419,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (tag.contains("HornType")) {
 			setHornVariant(tag.getInt("HornType"));
-		}
-
-		if (tag.contains("Breed")) {
-			setBreed(tag.getInt("Breed"));
 		}
 
 		if (tag.contains("Gender")) {
@@ -465,11 +451,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Breed", getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
 		tag.putInt("Wool", getWoolVariant());
 		tag.putInt("HornType", getHornVariant());
-		tag.putInt("Breed", getBreed());
 		tag.putInt("Gender", this.getGender());
 		tag.putBoolean("Sheared", this.isSheared());
 		tag.putInt("ShearedTime", this.regrowWoolCounter);
@@ -482,11 +468,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(WOOL_COLOR, 0);
 		this.entityData.define(HORN_TYPE, 0);
-		this.entityData.define(BREED, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
@@ -508,7 +494,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
 			this.setWoolColorByBreed();
-			this.setMarkingsByBreed();
+			this.setMarkingByBreed();
 			this.setHornsByBreed();
 		} else {
 			this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
@@ -518,6 +504,13 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+	}
+
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
 	}
 
 	public enum Gender {
@@ -558,13 +551,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			} else {
 				OSheep partner = (OSheep) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -574,40 +560,69 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		OSheep oSheep = (OSheep) ageableMob;
-		if (ageableMob instanceof OSheep) {
-			OSheep oSheep1 = (OSheep) ageableMob;
-			oSheep = EntityTypes.O_SHEEP_ENTITY.get().create(serverLevel);
+		OSheep lamb;
+		OSheep partner = (OSheep) ageableMob;
+		lamb = EntityTypes.O_SHEEP_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
+		int breedChance = this.random.nextInt(5);
+		int breed;
+		if (breedChance == 0) {
+			breed = this.random.nextInt(SheepBreed.Breed.values().length);
+		} else {
+			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+		}
+		lamb.setBreed(breed);
+
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int variantChance = this.random.nextInt(14);
 			int variant;
-			if (i < 4) {
+			if (variantChance < 6) {
 				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = oSheep1.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(OSheepModel.Variant.values().length);
 			}
-
-			int j = this.random.nextInt(9);
-			int breed;
-			if (j < 4) {
-				breed = this.getBreedLocation();
-			} else if (j < 8) {
-				breed = oSheep1.getBreedLocation();
-			} else {
-				breed = this.random.nextInt(SheepBreed.Breed.values().length);
-			}
-
-			int gender;
-			gender = this.random.nextInt(OSheep.Gender.values().length);
-
-			oSheep.setVariant(variant);
-			oSheep.setBreed(breed);
-			oSheep.setGender(gender);
+			lamb.setVariant(variant);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			lamb.setColorByBreed();
 		}
 
-		return oSheep;
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
+			if (overlayChance < 4) {
+				overlay = this.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
+			} else {
+				overlay = this.random.nextInt(OSheepMarkingLayer.Overlay.values().length);
+			}
+			lamb.setOverlayVariant(overlay);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			lamb.setMarkingByBreed();
+		}
+
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int woolColorChance = this.random.nextInt(10);
+			int woolColor;
+			if (woolColorChance < 4) {
+				woolColor = this.getOverlayVariant();
+			} else if (woolColorChance < 8) {
+				woolColor = partner.getOverlayVariant();
+			} else {
+				woolColor = this.random.nextInt(OSheepWoolLayer.Overlay.values().length);
+			}
+			lamb.setWoolVariant(woolColor);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			lamb.setWoolColorByBreed();
+		}
+
+		int gender;
+		gender = this.random.nextInt(OSheep.Gender.values().length);
+		lamb.setGender(gender);
+
+		return lamb;
 	}
 
 	@Override
@@ -983,7 +998,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	}
 
-	public void setMarkingsByBreed() {
+	public void setMarkingByBreed() {
 
 		if (this.getBreed() == 0) { //gulf coast don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {

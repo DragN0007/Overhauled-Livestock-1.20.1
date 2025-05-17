@@ -130,6 +130,20 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
+    protected Vec3 getRiddenInput(Player player, Vec3 vec3) {
+        if (this.onGround() && this.playerJumpPendingScale == 0.0F && this.isStanding() && !this.allowStandSliding) {
+            return Vec3.ZERO;
+        } else {
+            float strafe = player.xxa * 0.5F;
+            float forward = player.zza;
+            if (forward <= 0.0F) {
+                forward *= 0.25F;
+            }
+
+            return new Vec3((double)strafe, 0.0D, (double)forward);
+        }
+    }
+
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
     public static final UUID SHOE_MODIFIER_UUID = UUID.fromString("d9b2d63d-5baf-4f2d-9e24-d80b02e6d17c");
     public static final UUID SPRINT_SPEED_MOD_UUID = UUID.fromString("c9379664-01b5-4e19-a7e9-11264453bdce");

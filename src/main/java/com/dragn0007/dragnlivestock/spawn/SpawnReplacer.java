@@ -882,7 +882,7 @@ public class SpawnReplacer {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oSheep.setColorByBreed();
                         oSheep.setWoolColorByBreed();
-                        oSheep.setMarkingsByBreed();
+                        oSheep.setMarkingByBreed();
                         oSheep.setHornsByBreed();
                     } else {
                         oSheep.setVariant(random.nextInt(OSheepModel.Variant.values().length));

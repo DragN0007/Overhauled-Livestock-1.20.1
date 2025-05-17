@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.sheep;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,6 +21,11 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
 
         if (!animatable.isBaby() && animatable.isSheared()) {
             return;
+        }
+
+        if (animatable.isBaby()) {
+            poseStack.scale(2.0F, 2.0F, 2.0F);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
         }
 
         RenderType renderMarkingType = RenderType.entityCutout(((OSheep)animatable).getWoolLocation());

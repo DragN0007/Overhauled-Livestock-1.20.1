@@ -20,11 +20,11 @@ public class LivestockOverhaulClientEvent {
     public static final KeyMapping HORSE_SPANISH_WALK_TOGGLE = new KeyMapping("key.dragnlivestock.horse_spanish_walk_toggle", InputConstants.KEY_DOWN, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_WAVE = new KeyMapping("key.dragnlivestock.horse_wave", InputConstants.KEY_G, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_LEVADE = new KeyMapping("key.dragnlivestock.horse_levade", InputConstants.KEY_L, "key.dragnlivestock.categories.dragnlivestock");
-//    public static final KeyMapping HORSE_REINING_TOGGLE = new KeyMapping("key.dragnlivestock.horse_reining_toggle", InputConstants.KEY_UP, "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HORSE_WALK_BACKWARDS = new KeyMapping("key.dragnlivestock.horse_walk_backwards", InputConstants.KEY_S, "key.dragnlivestock.categories.dragnlivestock");
 
     @SubscribeEvent
     public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
-        KeyMapping[] keyMappings = {CLEAR, HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE};
+        KeyMapping[] keyMappings = {CLEAR, HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE, HORSE_WALK_BACKWARDS};
         for (KeyMapping keyMapping : keyMappings) {
             event.register(keyMapping);
         }
