@@ -1,7 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
+import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -357,13 +359,6 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			} else {
 				OPig partner = (OPig) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -385,55 +380,111 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-//		OPig piglet;
-//		OPig partner = (OPig) ageableMob;
-//		piglet = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
-//
-//		int breedChance = this.random.nextInt(5);
-//		int breed;
-//		if (breedChance == 0) {
-//			breed = this.random.nextInt(PigBreed.Breed.values().length);
-//		} else {
-//			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
-//		}
-//		piglet.setBreed(breed);
-//
-//		if (!(breedChance == 0)) {
-//			int variantChance = this.random.nextInt(14);
-//			int variant;
-//			if (variantChance < 6) {
-//				variant = this.getVariant();
-//			} else if (variantChance < 12) {
-//				variant = partner.getVariant();
-//			} else {
-//				variant = this.random.nextInt(OHorseModel.Variant.values().length);
-//			}
-//			piglet.setVariant(variant);
-//		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
-//			((OPig) piglet).setColorByBreed();
-//		}
-//
-//		if (!(breedChance == 0)) {
-//			int overlayChance = this.random.nextInt(10);
-//			int overlay;
-//			if (overlayChance < 4) {
-//				overlay = this.getOverlayVariant();
-//			} else if (overlayChance < 8) {
-//				overlay = partner.getOverlayVariant();
-//			} else {
-//				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
-//			}
-//			piglet.setVariant(overlay);
-//		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
-//			((OPig) piglet).setMarkingByBreed();
-//		}
-//
-//		int gender;
-//		gender = this.random.nextInt(OPig.Gender.values().length);
-//		piglet.setGender(gender);
-//
-//		return piglet;
-		return ageableMob;
+		OPig piglet;
+		OPig partner = (OPig) ageableMob;
+		piglet = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
+
+		int breedChance = this.random.nextInt(5);
+		int breed;
+		if (breedChance == 0) {
+			breed = this.random.nextInt(PigBreed.Breed.values().length);
+		} else {
+			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+		}
+		piglet.setBreed(breed);
+
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int variantChance = this.random.nextInt(14);
+			int variant;
+			if (variantChance < 6) {
+				variant = this.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
+			} else {
+				variant = this.random.nextInt(OPigModel.Variant.values().length);
+			}
+			piglet.setVariant(variant);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			piglet.setColorByBreed();
+		}
+
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
+			if (overlayChance < 4) {
+				overlay = this.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
+			} else {
+				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);
+			}
+			piglet.setOverlayVariant(overlay);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			piglet.setMarkingByBreed();
+		}
+
+		int gender;
+		gender = this.random.nextInt(OPig.Gender.values().length);
+		piglet.setGender(gender);
+
+		return piglet;
+	}
+
+	public void setColorByBreed() {
+
+		if (this.getBreed() == 0) { //yorkshires are pink or sometimes white
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OPigModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.25) {
+				this.setVariant(7);
+			} else if (random.nextDouble() > 0.25) {
+				this.setVariant(5);
+			}
+		}
+
+		if (this.getBreed() == 1) { //norfolk are pink, brown, red or black
+			if (random.nextDouble() < 0.15) {
+				this.setOverlayVariant(random.nextInt(OPigModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {0, 1, 5, 6};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 1) { //guinea hogs are black or blue
+			if (random.nextDouble() < 0.15) {
+				this.setOverlayVariant(random.nextInt(OPigModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {0, 1, 5, 6};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+
+	}
+
+	public void setMarkingByBreed() {
+
+		if (this.getBreed() == 0) { //yorkshires dont usually come in markings but can
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				this.setVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 1) { //norfolk can come in all sorts of markings
+			if (random.nextDouble() < 0.50) {
+				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.50) {
+				this.setVariant(0);
+			}
+		}
+
+
+
 	}
 
 }

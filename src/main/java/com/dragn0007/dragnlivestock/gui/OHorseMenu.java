@@ -45,6 +45,9 @@ public class OHorseMenu extends AbstractContainerMenu {
                 if (itemStack.getItem() instanceof HorseArmorItem) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
+                if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
+                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
+                }
                 return false;
             }
 
@@ -65,7 +68,7 @@ public class OHorseMenu extends AbstractContainerMenu {
 
             @Override
             public boolean isActive() {
-                return true;
+                return OHorseMenu.this.oHorse.canWearArmor();
             }
         });
 

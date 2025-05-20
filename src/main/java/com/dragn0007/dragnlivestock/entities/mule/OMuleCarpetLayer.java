@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.mule;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -9,6 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -18,22 +18,22 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 @OnlyIn(Dist.CLIENT)
 public class OMuleCarpetLayer extends GeoRenderLayer<OMule> {
     public static final ResourceLocation[] CARPET_COLOR = new ResourceLocation[]{
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/white.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/orange.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/magenta.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/light_blue.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/yellow.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/lime.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/pink.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/grey.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/light_grey.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/cyan.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/purple.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/blue.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/brown.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/green.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/red.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/black.png")
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/white.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/orange.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/magenta.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/light_blue.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/yellow.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/lime.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/pink.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/grey.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/light_grey.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/cyan.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/purple.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/blue.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/brown.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/green.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/red.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/black.png")
     };
 
     public static final ResourceLocation[] MEDIEVAL_COLOR = new ResourceLocation[]{
@@ -121,22 +121,36 @@ public class OMuleCarpetLayer extends GeoRenderLayer<OMule> {
         DyeColor dyeColor = animatable.getCarpet();
         ResourceLocation resourceLocation = null;
 
-        if (dyeColor != null) {
-            resourceLocation = MEDIEVAL_COLOR[dyeColor.getId()];
+//        SimpleContainer inventory = animatable.getInventory();
+//        ItemStack itemStack = inventory.getItem(2);
+//        if (inventory.isEmpty()) {
+//            return;
+//        }
 
-//            if (animatable.getCarpet().getTag() == LOTags.Items.CARPET_BLANKETS) {
-//                resourceLocation = CARPET_COLOR[dyeColor.getId()];
+        ItemStack itemStack = animatable.getInventory().getItem(2);
+//        if (itemStack.isEmpty()) {
+//            System.out.println("no items in slot 2. setting to black carpet.");
+//            animatable.getInventory().setItem(2, Items.BLACK_CARPET.asItem().getDefaultInstance());
+//            return;
+//        }
+
+
+        if (dyeColor != null) {
+            System.out.println("item in slot 2: " + animatable.getInventory().getItem(2) + "\ntags: " + animatable.getInventory().getItem(2).getTags());
+
+//            if (animatable.getInventory().getItem(2).is(LOTags.Items.CARPET_BLANKETS)) {
+                resourceLocation = CARPET_COLOR[dyeColor.getId()];
 //            }
-//            if (animatable.getCarpet().getTag() == LOTags.Items.MEDIEVAL_BLANKETS) {
+//            if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
 //                resourceLocation = MEDIEVAL_COLOR[dyeColor.getId()];
 //            }
-//            if (animatable.getCarpet().getTag() == LOTags.Items.MODERN_BLANKETS) {
+//            if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
 //                resourceLocation = MODERN_COLOR[dyeColor.getId()];
 //            }
-//            if (animatable.getCarpet().getTag() == LOTags.Items.RACING_BLANKETS) {
+//            if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
 //                resourceLocation = RACING_COLOR[dyeColor.getId()];
 //            }
-//            if (animatable.getCarpet().getTag() == LOTags.Items.WESTERN_BLANKETS) {
+//            if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
 //                resourceLocation = WESTERN_COLOR[dyeColor.getId()];
 //            }
         }

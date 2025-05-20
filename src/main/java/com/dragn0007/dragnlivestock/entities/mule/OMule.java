@@ -2,7 +2,7 @@ package com.dragn0007.dragnlivestock.entities.mule;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.horse.*;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
@@ -86,6 +86,14 @@ public class OMule extends AbstractOMount implements GeoEntity {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());
 			});
+		}
+	}
+
+	protected int getInventorySize() {
+		if (this.hasChest()) {
+			return 18;
+		} else {
+			return 3;
 		}
 	}
 
@@ -291,9 +299,14 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		}
 
 		if ((!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) || !isMoving)) {
-			if ((this.getBreed() == 0 && sprintTick < (maxSprint + stockSprintAddition)) ||
+			if (((this.getBreed() == 0 && sprintTick < (maxSprint + stockSprintAddition)) ||
 					(this.getBreed() == 2 && sprintTick < (maxSprint + draftSprintAddition)) ||
-					(this.getBreed() == 1 && sprintTick < maxSprint)) {
+					(this.getBreed() == 1 && sprintTick < maxSprint)) && isMoving) {
+				sprintTick++;
+			} else if (((this.getBreed() == 0 && sprintTick < (maxSprint + stockSprintAddition)) ||
+					(this.getBreed() == 2 && sprintTick < (maxSprint + draftSprintAddition)) ||
+					(this.getBreed() == 1 && sprintTick < maxSprint)) && !isMoving) {
+				sprintTick++;
 				sprintTick++;
 			}
 		}

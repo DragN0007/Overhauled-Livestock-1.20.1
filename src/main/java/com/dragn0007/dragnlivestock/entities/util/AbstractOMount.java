@@ -52,9 +52,9 @@ import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
 
-//    public SimpleContainer getInventory() {
-//        return inventory;
-//    }
+    public SimpleContainer getInventory() {
+        return inventory;
+    }
 
     public net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
 
@@ -519,7 +519,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             compoundTag.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
         }
 
-        if (!this.inventory.getItem(1).isEmpty() && !this.isGoat(this)) {
+        if (!this.inventory.getItem(1).isEmpty() && this.isEquine(this)) {
+            compoundTag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
+        }
+
+        if (!this.inventory.getItem(1).isEmpty() && !this.isGoat(this) && !this.isEquine(this)) {
             compoundTag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
         }
 
@@ -567,7 +571,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        if (compoundTag.contains("DecorItem", 10) && !this.isGoat(this)) {
+        if (compoundTag.contains("DecorItem", 10) && this.isEquine(this)) {
+            this.inventory.setItem(1, ItemStack.of(compoundTag.getCompound("DecorItem")));
+        }
+
+        if (compoundTag.contains("DecorItem", 10) && !this.isGoat(this) && !this.isEquine(this)) {
             this.inventory.setItem(1, ItemStack.of(compoundTag.getCompound("DecorItem")));
         }
 
@@ -681,7 +689,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
        this.setDropChance(EquipmentSlot.CHEST, 0f);
         if (!this.level().isClientSide) {
             super.updateContainerEquipment();
-            this.setCarpet(getDyeColor(this.inventory.getItem(1)));
+            this.setCarpet(getDyeColor(this.inventory.getItem(2)));
         }
     }
 
@@ -706,6 +714,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Nullable
+
     public DyeColor getCarpet() {
         int i = this.entityData.get(DATA_CARPET_ID);
         return i == -1 ? null : DyeColor.byId(i);
@@ -736,6 +745,14 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
     public boolean isGoat(Entity entity) {
         return entity.getType() == EntityTypes.O_GOAT_ENTITY.get();
+    }
+    public boolean isEquine(Entity entity) {
+        return
+                entity.getType() == EntityTypes.O_HORSE_ENTITY.get() ||
+                entity.getType() == EntityTypes.O_MULE_ENTITY.get() ||
+                entity.getType() == EntityTypes.O_DONKEY_ENTITY.get() ||
+                entity.getType() == EntityTypes.O_UNDEAD_HORSE_ENTITY.get() ||
+                entity.getType() == EntityTypes.UNICORN_ENTITY.get();
     }
 
     public void handleSpeedRequest(int speedMod) {

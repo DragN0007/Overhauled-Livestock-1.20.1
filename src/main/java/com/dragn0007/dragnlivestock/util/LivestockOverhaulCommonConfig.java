@@ -6,6 +6,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
+
+    public static final ForgeConfigSpec.BooleanValue REPLACE_SPAWN_EGG_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_HORSES;
     public static final ForgeConfigSpec.BooleanValue REPLACE_MULES;
     public static final ForgeConfigSpec.BooleanValue REPLACE_DONKEYS;
@@ -22,9 +24,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_GOATS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_FROGS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_UNDEAD_HORSES;
-    public static final ForgeConfigSpec.BooleanValue SPAWN_GRUBS;
     public static final ForgeConfigSpec.BooleanValue SPAWN_MOOBLOOMS;
-    public static final ForgeConfigSpec.BooleanValue SPAWN_CARIBOU;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BIPRODUCTS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BREEDING;
     public static final ForgeConfigSpec.BooleanValue ANIMALS_HERDING_ENABLED;
@@ -52,6 +52,10 @@ public class LivestockOverhaulCommonConfig {
 
     static {
         BUILDER.push("Spawning");
+
+        REPLACE_SPAWN_EGG_ANIMALS = BUILDER.comment("Should vanilla animals spawned via Spawn Egg be replaced with O-Animals?" +
+                        "\nNote that if this is turned on, all previously-spawned vanilla animals will be converted regardless of spawn type.")
+                .define("Replace Spawn Egg Vanilla Animals", false);
 
         REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
                 .define("Replace Horses", true);
@@ -98,17 +102,12 @@ public class LivestockOverhaulCommonConfig {
         REPLACE_FROGS = BUILDER.comment("Should frogs be replaced by O-Frogs?")
                 .define("Replace Frogs", true);
 
-        SPAWN_GRUBS = BUILDER.comment("Should Grubs spawn?")
-                .define("Spawn Grubs", true);
+        REPLACE_UNDEAD_HORSES = BUILDER.comment("Should undead horses be replaced by O-Undead Horses?")
+                .define("Replace Undead Horses", true);
 
         SPAWN_MOOBLOOMS = BUILDER.comment("Should Mooblooms have a chance to spawn alongside O-Cows?")
                 .define("Spawn Mooblooms", true);
 
-        SPAWN_CARIBOU = BUILDER.comment("Should Caribou spawn?")
-                .define("Spawn Caribou", true);
-
-        REPLACE_UNDEAD_HORSES = BUILDER.comment("Should undead horses be replaced by O-Undead Horses?")
-                .define("Replace Undead Horses", true);
         BUILDER.pop();
 
         BUILDER.push("Miscellaneous");

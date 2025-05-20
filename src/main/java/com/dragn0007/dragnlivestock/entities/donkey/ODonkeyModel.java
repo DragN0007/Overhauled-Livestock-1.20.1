@@ -7,10 +7,12 @@ import software.bernie.geckolib.model.GeoModel;
 public class ODonkeyModel extends GeoModel<ODonkey> {
 
     public enum Variant {
-        DEFAULT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/donkey_default.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/donkey_brown.png")),
-        PALE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/donkey_pale.png")),
-        STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/donkey_stripe.png"));
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/brown.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/black.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/cream.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/grey.png")),
+        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/strawberry.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/white.png"));
 
         //Add new entries to bottom when mod is public, else donkeys will change textures during update.
 
@@ -23,11 +25,11 @@ public class ODonkeyModel extends GeoModel<ODonkey> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/donkey_overhauled.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_donkey.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
 
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_donkey.geo.json");
-//    public static final ResourceLocation BABY_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/baby_horse.animation.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_donkey.geo.json");
+
     @Override
     public ResourceLocation getModelResource(ODonkey object) {
         if(object.isBaby())

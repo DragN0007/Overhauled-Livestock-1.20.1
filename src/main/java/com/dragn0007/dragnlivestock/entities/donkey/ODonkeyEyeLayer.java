@@ -1,6 +1,7 @@
-package com.dragn0007.dragnlivestock.entities.mule;
+package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,15 +15,15 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 import java.time.LocalDate;
 import java.time.Month;
 
-public class OMuleEyeLayer extends GeoRenderLayer<OMule> {
-    public OMuleEyeLayer(GeoRenderer entityRendererIn) {
+public class ODonkeyEyeLayer extends GeoRenderLayer<ODonkey> {
+    public ODonkeyEyeLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, OMule animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, ODonkey animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
-        RenderType renderMarkingType = RenderType.entityCutout(((OMule)animatable).getEyeTextureResource());
+        RenderType renderMarkingType = RenderType.entityCutout(((ODonkey)animatable).getEyeTextureResource());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);
         poseStack.translate(0.0d, 0.0d, 0.0d);

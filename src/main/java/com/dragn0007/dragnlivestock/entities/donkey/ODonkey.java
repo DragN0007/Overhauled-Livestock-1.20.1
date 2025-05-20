@@ -3,10 +3,8 @@ package com.dragn0007.dragnlivestock.entities.donkey;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.mule.OMule;
-import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
+import com.dragn0007.dragnlivestock.entities.horse.*;
+import com.dragn0007.dragnlivestock.entities.mule.*;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.gui.ODonkeyMenu;
@@ -53,10 +51,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ODonkey extends AbstractOMount implements GeoEntity {
-	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(ODonkey.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(ODonkey.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
 
 	public ODonkey(EntityType<? extends ODonkey> type, Level level) {
 		super(type, level);
@@ -326,46 +320,69 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		return SoundEvents.DONKEY_ANGRY;
 	}
 
-	public ResourceLocation getTextureResource() {
-		return this.entityData.get(VARIANT_TEXTURE);
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public ResourceLocation getModelResource() {
+		return MuleBreed.breedFromOrdinal(getBreed()).resourceLocation;
+	}
+	public int getBreed() {
+		return this.entityData.get(BREED);
+	}
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
 	}
 
-	public ResourceLocation getOverlayLocation() {
-		return this.entityData.get(OVERLAY_TEXTURE);
-	}
 
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
-
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-
 	public void setVariant(int variant) {
-		this.entityData.set(VARIANT_TEXTURE, ODonkeyModel.Variant.variantFromOrdinal(variant).resourceLocation);
 		this.entityData.set(VARIANT, variant);
+		this.entityData.set(VARIANT_TEXTURE, OMuleModel.Variant.variantFromOrdinal(variant).resourceLocation);
 	}
-
-	public void setOverlayVariant(int variant) {
-		this.entityData.set(OVERLAY_TEXTURE, ODonkeyMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
-		this.entityData.set(OVERLAY, variant);
+	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public ResourceLocation getTextureResource() {
+		return this.entityData.get(VARIANT_TEXTURE);
 	}
-
 	public void setVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
-			resourceLocation = ODonkeyModel.Variant.DEFAULT.resourceLocation;
+			resourceLocation = OMuleModel.Variant.RUST.resourceLocation;
 		}
 		this.entityData.set(VARIANT_TEXTURE, resourceLocation);
 	}
 
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int variant) {
+		this.entityData.set(OVERLAY, variant);
+		this.entityData.set(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
+	}
+	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public ResourceLocation getOverlayLocation() {
+		return this.entityData.get(OVERLAY_TEXTURE);
+	}
 	public void setOverlayVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
-			resourceLocation = ODonkeyMarkingLayer.Overlay.NONE.resourceLocation;
+			resourceLocation = OMuleMarkingLayer.Overlay.NONE.resourceLocation;
 		}
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
+	}
+
+
+	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public ResourceLocation getEyeTextureResource() {
+		return OMuleEyeLayer.EyeOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
+	}
+	public int getEyeVariant() {
+		return this.entityData.get(EYES);
+	}
+	public void setEyeVariant(int eyeVariant) {
+		this.entityData.set(EYES, eyeVariant);
 	}
 
 	@Override
@@ -391,6 +408,14 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("Eyes")) {
+			this.setEyeVariant(tag.getInt("Eyes"));
+		}
+
+		if (tag.contains("SprintTime")) {
+			this.sprintTick = tag.getInt("SprintTime");
+		}
 	}
 
 	@Override
@@ -401,6 +426,8 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Gender", this.getGender());
+		tag.putInt("Eyes", this.getEyeVariant());
+		tag.putInt("SprintTime", this.sprintTick);
 	}
 
 	@Override
@@ -410,9 +437,21 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		this.setVariant(random.nextInt(ODonkeyModel.Variant.values().length));
-		this.setOverlayVariant(random.nextInt(ODonkeyMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColor();
+			this.setMarking();
+		} else {
+			this.setVariant(random.nextInt(OMuleModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OMuleMarkingLayer.Overlay.values().length));
+		}
+
+		if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+			this.setEyeColorByChance();
+		} else {
+			this.setEyeVariant(random.nextInt(OMuleEyeLayer.EyeOverlay.values().length));
+		}
 
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -433,8 +472,9 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
-		this.entityData.define(VARIANT_TEXTURE, ODonkeyModel.Variant.DEFAULT.resourceLocation);
+		this.entityData.define(VARIANT_TEXTURE, ODonkeyModel.Variant.BROWN.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, ODonkeyMarkingLayer.Overlay.NONE.resourceLocation);
+		this.entityData.define(EYES, 0);
 	}
 
 	public boolean canMate(Animal animal) {
@@ -448,89 +488,163 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			} else {
 				AbstractOMount partner = (AbstractOMount) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent() && ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
-					return isFemale();
+					return this.isFemale();
 				}
 			}
 		}
 		return false;
 	}
+
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		AbstractOMount abstracthorse;
+		AbstractOMount foal;
 
-		if (ageableMob instanceof OHorse horse) {
+		if (ageableMob instanceof OHorse partnerHorse) {
 
-			abstracthorse = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
+			foal = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
-			int overlayChance = this.random.nextInt(9);
-			int selectedOverlay;
-
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
 			if (overlayChance < 4) {
-				selectedOverlay = this.getOverlayVariant();
+				overlay = this.getOverlayVariant();
 			} else if (overlayChance < 8) {
-				selectedOverlay = horse.getOverlayVariant();
+				overlay = partnerHorse.getOverlayVariant();
 			} else {
-				selectedOverlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
+			}
+			((OHorse) foal).setVariant(overlay);
+
+			((OMule) foal).setOverlayVariant(overlay);
+			((OMule) foal).setVariant(random.nextInt(OMuleModel.Variant.values().length));
+
+			if (partnerHorse.isStockBreed() || partnerHorse.isWarmbloodedBreed() || partnerHorse.isRacingBreed()) {
+				((OMule) foal).setBreed(0);
 			}
 
-			((OMule) abstracthorse).setOverlayVariant(selectedOverlay);
-			((OMule) abstracthorse).setVariant(random.nextInt(OMuleModel.Variant.values().length));
-
-			//horse parent is stock, warmblood or racer
-			if (horse.getBreed() == 0 || horse.getBreed() == 2 || horse.getBreed() == 4 || horse.getBreed() == 7 || horse.getBreed() == 9 || horse.getBreed() == 10 || horse.getBreed() == 13) {
-				((OMule) abstracthorse).setBreed(0);
+			if (partnerHorse.isPonyBreed()) {
+				((OMule) foal).setBreed(1);
 			}
 
-			//horse parent is pony
-			if (horse.getBreed() == 3 || horse.getBreed() == 6 || horse.getBreed() == 11) {
-				((OMule) abstracthorse).setBreed(1);
-			}
-
-			//horse parent is draft
-			if (horse.getBreed() == 1 || horse.getBreed() == 5 || horse.getBreed() == 8 || horse.getBreed() == 12) {
-				((OMule) abstracthorse).setBreed(2);
+			if (partnerHorse.isDraftBreed()) {
+				((OMule) foal).setBreed(2);
 			}
 
 		} else {
-			ODonkey donkey = (ODonkey) ageableMob;
-			abstracthorse = EntityTypes.O_DONKEY_ENTITY.get().create(serverLevel);
+			ODonkey partner = (ODonkey) ageableMob;
+			foal = EntityTypes.O_DONKEY_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
+			int variantChance = this.random.nextInt(14);
 			int variant;
-			if (i < 4) {
+			if (variantChance < 6) {
 				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = donkey.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
 			} else {
-				variant = this.random.nextInt(ODonkeyModel.Variant.values().length);
+				variant = this.random.nextInt(OHorseModel.Variant.values().length);
 			}
+			((ODonkey) foal).setVariant(variant);
 
-			int j = this.random.nextInt(5);
+			int overlayChance = this.random.nextInt(10);
 			int overlay;
-			if (j < 2) {
+			if (overlayChance < 4) {
 				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
-				overlay = donkey.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(ODonkeyMarkingLayer.Overlay.values().length);
 			}
+			((ODonkey) foal).setOverlayVariant(overlay);
+
+			int eyeColorChance = this.random.nextInt(11);
+			int eyes;
+			if (eyeColorChance < 5) {
+				eyes = this.getEyeVariant();
+			} else if (eyeColorChance < 10) {
+				eyes = partner.getEyeVariant();
+			} else {
+				eyes = this.random.nextInt(ODonkeyEyeLayer.EyeOverlay.values().length);
+			}
+			((ODonkey) foal).setEyeVariant(eyes);
 
 			int gender;
 			gender = this.random.nextInt(ODonkey.Gender.values().length);
+			foal.setGender(gender);
 
-			((ODonkey) abstracthorse).setVariant(variant);
-			((ODonkey) abstracthorse).setOverlayVariant(overlay);
-			((ODonkey) abstracthorse).setGender(gender);
+
+			if (this.random.nextInt(3) >= 1) {
+				((ODonkey) foal).generateRandomJumpStrength();
+
+				int betterSpeed = (int) Math.max(partner.getSpeed(), this.random.nextInt(10) + 20);
+				foal.setSpeed(betterSpeed);
+
+				int betterHealth = (int) Math.max(partner.getHealth(), this.random.nextInt(20) + 40);
+				foal.setHealth(betterHealth);
+			}
+		}
+		this.setOffspringAttributes(ageableMob, foal);
+		return foal;
+	}
+
+	public void setEyeColorByChance() {
+
+		//white, cream and mostly-white or bald donkeys have a better chance of gaining blue or green eyes
+		if (this.getVariant() == 2 || this.getVariant() == 5 || this.getOverlayVariant() == 2 || this.getOverlayVariant() == 8
+				|| this.getOverlayVariant() == 9 || this.getOverlayVariant() == 10 || this.getOverlayVariant() == 15
+				|| this.getOverlayVariant() == 17 || this.getOverlayVariant() == 20 || this.getOverlayVariant() == 24
+				|| this.getOverlayVariant() == 26 || this.getOverlayVariant() == 32 || this.getOverlayVariant() == 34
+				|| this.getOverlayVariant() == 36 || this.getOverlayVariant() == 37 || this.getOverlayVariant() == 38
+				|| this.getOverlayVariant() == 39) {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9)); //heterochromic
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6); //green
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.10) {
+				this.setEyeVariant(5); //blue
+			} else if (random.nextDouble() > 0.30) {
+				this.setEyeVariant(this.getRandom().nextInt(4)); //random (between dark brown and dark blue)
+			} else {
+				this.setEyeVariant(0);
+			}
+		} else {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9));
+			} else if (random.nextDouble() < 0.03 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6);
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.03) {
+				this.setEyeVariant(5);
+			} else if (random.nextDouble() > 0.10) {
+				this.setEyeVariant(this.getRandom().nextInt(4));
+			} else {
+				this.setEyeVariant(0);
+			}
 		}
 
-		this.setOffspringAttributes(ageableMob, abstracthorse);
-		return abstracthorse;
 	}
+
+	public void setColor() {
+
+		//donkeys tend to come in browns, grey and black but can uncommonly come in other colors
+		if (random.nextDouble() < 0.20) {
+			this.setOverlayVariant(random.nextInt(OMuleModel.Variant.values().length));
+		} else if (random.nextDouble() > 0.20) {
+			int[] variants = {0, 1, 3, 4};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+
+	}
+
+	public void setMarking() {
+
+		//donkeys dont usually come with markings but can. generally come with small ones
+		if (random.nextDouble() < 0.20) {
+			this.setOverlayVariant(random.nextInt(OMuleMarkingLayer.Overlay.values().length));
+		} else if (random.nextDouble() > 0.20) {
+			int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+	}
+
 
 }

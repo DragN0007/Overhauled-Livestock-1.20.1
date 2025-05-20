@@ -61,7 +61,7 @@ public class OMuleModel extends DefaultedEntityGeoModel<OMule> {
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_mule.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
 
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_donkey.geo.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_donkey.geo.json");
 
     @Override
     public ResourceLocation getModelResource(OMule object) {

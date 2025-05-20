@@ -69,6 +69,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
@@ -134,10 +135,9 @@ public class SpawnReplacer {
         Random random = new Random();
 
         //Horse
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof Horse) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof Horse vanillaHorse) {
 
-            if (event.getEntity().getClass() == Horse.class) {
-                Horse vanillaHorse = (Horse) event.getEntity();
+            if (event.getEntity().getClass() == Horse.class && (!(vanillaHorse.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
 
                 if (event.getLevel().isClientSide) {
                     return;

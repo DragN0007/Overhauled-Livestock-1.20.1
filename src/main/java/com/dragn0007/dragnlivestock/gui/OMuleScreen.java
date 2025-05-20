@@ -83,6 +83,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
         if (this.oMule.canWearArmor()) {
             graphics.blit(MULE_INVENTORY_LOCATION, x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
+            graphics.blit(MULE_INVENTORY_LOCATION, x + 7, y + 53, 36, this.imageHeight + 54, 18, 18);
         }
 
         if (this.oMule.hasChest()) {

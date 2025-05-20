@@ -7,7 +7,6 @@ import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
-import com.dragn0007.dragnlivestock.entities.mule.OMuleMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
@@ -69,16 +68,12 @@ import java.util.stream.Stream;
 public class OHorse extends AbstractOMount implements GeoEntity {
 
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse");
-	private static final ResourceLocation CREATE_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse_create");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
 	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/horse");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
-		}
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && ModList.get().isLoaded("create")) {
-			return CREATE_LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
@@ -1106,13 +1101,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			} else {
 				AbstractOMount partner = (AbstractOMount) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent() && ((this.isFemale() && partnerIsMale) || (this.isMale() && partnerIsFemale))) {
-					return isFemale();
+					return this.isFemale();
 				}
 			}
 		}

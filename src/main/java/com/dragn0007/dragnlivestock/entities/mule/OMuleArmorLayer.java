@@ -29,13 +29,13 @@ public class OMuleArmorLayer extends GeoRenderLayer<OMule> {
     @Override
     public void render(PoseStack poseStack, OMule animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
-        if (armorSlots == null || armorSlots.size() <= 2) {
+        if (armorSlots.size() <= 2) {
             return;
         }
 
         ItemStack armorItemStack = armorSlots.get(2);
 
-        if (armorItemStack.isEmpty() || !(armorItemStack.getItem() instanceof HorseArmorItem)) {
+        if (armorItemStack.isEmpty()) {
             return;
         }
 

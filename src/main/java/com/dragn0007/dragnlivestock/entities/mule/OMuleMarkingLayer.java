@@ -22,14 +22,6 @@ public class OMuleMarkingLayer extends GeoRenderLayer<OMule> {
     @Override
     public void render(PoseStack poseStack, OMule animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
-        LocalDate currentDate = LocalDate.now();
-        int day = currentDate.getDayOfMonth();
-        Month month = currentDate.getMonth();
-
-        if (month == Month.DECEMBER && (day == 24 || day == 25)) {
-            return;
-        }
-
         RenderType renderMarkingType = RenderType.entityCutout(((OMule)animatable).getOverlayLocation());
 //        poseStack.pushPose();
 //        poseStack.scale(1.0f, 1.0f, 1.0f);

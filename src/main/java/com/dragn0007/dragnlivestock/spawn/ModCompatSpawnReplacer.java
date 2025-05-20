@@ -320,8 +320,7 @@ public class ModCompatSpawnReplacer {
         }
 
         // TerraFirmaCraft Caribou -> LO Caribou
-        if (LivestockOverhaulCommonConfig.SPAWN_CARIBOU.get() &&
-                ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "caribou"))) {
+        if (ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).equals(new ResourceLocation("tfc", "caribou"))) {
 
             Entity tfcCaribou = event.getEntity();
 

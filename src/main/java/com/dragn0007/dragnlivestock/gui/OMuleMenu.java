@@ -44,8 +44,6 @@ public class OMuleMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack itemStack) {
                 if (itemStack.getItem() instanceof HorseArmorItem) {
                     return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
-                } else if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
-                    return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
                 }
                 return false;
             }
@@ -56,20 +54,20 @@ public class OMuleMenu extends AbstractContainerMenu {
             }
         });
 
-//        this.addSlot(new Slot(this.container, OMuleSlots++, 8, 54) {
-//            @Override
-//            public boolean mayPlace(ItemStack itemStack) {
-//                if (itemStack.getItem() instanceof HorseShoeItem) {
-//                    return !this.hasItem() && OMuleMenu.this.OMule.canWearShoes();
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean isActive() {
-//                return OMuleMenu.this.OMule.canWearShoes();
-//            }
-//        });
+        this.addSlot(new Slot(this.container, OMuleSlots++, 8, 54) {
+            @Override
+            public boolean mayPlace(ItemStack itemStack) {
+                if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
+                    return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean isActive() {
+                return OMuleMenu.this.oMule.canWearArmor();
+            }
+        });
 
         if(this.oMule.hasChest()) {
             for(int y = 0; y < 3; y++) {
@@ -94,33 +92,6 @@ public class OMuleMenu extends AbstractContainerMenu {
     public boolean stillValid(Player player) {
         return !this.oMule.hasInventoryChanged(this.container) && this.container.stillValid(player) && this.oMule.isAlive() && this.oMule.distanceTo(player) < 8.0F;
     }
-
-//    public ItemStack quickMoveStack(Player player, int slotId) {
-//        Slot slot = this.slots.get(slotId);
-//        if(!slot.hasItem()) {
-//            return ItemStack.EMPTY;
-//        }
-//
-//        ItemStack itemStack = slot.getItem();
-//        ItemStack itemStackCopy = itemStack.copy();
-//        int containerSize = this.container.getContainerSize();
-//
-//        if(slotId < containerSize) {
-//            if(!this.moveItemStackTo(itemStack, containerSize, containerSize + 36, true)) {
-//                return ItemStack.EMPTY;
-//            }
-//        } else if(slotId < containerSize + 36) {
-//            if(!this.moveItemStackTo(itemStack, 0, containerSize, false)) {
-//                return ItemStack.EMPTY;
-//            }
-//        }
-//
-//        if(itemStack.getCount() == 0) {
-//            slot.set(ItemStack.EMPTY);
-//        }
-//        slot.setChanged();
-//        return itemStackCopy;
-//    }
 
     @Override
     public ItemStack quickMoveStack(Player player, int slotId) {
