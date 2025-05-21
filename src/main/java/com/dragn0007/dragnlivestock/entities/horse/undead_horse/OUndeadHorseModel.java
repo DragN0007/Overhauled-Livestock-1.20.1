@@ -49,8 +49,8 @@ public class OUndeadHorseModel extends GeoModel<OUndeadHorse> {
         }
     }
 
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/horse_overhaul.animation.json");
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/horse_overhauled.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_horse.geo.json");
 
     @Override
     public ResourceLocation getModelResource(OUndeadHorse object) {

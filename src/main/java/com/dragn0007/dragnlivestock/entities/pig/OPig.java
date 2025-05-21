@@ -70,6 +70,14 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		return LOOT_TABLE;
 	}
 
+	public boolean isMeatBreed() {
+		return this.getBreed() == 4 || this.getBreed() == 0;
+	}
+
+	public boolean isNormalBreed() {
+		return this.getBreed() == 1 || this.getBreed() == 2 || this.getBreed() == 3 || this.getBreed() == 5;
+	}
+
 	@Override
 	public Vec3 getLeashOffset() {
 		return new Vec3(0D, (double)this.getEyeHeight() * 0.8F, (double)(this.getBbWidth() * 0.9F));
@@ -434,7 +442,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 0) { //yorkshires are pink or sometimes white
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OPigModel.Variant.values().length));
+				this.setVariant(random.nextInt(OPigModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.25) {
 				this.setVariant(7);
 			} else if (random.nextDouble() > 0.25) {
@@ -444,7 +452,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 1) { //norfolk are pink, brown, red or black
 			if (random.nextDouble() < 0.15) {
-				this.setOverlayVariant(random.nextInt(OPigModel.Variant.values().length));
+				this.setVariant(random.nextInt(OPigModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.15) {
 				int[] variants = {0, 1, 5, 6};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -452,13 +460,39 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
-		if (this.getBreed() == 1) { //guinea hogs are black or blue
+		if (this.getBreed() == 2) { //guinea hogs are black or blue
 			if (random.nextDouble() < 0.15) {
-				this.setOverlayVariant(random.nextInt(OPigModel.Variant.values().length));
+				this.setVariant(random.nextInt(OPigModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.15) {
-				int[] variants = {0, 1, 5, 6};
+				int[] variants = {0, 2};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //kunekunes are black, white or red
+			if (random.nextDouble() < 0.15) {
+				this.setVariant(random.nextInt(OPigModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {0, 1, 6};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //poland chinas are primarily black
+			if (random.nextDouble() < 0.15) {
+				this.setVariant(random.nextInt(OPigModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				this.setVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //berkshires are primarily black
+			if (random.nextDouble() < 0.30) {
+				this.setVariant(random.nextInt(OPigModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				this.setVariant(0);
 			}
 		}
 
@@ -471,7 +505,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.10) {
 				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.10) {
-				this.setVariant(0);
+				this.setOverlayVariant(0);
 			}
 		}
 
@@ -479,12 +513,78 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.50) {
 				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.50) {
-				this.setVariant(0);
+				this.setOverlayVariant(0);
 			}
 		}
 
+		if (this.getBreed() == 2) { //guinea hogs dont usually come in markings but can
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				this.setOverlayVariant(0);
+			}
+		}
 
+		if (this.getBreed() == 3) { //kunekunes have spots or splotches
+			if (random.nextDouble() < 0.15) {
+				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {5, 6, 7, 8, 9, 10, 11, 12};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
 
+		if (this.getBreed() == 4) { //poland chinas have socks or stripes
+			if (random.nextDouble() < 0.15) {
+				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {0, 1, 2, 3, 4, 15};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) { //berkshires can come in all sorts of markings
+			if (random.nextDouble() < 0.50) {
+				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.50) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+			if (this.isMeatBreed()) {
+				if (random.nextDouble() < 0.40) {
+					this.spawnAtLocation(Items.PORKCHOP, 2);
+					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get(), 2);
+					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get(), 2);
+					this.spawnAtLocation(Items.LEATHER, 2);
+				} else if (random.nextDouble() > 0.40) {
+					this.spawnAtLocation(Items.PORKCHOP);
+					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get());
+					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+			if (this.isNormalBreed()) {
+				if (random.nextDouble() < 0.15) {
+					this.spawnAtLocation(Items.PORKCHOP);
+					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get());
+					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+		}
 	}
 
 }

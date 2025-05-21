@@ -7,12 +7,12 @@ import software.bernie.geckolib.model.GeoModel;
 public class ODonkeyModel extends GeoModel<ODonkey> {
 
     public enum Variant {
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/brown.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/black.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/cream.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/grey.png")),
-        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/strawberry.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mule/white.png"));
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/brown.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/black.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/cream.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/grey.png")),
+        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/strawberry.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/donkey/white.png"));
 
         //Add new entries to bottom when mod is public, else donkeys will change textures during update.
 
