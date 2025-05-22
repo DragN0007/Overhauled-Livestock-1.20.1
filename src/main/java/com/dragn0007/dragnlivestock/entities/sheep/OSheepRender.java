@@ -19,6 +19,22 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
     @Override
     public void preRender(PoseStack poseStack, OSheep entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
+        if (entity.getBreed() == 6) {
+            if (entity.isFemale()) {
+                model.getBone("mane").ifPresent(b -> b.setHidden(true));
+            } else if (entity.isMale() && !entity.isBaby()) {
+                model.getBone("mane").ifPresent(b -> b.setHidden(false));
+            }
+            model.getBone("tail").ifPresent(b -> b.setScaleY(2F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+        } else {
+            model.getBone("mane").ifPresent(b -> b.setHidden(true));
+            model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
+            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+        }
+
         if (entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
             model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
@@ -96,7 +112,7 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
                 model.getBone("tail").ifPresent(b -> b.setScaleY(1.1F));
                 model.getBone("tail").ifPresent(b -> b.setScaleX(1.1F));
                 model.getBone("tail").ifPresent(b -> b.setScaleZ(1.1F));
-            } else {
+            } else if (!(entity.getBreed() == 6)) {
                 model.getBone("wool_body").ifPresent(b -> b.setScaleY(1.0F));
                 model.getBone("wool_body").ifPresent(b -> b.setScaleX(1.0F));
                 model.getBone("wool_body").ifPresent(b -> b.setScaleZ(1.0F));

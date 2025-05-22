@@ -23,6 +23,10 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
             return;
         }
 
+        if (animatable.getBreed() == 6) {
+            return;
+        }
+
         if (animatable.isBaby()) {
             poseStack.scale(2.0F, 2.0F, 2.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);
@@ -40,6 +44,7 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
                 renderMarkingType,
                 bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                 1, 1, 1, 1);
+            super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
     }
 
     public enum Overlay {
@@ -49,6 +54,7 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
         LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/light_grey.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/white.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
         ;
 
         //Add new entries to bottom when mod is public, else sheep will change textures during update.

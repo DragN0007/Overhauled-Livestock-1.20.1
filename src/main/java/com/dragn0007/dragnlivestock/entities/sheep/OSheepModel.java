@@ -42,7 +42,14 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
         BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/brown.png")),
         RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/red.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/white.png"));
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/white.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/cream.png")),
+        DOBERMAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/doberman.png")),
+        LIGHT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/light.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/mahogany.png")),
+        DARK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/dark.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {

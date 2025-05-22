@@ -20,7 +20,7 @@ public class OSheepMarkingLayer extends GeoRenderLayer<OSheep> {
     public void render(PoseStack poseStack, OSheep animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
         if (animatable.isBaby()) {
-            poseStack.scale(1.0F, 1.0F, 1.0F);
+            poseStack.scale(2.0F, 2.0F, 2.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);
         }
 
@@ -36,6 +36,7 @@ public class OSheepMarkingLayer extends GeoRenderLayer<OSheep> {
                 renderMarkingType,
                 bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                 1, 1, 1, 1);
+        super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
     }
 
     public enum Overlay {
@@ -50,6 +51,12 @@ public class OSheepMarkingLayer extends GeoRenderLayer<OSheep> {
         SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/socks.png")),
         SPLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/splotched.png")),
         STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/stripe.png")),
+        FANCY_LIGHT_SPLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_light_splotched.png")),
+        FANCY_MEDIUM_SPLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_medium_splotched.png")),
+        FANCY_SPLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_splotched.png")),
+        FANCY_SOCKS_BACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_socks_back.png")),
+        FANCY_SOCKS_FRONT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_socks_front.png")),
+        ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/roan.png")),
         ;
 
         //Add new entries to bottom when mod is public, else sheep will change textures during update.
