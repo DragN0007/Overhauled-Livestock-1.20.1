@@ -7,14 +7,15 @@ import software.bernie.geckolib.model.GeoModel;
 public class OLlamaModel extends GeoModel<OLlama> {
 
     public enum Variant {
-        ASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_ash.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_brown.png")),
-        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_chocolate.png")),
-        COCOA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_cocoa.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_grey.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/llama_white.png"));
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/brown.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/grey.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/light_grey.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/red.png")),
+        SANDY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/sandy.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/white.png"));
 
         //Add new entries to bottom when mod is public, else llamas will change textures during update.
 
@@ -27,8 +28,8 @@ public class OLlamaModel extends GeoModel<OLlama> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/llama_overhauled.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/llama_overhauled.animation.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_llama.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_llama.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OLlama object) {

@@ -34,16 +34,27 @@ public class OLlamaMarkingLayer extends GeoRenderLayer<OLlama> {
 
     public enum Overlay {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/none.png")),
-        BUTT_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_butt_black.png")),
-        BUTT_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_butt_white.png")),
-        FRONT_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_front_black.png")),
-        FRONT_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_front_white.png")),
-        HALVED_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_halved_black.png")),
-        HALVED_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_halved_white.png")),
-        SPLASH_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_splash_black.png")),
-        SPLASH_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_splash_white.png")),
-        SPOT_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_spot_black.png")),
-        SPOT_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/overlay_spot_white.png"));
+        BLACK_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/black_bald.png")),
+        BLACK_NECK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/black_neck.png")),
+        BLACK_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/black_socks.png")),
+        BLACK_TAILED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/black_tailed.png")),
+        BLUE_NECK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/blue_neck.png")),
+        FEW_SPOT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/few_spot.png")),
+        HALF_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/half_black.png")),
+        LARGE_SPOT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/large_spot.png")),
+        RED_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/red_bald.png")),
+        RED_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/red_black.png")),
+        SANDY_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_bald.png")),
+        SANDY_NECK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_neck.png")),
+        SANDY_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_socks.png")),
+        SANDY_TAILED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_tailed.png")),
+        TAN_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/tan_black.png")),
+        WHITE_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/white_bald.png")),
+        WHITE_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/white_black.png")),
+        WHITE_NECK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/white_neck.png")),
+        WHITE_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/white_socks.png")),
+        WHITE_TAILED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/white_tailed.png")),
+        ;
 
         //Add new entries to bottom when mod is public, else llamas will change textures during update.
 

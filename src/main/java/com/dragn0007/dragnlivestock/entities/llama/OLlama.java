@@ -4,6 +4,10 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.LlamaFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.ai.OLlamaFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -121,6 +125,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		this.targetSelector.addGoal(1, new LlamaHurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new LlamaAttackWolfGoal(this));
 		this.goalSelector.addGoal(3, new LlamaFollowHerdLeaderGoal(this));
+		this.goalSelector.addGoal(2, new OLlamaFollowCaravanGoal(this, (double)2.1F));
 	}
 
 	public LazyOptional<?> itemHandler = null;
@@ -132,14 +137,19 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
+		double currentSpeed = this.getDeltaMovement().lengthSqr();
+		double speedThreshold = 0.015;
+
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if (tAnimationState.isMoving()) {
-			if (isVehicle() || isAggressive() || isSprinting() || isSwimming()) {
+		if (isMoving) {
+			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
-
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
@@ -217,12 +227,6 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	public int replenishMilkCounter = 0;
-
-	private boolean milked = false;
-
-	public boolean wasMilked() {
-		return this.milked;
-	}
 
 	@Override
 	public void tick() {
@@ -345,39 +349,45 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	// Generates the base texture
-	public ResourceLocation getTextureResource() {
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
+	public ResourceLocation getTextureLocation() {
 		return OLlamaModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
-
-	public ResourceLocation getOverlayLocation() {
-		return OLlamaMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-	}
-
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
-
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
-
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 
-	public void setOverlayVariant(int variant) {
-		this.entityData.set(OVERLAY, variant);
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
+	public ResourceLocation getOverlayLocation() {return OLlamaMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int overlayVariant) {
+		this.entityData.set(OVERLAY, overlayVariant);
 	}
 
-	public boolean getMilked() {
-		return this.milked;
+	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.BOOLEAN);
+	public boolean wasMilked() {
+		return this.entityData.get(MILKED);
 	}
-
 	public void setMilked(boolean milked) {
-		this.milked = milked;
+		this.entityData.set(MILKED, milked);
+	}
+
+	public enum Wooly {
+		NONE,
+		WOOLY
+	}
+	public static final EntityDataAccessor<Integer> WOOLY = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
+	public int getWooly() {
+		return this.entityData.get(WOOLY);
+	}
+	public void setWooly(int gender) {
+		this.entityData.set(WOOLY, gender);
 	}
 
 	@Override
@@ -406,8 +416,16 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			this.setGender(tag.getInt("Gender"));
 		}
 
+		if (tag.contains("Wooly")) {
+			this.setWooly(tag.getInt("Wooly"));
+		}
+
 		if (tag.contains("Milked")) {
-			setMilked(tag.getBoolean("Milked"));
+			this.setMilked(tag.getBoolean("Milked"));
+		}
+
+		if (tag.contains("MilkedTime")) {
+			this.replenishMilkCounter = tag.getInt("MilkedTime");
 		}
 
 		this.updateContainerEquipment();
@@ -419,43 +437,32 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
-
 		tag.putInt("Overlay", getOverlayVariant());
-
 		tag.putBoolean("Chested", this.isChested());
-
 		tag.putInt("Strength", this.getStrength());
+		tag.putInt("Gender", this.getGender());
+		tag.putInt("Wooly", this.getWooly());
+		tag.putBoolean("Milked", this.wasMilked());
+		tag.putInt("MilkedTime", this.replenishMilkCounter);
 
 		if (!this.inventory.getItem(1).isEmpty()) {
 			tag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
 		}
-
-		tag.putInt("Gender", this.getGender());
-
-		tag.putBoolean("Milked", getMilked());
 	}
 
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		this.setRandomStrength();
-		int i;
-		if (data instanceof LlamaGroupData) {
-			i = ((LlamaGroupData)data).variant;
-		} else {
-			i = this.random.nextInt(8);
-			data = new LlamaGroupData(i);
-		}
-
-		this.setVariant(i);
-
 		if (data == null) {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
+
 		setVariant(random.nextInt(OLlamaModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(OLlama.Gender.values().length));
+		this.setWooly(random.nextInt(OLlama.Wooly.values().length));
+		this.setRandomStrength();
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -465,10 +472,11 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(GENDER, 0);
+		this.entityData.define(WOOLY, 0);
 		this.entityData.define(CHESTED, false);
 		this.entityData.define(DATA_STRENGTH_ID, 0);
 		this.entityData.define(DATA_SWAG_ID, -1);
-		this.entityData.define(GENDER, 0);
 	}
 
 	public enum Gender {
@@ -509,13 +517,6 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			} else {
 				OLlama partner = (OLlama) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}

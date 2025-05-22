@@ -11,16 +11,15 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
         super(renderManager, new OLlamaModel());
         this.addRenderLayer(new OLlamaMarkingLayer(this));
         this.addRenderLayer(new OLlamaCarpetLayer(this));
+        this.addRenderLayer(new OLlamaChestLayer(this));
     }
 
     @Override
     public void render(OLlama entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         if (entity.hasChest()) {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
-            model.getBone("halter").ifPresent(b -> b.setHidden(false));
         } else {
             model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
-            model.getBone("halter").ifPresent(b -> b.setHidden(true));
         }
 
         if(entity.isBaby()) {

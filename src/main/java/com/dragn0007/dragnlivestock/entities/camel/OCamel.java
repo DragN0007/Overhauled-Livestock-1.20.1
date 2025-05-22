@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -94,6 +95,41 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 				data.writeInt(this.getId());
 			});
 		}
+	}
+
+	@Nullable
+	public OCamel caravanHead;
+	@Nullable
+	public OCamel caravanTail;
+
+	public void leaveCaravan() {
+		if (this.caravanHead != null) {
+			this.caravanHead.caravanTail = null;
+		}
+
+		this.caravanHead = null;
+	}
+
+	public void joinCaravan(OCamel p_30767_) {
+		this.caravanHead = p_30767_;
+		this.caravanHead.caravanTail = this;
+	}
+
+	public boolean hasCaravanTail() {
+		return this.caravanTail != null;
+	}
+
+	public boolean inCaravan() {
+		return this.caravanHead != null;
+	}
+
+	@Nullable
+	public OCamel getCaravanHead() {
+		return this.caravanHead;
+	}
+
+	public double followLeashSpeed() {
+		return 2.0D;
 	}
 
 	@Override

@@ -340,6 +340,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(VARIANT, variant);
 	}
 
+
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getOverlayLocation() {return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public int getOverlayVariant() {

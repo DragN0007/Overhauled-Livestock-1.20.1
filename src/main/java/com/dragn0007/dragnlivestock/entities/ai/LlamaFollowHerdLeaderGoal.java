@@ -24,7 +24,7 @@ public class LlamaFollowHerdLeaderGoal extends Goal {
    }
 
    public boolean canUse() {
-      if (this.mob.hasFollowers() || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get()) {
+      if (this.mob.hasFollowers() || !LivestockOverhaulCommonConfig.ANIMALS_HERDING_ENABLED.get() || this.mob.inCaravan() || this.mob.hasCaravanTail()) {
          return false;
       } else if (this.mob.isFollower()) {
          return true;
