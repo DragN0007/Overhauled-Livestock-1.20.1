@@ -6,8 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 public class CamelBreed {
 
     public enum Breed {
-        BACTRIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel.geo.json")),
-        DROMEDARY(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel_dromedary.geo.json"));
+        BACTRIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel/o_camel.geo.json")),
+        DROMEDARY(new ResourceLocation(LivestockOverhaul.MODID, "geo/camel/dromedary.geo.json"));
 
         public final ResourceLocation resourceLocation;
 

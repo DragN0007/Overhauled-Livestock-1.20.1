@@ -163,8 +163,8 @@ public class LivestockOverhaulCommonConfig {
         HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. Default is 72000.")
                 .define("Horse Hair Growth Time", 72000);
 
-        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed and gender?")
-                .define("Spawn By Breed", true);
+        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed and gender, along with their breed depending on the biome?")
+                .define("Spawn By Breed & Biome", true);
 
         EYES_BY_COLOR = BUILDER.comment("Should O-Animals' eye colors, if applicable, depend on their coat/ coloring?")
                 .define("Eye Colors By Coat Color/ Markings", true);

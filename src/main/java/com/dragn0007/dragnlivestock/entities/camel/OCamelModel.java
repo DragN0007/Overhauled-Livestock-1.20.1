@@ -1,20 +1,49 @@
 package com.dragn0007.dragnlivestock.entities.camel;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 
-public class OCamelModel extends GeoModel<OCamel> {
+public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
+
+    public OCamelModel() {
+        super(new ResourceLocation(LivestockOverhaul.MODID, "o_camel"), true);
+    }
+
+    @Override
+    public void setCustomAnimations(OCamel animatable, long instanceId, AnimationState<OCamel> animationState) {
+
+        CoreGeoBone neck = getAnimationProcessor().getBone("neck");
+
+        if (neck != null) {
+            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+            neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
+            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
+            neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        }
+    }
 
     public enum Variant {
-        ASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_ash.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_brown.png")),
-        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_chestnut.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_cream.png")),
-        DESERT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_desert.png")),
-        TERRACOTTA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_terracotta.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/camel_white.png"));
+        ASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/ash.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/black.png")),
+        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/chestnut.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/cream.png")),
+        DESERT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/desert.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/grey.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/light_grey.png")),
+        LIVER_CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/liver_chestnut.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/mahogany.png")),
+        SANDY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/sandy.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/white.png"));
         //Add new entries to bottom when mod is public, else camels will change textures during update.
 
         public final ResourceLocation resourceLocation;
@@ -26,10 +55,9 @@ public class OCamelModel extends GeoModel<OCamel> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/camel.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/camel.animation.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_camel.animation.json");
 
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_camel.geo.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_camel.geo.json");
     @Override
     public ResourceLocation getModelResource(OCamel object) {
         if(object.isBaby() && object.getBreed() == 0)

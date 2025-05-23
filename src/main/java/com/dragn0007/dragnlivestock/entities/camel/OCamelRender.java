@@ -13,6 +13,8 @@ public class OCamelRender extends GeoEntityRenderer<OCamel> {
         super(renderManager, new OCamelModel());
         this.addRenderLayer(new OCamelMarkingLayer(this));
         this.addRenderLayer(new OCamelCarpetLayer(this));
+        this.addRenderLayer(new OCamelSaddleLayer(this));
+        this.addRenderLayer(new OCamelChestLayer(this));
         this.addRenderLayer(new OCamelBrandTagLayer(this));
     }
 

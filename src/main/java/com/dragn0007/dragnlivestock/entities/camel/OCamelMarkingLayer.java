@@ -34,16 +34,31 @@ public class OCamelMarkingLayer extends GeoRenderLayer<OCamel> {
 
     public enum Overlay {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/none.png")),
-        BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_bald.png")),
-        BLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_blotched.png")),
-        HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_half_splash.png")),
-        HALVED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_halved.png")),
-        HIGH_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_high_socks.png")),
-        PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_piebald.png")),
-        SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_socks.png")),
-        SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_speckled.png")),
-        SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_splash.png")),
-        SPOT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/overlay_spot.png"));
+        BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/bald.png")),
+        BLACK_BELLY_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/black_belly_splash.png")),
+        BLACK_HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/black_half_splash.png")),
+        BLACK_PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/black_piebald.png")),
+        BLACK_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/black_speckled.png")),
+        BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/blaze.png")),
+        BLUE_BELLY_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/blue_belly_splash.png")),
+        BLUE_HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/blue_half_splash.png")),
+        BLUE_PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/blue_piebald.png")),
+        BLUE_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/blue_speckled.png")),
+        CREAM_BELLY_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/cream_belly_splash.png")),
+        CREAM_HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/cream_half_splash.png")),
+        CREAM_PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/cream_piebald.png")),
+        CREAM_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/cream_speckled.png")),
+        FULL_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/full_socks.png")),
+        HALF_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/half_socks.png")),
+        RED_BELLY_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/red_belly_splash.png")),
+        RED_HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/red_half_splash.png")),
+        RED_PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/red_piebald.png")),
+        RED_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/red_speckled.png")),
+        WHITE_BELLY_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/white_belly_splash.png")),
+        WHITE_HALF_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/white_half_splash.png")),
+        WHITE_PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/white_piebald.png")),
+        WHITE_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/overlay/white_speckled.png")),
+        ;
 
         //Add new entries to bottom when mod is public, else camels will change textures during update.
 

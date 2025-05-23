@@ -45,7 +45,6 @@ public class OLlamaMarkingLayer extends GeoRenderLayer<OLlama> {
         RED_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/red_bald.png")),
         RED_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/red_black.png")),
         SANDY_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_bald.png")),
-        SANDY_NECK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_neck.png")),
         SANDY_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_socks.png")),
         SANDY_TAILED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/sandy_tailed.png")),
         TAN_BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/overlay/tan_black.png")),

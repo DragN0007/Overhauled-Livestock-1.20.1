@@ -79,6 +79,7 @@ import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.extensions.IForgeBlockEntity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -874,9 +875,29 @@ public class SpawnReplacer {
                 }
 
                 if (oSheep != null) {
-                    oSheep.copyPosition(vanillasheep);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            if (random.nextDouble() < 0.20) {
+                                oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
+                            } else {
+                                int[] variants = {0, 5, 6};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oSheep.setBreed(variants[randomIndex]);
+                            }
+                        } else {
+                            if (random.nextDouble() < 0.20) {
+                                oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
+                            } else {
+                                int[] variants = {1, 2, 3, 4};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oSheep.setBreed(variants[randomIndex]);
+                            }
+                        }
+                    } else {
+                        oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
+                    }
 
-                    oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
+                    oSheep.copyPosition(vanillasheep);
                     oSheep.setGender(random.nextInt(OSheep.Gender.values().length));
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {

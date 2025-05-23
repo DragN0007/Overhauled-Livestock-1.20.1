@@ -512,6 +512,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
     }
 
+    //TODO: Carpet Fix
     @Override
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
@@ -682,6 +683,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
+    //TODO: Carpet Fix
     @Override
     public void updateContainerEquipment() {
        super.updateContainerEquipment();
@@ -689,7 +691,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
        this.setDropChance(EquipmentSlot.CHEST, 0f);
         if (!this.level().isClientSide) {
             super.updateContainerEquipment();
-            this.setCarpet(getDyeColor(this.inventory.getItem(2)));
+            if (this.isEquine(this)) {
+                this.setCarpet(getDyeColor(this.inventory.getItem(1)));
+            } else {
+                this.setCarpet(getDyeColor(this.inventory.getItem(1)));
+            }
         }
     }
 

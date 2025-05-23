@@ -28,6 +28,12 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
             poseStack.scale(1F, 1F, 1F);
         }
 
+        if(entity.getWooly() == 0 || entity.isSheared()) {
+            model.getBone("wool_body").ifPresent(b -> b.setHidden(true));
+        } else {
+            model.getBone("wool_body").ifPresent(b -> b.setHidden(false));
+        }
+
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

@@ -13,6 +13,7 @@ import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -44,11 +45,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -227,6 +230,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	public int replenishMilkCounter = 0;
+	public int regrowWoolCounter = 0;
 
 	@Override
 	public void tick() {
@@ -237,6 +241,16 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			if (list.size() <= 1) {
 				this.herdSize = 1;
 			}
+		}
+
+		regrowWoolCounter++;
+
+		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
+			this.setSheared(false);
+		}
+
+		if (this.getWooly() == 0) {
+			this.setSheared(true);
 		}
 
 		replenishMilkCounter++;
@@ -310,6 +324,15 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
+
+		if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() &&
+				(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && this.getWooly() == 1) {
+			player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
+			this.setSheared(true);
+			this.dropWoolByColorAndMarking();
+			regrowWoolCounter = 0;
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
 
 		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
 			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
@@ -386,8 +409,16 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public int getWooly() {
 		return this.entityData.get(WOOLY);
 	}
-	public void setWooly(int gender) {
-		this.entityData.set(WOOLY, gender);
+	public void setWooly(int wooly) {
+		this.entityData.set(WOOLY, wooly);
+	}
+
+	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.BOOLEAN);
+	public boolean isSheared() {
+		return this.entityData.get(SHEARED);
+	}
+	public void setSheared(boolean sheared) {
+		this.entityData.set(SHEARED, sheared);
 	}
 
 	@Override
@@ -428,6 +459,14 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			this.replenishMilkCounter = tag.getInt("MilkedTime");
 		}
 
+		if (tag.contains("Sheared")) {
+			this.setSheared(tag.getBoolean("Sheared"));
+		}
+
+		if (tag.contains("ShearedTime")) {
+			this.regrowWoolCounter = tag.getInt("ShearedTime");
+		}
+
 		this.updateContainerEquipment();
 		this.updateInventory();
 		super.readAdditionalSaveData(tag);
@@ -444,6 +483,8 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		tag.putInt("Wooly", this.getWooly());
 		tag.putBoolean("Milked", this.wasMilked());
 		tag.putInt("MilkedTime", this.replenishMilkCounter);
+		tag.putBoolean("Sheared", this.isSheared());
+		tag.putInt("ShearedTime", this.regrowWoolCounter);
 
 		if (!this.inventory.getItem(1).isEmpty()) {
 			tag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
@@ -458,13 +499,26 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		}
 		Random random = new Random();
 
+		this.spawnByBiome(this.level().getBiome(this.getOnPos()));
 		setVariant(random.nextInt(OLlamaModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(OLlama.Gender.values().length));
-		this.setWooly(random.nextInt(OLlama.Wooly.values().length));
 		this.setRandomStrength();
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+	}
+
+	public void spawnByBiome(Holder<Biome> biome) {
+		Random random = new Random();
+
+		if (biome.is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+			if (random.nextDouble() < 0.20) {
+				this.setWooly(1);
+			} else {
+				this.setWooly(0);
+			}
+		}
+
 	}
 
 	@Override
@@ -477,27 +531,24 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		this.entityData.define(CHESTED, false);
 		this.entityData.define(DATA_STRENGTH_ID, 0);
 		this.entityData.define(DATA_SWAG_ID, -1);
+		this.entityData.define(SHEARED, false);
+		this.entityData.define(MILKED, false);
 	}
 
 	public enum Gender {
 		FEMALE,
 		MALE
 	}
-
 	public boolean isFemale() {
 		return this.getGender() == 0;
 	}
-
 	public boolean isMale() {
 		return this.getGender() == 1;
 	}
-
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
-
 	public int getGender() {
 		return this.entityData.get(GENDER);
 	}
-
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
 	}
@@ -568,6 +619,105 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		}
 
 		return oLlama;
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!this.isSheared()) {
+			this.dropWoolByColorAndMarking();
+		}
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+
+		}
+
+	}
+
+	public void dropWoolByColorAndMarking() {
+
+
+		if (this.getWooly() == 1) {
+			if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+				if (this.getVariant() == 0) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
+					}
+				}
+				if (this.getVariant() == 1 || this.getVariant() == 3) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
+					}
+				}
+				if (this.getVariant() == 2 || this.getVariant() == 6 || this.getVariant() == 7) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
+					}
+				}
+				if (this.getVariant() == 4) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
+					}
+				}
+				if (this.getVariant() == 6 || this.getVariant() == 8) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+					}
+				}
+				//if vanilla loot
+			} else {
+				if (this.getVariant() == 0) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(Items.BLACK_WOOL, 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(Items.BLACK_WOOL, 1);
+					}
+				}
+				if (this.getVariant() == 1 || this.getVariant() == 3) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(Items.GRAY_WOOL, 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(Items.GRAY_WOOL, 1);
+					}
+				}
+				if (this.getVariant() == 2 || this.getVariant() == 6 || this.getVariant() == 7) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(Items.BROWN_WOOL, 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(Items.BROWN_WOOL, 1);
+					}
+				}
+				if (this.getVariant() == 4) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
+					}
+				}
+				if (this.getVariant() == 6 || this.getVariant() == 8) {
+					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+						this.spawnAtLocation(Items.WHITE_WOOL, 2);
+					} else if (random.nextDouble() > 0.50) {
+						this.spawnAtLocation(Items.WHITE_WOOL, 1);
+					}
+				}
+			}
+
+
+		}
+
 	}
 
 	@Override

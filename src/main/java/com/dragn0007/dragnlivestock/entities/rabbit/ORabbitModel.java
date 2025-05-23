@@ -1,10 +1,42 @@
 package com.dragn0007.dragnlivestock.entities.rabbit;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 
-public class ORabbitModel extends GeoModel<ORabbit> {
+public class ORabbitModel extends DefaultedEntityGeoModel<ORabbit> {
+
+    public ORabbitModel() {
+        super(new ResourceLocation(LivestockOverhaul.MODID, "o_rabbit"), true);
+    }
+
+    @Override
+    public void setCustomAnimations(ORabbit animatable, long instanceId, AnimationState<ORabbit> animationState) {
+
+        CoreGeoBone neck = getAnimationProcessor().getBone("neck");
+        CoreGeoBone head = getAnimationProcessor().getBone("head");
+
+        if (neck != null) {
+            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+            neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
+            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
+            neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        }
+
+        if (head != null) {
+            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+            head.setRotX(head.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
+            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
+            head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        }
+    }
 
     public enum Variant {
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/rabbit_black.png")),

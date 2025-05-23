@@ -4,13 +4,13 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -34,8 +34,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -388,6 +390,12 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public void setTagged(boolean tagged) {
 		this.entityData.set(TAGGED, tagged);
 	}
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
+	}
 
 	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
 	public boolean isSheared() {
@@ -513,36 +521,23 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
-	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
-	}
-
 	public enum Gender {
 		FEMALE,
 		MALE
 	}
-
 	public boolean isFemale() {
 		return this.getGender() == 0;
 	}
-
 	public boolean isMale() {
 		return this.getGender() == 1;
 	}
-
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-
 	public int getGender() {
 		return this.entityData.get(GENDER);
 	}
-
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
 	}
-
 	public boolean canParent() {
 		return !this.isBaby() && this.isInLove();
 	}
