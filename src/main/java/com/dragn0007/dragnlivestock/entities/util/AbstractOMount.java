@@ -520,8 +520,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             compoundTag.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
         }
 
-        if (!this.inventory.getItem(1).isEmpty() && this.isEquine(this)) {
-            compoundTag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
+        if (!this.inventory.getItem(2).isEmpty() && this.isEquine(this)) {
+            compoundTag.put("DecorItem", this.inventory.getItem(2).save(new CompoundTag()));
         }
 
         if (!this.inventory.getItem(1).isEmpty() && !this.isGoat(this) && !this.isEquine(this)) {
@@ -573,7 +573,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         if (compoundTag.contains("DecorItem", 10) && this.isEquine(this)) {
-            this.inventory.setItem(1, ItemStack.of(compoundTag.getCompound("DecorItem")));
+            this.inventory.setItem(2, ItemStack.of(compoundTag.getCompound("DecorItem")));
         }
 
         if (compoundTag.contains("DecorItem", 10) && !this.isGoat(this) && !this.isEquine(this)) {
@@ -692,7 +692,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         if (!this.level().isClientSide) {
             super.updateContainerEquipment();
             if (this.isEquine(this)) {
-                this.setCarpet(getDyeColor(this.inventory.getItem(1)));
+                this.setCarpet(getDyeColor(this.inventory.getItem(2)));
             } else {
                 this.setCarpet(getDyeColor(this.inventory.getItem(1)));
             }

@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.mule;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -121,38 +123,31 @@ public class OMuleCarpetLayer extends GeoRenderLayer<OMule> {
         DyeColor dyeColor = animatable.getCarpet();
         ResourceLocation resourceLocation = null;
 
-//        SimpleContainer inventory = animatable.getInventory();
-//        ItemStack itemStack = inventory.getItem(2);
-//        if (inventory.isEmpty()) {
-//            return;
-//        }
-
         ItemStack itemStack = animatable.getInventory().getItem(2);
-//        if (itemStack.isEmpty()) {
+        if (itemStack.isEmpty()) {
 //            System.out.println("no items in slot 2. setting to black carpet.");
 //            animatable.getInventory().setItem(2, Items.BLACK_CARPET.asItem().getDefaultInstance());
-//            return;
-//        }
-
+            return;
+        }
 
         if (dyeColor != null) {
-            System.out.println("item in slot 2: " + animatable.getInventory().getItem(2) + "\ntags: " + animatable.getInventory().getItem(2).getTags());
+//            System.out.println("item in slot 2: " + animatable.getInventory().getItem(2));
 
-//            if (animatable.getInventory().getItem(2).is(LOTags.Items.CARPET_BLANKETS)) {
+            if (animatable.getInventory().getItem(2).is(LOTags.Items.CARPET_BLANKETS)) {
                 resourceLocation = CARPET_COLOR[dyeColor.getId()];
-//            }
-//            if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
-//                resourceLocation = MEDIEVAL_COLOR[dyeColor.getId()];
-//            }
-//            if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
-//                resourceLocation = MODERN_COLOR[dyeColor.getId()];
-//            }
-//            if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
-//                resourceLocation = RACING_COLOR[dyeColor.getId()];
-//            }
-//            if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-//                resourceLocation = WESTERN_COLOR[dyeColor.getId()];
-//            }
+            }
+            if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
+                resourceLocation = MEDIEVAL_COLOR[dyeColor.getId()];
+            }
+            if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
+                resourceLocation = MODERN_COLOR[dyeColor.getId()];
+            }
+            if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
+                resourceLocation = RACING_COLOR[dyeColor.getId()];
+            }
+            if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
+                resourceLocation = WESTERN_COLOR[dyeColor.getId()];
+            }
         }
 
         if (resourceLocation == null) {

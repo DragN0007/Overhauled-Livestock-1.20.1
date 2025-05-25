@@ -342,7 +342,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getModelResource().equals(MuleBreed.DRAFT.resourceLocation)) {
-				offsetY = 1.25;
+				offsetY = 1.2;
 			}
 
 			if (this.isJumping()) {
