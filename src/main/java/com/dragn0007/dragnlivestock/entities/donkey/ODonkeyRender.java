@@ -53,14 +53,6 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
             }
-
-            if (animatable.isWearingArmor()) {
-                model.getBone("body_armor").ifPresent(b -> b.setHidden(false));
-                model.getBone("neck_armor").ifPresent(b -> b.setHidden(false));
-            } else {
-                model.getBone("body_armor").ifPresent(b -> b.setHidden(true));
-                model.getBone("neck_armor").ifPresent(b -> b.setHidden(true));
-            }
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

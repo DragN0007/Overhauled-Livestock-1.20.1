@@ -11,6 +11,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -19,6 +20,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib.GeckoLib;
+
+import java.util.Optional;
 
 
 @Mod(LivestockOverhaul.MODID)
@@ -69,7 +72,10 @@ public class LivestockOverhaul
         }
     };
 
+     public static final EntityDataSerializer<Optional<DyeColor>> DYE_COLOR = EntityDataSerializer.optional(FriendlyByteBuf::writeEnum, (friendlyByteBuf) -> friendlyByteBuf.readEnum(DyeColor.class));
+
     static {
         EntityDataSerializers.registerSerializer(RESOURCE_LOCATION);
+        EntityDataSerializers.registerSerializer(DYE_COLOR);
     }
 }

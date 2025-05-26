@@ -4,7 +4,6 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
-import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -16,7 +15,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -36,17 +34,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -153,7 +149,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public static final AttributeModifier SPRINT_SPEED_MOD = new AttributeModifier(SPRINT_SPEED_MOD_UUID, "Sprint speed mod", 0.3D, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.7D, AttributeModifier.Operation.MULTIPLY_TOTAL); // KEEP THIS NEGATIVE. It is calculated by adding 1. So -0.1 actually means 0.9
 
-    public static final EntityDataAccessor<Integer> DATA_CARPET_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<ItemStack> DECOR_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<ItemStack> SADDLE_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
     protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.OPTIONAL_UUID);
 
     protected boolean shouldEmote;
@@ -287,40 +284,26 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return this.isAlive() && !this.isBaby() && this.isTamed();
     }
 
+    @Override
+    public boolean isSaddled() {
+        return !this.entityData.get(SADDLE_ITEM).isEmpty();
+    }
+
     public boolean isSaddle(ItemStack itemStack) {
         return itemStack.getItem() instanceof SaddleItem;
     }
 
     @Override
-    public void equipSaddle(@Nullable SoundSource source) {
-        this.inventory.setItem(0, new ItemStack(Items.SADDLE));
-
-        if (isGoat(this)) {
-            return;
-        }
-
-//        if (!isHorse(this) && !isMule(this) && !isDonkey(this) && !isGoat(this)) {
-//            this.inventory.setItem(0, new ItemStack(Items.SADDLE));
-//        }
-//
-//        if (isHorse(this) || isMule(this) || isDonkey(this)|| isGoat(this)) {
-//            return;
-//        }
+    public void equipSaddle(@Nullable SoundSource soundSource) {
+        // NOTE(EVNGLX): Handled in the interact method instead
     }
 
-    @Override
-    public boolean hasChest() {
-        return this.entityData.get(DATA_ID_CHEST);
+    public void setSaddleItem(ItemStack itemStack) {
+        this.entityData.set(SADDLE_ITEM, itemStack);
     }
 
-    @Override
-    public void setChest(boolean p_30505_) {
-        this.entityData.set(DATA_ID_CHEST, p_30505_);
-    }
-
-    @Override
-    public boolean isSaddled() {
-        return this.getFlag(4);
+    public ItemStack getSaddleItem() {
+        return this.entityData.get(SADDLE_ITEM);
     }
 
     @Override
@@ -429,6 +412,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
+        if(this.isSaddle(itemStack) && this.isSaddleable() && !this.isSaddled()) {
+            // item is a saddle, entity can be saddled, and isn't already wearing a saddle
+            this.setSaddleItem(itemStack);
+            return InteractionResult.SUCCESS;
+        }
+
         if(!itemStack.isEmpty()) {
             if(this.isFood(itemStack)) {
                 return this.fedFood(player, itemStack);
@@ -511,44 +500,40 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_CARPET_ID, -1);
         this.entityData.define(DATA_ID_CHEST, false);
+        this.entityData.define(DECOR_ITEM, ItemStack.EMPTY);
+        this.entityData.define(SADDLE_ITEM, ItemStack.EMPTY);
         this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
+    }
+
+    public ItemStack getDecorItem() {
+        return this.entityData.get(DECOR_ITEM);
+    }
+
+    public void setDecorItem(ItemStack decorItem) {
+        this.entityData.set(DECOR_ITEM, decorItem);
     }
 
     //TODO: Carpet Fix
     @Override
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
-        if (!this.inventory.getItem(1).isEmpty()) {
-            compoundTag.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
+        if(!this.getSaddleItem().isEmpty()) {
+            compoundTag.put("SaddleItem", this.getSaddleItem().save(new CompoundTag()));
         }
 
-        if (!this.inventory.getItem(2).isEmpty() && this.isEquine(this)) {
-            compoundTag.put("DecorItem", this.inventory.getItem(2).save(new CompoundTag()));
+        if(!this.getArmor().isEmpty()) {
+            compoundTag.put("ArmorItem", this.getArmor().save(new CompoundTag()));
         }
 
-        if (!this.inventory.getItem(1).isEmpty() && !this.isGoat(this) && !this.isEquine(this)) {
-            compoundTag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
+        if(!this.getDecorItem().isEmpty()) {
+            compoundTag.put("DecorItem", this.getDecorItem().save(new CompoundTag()));
         }
 
-        if (!this.inventory.getItem(0).isEmpty() && this.isGoat(this)) {
-            compoundTag.put("DecorItem", this.inventory.getItem(0).save(new CompoundTag()));
-        }
-
-        if (!this.inventory.getItem(0).isEmpty()) {
-            compoundTag.put("SaddleItem", this.inventory.getItem(0).save(new CompoundTag()));
-        }
-
-        if (!this.inventory.getItem(2).isEmpty()) {
-            compoundTag.put("ShoeItem", this.inventory.getItem(2).save(new CompoundTag()));
-        }
-
-        compoundTag.putBoolean("ChestedHorse", this.hasChest());
         if (this.hasChest()) {
             ListTag listtag = new ListTag();
 
-            for(int i = 2; i < this.inventory.getContainerSize(); ++i) {
+            for(int i = 2; i < this.inventory.getContainerSize(); i++) {
                 ItemStack itemstack = this.inventory.getItem(i);
                 if (!itemstack.isEmpty()) {
                     CompoundTag compoundtag = new CompoundTag();
@@ -560,50 +545,29 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
             compoundTag.put("Items", listtag);
         }
-
-        if (this.getOwnerUUID() != null) {
-            compoundTag.putUUID("Owner", this.getOwnerUUID());
-        }
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compoundTag) {
         super.readAdditionalSaveData(compoundTag);
-        if(compoundTag.contains("ArmorItem", 10)) {
-            ItemStack itemStack = ItemStack.of(compoundTag.getCompound("ArmorItem"));
-            if(!itemStack.isEmpty() && this.isArmor(itemStack)) {
-                this.inventory.setItem(1, itemStack);
-            }
+        if(compoundTag.contains("SaddleItem")) {
+            ItemStack saddleItem = ItemStack.of(compoundTag.getCompound("SaddleItem"));
+            this.setSaddleItem(saddleItem);
+            this.inventory.setItem(this.saddleSlot(), saddleItem);
         }
 
-        if (compoundTag.contains("DecorItem", 10) && this.isEquine(this)) {
-            this.inventory.setItem(2, ItemStack.of(compoundTag.getCompound("DecorItem")));
+        if(compoundTag.contains("ArmorItem")) {
+            ItemStack armorItem = ItemStack.of(compoundTag.getCompound("ArmorItem"));
+            this.setArmorEquipment(armorItem);
+            this.inventory.setItem(this.armorSlot(), armorItem);
         }
 
-        if (compoundTag.contains("DecorItem", 10) && !this.isGoat(this) && !this.isEquine(this)) {
-            this.inventory.setItem(1, ItemStack.of(compoundTag.getCompound("DecorItem")));
+        if(compoundTag.contains("DecorItem")) {
+            ItemStack decorItem = ItemStack.of(compoundTag.getCompound("DecorItem"));
+            this.setDecorItem(decorItem);
+            this.inventory.setItem(this.decorSlot(), decorItem);
         }
 
-        if (compoundTag.contains("DecorItem", 10) && this.isGoat(this)) {
-            this.inventory.setItem(0, ItemStack.of(compoundTag.getCompound("DecorItem")));
-        }
-
-        if (compoundTag.contains("SaddleItem", 10)) {
-            ItemStack itemStack = ItemStack.of(compoundTag.getCompound("SaddleItem"));
-            if(!itemStack.isEmpty() && this.isSaddle(itemStack)) {
-                this.inventory.setItem(0, itemStack);
-            }
-        }
-
-        if(compoundTag.contains("ShoeItem", 10)) {
-            ItemStack itemStack = ItemStack.of(compoundTag.getCompound("ShoeItem"));
-            if(!itemStack.isEmpty() && this.isShoe(itemStack)) {
-                this.inventory.setItem(2, itemStack);
-            }
-        }
-
-        this.setChest(compoundTag.getBoolean("ChestedHorse"));
-        this.createInventory();
         if (this.hasChest()) {
             ListTag listtag = compoundTag.getList("Items", 10);
 
@@ -617,36 +581,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         this.updateContainerEquipment();
-
-        UUID uuid;
-        if (compoundTag.hasUUID("Owner")) {
-            uuid = compoundTag.getUUID("Owner");
-        } else {
-            String s = compoundTag.getString("Owner");
-            uuid = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), s);
-        }
-
-        if (uuid != null) {
-            try {
-                this.setOwnerUUID(uuid);
-                this.setTamed(true);
-            } catch (Throwable throwable) {
-                this.setTamed(false);
-            }
-        }
-    }
-
-    @Nullable
-    public UUID getOwnerUUID() {
-        return this.entityData.get(DATA_OWNERUUID_ID).orElse((UUID)null);
-    }
-
-    public void setOwnerUUID(@Nullable UUID p_21817_) {
-        this.entityData.set(DATA_OWNERUUID_ID, Optional.ofNullable(p_21817_));
-    }
-
-    public boolean isOwnedBy(LivingEntity p_21831_) {
-        return p_21831_ == this.getOwner();
     }
 
     @Override
@@ -690,44 +624,24 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     //TODO: Carpet Fix
     @Override
     public void updateContainerEquipment() {
-       super.updateContainerEquipment();
-       this.setArmorEquipment(this.inventory.getItem(1));
-       this.setDropChance(EquipmentSlot.CHEST, 0f);
-        if (!this.level().isClientSide) {
-            super.updateContainerEquipment();
-            if (this.isEquine(this)) {
-                this.setCarpet(getDyeColor(this.inventory.getItem(2)));
-            } else {
-                this.setCarpet(getDyeColor(this.inventory.getItem(1)));
-            }
-        }
+       if(!this.level().isClientSide) {
+           this.setSaddleItem(this.inventory.getItem(this.saddleSlot()));
+           this.setArmorEquipment(this.inventory.getItem(this.armorSlot()));
+           this.setDropChance(EquipmentSlot.CHEST, 0f);
+           this.setDecorItem(this.inventory.getItem(this.decorSlot()));
+       }
     }
 
-    public void setCarpet(@Nullable DyeColor p_30772_) {
-        this.entityData.set(DATA_CARPET_ID, p_30772_ == null ? -1 : p_30772_.getId());
+    public int saddleSlot() {
+        return 0;
     }
 
-    @Nullable
-    public static DyeColor getDyeColor(ItemStack stack) {
-        Block block = Block.byItem(stack.getItem());
-        Item item = stack.getItem();
-
-        if (block instanceof WoolCarpetBlock) {
-            return ((WoolCarpetBlock)block).getColor();
-        }
-
-        if (item instanceof BlanketItem) {
-            return ((BlanketItem)item).getColor();
-        }
-
-        return null;
+    public int armorSlot() {
+        return 1;
     }
 
-    @Nullable
-
-    public DyeColor getCarpet() {
-        int i = this.entityData.get(DATA_CARPET_ID);
-        return i == -1 ? null : DyeColor.byId(i);
+    public int decorSlot() {
+        return 2;
     }
 
     @Override

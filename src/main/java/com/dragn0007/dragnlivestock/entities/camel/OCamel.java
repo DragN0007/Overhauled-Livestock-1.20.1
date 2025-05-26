@@ -333,7 +333,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 			this.filledHumpsTime = this.random.nextInt(6000) + 6000;
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
-			return super.mobInteract(player, hand);
+		return super.mobInteract(player, hand);
 	}
 
 	@Override
@@ -634,6 +634,19 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		if(soundSource != null) {
 			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 		}
+	}
+
+	@Override
+	public void updateContainerEquipment() {
+		if(!this.level().isClientSide) {
+			this.setSaddleItem(this.inventory.getItem(this.saddleSlot()));
+			this.setDecorItem(this.inventory.getItem(this.decorSlot()));
+		}
+	}
+
+	@Override
+	public int decorSlot() {
+		return 1;
 	}
 
 	@Override

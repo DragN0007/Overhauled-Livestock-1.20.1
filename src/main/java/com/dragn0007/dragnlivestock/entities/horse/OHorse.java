@@ -372,19 +372,22 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	protected int getInventorySize() {
+	public int getInventorySize() {
 		if (this.hasChest()) {
 		    if (this.isDraftBreed()) {
-				return 17;
+				return 18;
 			} else if (this.isPonyBreed()) {
-				return 14;
+				return 15;
 			} else if (this.isStockBreed() || this.isWarmbloodedBreed()) {
-				return 11;
+				return 12;
 			} else if (this.isRacingBreed()) {
-				return 5;
+				return 6;
+			} else {
+				return 18;
 			}
+		} else {
+			return 3;
 		}
-		return super.getInventorySize();
 	}
 
 	@Override
@@ -974,21 +977,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("TailGrowthTime")) {
 			this.tailGrowthTick = tag.getInt("TailGrowthTime");
 		}
-
-		this.createInventory();
-		if (this.hasChest()) {
-			ListTag listtag = tag.getList("Items", 10);
-
-			for(int i = 0; i < listtag.size(); ++i) {
-				CompoundTag compoundtag = listtag.getCompound(i);
-				int j = compoundtag.getByte("Slot") & 255;
-				if (j >= 2 && j < this.inventory.getContainerSize()) {
-					this.inventory.setItem(j, ItemStack.of(compoundtag));
-				}
-			}
-		}
-
-		this.updateContainerEquipment();
 	}
 
 	@Override
@@ -1008,22 +996,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("SprintTime", this.sprintTick);
 		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
 		tag.putInt("TailGrowthTime", this.tailGrowthTick);
-
-		if (this.hasChest()) {
-			ListTag listtag = new ListTag();
-
-			for(int i = 2; i < this.inventory.getContainerSize(); ++i) {
-				ItemStack itemstack = this.inventory.getItem(i);
-				if (!itemstack.isEmpty()) {
-					CompoundTag compoundtag = new CompoundTag();
-					compoundtag.putByte("Slot", (byte)i);
-					itemstack.save(compoundtag);
-					listtag.add(compoundtag);
-				}
-			}
-
-			tag.put("Items", listtag);
-		}
 	}
 
 	@Override

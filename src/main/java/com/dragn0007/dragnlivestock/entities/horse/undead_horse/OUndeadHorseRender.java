@@ -50,14 +50,6 @@ public class OUndeadHorseRender extends GeoEntityRenderer<OUndeadHorse> {
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isWearingArmor()) {
-                model.getBone("body_armor").ifPresent(b -> b.setHidden(false));
-                model.getBone("neck_armor").ifPresent(b -> b.setHidden(false));
-            } else {
-                model.getBone("body_armor").ifPresent(b -> b.setHidden(true));
-                model.getBone("neck_armor").ifPresent(b -> b.setHidden(true));
-            }
-
 //            if (entity.isWearingShoes()) {
 //                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
 //                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));

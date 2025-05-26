@@ -389,6 +389,18 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
+	public void updateContainerEquipment() {
+		if(!this.level().isClientSide) {
+			this.setDecorItem(this.inventory.getItem(0));
+		}
+	}
+
+	@Override
+	public int decorSlot() {
+		return 0;
+	}
+
+	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 		if (tag.contains("Variant")) {
@@ -566,10 +578,6 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	protected boolean canPerformRearing() {
 		return false;
-	}
-
-	@Override
-	public void equipSaddle(@Nullable SoundSource source) {
 	}
 
 	@Override

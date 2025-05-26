@@ -527,6 +527,19 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
+	public void updateContainerEquipment() {
+		if(!this.level().isClientSide) {
+			this.setSaddleItem(this.inventory.getItem(this.saddleSlot()));
+			this.setDecorItem(this.inventory.getItem(this.decorSlot()));
+		}
+	}
+
+	@Override
+	public int decorSlot() {
+		return 1;
+	}
+
+	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 

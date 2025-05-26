@@ -9,7 +9,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -121,53 +124,35 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
 
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        DyeColor dyeColor = animatable.getCarpet();
-        ResourceLocation resourceLocation = null;
+        ItemStack itemStack = animatable.getDecorItem();
+        if(!itemStack.isEmpty()) {
+            ResourceLocation resourceLocation = null;
+            if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                resourceLocation = CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+            } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
+                resourceLocation = MEDIEVAL_COLOR[((DyeItem)itemStack.getItem()).getDyeColor().getId()];
+            } else if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
+                resourceLocation = MODERN_COLOR[((DyeItem)itemStack.getItem()).getDyeColor().getId()];
+            } else if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
+                resourceLocation = RACING_COLOR[((DyeItem)itemStack.getItem()).getDyeColor().getId()];
+            } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
+                resourceLocation = WESTERN_COLOR[((DyeItem)itemStack.getItem()).getDyeColor().getId()];
+            }
 
-        List<ItemStack> carpetSlot = (List<ItemStack>) animatable.getArmorSlots();
-        if (carpetSlot.size() <= 2) {
-            return;
+            if(resourceLocation != null) {
+                RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                poseStack.pushPose();
+                poseStack.scale(1.0f, 1.0f, 1.0f);
+                poseStack.translate(0.0d, 0.0d, 0.0d);
+                poseStack.popPose();
+                getRenderer().reRender(getDefaultBakedModel(animatable),
+                        poseStack,
+                        bufferSource,
+                        animatable,
+                        renderType1,
+                        bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1, 1, 1, 1);
+            }
         }
-
-        ItemStack carpetItemStack = carpetSlot.get(2);
-
-        if (carpetItemStack.isEmpty()) {
-            return;
-        }
-
-        if (dyeColor != null) {
-            if (carpetItemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                resourceLocation = CARPET_COLOR[dyeColor.getId()];
-            }
-            if (carpetItemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
-                resourceLocation = MEDIEVAL_COLOR[dyeColor.getId()];
-            }
-            if (carpetItemStack.is(LOTags.Items.MODERN_BLANKETS)) {
-                resourceLocation = MODERN_COLOR[dyeColor.getId()];
-            }
-            if (carpetItemStack.is(LOTags.Items.RACING_BLANKETS)) {
-                resourceLocation = RACING_COLOR[dyeColor.getId()];
-            }
-            if (carpetItemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                resourceLocation = WESTERN_COLOR[dyeColor.getId()];
-            }
-        }
-
-        if (resourceLocation == null) {
-            return;
-        }
-
-        RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-        poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
-        getRenderer().reRender(getDefaultBakedModel(animatable),
-                poseStack,
-                bufferSource,
-                animatable,
-                renderType1,
-                bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                1, 1, 1, 1);
     }
 }

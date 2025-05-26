@@ -306,6 +306,13 @@ public class Ox extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
+	public void updateContainerEquipment() {
+		if(!this.level().isClientSide) {
+			this.setSaddleItem(this.inventory.getItem(0));
+		}
+	}
+
+	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 
