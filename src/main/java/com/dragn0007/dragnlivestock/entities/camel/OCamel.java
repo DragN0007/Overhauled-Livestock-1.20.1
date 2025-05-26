@@ -3,12 +3,15 @@ package com.dragn0007.dragnlivestock.entities.camel;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.ai.OCamelFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.ai.OLlamaFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OCamelMenu;
+import com.dragn0007.dragnlivestock.gui.OCamelScreen;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -129,7 +132,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public double followLeashSpeed() {
-		return 2.0D;
+		return 1.6D;
 	}
 
 	@Override
@@ -183,6 +186,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(5, new TemptGoal(this, 1.25D, Ingredient.of(Items.CACTUS), false));
 		this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Wolf.class, false));
+		this.goalSelector.addGoal(2, new OCamelFollowCaravanGoal(this, (double)1.5F));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
 				entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
@@ -486,7 +490,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		if(getBreed() == 0) {
 			switch (i) {
 				case 0:
-					entity.setPos(this.calcOffset(0, 1.6, -0.2));
+					entity.setPos(this.calcOffset(0, 1.65, -0.1));
 					break;
 			}
 		}

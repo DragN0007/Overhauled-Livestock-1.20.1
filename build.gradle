@@ -108,12 +108,12 @@ dependencies {
     //compat stuff
 
     //nbtenks made by gotenks
-    implementation fg.deobf("curse.maven:nbtenks-1255827:6514118")
+//    implementation fg.deobf("curse.maven:nbtenks-1255827:6514118")
 
     implementation fg.deobf("curse.maven:jade-324717:5876199")
     implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
     implementation fg.deobf("curse.maven:jei-238222:6075247")
-    implementation fg.deobf("curse.maven:worldedit-225608:4586218")
+//    implementation fg.deobf("curse.maven:worldedit-225608:4586218")
     implementation fg.deobf("curse.maven:architectury-api-419699:5137938")
     implementation fg.deobf("curse.maven:leawind-third-person-930880:5961735")
 //    implementation fg.deobf("curse.maven:minecraft-comes-alive-reborn-535291:6254999")

@@ -42,7 +42,7 @@ public class OxMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, oxSlots++, 8, 18) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
                     return !this.hasItem() && OxMenu.this.ox.canWearArmor();
                 }
                 return false;

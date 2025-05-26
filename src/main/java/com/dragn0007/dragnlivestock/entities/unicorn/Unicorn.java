@@ -2,7 +2,7 @@ package com.dragn0007.dragnlivestock.entities.unicorn;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.*;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -194,6 +194,9 @@ public class Unicorn extends OHorse implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public ResourceLocation getModelResource() {
+		return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
+	}
 	public int getBreed() {
 		return this.entityData.get(BREED);
 	}
@@ -201,19 +204,19 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.entityData.set(BREED, breed);
 	}
 
-	@Override
+
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
 	public void setVariant(int variant) {
-		this.entityData.set(VARIANT_TEXTURE, UnicornModel.Variant.variantFromOrdinal(variant).resourceLocation);
 		this.entityData.set(VARIANT, variant);
+		this.entityData.set(VARIANT_TEXTURE, UnicornModel.Variant.variantFromOrdinal(variant).resourceLocation);
 	}
-
-	@Override
-	public void setOverlayVariant(int variant) {
-		this.entityData.set(OVERLAY_TEXTURE, UnicornHornLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
-		this.entityData.set(OVERLAY, variant);
+	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(Unicorn.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public ResourceLocation getTextureResource() {
+		return this.entityData.get(VARIANT_TEXTURE);
 	}
-
-	@Override
 	public void setVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
@@ -222,7 +225,19 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.entityData.set(VARIANT_TEXTURE, resourceLocation);
 	}
 
-	@Override
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int variant) {
+		this.entityData.set(OVERLAY, variant);
+		this.entityData.set(OVERLAY_TEXTURE, UnicornMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
+	}
+	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(Unicorn.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public ResourceLocation getOverlayLocation() {
+		return this.entityData.get(OVERLAY_TEXTURE);
+	}
 	public void setOverlayVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
@@ -231,9 +246,33 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
 
+
+	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public ResourceLocation getEyeTextureResource() {
+		return UnicornEyeLayer.EyeOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
+	}
+	public int getEyeVariant() {
+		return this.entityData.get(EYES);
+	}
+	public void setEyeVariant(int eyeVariant) {
+		this.entityData.set(EYES, eyeVariant);
+	}
+
+
+	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getFeathering() {
+		return this.entityData.get(FEATHERING);
+	}
+	public void setFeathering(int feathering) {
+		this.entityData.set(FEATHERING, feathering);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
 
 		if (tag.contains("Variant")) {
 			this.setVariant(tag.getInt("Variant"));
@@ -251,8 +290,8 @@ public class Unicorn extends OHorse implements GeoEntity {
 			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
 
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
+		if (tag.contains("Reindeer_Variant")) {
+			this.setReindeerVariant(tag.getInt("Reindeer_Variant"));
 		}
 
 		if (tag.contains("Gender")) {
@@ -263,12 +302,28 @@ public class Unicorn extends OHorse implements GeoEntity {
 			this.setManeType(tag.getInt("Mane"));
 		}
 
+		if (tag.contains("Tail")) {
+			this.setTailType(tag.getInt("Tail"));
+		}
+
 		if (tag.contains("Feathering")) {
 			this.setFeathering(tag.getInt("Feathering"));
 		}
 
 		if (tag.contains("Eyes")) {
 			this.setEyeVariant(tag.getInt("Eyes"));
+		}
+
+		if (tag.contains("SprintTime")) {
+			this.sprintTick = tag.getInt("SprintTime");
+		}
+
+		if (tag.contains("ManeGrowthTime")) {
+			this.maneGrowthTick = tag.getInt("ManeGrowthTime");
+		}
+
+		if (tag.contains("TailGrowthTime")) {
+			this.tailGrowthTick = tag.getInt("TailGrowthTime");
 		}
 
 		this.createInventory();
@@ -290,15 +345,20 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		tag.putInt("Breed", this.getBreed());
+		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
+		tag.putInt("Tail", this.getTailType());
 		tag.putInt("Feathering", this.getFeathering());
 		tag.putInt("Eyes", this.getEyeVariant());
+		tag.putInt("SprintTime", this.sprintTick);
+		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
+		tag.putInt("TailGrowthTime", this.tailGrowthTick);
 
 		if (this.hasChest()) {
 			ListTag listtag = new ListTag();
@@ -315,16 +375,6 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 			tag.put("Items", listtag);
 		}
-	}
-
-	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
-
-	public int getFeathering() {
-		return this.entityData.get(FEATHERING);
-	}
-
-	public void setFeathering(int feathering) {
-		this.entityData.set(FEATHERING, feathering);
 	}
 
 	@Override
@@ -356,13 +406,14 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(BREED, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(VARIANT_TEXTURE, UnicornModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, UnicornMarkingLayer.Overlay.NONE.resourceLocation);
 		this.entityData.define(MANE_TYPE, 0);
+		this.entityData.define(TAIL_TYPE, 0);
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
 	}
@@ -375,6 +426,59 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		return null;
+	}
+
+	public void setFeatheringByBreed() {
+
+		//unicorns are more likely to have half or full feathering, but have a small chance of having none.
+		if (this.isPonyBreed()) {
+			if (random.nextDouble() < 0.15) {
+				this.setFeathering(0);
+			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() > 0.50) {
+				this.setFeathering(1);
+			} else {
+				this.setFeathering(1);
+			}
+		}
+
+	}
+
+	public void setEyeColorByChance() {
+
+		//white, cream and mostly-white or bald horses have a better chance of gaining blue or green eyes
+		if (this.getVariant() == 24 || this.getVariant() == 25 || this.getOverlayVariant() == 2 || this.getOverlayVariant() == 8
+				|| this.getOverlayVariant() == 9 || this.getOverlayVariant() == 10 || this.getOverlayVariant() == 15
+				|| this.getOverlayVariant() == 17 || this.getOverlayVariant() == 20 || this.getOverlayVariant() == 24
+				|| this.getOverlayVariant() == 26 || this.getOverlayVariant() == 32 || this.getOverlayVariant() == 34
+				|| this.getOverlayVariant() == 36 || this.getOverlayVariant() == 37 || this.getOverlayVariant() == 38
+				|| this.getOverlayVariant() == 39) {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9)); //heterochromic
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6); //green
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.10) {
+				this.setEyeVariant(5); //blue
+			} else if (random.nextDouble() > 0.30) {
+				this.setEyeVariant(this.getRandom().nextInt(4)); //random (between dark brown and dark blue)
+			} else {
+				this.setEyeVariant(0);
+			}
+		} else {
+			if (random.nextDouble() < 0.005) {
+				this.setEyeVariant(7 + this.getRandom().nextInt(9));
+			} else if (random.nextDouble() < 0.03 && random.nextDouble() > 0.005) {
+				this.setEyeVariant(6);
+			} else if (random.nextDouble() < 0.10 && random.nextDouble() > 0.03) {
+				this.setEyeVariant(5);
+			} else if (random.nextDouble() > 0.10) {
+				this.setEyeVariant(this.getRandom().nextInt(4));
+			} else {
+				this.setEyeVariant(0);
+			}
+		}
+
 	}
 
 }

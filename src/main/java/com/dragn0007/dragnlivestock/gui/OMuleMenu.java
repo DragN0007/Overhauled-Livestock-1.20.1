@@ -45,6 +45,9 @@ public class OMuleMenu extends AbstractContainerMenu {
                 if (itemStack.getItem() instanceof HorseArmorItem) {
                     return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
                 }
+                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
+                    return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
+                }
                 return false;
             }
 
@@ -57,7 +60,7 @@ public class OMuleMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, OMuleSlots++, 8, 54) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
                     return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
                 }
                 return false;

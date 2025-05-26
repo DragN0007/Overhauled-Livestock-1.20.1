@@ -120,7 +120,7 @@ public class OCamelScreen extends AbstractContainerScreen<OCamelMenu> {
 
     private void renderBaseCoatLabel(GuiGraphics graphics) {
         String text = this.oCamel.getTextureResource().toString(); //texture name
-        String noFillerText = text.replaceAll(".+camel_", ""); //remove 'donkey_' and anything before it
+        String noFillerText = text.replaceAll(".+camel/", ""); //remove 'donkey_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
         String labelText = "Base Coat: " + noPNGText.toUpperCase(); //print just the coat name
@@ -136,7 +136,7 @@ public class OCamelScreen extends AbstractContainerScreen<OCamelMenu> {
 
     private void renderMarkingLabel(GuiGraphics graphics) {
         String text = this.oCamel.getOverlayLocation().toString();
-        String noFillerText = text.replaceAll(".+overlay_", "");
+        String noFillerText = text.replaceAll(".+overlay/", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
         String labelText = "Marking(s): " + noPNGText.toUpperCase();

@@ -72,7 +72,8 @@ public class LOTags {
 
         public static final TagKey<Item> SWEM_CANTAZARITE_POTION = forgeTag("swem_cantazarite_potion");
 
-        public static final TagKey<Item> CAN_PLACE_ON_O_MOUNTS = tag("can_place_on_o_mounts");
+        public static final TagKey<Item> DECOR_FOR_O_MOUNTS = tag("decor_o_mounts");
+        public static final TagKey<Item> ARMOR_FOR_O_MOUNTS = tag("armor_for_o_mounts");
         public static final TagKey<Item> CARPET_BLANKETS = tag("carpet_blankets");
         public static final TagKey<Item> MEDIEVAL_BLANKETS = tag("medieval_blankets");
         public static final TagKey<Item> MODERN_BLANKETS = tag("modern_blankets");

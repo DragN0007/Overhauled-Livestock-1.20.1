@@ -325,7 +325,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     @Override
     public boolean isArmor(ItemStack itemStack) {
-        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.CAN_PLACE_ON_O_MOUNTS);
+        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS);
     }
 
     @Override
@@ -372,7 +372,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.isHorse(this)) {
+        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && (this.isHorse(this) || this.isUnicorn(this))) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getManeType() == 3 || oHorse.getManeType() == 2) {
@@ -390,7 +390,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
+        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && (this.isHorse(this) || this.isUnicorn(this))) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getTailType() == 3 || oHorse.getTailType() == 2) {
@@ -487,6 +487,14 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 }
             }
             return InteractionResult.SUCCESS;
+        }
+
+        if(this.isVehicle()) {
+            if (this.canAddPassenger(this)) {
+                this.doPlayerRide(player);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+            return super.mobInteract(player, hand);
         }
 
         if(this.isBaby()) {
@@ -751,6 +759,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
     public boolean isGoat(Entity entity) {
         return entity.getType() == EntityTypes.O_GOAT_ENTITY.get();
+    }
+    public boolean isUnicorn(Entity entity) {
+        return entity.getType() == EntityTypes.UNICORN_ENTITY.get();
     }
     public boolean isEquine(Entity entity) {
         return
