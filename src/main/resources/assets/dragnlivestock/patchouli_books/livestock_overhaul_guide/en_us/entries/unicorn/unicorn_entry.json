@@ -1,0 +1,23 @@
+{
+  "name": "Unicorn",
+  "icon": "dragnlivestock:unicorn_spawn_egg",
+  "category": "dragnlivestock:unicorn_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Type: Overhaul $(br)Tamable: Yes $(br)Chest-able: Yes $(br)Drops: Unicorn Meat, Leather, Unicorn Horn"
+    },
+    {
+      "type": "patchouli:text",
+      "text": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:unicorn_breeds"
+      },
+      "text": "Unicorn",
+      "title": "Unicorn"
+    }
+  ]
+}

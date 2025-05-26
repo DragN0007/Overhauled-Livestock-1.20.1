@@ -26,6 +26,9 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.COW_COLORS);
         simpleItem(LOItems.COW_MARKINGS);
         simpleItem(LOItems.COW_BREEDS);
+        simpleItem(LOItems.UNICORN_COLORS);
+        simpleItem(LOItems.UNICORN_MARKINGS);
+        simpleItem(LOItems.UNICORN_BREEDS);
 
         simpleItem(LOItems.UNICORN_SPAWN_EGG);
 

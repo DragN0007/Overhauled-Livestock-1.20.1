@@ -135,7 +135,7 @@ public class UnicornScreen extends AbstractContainerScreen<UnicornMenu> {
     }
 
     private void renderBreedLabel(GuiGraphics graphics) {
-        String breedText = getBreedText(this.unicorn.getBreed());
+        String breedText = getBreedText(this.unicorn.getSpecies());
         String labelText = "Species: " + breedText;
 
         graphics.drawString(this.font, labelText, breedLabelX, breedLabelY, 0xFFFFFF, false);

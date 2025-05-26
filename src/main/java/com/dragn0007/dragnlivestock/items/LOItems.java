@@ -674,6 +674,12 @@ public class LOItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> COW_BREEDS = ITEMS.register("cow_breeds",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UNICORN_COLORS = ITEMS.register("unicorn_colors",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UNICORN_MARKINGS = ITEMS.register("unicorn_markings",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UNICORN_BREEDS = ITEMS.register("unicorn_breeds",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

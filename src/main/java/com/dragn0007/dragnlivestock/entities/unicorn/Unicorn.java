@@ -7,10 +7,10 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
-import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.gui.UnicornMenu;
+import com.dragn0007.dragnlivestock.gui.UnicornScreen;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.SimpleMenuProvider;
@@ -37,6 +38,7 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.FluidState;
@@ -64,13 +66,13 @@ public class Unicorn extends OHorse implements GeoEntity {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (this.getBreed() == 0) {
+		if (this.getSpecies() == 0) {
 			return O_LOOT_TABLE;
 		}
-		if (this.getBreed() == 1) {
+		if (this.getSpecies() == 1) {
 			return N_LOOT_TABLE;
 		}
-		if (this.getBreed() == 2) {
+		if (this.getSpecies() == 2) {
 			return E_LOOT_TABLE;
 		} else {
 			return VANILLA_LOOT_TABLE;
@@ -92,6 +94,21 @@ public class Unicorn extends OHorse implements GeoEntity {
 	public Vec3 getLeashOffset() {
 		return new Vec3(0D, (double)this.getEyeHeight() * 1F, (double)(this.getBbWidth() * 1.4F));
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
+	}
+
+	public static final Ingredient OVERWORLD_FOOD_ITEMS = Ingredient.of(Items.HEART_OF_THE_SEA, Items.AMETHYST_CLUSTER, Items.EMERALD);
+	public static final Ingredient NETHER_FOOD_ITEMS = Ingredient.of(Items.NETHERITE_SCRAP, Items.QUARTZ_BLOCK, Items.GOLD_BLOCK);
+	public static final Ingredient END_FOOD_ITEMS = Ingredient.of(Items.DRAGON_BREATH, Items.END_CRYSTAL, Items.ENDER_PEARL);
+	public boolean isFood(ItemStack stack) {
+		if (this.getBreed() == 0) {
+			return OVERWORLD_FOOD_ITEMS.test(stack);
+		} else if (this.getBreed() == 1) {
+			return NETHER_FOOD_ITEMS.test(stack);
+		} else if (this.getBreed() == 2) {
+			return END_FOOD_ITEMS.test(stack);
+		} else {
+			return FOOD_ITEMS.test(stack);
+		}
 	}
 
 	public static AttributeSupplier.Builder createBaseHorseAttributes() {
@@ -140,7 +157,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 	@Override
 	public boolean canStandOnFluid(FluidState fluidState) {
-		if (this.getBreed() == 1) {
+		if (this.getSpecies() == 1) {
 			return fluidState.is(FluidTags.LAVA);
 		}
 		return false;
@@ -148,11 +165,11 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (this.getBreed() == 1 && (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.EXPLOSION))) {
+		if (this.getSpecies() == 1 && (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.EXPLOSION))) {
 			return false;
 		}
 
-		if ((this.getBreed() == 0 || this.getBreed() == 2) && (damageSource.is(DamageTypes.MAGIC) || damageSource.is(DamageTypes.EXPLOSION))) {
+		if ((this.getSpecies() == 0 || this.getSpecies() == 2) && (damageSource.is(DamageTypes.MAGIC) || damageSource.is(DamageTypes.EXPLOSION))) {
 			return false;
 		}
 
@@ -165,21 +182,21 @@ public class Unicorn extends OHorse implements GeoEntity {
 	public void aiStep() {
 		super.aiStep();
 
-		if (this.getBreed() == 2 && !this.level().isClientSide && this.isAlive() && !this.isBaby() && --this.pearlTime <= 0) {
+		if (this.getSpecies() == 2 && !this.level().isClientSide && this.isAlive() && !this.isBaby() && --this.pearlTime <= 0) {
 			this.playSound(SoundEvents.AMETHYST_BLOCK_CHIME, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.spawnAtLocation(Items.ENDER_PEARL);
 			this.pearlTime = this.random.nextInt(6000) + 6000;
 		}
 
-		if (this.getBreed() == 0) {
+		if (this.getSpecies() == 0) {
 			this.level().addParticle(ParticleTypes.MYCELIUM, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 		}
 
-		if (this.getBreed() == 1) {
+		if (this.getSpecies() == 1) {
 			this.level().addParticle(ParticleTypes.WARPED_SPORE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 		}
 
-		if (this.getBreed() == 2) {
+		if (this.getSpecies() == 2) {
 			this.level().addParticle(ParticleTypes.ENCHANT, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 		}
 	}
@@ -210,15 +227,15 @@ public class Unicorn extends OHorse implements GeoEntity {
 		}
 	}
 
-	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
-	public int getBreedLocation() {
+	public static final EntityDataAccessor<Integer> SPECIES = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getSpeciesLocation() {
 		return UnicornSpecies.Breed.values().length;
 	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
+	public int getSpecies() {
+		return this.entityData.get(SPECIES);
 	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
+	public void setSpecies(int breed) {
+		this.entityData.set(SPECIES, breed);
 	}
 
 
@@ -299,8 +316,8 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
+		if (tag.contains("Species")) {
+			this.setSpecies(tag.getInt("Species"));
 		}
 
 		if (tag.contains("Variant")) {
@@ -366,7 +383,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putInt("Breed", this.getBreed());
+		tag.putInt("Species", this.getSpecies());
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
@@ -405,7 +422,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		Random random = new Random();
 
 		this.setGender(random.nextInt(Gender.values().length));
-		this.setBreed(random.nextInt(UnicornSpecies.Breed.values().length));
+		this.setSpecies(random.nextInt(UnicornSpecies.Breed.values().length));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
@@ -435,7 +452,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
-		this.entityData.define(BREED, 0);
+		this.entityData.define(SPECIES, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
@@ -518,8 +535,8 @@ public class Unicorn extends OHorse implements GeoEntity {
 			foal = EntityTypes.UNICORN_ENTITY.get().create(serverLevel);
 
 			int breed;
-			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
-			((Unicorn) foal).setBreed(breed);
+			breed = (this.random.nextInt(2) == 0) ? this.getSpecies() : partner.getSpecies();
+			((Unicorn) foal).setSpecies(breed);
 
 
 			int variantChance = this.random.nextInt(14);
@@ -600,7 +617,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	public void setFeatheringByBreed() {
 
 		//overworlds are more likely to have half or full feathering, but have a small chance of having none.
-		if (this.getBreed() == 0) {
+		if (this.getSpecies() == 0) {
 			if (random.nextDouble() < 0.15) {
 				this.setFeathering(0);
 			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
@@ -611,7 +628,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		}
 
 		//nethers are more likely to have no feathering but can have half or full
-		if (this.getBreed() == 1) {
+		if (this.getSpecies() == 1) {
 			if (random.nextDouble() < 0.15) {
 				this.setFeathering(2);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.15) {
@@ -622,7 +639,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		}
 
 		//ends are more likely to have half feathering
-		if (this.getBreed() == 2) {
+		if (this.getSpecies() == 2) {
 			if (random.nextDouble() < 0.15) {
 				this.setFeathering(2);
 			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
@@ -672,7 +689,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 	public void setColorByBreed() {
 
-		if (this.getBreed() == 0) {
+		if (this.getSpecies() == 0) {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
@@ -684,7 +701,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 		}
 
-		if (this.getBreed() == 1) {
+		if (this.getSpecies() == 1) {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
@@ -696,7 +713,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 		}
 
-		if (this.getBreed() == 2) {
+		if (this.getSpecies() == 2) {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
@@ -724,7 +741,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 	public void setHornByBreed() {
 
-		if (this.getBreed() == 0) {
+		if (this.getSpecies() == 0) {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
@@ -734,7 +751,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 		}
 
-		if (this.getBreed() == 1) {
+		if (this.getSpecies() == 1) {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
@@ -744,7 +761,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 		}
 
-		if (this.getBreed() == 2) {
+		if (this.getSpecies() == 2) {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.30) {

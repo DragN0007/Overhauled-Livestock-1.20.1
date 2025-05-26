@@ -1258,7 +1258,7 @@ public class SpawnReplacer {
                 if (unicorn != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
-                            unicorn.setBreed(0);
+                            unicorn.setSpecies(0);
                         }
                     }
 
@@ -1299,7 +1299,7 @@ public class SpawnReplacer {
 
                 if (unicorn != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                        unicorn.setBreed(1);
+                        unicorn.setSpecies(1);
                     }
 
                     unicorn.copyPosition(brute);
@@ -1340,7 +1340,7 @@ public class SpawnReplacer {
                 if (unicorn != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
-                            unicorn.setBreed(2);
+                            unicorn.setSpecies(2);
                         }
                     }
 

@@ -12,6 +12,16 @@
       "type": "patchouli:crafting",
       "recipe": "dragnlivestock:mane_scissors",
       "recipe2": "dragnlivestock:tail_scissors"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:red_medieval_blanket",
+      "recipe2": "dragnlivestock:red_modern_blanket"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "dragnlivestock:red_racing_blanket",
+      "recipe2": "dragnlivestock:red_western_blanket"
     }
   ]
 }
