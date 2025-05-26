@@ -1,16 +1,15 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
-import java.util.EnumSet;
-import java.util.List;
-
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.decoration.LeashFenceKnotEntity;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.EnumSet;
+import java.util.List;
 
 public class OLlamaFollowCaravanGoal extends Goal {
    public final OLlama llama;

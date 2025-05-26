@@ -11,9 +11,6 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 public class OMuleMarkingLayer extends GeoRenderLayer<OMule> {
     public OMuleMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
