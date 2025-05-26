@@ -11,6 +11,7 @@ public class UnicornRender extends GeoEntityRenderer<Unicorn> {
 
     public UnicornRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new UnicornModel());
+        this.addRenderLayer(new UnicornMarkingLayer(this));
         this.addRenderLayer(new UnicornHornLayer(this));
         this.addRenderLayer(new UnicornCarpetLayer(this));
         this.addRenderLayer(new UnicornArmorLayer(this));
@@ -98,41 +99,6 @@ public class UnicornRender extends GeoEntityRenderer<Unicorn> {
             model.getBone("short").ifPresent(b -> b.setHidden(true));
             model.getBone("buttons").ifPresent(b -> b.setHidden(true));
             model.getBone("long").ifPresent(b -> b.setHidden(true));
-        }
-
-        if (entity.getTailType() == 0) {
-            model.getBone("tail").ifPresent(b -> b.setScaleY(0.9F));
-            model.getBone("tail").ifPresent(b -> b.setScaleX(0.7F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(0.7F));
-            model.getBone("tail_2").ifPresent(b -> b.setHidden(true));
-        }
-
-        if (entity.getTailType() == 1) {
-            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleY(1.3F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
-            model.getBone("tail_2").ifPresent(b -> b.setHidden(false));
-        }
-
-        if (entity.getTailType() == 2) {
-            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
-            model.getBone("tail_2").ifPresent(b -> b.setHidden(false));
-        }
-
-        if (entity.getTailType() == 3) {
-            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleY(0.6F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
-            model.getBone("tail_2").ifPresent(b -> b.setHidden(false));
-        }
-
-        if (entity.getTailType() == 4) {
-            model.getBone("tail").ifPresent(b -> b.setScaleY(0.7F));
-            model.getBone("tail").ifPresent(b -> b.setScaleX(1.1F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
-            model.getBone("tail_2").ifPresent(b -> b.setHidden(true));
         }
 
         if (entity.getFeathering() == 0) {

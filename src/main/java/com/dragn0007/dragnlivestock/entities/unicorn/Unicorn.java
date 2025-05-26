@@ -1,9 +1,16 @@
 package com.dragn0007.dragnlivestock.entities.unicorn;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
+import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.gui.OMountMenu;
+import com.dragn0007.dragnlivestock.gui.UnicornMenu;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -13,9 +20,11 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
@@ -32,6 +41,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 
@@ -64,6 +74,17 @@ public class Unicorn extends OHorse implements GeoEntity {
 			return E_LOOT_TABLE;
 		} else {
 			return VANILLA_LOOT_TABLE;
+		}
+	}
+
+	public void openInventory(Player player) {
+		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
+				return new UnicornMenu(containerId, inventory, this.inventory, this);
+			}, this.getDisplayName()), (data) -> {
+				data.writeInt(this.getInventorySize());
+				data.writeInt(this.getId());
+			});
 		}
 	}
 
@@ -173,12 +194,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		if (this.hasPassenger(entity)) {
 			double offsetX = 0;
 			double offsetY = 1.4;
-			double offsetZ = -0.2;
-
-			if (this.isJumping()) {
-				offsetY = 1.7;
-				offsetZ = -0.9;
-			}
+			double offsetZ = -0.1;
 
 			double radYaw = Math.toRadians(this.getYRot());
 
@@ -195,8 +211,8 @@ public class Unicorn extends OHorse implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
-	public ResourceLocation getModelResource() {
-		return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
+	public int getBreedLocation() {
+		return UnicornSpecies.Breed.values().length;
 	}
 	public int getBreed() {
 		return this.entityData.get(BREED);
@@ -260,6 +276,18 @@ public class Unicorn extends OHorse implements GeoEntity {
 	}
 
 
+	public static final EntityDataAccessor<Integer> HORN = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public ResourceLocation getHornTextureResource() {
+		return UnicornHornLayer.Overlay.overlayFromOrdinal(getHornVariant()).resourceLocation;
+	}
+	public int getHornVariant() {
+		return this.entityData.get(HORN);
+	}
+	public void setHornVariant(int eyeVariant) {
+		this.entityData.set(HORN, eyeVariant);
+	}
+
+
 	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
 	public int getFeathering() {
 		return this.entityData.get(FEATHERING);
@@ -291,20 +319,12 @@ public class Unicorn extends OHorse implements GeoEntity {
 			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
 
-		if (tag.contains("Reindeer_Variant")) {
-			this.setReindeerVariant(tag.getInt("Reindeer_Variant"));
-		}
-
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
 
 		if (tag.contains("Mane")) {
 			this.setManeType(tag.getInt("Mane"));
-		}
-
-		if (tag.contains("Tail")) {
-			this.setTailType(tag.getInt("Tail"));
 		}
 
 		if (tag.contains("Feathering")) {
@@ -315,16 +335,16 @@ public class Unicorn extends OHorse implements GeoEntity {
 			this.setEyeVariant(tag.getInt("Eyes"));
 		}
 
+		if (tag.contains("Horn")) {
+			this.setHornVariant(tag.getInt("Horn"));
+		}
+
 		if (tag.contains("SprintTime")) {
 			this.sprintTick = tag.getInt("SprintTime");
 		}
 
 		if (tag.contains("ManeGrowthTime")) {
 			this.maneGrowthTick = tag.getInt("ManeGrowthTime");
-		}
-
-		if (tag.contains("TailGrowthTime")) {
-			this.tailGrowthTick = tag.getInt("TailGrowthTime");
 		}
 
 		this.createInventory();
@@ -351,15 +371,13 @@ public class Unicorn extends OHorse implements GeoEntity {
 		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
-		tag.putInt("Tail", this.getTailType());
 		tag.putInt("Feathering", this.getFeathering());
 		tag.putInt("Eyes", this.getEyeVariant());
+		tag.putInt("Horn", this.getHornVariant());
 		tag.putInt("SprintTime", this.sprintTick);
 		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
-		tag.putInt("TailGrowthTime", this.tailGrowthTick);
 
 		if (this.hasChest()) {
 			ListTag listtag = new ListTag();
@@ -387,18 +405,28 @@ public class Unicorn extends OHorse implements GeoEntity {
 		Random random = new Random();
 
 		this.setGender(random.nextInt(Gender.values().length));
-		this.setColorByBreed();
-		this.setMarkingByBreed();
-		this.setFeatheringByBreed();
-		this.setEyeColorByChance();
+		this.setBreed(random.nextInt(UnicornSpecies.Breed.values().length));
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColorByBreed();
+			this.setMarkingByBreed();
+			this.setHornByBreed();
+			this.setFeatheringByBreed();
+		} else {
+			this.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+			this.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+			this.setFeathering(random.nextInt(Feathering.values().length));
+		}
+
+		if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+			this.setEyeColorByChance();
+		} else {
+			this.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+		}
 
 		int randomMane = 1 + this.getRandom().nextInt(3);
 		this.setManeType(randomMane);
-
-		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-			this.setBreed(random.nextInt(UnicornSpecies.Breed.values().length));
-			this.setBreed(random.nextInt(4));
-		}
 
 		this.randomizeOHorseAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -414,32 +442,192 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.entityData.define(VARIANT_TEXTURE, UnicornModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, UnicornMarkingLayer.Overlay.NONE.resourceLocation);
 		this.entityData.define(MANE_TYPE, 0);
-		this.entityData.define(TAIL_TYPE, 0);
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
+		this.entityData.define(HORN, 0);
 	}
 
-	@Override
 	public boolean canMate(Animal animal) {
+		if (animal == this) {
+			return false;
+		} else if (!(animal instanceof Unicorn) && !(animal instanceof OHorse)) {
+			return false;
+		} else {
+			if (LivestockOverhaulCommonConfig.UNICORN_BREEDING.get()) {
+				if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+					return this.canParent() && ((AbstractOMount) animal).canParent();
+				} else {
+					AbstractOMount partner = (AbstractOMount) animal;
+					if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+						return this.isFemale();
+					}
+				}
+			}
+		}
 		return false;
+	}
+
+	public enum Gender {
+		FEMALE,
+		MALE
+	}
+	public boolean isFemale() {
+		return this.getGender() == 0;
+	}
+	public boolean isMale() {
+		return this.getGender() == 1;
+	}
+
+	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getGender() {
+		return this.entityData.get(GENDER);
+	}
+	public void setGender(int gender) {
+		this.entityData.set(GENDER, gender);
 	}
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return null;
+		AbstractOMount foal;
+		if (ageableMob instanceof OHorse partnerHorse) {
+
+			if (random.nextDouble() > 0.05) {
+				foal = EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
+			} else {
+				foal = EntityTypes.UNICORN_ENTITY.get().create(serverLevel);
+			}
+
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
+			if (overlayChance < 4) {
+				overlay = this.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partnerHorse.getOverlayVariant();
+			} else {
+				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
+			}
+			((OHorse) foal).setVariant(overlay);
+
+			((OHorse) foal).setManeType(3);
+			((OHorse) foal).setTailType(3);
+			((OHorse) foal).setOverlayVariant(overlay);
+			((OHorse) foal).setVariant(random.nextInt(OHorseModel.Variant.values().length));
+
+		} else {
+			Unicorn partner = (Unicorn) ageableMob;
+			foal = EntityTypes.UNICORN_ENTITY.get().create(serverLevel);
+
+			int breed;
+			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+			((Unicorn) foal).setBreed(breed);
+
+
+			int variantChance = this.random.nextInt(14);
+			int variant;
+			if (variantChance < 6) {
+				variant = this.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
+			} else {
+				variant = this.random.nextInt(UnicornModel.Variant.values().length);
+			}
+			((Unicorn) foal).setVariant(variant);
+
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
+			if (overlayChance < 4) {
+				overlay = this.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
+			} else {
+				overlay = this.random.nextInt(UnicornMarkingLayer.Overlay.values().length);
+			}
+			((Unicorn) foal).setOverlayVariant(overlay);
+
+			int eyeColorChance = this.random.nextInt(11);
+			int eyes;
+			if (eyeColorChance < 5) {
+				eyes = this.getEyeVariant();
+			} else if (eyeColorChance < 10) {
+				eyes = partner.getEyeVariant();
+			} else {
+				eyes = this.random.nextInt(UnicornEyeLayer.EyeOverlay.values().length);
+			}
+			((Unicorn) foal).setEyeVariant(eyes);
+
+			int gender;
+			gender = this.random.nextInt(Unicorn.Gender.values().length);
+			foal.setGender(gender);
+
+			((Unicorn) foal).setFeatheringByBreed();
+			((Unicorn) foal).setManeType(3);
+
+			if (this.random.nextInt(3) >= 1) {
+				((Unicorn) foal).generateRandomOHorseJumpStrength();
+
+				int betterSpeed = (int) Math.max(partner.getSpeed(), this.random.nextInt(10) + 20);
+				foal.setSpeed(betterSpeed);
+
+				int betterHealth = (int) Math.max(partner.getHealth(), this.random.nextInt(20) + 40);
+				foal.setHealth(betterHealth);
+			}
+		}
+
+		this.setOffspringAttributes(ageableMob, foal);
+		return foal;
+	}
+
+	public enum Mane {
+		BUTTONS,
+		LONG,
+		ROACHED,
+		SHORT,
+		NONE;
+
+		public Unicorn.Mane next() {
+			return Unicorn.Mane.values()[(this.ordinal() + 1) % Unicorn.Mane.values().length];
+		}
+	}
+
+	public static final EntityDataAccessor<Integer> MANE_TYPE = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getManeType() {
+		return this.entityData.get(MANE_TYPE);
+	}
+	public void setManeType(int mane) {
+		this.entityData.set(MANE_TYPE, mane);
 	}
 
 	public void setFeatheringByBreed() {
 
-		//unicorns are more likely to have half or full feathering, but have a small chance of having none.
-		if (this.isPonyBreed()) {
+		//overworlds are more likely to have half or full feathering, but have a small chance of having none.
+		if (this.getBreed() == 0) {
 			if (random.nextDouble() < 0.15) {
 				this.setFeathering(0);
 			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
 				this.setFeathering(2);
 			} else if (random.nextDouble() > 0.50) {
 				this.setFeathering(1);
-			} else {
+			}
+		}
+
+		//nethers are more likely to have no feathering but can have half or full
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.15) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.15) {
+				this.setFeathering(1);
+			} else if (random.nextDouble() > 0.30) {
+				this.setFeathering(0);
+			}
+		}
+
+		//ends are more likely to have half feathering
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.15) {
+				this.setFeathering(2);
+			} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.15) {
+				this.setFeathering(0);
+			} else if (random.nextDouble() > 0.50) {
 				this.setFeathering(1);
 			}
 		}
@@ -481,5 +669,92 @@ public class Unicorn extends OHorse implements GeoEntity {
 		}
 
 	}
+
+	public void setColorByBreed() {
+
+		if (this.getBreed() == 0) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
+				int[] variants = {4, 8, 9, 11, 16, 18, 19, 24, 25, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.30) {
+				this.setVariant(24);
+			}
+		}
+
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
+				int[] variants = {0, 1, 2, 3, 5, 6, 10, 12, 13, 17, 20, 21, 26};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.30) {
+				this.setVariant(2);
+			}
+		}
+
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
+				int[] variants = {7, 8, 11, 15, 22, 23, 28, 31};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.30) {
+				this.setVariant(31);
+			}
+		}
+
+	}
+
+	public void setMarkingByBreed() {
+
+			if (random.nextDouble() < 0.30) {
+				this.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+
+	}
+
+	public void setHornByBreed() {
+
+		if (this.getBreed() == 0) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {0, 1, 2, 3, 4, 5, 6, 7};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {8, 9, 10, 11, 12, 13, 14, 15};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {16, 17, 18, 19, 20, 21, 22, 23};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+	}
+
 
 }

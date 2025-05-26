@@ -172,6 +172,7 @@ public class LivestockOverhaulEvent {
         MenuScreens.register(LOMenuTypes.O_DONKEY_MENU.get(), ODonkeyScreen::new);
         MenuScreens.register(LOMenuTypes.O_CAMEL_MENU.get(), OCamelScreen::new);
         MenuScreens.register(LOMenuTypes.O_CARIBOU_MENU.get(), CaribouScreen::new);
+        MenuScreens.register(LOMenuTypes.UNICORN_MENU.get(), UnicornScreen::new);
 
         //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);

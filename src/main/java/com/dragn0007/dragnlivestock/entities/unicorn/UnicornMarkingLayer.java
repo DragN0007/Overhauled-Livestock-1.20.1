@@ -11,9 +11,6 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 public class UnicornMarkingLayer extends GeoRenderLayer<Unicorn> {
     public UnicornMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
@@ -21,14 +18,6 @@ public class UnicornMarkingLayer extends GeoRenderLayer<Unicorn> {
 
     @Override
     public void render(PoseStack poseStack, Unicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-
-        LocalDate currentDate = LocalDate.now();
-        int day = currentDate.getDayOfMonth();
-        Month month = currentDate.getMonth();
-
-        if (month == Month.DECEMBER && (day == 24 || day == 25)) {
-            return;
-        }
 
         RenderType renderMarkingType = RenderType.entityCutout(((Unicorn)animatable).getOverlayLocation());
         poseStack.pushPose();

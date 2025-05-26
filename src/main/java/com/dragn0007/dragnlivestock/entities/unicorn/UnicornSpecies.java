@@ -7,8 +7,8 @@ public class UnicornSpecies {
         NETHER,
         END;
 
-        public static Breed breedFromOrdinal(int ordinal) {
-            return Breed.values()[ordinal % Breed.values().length];
+        public static UnicornSpecies.Breed breedFromOrdinal(int ordinal) {
+            return UnicornSpecies.Breed.values()[ordinal % UnicornSpecies.Breed.values().length];
         }
     }
 

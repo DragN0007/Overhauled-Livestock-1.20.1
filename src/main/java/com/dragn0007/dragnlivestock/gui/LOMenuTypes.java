@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -19,6 +20,7 @@ public class LOMenuTypes {
     public static final RegistryObject<MenuType<OCamelMenu>> O_CAMEL_MENU = registerMenuType("ocamel_menu", OCamelMenu::new);
     public static final RegistryObject<MenuType<CaribouMenu>> O_CARIBOU_MENU = registerMenuType("ocaribou_menu", CaribouMenu::new);
     public static final RegistryObject<MenuType<OxMenu>> OX_MENU = registerMenuType("ox_menu", OxMenu::new);
+    public static final RegistryObject<MenuType<UnicornMenu>> UNICORN_MENU = registerMenuType("unicorn_menu", UnicornMenu::new);
 
     public static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENU_TYPES.register(name, () -> IForgeMenuType.create(factory));

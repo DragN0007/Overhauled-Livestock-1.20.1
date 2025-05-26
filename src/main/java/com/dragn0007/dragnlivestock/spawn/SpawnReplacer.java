@@ -62,11 +62,13 @@ import com.dragn0007.dragnlivestock.entities.rabbit.RabbitBreed;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
 import com.dragn0007.dragnlivestock.entities.sheep.*;
+import com.dragn0007.dragnlivestock.entities.unicorn.*;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -76,6 +78,8 @@ import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -1240,7 +1244,134 @@ public class SpawnReplacer {
             }
         }
 
+        //Unicorn
+        Unicorn unicorn = EntityTypes.UNICORN_ENTITY.get().create(event.getLevel());
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.SPAWN_UNICORNS.get()) {
 
+            if (event.getEntity().getClass() == ORabbit.class && random.nextDouble() < 0.008 && event.getLevel().isDay()) {
+                ORabbit rabbit = (ORabbit) event.getEntity();
+
+                if (event.getLevel().isClientSide) {
+                    return;
+                }
+
+                if (unicorn != null) {
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
+                            unicorn.setBreed(0);
+                        }
+                    }
+
+                    unicorn.copyPosition(rabbit);
+                    unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
+
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        unicorn.setColorByBreed();
+                        unicorn.setMarkingByBreed();
+                        unicorn.setHornByBreed();
+                    } else {
+                        unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+                        unicorn.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+                        unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                        unicorn.setEyeColorByChance();
+                    } else {
+                        unicorn.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+                    }
+
+                    unicorn.setManeType(1 + random.nextInt(4));
+
+                    event.getLevel().addFreshEntity(unicorn);
+                    rabbit.remove(Entity.RemovalReason.DISCARDED);
+
+                    event.setCanceled(true);
+                }
+            }
+
+            if (event.getEntity().getClass() == PiglinBrute.class && random.nextDouble() < 0.02) {
+                PiglinBrute brute = (PiglinBrute) event.getEntity();
+
+                if (event.getLevel().isClientSide) {
+                    return;
+                }
+
+                if (unicorn != null) {
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        unicorn.setBreed(1);
+                    }
+
+                    unicorn.copyPosition(brute);
+                    unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
+
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        unicorn.setColorByBreed();
+                        unicorn.setMarkingByBreed();
+                        unicorn.setHornByBreed();
+                    } else {
+                        unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+                        unicorn.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+                        unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                        unicorn.setEyeColorByChance();
+                    } else {
+                        unicorn.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+                    }
+
+                    unicorn.setManeType(1 + random.nextInt(4));
+
+                    event.getLevel().addFreshEntity(unicorn);
+                    brute.remove(Entity.RemovalReason.DISCARDED);
+
+                    event.setCanceled(true);
+                }
+            }
+
+            if (event.getEntity().getClass() == EnderMan.class && random.nextDouble() < 0.005) {
+                EnderMan enderMan = (EnderMan) event.getEntity();
+
+                if (event.getLevel().isClientSide) {
+                    return;
+                }
+
+                if (unicorn != null) {
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
+                            unicorn.setBreed(2);
+                        }
+                    }
+
+                    unicorn.copyPosition(enderMan);
+                    unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
+
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        unicorn.setColorByBreed();
+                        unicorn.setMarkingByBreed();
+                        unicorn.setHornByBreed();
+                    } else {
+                        unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+                        unicorn.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+                        unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                        unicorn.setEyeColorByChance();
+                    } else {
+                        unicorn.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+                    }
+
+                    unicorn.setManeType(1 + random.nextInt(4));
+
+                    event.getLevel().addFreshEntity(unicorn);
+                    enderMan.remove(Entity.RemovalReason.DISCARDED);
+
+                    event.setCanceled(true);
+                }
+            }
+        }
 
 
 

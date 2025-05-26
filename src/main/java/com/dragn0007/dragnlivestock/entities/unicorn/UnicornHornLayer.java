@@ -18,7 +18,7 @@ public class UnicornHornLayer extends GeoRenderLayer<Unicorn> {
 
     @Override
     public void render(PoseStack poseStack, Unicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderType renderMarkingType = RenderType.entityCutout(((Unicorn)animatable).getOverlayLocation());
+        RenderType renderMarkingType = RenderType.entityCutout(((Unicorn)animatable).getHornTextureResource());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);
         poseStack.translate(0.0d, 0.0d, 0.0d);
@@ -33,32 +33,33 @@ public class UnicornHornLayer extends GeoRenderLayer<Unicorn> {
     }
 
     public enum Overlay {
-        END_CRYSTAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_endcrystal.png")),
-        ENDER_DRAGON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_enderdragon.png")),
-        ENDER_EYE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_endereye.png")),
-        ENDER_PEARL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_enderpearl.png")),
-        END_GATEWAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_endgateway.png")),
-        END_ROD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_endrod.png")),
-        PURPUR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_purpur.png")),
-        VOID(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_void.png")),
 
-        FIRE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_fire.png")),
-        GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_gold.png")),
-        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_mahogany.png")),
-        NETHERITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_netherite.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_red.png")),
-        REDSTONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_redstone.png")),
-        PURPLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_purple.png")),
-        NAVY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_navy.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/blue.png")),
+        DIAMOND(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/diamond.png")),
+        EMERALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/emerald.png")),
+        GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/green.png")),
+        LAPIS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/lapis.png")),
+        PEARL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/pearl.png")),
+        PINK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/pink.png")),
+        YELLOW(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/yellow.png")),
 
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_blue.png")),
-        DIAMOND(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_diamond.png")),
-        EMERALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_emerald.png")),
-        GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_green.png")),
-        LAPIS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_lapis.png")),
-        PEARL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_pearl.png")),
-        PINK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_pink.png")),
-        YELLOW(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/overlay_horn_yellow.png"));
+        FIRE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/fire.png")),
+        GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/gold.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/mahogany.png")),
+        NETHERITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/netherite.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/red.png")),
+        REDSTONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/redstone.png")),
+        PURPLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/purple.png")),
+        NAVY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/navy.png")),
+
+        END_CRYSTAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/endcrystal.png")),
+        ENDER_DRAGON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/enderdragon.png")),
+        ENDER_EYE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/endereye.png")),
+        ENDER_PEARL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/enderpearl.png")),
+        END_GATEWAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/endgateway.png")),
+        END_ROD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/endrod.png")),
+        PURPUR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/purpur.png")),
+        VOID(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/horn/void.png"));
 
         public final ResourceLocation resourceLocation;
         Overlay(ResourceLocation resourceLocation) {

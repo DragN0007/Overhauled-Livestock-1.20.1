@@ -25,6 +25,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue REPLACE_FROGS;
     public static final ForgeConfigSpec.BooleanValue REPLACE_UNDEAD_HORSES;
     public static final ForgeConfigSpec.BooleanValue SPAWN_MOOBLOOMS;
+    public static final ForgeConfigSpec.BooleanValue SPAWN_UNICORNS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BIPRODUCTS;
     public static final ForgeConfigSpec.BooleanValue GENDERS_AFFECT_BREEDING;
     public static final ForgeConfigSpec.BooleanValue ANIMALS_HERDING_ENABLED;
@@ -44,6 +45,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue SPAWN_BY_BREED;
     public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
     public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
+    public static final ForgeConfigSpec.BooleanValue UNICORN_BREEDING;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
@@ -107,6 +109,9 @@ public class LivestockOverhaulCommonConfig {
 
         SPAWN_MOOBLOOMS = BUILDER.comment("Should Mooblooms have a chance to spawn alongside O-Cows?")
                 .define("Spawn Mooblooms", true);
+
+        SPAWN_UNICORNS = BUILDER.comment("Should Unicorns have a chance to spawn in unique situations?")
+                .define("Spawn Unicorns", true);
 
         BUILDER.pop();
 
@@ -172,6 +177,9 @@ public class LivestockOverhaulCommonConfig {
         OLD_HORSE_TURNING = BUILDER.comment("Should O-Horses and other mounts turn their heads similarly to old 1.12 horses when ridden?" +
                         "\nTurning this off will make mounts use the post-1.12 turning, which is simply just pivoting in place.")
                 .define("Advanced Horse Turning", true);
+
+        UNICORN_BREEDING = BUILDER.comment("Should Unicorns be able to breed?")
+                .define("Allow Unicorn Breeding", false);
 
         MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
                 .define("NON FUNCTIONAL", 3);

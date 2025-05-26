@@ -120,13 +120,7 @@
   "entity.dragnlivestock.peach_moobloom": "Peach Moobloom",
 
   "item.dragnlivestock.unicorn_spawn_egg": "Unicorn Spawn Egg",
-  "entity.dragnlivestock.nicorn": "Unicorn",
-
-  "item.dragnlivestock.nether_unicorn_spawn_egg": "Nether Unicorn Spawn Egg",
-  "entity.dragnlivestock.nether_unicorn": "Nether Unicorn",
-
-  "item.dragnlivestock.end_unicorn_spawn_egg": "End Unicorn Spawn Egg",
-  "entity.dragnlivestock.end_unicorn": "End Unicorn",
+  "entity.dragnlivestock.unicorn": "Unicorn",
 
   "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
 

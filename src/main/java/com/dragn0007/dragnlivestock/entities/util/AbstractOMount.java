@@ -337,21 +337,17 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         FEMALE,
         MALE
     }
-
     public boolean isFemale() {
         return this.getGender() == 0;
     }
-
     public boolean isMale() {
         return this.getGender() == 1;
     }
 
     public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-
     public int getGender() {
         return this.entityData.get(GENDER);
     }
-
     public void setGender(int gender) {
         this.entityData.set(GENDER, gender);
     }
@@ -390,7 +386,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && (this.isHorse(this) || this.isUnicorn(this))) {
+        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getTailType() == 3 || oHorse.getTailType() == 2) {

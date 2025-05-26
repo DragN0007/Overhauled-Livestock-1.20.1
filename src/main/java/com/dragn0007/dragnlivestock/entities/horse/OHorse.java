@@ -1254,21 +1254,17 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> MANE_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-
 	public int getManeType() {
 		return this.entityData.get(MANE_TYPE);
 	}
-
 	public void setManeType(int mane) {
 		this.entityData.set(MANE_TYPE, mane);
 	}
 
 	public static final EntityDataAccessor<Integer> TAIL_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-
 	public int getTailType() {
 		return this.entityData.get(TAIL_TYPE);
 	}
-
 	public void setTailType(int tail) {
 		this.entityData.set(TAIL_TYPE, tail);
 	}
