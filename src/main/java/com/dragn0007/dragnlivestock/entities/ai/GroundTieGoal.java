@@ -19,7 +19,7 @@ public class GroundTieGoal extends Goal {
    }
 
    public boolean canUse() {
-      if (!LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
+      if (!LivestockOverhaulCommonConfig.GROUND_TIE.get() || !this.mob.isTamed()) {
          return false;
       } else if (this.mob.isInWaterOrBubble()) {
          return false;

@@ -183,8 +183,10 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	public void stopFollowing() {
-		this.leader.removeFollower();
-		this.leader = null;
+		if (this.leader != null) {
+			this.leader.removeFollower();
+			this.leader = null;
+		}
 	}
 
 	public void addFollower() {

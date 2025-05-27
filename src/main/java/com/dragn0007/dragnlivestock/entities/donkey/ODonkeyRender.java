@@ -47,7 +47,6 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
             } else {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(true));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
-                model.getBone("extras").ifPresent(b -> b.setHidden(true));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(true));
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(true));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));

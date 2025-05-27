@@ -128,11 +128,17 @@ public class LOItems {
     public static final RegistryObject<Item> CHAINMAIL_HORSE_ARMOR = ITEMS.register("chainmail_horse_armor",
             () -> new HorseArmorItem(4, "chainmail", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> BLACK_SADDLE = ITEMS.register("black_saddle",
-            () -> new SaddleItem(new Item.Properties()));
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WHITE_SADDLE = ITEMS.register("white_saddle",
-            () -> new SaddleItem(new Item.Properties()));
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LIGHT_SADDLE = ITEMS.register("light_saddle",
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BLACK_LIGHT_SADDLE = ITEMS.register("black_light_saddle",
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WHITE_LIGHT_SADDLE = ITEMS.register("white_light_saddle",
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> RODEO_HARNESS = ITEMS.register("rodeo_harness",
-            () -> new RodeoHarnessItem(new Item.Properties()));
+            () -> new RodeoHarnessItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));

@@ -85,8 +85,12 @@ public class LOItemGroup {
 
                         output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
-//                        output.accept(LOItems.BLACK_SADDLE.get());
-//                        output.accept(LOItems.WHITE_SADDLE.get());
+                        output.accept(Items.SADDLE);
+                        output.accept(LOItems.BLACK_SADDLE.get());
+                        output.accept(LOItems.WHITE_SADDLE.get());
+                        output.accept(LOItems.LIGHT_SADDLE.get());
+                        output.accept(LOItems.BLACK_LIGHT_SADDLE.get());
+                        output.accept(LOItems.WHITE_LIGHT_SADDLE.get());
                         output.accept(LOItems.RODEO_HARNESS.get());
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
