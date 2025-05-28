@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
+import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -26,8 +27,8 @@ public class CaribouMenu extends AbstractContainerMenu {
         this.container = container;
         this.caribou = abstractOMount;
 
-        int CaribouSlots = 0;
-        this.addSlot(new Slot(this.container, CaribouSlots++, 8, 18) {
+        int caribouSlots = 0;
+        this.addSlot(new Slot(this.container, caribouSlots++, 8, 18) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
                 return itemStack.is(LOTags.Items.SADDLE) && !this.hasItem() && CaribouMenu.this.caribou.isSaddleable();
@@ -39,10 +40,10 @@ public class CaribouMenu extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new Slot(this.container, CaribouSlots++, 8, 36) {
+        this.addSlot(new Slot(this.container, caribouSlots++, 8, 36) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.getItem() instanceof HorseArmorItem) {
+                if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem) {
                     return !this.hasItem() && CaribouMenu.this.caribou.canWearArmor();
                 }
                 if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
@@ -57,7 +58,7 @@ public class CaribouMenu extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new Slot(this.container, CaribouSlots++, 8, 54) {
+        this.addSlot(new Slot(this.container, caribouSlots++, 8, 54) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
                 if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
@@ -75,7 +76,7 @@ public class CaribouMenu extends AbstractContainerMenu {
         if(this.caribou.hasChest()) {
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 5; x++) {
-                    this.addSlot(new Slot(this.container, CaribouSlots++, 80 + x * 18, 18 + y * 18));
+                    this.addSlot(new Slot(this.container, caribouSlots++, 80 + x * 18, 18 + y * 18));
                 }
             }
         }

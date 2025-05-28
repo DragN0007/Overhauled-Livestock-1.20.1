@@ -32,9 +32,25 @@ public class LOItemModelProvider extends ItemModelProvider {
 
         simpleItem(LOItems.UNICORN_SPAWN_EGG);
 
+
         simpleItem(LOItems.CHAINMAIL_HORSE_ARMOR);
+        simpleItem(LOItems.COPPER_HORSE_ARMOR);
+        simpleItem(LOItems.QUARTZ_HORSE_ARMOR);
+        simpleItem(LOItems.EMERALD_HORSE_ARMOR);
         simpleItem(LOItems.NETHERITE_HORSE_ARMOR);
+        simpleItem(LOItems.OBSIDIAN_HORSE_ARMOR);
         simpleItem(LOItems.GRIFFITH_INSPIRED_HORSE_ARMOR);
+        simpleItem(LOItems.RIOT_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_LEATHER_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_COPPER_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_IRON_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_GOLDEN_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_QUARTZ_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_EMERALD_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_DIAMOND_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_NETHERITE_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_OBSIDIAN_HORSE_ARMOR);
+        simpleItem(LOItems.MINIMAL_GRIFFITH_INSPIRED_HORSE_ARMOR);
         simpleItem(LOItems.BLACK_SADDLE);
         simpleItem(LOItems.WHITE_SADDLE);
         simpleItem(LOItems.LIGHT_SADDLE);

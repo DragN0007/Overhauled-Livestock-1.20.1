@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
+import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
@@ -308,7 +309,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     @Override
     public boolean isArmor(ItemStack itemStack) {
-        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS);
+        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS) || itemStack.getItem() instanceof LightHorseArmorItem;
     }
 
     @Override
@@ -614,6 +615,14 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 if (protection > 0) {
                     this.getAttribute(Attributes.ARMOR).addTransientModifier(
                             new AttributeModifier(ARMOR_MODIFIER_UUID, "Horse armor bonus", (double) protection, AttributeModifier.Operation.ADDITION)
+                    );
+                }
+            }
+            if (itemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
+                int protection = horseArmorItem.getProtection();
+                if (protection > 0) {
+                    this.getAttribute(Attributes.ARMOR).addTransientModifier(
+                            new AttributeModifier(ARMOR_MODIFIER_UUID, "Light armor bonus", (double) protection, AttributeModifier.Operation.ADDITION)
                     );
                 }
             }

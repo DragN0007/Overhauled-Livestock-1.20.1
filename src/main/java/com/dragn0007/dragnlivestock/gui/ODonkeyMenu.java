@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -42,9 +43,10 @@ public class ODonkeyMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, ODonkeySlots++, 8, 36) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.getItem() instanceof HorseArmorItem) {
+                if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem) {
                     return !this.hasItem() && ODonkeyMenu.this.oDonkey.canWearArmor();
-                } else if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
+                }
+                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
                     return !this.hasItem() && ODonkeyMenu.this.oDonkey.canWearArmor();
                 }
                 return false;
@@ -56,20 +58,20 @@ public class ODonkeyMenu extends AbstractContainerMenu {
             }
         });
 
-//        this.addSlot(new Slot(this.container, ODonkeySlots++, 8, 54) {
-//            @Override
-//            public boolean mayPlace(ItemStack itemStack) {
-//                if (itemStack.getItem() instanceof HorseShoeItem) {
-//                    return !this.hasItem() && ODonkeyMenu.this.ODonkey.canWearShoes();
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean isActive() {
-//                return ODonkeyMenu.this.ODonkey.canWearShoes();
-//            }
-//        });
+        this.addSlot(new Slot(this.container, ODonkeySlots++, 8, 54) {
+            @Override
+            public boolean mayPlace(ItemStack itemStack) {
+                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
+                    return !this.hasItem() && ODonkeyMenu.this.oDonkey.canWearArmor();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean isActive() {
+                return ODonkeyMenu.this.oDonkey.canWearArmor();
+            }
+        });
 
         if(this.oDonkey.hasChest()) {
             for(int y = 0; y < 3; y++) {

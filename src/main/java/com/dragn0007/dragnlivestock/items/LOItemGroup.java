@@ -83,8 +83,34 @@ public class LOItemGroup {
 //                        output.accept(LOBlocks.SPRUCE_RABBIT_HUTCH.get());
 //                        output.accept(LOBlocks.WARPED_RABBIT_HUTCH.get());
 
+                        output.accept(Items.LEATHER_HORSE_ARMOR);
                         output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
+                        output.accept(LOItems.COPPER_HORSE_ARMOR.get());
+                        output.accept(Items.IRON_HORSE_ARMOR);
+                        output.accept(Items.GOLDEN_HORSE_ARMOR);
+                        output.accept(LOItems.QUARTZ_HORSE_ARMOR.get());
+                        output.accept(LOItems.EMERALD_HORSE_ARMOR.get());
+                        output.accept(Items.DIAMOND_HORSE_ARMOR);
                         output.accept(LOItems.NETHERITE_HORSE_ARMOR.get());
+//                        if (ModList.get().isLoaded("medievalembroidery")) {
+                            output.accept(LOItems.OBSIDIAN_HORSE_ARMOR.get());
+//                        }
+//                        if (ModList.get().isLoaded("deadlydinos")) {
+                            output.accept(LOItems.RIOT_HORSE_ARMOR.get());
+//                        }
+
+                        output.accept(LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_COPPER_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_IRON_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_GOLDEN_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_QUARTZ_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_EMERALD_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_DIAMOND_HORSE_ARMOR.get());
+                        output.accept(LOItems.MINIMAL_NETHERITE_HORSE_ARMOR.get());
+//                        if (ModList.get().isLoaded("medievalembroidery")) {
+                            output.accept(LOItems.MINIMAL_OBSIDIAN_HORSE_ARMOR.get());
+//                        }
+
                         output.accept(Items.SADDLE);
                         output.accept(LOItems.BLACK_SADDLE.get());
                         output.accept(LOItems.WHITE_SADDLE.get());

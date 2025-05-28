@@ -1,8 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.Overlay;
 import net.minecraft.resources.ResourceLocation;
 
 public enum EquineMarkingOverlay {

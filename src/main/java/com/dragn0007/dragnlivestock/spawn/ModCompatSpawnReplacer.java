@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.spawn;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
-import com.dragn0007.dragnlivestock.entities.caribou.CaribouMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.caribou.CaribouModel;
 import com.dragn0007.dragnlivestock.entities.horse.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;

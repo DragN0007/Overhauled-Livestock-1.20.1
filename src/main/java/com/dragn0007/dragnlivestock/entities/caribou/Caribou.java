@@ -4,9 +4,9 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
-import com.dragn0007.dragnlivestock.entities.horse.*;
+import com.dragn0007.dragnlivestock.entities.horse.EquineEyeColorOverlay;
+import com.dragn0007.dragnlivestock.entities.horse.EquineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -82,6 +82,11 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
+	}
+
+	@Override
+	public boolean canWearArmor() {
+		return true;
 	}
 
 	public Caribou(EntityType<? extends Caribou> type, Level level) {
@@ -606,19 +611,6 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 	public void setTagged(boolean tagged) {
 		this.entityData.set(TAGGED, tagged);
-	}
-
-	@Override
-	public void updateContainerEquipment() {
-		if(!this.level().isClientSide) {
-			this.setSaddleItem(this.inventory.getItem(this.saddleSlot()));
-			this.setDecorItem(this.inventory.getItem(this.decorSlot()));
-		}
-	}
-
-	@Override
-	public int decorSlot() {
-		return 1;
 	}
 
 	@Override

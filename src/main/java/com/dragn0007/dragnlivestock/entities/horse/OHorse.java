@@ -13,12 +13,12 @@ import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -39,7 +39,9 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -723,14 +725,39 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.herdSize = 1;
 			}
 		}
+
+		List<ItemStack> armorSlots = (List<ItemStack>) this.getArmorSlots();
+		ItemStack armorItemStack = armorSlots.get(2);
 		
 		if (this.isOnSand()) {
 			if (!this.hasSlownessEffect()) {
 				this.applySlownessEffect();
 			}
-		} else {
+		} else if (!(!this.isDraftBreed() && armorItemStack.getItem() instanceof HorseArmorItem) || !(this.isRacingBreed() && armorItemStack.getItem() instanceof LightHorseArmorItem)){
 			if (this.hasSlownessEffect()) {
 				this.removeSlownessEffect();
+			}
+		}
+
+		if (armorItemStack.getItem() instanceof HorseArmorItem) {
+			if (!this.isDraftBreed()) {
+				if (!this.hasSlownessEffect()) {
+					this.applySlownessEffect();
+				}
+			} else if (!this.isOnSand()) {
+				if (this.hasSlownessEffect()) {
+					this.removeSlownessEffect();
+				}
+			}
+		} else if (armorItemStack.getItem() instanceof LightHorseArmorItem) {
+			if (this.isRacingBreed()) {
+				if (!this.hasSlownessEffect()) {
+					this.applySlownessEffect();
+				}
+			} else if (!this.isOnSand()) {
+				if (this.hasSlownessEffect()) {
+					this.removeSlownessEffect();
+				}
 			}
 		}
 
