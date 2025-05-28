@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.donkey;
 
+import com.dragn0007.dragnlivestock.entities.mule.OMuleEyeLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,8 +13,9 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
     public ODonkeyRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ODonkeyModel());
         this.addRenderLayer(new ODonkeyMarkingLayer(this));
-        this.addRenderLayer(new ODonkeyCarpetLayer(this));
+        this.addRenderLayer(new ODonkeyEyeLayer(this));
         this.addRenderLayer(new ODonkeyArmorLayer(this));
+        this.addRenderLayer(new ODonkeyCarpetLayer(this));
         this.addRenderLayer(new ODonkeySaddleLayer(this));
         this.addRenderLayer(new ODonkeyShoeLayer(this));
     }

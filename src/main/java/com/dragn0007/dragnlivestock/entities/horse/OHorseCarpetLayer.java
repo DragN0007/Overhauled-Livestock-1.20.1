@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -151,10 +152,12 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
         ResourceLocation resourceLocation = null;
 
         if (!armorItemStack.isEmpty() && !itemStack.isEmpty()) {
-            if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-            } else {
-                resourceLocation = ARMOR_COLOR[((DyeItem)itemStack.getItem()).getDyeColor().getId()];
+            if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !(armorItemStack.getItem() == LOItems.RODEO_HARNESS.get())) {
+                if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                    resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                } else {
+                    resourceLocation = ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                }
             }
         }
 

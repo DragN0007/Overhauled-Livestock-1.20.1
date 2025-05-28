@@ -12,10 +12,10 @@ public class CaribouRender extends GeoEntityRenderer<Caribou> {
     public CaribouRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new CaribouModel());
         this.addRenderLayer(new CaribouMarkingLayer(this));
-        this.addRenderLayer(new CaribouBrandTagLayer(this));
         this.addRenderLayer(new CaribouEyeLayer(this));
-        this.addRenderLayer(new CaribouCarpetLayer(this));
+        this.addRenderLayer(new CaribouBrandTagLayer(this));
         this.addRenderLayer(new CaribouArmorLayer(this));
+        this.addRenderLayer(new CaribouCarpetLayer(this));
         this.addRenderLayer(new CaribouSaddleLayer(this));
     }
 
