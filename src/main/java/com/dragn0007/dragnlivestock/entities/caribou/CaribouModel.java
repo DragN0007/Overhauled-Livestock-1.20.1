@@ -29,13 +29,23 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
     }
 
     public enum Variant {
-        BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_bay.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_brown.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_cream.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_light_grey.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/reindeer_white.png"));
+        BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/bay.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/blue.png")),
+        CHAMPAGNE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/champagne.png")),
+        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/chestnut.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/cream.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/grey.png")),
+        IVORY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/ivory.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/light_grey.png")),
+        LIVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/liver_chestnut.png")),
+        PALAMINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/palamino.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/red.png")),
+        SEAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/seal.png")),
+        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/strawberry.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/white.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
@@ -47,15 +57,15 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_reindeer.geo.json");
-    public static final ResourceLocation REINDEER_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/reindeer.geo.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_caribou.geo.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/caribou.geo.json");
 
     @Override
     public ResourceLocation getModelResource(Caribou object) {
         if (object.isBaby()) {
             return BABY_MODEL;
         }
-        return REINDEER_MODEL;
+        return MODEL;
     }
 
     @Override

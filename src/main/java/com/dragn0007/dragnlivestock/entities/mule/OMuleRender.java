@@ -39,13 +39,6 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
                 model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
-            } else if (animatable.isSaddled()) {
-                model.getBone("saddle").ifPresent(b -> b.setHidden(false));
-                model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
-                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(true));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(true));

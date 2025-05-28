@@ -2,6 +2,8 @@ package com.dragn0007.dragnlivestock.entities.mule;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.horse.EquineEyeColorOverlay;
+import com.dragn0007.dragnlivestock.entities.horse.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
@@ -432,7 +434,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
-		this.entityData.set(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
+		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation);
 	}
 	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(OMule.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public ResourceLocation getOverlayLocation() {
@@ -441,7 +443,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	public void setOverlayVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
-			resourceLocation = OMuleMarkingLayer.Overlay.NONE.resourceLocation;
+			resourceLocation = EquineMarkingOverlay.NONE.resourceLocation;
 		}
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
@@ -449,7 +451,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
 	public ResourceLocation getEyeTextureResource() {
-		return OMuleEyeLayer.EyeOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
+		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
 	}
 	public int getEyeVariant() {
 		return this.entityData.get(EYES);
@@ -538,14 +540,14 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			this.setFeatheringByBreed();
 		} else {
 			this.setVariant(random.nextInt(OMuleModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(OMuleMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			this.setFeathering(random.nextInt(OHorse.Feathering.values().length));
 		}
 
 		if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
 			this.setEyeColorByChance();
 		} else {
-			this.setEyeVariant(random.nextInt(OMuleEyeLayer.EyeOverlay.values().length));
+			this.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
 		}
 
 		this.randomizeAttributes();
@@ -558,7 +560,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(VARIANT_TEXTURE, OMuleModel.Variant.RUST.resourceLocation);
-		this.entityData.define(OVERLAY_TEXTURE, OMuleMarkingLayer.Overlay.NONE.resourceLocation);
+		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BREED, 0);
 		this.entityData.define(FEATHERING, 0);
@@ -658,7 +660,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 		//mules dont usually come with markings but definitely can. generally come with small ones
 		if (random.nextDouble() < 0.20) {
-			this.setOverlayVariant(random.nextInt(OMuleMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 		} else if (random.nextDouble() > 0.20) {
 			int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
 			int randomIndex = new Random().nextInt(variants.length);

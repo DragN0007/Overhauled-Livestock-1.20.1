@@ -11,7 +11,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
 
     public OHorseRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OHorseModel());
-        this.addRenderLayer(new OHorseMarkingLayer(this));;
+        this.addRenderLayer(new OHorseMarkingLayer(this));
         this.addRenderLayer(new OHorseEyeLayer(this));
         this.addRenderLayer(new OHorseCarpetLayer(this));
         this.addRenderLayer(new OHorseArmorLayer(this));
@@ -32,13 +32,6 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             }
 
             if (animatable.isSaddled()) {
-                model.getBone("saddle").ifPresent(b -> b.setHidden(false));
-                model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
-                model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("front_left_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(false));
-                model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(false));
-            } else if (animatable.isSaddled()) {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(false));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(false));
                 model.getBone("front_right_shoe").ifPresent(b -> b.setHidden(false));

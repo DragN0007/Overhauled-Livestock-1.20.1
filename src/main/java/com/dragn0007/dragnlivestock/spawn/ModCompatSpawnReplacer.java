@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
 import com.dragn0007.dragnlivestock.entities.caribou.CaribouMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.caribou.CaribouModel;
+import com.dragn0007.dragnlivestock.entities.horse.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Random;
+
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModCompatSpawnReplacer {
 
@@ -32,6 +35,8 @@ public class ModCompatSpawnReplacer {
 
     @SubscribeEvent
     public static void onModdedSpawn(EntityJoinLevelEvent event) {
+
+        Random random = new Random();
 
         // TerraFirmaCraft Horse -> Vanilla (so it can be converted into an O-Variant)
         if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() &&
@@ -333,14 +338,23 @@ public class ModCompatSpawnReplacer {
                 caribou.copyPosition(tfcCaribou);
                 caribou.setCustomName(tfcCaribou.getCustomName());
 
-                int randomVariant = event.getLevel().getRandom().nextInt(CaribouModel.Variant.values().length);
-                caribou.setVariant(randomVariant);
+                caribou.setGender(random.nextInt(AbstractOMount.Gender.values().length));
 
-                int randomOverlayVariant = event.getLevel().getRandom().nextInt(CaribouMarkingLayer.Overlay.values().length);
-                caribou.setOverlayVariant(randomOverlayVariant);
+                if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                    caribou.setColorByChance();
+                    caribou.setMarkingByChance();
+                    caribou.setFeatheringByChance();
+                } else {
+                    caribou.setVariant(random.nextInt(CaribouModel.Variant.values().length));
+                    caribou.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+                    caribou.setFeathering(random.nextInt(Caribou.Feathering.values().length));
+                }
 
-                int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                caribou.setGender(randomGender);
+                if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                    caribou.setEyeColorByChance();
+                } else {
+                    caribou.setEyeVariant(random.nextInt(EquineMarkingOverlay.values().length));
+                }
 
                 if (event.getLevel().isClientSide) {
                     tfcCaribou.remove(Entity.RemovalReason.DISCARDED);

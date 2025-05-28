@@ -1,6 +1,8 @@
 package com.dragn0007.dragnlivestock.entities.caribou;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.EquineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,6 +13,9 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class CaribouMarkingLayer extends GeoRenderLayer<Caribou> {
     public CaribouMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
@@ -19,11 +24,9 @@ public class CaribouMarkingLayer extends GeoRenderLayer<Caribou> {
     @Override
     public void render(PoseStack poseStack, Caribou animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
-        RenderType renderMarkingType = RenderType.entityCutout(((Caribou)animatable).getOverlayLocation());
-        poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
+        EquineMarkingOverlay overlay = EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
+        RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
+
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
                 bufferSource,
@@ -31,23 +34,6 @@ public class CaribouMarkingLayer extends GeoRenderLayer<Caribou> {
                 renderMarkingType,
                 bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                 1, 1, 1, 1);
-    }
-
-    public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/none.png")),
-        BLANKET(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_blanket.png")),
-        FULL_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_full_socks.png")),
-        PIEBALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_piebald.png")),
-        SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_socks.png")),
-        SPOTTED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/overlay/overlay_spotted.png"));
-
-        public final ResourceLocation resourceLocation;
-        Overlay(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Overlay overlayFromOrdinal(int overlay) { return Overlay.values()[overlay % Overlay.values().length];
-        }
     }
 
 }

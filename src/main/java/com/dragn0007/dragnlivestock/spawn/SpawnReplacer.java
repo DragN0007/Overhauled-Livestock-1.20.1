@@ -204,14 +204,14 @@ public class SpawnReplacer {
                         oHorse.setFeatheringByBreed();
                     } else {
                         oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
-                        oHorse.setOverlayVariant(random.nextInt(OHorseMarkingLayer.Overlay.values().length));
+                        oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
                         oHorse.setEyeColorByChance();
                     } else {
-                        oHorse.setEyeVariant(random.nextInt(OHorseEyeLayer.EyeOverlay.values().length));
+                        oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                     }
 
                     //discard vanilla horse once it's been successfully replaced on client and server
@@ -1271,14 +1271,14 @@ public class SpawnReplacer {
                         unicorn.setHornByBreed();
                     } else {
                         unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
-                        unicorn.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+                        unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
                         unicorn.setEyeColorByChance();
                     } else {
-                        unicorn.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+                        unicorn.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                     }
 
                     unicorn.setManeType(1 + random.nextInt(4));
@@ -1311,14 +1311,14 @@ public class SpawnReplacer {
                         unicorn.setHornByBreed();
                     } else {
                         unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
-                        unicorn.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+                        unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
                         unicorn.setEyeColorByChance();
                     } else {
-                        unicorn.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+                        unicorn.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                     }
 
                     unicorn.setManeType(1 + random.nextInt(4));
@@ -1353,14 +1353,14 @@ public class SpawnReplacer {
                         unicorn.setHornByBreed();
                     } else {
                         unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
-                        unicorn.setOverlayVariant(random.nextInt(UnicornMarkingLayer.Overlay.values().length));
+                        unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
                         unicorn.setEyeColorByChance();
                     } else {
-                        unicorn.setEyeVariant(random.nextInt(UnicornEyeLayer.EyeOverlay.values().length));
+                        unicorn.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                     }
 
                     unicorn.setManeType(1 + random.nextInt(4));

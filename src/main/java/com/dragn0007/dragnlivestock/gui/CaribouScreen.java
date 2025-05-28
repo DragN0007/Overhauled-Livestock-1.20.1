@@ -78,15 +78,12 @@ public class CaribouScreen extends AbstractContainerScreen<CaribouMenu> {
 
         if (this.caribou.canWearArmor()) {
             graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 7, y + 35, 0, this.imageHeight + 54, 18, 18);
+            graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 7, y + 53, 36, this.imageHeight + 54, 18, 18);
         }
 
         if (this.caribou.hasChest()) {
             graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
         }
-
-//        if (this.oCamel.canWearShoes()) {
-//            graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 53, 54, this.imageHeight + 54, 18, 18);
-//        }
 
         if (this.caribou.isFemale()) {
             graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
@@ -120,7 +117,7 @@ public class CaribouScreen extends AbstractContainerScreen<CaribouMenu> {
 
     private void renderBaseCoatLabel(GuiGraphics graphics) {
         String text = this.caribou.getTextureResource().toString(); //texture name
-        String noFillerText = text.replaceAll(".+reindeer_", ""); //remove 'donkey_' and anything before it
+        String noFillerText = text.replaceAll(".+reindeer/", ""); //remove 'donkey_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
         String labelText = "Base Coat: " + noPNGText.toUpperCase(); //print just the coat name
@@ -136,7 +133,7 @@ public class CaribouScreen extends AbstractContainerScreen<CaribouMenu> {
 
     private void renderMarkingLabel(GuiGraphics graphics) {
         String text = this.caribou.getOverlayLocation().toString();
-        String noFillerText = text.replaceAll(".+overlay_", "");
+        String noFillerText = text.replaceAll(".+overlay/", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
         String labelText = "Marking(s): " + noPNGText.toUpperCase();

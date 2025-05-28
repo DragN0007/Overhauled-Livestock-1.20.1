@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.donkey;
+package com.dragn0007.dragnlivestock.entities.caribou;
 
 import com.dragn0007.dragnlivestock.entities.horse.EquineEyeColorOverlay;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,13 +10,13 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class ODonkeyEyeLayer extends GeoRenderLayer<ODonkey> {
-    public ODonkeyEyeLayer(GeoRenderer entityRendererIn) {
+public class CaribouEyeLayer extends GeoRenderLayer<Caribou> {
+    public CaribouEyeLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, ODonkey animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, Caribou animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
         EquineEyeColorOverlay eyes = EquineEyeColorOverlay.eyesFromOrdinal(animatable.getEyeVariant());
         RenderType renderEyeType = RenderType.entityCutout(eyes.resourceLocation);

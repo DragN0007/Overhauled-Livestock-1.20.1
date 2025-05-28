@@ -1,8 +1,10 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.datafixers.DataFixUtils;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.List;
@@ -60,7 +62,20 @@ public class LlamaFollowHerdLeaderGoal extends Goal {
    public void tick() {
       if (--this.timeToRecalcPath <= 0) {
          this.timeToRecalcPath = this.adjustedTickDelay(10);
-         this.mob.pathToLeader();
+
+         OLlama leader = this.mob.leader;
+         if (mob.goalSelector.getRunningGoals().noneMatch(goal -> goal.getGoal() instanceof AvoidEntityGoal<?>)) {
+            if (leader != null) {
+               double distanceSq = this.mob.distanceToSqr(leader);
+               double minDistanceSq = 3.0D * 3.0D;
+
+               if (distanceSq > minDistanceSq) {
+                  this.mob.pathToLeader();
+               } else {
+                  this.mob.getNavigation().stop();
+               }
+            }
+         }
       }
    }
 }

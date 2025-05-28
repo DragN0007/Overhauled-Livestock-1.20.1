@@ -514,7 +514,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.entityData.set(DECOR_ITEM, decorItem);
     }
 
-    //TODO: Carpet Fix
     @Override
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
@@ -621,7 +620,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
-    //TODO: Carpet Fix
     @Override
     public void updateContainerEquipment() {
        if(!this.level().isClientSide) {

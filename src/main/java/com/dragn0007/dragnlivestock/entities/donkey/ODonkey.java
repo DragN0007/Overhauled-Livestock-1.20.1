@@ -3,9 +3,7 @@ package com.dragn0007.dragnlivestock.entities.donkey;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.horse.*;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
@@ -388,7 +386,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
-		this.entityData.set(OVERLAY_TEXTURE, ODonkeyMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
+		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation);
 	}
 	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(ODonkey.class, LivestockOverhaul.RESOURCE_LOCATION);
 	public ResourceLocation getOverlayLocation() {
@@ -397,7 +395,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	public void setOverlayVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
-			resourceLocation = ODonkeyMarkingLayer.Overlay.NONE.resourceLocation;
+			resourceLocation = EquineMarkingOverlay.NONE.resourceLocation;
 		}
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
@@ -405,7 +403,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
 	public ResourceLocation getEyeTextureResource() {
-		return ODonkeyEyeLayer.EyeOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
+		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
 	}
 	public int getEyeVariant() {
 		return this.entityData.get(EYES);
@@ -473,13 +471,13 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			this.setMarking();
 		} else {
 			this.setVariant(random.nextInt(ODonkeyModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(ODonkeyMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 		}
 
 		if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
 			this.setEyeColorByChance();
 		} else {
-			this.setEyeVariant(random.nextInt(ODonkeyEyeLayer.EyeOverlay.values().length));
+			this.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
 		}
 
 		this.randomizeAttributes();
@@ -502,7 +500,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(VARIANT_TEXTURE, ODonkeyModel.Variant.BROWN.resourceLocation);
-		this.entityData.define(OVERLAY_TEXTURE, ODonkeyMarkingLayer.Overlay.NONE.resourceLocation);
+		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation);
 		this.entityData.define(EYES, 0);
 	}
 
@@ -539,7 +537,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			} else if (overlayChance < 8) {
 				overlay = partnerHorse.getOverlayVariant();
 			} else {
-				overlay = this.random.nextInt(OHorseMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
 			((OHorse) foal).setVariant(overlay);
 
@@ -580,7 +578,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			} else if (overlayChance < 8) {
 				overlay = partner.getOverlayVariant();
 			} else {
-				overlay = this.random.nextInt(ODonkeyMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
 			((ODonkey) foal).setOverlayVariant(overlay);
 
@@ -591,7 +589,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			} else if (eyeColorChance < 10) {
 				eyes = partner.getEyeVariant();
 			} else {
-				eyes = this.random.nextInt(ODonkeyEyeLayer.EyeOverlay.values().length);
+				eyes = this.random.nextInt(EquineEyeColorOverlay.values().length);
 			}
 			((ODonkey) foal).setEyeVariant(eyes);
 
@@ -667,7 +665,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 		//donkeys dont usually come with markings but can. generally come with small ones
 		if (random.nextDouble() < 0.20) {
-			this.setOverlayVariant(random.nextInt(ODonkeyMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 		} else if (random.nextDouble() > 0.20) {
 			int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
 			int randomIndex = new Random().nextInt(variants.length);
