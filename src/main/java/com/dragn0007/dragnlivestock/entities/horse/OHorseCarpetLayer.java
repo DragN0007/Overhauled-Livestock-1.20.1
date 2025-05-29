@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraftforge.api.distmarker.Dist;
@@ -139,6 +140,44 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/black.png")
     };
 
+    public static final ResourceLocation[] LEATHER_ARMOR_COLOR = new ResourceLocation[]{
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/white.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/orange.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/magenta.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/light_blue.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/yellow.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/lime.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/pink.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/grey.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/light_grey.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/cyan.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/purple.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/blue.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/brown.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/green.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/red.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/black.png")
+    };
+
+    public static final ResourceLocation[] MINIMAL_LEATHER_ARMOR_COLOR = new ResourceLocation[]{
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/white_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/orange_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/magenta_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/light_blue_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/yellow_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/lime_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/pink_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/grey_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/light_grey_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/cyan_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/purple_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/blue_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/brown_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/green_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/red_minimal.png"),
+            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/black_minimal.png")
+    };
+
     public OHorseCarpetLayer(GeoRenderer<OHorse> entityRendererIn) {
         super(entityRendererIn);
     }
@@ -153,7 +192,20 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
 
         if (!armorItemStack.isEmpty() && !itemStack.isEmpty()) {
             if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !(armorItemStack.getItem() == LOItems.RODEO_HARNESS.get())) {
-                if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+
+                if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
+                    if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                        resourceLocation = LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                    } else {
+                        resourceLocation = LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    }
+                } else if (armorItemStack.getItem() == LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get()) {
+                    if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                        resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                    } else {
+                        resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    }
+                } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                     resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                 } else {
                     resourceLocation = ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
