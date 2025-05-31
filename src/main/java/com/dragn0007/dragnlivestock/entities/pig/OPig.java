@@ -332,21 +332,16 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		FEMALE,
 		MALE
 	}
-
 	public boolean isFemale() {
 		return this.getGender() == 0;
 	}
-
 	public boolean isMale() {
 		return this.getGender() == 1;
 	}
-
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
-
 	public int getGender() {
 		return this.entityData.get(GENDER);
 	}
-
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
 	}

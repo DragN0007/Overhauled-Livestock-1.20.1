@@ -53,8 +53,6 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseRender;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorsemanRender;
-import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorse;
-import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseRender;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaRender;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
@@ -100,7 +98,6 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.O_CAMEL_ENTITY.get(), OCamel.createBaseHorseAttributes().build());
         event.put(EntityTypes.OX_ENTITY.get(), Ox.createBaseHorseAttributes().build());
         event.put(EntityTypes.O_GOAT_ENTITY.get(), OGoat.createAttributes().build());
-        event.put(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorse.createBaseHorseAttributes().build());
         event.put(EntityTypes.O_FROG_ENTITY.get(), OFrog.createAttributes().build());
 
         event.put(EntityTypes.CARIBOU_ENTITY.get(), Caribou.createBaseHorseAttributes().build());
@@ -142,7 +139,6 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_CAMEL_ENTITY.get(), OCamelRender::new);
         EntityRenderers.register(EntityTypes.OX_ENTITY.get(), OxRender::new);
         EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatRender::new);
-        EntityRenderers.register(EntityTypes.O_UNDEAD_HORSE_ENTITY.get(), OUndeadHorseRender::new);
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
         EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);

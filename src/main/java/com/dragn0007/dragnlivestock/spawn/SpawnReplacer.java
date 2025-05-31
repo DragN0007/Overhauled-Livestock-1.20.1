@@ -45,9 +45,6 @@ import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.*;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
-import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorse;
-import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseModel;
-import com.dragn0007.dragnlivestock.entities.horse.undead_horse.OUndeadHorseSkeletalLayer;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
@@ -1147,26 +1144,62 @@ public class SpawnReplacer {
                     return;
                 }
 
-                OUndeadHorse oUndeadHorse = EntityTypes.O_UNDEAD_HORSE_ENTITY.get().create(event.getLevel());
-                if (oUndeadHorse != null) {
-                    oUndeadHorse.copyPosition(skeletonHorse);
+                OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(event.getLevel());
+                if (oHorse != null) {
+                    oHorse.copyPosition(skeletonHorse);
 
-                    oUndeadHorse.setCustomName(skeletonHorse.getCustomName());
-                    oUndeadHorse.setOwnerUUID(skeletonHorse.getOwnerUUID());
-                    oUndeadHorse.setAge(skeletonHorse.getAge());
-                    oUndeadHorse.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oUndeadHorse.generateRandomMaxHealth());
-                    oUndeadHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oUndeadHorse.generateRandomSpeed());
-                    oUndeadHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oUndeadHorse.generateRandomJumpStrength());
+                    oHorse.setCustomName(skeletonHorse.getCustomName());
+                    oHorse.setOwnerUUID(skeletonHorse.getOwnerUUID());
+                    oHorse.setAge(skeletonHorse.getAge());
+                    oHorse.randomizeOHorseAttributes();
 
-                    oUndeadHorse.setVariant(event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length));
-                    oUndeadHorse.setOverlayVariant(event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length));
+                    oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
+                    oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
+                    oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
+                    oHorse.setUndead(true);
+
+                    if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
+                        if (!ModList.get().isLoaded("deadlydinos")) {
+                            int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+                            int randomIndex = new Random().nextInt(breeds.length);
+                            oHorse.setBreed(breeds[randomIndex]);
+                        } else {
+                            oHorse.setBreed(random.nextInt(HorseBreed.values().length));
+                        }
+
+                        oHorse.setManeType(1 + random.nextInt(4));
+                        oHorse.setTailType(1 + random.nextInt(4));
+                    } else {
+                        oHorse.setBreed(0);
+                        oHorse.setManeType(2);
+                        oHorse.setTailType(1 + random.nextInt(4));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oHorse.setColorByBreed();
+                        oHorse.setMarkingByBreed();
+                        oHorse.setFeatheringByBreed();
+                    } else {
+                        oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
+                        oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+                        oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                        oHorse.setEyeColorByChance();
+                    } else {
+                        oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-                    event.getLevel().addFreshEntity(oUndeadHorse);
+                    event.getLevel().addFreshEntity(oHorse);
                     skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
+
+                    //debug only. annoying to see it spam the console
+//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla horse with an O-Horse!");
 
                     event.setCanceled(true);
                 }
@@ -1182,26 +1215,62 @@ public class SpawnReplacer {
                     return;
                 }
 
-                OUndeadHorse oUndeadHorse = EntityTypes.O_UNDEAD_HORSE_ENTITY.get().create(event.getLevel());
-                if (oUndeadHorse != null) {
-                    oUndeadHorse.copyPosition(zombieHorse);
+                OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(event.getLevel());
+                if (oHorse != null) {
+                    oHorse.copyPosition(zombieHorse);
 
-                    oUndeadHorse.setCustomName(zombieHorse.getCustomName());
-                    oUndeadHorse.setOwnerUUID(zombieHorse.getOwnerUUID());
-                    oUndeadHorse.setAge(zombieHorse.getAge());
-                    oUndeadHorse.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oUndeadHorse.generateRandomMaxHealth());
-                    oUndeadHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oUndeadHorse.generateRandomSpeed());
-                    oUndeadHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oUndeadHorse.generateRandomJumpStrength());
+                    oHorse.setCustomName(zombieHorse.getCustomName());
+                    oHorse.setOwnerUUID(zombieHorse.getOwnerUUID());
+                    oHorse.setAge(zombieHorse.getAge());
+                    oHorse.randomizeOHorseAttributes();
 
-                    oUndeadHorse.setVariant(event.getLevel().getRandom().nextInt(OUndeadHorseModel.Variant.values().length));
-                    oUndeadHorse.setOverlayVariant(event.getLevel().getRandom().nextInt(OUndeadHorseSkeletalLayer.Overlay.values().length));
+                    oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
+                    oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
+                    oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
+                    oHorse.setUndead(true);
+
+                    if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
+                        if (!ModList.get().isLoaded("deadlydinos")) {
+                            int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+                            int randomIndex = new Random().nextInt(breeds.length);
+                            oHorse.setBreed(breeds[randomIndex]);
+                        } else {
+                            oHorse.setBreed(random.nextInt(HorseBreed.values().length));
+                        }
+
+                        oHorse.setManeType(1 + random.nextInt(4));
+                        oHorse.setTailType(1 + random.nextInt(4));
+                    } else {
+                        oHorse.setBreed(0);
+                        oHorse.setManeType(2);
+                        oHorse.setTailType(1 + random.nextInt(4));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oHorse.setColorByBreed();
+                        oHorse.setMarkingByBreed();
+                        oHorse.setFeatheringByBreed();
+                    } else {
+                        oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
+                        oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+                        oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
+                        oHorse.setEyeColorByChance();
+                    } else {
+                        oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         zombieHorse.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-                    event.getLevel().addFreshEntity(oUndeadHorse);
+                    event.getLevel().addFreshEntity(oHorse);
                     zombieHorse.remove(Entity.RemovalReason.DISCARDED);
+
+                    //debug only. annoying to see it spam the console
+//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla horse with an O-Horse!");
 
                     event.setCanceled(true);
                 }

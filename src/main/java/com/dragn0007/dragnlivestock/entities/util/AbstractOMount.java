@@ -685,7 +685,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 entity.getType() == EntityTypes.O_HORSE_ENTITY.get() ||
                 entity.getType() == EntityTypes.O_MULE_ENTITY.get() ||
                 entity.getType() == EntityTypes.O_DONKEY_ENTITY.get() ||
-                entity.getType() == EntityTypes.O_UNDEAD_HORSE_ENTITY.get() ||
                 entity.getType() == EntityTypes.UNICORN_ENTITY.get();
     }
 

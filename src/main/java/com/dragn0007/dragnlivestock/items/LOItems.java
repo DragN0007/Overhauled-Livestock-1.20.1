@@ -52,8 +52,6 @@ public class LOItems {
             () -> new ForgeSpawnEggItem(EntityTypes.OX_ENTITY, 0xa19477, 0x826b54, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> O_GOAT_SPAWN_EGG = ITEMS.register("o_goat_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.O_GOAT_ENTITY, 0xfafafa, 0xeae7de, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> O_UNDEAD_HORSE_SPAWN_EGG = ITEMS.register("o_undead_horse_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.O_UNDEAD_HORSE_ENTITY, 0xdbdbdb, 0x868686, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> O_FROG_SPAWN_EGG = ITEMS.register("o_frog_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.O_FROG_ENTITY, 0x9cc15c, 0xc34f31, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> GRUB_SPAWN_EGG = ITEMS.register("grub_spawn_egg",

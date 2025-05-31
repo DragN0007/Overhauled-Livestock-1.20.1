@@ -11,6 +11,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
 
     public OHorseRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OHorseModel());
+        this.addRenderLayer(new OHorseDecompLayer(this));
         this.addRenderLayer(new OHorseMarkingLayer(this));
         this.addRenderLayer(new OHorseEyeLayer(this));
         this.addRenderLayer(new OHorseArmorLayer(this));

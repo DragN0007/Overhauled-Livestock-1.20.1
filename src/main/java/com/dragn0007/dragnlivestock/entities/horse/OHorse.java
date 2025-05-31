@@ -18,6 +18,7 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -31,6 +32,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -39,7 +41,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
@@ -706,6 +707,41 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		});
 	}
 
+	@Override
+	public void aiStep() {
+		super.aiStep();
+
+		if (this.isUndead()) {
+			this.level().addParticle(ParticleTypes.ASH, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+		}
+
+	}
+
+	@Override
+	public boolean hurt(DamageSource damageSource, float v) {
+		if (!this.isUndead() && random.nextDouble() < 0.60 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
+			if (this.getHealth() <= 1) {
+				this.heal(10);
+				this.setUndead(true);
+				this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+				return false;
+			}
+		}
+		if (this.isUndead()) {
+			if (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.EXPLOSION)) {
+				return false;
+			}
+		}
+		return super.hurt(damageSource, v);
+	}
+
+	public MobType getMobType() {
+		if (this.isUndead()) {
+			return MobType.UNDEAD;
+		}
+		return null;
+	}
+
 	public int maxSprint = 20 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
 	public int sprintTick = maxSprint;
 	public int warmbloodSprintAddition = 1200;
@@ -714,6 +750,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public int ponySprintAddition = 200;
 	public int maneGrowthTick;
 	public int tailGrowthTick;
+	public int decompTick;
 
 	@Override
 	public void tick() {
@@ -773,6 +810,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (tailGrowthTick >= LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH_TIME.get() && this.getTailType() > 1) {
 				this.setTailType(this.getTailType() - 1);
 				tailGrowthTick = 0;
+			}
+		}
+
+		if (this.isUndead()) {
+			if (decompTick >= LivestockOverhaulCommonConfig.DECOMPISITION_STAGE_TIME.get()) {
+				this.setDecompVariant(this.getDecompVariant() + 1);
+				decompTick = 0;
 			}
 		}
 
@@ -840,23 +884,32 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public SoundEvent getAmbientSound() {
 		super.getAmbientSound();
+		if (this.isUndead()) {
+			return SoundEvents.ZOMBIE_HORSE_AMBIENT;
+		}
 		return SoundEvents.HORSE_AMBIENT;
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
+		if (this.isUndead()) {
+			return SoundEvents.ZOMBIE_HORSE_DEATH;
+		}
 		return SoundEvents.HORSE_DEATH;
 	}
 
 	@Nullable
 	@Override
 	public SoundEvent getEatingSound() {
-		return SoundEvents.HORSE_EAT;
+		return SoundEvents.HORSE_DEATH;
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource damageSource) {
 		super.getHurtSound(damageSource);
+		if (this.isUndead()) {
+			return SoundEvents.ZOMBIE_HORSE_HURT;
+		}
 		return SoundEvents.HORSE_HURT;
 	}
 
@@ -919,7 +972,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
 
-
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public ResourceLocation getEyeTextureResource() {
 		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
@@ -931,7 +983,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(EYES, eyeVariant);
 	}
 
-
 	public static final EntityDataAccessor<Integer> REINDEER_VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public ResourceLocation getReindeerTextureResource() {
 		return OHorseModel.ReindeerVariant.reindeerVariantFromOrdinal(getReindeerVariant()).resourceLocation;
@@ -942,7 +993,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void setReindeerVariant(int reindeerVariant) {
 		this.entityData.set(REINDEER_VARIANT, reindeerVariant);
 	}
-
 
 	public enum Feathering {
 		NONE,
@@ -960,6 +1010,24 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(FEATHERING, feathering);
 	}
 
+	public static final EntityDataAccessor<Boolean> UNDEAD = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
+	public boolean isUndead() {
+		return this.entityData.get(UNDEAD);
+	}
+	public void setUndead(boolean undead) {
+		this.entityData.set(UNDEAD, undead);
+	}
+
+	public static final EntityDataAccessor<Integer> DECOMP = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public ResourceLocation getDecompTextureResource() {
+		return OHorseDecompLayer.UndeadStage.overlayFromOrdinal(getDecompVariant()).resourceLocation;
+	}
+	public int getDecompVariant() {
+		return this.entityData.get(DECOMP);
+	}
+	public void setDecompVariant(int decompVariant) {
+		this.entityData.set(DECOMP, decompVariant);
+	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -987,6 +1055,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (tag.contains("Reindeer_Variant")) {
 			this.setReindeerVariant(tag.getInt("Reindeer_Variant"));
+		}
+
+		if (tag.contains("Decomp_Stage")) {
+			this.setDecompVariant(tag.getInt("Decomp_Stage"));
 		}
 
 		if (tag.contains("Gender")) {
@@ -1020,6 +1092,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("TailGrowthTime")) {
 			this.tailGrowthTick = tag.getInt("TailGrowthTime");
 		}
+
+		if (tag.contains("Undead")) {
+			this.setUndead(tag.getBoolean("Undead"));
+		}
 	}
 
 	@Override
@@ -1031,6 +1107,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putString("Variant_Texture", this.getTextureResource().toString());
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
+		tag.putInt("Decomp_Stage", this.getDecompVariant());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
 		tag.putInt("Tail", this.getTailType());
@@ -1039,6 +1116,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("SprintTime", this.sprintTick);
 		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
 		tag.putInt("TailGrowthTime", this.tailGrowthTick);
+		tag.putBoolean("Undead", this.isUndead());
 	}
 
 	@Override
@@ -1099,10 +1177,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT_TEXTURE, OHorseModel.Variant.BAY.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation);
 		this.entityData.define(REINDEER_VARIANT, 0);
+		this.entityData.define(DECOMP, 0);
 		this.entityData.define(MANE_TYPE, 0);
 		this.entityData.define(TAIL_TYPE, 0);
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
+		this.entityData.define(UNDEAD, false);
 	}
 
 	public boolean canMate(Animal animal) {

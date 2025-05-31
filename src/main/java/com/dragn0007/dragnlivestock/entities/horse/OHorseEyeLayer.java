@@ -17,6 +17,10 @@ public class OHorseEyeLayer extends GeoRenderLayer<OHorse> {
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
+        if (animatable.getDecompVariant() <= 2) {
+            return;
+        }
+
         EquineEyeColorOverlay eyes = EquineEyeColorOverlay.eyesFromOrdinal(animatable.getEyeVariant());
         RenderType renderEyeType = RenderType.entityCutout(eyes.resourceLocation);
 

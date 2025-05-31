@@ -46,6 +46,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
     public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
     public static final ForgeConfigSpec.BooleanValue UNICORN_BREEDING;
+    public static final ForgeConfigSpec.BooleanValue UNDEAD_HORSE_DEATH;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DECOMPISITION_STAGE_TIME;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
@@ -180,6 +182,12 @@ public class LivestockOverhaulCommonConfig {
 
         UNICORN_BREEDING = BUILDER.comment("Should Unicorns be able to breed?")
                 .define("Allow Unicorn Breeding", false);
+
+        UNDEAD_HORSE_DEATH = BUILDER.comment("Should O-Horses have a small chance to turn Undead upon death?")
+                .define("Occasional Horse Turns Undead", true);
+
+        DECOMPISITION_STAGE_TIME = BUILDER.comment("Amount of time, in ticks, it takes for an Undead Horse to decompose to the next stage. Default is 72000.")
+                .define("Undead Decomp Stage Time", 72000);
 
         MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
                 .define("NON FUNCTIONAL", 3);

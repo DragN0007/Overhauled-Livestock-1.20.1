@@ -17,6 +17,10 @@ public class OHorseMarkingLayer extends GeoRenderLayer<OHorse> {
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
+        if (animatable.getDecompVariant() <= 3) {
+            return;
+        }
+
         EquineMarkingOverlay overlay = EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
         RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
 
