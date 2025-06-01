@@ -415,8 +415,15 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
         if(this.isSaddle(itemStack) && this.isSaddleable() && !this.isSaddled()) {
             // item is a saddle, entity can be saddled, and isn't already wearing a saddle
-            this.setSaddleItem(itemStack);
-            return InteractionResult.SUCCESS;
+            if(!this.level().isClientSide) {
+                this.level().gameEvent(this, GameEvent.EQUIP, this.position());
+                ItemStack saddleItem = itemStack.copy();
+                this.inventory.setItem(this.saddleSlot(), saddleItem);
+                itemStack.shrink(1);
+
+                this.setSaddleItem(saddleItem);
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
         if(!itemStack.isEmpty()) {
