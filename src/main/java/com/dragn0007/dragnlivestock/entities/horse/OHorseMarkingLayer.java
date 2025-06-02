@@ -17,7 +17,9 @@ public class OHorseMarkingLayer extends GeoRenderLayer<OHorse> {
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
-        if (animatable.getDecompVariant() <= 3) {
+        if (animatable.getDecompVariant() == 4 ||
+                animatable.getDecompVariant() == 5 ||
+                animatable.getDecompVariant() == 6) {
             return;
         }
 

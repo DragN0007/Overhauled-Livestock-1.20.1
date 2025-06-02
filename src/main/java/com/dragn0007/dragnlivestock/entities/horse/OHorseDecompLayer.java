@@ -36,7 +36,12 @@ public class OHorseDecompLayer extends GeoRenderLayer<OHorse> {
         MINIMAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_1.png")),
         MODERATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_2.png")),
         EXTREME(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_3.png")),
-        SKELETAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_4.png"));
+        SKELETAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_4.png")),
+        WITHER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/wither.png")),
+        STRAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/stray.png")),
+        DROWNED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/drowned.png")),
+        HUSK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/husk.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         UndeadStage(ResourceLocation resourceLocation) {

@@ -123,8 +123,21 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
 
     @Override
     public ResourceLocation getTextureResource(OHorse object) {
-        if (month == Month.DECEMBER && (day == 24 || day == 25)) {
-            return object.getReindeerTextureResource();
+        if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
+            if (month == Month.DECEMBER && (day == 24 || day == 25)) {
+                return object.getReindeerTextureResource();
+            }
+            return object.getTextureResource();
+        } else if (object.getDecompVariant() == 4) {
+            return OHorseDecompLayer.UndeadStage.SKELETAL.resourceLocation;
+        } else if (object.getDecompVariant() == 5) {
+            return OHorseDecompLayer.UndeadStage.WITHER.resourceLocation;
+        } else if (object.getDecompVariant() == 6) {
+            return OHorseDecompLayer.UndeadStage.STRAY.resourceLocation;
+        } else if (object.getDecompVariant() == 7) {
+            return OHorseDecompLayer.UndeadStage.DROWNED.resourceLocation;
+        } else if (object.getDecompVariant() == 8) {
+            return OHorseDecompLayer.UndeadStage.HUSK.resourceLocation;
         }
         return object.getTextureResource();
     }

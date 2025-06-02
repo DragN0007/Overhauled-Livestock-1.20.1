@@ -29,6 +29,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
@@ -49,6 +51,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -719,11 +722,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (!this.isUndead() && random.nextDouble() < 0.60 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
-			if (this.getHealth() <= 1) {
+		if (!this.isUndead() && random.nextDouble() < 1 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
+			if (this.getHealth() <= 4) {
 				this.heal(10);
 				this.setUndead(true);
+				this.level().playSound(null, this, this.getDeathSound(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
 				this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+				this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+				this.level().playSound(null, this, SoundEvents.ZOMBIE_HORSE_AMBIENT, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
 				return false;
 			}
 		}
@@ -798,10 +804,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		maneGrowthTick++;
-		tailGrowthTick++;
-
 		if (!this.isBaby()) {
+			maneGrowthTick++;
+			tailGrowthTick++;
+
 			if (maneGrowthTick >= LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH_TIME.get() && this.getManeType() > 1) {
 				this.setManeType(this.getManeType() - 1);
 				maneGrowthTick = 0;
@@ -813,9 +819,21 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.isUndead()) {
+		if (this.isUndead() && this.getDecompVariant() < 4 && this.canDecompose()) {
+			decompTick++;
+
 			if (decompTick >= LivestockOverhaulCommonConfig.DECOMPISITION_STAGE_TIME.get()) {
-				this.setDecompVariant(this.getDecompVariant() + 1);
+				if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_HOT_NETHER)) {
+					this.setDecompVariant(5);
+				} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+					this.setDecompVariant(6);
+				} else if (this.isInWater()) {
+					this.setDecompVariant(7);
+				} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_DESERT)) {
+					this.setDecompVariant(8);
+				} else {
+					this.setDecompVariant(this.getDecompVariant() + 1);
+				}
 				decompTick = 0;
 			}
 		}
@@ -901,7 +919,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Nullable
 	@Override
 	public SoundEvent getEatingSound() {
-		return SoundEvents.HORSE_DEATH;
+		return SoundEvents.HORSE_EAT;
 	}
 
 	@Override
@@ -1029,6 +1047,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(DECOMP, decompVariant);
 	}
 
+	public static final EntityDataAccessor<Boolean> DECOMPOSE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
+	public boolean canDecompose() {
+		return this.entityData.get(DECOMPOSE);
+	}
+	public void setCanDecompose(boolean canDecompose) {
+		this.entityData.set(DECOMPOSE, canDecompose);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -1096,6 +1122,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Undead")) {
 			this.setUndead(tag.getBoolean("Undead"));
 		}
+
+		if (tag.contains("CanDecompose")) {
+			this.setCanDecompose(tag.getBoolean("CanDecompose"));
+		}
 	}
 
 	@Override
@@ -1117,6 +1147,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
 		tag.putInt("TailGrowthTime", this.tailGrowthTick);
 		tag.putBoolean("Undead", this.isUndead());
+		tag.putBoolean("CanDecompose", this.canDecompose());
 	}
 
 	@Override
@@ -1183,6 +1214,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
 		this.entityData.define(UNDEAD, false);
+		this.entityData.define(DECOMPOSE, false);
 	}
 
 	public boolean canMate(Animal animal) {

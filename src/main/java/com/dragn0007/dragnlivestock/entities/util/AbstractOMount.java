@@ -388,6 +388,31 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
+        if (this.isHorse(this) && itemStack.is(LOItems.OVERWORLD_UNICORN_HORN.get())) {
+            OHorse oHorse = (OHorse) this;
+
+            if (oHorse.isUndead()) {
+                oHorse.setDecompVariant(0);
+                oHorse.setUndead(false);
+                this.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+                this.level().playSound(null, this, SoundEvents.TOTEM_USE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
+            }
+        }
+
+        if (this.isHorse(this) && itemStack.is(LOItems.NETHER_UNICORN_HORN.get())) {
+            OHorse oHorse = (OHorse) this;
+
+            itemStack.finishUsingItem(level(), player);
+            this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+
+            if (oHorse.isUndead() && oHorse.canDecompose()) {
+                oHorse.setCanDecompose(false);
+            }
+            if (oHorse.isUndead() && !oHorse.canDecompose()) {
+                oHorse.setCanDecompose(true);
+            }
+        }
+
         if(!this.isBaby()) {
             if(this.isTamed() && player.isSecondaryUseActive()) {
                 this.openInventory(player);
