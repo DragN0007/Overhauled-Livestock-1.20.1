@@ -149,11 +149,11 @@ public class LivestockOverhaulCommonConfig {
         CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
                 .define("Chicken Egg Lay Cooldown", 12000);
 
-        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk an O-Cow, O-Sheep, O-Llama, O-Mooshroom, or Moobloom. Default is 48000 ticks, or 40 minutes.")
+        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a non-dairy-breed animal. Default is 48000 ticks, or 40 minutes.")
                 .define("Average Milking Cooldown", 48000);
 
-        DAIRY_MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a Dairy-Breed O-Cow. Default is 12000 ticks, or 10 minutes.")
-                .define("Dairy Cow Milking Cooldown", 12000);
+        DAIRY_MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a dairy-breed animal. Default is 12000 ticks, or 10 minutes.")
+                .define("Dairy Breed Milking Cooldown", 12000);
 
         SHEEP_WOOL_REGROWTH_TIME = BUILDER.comment("Amount of time, in ticks, that you must wait to shear an O-Sheep. Default is 24000 ticks, or 20 minutes.")
                 .define("Sheep Wool Regrowth Time", 24000);

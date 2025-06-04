@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
+import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -83,15 +84,19 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	}
 
 	public boolean isMeatBreed() {
-		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4;
+		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 8;
 	}
 
 	public boolean isNormalBreed() {
 		return this.getBreed() == 1 || this.getBreed() == 5;
 	}
 
-	public boolean isDairyOrMiniBreed() {
+	public boolean isMiniBreed() {
 		return this.getBreed() == 3;
+	}
+
+	public boolean isDairyBreed() {
+		return this.getBreed() == 6 || this.getBreed() == 7;
 	}
 
 	@Override
@@ -228,6 +233,8 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		});
 	}
 
+	public int replenishMilkCounter = 0;
+
 	public void tick() {
 		super.tick();
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
@@ -239,15 +246,13 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 
 		replenishMilkCounter++;
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed()) {
 			this.setMilked(false);
 		}
-	}
 
-	public int replenishMilkCounter = 0;
-	private boolean milked = false;
-	public boolean wasMilked() {
-		return this.milked;
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed()) {
+			this.setMilked(false);
+		}
 	}
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -290,6 +295,14 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			return InteractionResult.SUCCESS;
 		}
 
+		if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
+			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed() &&
+					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+
+			}
+		}
+
 		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())
 				&& (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 				(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
@@ -326,67 +339,47 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	}
 
 	// Generates the base texture
-	public ResourceLocation getTextureLocation() {
-		return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getOverlayLocation() {
-		return OCowMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getHornsLocation() {
-		return OCowHornLayer.HornOverlay.hornOverlayFromOrdinal(getHornVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getModelResource() {
-		return CowBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;
-	}
-
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public int getHornVariant() {
-		return this.entityData.get(HORNS);
+	public int getBreedLocation() {
+		return CowBreed.Breed.values().length;
 	}
 	public int getBreed() {
 		return this.entityData.get(BREED);
-	}
-	public int getHornType() {
-		return this.entityData.get(HORN_TYPE);
-	}
-
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
-	public void setHornVariant(int hornVariant) {
-		this.entityData.set(HORNS, hornVariant);
-	}
-	public void setHornType(int hornType) {
-		this.entityData.set(HORN_TYPE, hornType);
 	}
 	public void setBreed(int breed) {
 		this.entityData.set(BREED, breed);
 	}
 
-	public boolean getMilked() {
-		return this.milked;
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public ResourceLocation getTextureLocation() {
+		return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
-	public void setMilked(boolean milked) {
-		this.milked = milked;
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
+	public void setVariant(int variant) {
+		this.entityData.set(VARIANT, variant);
 	}
 
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public ResourceLocation getOverlayLocation() {return OCowMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int overlayVariant) {
+		this.entityData.set(OVERLAY, overlayVariant);
+	}
+
+	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public int getHornVariant() {
+		return this.entityData.get(HORN_TYPE);
+	}
+	public void setHornVariant(int hornVariant) {
+		this.entityData.set(HORN_TYPE, hornVariant);
+	}
+
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
@@ -399,22 +392,34 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		return this.isAlive() && !this.isBaby();
 	}
 	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
-	}
-	@Override
 	public boolean isTagged() {
 		return this.entityData.get(TAGGED);
 	}
 	public void setTagged(boolean tagged) {
 		this.entityData.set(TAGGED, tagged);
 	}
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
+	}
+
+	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public boolean wasMilked() {
+		return this.entityData.get(MILKED);
+	}
+	public void setMilked(boolean milked) {
+		this.entityData.set(MILKED, milked);
+	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+
+		if (tag.contains("Breed")) {
+			setBreed(tag.getInt("Breed"));
+		}
 
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
@@ -424,20 +429,20 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (tag.contains("Horns")) {
-			setHornVariant(tag.getInt("Horns"));
-		}
-
 		if (tag.contains("HornType")) {
-			setHornType(tag.getInt("HornType"));
+			setHornVariant(tag.getInt("HornType"));
 		}
 
 		if (tag.contains("Gender")) {
-			setGender(tag.getInt("Gender"));
+			this.setGender(tag.getInt("Gender"));
 		}
 
-		if (tag.contains("Breed")) {
-			setBreed(tag.getInt("Breed"));
+		if (tag.contains("Milked")) {
+			this.setMilked(tag.getBoolean("Milked"));
+		}
+
+		if (tag.contains("MilkedTime")) {
+			this.replenishMilkCounter = tag.getInt("MilkedTime");
 		}
 
 		if (tag.contains("Milked")) {
@@ -454,29 +459,16 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putInt("Variant", getVariant());
-
-		tag.putInt("Overlay", getOverlayVariant());
-
-		tag.putInt("Horns", getHornVariant());
-
-		tag.putInt("HornType", getHornType());
-
-		tag.putInt("Gender", getGender());
 
 		tag.putInt("Breed", getBreed());
-
-		tag.putBoolean("Milked", getMilked());
-
+		tag.putInt("Variant", getVariant());
+		tag.putInt("Overlay", getOverlayVariant());
+		tag.putInt("HornType", getHornVariant());
+		tag.putInt("Gender", this.getGender());
+		tag.putBoolean("Milked", this.wasMilked());
+		tag.putInt("MilkedTime", this.replenishMilkCounter);
 		tag.putBoolean("Tagged", this.isTagged());
-
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
-	}
-
-	public enum HornType {
-		ONE,
-		TWO,
-		THREE
 	}
 
 	@Override
@@ -491,54 +483,40 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		setGender(random.nextInt(Gender.values().length));
 		setBreed(random.nextInt(CowBreed.Breed.values().length));
 
-		if (this.getBreed() == 4) {
-			setHornVariant(2);
-			setHornType(random.nextInt(HornType.values().length));
-		} else {
-			setHornVariant(random.nextInt(OCowHornLayer.HornOverlay.values().length));
-		}
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
-
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(HORNS, 0);
 		this.entityData.define(GENDER, 0);
-		this.entityData.define(BREED, 0);
+		this.entityData.define(HORN_TYPE, 0);
+		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
-		this.entityData.define(HORN_TYPE, 0);
+		this.entityData.define(MILKED, false);
 	}
 
 	public enum Gender {
 		FEMALE,
 		MALE
 	}
-
 	public boolean isFemale() {
 		return this.getGender() == 0;
 	}
-
 	public boolean isMale() {
 		return this.getGender() == 1;
 	}
-
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-
 	public int getGender() {
 		return this.entityData.get(GENDER);
 	}
-
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
 	}
-
 	public boolean canParent() {
 		return !this.isBaby() && this.isInLove();
 	}
@@ -554,13 +532,6 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			} else {
 				OCow partner = (OCow) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -575,65 +546,65 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		if (ageableMob instanceof OCow) {
 			OCow oCow1 = (OCow) ageableMob;
 
-			if (this.random.nextInt(5) == 0) {
-				Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
-				if (oX != null) {
-					oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
-					return oX;
-				}
-
-			} else {
-				oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
-
-				int i = this.random.nextInt(9);
-				int variant;
-				if (i < 4) {
-					variant = this.getVariant();
-				} else if (i < 8) {
-					variant = oCow1.getVariant();
-				} else {
-					variant = this.random.nextInt(OCowModel.Variant.values().length);
-				}
-
-				int j = this.random.nextInt(5);
-				int overlay;
-				if (j < 2) {
-					overlay = this.getOverlayVariant();
-				} else if (j < 4) {
-					overlay = oCow1.getOverlayVariant();
-				} else {
-					overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
-				}
-
-				int k = this.random.nextInt(5);
-				int horns;
-				if (k < 2) {
-					horns = this.getHornVariant();
-				} else if (k < 4) {
-					horns = oCow1.getHornVariant();
-				} else {
-					horns = this.random.nextInt(OCowHornLayer.HornOverlay.values().length);
-				}
-
-				int m = this.random.nextInt(5);
-				int breed;
-				if (m < 2) {
-					breed = this.getBreed();
-				} else if (m < 4) {
-					breed = oCow1.getBreed();
-				} else {
-					breed = this.random.nextInt(CowBreed.Breed.values().length);
-				}
-
-				int udders;
-				udders = this.random.nextInt(Gender.values().length);
-
-				oCow.setVariant(variant);
-				oCow.setOverlayVariant(overlay);
-				oCow.setHornVariant(horns);
-				oCow.setGender(udders);
-				oCow.setBreed(breed);
-			}
+//			if (this.random.nextInt(5) == 0) {
+//				Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
+//				if (oX != null) {
+//					oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
+//					return oX;
+//				}
+//
+//			} else {
+//				oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
+//
+//				int i = this.random.nextInt(9);
+//				int variant;
+//				if (i < 4) {
+//					variant = this.getVariant();
+//				} else if (i < 8) {
+//					variant = oCow1.getVariant();
+//				} else {
+//					variant = this.random.nextInt(OCowModel.Variant.values().length);
+//				}
+//
+//				int j = this.random.nextInt(5);
+//				int overlay;
+//				if (j < 2) {
+//					overlay = this.getOverlayVariant();
+//				} else if (j < 4) {
+//					overlay = oCow1.getOverlayVariant();
+//				} else {
+//					overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
+//				}
+//
+//				int k = this.random.nextInt(5);
+//				int horns;
+//				if (k < 2) {
+//					horns = this.getHornVariant();
+//				} else if (k < 4) {
+//					horns = oCow1.getHornVariant();
+//				} else {
+//					horns = this.random.nextInt(OCowHornLayer.HornOverlay.values().length);
+//				}
+//
+//				int m = this.random.nextInt(5);
+//				int breed;
+//				if (m < 2) {
+//					breed = this.getBreed();
+//				} else if (m < 4) {
+//					breed = oCow1.getBreed();
+//				} else {
+//					breed = this.random.nextInt(CowBreed.Breed.values().length);
+//				}
+//
+//				int udders;
+//				udders = this.random.nextInt(Gender.values().length);
+//
+//				oCow.setVariant(variant);
+//				oCow.setOverlayVariant(overlay);
+//				oCow.setHornVariant(horns);
+//				oCow.setGender(udders);
+//				oCow.setBreed(breed);
+//			}
 		}
 
 		return oCow;

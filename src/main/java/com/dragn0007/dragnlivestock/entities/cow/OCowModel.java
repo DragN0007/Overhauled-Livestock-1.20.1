@@ -56,17 +56,20 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
         }
     }
 
-//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow_overhaul.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/cow_overhaul.animation.json");
-
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_cow_overhaul.geo.json");
+    public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_cow.geo.json");
+    public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_bull.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_cow.geo.json");
 
     @Override
     public ResourceLocation getModelResource(OCow object) {
         if (object.isBaby()) {
             return BABY_MODEL;
+        } else if (object.isMale()) {
+            return MALE;
+        } else {
+            return FEMALE;
         }
-        return CowBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override
