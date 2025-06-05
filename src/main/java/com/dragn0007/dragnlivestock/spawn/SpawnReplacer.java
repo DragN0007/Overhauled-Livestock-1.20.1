@@ -337,9 +337,6 @@ public class SpawnReplacer {
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
-
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
@@ -363,9 +360,6 @@ public class SpawnReplacer {
 
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
-
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
 
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -391,9 +385,6 @@ public class SpawnReplacer {
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
-
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
@@ -417,9 +408,6 @@ public class SpawnReplacer {
 
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
-
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
 
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -445,9 +433,6 @@ public class SpawnReplacer {
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
-
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
@@ -471,9 +456,6 @@ public class SpawnReplacer {
 
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
-
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
 
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -499,9 +481,6 @@ public class SpawnReplacer {
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
-
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
@@ -525,9 +504,6 @@ public class SpawnReplacer {
 
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
-
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
 
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -553,9 +529,6 @@ public class SpawnReplacer {
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
-
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
@@ -580,9 +553,6 @@ public class SpawnReplacer {
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
-
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
@@ -606,9 +576,6 @@ public class SpawnReplacer {
 
                             int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
                             moobloom.setOverlayVariant(randomOverlayVariant);
-
-                            int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                            moobloom.setHornVariant(randomHorns);
 
                             if (event.getLevel().isClientSide) {
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -638,15 +605,6 @@ public class SpawnReplacer {
 
                     int randomBreed = event.getLevel().getRandom().nextInt(CowBreed.Breed.values().length);
                     oCow.setBreed(randomBreed);
-
-                    if (oCow.getBreed() == 4) {
-                        oCow.setHornVariant(2);
-                        int randomHornType = event.getLevel().getRandom().nextInt(OCow.HornType.values().length);
-                        oCow.setHornType(randomHornType);
-                    } else {
-                        int randomHorns = event.getLevel().getRandom().nextInt(OCowHornLayer.HornOverlay.values().length);
-                        oCow.setHornVariant(randomHorns);
-                    }
 
                     if (event.getLevel().isClientSide) {
                         vanillacow.remove(Entity.RemovalReason.DISCARDED);

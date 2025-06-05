@@ -18,9 +18,10 @@ public class OCowMarkingLayer extends GeoRenderLayer<OCow> {
 
     @Override
     public void render(PoseStack poseStack, OCow animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderType renderMarkingType = RenderType.entityCutout(((OCow)animatable).getOverlayLocation());
+        RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
+
         poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
+        poseStack.scale(1.0F, 1.0F, 1.0F);
         poseStack.translate(0.0d, 0.0d, 0.0d);
         poseStack.popPose();
         getRenderer().reRender(getDefaultBakedModel(animatable),
@@ -34,18 +35,31 @@ public class OCowMarkingLayer extends GeoRenderLayer<OCow> {
 
     public enum Overlay {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/none.png")),
-        HIGHLAND_DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/highland_dark_brown.png")),
-        HIGHLAND_GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/highland_gold.png")),
-        HIGHLAND_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/highland_white.png")),
-        BLACK_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_black_speckled.png")),
-        BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_blaze.png")),
-        DAIRY_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_dairy_paint.png")),
-        OVERO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_overo.png")),
-        PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_paint.png")),
-        REVERSE_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_reverse_paint.png")),
-        SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_socks.png")),
-        SPLASH_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_splash_stripe.png")),
-        WHITE_SPECKLED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/overlay_white_speckled.png"));
+        BLACK_FEW_SPECKLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/black_few_speckle.png")),
+        BLACK_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/black_leopard.png")),
+        BLACK_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/black_paint.png")),
+        BLACK_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/black_stripe.png")),
+        BLUE_FEW_SPECKLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/blue_few_speckle.png")),
+        BLUE_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/blue_leopard.png")),
+        BLUE_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/blue_paint.png")),
+        BLUE_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/blue_stripe.png")),
+        CREAM_FEW_SPECKLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/cream_few_speckle.png")),
+        CREAM_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/cream_leopard.png")),
+        CREAM_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/cream_paint.png")),
+        CREAM_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/cream_stripe.png")),
+        RED_FEW_SPECKLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/red_few_speckle.png")),
+        RED_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/red_leopard.png")),
+        RED_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/red_paint.png")),
+        RED_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/red_stripe.png")),
+        WHITE_FEW_SPECKLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/white_few_speckle.png")),
+        WHITE_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/white_leopard.png")),
+        WHITE_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/white_paint.png")),
+        WHITE_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/white_stripe.png")),
+        BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/blaze.png")),
+        SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/socks.png")),
+        FULL_SOCKS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/full_socks.png")),
+        PURE_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/pure_white.png")),
+        HEREFORD_SPLASH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/hereford_splash.png"));
 
         //Add new entries to bottom when mod is public, else cows will change textures during update.
 

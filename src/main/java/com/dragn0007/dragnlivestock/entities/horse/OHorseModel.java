@@ -134,10 +134,6 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
             return OHorseDecompLayer.UndeadStage.WITHER.resourceLocation;
         } else if (object.getDecompVariant() == 6) {
             return OHorseDecompLayer.UndeadStage.STRAY.resourceLocation;
-        } else if (object.getDecompVariant() == 7) {
-            return OHorseDecompLayer.UndeadStage.DROWNED.resourceLocation;
-        } else if (object.getDecompVariant() == 8) {
-            return OHorseDecompLayer.UndeadStage.HUSK.resourceLocation;
         }
         return object.getTextureResource();
     }

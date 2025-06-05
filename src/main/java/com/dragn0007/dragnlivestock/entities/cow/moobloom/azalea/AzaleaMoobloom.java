@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea;
 
-import com.dragn0007.dragnlivestock.entities.cow.OCowHornLayer;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -85,10 +84,6 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
         return OCowMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
     }
 
-    public ResourceLocation getHornsLocation() {
-        return OCowHornLayer.HornOverlay.hornOverlayFromOrdinal(getHornVariant()).resourceLocation;
-    }
-
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
@@ -149,7 +144,7 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
         Random random = new Random();
         setVariant(random.nextInt(AzaleaMoobloomModel.Variant.values().length));
         setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
-        setHornVariant(random.nextInt(OCowHornLayer.HornOverlay.values().length));
+        
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }

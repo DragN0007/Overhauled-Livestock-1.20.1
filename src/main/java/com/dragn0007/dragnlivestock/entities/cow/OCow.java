@@ -65,7 +65,6 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		super(type, level);
 	}
 
-
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
 	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
@@ -156,6 +155,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			if (tAnimationState.isMoving()) {
 				if (currentSpeed > speedThreshold) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(1.1);
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				}
@@ -299,20 +299,20 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed() &&
 					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-
+				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+				ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
+				player.setItemInHand(hand, itemstack1);
+				replenishMilkCounter = 0;
+				setMilked(true);
+			} else if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed() &&
+					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+				ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
+				player.setItemInHand(hand, itemstack1);
+				replenishMilkCounter = 0;
+				setMilked(true);
 			}
-		}
-
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())
-				&& (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-				(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-
-			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
-			player.setItemInHand(hand, itemstack1);
-			replenishMilkCounter = 0;
-			setMilked(true);
-
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else {
 			return super.mobInteract(player, hand);
@@ -437,10 +437,6 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			this.setGender(tag.getInt("Gender"));
 		}
 
-		if (tag.contains("Milked")) {
-			this.setMilked(tag.getBoolean("Milked"));
-		}
-
 		if (tag.contains("MilkedTime")) {
 			this.replenishMilkCounter = tag.getInt("MilkedTime");
 		}
@@ -478,10 +474,19 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		setVariant(random.nextInt(OCowModel.Variant.values().length));
-		setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
-		setGender(random.nextInt(Gender.values().length));
-		setBreed(random.nextInt(CowBreed.Breed.values().length));
+
+		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
+		this.setGender(random.nextInt(OCow.Gender.values().length));
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColorByBreed();
+			this.setMarkingByBreed();
+			this.setHornsByBreed();
+		} else {
+			this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
+		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -494,7 +499,6 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(HORN_TYPE, 0);
-		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
 		this.entityData.define(MILKED, false);
@@ -546,65 +550,65 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		if (ageableMob instanceof OCow) {
 			OCow oCow1 = (OCow) ageableMob;
 
-//			if (this.random.nextInt(5) == 0) {
-//				Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
-//				if (oX != null) {
-//					oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
-//					return oX;
-//				}
-//
-//			} else {
-//				oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
-//
-//				int i = this.random.nextInt(9);
-//				int variant;
-//				if (i < 4) {
-//					variant = this.getVariant();
-//				} else if (i < 8) {
-//					variant = oCow1.getVariant();
-//				} else {
-//					variant = this.random.nextInt(OCowModel.Variant.values().length);
-//				}
-//
-//				int j = this.random.nextInt(5);
-//				int overlay;
-//				if (j < 2) {
-//					overlay = this.getOverlayVariant();
-//				} else if (j < 4) {
-//					overlay = oCow1.getOverlayVariant();
-//				} else {
-//					overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
-//				}
-//
-//				int k = this.random.nextInt(5);
-//				int horns;
-//				if (k < 2) {
-//					horns = this.getHornVariant();
-//				} else if (k < 4) {
-//					horns = oCow1.getHornVariant();
-//				} else {
-//					horns = this.random.nextInt(OCowHornLayer.HornOverlay.values().length);
-//				}
-//
-//				int m = this.random.nextInt(5);
-//				int breed;
-//				if (m < 2) {
-//					breed = this.getBreed();
-//				} else if (m < 4) {
-//					breed = oCow1.getBreed();
-//				} else {
-//					breed = this.random.nextInt(CowBreed.Breed.values().length);
-//				}
-//
-//				int udders;
-//				udders = this.random.nextInt(Gender.values().length);
-//
-//				oCow.setVariant(variant);
-//				oCow.setOverlayVariant(overlay);
-//				oCow.setHornVariant(horns);
-//				oCow.setGender(udders);
-//				oCow.setBreed(breed);
-//			}
+			if (this.random.nextInt(5) == 0) {
+				Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
+				if (oX != null) {
+					oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
+					return oX;
+				}
+
+			} else {
+				oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
+
+				int i = this.random.nextInt(9);
+				int variant;
+				if (i < 4) {
+					variant = this.getVariant();
+				} else if (i < 8) {
+					variant = oCow1.getVariant();
+				} else {
+					variant = this.random.nextInt(OCowModel.Variant.values().length);
+				}
+
+				int j = this.random.nextInt(5);
+				int overlay;
+				if (j < 2) {
+					overlay = this.getOverlayVariant();
+				} else if (j < 4) {
+					overlay = oCow1.getOverlayVariant();
+				} else {
+					overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
+				}
+
+				int k = this.random.nextInt(5);
+				int horns;
+				if (k < 2) {
+					horns = this.getHornVariant();
+				} else if (k < 4) {
+					horns = oCow1.getHornVariant();
+				} else {
+					horns = this.random.nextInt(BreedHorns.values().length);
+				}
+
+				int m = this.random.nextInt(5);
+				int breed;
+				if (m < 2) {
+					breed = this.getBreed();
+				} else if (m < 4) {
+					breed = oCow1.getBreed();
+				} else {
+					breed = this.random.nextInt(CowBreed.Breed.values().length);
+				}
+
+				int udders;
+				udders = this.random.nextInt(Gender.values().length);
+
+				oCow.setVariant(variant);
+				oCow.setOverlayVariant(overlay);
+				oCow.setHornVariant(horns);
+				oCow.setGender(udders);
+				oCow.setBreed(breed);
+			}
 		}
 
 		return oCow;
@@ -639,6 +643,300 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 				}
 			}
 
+		}
+	}
+
+	public void setColorByBreed() {
+
+		if (this.getBreed() == 0) { //angus
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.05) { //longhorn
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {2, 3, 4, 5, 7, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.05) { //brahman
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 8, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //mini
+			this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+		}
+
+		if (this.getBreed() == 4) { //watusi
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {2, 3, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) {
+			if (random.nextDouble() < 0.05) { //corriente
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 2, 3, 4, 5, 8, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 6) {
+			if (random.nextDouble() < 0.05) { //holstein
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 2, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 7) {
+			if (random.nextDouble() < 0.05) { //jersey
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 8) {
+			if (random.nextDouble() < 0.05) { //hereford
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {2, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 9) { //highland
+			this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+		}
+
+	}
+
+	public void setMarkingByBreed() {
+
+		if (this.getBreed() == 0) { //angus
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.05) { //longhorn
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {9, 10, 11, 13, 14, 15, 17, 18, 19};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.05) { //brahman
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 3) { //mini
+			this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+		}
+
+		if (this.getBreed() == 4) { //watusi
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 9, 10, 11, 13, 14, 15, 17, 18, 19};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) {
+			if (random.nextDouble() < 0.05) { //corriente
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 1, 5, 9, 13, 17, 21, 22, 23};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 6) {
+			if (random.nextDouble() < 0.05) { //holstein
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {2, 3, 5, 10, 11, 18, 19, 21, 22, 23, 24};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 7) {
+			if (random.nextDouble() < 0.05) { //jersey
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 21, 22, 23};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 8) {
+			if (random.nextDouble() < 0.05) { //hereford
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(25);
+			}
+		}
+
+		if (this.getBreed() == 9) { //highland
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+	}
+
+	public void setHornsByBreed() {
+
+		if (this.getBreed() == 0) { //angus
+			if (random.nextDouble() < 0.05) {
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setHornVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 1) {
+			if (random.nextDouble() < 0.05) { //longhorn
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {2, 3, 4};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) {
+			if (random.nextDouble() < 0.05) { //brahman
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 8, 9, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) {
+			if (random.nextDouble() < 0.05) { //mini
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 8, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //watusi
+			if (random.nextDouble() < 0.05) {
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {5, 6};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) {
+			if (random.nextDouble() < 0.05) { //corriente
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {1, 7, 8, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 6) {
+			if (random.nextDouble() < 0.05) { //holstein
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setHornVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 7) {
+			if (random.nextDouble() < 0.05) { //jersey
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setHornVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 8) {
+			if (random.nextDouble() < 0.05) { //hereford
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setHornVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 9) {
+			if (random.nextDouble() < 0.05) { //highland
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {1, 7, 8, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+	}
+
+	public enum BreedHorns {
+		NONE,
+		CLASSIC_BULL_UPWARDS,
+		LONGHORN_FORWARD,
+		LONGHORN_UPWARDS,
+		LONGHORN_DOWNWARDS,
+		WATUSI_STRAIGHT,
+		WATUSI_CURVED,
+		SMALL_UPWARDS,
+		CLASSIC_BULL_FORWARD,
+		ZEBU,
+		SMALL_FORWARD;
+
+		public static OCow.BreedHorns hornsFromOrdinal(int ordinal) {
+			return OCow.BreedHorns.values()[ordinal % OCow.BreedHorns.values().length];
 		}
 	}
 

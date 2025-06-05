@@ -23,10 +23,9 @@ public class OxModel extends GeoModel<Ox> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/ox.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/cow_overhaul.animation.json");
-
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_cow_overhaul.geo.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/large_bull.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/baby_o_cow.geo.json");
     @Override
     public ResourceLocation getModelResource(Ox object) {
         if(object.isBaby())
