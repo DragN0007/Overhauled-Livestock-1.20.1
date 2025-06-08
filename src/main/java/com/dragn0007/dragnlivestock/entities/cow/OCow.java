@@ -181,7 +181,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.isHarnessed() && this.isVehicle()) {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
-			controller.setAnimationSpeed(1.3);
+			controller.setAnimationSpeed(1.1);
 		} else {
 			if (tAnimationState.isMoving()) {
 				if (currentSpeed > speedThreshold) {
@@ -214,8 +214,12 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		if (this.hasPassenger(entity)) {
 
 			double offsetX = 0;
-			double offsetY = 1.4;
+			double offsetY = 1.1;
 			double offsetZ = -0.055;
+
+			if (this.isHarnessed()) {
+				offsetY = 1.4;
+			}
 
 			double radYaw = Math.toRadians(this.getYRot());
 

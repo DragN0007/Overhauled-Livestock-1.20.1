@@ -55,7 +55,7 @@ public class BullAroundLikeCrazyGoal extends Goal {
       if (this.mount.isHarnessed() && this.mount.isVehicle()) {
          if (this.mount.getRandom().nextInt(this.adjustedTickDelay(90)) == 10) {
 
-            Entity entity = this.mount.getPassengers().getFirst();
+            Entity entity = this.mount.getPassengers().get(0);
             if (entity == null) {
                return;
             }
