@@ -76,28 +76,6 @@ public class BullAroundLikeCrazyGoal extends Goal {
             player.displayClientMessage(Component.translatable("Stayed On: " + stayedOnInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
          }
       }
-
-      if (!this.mount.isTamed() && this.mount.getRandom().nextInt(this.adjustedTickDelay(50)) == 0) {
-         Entity entity = this.mount.getPassengers().getFirst();
-         if (entity == null) {
-            return;
-         }
-
-         if (entity instanceof Player) {
-            int i = this.mount.getTemper();
-            int j = this.mount.getMaxTemper();
-            if (j > 0 && this.mount.getRandom().nextInt(j) < i && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(mount, (Player)entity)) {
-               this.mount.tameWithName((Player)entity);
-               return;
-            }
-
-            this.mount.modifyTemper(5);
-         }
-
-         this.mount.ejectPassengers();
-         this.mount.makeMad();
-         this.mount.level().broadcastEntityEvent(this.mount, (byte)6);
-      }
-
    }
+
 }
