@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -11,21 +12,21 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 
-public class ORunAroundLikeCrazyGoal extends Goal {
-   private final AbstractOMount mount;
+public class BullAroundLikeCrazyGoal extends Goal {
+   private final OCow mount;
    private final double speedModifier;
    private double posX;
    private double posY;
    private double posZ;
 
-   public ORunAroundLikeCrazyGoal(AbstractOMount p_25890_, double p_25891_) {
+   public BullAroundLikeCrazyGoal(OCow p_25890_, double p_25891_) {
       this.mount = p_25890_;
       this.speedModifier = p_25891_;
-      this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+      this.setFlags(EnumSet.of(Flag.MOVE));
    }
 
    public boolean canUse() {
-      if ((!this.mount.isTamed() && this.mount.isVehicle()) || (this.mount.isWearingHarness() && this.mount.isVehicle())) {
+      if ((!this.mount.isTamed() && this.mount.isVehicle()) || (this.mount.isHarnessed() && this.mount.isVehicle())) {
          Vec3 vec3 = DefaultRandomPos.getPos(this.mount, 5, 4);
          if (vec3 == null) {
             return false;
@@ -51,10 +52,10 @@ public class ORunAroundLikeCrazyGoal extends Goal {
    public int secondsStayedOnTick = 0;
 
    public void tick() {
-      if (this.mount.isWearingHarness() && this.mount.isVehicle()) {
+      if (this.mount.isHarnessed() && this.mount.isVehicle()) {
          if (this.mount.getRandom().nextInt(this.adjustedTickDelay(90)) == 10) {
 
-            Entity entity = this.mount.getPassengers().get(0);
+            Entity entity = this.mount.getPassengers().getFirst();
             if (entity == null) {
                return;
             }
@@ -77,7 +78,7 @@ public class ORunAroundLikeCrazyGoal extends Goal {
       }
 
       if (!this.mount.isTamed() && this.mount.getRandom().nextInt(this.adjustedTickDelay(50)) == 0) {
-         Entity entity = this.mount.getPassengers().get(0);
+         Entity entity = this.mount.getPassengers().getFirst();
          if (entity == null) {
             return;
          }

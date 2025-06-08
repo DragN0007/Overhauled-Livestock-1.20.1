@@ -629,7 +629,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			} else {
 				hornType = this.random.nextInt(OSheep.BreedHorns.values().length);
 			}
-			lamb.setWoolVariant(hornType);
+			lamb.setHornVariant(hornType);
 		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
 			lamb.setHornsByBreed();
 		}

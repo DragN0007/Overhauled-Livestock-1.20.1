@@ -2,12 +2,16 @@ package com.dragn0007.dragnlivestock.entities.cow;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
 import com.dragn0007.dragnlivestock.entities.sheep.*;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
+import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -19,12 +23,11 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -38,8 +41,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -52,11 +57,13 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class OCow extends Animal implements GeoEntity, Taggable {
+public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public OCow leader;
 	public int herdSize = 1;
@@ -106,13 +113,32 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 14.0D)
+				.add(Attributes.MAX_HEALTH, 18.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.17F);
 	}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_COW_EATS);
 	public boolean isFood(ItemStack stack) {
 		return FOOD_ITEMS.test(stack);
+	}
+
+	@Override
+	public void playEmote(String emoteName, String loopType) {}
+	@Override
+	public void openInventory(Player player) {}
+	@Override
+	public void openCustomInventoryScreen(Player player) {}
+	@Override
+	public boolean isTamed() {
+		return false;
+	}
+	@Override
+	public boolean canWearArmor() {
+		return false;
+	}
+	@Override
+	protected boolean canPerformRearing() {
+		return false;
 	}
 
 	public void registerGoals() {
@@ -125,6 +151,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(3, new CattleFollowHerdLeaderGoal(this, 16.0F));
+		this.goalSelector.addGoal(1, new BullAroundLikeCrazyGoal(this, 1.3F));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 			livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
@@ -152,6 +179,10 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
+		if (this.isHarnessed() && this.isVehicle()) {
+			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
+			controller.setAnimationSpeed(1.3);
+		} else {
 			if (tAnimationState.isMoving()) {
 				if (currentSpeed > speedThreshold) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
@@ -162,6 +193,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 			}
+		}
 
 		return PlayState.CONTINUE;
 	}
@@ -175,6 +207,28 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {
 		return this.geoCache;
+	}
+
+	@Override
+	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+		if (this.hasPassenger(entity)) {
+
+			double offsetX = 0;
+			double offsetY = 1.4;
+			double offsetZ = -0.055;
+
+			double radYaw = Math.toRadians(this.getYRot());
+
+			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
+			double offsetYRotated = offsetY;
+			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
+
+			double x = this.getX() + offsetXRotated;
+			double y = this.getY() + offsetYRotated;
+			double z = this.getZ() + offsetZRotated;
+
+			entity.setPos(x, y, z);
+		}
 	}
 
 	public boolean isFollower() {
@@ -256,8 +310,8 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 	}
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
-		ItemStack itemstack = player.getItemInHand(hand);
-		Item item = itemstack.getItem();
+		ItemStack itemStack = player.getItemInHand(hand);
+		Item item = itemStack.getItem();
 
 		if (item instanceof BrandTagItem) {
 			setTagged(true);
@@ -267,40 +321,55 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 				if (color != this.getBrandTagColor()) {
 					this.setBrandTagColor(color);
 				if (!player.getAbilities().instabuild) {
-					itemstack.shrink(1);
+					itemStack.shrink(1);
 					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
 			}
 		}
 
-		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
-			if (this.isTagged()) {
-				this.setTagged(false);
+		if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+			if (this.isTagged() || this.isHarnessed()) {
+				if (this.isTagged()) {
+					this.setTagged(false);
+				}
+				if (this.isHarnessed()) {
+					this.setHarnessed(false);
+					spawnAtLocation(LOItems.RODEO_HARNESS.get());
+				}
 				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
 				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 		}
 
-		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
+		if (itemStack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
 			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
-			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
 			return InteractionResult.SUCCESS;
 		}
 
-		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
+		if (itemStack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isMale()) {
 			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
-			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
+			ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.MALE_GENDER_TEST_STRIP.get().getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
 			return InteractionResult.SUCCESS;
 		}
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
+		if(itemStack.is(LOItems.RODEO_HARNESS.get()) && !this.isHarnessed()) {
+			if(!this.level().isClientSide) {
+				this.level().gameEvent(this, GameEvent.EQUIP, this.position());
+				itemStack.shrink(1);
+				this.setHarnessed(true);
+			}
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
+		if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
 			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed() &&
 					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-				ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
+				ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
 				player.setItemInHand(hand, itemstack1);
 				replenishMilkCounter = 0;
 				setMilked(true);
@@ -308,7 +377,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
 							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
 				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-				ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
+				ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
 				player.setItemInHand(hand, itemstack1);
 				replenishMilkCounter = 0;
 				setMilked(true);
@@ -413,6 +482,14 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(MILKED, milked);
 	}
 
+	public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public boolean isHarnessed() {
+		return this.entityData.get(HARNESSED);
+	}
+	public void setHarnessed(boolean harnessed) {
+		this.entityData.set(HARNESSED, harnessed);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -450,6 +527,10 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		}
 
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
+
+		if(tag.contains("Harnessed")) {
+			this.setHarnessed(tag.getBoolean("Harnessed"));
+		}
 	}
 
 	@Override
@@ -465,6 +546,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		tag.putInt("MilkedTime", this.replenishMilkCounter);
 		tag.putBoolean("Tagged", this.isTagged());
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
+		tag.putBoolean("Harnessed", this.isHarnessed());
 	}
 
 	@Override
@@ -502,6 +584,7 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
 		this.entityData.define(MILKED, false);
+		this.entityData.define(HARNESSED, false);
 	}
 
 	public enum Gender {
@@ -545,73 +628,79 @@ public class OCow extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		OCow oCow = (OCow) ageableMob;
+		OCow calf;
+		OCow partner = (OCow) ageableMob;
+		calf = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
 
-		if (ageableMob instanceof OCow) {
-			OCow oCow1 = (OCow) ageableMob;
-
-			if (this.random.nextInt(5) == 0) {
-				Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
-				if (oX != null) {
-					oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
-					return oX;
-				}
-
-			} else {
-				oCow = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
-
-				int i = this.random.nextInt(9);
-				int variant;
-				if (i < 4) {
-					variant = this.getVariant();
-				} else if (i < 8) {
-					variant = oCow1.getVariant();
-				} else {
-					variant = this.random.nextInt(OCowModel.Variant.values().length);
-				}
-
-				int j = this.random.nextInt(5);
-				int overlay;
-				if (j < 2) {
-					overlay = this.getOverlayVariant();
-				} else if (j < 4) {
-					overlay = oCow1.getOverlayVariant();
-				} else {
-					overlay = this.random.nextInt(OCowMarkingLayer.Overlay.values().length);
-				}
-
-				int k = this.random.nextInt(5);
-				int horns;
-				if (k < 2) {
-					horns = this.getHornVariant();
-				} else if (k < 4) {
-					horns = oCow1.getHornVariant();
-				} else {
-					horns = this.random.nextInt(BreedHorns.values().length);
-				}
-
-				int m = this.random.nextInt(5);
-				int breed;
-				if (m < 2) {
-					breed = this.getBreed();
-				} else if (m < 4) {
-					breed = oCow1.getBreed();
-				} else {
-					breed = this.random.nextInt(CowBreed.Breed.values().length);
-				}
-
-				int udders;
-				udders = this.random.nextInt(Gender.values().length);
-
-				oCow.setVariant(variant);
-				oCow.setOverlayVariant(overlay);
-				oCow.setHornVariant(horns);
-				oCow.setGender(udders);
-				oCow.setBreed(breed);
+		if (this.random.nextInt(5) == 0) {
+			Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
+			if (oX != null) {
+				oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
+				return oX;
 			}
+		} else {
+
+			int breedChance = this.random.nextInt(5);
+			int breed;
+			if (breedChance == 0) {
+				breed = this.random.nextInt(CowBreed.Breed.values().length);
+			} else {
+				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+			}
+			calf.setBreed(breed);
+
+			if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+				int variantChance = this.random.nextInt(14);
+				int variant;
+				if (variantChance < 6) {
+					variant = this.getVariant();
+				} else if (variantChance < 12) {
+					variant = partner.getVariant();
+				} else {
+					variant = this.random.nextInt(OSheepModel.Variant.values().length);
+				}
+				calf.setVariant(variant);
+			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+				calf.setColorByBreed();
+			}
+
+			if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+				int overlayChance = this.random.nextInt(10);
+				int overlay;
+				if (overlayChance < 4) {
+					overlay = this.getOverlayVariant();
+				} else if (overlayChance < 8) {
+					overlay = partner.getOverlayVariant();
+				} else {
+					overlay = this.random.nextInt(OSheepMarkingLayer.Overlay.values().length);
+				}
+				calf.setOverlayVariant(overlay);
+			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+				calf.setMarkingByBreed();
+			}
+
+			if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+				int hornsChance = this.random.nextInt(10);
+				int hornType;
+				if (hornsChance < 4) {
+					hornType = this.getHornVariant();
+				} else if (hornsChance < 8) {
+					hornType = partner.getHornVariant();
+				} else {
+					hornType = this.random.nextInt(OSheep.BreedHorns.values().length);
+				}
+				calf.setHornVariant(hornType);
+			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+				calf.setHornsByBreed();
+			}
+
+			int gender;
+			gender = this.random.nextInt(OSheep.Gender.values().length);
+			calf.setGender(gender);
+
 		}
 
-		return oCow;
+		return calf;
 	}
 
 	@Override
