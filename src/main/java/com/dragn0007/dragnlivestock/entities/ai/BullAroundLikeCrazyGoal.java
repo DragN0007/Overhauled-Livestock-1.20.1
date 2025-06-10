@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;

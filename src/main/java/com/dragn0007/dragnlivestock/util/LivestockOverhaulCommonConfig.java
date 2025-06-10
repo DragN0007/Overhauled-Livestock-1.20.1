@@ -52,6 +52,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
 //    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
     public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
+    public static final ForgeConfigSpec.BooleanValue COW_BELL_SOUND;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -117,34 +118,12 @@ public class LivestockOverhaulCommonConfig {
 
         BUILDER.pop();
 
-        BUILDER.push("Miscellaneous");
-
+        BUILDER.push("Husbandry");
         GENDERS_AFFECT_BIPRODUCTS = BUILDER.comment("Should an animal's gender affect the ability to get byproducts from it?")
                 .define("Genders Affect Byproducts", true);
 
         GENDERS_AFFECT_BREEDING = BUILDER.comment("Should an animal's gender affect how it breeds?")
                 .define("Genders Affect Breeding", true);
-
-        ANIMALS_HERDING_ENABLED = BUILDER.comment("Should animals, like cows, herd together?")
-                .define("Animals Herd Together", true);
-
-        COW_HERD_MAX = BUILDER.comment("Maximum amount of O-Cows that can herd together. Default is 8.")
-                .define("Cow Herd Maximum", 8);
-
-        HORSE_HERD_MAX = BUILDER.comment("Maximum amount of O-Horses that can herd together. Default is 3.")
-                .define("Horse Herd Maximum", 3);
-
-        SHEEP_HERD_MAX = BUILDER.comment("Maximum amount of O-Sheep that can herd together. Default is 8.")
-                .define("Sheep Herd Maximum", 8);
-
-        LLAMA_HERD_MAX = BUILDER.comment("Maximum amount of O-Llamas that can herd together. Default is 3.")
-                .define("Llama Herd Maximum", 3);
-
-        USE_VANILLA_LOOT = BUILDER.comment("Should O-Animals use vanilla loot instead of the loot included in the mod?")
-                .define("Use Vanilla Animal Loot", false);
-
-        NATURAL_HORSE_BREEDS = BUILDER.comment("Should O-Horses be able to spawn with any breed naturally? (They spawn only as wild Mustangs by default)")
-                .define("Naturally Spawning O-Horse Breeds", false);
 
         CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
                 .define("Chicken Egg Lay Cooldown", 12000);
@@ -160,6 +139,31 @@ public class LivestockOverhaulCommonConfig {
 
         CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
                 .define("Chicken Egg Lay Amount", 3);
+        BUILDER.pop();
+
+        BUILDER.push("Herding");
+        ANIMALS_HERDING_ENABLED = BUILDER.comment("Should animals, like cows, herd together?")
+                .define("Animals Herd Together", true);
+
+        COW_HERD_MAX = BUILDER.comment("Maximum amount of O-Cows that can herd together. Default is 8.")
+                .define("Cow Herd Maximum", 8);
+
+        HORSE_HERD_MAX = BUILDER.comment("Maximum amount of O-Horses that can herd together. Default is 3.")
+                .define("Horse Herd Maximum", 3);
+
+        SHEEP_HERD_MAX = BUILDER.comment("Maximum amount of O-Sheep that can herd together. Default is 8.")
+                .define("Sheep Herd Maximum", 8);
+
+        LLAMA_HERD_MAX = BUILDER.comment("Maximum amount of O-Llamas that can herd together. Default is 3.")
+                .define("Llama Herd Maximum", 3);
+        BUILDER.pop();
+
+        BUILDER.push("QoL");
+        USE_VANILLA_LOOT = BUILDER.comment("Should O-Animals use vanilla loot instead of the loot included in the mod?")
+                .define("Use Vanilla Animal Loot", false);
+
+        NATURAL_HORSE_BREEDS = BUILDER.comment("Should O-Horses be able to spawn with any breed naturally? (They spawn only as wild Mustangs by default)")
+                .define("Naturally Spawning O-Horse Breeds", false);
 
         BASE_HORSE_SPRINT_TIME = BUILDER.comment("Base time an O-Horse can run for at full speed, in seconds. Default is 45s.")
                 .define("Base Horse Sprint Time", 45);
@@ -180,6 +184,15 @@ public class LivestockOverhaulCommonConfig {
                         "\nTurning this off will make mounts use the post-1.12 turning, which is simply just pivoting in place.")
                 .define("Advanced Horse Turning", true);
 
+        COW_BELL_SOUND = BUILDER.comment("Should cow bells make noise/ ding?")
+                .define("Cow Bell Ding", true);
+
+        GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
+                .define("Ground Tie When Dismounted", true);
+        BUILDER.pop();
+
+        BUILDER.push("Miscellaneous");
+
         UNICORN_BREEDING = BUILDER.comment("Should Unicorns be able to breed?")
                 .define("Allow Unicorn Breeding", false);
 
@@ -194,9 +207,6 @@ public class LivestockOverhaulCommonConfig {
 //
 //        MAX_RABBIT_BABIES = BUILDER.comment("Maximum amount of babies O-Rabbits can have after breeding. Default is 3.")
 //                .define("Max Rabbit Babies", 3);
-
-        GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
-                .define("Ground Tie When Dismounted", true);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

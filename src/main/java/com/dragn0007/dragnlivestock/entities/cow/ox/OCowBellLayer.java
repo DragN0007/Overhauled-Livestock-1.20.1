@@ -1,6 +1,7 @@
-package com.dragn0007.dragnlivestock.entities.cow;
+package com.dragn0007.dragnlivestock.entities.cow.ox;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,8 +15,8 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
-public class OCowHarnessLayer extends GeoRenderLayer<OCow> {
-    public OCowHarnessLayer(GeoRenderer<OCow> entityRendererIn) {
+public class OCowBellLayer extends GeoRenderLayer<OCow> {
+    public OCowBellLayer(GeoRenderer<OCow> entityRendererIn) {
         super(entityRendererIn);
     }
 
@@ -24,8 +25,8 @@ public class OCowHarnessLayer extends GeoRenderLayer<OCow> {
 
         ResourceLocation resourceLocation = null;
 
-       if (animatable.isHarnessed()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/rodeo_harness.png");
+       if (animatable.isBelled()) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/bell.png");
        } else {
            return;
        }

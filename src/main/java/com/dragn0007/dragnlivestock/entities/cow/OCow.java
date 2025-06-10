@@ -4,14 +4,14 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
-import com.dragn0007.dragnlivestock.entities.sheep.*;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
-import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -23,11 +23,12 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.*;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -44,7 +45,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -57,8 +57,6 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -151,7 +149,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(3, new CattleFollowHerdLeaderGoal(this, 16.0F));
-		this.goalSelector.addGoal(1, new BullAroundLikeCrazyGoal(this, 1.3F));
+		this.goalSelector.addGoal(1, new BullAroundLikeCrazyGoal(this, 1.7F));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 			livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
@@ -181,7 +179,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.isHarnessed() && this.isVehicle()) {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
-			controller.setAnimationSpeed(1.1);
+			controller.setAnimationSpeed(1.3);
 		} else {
 			if (tAnimationState.isMoving()) {
 				if (currentSpeed > speedThreshold) {
@@ -218,7 +216,41 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			double offsetZ = -0.055;
 
 			if (this.isHarnessed()) {
-				offsetY = 1.4;
+				if (this.isMale()) {
+					if (this.isMeatBreed()) {
+						offsetY = 1.3;
+					} else if (this.isNormalBreed()) {
+						offsetY = 1.0;
+					} else if (this.isMiniBreed()) {
+						offsetY = 0.8;
+					}
+				} else if (this.isFemale()) {
+					if (this.isMeatBreed()) {
+						offsetY = 1.2;
+					} else if (this.isNormalBreed()) {
+						offsetY = 0.7;
+					} else if (this.isMiniBreed()) {
+						offsetY = 0.4;
+					}
+				}
+			} else {
+				if (this.isMale()) {
+					if (this.isMeatBreed()) {
+						offsetY = 1.0;
+					} else if (this.isNormalBreed()) {
+						offsetY = 0.8;
+					} else if (this.isMiniBreed()) {
+						offsetY = 0.6;
+					}
+				} else if (this.isFemale()) {
+					if (this.isMeatBreed()) {
+						offsetY = 0.9;
+					} else if (this.isNormalBreed()) {
+						offsetY = 0.6;
+					} else if (this.isMiniBreed()) {
+						offsetY = 0.4;
+					}
+				}
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -340,6 +372,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 					this.setHarnessed(false);
 					spawnAtLocation(LOItems.RODEO_HARNESS.get());
 				}
+				if (this.isBelled()) {
+					this.setBelled(false);
+					spawnAtLocation(Items.BELL);
+				}
 				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
 				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
@@ -364,6 +400,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 				this.level().gameEvent(this, GameEvent.EQUIP, this.position());
 				itemStack.shrink(1);
 				this.setHarnessed(true);
+			}
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
+		if(itemStack.is(Items.BELL) && !this.isBelled()) {
+			if(!this.level().isClientSide) {
+				this.level().gameEvent(this, GameEvent.EQUIP, this.position());
+				itemStack.shrink(1);
+				this.setBelled(true);
 			}
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
@@ -408,7 +453,11 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
-		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+		if (this.isBelled() && LivestockOverhaulCommonConfig.COW_BELL_SOUND.get()) {
+			this.playSound(SoundEvents.BELL_BLOCK, 0.3F, 1.3F);
+		} else {
+			this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+		}
 	}
 
 	// Generates the base texture
@@ -494,6 +543,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(HARNESSED, harnessed);
 	}
 
+	public static final EntityDataAccessor<Boolean> BELLED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	public boolean isBelled() {
+		return this.entityData.get(BELLED);
+	}
+	public void setBelled(boolean belled) {
+		this.entityData.set(BELLED, belled);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -535,6 +592,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		if(tag.contains("Harnessed")) {
 			this.setHarnessed(tag.getBoolean("Harnessed"));
 		}
+
+		if(tag.contains("Belled")) {
+			this.setBelled(tag.getBoolean("Belled"));
+		}
 	}
 
 	@Override
@@ -551,6 +612,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		tag.putBoolean("Tagged", this.isTagged());
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 		tag.putBoolean("Harnessed", this.isHarnessed());
+		tag.putBoolean("Belled", this.isBelled());
 	}
 
 	@Override
@@ -589,6 +651,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.define(TAGGED, false);
 		this.entityData.define(MILKED, false);
 		this.entityData.define(HARNESSED, false);
+		this.entityData.define(BELLED, false);
 	}
 
 	public enum Gender {
