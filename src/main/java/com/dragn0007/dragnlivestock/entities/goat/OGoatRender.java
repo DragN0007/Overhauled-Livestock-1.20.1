@@ -9,7 +9,9 @@ public class OGoatRender extends GeoEntityRenderer<OGoat> {
 
     public OGoatRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OGoatModel());
+        this.addRenderLayer(new OGoatMarkingLayer(this));
         this.addRenderLayer(new OGoatCarpetLayer(this));
+        this.addRenderLayer(new OGoatChestLayer(this));
         this.addRenderLayer(new OGoatBrandTagLayer(this));
     }
 
@@ -18,32 +20,40 @@ public class OGoatRender extends GeoEntityRenderer<OGoat> {
 
         if(entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
-            model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
-            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
+            model.getBone("male_horns").ifPresent(b -> b.setHidden(true));
+            model.getBone("female_horns").ifPresent(b -> b.setHidden(true));
         } else {
             poseStack.scale(1F, 1F, 1F);
-            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
-            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
-        }
 
-        if (!entity.isBaby()) {
             if (entity.hasChest()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
-        }
 
-        if(entity.isMale() || entity.isBaby()) {
-            model.getBone("Horns2").ifPresent(b -> b.setHidden(true));
-        } else {
-            model.getBone("Horns2").ifPresent(b -> b.setHidden(false));
-        }
+            if(entity.isMale()) {
+                model.getBone("male_horns").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("male_horns").ifPresent(b -> b.setHidden(true));
+            }
 
-        if(entity.isFemale() || entity.isBaby()) {
-            model.getBone("Horns1").ifPresent(b -> b.setHidden(true));
-        } else {
-            model.getBone("Horns1").ifPresent(b -> b.setHidden(false));
+            if(entity.isFemale()) {
+                model.getBone("female_horns").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("female_horns").ifPresent(b -> b.setHidden(true));
+            }
+
+            if (entity.isSheared()) {
+                model.getBone("wool_body").ifPresent(b -> b.setHidden(true));
+                model.getBone("wool_neck").ifPresent(b -> b.setHidden(true));
+                model.getBone("right_thigh_wool").ifPresent(b -> b.setHidden(true));
+                model.getBone("left_thigh_wool").ifPresent(b -> b.setHidden(true));
+            } else {
+                model.getBone("wool_body").ifPresent(b -> b.setHidden(false));
+                model.getBone("wool_neck").ifPresent(b -> b.setHidden(false));
+                model.getBone("right_thigh_wool").ifPresent(b -> b.setHidden(false));
+                model.getBone("left_thigh_wool").ifPresent(b -> b.setHidden(false));
+            }
         }
 
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);

@@ -2,7 +2,7 @@ package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.ai.OGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
@@ -23,7 +23,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -63,7 +62,6 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Random;
 
 public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
@@ -72,8 +70,6 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	protected static final ImmutableList<SensorType<? extends Sensor<? super OGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATE_RECENTLY, MemoryModuleType.BREED_TARGET, MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryModuleType.RAM_TARGET, MemoryModuleType.IS_PANICKING);
 	private static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_GOAT = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<Boolean> DATA_HAS_LEFT_HORN = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<Boolean> DATA_HAS_RIGHT_HORN = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	private boolean isLoweringHead;
 	private int lowerHeadTick;
 
@@ -122,14 +118,14 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity -> {
-			boolean isHerdingDog = livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS);
-			return isHerdingDog;
-		}));
+		this.goalSelector.addGoal(2, new OGoatFollowCaravanGoal(this, (double)1.6F));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame())
+				livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
+		));
+
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 	}
 
@@ -157,10 +153,28 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
-			if (this.isTagged()) {
-				this.setTagged(false);
-				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+		if (itemstack.is(Items.SHEARS)) {
+			if (player.isShiftKeyDown()) {
+				if (this.isTagged()) {
+					this.setTagged(false);
+					this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
+				if (this.hasChest()) {
+					this.dropEquipment();
+					this.inventory.removeAllItems();
+
+					this.setChest(false);
+					this.playChestEquipsSound();
+
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
+			} else if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() &&
+					(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get())) {
+				player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
+				this.setSheared(true);
+				this.dropWoolByColorAndMarking();
+				regrowWoolCounter = 0;
 				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 		}
@@ -175,7 +189,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.isTamed()) {
 			if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-				this.heal((float) Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition());
+				this.heal(2F);
 				if (!player.getAbilities().instabuild) {
 					itemstack.shrink(1);
 				}
@@ -215,15 +229,16 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public int replenishMilkCounter = 0;
-
-	private boolean milked = false;
-
-	public boolean wasMilked() {
-		return this.milked;
-	}
+	public int regrowWoolCounter = 0;
 
 	public void tick() {
 		super.tick();
+
+		regrowWoolCounter++;
+
+		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
+			this.setSheared(false);
+		}
 
 		replenishMilkCounter++;
 
@@ -245,22 +260,26 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
-		double speedThreshold = 0.01;
+		double speedThreshold = 0.015;
+
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if (tAnimationState.isMoving()) {
+		if (isMoving) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(1.8);
+				controller.setAnimationSpeed(1.6);
 			}
 		} else {
 			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimationSpeed(1.0);
 		}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -272,6 +291,41 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {
 		return this.geoCache;
+	}
+
+	@Nullable
+	public OGoat caravanHead;
+	@Nullable
+	public OGoat caravanTail;
+
+	public void leaveCaravan() {
+		if (this.caravanHead != null) {
+			this.caravanHead.caravanTail = null;
+		}
+
+		this.caravanHead = null;
+	}
+
+	public void joinCaravan(OGoat p_30767_) {
+		this.caravanHead = p_30767_;
+		this.caravanHead.caravanTail = this;
+	}
+
+	public boolean hasCaravanTail() {
+		return this.caravanTail != null;
+	}
+
+	public boolean inCaravan() {
+		return this.caravanHead != null;
+	}
+
+	@Nullable
+	public OGoat getCaravanHead() {
+		return this.caravanHead;
+	}
+
+	public double followLeashSpeed() {
+		return 1.6D;
 	}
 
 	protected SoundEvent getAmbientSound() {
@@ -299,14 +353,6 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	public void setScreamingGoat(boolean p_149406_) {
 		this.entityData.set(DATA_IS_SCREAMING_GOAT, p_149406_);
-	}
-
-	public boolean hasLeftHorn() {
-		return this.entityData.get(DATA_HAS_LEFT_HORN);
-	}
-
-	public boolean hasRightHorn() {
-		return this.entityData.get(DATA_HAS_RIGHT_HORN);
 	}
 
 	public void handleEntityEvent(byte p_149356_) {
@@ -341,29 +387,28 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
-
 	public ResourceLocation getTextureLocation() {
 		return OGoatModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
-
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
-
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
 
-	public boolean getMilked() {
-		return this.milked;
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
+	public ResourceLocation getOverlayLocation() {return OGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int overlayVariant) {
+		this.entityData.set(OVERLAY, overlayVariant);
 	}
 
-	public void setMilked(boolean milked) {
-		this.milked = milked;
-	}
-
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
 	}
@@ -375,29 +420,45 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return this.isAlive() && !this.isBaby();
 	}
 	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
-	}
-	@Override
 	public boolean isTagged() {
 		return this.entityData.get(TAGGED);
 	}
 	public void setTagged(boolean tagged) {
 		this.entityData.set(TAGGED, tagged);
 	}
+	@Override
+	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+		if(soundSource != null) {
+			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
+		}
+	}
+
+	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
+	public boolean isSheared() {
+		return this.entityData.get(SHEARED);
+	}
+	public void setSheared(boolean sheared) {
+		this.entityData.set(SHEARED, sheared);
+	}
+
+	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
+	public boolean wasMilked() {
+		return this.entityData.get(MILKED);
+	}
+	public void setMilked(boolean milked) {
+		this.entityData.set(MILKED, milked);
+	}
 
 	@Override
 	public void updateContainerEquipment() {
 		if(!this.level().isClientSide) {
-			this.setDecorItem(this.inventory.getItem(0));
+			this.setDecorItem(this.inventory.getItem(1));
 		}
 	}
 
 	@Override
 	public int decorSlot() {
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -407,16 +468,28 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			setVariant(tag.getInt("Variant"));
 		}
 
-		this.setScreamingGoat(tag.getBoolean("IsScreamingGoat"));
-		this.entityData.set(DATA_HAS_LEFT_HORN, tag.getBoolean("HasLeftHorn"));
-		this.entityData.set(DATA_HAS_RIGHT_HORN, tag.getBoolean("HasRightHorn"));
+		if (tag.contains("Overlay")) {
+			this.setOverlayVariant(tag.getInt("Overlay"));
+		}
 
 		if (tag.contains("Gender")) {
 			setGender(tag.getInt("Gender"));
 		}
 
 		if (tag.contains("Milked")) {
-			setMilked(tag.getBoolean("Milked"));
+			this.setMilked(tag.getBoolean("Milked"));
+		}
+
+		if (tag.contains("MilkedTime")) {
+			this.replenishMilkCounter = tag.getInt("MilkedTime");
+		}
+
+		if (tag.contains("Sheared")) {
+			this.setSheared(tag.getBoolean("Sheared"));
+		}
+
+		if (tag.contains("ShearedTime")) {
+			this.regrowWoolCounter = tag.getInt("ShearedTime");
 		}
 
 		if(tag.contains("Tagged")) {
@@ -424,31 +497,36 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
+
+		this.setScreamingGoat(tag.getBoolean("IsScreamingGoat"));
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
-		tag.putBoolean("IsScreamingGoat", this.isScreamingGoat());
-		tag.putBoolean("HasLeftHorn", this.hasLeftHorn());
-		tag.putBoolean("HasRightHorn", this.hasRightHorn());
+		tag.putInt("Overlay", this.getOverlayVariant());
 		tag.putInt("Gender", getGender());
-		tag.putBoolean("Milked", getMilked());
+		tag.putBoolean("Sheared", this.isSheared());
+		tag.putInt("ShearedTime", this.regrowWoolCounter);
+		tag.putBoolean("Milked", this.wasMilked());
+		tag.putInt("MilkedTime", this.replenishMilkCounter);
 		tag.putBoolean("Tagged", this.isTagged());
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
+		tag.putBoolean("IsScreamingGoat", this.isScreamingGoat());
 	}
 
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
+		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
-		this.entityData.define(DATA_IS_SCREAMING_GOAT, false);
-		this.entityData.define(DATA_HAS_LEFT_HORN, true);
-		this.entityData.define(DATA_HAS_RIGHT_HORN, true);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
+		this.entityData.define(SHEARED, false);
+		this.entityData.define(MILKED, false);
+		this.entityData.define(DATA_IS_SCREAMING_GOAT, false);
 	}
 
 	@Override
@@ -459,6 +537,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 		this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
+		this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
 
 		RandomSource randomsource = serverLevelAccessor.getRandom();
@@ -487,19 +566,13 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			} else {
 				OGoat partner = (OGoat) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
 		}
 		return false;
 	}
+
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
@@ -534,11 +607,6 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean isArmor(ItemStack itemStack) {
-		return itemStack.is(ItemTags.WOOL_CARPETS);
-	}
-
-	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
 			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
@@ -558,7 +626,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			double offsetZ;
 
 			offsetX = 0;
-			offsetY = 0.7;
+			offsetY = 0.6;
 			offsetZ = 0;
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -582,11 +650,235 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	@Override
 	protected int getInventorySize() {
-		return this.hasChest() ? 26 : super.getInventorySize();
+		return 26;
 	}
 
 	@Override
-	public boolean isVehicle() {
-		return false;
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!this.isSheared()) {
+			this.dropWoolByColorAndMarking();
+		}
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+
+		}
+
 	}
+
+	public void dropWoolByColorAndMarking() {
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			if (this.getVariant() == 0 && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+			if ((this.getVariant() == 2 || this.getVariant() == 3 || this.getVariant() == 6 || this.getVariant() == 7 || this.getVariant() == 8)
+					&& !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+			if ((this.getVariant() == 1 || this.getVariant() == 5) && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+			if (this.getVariant() == 6 && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+			if ((this.getVariant() == 4 || this.getVariant() == 9 || this.getVariant() == 10) && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+
+			if (this.getOverlayVariant() == 1 || this.getOverlayVariant() == 7 || this.getOverlayVariant() == 9 ||
+					this.getOverlayVariant() == 10  || this.getOverlayVariant() == 12 || this.getOverlayVariant() == 13 ||
+					this.getOverlayVariant() == 14 || this.getOverlayVariant() == 15) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+			if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6 || this.getOverlayVariant() == 6) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
+				}
+			}
+
+
+			if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				}
+
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+			}
+
+
+			//if vanilla loot
+		} else {
+			if (this.getVariant() == 0 && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.BLACK_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.BLACK_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.BLACK_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.BLACK_WOOL, 1);
+				}
+			}
+
+			if ((this.getVariant() == 2 || this.getVariant() == 3 || this.getVariant() == 6 || this.getVariant() == 7 || this.getVariant() == 8)
+					&& !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.BROWN_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.BROWN_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.BROWN_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.BROWN_WOOL, 1);
+				}
+			}
+
+			if ((this.getVariant() == 1 || this.getVariant() == 5) && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 1);
+				}
+			}
+
+			if (this.getVariant() == 6 && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
+				}
+			}
+
+			if ((this.getVariant() == 4 || this.getVariant() == 9 || this.getVariant() == 10) && !(this.getOverlayVariant() == 3)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 1);
+				}
+			}
+
+			if (this.getOverlayVariant() == 1 || this.getOverlayVariant() == 7 || this.getOverlayVariant() == 9 ||
+					this.getOverlayVariant() == 10  || this.getOverlayVariant() == 12 || this.getOverlayVariant() == 13 ||
+					this.getOverlayVariant() == 14 || this.getOverlayVariant() == 15) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 1);
+				}
+			}
+
+			if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.BLACK_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.BLACK_WOOL, 1);
+				}
+			}
+
+
+			if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 1);
+				}
+
+				this.spawnAtLocation(Items.WHITE_WOOL, 1);
+			}
+		}
+	}
+
 }

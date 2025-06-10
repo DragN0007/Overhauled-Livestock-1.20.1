@@ -37,11 +37,18 @@ public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
     }
 
     public enum Variant {
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_grey.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_red.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_brown.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/goat_black.png"));
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/brown.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/cream.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/grey.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/light_grey.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/mahogany.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/red.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/white.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
@@ -52,8 +59,8 @@ public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
         }
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/goat_overhaul.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/goat_overhaul.animation.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_goat.geo.json");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_goat.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OGoat object) {
