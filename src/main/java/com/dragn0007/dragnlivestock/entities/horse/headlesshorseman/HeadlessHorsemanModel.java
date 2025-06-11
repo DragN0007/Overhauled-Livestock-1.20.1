@@ -7,7 +7,7 @@ import software.bernie.geckolib.model.GeoModel;
 public class HeadlessHorsemanModel extends GeoModel<HeadlessHorseman> {
 
     public enum Variant {
-        HEADLESS_HORSEMAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horse_headless_horseman.png"));
+        HEADLESS_HORSEMAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horseman_horse.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {

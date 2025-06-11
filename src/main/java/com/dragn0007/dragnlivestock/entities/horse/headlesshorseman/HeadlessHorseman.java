@@ -57,9 +57,26 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	protected boolean isSunSensitive() {
 		return true;
 	}
-
 	protected boolean shouldDespawnInPeaceful() {
 		return true;
+	}
+	@Override
+	public boolean isTamed() {
+		return false;
+	}
+	@Override
+	public boolean isWearingHarness() {
+		return false;
+	}
+	@Override
+	public void openInventory(Player player) {
+	}
+	@Override
+	protected void doPlayerRide(Player p_30634_) {
+	}
+	@Override
+	public boolean canAddPassenger(Entity entity) {
+		return false;
 	}
 
 	@Override
@@ -169,7 +186,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
-		return super.mobInteract(player, hand);
+		return InteractionResult.FAIL;
 	}
 
 	@Override
