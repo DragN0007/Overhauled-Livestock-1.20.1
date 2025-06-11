@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
+import com.dragn0007.dragnlivestock.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -229,21 +230,31 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (isMoving) {
-			if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.87 * controller.getAnimationSpeed() + animationSpeed));
+			if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
+				if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.87 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else if (this.isOnSand() && currentSpeed > speedThreshold && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-				controller.setAnimation(RawAnimation.begin().then("sprint_trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
+				} else if (this.isOnSand() && currentSpeed > speedThreshold && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("trot_sprint", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else if (this.isVehicle() && currentSpeed > speedThreshold) {
-				controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
+				} else if (this.isVehicle() && currentSpeed > speedThreshold) {
+					controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
 
-			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+				}
+			} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
+				if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+				}
 			}
 
 		} else {
@@ -487,7 +498,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		if(getBreed() == 0) {
 			switch (i) {
 				case 0:
-					entity.setPos(this.calcOffset(0, 1.65, -0.1));
+					entity.setPos(this.calcOffset(0, 1.7, -0.1));
 					break;
 			}
 		}
@@ -495,10 +506,10 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		if(getBreed() == 1) {
 			switch (i) {
 				case 0:
-					entity.setPos(this.calcOffset(0, 2.2, -0.2));
+					entity.setPos(this.calcOffset(0, 2.25, -0.2));
 					break;
 				case 1:
-					entity.setPos(this.calcOffset(0, 1.6, -1.0));
+					entity.setPos(this.calcOffset(0, 1.65, -1.0));
 					break;
 			}
 		}
