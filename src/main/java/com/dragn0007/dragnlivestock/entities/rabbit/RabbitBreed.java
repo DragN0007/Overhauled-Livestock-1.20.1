@@ -6,10 +6,10 @@ import net.minecraft.resources.ResourceLocation;
 public class RabbitBreed {
 
     public enum Breed {
-        DEFAULT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/rabbit_overhauled.geo.json")),
-        GIANT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/rabbit_giant.geo.json")),
-        DWARF(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/rabbit_dwarf.geo.json")),
-        LOP(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/rabbit_lop.geo.json"));
+        DEFAULT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/o_rabbit.geo.json")),
+        GIANT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/giant.geo.json")),
+        DWARF(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/dwarf.geo.json")),
+        LOP(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/lop.geo.json"));
 
         public final ResourceLocation resourceLocation;
 

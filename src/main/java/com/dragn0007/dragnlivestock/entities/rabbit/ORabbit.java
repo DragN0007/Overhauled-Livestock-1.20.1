@@ -2,6 +2,13 @@ package com.dragn0007.dragnlivestock.entities.rabbit;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.horse.EquineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.llama.OLlama;
+import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -27,10 +34,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -62,9 +66,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		super(type, level);
 	}
 
-	private static final ResourceLocation MEAT_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_meat_rabbit");
 	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_rabbit");
-	private static final ResourceLocation MINI_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mini_rabbit");
 	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/rabbit");
 	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/rabbit");
 	@Override
@@ -72,19 +74,25 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1)) {
-			return MEAT_LOOT_TABLE;
-		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 0 || this.getBreed() == 3)) {
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return LOOT_TABLE;
-		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 2)) {
-			return MINI_LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
 		}
 		return LOOT_TABLE;
+	}
+
+	public boolean isMeatBreed() {
+		return this.getBreed() == 1;
+	}
+
+	public boolean isNormalBreed() {
+		return this.getBreed() == 0 || this.getBreed() == 3;
+	}
+
+	public boolean isMiniBreed() {
+		return this.getBreed() == 2;
 	}
 
 	@Override
@@ -106,7 +114,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.8F));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
-		this.goalSelector.addGoal(4, new RabbitAvoidEntityGoal(this, Player.class, 8.0F, 2.2D, 2.2D));
+		this.goalSelector.addGoal(4, new RabbitAvoidEntityGoal<>(this, Player.class, 8.0F, 2.2D, 2.2D));
 		this.goalSelector.addGoal(4, new RabbitAvoidEntityGoal<>(this, Wolf.class, 10.0F, 2.2D, 2.2D));
 		this.goalSelector.addGoal(4, new RabbitAvoidEntityGoal<>(this, Monster.class, 4.0F, 2.2D, 2.2D));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
@@ -240,7 +248,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				controller.setAnimationSpeed(1.7);
 			}
 		} else if (this.isInSittingPose()) {
-			controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
+			controller.setAnimation(RawAnimation.begin().then("sit", Animation.LoopType.LOOP));
 		} else {
 			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 		}
@@ -361,41 +369,32 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		return FOOD_ITEMS.test(p_28271_);
 	}
 
+
 	// Generates the base texture
-	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(ORabbit.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(ORabbit.class, LivestockOverhaul.RESOURCE_LOCATION);
-
-	public ResourceLocation getTextureResource() {
-		return this.entityData.get(VARIANT_TEXTURE);
-	}
-
-	public ResourceLocation getOverlayLocation() {
-		return this.entityData.get(OVERLAY_TEXTURE);
-	}
-
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
+	public ResourceLocation getModelResource() {
+		return RabbitBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;
 	}
 	public int getBreed() {
 		return this.entityData.get(BREED);
 	}
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
+	}
 
+
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 		this.entityData.set(VARIANT_TEXTURE, ORabbitModel.Variant.variantFromOrdinal(variant).resourceLocation);
 	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-		this.entityData.set(OVERLAY_TEXTURE, ORabbitMarkingLayer.Overlay.overlayFromOrdinal(overlayVariant).resourceLocation);
+	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(ORabbit.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public ResourceLocation getTextureResource() {
+		return this.entityData.get(VARIANT_TEXTURE);
 	}
-
 	public void setVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
@@ -404,6 +403,19 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.set(VARIANT_TEXTURE, resourceLocation);
 	}
 
+
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
+	public int getOverlayVariant() {
+		return this.entityData.get(OVERLAY);
+	}
+	public void setOverlayVariant(int variant) {
+		this.entityData.set(OVERLAY, variant);
+		this.entityData.set(OVERLAY_TEXTURE, ORabbitMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation);
+	}
+	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(ORabbit.class, LivestockOverhaul.RESOURCE_LOCATION);
+	public ResourceLocation getOverlayLocation() {
+		return this.entityData.get(OVERLAY_TEXTURE);
+	}
 	public void setOverlayVariantTexture(String variant) {
 		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
 		if (resourceLocation == null) {
@@ -412,13 +424,26 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
 
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
+	public enum Dewlap {
+		NONE,
+		HALF,
+		FULL
+	}
+	public static final EntityDataAccessor<Integer> DEWLAP = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
+	public int getDewlap() {
+		return this.entityData.get(DEWLAP);
+	}
+	public void setDewlap(int dewlap) {
+		this.entityData.set(DEWLAP, dewlap);
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+
+		if (tag.contains("Breed")) {
+			this.setBreed(tag.getInt("Breed"));
+		}
 
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
@@ -436,29 +461,25 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
 
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
+		if (tag.contains("Dewlap")) {
+			this.setDewlap(tag.getInt("Dewlap"));
 		}
 
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
+		if (tag.contains("Gender")) {
+			this.setGender(tag.getInt("Gender"));
 		}
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putInt("Variant", getVariant());
-
-		tag.putInt("Overlay", getOverlayVariant());
-
-		tag.putString("Variant_Texture", this.getTextureResource().toString());
-
-		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-
-		tag.putInt("Gender", this.getGender());
-
 		tag.putInt("Breed", this.getBreed());
+		tag.putInt("Variant", getVariant());
+		tag.putInt("Overlay", getOverlayVariant());
+		tag.putString("Variant_Texture", this.getTextureResource().toString());
+		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		tag.putInt("Dewlap", this.getDewlap());
+		tag.putInt("Gender", this.getGender());
 	}
 
 	@Override
@@ -468,10 +489,17 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		setVariant(random.nextInt(ORabbitModel.Variant.values().length));
-		setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(ORabbit.Gender.values().length));
 		this.setBreed(random.nextInt(RabbitBreed.Breed.values().length));
+		this.setDewlapByGender();
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColorByWildStatus();
+			this.setMarkingByWildStatus();
+		} else {
+			this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -479,37 +507,32 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(GENDER, 0);
-		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT_TEXTURE, ORabbitModel.Variant.BLACK.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, ORabbitMarkingLayer.Overlay.NONE.resourceLocation);
+		this.entityData.define(GENDER, 0);
+		this.entityData.define(DEWLAP, 0);
 	}
 
 	public enum Gender {
 		FEMALE,
 		MALE
 	}
-
 	public boolean isFemale() {
 		return this.getGender() == 0;
 	}
-
 	public boolean isMale() {
 		return this.getGender() == 1;
 	}
-
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
-
 	public int getGender() {
 		return this.entityData.get(GENDER);
 	}
-
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
 	}
-
 	public boolean canParent() {
 		return !this.isBaby() && this.isInLove();
 	}
@@ -525,13 +548,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			} else {
 				ORabbit partner = (ORabbit) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -541,51 +557,123 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		ORabbit oRabbit = (ORabbit) ageableMob;
-		if (ageableMob instanceof ORabbit) {
-			ORabbit oRabbit1 = (ORabbit) ageableMob;
-			oRabbit = EntityTypes.O_RABBIT_ENTITY.get().create(serverLevel);
+		ORabbit kit;
+		ORabbit partner = (ORabbit) ageableMob;
+		kit = EntityTypes.O_RABBIT_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
+		int breedChance = this.random.nextInt(5);
+		int breed;
+		if (breedChance == 0) {
+			breed = this.random.nextInt(SheepBreed.Breed.values().length);
+		} else {
+			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+		}
+		kit.setBreed(breed);
+
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int variantChance = this.random.nextInt(14);
 			int variant;
-			if (i < 4) {
+			if (variantChance < 6) {
 				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = oRabbit1.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(ORabbitModel.Variant.values().length);
 			}
+			kit.setVariant(variant);
+		}
 
-			int j = this.random.nextInt(5);
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int overlayChance = this.random.nextInt(10);
 			int overlay;
-			if (j < 2) {
+			if (overlayChance < 4) {
 				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
-				overlay = oRabbit1.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(ORabbitMarkingLayer.Overlay.values().length);
 			}
-
-			int k = this.random.nextInt(5);
-			int breed;
-			if (j < 2) {
-				breed = this.getOverlayVariant();
-			} else if (j < 4) {
-				breed = oRabbit1.getOverlayVariant();
-			} else {
-				breed = this.random.nextInt(RabbitBreed.Breed.values().length);
-			}
-
-			int gender;
-			gender = this.random.nextInt(ORabbit.Gender.values().length);
-
-			oRabbit.setVariant(variant);
-			oRabbit.setOverlayVariant(overlay);
-			oRabbit.setGender(gender);
-			oRabbit.setBreed(breed);
+			kit.setOverlayVariant(overlay);
 		}
 
-		return oRabbit;
+		int gender;
+		gender = this.random.nextInt(ORabbit.Gender.values().length);
+		kit.setGender(gender);
+
+		kit.setDewlapByGender();
+
+		return kit;
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+			if (this.isMeatBreed()) {
+				if (random.nextDouble() < 0.40) {
+					this.spawnAtLocation(Items.RABBIT, 2);
+					this.spawnAtLocation(LOItems.RABBIT_THIGH.get(), 2);
+					this.spawnAtLocation(Items.RABBIT_HIDE, 2);
+				} else if (random.nextDouble() > 0.40) {
+					this.spawnAtLocation(Items.RABBIT);
+					this.spawnAtLocation(LOItems.RABBIT_THIGH.get());
+					this.spawnAtLocation(Items.RABBIT_HIDE);
+				}
+			}
+
+			if (this.isNormalBreed()) {
+				if (random.nextDouble() < 0.15) {
+					this.spawnAtLocation(Items.RABBIT);
+					this.spawnAtLocation(LOItems.RABBIT_THIGH.get());
+					this.spawnAtLocation(Items.RABBIT_HIDE);
+				}
+			}
+
+		}
+	}
+
+	public void setDewlapByGender() {
+
+		if (this.isFemale()) {
+			if (random.nextDouble() < 0.15) {
+				this.setDewlap(0);
+			} else if (random.nextDouble() > 0.15 && random.nextDouble() < 0.50) {
+				this.setDewlap(1);
+			} else if (random.nextDouble() > 0.50) {
+				this.setDewlap(2);
+			}
+		}
+
+		if (this.isMale()) {
+			if (random.nextDouble() < 0.15) {
+				this.setDewlap(2);
+			} else if (random.nextDouble() > 0.15 && random.nextDouble() < 0.50) {
+				this.setDewlap(1);
+			} else if (random.nextDouble() > 0.50) {
+				this.setDewlap(0);
+			}
+		}
+
+	}
+
+	public void setColorByWildStatus() {
+		if (random.nextDouble() < 0.05) {
+			this.setVariant(random.nextInt(ORabbitModel.Variant.values().length));
+		} else if (random.nextDouble() > 0.05) {
+			int[] variants = {0, 2, 3, 8, 10, 11, 12};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+	}
+
+	public void setMarkingByWildStatus() {
+		if (random.nextDouble() < 0.10) {
+			this.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
+		} else if (random.nextDouble() > 0.10) {
+			this.setOverlayVariant(0);
+		}
 	}
 
 }

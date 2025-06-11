@@ -323,266 +323,268 @@ public class SpawnReplacer {
                     return;
                 }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        WheatMoobloom moobloom = EntityTypes.WHEAT_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get()) {
+                    if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS)) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            WheatMoobloom moobloom = EntityTypes.WHEAT_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(WheatMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(WheatMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.TAIGA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SNOWY_TAIGA))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        SweetBerryMoobloom moobloom = EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.TAIGA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SNOWY_TAIGA))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            SweetBerryMoobloom moobloom = EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(SweetBerryMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(SweetBerryMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        PumpkinMoobloom moobloom = EntityTypes.PUMPKIN_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            PumpkinMoobloom moobloom = EntityTypes.PUMPKIN_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(PumpkinMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(PumpkinMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        PotatoMoobloom moobloom = EntityTypes.POTATO_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            PotatoMoobloom moobloom = EntityTypes.POTATO_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(PotatoMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(PotatoMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        MelonMoobloom moobloom = EntityTypes.MELON_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SPARSE_JUNGLE) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            MelonMoobloom moobloom = EntityTypes.MELON_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(MelonMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(MelonMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        GlowBerryMoobloom moobloom = EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SWAMP) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.DARK_FOREST))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            GlowBerryMoobloom moobloom = EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(GlowBerryMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(GlowBerryMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FLOWER_FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.30) {
-                        FloweringMoobloom moobloom = EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FLOWER_FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.20) {
+                            FloweringMoobloom moobloom = EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(FloweringMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(FloweringMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        CarrotMoobloom moobloom = EntityTypes.CARROT_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            CarrotMoobloom moobloom = EntityTypes.CARROT_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(CarrotMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(CarrotMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        BeetrootMoobloom moobloom = EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.MEADOW))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            BeetrootMoobloom moobloom = EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(BeetrootMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(BeetrootMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.BIRCH_FOREST))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        AzaleaMoobloom moobloom = EntityTypes.AZALEA_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if ((event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.LUSH_CAVES) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.FOREST) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.BIRCH_FOREST))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            AzaleaMoobloom moobloom = EntityTypes.AZALEA_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(AzaleaMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(AzaleaMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
-                }
 
-                if (ModList.get().isLoaded("thatsjustpeachy") && LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get() && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA_PLATEAU) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.WINDSWEPT_SAVANNA))) {
-                    if (event.getLevel().getRandom().nextDouble() < 0.02) {
-                        PeachMoobloom moobloom = EntityTypes.PEACH_MOOBLOOM_ENTITY.get().create(event.getLevel());
+                    if (ModList.get().isLoaded("thatsjustpeachy") && (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA_PLATEAU) || event.getLevel().getBiome(event.getEntity().blockPosition()).is(Biomes.WINDSWEPT_SAVANNA))) {
+                        if (event.getLevel().getRandom().nextDouble() < 0.01) {
+                            PeachMoobloom moobloom = EntityTypes.PEACH_MOOBLOOM_ENTITY.get().create(event.getLevel());
 
-                        if (moobloom != null) {
-                            moobloom.copyPosition(vanillacow);
-                            event.getLevel().addFreshEntity(moobloom);
+                            if (moobloom != null) {
+                                moobloom.copyPosition(vanillacow);
+                                event.getLevel().addFreshEntity(moobloom);
 
-                            int randomVariant = event.getLevel().getRandom().nextInt(PeachMoobloomModel.Variant.values().length);
-                            moobloom.setVariant(randomVariant);
+                                int randomVariant = event.getLevel().getRandom().nextInt(PeachMoobloomModel.Variant.values().length);
+                                moobloom.setVariant(randomVariant);
 
-                            int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
-                            moobloom.setOverlayVariant(randomOverlayVariant);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                moobloom.setOverlayVariant(randomOverlayVariant);
 
-                            if (event.getLevel().isClientSide) {
+                                if (event.getLevel().isClientSide) {
+                                    vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                }
+
+                                event.getLevel().addFreshEntity(moobloom);
                                 vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
-
-                            event.getLevel().addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
                 }
@@ -809,22 +811,33 @@ public class SpawnReplacer {
                 }
 
                 if (oRabbit != null) {
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oRabbit.setBreed(0);
+                        oRabbit.setMarkingByWildStatus();
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            int[] variants = {4, 7, 10, 14};
+                            int randomIndex = new Random().nextInt(variants.length);
+                            oRabbit.setVariant(variants[randomIndex]);
+                        } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            int[] variants = {1, 9, 11};
+                            int randomIndex = new Random().nextInt(variants.length);
+                            oRabbit.setVariant(variants[randomIndex]);
+                        } else {
+                            oRabbit.setColorByWildStatus();
+                        }
+                    } else {
+                        oRabbit.setBreed(random.nextInt(RabbitBreed.Breed.values().length));
+                        oRabbit.setVariant(random.nextInt(ORabbitModel.Variant.values().length));
+                        oRabbit.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
+                    }
+
                     oRabbit.copyPosition(vanillarabbit);
 
                     oRabbit.setCustomName(vanillarabbit.getCustomName());
                     oRabbit.setAge(vanillarabbit.getAge());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(ORabbitModel.Variant.values().length);
-                    oRabbit.setVariant(randomVariant);
-
-                    int randomOverlay = event.getLevel().getRandom().nextInt(ORabbitMarkingLayer.Overlay.values().length);
-                    oRabbit.setOverlayVariant(randomOverlay);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(ORabbit.Gender.values().length);
-                    oRabbit.setGender(randomGender);
-
-                    int randomBreed = event.getLevel().getRandom().nextInt(RabbitBreed.Breed.values().length);
-                    oRabbit.setBreed(randomBreed);
+                    oRabbit.setGender(random.nextInt(ORabbit.Gender.values().length));
+                    oRabbit.setDewlapByGender();
 
                     if (event.getLevel().isClientSide) {
                         vanillarabbit.remove(Entity.RemovalReason.DISCARDED);
@@ -1284,7 +1297,7 @@ public class SpawnReplacer {
         Unicorn unicorn = EntityTypes.UNICORN_ENTITY.get().create(event.getLevel());
         if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.SPAWN_UNICORNS.get()) {
 
-            if (event.getEntity().getClass() == ORabbit.class && random.nextDouble() < 0.008 && event.getLevel().isDay()) {
+            if (event.getEntity().getClass() == ORabbit.class && random.nextDouble() < 0.008 && event.getLevel().isDay() && event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
                 ORabbit rabbit = (ORabbit) event.getEntity();
 
                 if (event.getLevel().isClientSide) {
@@ -1292,14 +1305,9 @@ public class SpawnReplacer {
                 }
 
                 if (unicorn != null) {
-                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
-                            unicorn.setSpecies(0);
-                        }
-                    }
-
                     unicorn.copyPosition(rabbit);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
+                    unicorn.setSpecies(0);
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         unicorn.setColorByBreed();
@@ -1334,12 +1342,9 @@ public class SpawnReplacer {
                 }
 
                 if (unicorn != null) {
-                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                        unicorn.setSpecies(1);
-                    }
-
                     unicorn.copyPosition(brute);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
+                    unicorn.setSpecies(1);
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         unicorn.setColorByBreed();
@@ -1366,7 +1371,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getEntity().getClass() == EnderMan.class && random.nextDouble() < 0.005) {
+            if (event.getEntity().getClass() == EnderMan.class && random.nextDouble() < 0.005 && event.getLevel().getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
                 EnderMan enderMan = (EnderMan) event.getEntity();
 
                 if (event.getLevel().isClientSide) {
@@ -1374,14 +1379,9 @@ public class SpawnReplacer {
                 }
 
                 if (unicorn != null) {
-                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
-                            unicorn.setSpecies(2);
-                        }
-                    }
-
                     unicorn.copyPosition(enderMan);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
+                    unicorn.setSpecies(2);
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         unicorn.setColorByBreed();

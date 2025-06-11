@@ -78,7 +78,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 1) || this.getBreed() == 5) {
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {

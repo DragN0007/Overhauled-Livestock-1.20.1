@@ -58,6 +58,11 @@ public class LivestockOverhaulCommonConfig {
     static {
         BUILDER.push("Spawning");
 
+        BUILDER.comment("Welcome to Livestock Overhaul! You can turn off any O-Animal from spawning in this config, among other things." +
+                "\nPlease note that LO *DOES NOT CHANGE SPAWN RATES* because O-Animals simply replace existing vanilla ones. " +
+                "If you have an issue with too many O-Animals spawning, check your other mods. LO does not have it's own spawn rates, " +
+                "you'll have to change vanilla animal spawn rates to see differences in spawning.");
+
         REPLACE_SPAWN_EGG_ANIMALS = BUILDER.comment("Should vanilla animals spawned via Spawn Egg be replaced with O-Animals?" +
                         "\nNote that if this is turned on, all previously-spawned vanilla animals will be converted regardless of spawn type.")
                 .define("Replace Spawn Egg Vanilla Animals", false);
