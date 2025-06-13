@@ -18,7 +18,7 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
 
     @Override
     public void render(PoseStack poseStack, OMooshroom animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        RenderType renderMarkingType = RenderType.entityCutout(((OMooshroom)animatable).getMushroomsLocation());
+        RenderType renderMarkingType = RenderType.entityCutout(animatable.getMushroomLocation());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);
         poseStack.translate(0.0d, 0.0d, 0.0d);
@@ -32,11 +32,8 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
                 1, 1, 1, 1);
     }
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/overlay/none.png")),
-        BROWN_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_brown_full.png")),
-        RED_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_red_full.png")),
-        BROWN_HALF(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_brown_half.png")),
-        RED_HALF(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/mooshroom/overlay/overlay_red_half.png"));
+        BROWN_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/mushroom/brown_mushroom.png")),
+        RED_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/mushroom/red_mushroom.png"));
 
         //Add new entries to bottom when mod is public, else mooshrooms will change textures during update.
 

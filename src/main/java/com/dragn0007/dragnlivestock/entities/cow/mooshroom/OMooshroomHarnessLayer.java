@@ -1,6 +1,7 @@
-package com.dragn0007.dragnlivestock.entities.cow;
+package com.dragn0007.dragnlivestock.entities.cow.mooshroom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,13 +15,13 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
-public class OCowHarnessLayer extends GeoRenderLayer<OCow> {
-    public OCowHarnessLayer(GeoRenderer<OCow> entityRendererIn) {
+public class OMooshroomHarnessLayer extends GeoRenderLayer<OMooshroom> {
+    public OMooshroomHarnessLayer(GeoRenderer<OMooshroom> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, OCow animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, OMooshroom animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
         ResourceLocation resourceLocation = null;
 

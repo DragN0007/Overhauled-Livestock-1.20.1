@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot;
 
+import com.dragn0007.dragnlivestock.entities.cow.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -138,7 +139,7 @@ public class CarrotMoobloom extends AbstractMoobloom implements GeoEntity {
     }
 
     public ResourceLocation getOverlayLocation() {
-        return OCowMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+        return BovineMarkingOverlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
     }
 
     
@@ -202,7 +203,7 @@ public class CarrotMoobloom extends AbstractMoobloom implements GeoEntity {
         }
         Random random = new Random();
         setVariant(random.nextInt(CarrotMoobloomModel.Variant.values().length));
-        setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+        setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
         
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);

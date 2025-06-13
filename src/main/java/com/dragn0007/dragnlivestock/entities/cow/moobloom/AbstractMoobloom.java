@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.cow.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomModel;
@@ -142,7 +143,7 @@ public class AbstractMoobloom extends OCow implements GeoEntity {
         }
         Random random = new Random();
         setVariant(random.nextInt(SweetBerryMoobloomModel.Variant.values().length));
-        setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+        setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }

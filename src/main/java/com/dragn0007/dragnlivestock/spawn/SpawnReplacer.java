@@ -11,10 +11,7 @@ import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
-import com.dragn0007.dragnlivestock.entities.cow.CowBreed;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.cow.OCowModel;
+import com.dragn0007.dragnlivestock.entities.cow.*;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloomModel;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloom;
@@ -335,7 +332,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(WheatMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -359,7 +356,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(SweetBerryMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -383,7 +380,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(PumpkinMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -407,7 +404,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(PotatoMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -431,7 +428,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(MelonMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -455,7 +452,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(GlowBerryMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -479,7 +476,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(FloweringMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -503,7 +500,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(CarrotMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -527,7 +524,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(BeetrootMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -551,7 +548,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(AzaleaMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -575,7 +572,7 @@ public class SpawnReplacer {
                                 int randomVariant = event.getLevel().getRandom().nextInt(PeachMoobloomModel.Variant.values().length);
                                 moobloom.setVariant(randomVariant);
 
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCowMarkingLayer.Overlay.values().length);
+                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
                                 moobloom.setOverlayVariant(randomOverlayVariant);
 
                                 if (event.getLevel().isClientSide) {
@@ -624,7 +621,7 @@ public class SpawnReplacer {
                         oCow.setHornsByBreed();
                     } else {
                         oCow.setVariant(random.nextInt(OCowModel.Variant.values().length));
-                        oCow.setOverlayVariant(random.nextInt(OCowMarkingLayer.Overlay.values().length));
+                        oCow.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
                         oCow.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
                     }
 
@@ -1006,20 +1003,18 @@ public class SpawnReplacer {
                     oMooshroom.setCustomName(vanillamooshroom.getCustomName());
                     oMooshroom.setAge(vanillamooshroom.getAge());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OMooshroomModel.Variant.values().length);
-                    oMooshroom.setVariant(randomVariant);
+                    oMooshroom.setGender(random.nextInt(OCow.Gender.values().length));
+                    oMooshroom.setBreed(random.nextInt(CowBreed.Breed.values().length));
 
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OMooshroomMarkingLayer.Overlay.values().length);
-                    oMooshroom.setOverlayVariant(randomOverlayVariant);
-
-                    int randomHorns = event.getLevel().getRandom().nextInt(OMooshroomHornLayer.HornOverlay.values().length);
-                    oMooshroom.setHornVariant(randomHorns);
-
-                    int randomMushrooms = event.getLevel().getRandom().nextInt(OMooshroomMushroomLayer.Overlay.values().length);
-                    oMooshroom.setMushroomVariant(randomMushrooms);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(OMooshroom.Gender.values().length);
-                    oMooshroom.setGender(randomGender);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oMooshroom.setColorByBreed();
+                        oMooshroom.setMarkingByBreed();
+                        oMooshroom.setHornsByBreed();
+                    } else {
+                        oMooshroom.setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
+                        oMooshroom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+                        oMooshroom.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);

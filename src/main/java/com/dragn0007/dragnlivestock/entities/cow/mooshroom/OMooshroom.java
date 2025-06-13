@@ -2,7 +2,17 @@ package com.dragn0007.dragnlivestock.entities.cow.mooshroom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.cow.BovineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.cow.CowBreed;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.cow.OCowModel;
+import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
+import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
+import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +22,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,13 +32,12 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -58,17 +68,27 @@ public class OMooshroom extends OCow implements GeoEntity {
     }
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.BOWL) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())
-                && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-                        (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        Item item = itemStack.getItem();
 
-            player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
-            ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MUSHROOM_STEW.getDefaultInstance());
-            player.setItemInHand(hand, itemstack1);
-            replenishMilkCounter = 0;
-            setMilked(true);
-
+        if (itemStack.is(Items.BOWL) && !this.isBaby()) {
+            if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed() &&
+                    (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+                            (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+                player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
+                ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MUSHROOM_STEW.getDefaultInstance());
+                player.setItemInHand(hand, itemstack1);
+                replenishMilkCounter = 0;
+                setMilked(true);
+            } else if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed() &&
+                    (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+                            (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+                player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
+                ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MUSHROOM_STEW.getDefaultInstance());
+                player.setItemInHand(hand, itemstack1);
+                replenishMilkCounter = 0;
+                setMilked(true);
+            }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
             return super.mobInteract(player, hand);
@@ -76,55 +96,42 @@ public class OMooshroom extends OCow implements GeoEntity {
     }
 
     // Generates the base texture
+    public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> BELLED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.BOOLEAN);
+
+    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
     public ResourceLocation getTextureLocation() {
         return OMooshroomModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
     }
-
-    public ResourceLocation getOverlayLocation() {
-        return OMooshroomMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-    }
-
-    public ResourceLocation getHornsLocation() {
-        return OMooshroomHornLayer.HornOverlay.hornOverlayFromOrdinal(getHornVariant()).resourceLocation;
-    }
-
-    public ResourceLocation getMushroomsLocation() {
-        return OMooshroomMushroomLayer.Overlay.overlayFromOrdinal(getMushroomVariant()).resourceLocation;
-    }
-    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> MUSHROOMS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-
     public int getVariant() {
         return this.entityData.get(VARIANT);
     }
-    public int getOverlayVariant() {
-        return this.entityData.get(OVERLAY);
-    }
-    public int getHornVariant() {
-        return this.entityData.get(HORNS);
-    }
-    public int getMushroomVariant() {
-        return this.entityData.get(MUSHROOMS);
-    }
-
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
     }
-    public void setOverlayVariant(int overlayVariant) {
-        this.entityData.set(OVERLAY, overlayVariant);
+
+    public static final EntityDataAccessor<Integer> MUSHROOMS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
+    public ResourceLocation getMushroomLocation() {return OMooshroomMushroomLayer.Overlay.overlayFromOrdinal(getMushroomVariant()).resourceLocation;}
+    public int getMushroomVariant() {
+        return this.entityData.get(MUSHROOMS);
     }
-    public void setHornVariant(int hornVariant) {
-        this.entityData.set(HORNS, hornVariant);
-    }
-    public void setMushroomVariant(int mushroomVariant) {
-        this.entityData.set(MUSHROOMS, mushroomVariant);
+    public void setMushroomVariant(int overlayVariant) {
+        this.entityData.set(MUSHROOMS, overlayVariant);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+
+        if (tag.contains("Breed")) {
+            setBreed(tag.getInt("Breed"));
+        }
 
         if (tag.contains("Variant")) {
             setVariant(tag.getInt("Variant"));
@@ -134,31 +141,56 @@ public class OMooshroom extends OCow implements GeoEntity {
             setOverlayVariant(tag.getInt("Overlay"));
         }
 
-        if (tag.contains("Horns")) {
-            setHornVariant(tag.getInt("Horns"));
-        }
-
         if (tag.contains("Mushrooms")) {
             setMushroomVariant(tag.getInt("Mushrooms"));
         }
 
+        if (tag.contains("HornType")) {
+            setHornVariant(tag.getInt("HornType"));
+        }
+
         if (tag.contains("Gender")) {
-            setGender(tag.getInt("Gender"));
+            this.setGender(tag.getInt("Gender"));
+        }
+
+        if (tag.contains("MilkedTime")) {
+            this.replenishMilkCounter = tag.getInt("MilkedTime");
+        }
+
+        if (tag.contains("Milked")) {
+            setMilked(tag.getBoolean("Milked"));
+        }
+
+        if(tag.contains("Tagged")) {
+            this.setTagged(tag.getBoolean("Tagged"));
+        }
+
+        this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
+
+        if(tag.contains("Harnessed")) {
+            this.setHarnessed(tag.getBoolean("Harnessed"));
+        }
+
+        if(tag.contains("Belled")) {
+            this.setBelled(tag.getBoolean("Belled"));
         }
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
+        tag.putInt("Breed", getBreed());
         tag.putInt("Variant", getVariant());
-
         tag.putInt("Overlay", getOverlayVariant());
-
-        tag.putInt("Horns", getHornVariant());
-
         tag.putInt("Mushrooms", getMushroomVariant());
-
-        tag.putInt("Gender", getGender());
+        tag.putInt("HornType", getHornVariant());
+        tag.putInt("Gender", this.getGender());
+        tag.putBoolean("Milked", this.wasMilked());
+        tag.putInt("MilkedTime", this.replenishMilkCounter);
+        tag.putBoolean("Tagged", this.isTagged());
+        tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
+        tag.putBoolean("Harnessed", this.isHarnessed());
+        tag.putBoolean("Belled", this.isBelled());
     }
 
     @Override
@@ -168,11 +200,18 @@ public class OMooshroom extends OCow implements GeoEntity {
             data = new AgeableMobGroupData(0.2F);
         }
         Random random = new Random();
-        setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
-        setOverlayVariant(random.nextInt(OMooshroomMarkingLayer.Overlay.values().length));
-        setHornVariant(random.nextInt(OMooshroomHornLayer.HornOverlay.values().length));
-        setMushroomVariant(random.nextInt(OMooshroomMushroomLayer.Overlay.values().length));
+        setBreed(random.nextInt(CowBreed.Breed.values().length));
         setGender(random.nextInt(Gender.values().length));
+
+        if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+            this.setColorByBreed();
+            this.setMarkingByBreed();
+            this.setHornsByBreed();
+        } else {
+            this.setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
+            this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+            this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
+        }
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
@@ -182,11 +221,17 @@ public class OMooshroom extends OCow implements GeoEntity {
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(BREED, 0);
         this.entityData.define(VARIANT, 0);
         this.entityData.define(OVERLAY, 0);
-        this.entityData.define(HORNS, 0);
         this.entityData.define(MUSHROOMS, 0);
         this.entityData.define(GENDER, 0);
+        this.entityData.define(HORN_TYPE, 0);
+        this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+        this.entityData.define(TAGGED, false);
+        this.entityData.define(MILKED, false);
+        this.entityData.define(HARNESSED, false);
+        this.entityData.define(BELLED, false);
     }
 
     public boolean canParent() {
@@ -204,13 +249,6 @@ public class OMooshroom extends OCow implements GeoEntity {
             } else {
                 OMooshroom partner = (OMooshroom) animal;
                 if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-                    return true;
-                }
-
-                boolean partnerIsFemale = partner.isFemale();
-                boolean partnerIsMale = partner.isMale();
-                if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-                        && ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
                     return isFemale();
                 }
             }
@@ -220,61 +258,87 @@ public class OMooshroom extends OCow implements GeoEntity {
 
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        OMooshroom oMooshroom = (OMooshroom) ageableMob;
-        if (ageableMob instanceof OMooshroom) {
-            OMooshroom oMooshroom1 = (OMooshroom) ageableMob;
-            oMooshroom = EntityTypes.O_MOOSHROOM_ENTITY.get().create(serverLevel);
+        OMooshroom calf;
+        OMooshroom partner = (OMooshroom) ageableMob;
+        calf = EntityTypes.O_MOOSHROOM_ENTITY.get().create(serverLevel);
 
-            int i = this.random.nextInt(9);
-            int variant;
-            if (i < 4) {
-                variant = this.getVariant();
-            } else if (i < 8) {
-                variant = oMooshroom1.getVariant();
-            } else {
-                variant = this.random.nextInt(OMooshroomModel.Variant.values().length);
-            }
+        int breedChance = this.random.nextInt(5);
+        int breed;
+        if (breedChance == 0) {
+            breed = this.random.nextInt(CowBreed.Breed.values().length);
+        } else {
+            breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+        }
+        calf.setBreed(breed);
 
-            int j = this.random.nextInt(5);
+        int variantChance = this.random.nextInt(14);
+        int variant;
+        if (variantChance < 6) {
+            variant = this.getVariant();
+        } else if (variantChance < 12) {
+            variant = partner.getVariant();
+        } else {
+            variant = this.random.nextInt(OMooshroomModel.Variant.values().length);
+        }
+        calf.setVariant(variant);
+
+        if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+            int overlayChance = this.random.nextInt(10);
             int overlay;
-            if (j < 2) {
+            if (overlayChance < 4) {
                 overlay = this.getOverlayVariant();
-            } else if (j < 4) {
-                overlay = oMooshroom1.getOverlayVariant();
+            } else if (overlayChance < 8) {
+                overlay = partner.getOverlayVariant();
             } else {
-                overlay = this.random.nextInt(OMooshroomMarkingLayer.Overlay.values().length);
+                overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
             }
-
-            int k = this.random.nextInt(5);
-            int horns;
-            if (k < 2) {
-                horns = this.getHornVariant();
-            } else if (k < 4) {
-                horns = oMooshroom1.getHornVariant();
-            } else {
-                horns = this.random.nextInt(OMooshroomHornLayer.HornOverlay.values().length);
-            }
-
-            int l = this.random.nextInt(5);
-            int mushrooms;
-            if (l < 2) {
-                mushrooms = this.getMushroomVariant();
-            } else if (l < 4) {
-                mushrooms = oMooshroom1.getMushroomVariant();
-            } else {
-                mushrooms = this.random.nextInt(OMooshroomMushroomLayer.Overlay.values().length);
-            }
-
-            int udders;
-            udders = this.random.nextInt(Gender.values().length);
-
-            oMooshroom.setVariant(variant);
-            oMooshroom.setOverlayVariant(overlay);
-            oMooshroom.setHornVariant(horns);
-            oMooshroom.setMushroomVariant(mushrooms);
-            oMooshroom.setGender(udders);
+            calf.setOverlayVariant(overlay);
+        } else if (breedChance == 0 && random.nextDouble() < 0.5) {
+            calf.setMarkingByBreed();
         }
 
-        return oMooshroom;
+        int mushroomChance = this.random.nextInt(10);
+        int mushrooms;
+        if (mushroomChance < 4) {
+            mushrooms = this.getMushroomVariant();
+        } else if (mushroomChance < 8) {
+            mushrooms = partner.getMushroomVariant();
+        } else {
+            mushrooms = this.random.nextInt(OMooshroomMushroomLayer.Overlay.values().length);
+        }
+        calf.setMushroomVariant(mushrooms);
+
+        if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+            int hornsChance = this.random.nextInt(10);
+            int hornType;
+            if (hornsChance < 4) {
+                hornType = this.getHornVariant();
+            } else if (hornsChance < 8) {
+                hornType = partner.getHornVariant();
+            } else {
+                hornType = this.random.nextInt(OCow.BreedHorns.values().length);
+            }
+            calf.setHornVariant(hornType);
+        } else if (breedChance == 0 && random.nextDouble() < 0.5) {
+            calf.setHornsByBreed();
+        }
+
+        int gender;
+        gender = this.random.nextInt(OCow.Gender.values().length);
+        calf.setGender(gender);
+
+        return calf;
     }
+
+    public void setColorByBreed() {
+
+        if (random.nextDouble() < 0.05) {
+            this.setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
+        } else if (random.nextDouble() > 0.05) {
+            int[] variants = {0, 7, 9, 10, 11};
+            int randomIndex = new Random().nextInt(variants.length);
+            this.setVariant(variants[randomIndex]);
+        }
+    }
+
 }
