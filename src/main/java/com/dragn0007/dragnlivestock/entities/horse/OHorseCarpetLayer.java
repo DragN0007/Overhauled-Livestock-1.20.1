@@ -2,6 +2,8 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
+import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -10,6 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -188,7 +191,7 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
 
         ResourceLocation resourceLocation = null;
 
-        if (!armorItemStack.isEmpty() && !itemStack.isEmpty()) {
+        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) {
             if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !(armorItemStack.getItem() == LOItems.RODEO_HARNESS.get())) {
 
                 if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
@@ -211,7 +214,7 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
             }
         }
 
-        if(!itemStack.isEmpty() && armorItemStack.isEmpty()) {
+        if(!itemStack.isEmpty() && armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) {
             if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                 resourceLocation = CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
             } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {

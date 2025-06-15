@@ -2,8 +2,10 @@ package com.dragn0007.dragnlivestock.datagen;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -342,6 +344,207 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.RED_WESTERN_BLANKET);
         simpleItem(LOItems.WHITE_WESTERN_BLANKET);
         simpleItem(LOItems.YELLOW_WESTERN_BLANKET);
+
+
+        simpleMedievalItem(LOItems.BLACK_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_BLACK_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_BLACK_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_BLACK_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_BLACK_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_BLUE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_BLUE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_BLUE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_BLUE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.BLUE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLUE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLUE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLUE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_BLUE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_BLUE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_BLUE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_BLUE_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_BROWN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_BROWN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_BROWN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_BROWN_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.BROWN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BROWN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BROWN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BROWN_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_BROWN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_BROWN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_BROWN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_BROWN_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_CYAN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_CYAN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_CYAN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_CYAN_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.CYAN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.CYAN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.CYAN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.CYAN_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_CYAN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_CYAN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_CYAN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_CYAN_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_GREEN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_GREEN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_GREEN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_GREEN_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.GREEN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.GREEN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.GREEN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.GREEN_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_GREEN_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_GREEN_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_GREEN_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_GREEN_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_GREY_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_GREY_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_GREY_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_GREY_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.GREY_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.GREY_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.GREY_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.GREY_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_GREY_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_GREY_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_GREY_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_GREY_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_LIGHT_BLUE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_LIGHT_BLUE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_LIGHT_BLUE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_LIGHT_BLUE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.LIGHT_BLUE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.LIGHT_BLUE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.LIGHT_BLUE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.LIGHT_BLUE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_BLUE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_BLUE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_BLUE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_BLUE_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_LIGHT_GREY_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_LIGHT_GREY_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_LIGHT_GREY_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_LIGHT_GREY_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.LIGHT_GREY_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.LIGHT_GREY_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.LIGHT_GREY_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.LIGHT_GREY_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_GREY_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_GREY_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_GREY_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_LIGHT_GREY_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_LIME_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_LIME_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_LIME_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_LIME_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.LIME_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.LIME_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.LIME_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.LIME_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_LIME_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_LIME_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_LIME_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_LIME_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_MAGENTA_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_MAGENTA_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_MAGENTA_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_MAGENTA_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.MAGENTA_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.MAGENTA_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.MAGENTA_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.MAGENTA_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_MAGENTA_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_MAGENTA_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_MAGENTA_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_MAGENTA_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_ORANGE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_ORANGE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_ORANGE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_ORANGE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.ORANGE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.ORANGE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.ORANGE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.ORANGE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_ORANGE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_ORANGE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_ORANGE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_ORANGE_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_PINK_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_PINK_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_PINK_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_PINK_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.PINK_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.PINK_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.PINK_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.PINK_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_PINK_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_PINK_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_PINK_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_PINK_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_PURPLE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_PURPLE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_PURPLE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_PURPLE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.PURPLE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.PURPLE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.PURPLE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.PURPLE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_PURPLE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_PURPLE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_PURPLE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_PURPLE_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_RED_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_RED_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_RED_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_RED_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.RED_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.RED_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.RED_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.RED_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_RED_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_RED_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_RED_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_RED_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_WHITE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_WHITE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_WHITE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_WHITE_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_CAPARISON_SHOULDER);
+
+        simpleMedievalItem(LOItems.BLACK_YELLOW_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.BLACK_YELLOW_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.BLACK_YELLOW_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.BLACK_YELLOW_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.YELLOW_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.YELLOW_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.YELLOW_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.YELLOW_CAPARISON_SHOULDER);
+        simpleMedievalItem(LOItems.WHITE_YELLOW_CAPARISON_CAPE);
+        simpleMedievalItem(LOItems.WHITE_YELLOW_CAPARISON_FULL);
+        simpleMedievalItem(LOItems.WHITE_YELLOW_CAPARISON_HALF);
+        simpleMedievalItem(LOItems.WHITE_YELLOW_CAPARISON_SHOULDER);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
@@ -354,5 +557,11 @@ public class LOItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(LivestockOverhaul.MODID,"item/" + getTextureName));
+    }
+
+    private ItemModelBuilder simpleMedievalItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation("medievalembroidery","item/" + item.getId().getPath()));
     }
 }

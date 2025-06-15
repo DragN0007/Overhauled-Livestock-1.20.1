@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.peach;
 
-import com.dragn0007.dragnlivestock.entities.cow.BovineMarkingOverlay;
-import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -66,8 +65,8 @@ public class PeachMoobloom extends AbstractMoobloom implements GeoEntity {
         }
 
         try {
-            if (ModList.get().isLoaded("thatsjustpeachy") && itemStack.is(Items.SHEARS) && (!isPlantsSheared() || regrowPlantsTickCounter >= 4800) && !player.isShiftKeyDown()) {
-                this.setPlantsSheared(true);
+            if (ModList.get().isLoaded("thatsjustpeachy") && itemStack.is(Items.SHEARS) && (!isSheared() || regrowPlantsCounter >= 4800) && !player.isShiftKeyDown()) {
+                this.setSheared(true);
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 
                 Class<?> TJPItems = Class.forName("com.dragn0007.thatsjustpeachy.item.TJPItems");
@@ -78,7 +77,7 @@ public class PeachMoobloom extends AbstractMoobloom implements GeoEntity {
                 this.spawnAtLocation(peachItem);
                 this.spawnAtLocation(peachItem);
                 this.spawnAtLocation(peachItem);
-                regrowPlantsTickCounter = 0;
+                regrowPlantsCounter = 0;
 
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
@@ -138,18 +137,12 @@ public class PeachMoobloom extends AbstractMoobloom implements GeoEntity {
     public int getOverlayVariant() {
         return this.entityData.get(OVERLAY);
     }
-    public int getHornVariant() {
-        return this.entityData.get(HORNS);
-    }
 
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
     }
     public void setOverlayVariant(int overlayVariant) {
         this.entityData.set(OVERLAY, overlayVariant);
-    }
-    public void setHornVariant(int hornVariant) {
-        this.entityData.set(HORNS, hornVariant);
     }
 
     @Override
@@ -198,7 +191,6 @@ public class PeachMoobloom extends AbstractMoobloom implements GeoEntity {
         super.defineSynchedData();
         this.entityData.define(VARIANT, 0);
         this.entityData.define(OVERLAY, 0);
-        this.entityData.define(HORNS, 0);
     }
 
 }

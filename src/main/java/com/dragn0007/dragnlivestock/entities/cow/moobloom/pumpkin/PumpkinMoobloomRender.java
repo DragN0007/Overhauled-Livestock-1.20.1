@@ -35,7 +35,7 @@ public class PumpkinMoobloomRender extends GeoEntityRenderer<PumpkinMoobloom> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
         } else {
             model.getBone("plant").ifPresent(b -> b.setHidden(false));

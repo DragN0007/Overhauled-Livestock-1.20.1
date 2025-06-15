@@ -35,7 +35,7 @@ public class PeachMoobloomRender extends GeoEntityRenderer<PeachMoobloom> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
             model.getBone("plant2").ifPresent(b -> b.setHidden(true));
         } else {

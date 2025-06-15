@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "medievalembroidery:item/blue_caparison_half"
+  }
+}

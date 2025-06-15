@@ -31,18 +31,18 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
                 bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                 1, 1, 1, 1);
     }
-    public enum Overlay {
+    public enum MushroomOverlay {
         BROWN_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/mushroom/brown_mushroom.png")),
         RED_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/mushroom/red_mushroom.png"));
 
         //Add new entries to bottom when mod is public, else mooshrooms will change textures during update.
 
         public final ResourceLocation resourceLocation;
-        Overlay(ResourceLocation resourceLocation) {
+        MushroomOverlay(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
 
-        public static Overlay overlayFromOrdinal(int overlay) { return Overlay.values()[overlay % Overlay.values().length];
+        public static MushroomOverlay overlayFromOrdinal(int overlay) { return MushroomOverlay.values()[overlay % MushroomOverlay.values().length];
         }
     }
 

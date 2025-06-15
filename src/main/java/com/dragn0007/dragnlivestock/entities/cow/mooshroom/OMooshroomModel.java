@@ -73,7 +73,7 @@ public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
 
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/o_mooshroom.geo.json");
     public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/mooshroom_bull.geo.json");
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_cow.geo.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/baby_o_cow.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
 
     @Override

@@ -12,7 +12,6 @@ public class MelonMoobloomRender extends GeoEntityRenderer<MelonMoobloom> {
     public MelonMoobloomRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new MelonMoobloomModel());
         this.addRenderLayer(new MelonMoobloomMarkingLayer(this));
-        this.addRenderLayer(new MelonMoobloomHornLayer(this));
         this.addRenderLayer(new MelonMoobloomBrandTagLayer(this));
     }
 
@@ -35,7 +34,7 @@ public class MelonMoobloomRender extends GeoEntityRenderer<MelonMoobloom> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
         } else {
             model.getBone("plant").ifPresent(b -> b.setHidden(false));

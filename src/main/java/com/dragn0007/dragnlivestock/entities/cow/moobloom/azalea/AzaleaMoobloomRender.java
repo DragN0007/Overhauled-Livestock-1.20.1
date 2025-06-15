@@ -12,7 +12,6 @@ public class AzaleaMoobloomRender extends GeoEntityRenderer<AzaleaMoobloom> {
     public AzaleaMoobloomRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new AzaleaMoobloomModel());
         this.addRenderLayer(new AzaleaMoobloomMarkingLayer(this));
-        this.addRenderLayer(new AzaleaMoobloomHornLayer(this));
         this.addRenderLayer(new AzaleaMoobloomBrandTagLayer(this));
     }
 
@@ -35,7 +34,7 @@ public class AzaleaMoobloomRender extends GeoEntityRenderer<AzaleaMoobloom> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
         } else {
             model.getBone("plant").ifPresent(b -> b.setHidden(false));

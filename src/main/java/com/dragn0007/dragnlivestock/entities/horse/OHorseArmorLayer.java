@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,6 +29,7 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
         ItemStack armorItemStack = armorSlots.get(2);
+        ItemStack itemStack = animatable.getDecorItem();
 
         if (armorItemStack.isEmpty()) {
             return;

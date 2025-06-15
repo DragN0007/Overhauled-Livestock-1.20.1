@@ -252,6 +252,208 @@ public class LOItemGroup {
                         output.accept(LOItems.RED_WESTERN_BLANKET.get());
                         output.accept(LOItems.WHITE_WESTERN_BLANKET.get());
                         output.accept(LOItems.YELLOW_WESTERN_BLANKET.get());
+
+//                        if (ModList.get().isLoaded("medievalembroidery")) {
+                            output.accept(LOItems.BLACK_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_BLACK_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_BLACK_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_BLACK_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_BLACK_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_BLUE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_BLUE_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_BLUE_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_BLUE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.BLUE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLUE_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLUE_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLUE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_BLUE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_BLUE_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_BLUE_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_BLUE_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_BROWN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_BROWN_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_BROWN_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_BROWN_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.BROWN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BROWN_CAPARISON_FULL.get());
+                            output.accept(LOItems.BROWN_CAPARISON_HALF.get());
+                            output.accept(LOItems.BROWN_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_BROWN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_BROWN_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_BROWN_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_BROWN_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_CYAN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_CYAN_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_CYAN_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_CYAN_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.CYAN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.CYAN_CAPARISON_FULL.get());
+                            output.accept(LOItems.CYAN_CAPARISON_HALF.get());
+                            output.accept(LOItems.CYAN_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_CYAN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_CYAN_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_CYAN_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_CYAN_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_GREEN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_GREEN_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_GREEN_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_GREEN_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.GREEN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.GREEN_CAPARISON_FULL.get());
+                            output.accept(LOItems.GREEN_CAPARISON_HALF.get());
+                            output.accept(LOItems.GREEN_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_GREEN_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_GREEN_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_GREEN_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_GREEN_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_GREY_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_GREY_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_GREY_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_GREY_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.GREY_CAPARISON_CAPE.get());
+                            output.accept(LOItems.GREY_CAPARISON_FULL.get());
+                            output.accept(LOItems.GREY_CAPARISON_HALF.get());
+                            output.accept(LOItems.GREY_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_GREY_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_GREY_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_GREY_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_GREY_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_LIGHT_BLUE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_LIGHT_BLUE_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_LIGHT_BLUE_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_LIGHT_BLUE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.LIGHT_BLUE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.LIGHT_BLUE_CAPARISON_FULL.get());
+                            output.accept(LOItems.LIGHT_BLUE_CAPARISON_HALF.get());
+                            output.accept(LOItems.LIGHT_BLUE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_LIGHT_BLUE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_LIGHT_BLUE_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_LIGHT_BLUE_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_LIGHT_BLUE_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_LIGHT_GREY_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_LIGHT_GREY_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_LIGHT_GREY_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_LIGHT_GREY_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.LIGHT_GREY_CAPARISON_CAPE.get());
+                            output.accept(LOItems.LIGHT_GREY_CAPARISON_FULL.get());
+                            output.accept(LOItems.LIGHT_GREY_CAPARISON_HALF.get());
+                            output.accept(LOItems.LIGHT_GREY_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_LIGHT_GREY_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_LIGHT_GREY_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_LIGHT_GREY_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_LIGHT_GREY_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_LIME_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_LIME_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_LIME_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_LIME_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.LIME_CAPARISON_CAPE.get());
+                            output.accept(LOItems.LIME_CAPARISON_FULL.get());
+                            output.accept(LOItems.LIME_CAPARISON_HALF.get());
+                            output.accept(LOItems.LIME_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_LIME_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_LIME_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_LIME_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_LIME_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_MAGENTA_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_MAGENTA_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_MAGENTA_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_MAGENTA_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.MAGENTA_CAPARISON_CAPE.get());
+                            output.accept(LOItems.MAGENTA_CAPARISON_FULL.get());
+                            output.accept(LOItems.MAGENTA_CAPARISON_HALF.get());
+                            output.accept(LOItems.MAGENTA_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_MAGENTA_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_MAGENTA_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_MAGENTA_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_MAGENTA_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_ORANGE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_ORANGE_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_ORANGE_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_ORANGE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.ORANGE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.ORANGE_CAPARISON_FULL.get());
+                            output.accept(LOItems.ORANGE_CAPARISON_HALF.get());
+                            output.accept(LOItems.ORANGE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_ORANGE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_ORANGE_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_ORANGE_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_ORANGE_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_PINK_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_PINK_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_PINK_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_PINK_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.PINK_CAPARISON_CAPE.get());
+                            output.accept(LOItems.PINK_CAPARISON_FULL.get());
+                            output.accept(LOItems.PINK_CAPARISON_HALF.get());
+                            output.accept(LOItems.PINK_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_PINK_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_PINK_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_PINK_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_PINK_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_PURPLE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_PURPLE_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_PURPLE_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_PURPLE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.PURPLE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.PURPLE_CAPARISON_FULL.get());
+                            output.accept(LOItems.PURPLE_CAPARISON_HALF.get());
+                            output.accept(LOItems.PURPLE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_PURPLE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_PURPLE_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_PURPLE_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_PURPLE_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_RED_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_RED_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_RED_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_RED_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.RED_CAPARISON_CAPE.get());
+                            output.accept(LOItems.RED_CAPARISON_FULL.get());
+                            output.accept(LOItems.RED_CAPARISON_HALF.get());
+                            output.accept(LOItems.RED_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_RED_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_RED_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_RED_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_RED_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_WHITE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_WHITE_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_WHITE_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_WHITE_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_CAPARISON_SHOULDER.get());
+
+                            output.accept(LOItems.BLACK_YELLOW_CAPARISON_CAPE.get());
+                            output.accept(LOItems.BLACK_YELLOW_CAPARISON_FULL.get());
+                            output.accept(LOItems.BLACK_YELLOW_CAPARISON_HALF.get());
+                            output.accept(LOItems.BLACK_YELLOW_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.YELLOW_CAPARISON_CAPE.get());
+                            output.accept(LOItems.YELLOW_CAPARISON_FULL.get());
+                            output.accept(LOItems.YELLOW_CAPARISON_HALF.get());
+                            output.accept(LOItems.YELLOW_CAPARISON_SHOULDER.get());
+                            output.accept(LOItems.WHITE_YELLOW_CAPARISON_CAPE.get());
+                            output.accept(LOItems.WHITE_YELLOW_CAPARISON_FULL.get());
+                            output.accept(LOItems.WHITE_YELLOW_CAPARISON_HALF.get());
+                            output.accept(LOItems.WHITE_YELLOW_CAPARISON_SHOULDER.get());
+//                        }
                     }).build());
 
     public static final RegistryObject<CreativeModeTab> LIVESTOCK_OVERHAUL_FOOD_GROUP = CREATIVE_MODE_TABS.register("overhauled_livestock_food",

@@ -12,7 +12,6 @@ public class FloweringMoobloomRender extends GeoEntityRenderer<FloweringMoobloom
     public FloweringMoobloomRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new FloweringMoobloomModel());
         this.addRenderLayer(new FloweringMoobloomMarkingLayer(this));
-        this.addRenderLayer(new FloweringMoobloomHornLayer(this));
         this.addRenderLayer(new FloweringMoobloomBrandTagLayer(this));
     }
 
@@ -35,7 +34,7 @@ public class FloweringMoobloomRender extends GeoEntityRenderer<FloweringMoobloom
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
         } else {
             model.getBone("plant").ifPresent(b -> b.setHidden(false));

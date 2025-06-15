@@ -12,7 +12,6 @@ public class WheatMoobloomRender extends GeoEntityRenderer<WheatMoobloom> {
     public WheatMoobloomRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new WheatMoobloomModel());
         this.addRenderLayer(new WheatMoobloomMarkingLayer(this));
-        this.addRenderLayer(new WheatMoobloomHornLayer(this));
         this.addRenderLayer(new WheatMoobloomBrandTagLayer(this));
     }
 
@@ -35,7 +34,7 @@ public class WheatMoobloomRender extends GeoEntityRenderer<WheatMoobloom> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
         } else {
             model.getBone("plant").ifPresent(b -> b.setHidden(false));

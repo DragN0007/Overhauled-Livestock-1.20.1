@@ -607,9 +607,9 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			int woolColorChance = this.random.nextInt(10);
 			int woolColor;
 			if (woolColorChance < 4) {
-				woolColor = this.getOverlayVariant();
+				woolColor = this.getWoolVariant();
 			} else if (woolColorChance < 8) {
-				woolColor = partner.getOverlayVariant();
+				woolColor = partner.getWoolVariant();
 			} else {
 				woolColor = this.random.nextInt(OSheepWoolLayer.Overlay.values().length);
 			}

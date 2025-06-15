@@ -47,6 +47,9 @@ import com.dragn0007.dragnlivestock.entities.horse.*;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.marking_layer.EquineEyeColorOverlay;
+import com.dragn0007.dragnlivestock.entities.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
@@ -1005,6 +1008,7 @@ public class SpawnReplacer {
 
                     oMooshroom.setGender(random.nextInt(OCow.Gender.values().length));
                     oMooshroom.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                    oMooshroom.setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oMooshroom.setColorByBreed();

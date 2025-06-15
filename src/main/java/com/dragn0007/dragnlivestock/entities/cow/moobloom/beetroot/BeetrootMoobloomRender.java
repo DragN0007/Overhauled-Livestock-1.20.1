@@ -12,7 +12,6 @@ public class BeetrootMoobloomRender extends GeoEntityRenderer<BeetrootMoobloom> 
     public BeetrootMoobloomRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new BeetrootMoobloomModel());
         this.addRenderLayer(new BeetrootMoobloomMarkingLayer(this));
-        this.addRenderLayer(new BeetrootMoobloomHornLayer(this));
         this.addRenderLayer(new BeetrootMoobloomBrandTagLayer(this));
     }
 
@@ -35,7 +34,7 @@ public class BeetrootMoobloomRender extends GeoEntityRenderer<BeetrootMoobloom> 
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
             model.getBone("plant2").ifPresent(b -> b.setHidden(true));
         } else {

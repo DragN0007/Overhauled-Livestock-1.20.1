@@ -6,9 +6,7 @@ import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -345,13 +343,28 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemStack = player.getItemInHand(hand);
 		Item item = itemStack.getItem();
 
-		//todo
-		if(this.isFood(itemStack)) {
-			return this.fedFood(player, itemStack);
+		if (this.isFood(itemStack)) {
+			int i = this.getAge();
+			if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
+				this.usePlayerItem(player, hand, itemStack);
+				this.setInLove(player);
+				return InteractionResult.SUCCESS;
+			}
+
+			if (this.isBaby()) {
+				this.usePlayerItem(player, hand, itemStack);
+				this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+
+			if (this.level().isClientSide) {
+				return InteractionResult.CONSUME;
+			}
 		}
 
 		if (item instanceof BrandTagItem) {
@@ -437,9 +450,9 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 				setMilked(true);
 			}
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
-		} else {
-			return super.mobInteract(player, hand);
 		}
+
+		return super.mobInteract(player, hand);
 	}
 
 	public SoundEvent getAmbientSound() {

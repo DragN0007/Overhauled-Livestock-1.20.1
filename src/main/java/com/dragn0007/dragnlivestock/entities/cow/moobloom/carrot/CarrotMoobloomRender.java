@@ -12,7 +12,6 @@ public class CarrotMoobloomRender extends GeoEntityRenderer<CarrotMoobloom> {
     public CarrotMoobloomRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new CarrotMoobloomModel());
         this.addRenderLayer(new CarrotMoobloomMarkingLayer(this));
-        this.addRenderLayer(new CarrotMoobloomHornLayer(this));
         this.addRenderLayer(new CarrotMoobloomBrandTagLayer(this));
     }
 
@@ -35,7 +34,7 @@ public class CarrotMoobloomRender extends GeoEntityRenderer<CarrotMoobloom> {
             model.getBone("Horns3").ifPresent(b -> b.setHidden(false));
         }
 
-        if(entity.isPlantsSheared()) {
+        if(entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
             model.getBone("plant2").ifPresent(b -> b.setHidden(true));
         } else {

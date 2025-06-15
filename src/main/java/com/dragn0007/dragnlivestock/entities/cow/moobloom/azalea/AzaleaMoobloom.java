@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea;
 
-import com.dragn0007.dragnlivestock.entities.cow.BovineMarkingOverlay;
-import com.dragn0007.dragnlivestock.entities.cow.OCowMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import net.minecraft.nbt.CompoundTag;
@@ -61,14 +60,14 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
             }
         }
 
-        if (itemStack.is(Items.SHEARS) && (!isPlantsSheared() || regrowPlantsTickCounter >= 4800) && !player.isShiftKeyDown()) {
-            this.setPlantsSheared(true);
+        if (itemStack.is(Items.SHEARS) && (!isSheared() || regrowPlantsCounter >= 4800) && !player.isShiftKeyDown()) {
+            this.setSheared(true);
             this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             this.spawnAtLocation(Items.MOSS_BLOCK, 1);
             this.spawnAtLocation(Items.MOSS_BLOCK, 1);
             this.spawnAtLocation(Items.AZALEA, 1);
             this.spawnAtLocation(Items.FLOWERING_AZALEA, 1);
-            regrowPlantsTickCounter = 0;
+            regrowPlantsCounter = 0;
 
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
@@ -87,7 +86,6 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
 
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
 
     public int getVariant() {
         return this.entityData.get(VARIANT);
@@ -95,18 +93,12 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
     public int getOverlayVariant() {
         return this.entityData.get(OVERLAY);
     }
-    public int getHornVariant() {
-        return this.entityData.get(HORNS);
-    }
 
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
     }
     public void setOverlayVariant(int overlayVariant) {
         this.entityData.set(OVERLAY, overlayVariant);
-    }
-    public void setHornVariant(int hornVariant) {
-        this.entityData.set(HORNS, hornVariant);
     }
 
     @Override
@@ -120,20 +112,13 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
         if (tag.contains("Overlay")) {
             setOverlayVariant(tag.getInt("Overlay"));
         }
-
-        if (tag.contains("Horns")) {
-            setHornVariant(tag.getInt("Horns"));
-        }
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("Variant", getVariant());
-
         tag.putInt("Overlay", getOverlayVariant());
-
-        tag.putInt("Horns", getHornVariant());
     }
 
     @Override
@@ -145,7 +130,6 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
         Random random = new Random();
         setVariant(random.nextInt(AzaleaMoobloomModel.Variant.values().length));
         setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
-        
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
@@ -155,7 +139,6 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
         super.defineSynchedData();
         this.entityData.define(VARIANT, 0);
         this.entityData.define(OVERLAY, 0);
-        this.entityData.define(HORNS, 0);
     }
 
 }
