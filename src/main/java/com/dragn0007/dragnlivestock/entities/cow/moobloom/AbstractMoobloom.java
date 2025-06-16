@@ -1,13 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
-import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomModel;
-import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomModel;
+import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomModel;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import com.sun.jna.platform.win32.ShellAPI;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -36,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class AbstractMoobloom extends OCow implements GeoEntity {
     public AbstractMoobloom(EntityType<? extends OCow> type, Level level) {
@@ -229,7 +224,6 @@ public class AbstractMoobloom extends OCow implements GeoEntity {
         super.defineSynchedData();
         this.entityData.define(VARIANT, 0);
         this.entityData.define(OVERLAY, 0);
-        this.entityData.define(GENDER, 0);
         this.entityData.define(HORN_TYPE, 0);
         this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
         this.entityData.define(TAGGED, false);

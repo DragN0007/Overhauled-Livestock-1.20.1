@@ -2,9 +2,9 @@ package com.dragn0007.dragnlivestock.entities.cow.mooshroom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.cow.CowBreed;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -256,7 +256,6 @@ public class OMooshroom extends OCow implements GeoEntity {
         Random random = new Random();
         setBreed(random.nextInt(CowBreed.Breed.values().length));
         setGender(random.nextInt(Gender.values().length));
-        setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
 
         if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
             this.setColorByBreed();
@@ -267,6 +266,8 @@ public class OMooshroom extends OCow implements GeoEntity {
             this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
             this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
         }
+
+        setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }

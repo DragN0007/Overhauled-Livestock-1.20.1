@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin;
 
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.Overlay;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,7 +18,7 @@ public class PumpkinMoobloomMarkingLayer extends GeoRenderLayer<PumpkinMoobloom>
     @Override
     public void render(PoseStack poseStack, PumpkinMoobloom animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
-        Overlay overlay = Overlay.overlayFromOrdinal(animatable.getOverlayVariant());
+        BovineMarkingOverlay overlay = BovineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
 
         RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
 

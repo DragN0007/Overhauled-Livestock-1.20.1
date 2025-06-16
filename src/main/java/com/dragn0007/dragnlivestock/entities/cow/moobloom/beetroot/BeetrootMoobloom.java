@@ -1,7 +1,8 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot;
 
-import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
+import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
@@ -64,26 +65,37 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
             }
         }
 
-        if (itemStack.is(Items.SHEARS) && (!isSheared() || regrowPlantsCounter >= 4800) && !player.isShiftKeyDown()) {
+        if (itemStack.is(Items.SHEARS) && (!isSheared() || regrowPlantsCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && !player.isShiftKeyDown()) {
             this.setSheared(true);
             this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            this.spawnAtLocation(Items.BEETROOT);
-            this.spawnAtLocation(Items.BEETROOT);
-            this.spawnAtLocation(Items.BEETROOT);
-            this.spawnAtLocation(Items.BEETROOT);
-            this.spawnAtLocation(Items.BEETROOT);
-            this.spawnAtLocation(Items.BEETROOT_SEEDS);
+            if (random.nextDouble() < 0.40) {
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT_SEEDS);
+            } else {
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT);
+                this.spawnAtLocation(Items.BEETROOT_SEEDS);
+            }
             regrowPlantsCounter = 0;
 
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(Items.BOWL) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get())) {
-            player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
-            ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.BEETROOT_SOUP.getDefaultInstance());
-            player.setItemInHand(hand, itemstack1);
-            replenishMilkCounter = 0;
-            setMilked(true);
+        if (itemStack.is(Items.BOWL) && !this.isBaby()) {
+            if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed() &&
+                    (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+                            (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+                player.playSound(SoundEvents.MOOSHROOM_MILK, 1.0F, 1.0F);
+                ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.BEETROOT_SOUP.getDefaultInstance());
+                player.setItemInHand(hand, itemstack1);
+                replenishMilkCounter = 0;
+                setMilked(true);
+            }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
@@ -133,32 +145,31 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
     }
 
     // Generates the base texture
+    public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> BELLED = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.BOOLEAN);
+
+    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
     public ResourceLocation getTextureLocation() {
         return BeetrootMoobloomModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
     }
-
-    public ResourceLocation getOverlayLocation() {
-        return BovineMarkingOverlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-    }
-
-    
-
-    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> HORNS = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.INT);
-
     public int getVariant() {
         return this.entityData.get(VARIANT);
     }
-    public int getOverlayVariant() {
-        return this.entityData.get(OVERLAY);
-    }
-
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
     }
-    public void setOverlayVariant(int overlayVariant) {
-        this.entityData.set(OVERLAY, overlayVariant);
+
+    public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(BeetrootMoobloom.class, EntityDataSerializers.BOOLEAN);
+    public boolean isSheared() {
+        return this.entityData.get(SHEARED);
+    }
+    public void setSheared(boolean sheared) {
+        this.entityData.set(SHEARED, sheared);
     }
 
     @Override
@@ -173,8 +184,42 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
             setOverlayVariant(tag.getInt("Overlay"));
         }
 
-        if (tag.contains("Horns")) {
-            setHornVariant(tag.getInt("Horns"));
+        if (tag.contains("HornType")) {
+            setHornVariant(tag.getInt("HornType"));
+        }
+
+        if (tag.contains("Gender")) {
+            this.setGender(tag.getInt("Gender"));
+        }
+
+        if (tag.contains("MilkedTime")) {
+            this.replenishMilkCounter = tag.getInt("MilkedTime");
+        }
+
+        if (tag.contains("Milked")) {
+            setMilked(tag.getBoolean("Milked"));
+        }
+
+        if(tag.contains("Tagged")) {
+            this.setTagged(tag.getBoolean("Tagged"));
+        }
+
+        this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
+
+        if(tag.contains("Harnessed")) {
+            this.setHarnessed(tag.getBoolean("Harnessed"));
+        }
+
+        if(tag.contains("Belled")) {
+            this.setBelled(tag.getBoolean("Belled"));
+        }
+
+        if (tag.contains("Sheared")) {
+            this.setSheared(tag.getBoolean("Sheared"));
+        }
+
+        if (tag.contains("ShearedTime")) {
+            this.regrowPlantsCounter = tag.getInt("ShearedTime");
         }
     }
 
@@ -182,10 +227,17 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("Variant", getVariant());
-
         tag.putInt("Overlay", getOverlayVariant());
-
-        tag.putInt("Horns", getHornVariant());
+        tag.putInt("HornType", getHornVariant());
+        tag.putInt("Gender", this.getGender());
+        tag.putBoolean("Milked", this.wasMilked());
+        tag.putInt("MilkedTime", this.replenishMilkCounter);
+        tag.putBoolean("Tagged", this.isTagged());
+        tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
+        tag.putBoolean("Harnessed", this.isHarnessed());
+        tag.putBoolean("Belled", this.isBelled());
+        tag.putBoolean("Sheared", this.isSheared());
+        tag.putInt("ShearedTime", this.regrowPlantsCounter);
     }
 
     @Override
@@ -197,7 +249,8 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
         Random random = new Random();
         setVariant(random.nextInt(BeetrootMoobloomModel.Variant.values().length));
         setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
-        
+        setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
+        setGender(0);
 
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
@@ -207,6 +260,13 @@ public class BeetrootMoobloom extends AbstractMoobloom implements GeoEntity {
         super.defineSynchedData();
         this.entityData.define(VARIANT, 0);
         this.entityData.define(OVERLAY, 0);
+        this.entityData.define(HORN_TYPE, 0);
+        this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+        this.entityData.define(TAGGED, false);
+        this.entityData.define(MILKED, false);
+        this.entityData.define(HARNESSED, false);
+        this.entityData.define(BELLED, false);
+        this.entityData.define(SHEARED, false);
     }
 
 }
