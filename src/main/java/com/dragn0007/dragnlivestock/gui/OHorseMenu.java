@@ -61,7 +61,7 @@ public class OHorseMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, oHorseSlots++, 8, 54) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS) || itemStack.is(LOTags.Items.CAPARISONS)) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
                 return false;

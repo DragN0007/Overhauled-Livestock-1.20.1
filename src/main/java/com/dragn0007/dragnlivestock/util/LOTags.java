@@ -79,6 +79,7 @@ public class LOTags {
         public static final TagKey<Item> MODERN_BLANKETS = tag("modern_blankets");
         public static final TagKey<Item> RACING_BLANKETS = tag("racing_blankets");
         public static final TagKey<Item> WESTERN_BLANKETS = tag("western_blankets");
+        public static final TagKey<Item> CAPARISONS = tag("caparisons");
 
         public static TagKey<Item> forgeTag (String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
