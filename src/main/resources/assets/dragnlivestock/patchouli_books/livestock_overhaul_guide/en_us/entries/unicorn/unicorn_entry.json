@@ -1,7 +1,7 @@
 {
   "name": "Unicorn",
   "icon": "dragnlivestock:unicorn_spawn_egg",
-  "category": "dragnlivestock:unicorn_category",
+  "category": "dragnlivestock:animals_category",
   "pages": [
     {
       "type": "patchouli:text",

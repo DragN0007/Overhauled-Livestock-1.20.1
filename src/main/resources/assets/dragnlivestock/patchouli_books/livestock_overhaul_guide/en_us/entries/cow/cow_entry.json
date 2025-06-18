@@ -1,7 +1,7 @@
 {
   "name": "O-Cow",
   "icon": "dragnlivestock:o_cow_spawn_egg",
-  "category": "dragnlivestock:cow_category",
+  "category": "dragnlivestock:animals_category",
   "pages": [
     {
       "type": "patchouli:text",
@@ -10,6 +10,14 @@
     {
       "type": "patchouli:text",
       "text": "The milking cooldown on normal O-Cows is 40 minutes, whilst dairy breed cooldowns are 10 minutes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O-Cows come in multiple different breeds. This includes: $(br2)-(0) Angus $(br)-(1) Longhorn $(br)-(2) Brahman $(br)-(3) Mini $(br)-(4) Watusi $(br)-(5) Corriente $(br)-(6) Holstein $(br)-(7) Jersey $(br)-(8) Hereford $(br)-(9) Highland"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Angus, Brahman, Watusi and Hereford cattle are meat cows, which means they generally drop more meat and are bigger. Holstein and Jersey, on the other hand, are dairy cattle, so they can give milk much faster than other cows."
     }
   ]
 }

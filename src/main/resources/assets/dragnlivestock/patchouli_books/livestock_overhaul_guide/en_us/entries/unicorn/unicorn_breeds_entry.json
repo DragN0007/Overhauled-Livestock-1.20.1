@@ -1,7 +1,7 @@
 {
   "name": "Unicorn Species",
   "icon": "dragnlivestock:unicorn_breeds",
-  "category": "dragnlivestock:unicorn_category",
+  "category": "dragnlivestock:animals_category",
   "pages": [
     {
       "type": "patchouli:text",

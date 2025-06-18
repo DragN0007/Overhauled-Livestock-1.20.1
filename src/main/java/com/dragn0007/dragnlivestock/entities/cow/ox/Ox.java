@@ -73,6 +73,8 @@ public class Ox extends AbstractOMount implements GeoEntity, Taggable {
 		return LOOT_TABLE;
 	}
 
+	//todo
+
 	public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.8D, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
 	@Override

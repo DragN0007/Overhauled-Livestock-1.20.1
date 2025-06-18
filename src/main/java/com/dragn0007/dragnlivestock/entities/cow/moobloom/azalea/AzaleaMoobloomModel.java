@@ -36,13 +36,7 @@ public class AzaleaMoobloomModel extends DefaultedEntityGeoModel<AzaleaMoobloom>
             head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
         }
 
-        if (animatable.getBreed() == 2) {
-            left_ear.setRotZ(-10);
-            right_ear.setRotZ(10);
-        } else {
-            left_ear.setRotZ(-5);
-            right_ear.setRotZ(5);
-        }
+        
     }
 
     public enum Variant {

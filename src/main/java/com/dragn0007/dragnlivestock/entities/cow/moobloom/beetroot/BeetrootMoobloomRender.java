@@ -19,6 +19,11 @@ public class BeetrootMoobloomRender extends GeoEntityRenderer<BeetrootMoobloom> 
     @Override
     public void preRender(PoseStack poseStack, BeetrootMoobloom entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
+        model.getBone("hump").ifPresent(b -> b.setHidden(true));
+        model.getBone("body_fluff").ifPresent(b -> b.setHidden(true));
+        model.getBone("neck_fluff").ifPresent(b -> b.setHidden(true));
+        model.getBone("head_fluff").ifPresent(b -> b.setHidden(true));
+
         if (entity.isSheared()) {
             model.getBone("plant").ifPresent(b -> b.setHidden(true));
         } else {
@@ -39,12 +44,6 @@ public class BeetrootMoobloomRender extends GeoEntityRenderer<BeetrootMoobloom> 
             model.getBone("horns_10").ifPresent(b -> b.setHidden(true));
             model.getBone("horn_connection").ifPresent(b -> b.setHidden(true));
         } else {
-            model.getBone("hump").ifPresent(b -> b.setHidden(true));
-            model.getBone("body_fluff").ifPresent(b -> b.setHidden(true));
-            model.getBone("neck_fluff").ifPresent(b -> b.setHidden(true));
-            model.getBone("head_fluff").ifPresent(b -> b.setHidden(true));
-            model.getBone("wheat").ifPresent(b -> b.setHidden(true));
-            model.getBone("melon").ifPresent(b -> b.setHidden(true));
 
             model.getBone("utters").ifPresent(b -> b.setScaleY(1.5F));
             model.getBone("utters").ifPresent(b -> b.setScaleX(1.5F));
