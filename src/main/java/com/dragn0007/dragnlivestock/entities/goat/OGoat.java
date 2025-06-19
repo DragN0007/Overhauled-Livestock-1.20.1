@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.goat;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OGoatFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
@@ -576,29 +577,37 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		OGoat goat = (OGoat) ageableMob;
-		if (ageableMob instanceof OGoat) {
-			OGoat oGoat = (OGoat) ageableMob;
-			goat = EntityTypes.O_GOAT_ENTITY.get().create(serverLevel);
+		OGoat kid;
+		OGoat partner = (OGoat) ageableMob;
+		kid = EntityTypes.O_GOAT_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
-			int variant;
-			if (i < 4) {
-				variant = this.getVariant();
-			} else if (i < 8) {
-				variant = oGoat.getVariant();
-			} else {
-				variant = this.random.nextInt(OGoatModel.Variant.values().length);
-			}
-
-			int gender;
-			gender = this.random.nextInt(Gender.values().length);
-
-			goat.setVariant(variant);
-			goat.setGender(gender);
+		int variantChance = this.random.nextInt(14);
+		int variant;
+		if (variantChance < 6) {
+			variant = this.getVariant();
+		} else if (variantChance < 12) {
+			variant = partner.getVariant();
+		} else {
+			variant = this.random.nextInt(OSheepModel.Variant.values().length);
 		}
+		kid.setVariant(variant);
 
-		return goat;
+		int overlayChance = this.random.nextInt(10);
+		int overlay;
+		if (overlayChance < 4) {
+			overlay = this.getOverlayVariant();
+		} else if (overlayChance < 8) {
+			overlay = partner.getOverlayVariant();
+		} else {
+			overlay = this.random.nextInt(OSheepMarkingLayer.Overlay.values().length);
+		}
+		kid.setOverlayVariant(overlay);
+
+		int gender;
+		gender = this.random.nextInt(OSheep.Gender.values().length);
+		kid.setGender(gender);
+
+		return kid;
 	}
 
 	@Override

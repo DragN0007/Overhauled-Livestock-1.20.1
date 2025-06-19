@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
+import com.dragn0007.dragnlivestock.entities.chicken.ChickenBreed;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
@@ -53,6 +54,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorseDecompLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
+import com.dragn0007.dragnlivestock.entities.llama.OLlamaMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
 import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.marking_layer.EquineEyeColorOverlay;
@@ -259,11 +261,15 @@ public class SpawnReplacer {
                     oDonkey.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oDonkey.generateRandomSpeed());
                     oDonkey.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oDonkey.generateRandomJumpStrength());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(ODonkeyModel.Variant.values().length);
-                    oDonkey.setVariant(randomVariant);
+                    oDonkey.setGender(random.nextInt(AbstractOMount.Gender.values().length));
 
-                    int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                    oDonkey.setGender(randomGender);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oDonkey.setColor();
+                        oDonkey.setMarking();
+                    } else {
+                        oDonkey.setVariant(random.nextInt(ODonkeyModel.Variant.values().length));
+                        oDonkey.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         vanillaDonkey.remove(Entity.RemovalReason.DISCARDED);
@@ -300,11 +306,17 @@ public class SpawnReplacer {
                     oMule.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oMule.generateRandomSpeed());
                     oMule.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oMule.generateRandomJumpStrength());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OMuleModel.Variant.values().length);
-                    oMule.setVariant(randomVariant);
+                    oMule.setGender(random.nextInt(AbstractOMount.Gender.values().length));
 
-                    int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                    oMule.setGender(randomGender);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oMule.setColor();
+                        oMule.setMarking();
+                        oMule.setFeatheringByBreed();
+                    } else {
+                        oMule.setVariant(random.nextInt(OMuleModel.Variant.values().length));
+                        oMule.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+                        oMule.setFeathering(random.nextInt(OHorse.Feathering.values().length));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         vanillaMule.remove(Entity.RemovalReason.DISCARDED);
@@ -339,11 +351,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(WheatMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(WheatMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -363,11 +372,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(SweetBerryMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(SweetBerryMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -387,11 +393,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(PumpkinMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(PumpkinMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -411,11 +414,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(PotatoMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(PotatoMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -435,11 +435,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(MelonMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(MelonMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -459,11 +456,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(GlowBerryMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(GlowBerryMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -483,11 +477,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(FloweringMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(FloweringMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -507,11 +498,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(CarrotMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(CarrotMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -531,11 +519,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(BeetrootMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(BeetrootMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -555,11 +540,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(AzaleaMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(AzaleaMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -579,11 +561,8 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 event.getLevel().addFreshEntity(moobloom);
 
-                                int randomVariant = event.getLevel().getRandom().nextInt(PeachMoobloomModel.Variant.values().length);
-                                moobloom.setVariant(randomVariant);
-
-                                int randomOverlayVariant = event.getLevel().getRandom().nextInt(BovineMarkingOverlay.values().length);
-                                moobloom.setOverlayVariant(randomOverlayVariant);
+                                moobloom.setVariant(random.nextInt(PeachMoobloomModel.Variant.values().length));
+                                moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                                 if (event.getLevel().isClientSide) {
                                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
@@ -665,11 +644,8 @@ public class SpawnReplacer {
                     oChicken.setCustomName(vanillachicken.getCustomName());
                     oChicken.setAge(vanillachicken.getAge());
 
-                    int randomBreed = event.getLevel().getRandom().nextInt(5);
-                    oChicken.setBreed(randomBreed);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(OChicken.Gender.values().length);
-                    oChicken.setGender(randomGender);
+                    oChicken.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
+                    oChicken.setGender(random.nextInt(OChicken.Gender.values().length));
 
                     if (oChicken.isFemale()) {
                         int randomVariant = 6 + event.getLevel().getRandom().nextInt(9);
@@ -736,8 +712,7 @@ public class SpawnReplacer {
 
                     oSalmon.setCustomName(vanillasalmon.getCustomName());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OSalmonModel.Variant.values().length);
-                    oSalmon.setVariant(randomVariant);
+                    oSalmon.setVariant(random.nextInt(OSalmonModel.Variant.values().length));
 
                     if (event.getLevel().isClientSide) {
                         vanillasalmon.remove(Entity.RemovalReason.DISCARDED);
@@ -791,12 +766,10 @@ public class SpawnReplacer {
                 oBee.setCustomName(bee.getCustomName());
                 oBee.deserializeNBT(bee.serializeNBT());
 
+                oBee.setVariant(random.nextInt(OBeeModel.Variant.values().length));
+
                 bee.remove(Entity.RemovalReason.DISCARDED);
                 event.getLevel().addFreshEntity(oBee);
-
-                int randomSpecies = event.getLevel().getRandom().nextInt(OBeeModel.Variant.values().length);
-                oBee.setVariant(randomSpecies);
-
                 // we need to handle beehive data and replace it with oBee data
                 if(oBee.getHivePos() != null) {
                     BlockEntity blockEntity = event.getLevel().getBlockEntity(oBee.getHivePos());
@@ -935,14 +908,11 @@ public class SpawnReplacer {
                     oLlama.setOwnerUUID(vanillallama.getOwnerUUID());
                     oLlama.setAge(vanillallama.getAge());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OLlamaModel.Variant.values().length);
-                    oLlama.setVariant(randomVariant);
+                    oLlama.setWooly(random.nextInt(OLlama.Wooly.values().length));
+                    oLlama.setVariant(random.nextInt(OLlamaModel.Variant.values().length));
+                    oLlama.setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
 
-                    int randomOverlay = event.getLevel().getRandom().nextInt(OPigMarkingLayer.Overlay.values().length);
-                    oLlama.setOverlayVariant(randomOverlay);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(OLlama.Gender.values().length);
-                    oLlama.setGender(randomGender);
+                    oLlama.setGender(random.nextInt(OPig.Gender.values().length));
 
                     if (event.getLevel().isClientSide) {
                         vanillallama.remove(Entity.RemovalReason.DISCARDED);
@@ -974,14 +944,15 @@ public class SpawnReplacer {
                     oPig.setCustomName(vanillapig.getCustomName());
                     oPig.setAge(vanillapig.getAge());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OPigModel.Variant.values().length);
-                    oPig.setVariant(randomVariant);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oPig.setColorByBreed();
+                        oPig.setMarkingByBreed();
+                    } else {
+                        oPig.setVariant(random.nextInt(OPigModel.Variant.values().length));
+                        oPig.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+                    }
 
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OPigMarkingLayer.Overlay.values().length);
-                    oPig.setOverlayVariant(randomOverlayVariant);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(OPig.Gender.values().length);
-                    oPig.setGender(randomGender);
+                    oPig.setGender(random.nextInt(OPig.Gender.values().length));
 
                     if (event.getLevel().isClientSide) {
                         vanillapig.remove(Entity.RemovalReason.DISCARDED);
@@ -1059,17 +1030,10 @@ public class SpawnReplacer {
                     oCamel.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oCamel.generateRandomMaxHealth());
                     oCamel.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oCamel.generateRandomSpeed());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OCamelModel.Variant.values().length);
-                    oCamel.setVariant(randomVariant);
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OCamelMarkingLayer.Overlay.values().length);
-                    oCamel.setOverlayVariant(randomOverlayVariant);
-
-                    int randomGender = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                    oCamel.setGender(randomGender);
-
-                    int randomBreed = event.getLevel().getRandom().nextInt(CamelBreed.Breed.values().length);
-                    oCamel.setBreed(randomBreed);
+                    oCamel.setVariant(random.nextInt(OCamelModel.Variant.values().length));
+                    oCamel.setOverlayVariant(random.nextInt(OCamelMarkingLayer.Overlay.values().length));
+                    oCamel.setBreed(random.nextInt(CamelBreed.Breed.values().length));
+                    oCamel.setGender(random.nextInt(AbstractOMount.Gender.values().length));
 
                     if (event.getLevel().isClientSide) {
                         vanillacamel.remove(Entity.RemovalReason.DISCARDED);
@@ -1101,11 +1065,10 @@ public class SpawnReplacer {
                     oGoat.setCustomName(vanillagoat.getCustomName());
                     oGoat.setAge(vanillagoat.getAge());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OGoatModel.Variant.values().length);
-                    oGoat.setVariant(randomVariant);
+                    oGoat.setGender(random.nextInt(OGoat.Gender.values().length));
 
-                    int randomHorns = event.getLevel().getRandom().nextInt(AbstractOMount.Gender.values().length);
-                    oGoat.setGender(randomHorns);
+                    oGoat.setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
+                    oGoat.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 
                     if (event.getLevel().isClientSide) {
                         vanillagoat.remove(Entity.RemovalReason.DISCARDED);
@@ -1278,14 +1241,9 @@ public class SpawnReplacer {
                     oFrog.setCustomName(frog.getCustomName());
                     oFrog.setAge(frog.getAge());
 
-                    int randomVariant = event.getLevel().getRandom().nextInt(OFrogModel.Variant.values().length);
-                    oFrog.setVariant(randomVariant);
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OFrogMarkingLayer.Overlay.values().length);
-                    oFrog.setOverlayVariant(randomOverlayVariant);
-
-                    int randomEyeVariant = event.getLevel().getRandom().nextInt(OFrogEyeLayer.Overlay.values().length);
-                    oFrog.setEyesVariant(randomEyeVariant);
+                    oFrog.setVariant(random.nextInt(OFrogModel.Variant.values().length));
+                    oFrog.setOverlayVariant(random.nextInt(OFrogMarkingLayer.Overlay.values().length));
+                    oFrog.setEyesVariant(random.nextInt(OFrogEyeLayer.Overlay.values().length));
 
                     if (event.getLevel().isClientSide) {
                         frog.remove(Entity.RemovalReason.DISCARDED);
