@@ -82,6 +82,8 @@ public class LOItemGroup {
 //                        output.accept(LOBlocks.SPRUCE_RABBIT_HUTCH.get());
 //                        output.accept(LOBlocks.WARPED_RABBIT_HUTCH.get());
 
+                        output.accept(LOItems.LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE.get());
+
                         output.accept(Items.LEATHER_HORSE_ARMOR);
                         output.accept(LOItems.CHAINMAIL_HORSE_ARMOR.get());
                         output.accept(LOItems.COPPER_HORSE_ARMOR.get());

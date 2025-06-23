@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "item": "minecraft:paper"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "ACA",
+    "CBC"
+  ],
+  "result": {
+    "count": 3,
+    "item": "dragnlivestock:light_horse_armor_smithing_template"
+  },
+  "show_notification": true
+}

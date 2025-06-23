@@ -3496,10 +3496,10 @@
 				},
 				"neck": {
 					"rotation": {
-						"vector": ["40+Math.sin(query.anim_time * 1040)*-3", 0, 0]
+						"vector": ["42.5+Math.sin(query.anim_time * 1040)*-3", 0, 0]
 					},
 					"position": {
-						"vector": [0, 2, "-3+Math.sin(query.anim_time * 1040)*1"]
+						"vector": [0, 0, "-6+Math.sin(query.anim_time * 1040)*1"]
 					}
 				},
 				"hair_neck": {
@@ -3515,7 +3515,7 @@
 				},
 				"head": {
 					"rotation": {
-						"vector": ["-37.5+Math.cos(query.anim_time * 1040)*-5+2", 0, 0]
+						"vector": ["-39.9873+Math.cos(query.anim_time * 1040)*-5+2", 0.12351, -0.62468]
 					}
 				},
 				"bone3": {

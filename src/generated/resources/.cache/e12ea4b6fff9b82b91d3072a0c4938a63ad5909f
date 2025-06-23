@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-15T16:26:16.154787	Item Models: dragnlivestock
+// 1.20.1	2025-06-23T16:33:57.5170591	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 8110dbd2ae71c3e53b1df0eea1d1fa7db2c7aa50 assets/dragnlivestock/models/item/ayam_cemani_egg.json
 60a0aeb7386f8691cbe20488e207b0fb5497c437 assets/dragnlivestock/models/item/beef_jerky.json
@@ -250,6 +250,7 @@ c0ba917b98501a4c03a2eda96e0f90f34b296ce8 assets/dragnlivestock/models/item/light
 9a0f347729af9fb34be55c68f8558182b5258227 assets/dragnlivestock/models/item/light_grey_western_blanket.json
 df39a9f18f98c90327bab0178448fdeff482e0a7 assets/dragnlivestock/models/item/light_grey_wool_dye.json
 8c5a4e5ad8b5fd380f38355fa3cdb2a517812e85 assets/dragnlivestock/models/item/light_grey_wool_staple.json
+32852d1dc2e897092e3b6f749fbb3956b1618452 assets/dragnlivestock/models/item/light_horse_armor_smithing_template.json
 b14208cec6c5ca09858269e4af73fe331ff9a25c assets/dragnlivestock/models/item/light_saddle.json
 6c82cb7b4b494bd397cc69c76314890d3046e50f assets/dragnlivestock/models/item/lime_brand_tag.json
 69d337793d0d4e8d362cd1c78f3dc9f1b4428eec assets/dragnlivestock/models/item/lime_caparison_cape.json

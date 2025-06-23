@@ -23,6 +23,17 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE.get(), 3)
+                .define('A', Items.LEATHER)
+                .define('B', Items.PAPER)
+                .define('C', Items.IRON_INGOT)
+                .pattern("BAB")
+                .pattern("ACA")
+                .pattern("CBC")
+                .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.PAPER).build()))
+                .save(pFinishedRecipeConsumer);
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.BLACK_WOOL, 8)
                 .define('A', LOItems.BLACK_WOOL_DYE.get())
@@ -1205,6 +1216,39 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .define('A', Items.LEATHER)
                 .define('B', ItemTags.WOOL_CARPETS)
                 .define('C', Items.DIAMOND)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.EMERALD_HORSE_ARMOR.get())
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.EMERALD)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.QUARTZ_HORSE_ARMOR.get())
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.QUARTZ)
+                .pattern("  C")
+                .pattern("CCC")
+                .pattern("ABA")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.COPPER_HORSE_ARMOR.get())
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL_CARPETS)
+                .define('C', Items.COPPER_INGOT)
                 .pattern("  C")
                 .pattern("CCC")
                 .pattern("ABA")

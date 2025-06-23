@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:quartz"
+  },
+  "base": {
+    "item": "dragnlivestock:quartz_horse_armor"
+  },
+  "result": {
+    "item": "dragnlivestock:minimal_quartz_horse_armor"
+  },
+  "template": {
+    "item": "dragnlivestock:light_horse_armor_smithing_template"
+  }
+}

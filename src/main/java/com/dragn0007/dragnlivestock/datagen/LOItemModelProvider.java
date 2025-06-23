@@ -32,6 +32,7 @@ public class LOItemModelProvider extends ItemModelProvider {
 
         simpleItem(LOItems.UNICORN_SPAWN_EGG);
 
+        simpleItem(LOItems.LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE);
 
         simpleItem(LOItems.CHAINMAIL_HORSE_ARMOR);
         simpleItem(LOItems.COPPER_HORSE_ARMOR);

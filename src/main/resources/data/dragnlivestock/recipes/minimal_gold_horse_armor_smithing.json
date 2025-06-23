@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:gold_ingot"
+  },
+  "base": {
+    "item": "minecraft:golden_horse_armor"
+  },
+  "result": {
+    "item": "dragnlivestock:minimal_golden_horse_armor"
+  },
+  "template": {
+    "item": "dragnlivestock:light_horse_armor_smithing_template"
+  }
+}

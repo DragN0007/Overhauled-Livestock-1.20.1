@@ -47,7 +47,7 @@ public class LivestockOverhaul
         MinecraftForge.EVENT_BUS.register(this);
 
         System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
-        System.out.println("[DragN's Livestock Overhaul!] Issues Page: https://github.com/DragN0007/Overhauled-Livestock/issues");
+        System.out.println("[DragN's Livestock Overhaul!] Do not remove this mod without running the Failsafe Config!");
     }
 
     private void setup(final FMLCommonSetupEvent event) {

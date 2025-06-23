@@ -120,6 +120,9 @@ public class LOItems {
             () -> new HorseShoeItem(2, (new Item.Properties()).stacksTo(1)));
 
 
+
+    public static final RegistryObject<Item> LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE = ITEMS.register("light_horse_armor_smithing_template",
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CHAINMAIL_HORSE_ARMOR = ITEMS.register("chainmail_horse_armor",
             () -> new HorseArmorItem(4, "chainmail", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> COPPER_HORSE_ARMOR = ITEMS.register("copper_horse_armor",
