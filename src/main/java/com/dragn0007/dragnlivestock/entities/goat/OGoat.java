@@ -3,7 +3,13 @@ package com.dragn0007.dragnlivestock.entities.goat;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OGoatFollowCaravanGoal;
-import com.dragn0007.dragnlivestock.entities.sheep.*;
+import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.marking_layer.EquineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
@@ -537,9 +543,15 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
-		this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
+
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColor();
+			this.setMarking();
+		} else {
+			this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+		}
 
 		RandomSource randomsource = serverLevelAccessor.getRandom();
 		this.setScreamingGoat(randomsource.nextDouble() < 0.02D);
@@ -608,6 +620,30 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		kid.setGender(gender);
 
 		return kid;
+	}
+
+	public void setColor() {
+
+		if (random.nextDouble() < 0.10) {
+			this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
+		} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
+			int[] variants = {0, 5, 6, 10};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		} else if (random.nextDouble() > 0.30) {
+			this.setVariant(10);
+		}
+
+	}
+
+	public void setMarking() {
+
+		if (random.nextDouble() < 0.10) {
+			this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+		} else if (random.nextDouble() > 0.10) {
+			this.setOverlayVariant(0);
+		}
+
 	}
 
 	@Override

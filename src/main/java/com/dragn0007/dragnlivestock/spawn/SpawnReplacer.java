@@ -47,6 +47,7 @@ import com.dragn0007.dragnlivestock.entities.frog.OFrogEyeLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoatMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
@@ -1067,8 +1068,13 @@ public class SpawnReplacer {
 
                     oGoat.setGender(random.nextInt(OGoat.Gender.values().length));
 
-                    oGoat.setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
-                    oGoat.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oGoat.setColor();
+                        oGoat.setMarking();
+                    } else {
+                        oGoat.setVariant(random.nextInt(OGoatModel.Variant.values().length));
+                        oGoat.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         vanillagoat.remove(Entity.RemovalReason.DISCARDED);
