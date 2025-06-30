@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:pink_carpet"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "A  "
+  ],
+  "result": {
+    "item": "dragnlivestock:pink_racing_blanket"
+  },
+  "show_notification": true
+}

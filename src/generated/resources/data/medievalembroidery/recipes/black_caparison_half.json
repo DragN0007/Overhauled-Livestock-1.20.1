@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:black_carpet"
+          },
+          "B": {
+            "item": "minecraft:gold_nugget"
+          }
+        },
+        "pattern": [
+          "AA ",
+          "BAB"
+        ],
+        "result": {
+          "item": "medievalembroidery:black_caparison_half"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

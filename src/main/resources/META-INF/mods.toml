@@ -31,9 +31,23 @@ ordering="NONE"
 side="BOTH"
 [[dependencies.dragnlivestock]]
 modId="patchouli"
-mandatory=false
+mandatory=true
 versionRange = "[1.20.1-84,)"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.dragnlivestock]]
+modId="medievalembroidery"
+mandatory=false
+versionRange = "[0.7,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.dragnlivestock]]
+modId="deadlydinos"
+mandatory=false
+versionRange = "[0.1,)"
+ordering="NONE"
+side="BOTH"
+
 [[mixins]]
 config = "dragnlivestock.mixins.json"

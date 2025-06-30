@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.datagen;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.compat.MECompatItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
@@ -11,7 +12,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 import java.util.function.Consumer;
 
@@ -22,6 +25,3018 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_CAPE.get())
+                            .define('A', Items.BLACK_CARPET)
+                            .define('B', Items.GOLD_NUGGET)
+                            .pattern("AA")
+                            .pattern("BA")
+                            .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                            ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_HALF.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_FULL.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_CAPE.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLACK_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_HALF.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLACK_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_FULL.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLACK_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BLACK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLACK_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_CAPE.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLUE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_HALF.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLUE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_FULL.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLUE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLUE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_CAPE.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BLUE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_HALF.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BLUE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_FULL.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BLUE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BLUE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_CAPE.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLUE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_HALF.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLUE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_FULL.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLUE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BLUE_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_CAPE.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BROWN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_HALF.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BROWN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_FULL.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BROWN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BROWN_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_CAPE.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BROWN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_HALF.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BROWN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_FULL.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BROWN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_BROWN_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_CAPE.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BROWN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_HALF.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BROWN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_FULL.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BROWN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.BROWN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_BROWN_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_CAPE.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.CYAN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_HALF.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.CYAN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_FULL.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.CYAN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.CYAN_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_CAPE.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CYAN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_HALF.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CYAN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_FULL.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CYAN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_CYAN_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_CAPE.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CYAN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_HALF.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CYAN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_FULL.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CYAN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.CYAN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CYAN_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_CAPE.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREEN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_HALF.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREEN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_FULL.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREEN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREEN_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_CAPE.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREEN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_HALF.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREEN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_FULL.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREEN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREEN_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_CAPE.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREEN_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_HALF.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREEN_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_FULL.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREEN_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_SHOULDER.get())
+                                .define('A', Items.GREEN_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREEN_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_CAPE.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREY_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_HALF.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREY_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_FULL.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREY_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_SHOULDER.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.GREY_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_CAPE.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREY_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_HALF.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREY_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_FULL.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREY_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_SHOULDER.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_GREY_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_CAPE.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREY_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_HALF.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREY_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_FULL.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREY_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_SHOULDER.get())
+                                .define('A', Items.GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_GREY_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_CAPE.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_BLUE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_HALF.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_BLUE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_FULL.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_BLUE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_BLUE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_CAPE.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_HALF.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_FULL.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_CAPE.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_HALF.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_FULL.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_CAPE.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_GREY_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_HALF.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_GREY_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_FULL.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_GREY_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIGHT_GREY_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_CAPE.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_GREY_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_HALF.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_GREY_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_FULL.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_GREY_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIGHT_GREY_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_CAPE.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_GREY_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_HALF.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_GREY_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_FULL.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_GREY_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIGHT_GRAY_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIGHT_GREY_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_CAPE.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIME_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_HALF.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIME_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_FULL.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIME_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LIME_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_CAPE.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIME_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_HALF.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIME_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_FULL.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIME_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_LIME_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_CAPE.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIME_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_HALF.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIME_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_FULL.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIME_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_SHOULDER.get())
+                                .define('A', Items.LIME_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_LIME_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_CAPE.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.MAGENTA_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_HALF.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.MAGENTA_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_FULL.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.MAGENTA_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_SHOULDER.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.MAGENTA_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_CAPE.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_MAGENTA_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_HALF.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_MAGENTA_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_FULL.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_MAGENTA_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_SHOULDER.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_MAGENTA_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_CAPE.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_MAGENTA_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_HALF.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_MAGENTA_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_FULL.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_MAGENTA_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_SHOULDER.get())
+                                .define('A', Items.MAGENTA_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_MAGENTA_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_CAPE.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.ORANGE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_HALF.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.ORANGE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_FULL.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.ORANGE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.ORANGE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_CAPE.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_ORANGE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_HALF.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_ORANGE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_FULL.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_ORANGE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_ORANGE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_CAPE.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_ORANGE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_HALF.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_ORANGE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_FULL.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_ORANGE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_ORANGE_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_CAPE.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PINK_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_HALF.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PINK_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_FULL.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PINK_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_SHOULDER.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PINK_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_CAPE.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PINK_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_HALF.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PINK_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_FULL.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PINK_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_SHOULDER.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PINK_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_CAPE.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PINK_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_HALF.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PINK_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_FULL.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PINK_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_SHOULDER.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PINK_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_CAPE.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PURPLE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_HALF.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PURPLE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_FULL.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PURPLE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.PURPLE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_CAPE.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PURPLE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_HALF.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PURPLE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_FULL.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PURPLE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_PURPLE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_CAPE.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PURPLE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_HALF.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PURPLE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_FULL.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PURPLE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_PURPLE_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_CAPE.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.RED_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_HALF.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.RED_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_FULL.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.RED_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_SHOULDER.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.RED_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_CAPE.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_RED_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_HALF.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_RED_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_FULL.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_RED_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_SHOULDER.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_RED_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_CAPE.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_RED_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_HALF.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_RED_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_FULL.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_RED_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_SHOULDER.get())
+                                .define('A', Items.RED_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_RED_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_CAPE.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_HALF.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_FULL.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_CAPE.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_WHITE_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_HALF.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_WHITE_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_FULL.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_WHITE_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_SHOULDER.get())
+                                .define('A', Items.WHITE_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_WHITE_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_CAPE.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.YELLOW_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_HALF.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("AA ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.YELLOW_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_FULL.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern("  A")
+                                .pattern("AAA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.YELLOW_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_SHOULDER.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .pattern(" A")
+                                .pattern("AA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.YELLOW_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_CAPE.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_YELLOW_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_HALF.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_YELLOW_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_FULL.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_YELLOW_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_SHOULDER.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.BLACK_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_YELLOW_CAPARISON_SHOULDER.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_CAPE.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("CA")
+                                .pattern("BA")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_YELLOW_CAPARISON_CAPE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_HALF.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("AC ")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_YELLOW_CAPARISON_HALF.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_FULL.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("  C")
+                                .pattern("ACA")
+                                .pattern("BAB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_YELLOW_CAPARISON_FULL.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_SHOULDER.get())
+                                .define('A', Items.YELLOW_CARPET)
+                                .define('B', Items.GOLD_NUGGET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern(" C")
+                                .pattern("CA")
+                                .pattern("AB")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_YELLOW_CAPARISON_SHOULDER.get().toString()));
+
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_MODERN_BLANKET.get())
+                .define('A', Items.BLACK_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_RACING_BLANKET.get())
+                .define('A', Items.BLACK_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_WESTERN_BLANKET.get())
+                .define('A', Items.BLACK_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_MEDIEVAL_BLANKET.get())
+                .define('A', Items.BLACK_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_MODERN_BLANKET.get())
+                .define('A', Items.BLUE_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_RACING_BLANKET.get())
+                .define('A', Items.BLUE_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_WESTERN_BLANKET.get())
+                .define('A', Items.BLUE_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_MEDIEVAL_BLANKET.get())
+                .define('A', Items.BLUE_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_MODERN_BLANKET.get())
+                .define('A', Items.BROWN_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_RACING_BLANKET.get())
+                .define('A', Items.BROWN_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_WESTERN_BLANKET.get())
+                .define('A', Items.BROWN_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_MEDIEVAL_BLANKET.get())
+                .define('A', Items.BROWN_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_MODERN_BLANKET.get())
+                .define('A', Items.CYAN_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_RACING_BLANKET.get())
+                .define('A', Items.CYAN_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_WESTERN_BLANKET.get())
+                .define('A', Items.CYAN_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_MEDIEVAL_BLANKET.get())
+                .define('A', Items.CYAN_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_MODERN_BLANKET.get())
+                .define('A', Items.GREEN_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_RACING_BLANKET.get())
+                .define('A', Items.GREEN_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_WESTERN_BLANKET.get())
+                .define('A', Items.GREEN_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_MEDIEVAL_BLANKET.get())
+                .define('A', Items.GREEN_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_MODERN_BLANKET.get())
+                .define('A', Items.GRAY_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_RACING_BLANKET.get())
+                .define('A', Items.GRAY_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_WESTERN_BLANKET.get())
+                .define('A', Items.GRAY_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_MEDIEVAL_BLANKET.get())
+                .define('A', Items.GRAY_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_MODERN_BLANKET.get())
+                .define('A', Items.LIGHT_BLUE_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_RACING_BLANKET.get())
+                .define('A', Items.LIGHT_BLUE_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_WESTERN_BLANKET.get())
+                .define('A', Items.LIGHT_BLUE_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_MEDIEVAL_BLANKET.get())
+                .define('A', Items.LIGHT_BLUE_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_MODERN_BLANKET.get())
+                .define('A', Items.LIGHT_GRAY_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_RACING_BLANKET.get())
+                .define('A', Items.LIGHT_GRAY_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_WESTERN_BLANKET.get())
+                .define('A', Items.LIGHT_GRAY_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_MEDIEVAL_BLANKET.get())
+                .define('A', Items.LIGHT_GRAY_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_MODERN_BLANKET.get())
+                .define('A', Items.LIME_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_RACING_BLANKET.get())
+                .define('A', Items.LIME_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_WESTERN_BLANKET.get())
+                .define('A', Items.LIME_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_MEDIEVAL_BLANKET.get())
+                .define('A', Items.LIME_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_MODERN_BLANKET.get())
+                .define('A', Items.MAGENTA_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_RACING_BLANKET.get())
+                .define('A', Items.MAGENTA_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_WESTERN_BLANKET.get())
+                .define('A', Items.MAGENTA_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_MEDIEVAL_BLANKET.get())
+                .define('A', Items.MAGENTA_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_MODERN_BLANKET.get())
+                .define('A', Items.ORANGE_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_RACING_BLANKET.get())
+                .define('A', Items.ORANGE_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_WESTERN_BLANKET.get())
+                .define('A', Items.ORANGE_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_MEDIEVAL_BLANKET.get())
+                .define('A', Items.ORANGE_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_MODERN_BLANKET.get())
+                .define('A', Items.PINK_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_RACING_BLANKET.get())
+                .define('A', Items.PINK_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_WESTERN_BLANKET.get())
+                .define('A', Items.PINK_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_MEDIEVAL_BLANKET.get())
+                .define('A', Items.PINK_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_MODERN_BLANKET.get())
+                .define('A', Items.PURPLE_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_RACING_BLANKET.get())
+                .define('A', Items.PURPLE_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_WESTERN_BLANKET.get())
+                .define('A', Items.PURPLE_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_MEDIEVAL_BLANKET.get())
+                .define('A', Items.PURPLE_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_MODERN_BLANKET.get())
+                .define('A', Items.RED_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_RACING_BLANKET.get())
+                .define('A', Items.RED_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_WESTERN_BLANKET.get())
+                .define('A', Items.RED_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_MEDIEVAL_BLANKET.get())
+                .define('A', Items.RED_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_MODERN_BLANKET.get())
+                .define('A', Items.WHITE_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_RACING_BLANKET.get())
+                .define('A', Items.WHITE_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_WESTERN_BLANKET.get())
+                .define('A', Items.WHITE_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_MEDIEVAL_BLANKET.get())
+                .define('A', Items.WHITE_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_MODERN_BLANKET.get())
+                .define('A', Items.YELLOW_CARPET)
+                .pattern("AAA")
+                .pattern("AA ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_RACING_BLANKET.get())
+                .define('A', Items.YELLOW_CARPET)
+                .pattern("AAA")
+                .pattern("A  ")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_WESTERN_BLANKET.get())
+                .define('A', Items.YELLOW_CARPET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_MEDIEVAL_BLANKET.get())
+                .define('A', Items.YELLOW_CARPET)
+                .define('B', Items.GOLD_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE.get(), 3)
                 .define('A', Items.LEATHER)

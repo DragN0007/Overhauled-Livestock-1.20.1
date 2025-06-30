@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:pink_carpet"
+          },
+          "B": {
+            "item": "minecraft:gold_nugget"
+          }
+        },
+        "pattern": [
+          " A",
+          "AA",
+          "AB"
+        ],
+        "result": {
+          "item": "medievalembroidery:pink_caparison_shoulder"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

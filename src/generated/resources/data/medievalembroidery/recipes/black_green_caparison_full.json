@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:green_carpet"
+          },
+          "B": {
+            "item": "minecraft:gold_nugget"
+          },
+          "C": {
+            "item": "minecraft:black_carpet"
+          }
+        },
+        "pattern": [
+          "  C",
+          "ACA",
+          "BAB"
+        ],
+        "result": {
+          "item": "medievalembroidery:black_green_caparison_full"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

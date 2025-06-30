@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:light_blue_carpet"
+          },
+          "B": {
+            "item": "minecraft:gold_nugget"
+          },
+          "C": {
+            "item": "minecraft:black_carpet"
+          }
+        },
+        "pattern": [
+          " C",
+          "CA",
+          "AB"
+        ],
+        "result": {
+          "item": "medievalembroidery:black_light_blue_caparison_shoulder"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

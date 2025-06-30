@@ -1,7 +1,7 @@
 {
   "name": "O-Horse",
   "icon": "dragnlivestock:o_horse_spawn_egg",
-  "category": "dragnlivestock:horse_category",
+  "category": "dragnlivestock:animals_category",
   "pages": [
     {
       "type": "patchouli:text",

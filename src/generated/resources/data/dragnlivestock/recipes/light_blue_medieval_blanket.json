@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:light_blue_carpet"
+    },
+    "B": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BAB"
+  ],
+  "result": {
+    "item": "dragnlivestock:light_blue_medieval_blanket"
+  },
+  "show_notification": true
+}

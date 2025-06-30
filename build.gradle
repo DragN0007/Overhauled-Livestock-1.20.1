@@ -106,6 +106,8 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     //compat stuff
+//    implementation fg.deobf("curse.maven:medieval-embroidery-986913:6428164")
+//    implementation fg.deobf("curse.maven:dragns-deadly-dinos-reconstructed-1293235:6689976")
 
     //nbtenks made by gotenks
     implementation fg.deobf("curse.maven:nbtenks-1255827:6514118")
