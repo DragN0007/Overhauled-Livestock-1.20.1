@@ -24,7 +24,7 @@ public enum EquineMarkingOverlay {
         SPLASHED_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/splashed_paint.png")),
         SPOTTED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/spotted.png")),
         STAR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/star.png")),
-        TOBIANO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/tobiano.png")),
+        TOBAINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/tobaino.png")),
         HALF_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/half_silver.png")),
         FULL_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/full_silver.png")),
         CORONET(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/coronet.png")),
