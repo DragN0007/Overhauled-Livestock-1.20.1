@@ -74,7 +74,7 @@ public class RabbitHutchBase extends HorizontalDirectionalBlock {
         }
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_53389_) {
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_53389_) {
         p_53389_.add(FACING, OPEN);
     }
 

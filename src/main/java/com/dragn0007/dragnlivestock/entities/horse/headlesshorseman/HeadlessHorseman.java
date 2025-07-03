@@ -54,10 +54,10 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 				.add(Attributes.ATTACK_KNOCKBACK, 1F);
 	}
 
-	protected boolean isSunSensitive() {
+	public boolean isSunSensitive() {
 		return true;
 	}
-	protected boolean shouldDespawnInPeaceful() {
+	public boolean shouldDespawnInPeaceful() {
 		return true;
 	}
 	@Override
@@ -72,7 +72,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	public void openInventory(Player player) {
 	}
 	@Override
-	protected void doPlayerRide(Player p_30634_) {
+	public void doPlayerRide(Player p_30634_) {
 	}
 	@Override
 	public boolean canAddPassenger(Entity entity) {

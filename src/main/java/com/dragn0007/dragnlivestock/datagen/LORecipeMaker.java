@@ -1,8 +1,8 @@
 package com.dragn0007.dragnlivestock.datagen;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.compat.MECompatItems;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
@@ -24,7 +24,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+    public void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
         ConditionalRecipe.builder()
                 .addCondition(new ModLoadedCondition("medievalembroidery"))

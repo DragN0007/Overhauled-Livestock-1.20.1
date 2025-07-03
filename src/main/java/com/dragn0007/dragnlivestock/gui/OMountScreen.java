@@ -23,7 +23,7 @@ public class OMountScreen extends AbstractContainerScreen<OMountMenu> {
     }
 
     @Override
-    protected void init() {
+    public void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
     }

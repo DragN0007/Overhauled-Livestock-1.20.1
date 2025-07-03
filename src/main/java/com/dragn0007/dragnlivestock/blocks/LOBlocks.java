@@ -59,16 +59,16 @@ public class LOBlocks {
     public static final RegistryObject<Block> GENERIC_JERKY_HANGING = registerBlockWithoutItem("generic_jerky_hanging", DriedJerky::new);
 
 
-    protected static <T extends Block>RegistryObject<T> registerBlockWithoutItem(String name, Supplier<T> block){
+    public static <T extends Block>RegistryObject<T> registerBlockWithoutItem(String name, Supplier<T> block){
         return BLOCKS.register(name, block);
     }
 
-    protected static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block){
+    public static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
     }
-    protected static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
+    public static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
         LOItems.ITEMS.register(name, () -> new BlockItem(block.get(),
                 new Item.Properties()));
     }

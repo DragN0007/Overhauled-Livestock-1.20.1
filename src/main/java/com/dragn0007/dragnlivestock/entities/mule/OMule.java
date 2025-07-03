@@ -91,7 +91,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		}
 	}
 
-	protected int getInventorySize() {
+	public int getInventorySize() {
 		if (this.hasChest()) {
 			return 18;
 		} else {
@@ -154,7 +154,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

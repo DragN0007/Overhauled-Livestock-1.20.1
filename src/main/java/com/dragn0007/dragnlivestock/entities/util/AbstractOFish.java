@@ -36,7 +36,7 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
         this.moveControl = new AbstractOFish.FishMoveControl(this);
     }
 
-    protected float getStandingEyeHeight(Pose p_27474_, EntityDimensions p_27475_) {
+    public float getStandingEyeHeight(Pose p_27474_, EntityDimensions p_27475_) {
         return p_27475_.height * 0.65F;
     }
 
@@ -56,7 +56,7 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
         return 8;
     }
 
-    protected void defineSynchedData() {
+    public void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FROM_BUCKET, false);
 
@@ -79,14 +79,14 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
         this.setFromBucket(p_27465_.getBoolean("FromBucket"));
     }
 
-    protected void registerGoals() {
+    public void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(4, new AbstractOFish.FishSwimGoal(this));
     }
 
-    protected PathNavigation createNavigation(Level p_27480_) {
+    public PathNavigation createNavigation(Level p_27480_) {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
 
@@ -115,7 +115,7 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
         super.aiStep();
     }
 
-    protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
+    public InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
         return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
     }
 
@@ -131,17 +131,17 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
         return SoundEvents.BUCKET_FILL_FISH;
     }
 
-    protected boolean canRandomSwim() {
+    public boolean canRandomSwim() {
         return true;
     }
 
-    protected abstract SoundEvent getFlopSound();
+    public abstract SoundEvent getFlopSound();
 
-    protected SoundEvent getSwimSound() {
+    public SoundEvent getSwimSound() {
         return SoundEvents.FISH_SWIM;
     }
 
-    protected void playStepSound(BlockPos p_27482_, BlockState p_27483_) {
+    public void playStepSound(BlockPos p_27482_, BlockState p_27483_) {
     }
 
     static class FishMoveControl extends MoveControl {

@@ -14,18 +14,18 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class OAvoidEntityGoal<T extends LivingEntity> extends Goal {
-   protected final PathfinderMob mob;
+   public final PathfinderMob mob;
    private final double walkSpeedModifier;
    private final double sprintSpeedModifier;
    @Nullable
-   protected T toAvoid;
-   protected final float maxDist;
+   public T toAvoid;
+   public final float maxDist;
    @Nullable
-   protected Path path;
-   protected final PathNavigation pathNav;
-   protected final Class<T> avoidClass;
-   protected final Predicate<LivingEntity> avoidPredicate;
-   protected final Predicate<LivingEntity> predicateOnAvoidEntity;
+   public Path path;
+   public final PathNavigation pathNav;
+   public final Class<T> avoidClass;
+   public final Predicate<LivingEntity> avoidPredicate;
+   public final Predicate<LivingEntity> predicateOnAvoidEntity;
    private final TargetingConditions avoidEntityTargeting;
 
    public OAvoidEntityGoal(PathfinderMob mob, Class<T> avoid, Predicate<LivingEntity> livingEntityPredicate, float maxDist, double walkSpeed, double sprintSpeed, Predicate<LivingEntity> entityPredicate) {

@@ -1,14 +1,8 @@
 package com.dragn0007.dragnlivestock.compat;
 
-import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.blocks.LOBlocks;
-import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.items.custom.*;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
-import net.minecraftforge.common.ForgeSpawnEggItem;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

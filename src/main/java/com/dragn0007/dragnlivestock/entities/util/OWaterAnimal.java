@@ -9,7 +9,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 public abstract class OWaterAnimal extends AgeableMob {
-   protected OWaterAnimal(EntityType<? extends OWaterAnimal> p_30341_, Level p_30342_) {
+   public OWaterAnimal(EntityType<? extends OWaterAnimal> p_30341_, Level p_30342_) {
       super(p_30341_, p_30342_);
       this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
    }
@@ -34,7 +34,7 @@ public abstract class OWaterAnimal extends AgeableMob {
       return 1 + this.level().random.nextInt(3);
    }
 
-   protected void handleAirSupply(int p_30344_) {
+   public void handleAirSupply(int p_30344_) {
       if (this.isAlive() && !this.isInWaterOrBubble()) {
          this.setAirSupply(p_30344_ - 1);
          if (this.getAirSupply() == -20) {

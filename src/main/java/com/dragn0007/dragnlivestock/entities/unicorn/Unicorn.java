@@ -75,6 +75,11 @@ public class Unicorn extends OHorse implements GeoEntity {
 		}
 	}
 
+	@Override
+	public boolean hasGrowableHair() {
+		return true;
+	}
+
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
 			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {

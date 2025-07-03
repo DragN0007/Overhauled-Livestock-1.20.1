@@ -33,7 +33,7 @@ public class FrogSitOnBlockGoal extends MoveToBlockGoal {
       super.tick();
    }
 
-   protected boolean isValidTarget(LevelReader blockState, BlockPos pos) {
+   public boolean isValidTarget(LevelReader blockState, BlockPos pos) {
       if (!blockState.isEmptyBlock(pos.above())) {
          return false;
       } else {

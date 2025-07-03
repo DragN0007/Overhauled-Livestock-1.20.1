@@ -13,15 +13,15 @@ import java.util.EnumSet;
 
 public class MountLookAtPlayerGoal extends Goal {
    public static final float DEFAULT_PROBABILITY = 0.02F;
-   protected final AbstractOMount mob;
+   public final AbstractOMount mob;
    @Nullable
-   protected Entity lookAt;
-   protected final float lookDistance;
+   public Entity lookAt;
+   public final float lookDistance;
    private int lookTime;
-   protected final float probability;
+   public final float probability;
    private final boolean onlyHorizontal;
-   protected final Class<? extends LivingEntity> lookAtType;
-   protected final TargetingConditions lookAtContext;
+   public final Class<? extends LivingEntity> lookAtType;
+   public final TargetingConditions lookAtContext;
 
    public MountLookAtPlayerGoal(AbstractOMount p_25520_, Class<? extends LivingEntity> p_25521_, float p_25522_) {
       this(p_25520_, p_25521_, p_25522_, 0.02F);

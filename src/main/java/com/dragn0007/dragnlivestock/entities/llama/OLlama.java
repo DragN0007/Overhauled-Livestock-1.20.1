@@ -107,7 +107,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

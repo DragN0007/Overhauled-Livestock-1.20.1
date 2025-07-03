@@ -133,7 +133,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		return false;
 	}
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

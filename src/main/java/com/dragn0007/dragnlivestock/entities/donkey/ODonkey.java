@@ -148,7 +148,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

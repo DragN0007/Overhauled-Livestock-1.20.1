@@ -602,7 +602,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		return this.isChickenJockey();
 	}
 
-	protected void positionRider(Entity p_289537_, Entity.MoveFunction p_289541_) {
+	public void positionRider(Entity p_289537_, Entity.MoveFunction p_289541_) {
 		super.positionRider(p_289537_, p_289541_);
 		float f = Mth.sin(this.yBodyRot * ((float)Math.PI / 180F));
 		float f1 = Mth.cos(this.yBodyRot * ((float)Math.PI / 180F));

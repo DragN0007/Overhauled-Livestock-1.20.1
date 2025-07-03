@@ -17,7 +17,7 @@ public class JerkyBase extends HorizontalDirectionalBlock {
 
     public static final IntegerProperty DRY_TIME = IntegerProperty.create("dry_time", 0, 17);
 
-    protected IntegerProperty getDryTimeProperty() {
+    public IntegerProperty getDryTimeProperty() {
         return DRY_TIME;
     }
 
@@ -37,7 +37,7 @@ public class JerkyBase extends HorizontalDirectionalBlock {
         return true;
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(DRY_TIME).add(HorizontalDirectionalBlock.FACING);
     }
 

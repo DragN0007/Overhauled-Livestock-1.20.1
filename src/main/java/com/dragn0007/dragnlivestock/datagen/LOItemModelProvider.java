@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.datagen;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
-import com.dragn0007.dragnlivestock.compat.MECompatItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -17,7 +16,7 @@ public class LOItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    protected void registerModels() {
+    public void registerModels() {
         simpleItem(LOItems.LIVESTOCK_OVERHAUL);
         simpleItem(LOItems.LIVESTOCK_OVERHAUL_FOOD);
         simpleItem(LOItems.HORSE_COLORS);

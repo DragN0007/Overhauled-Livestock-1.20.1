@@ -19,19 +19,19 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
 
     public static final ResourceLocation MULE_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/o_horse.png");
     public final ODonkey oDonkey;
-    protected int baseColorLabelX;
-    protected int baseColorLabelY;
-    protected int markingLabelX;
-    protected int markingLabelY;
-    protected int speedLabelX;
-    protected int speedLabelY;
-    protected int jumpStrengthLabelX;
-    protected int jumpStrengthLabelY;
-    protected int healthLabelX;
-    protected int healthLabelY;
-    protected int genderFLabelX;
-    protected int genderMLabelX;
-    protected int genderLabelY;
+    public int baseColorLabelX;
+    public int baseColorLabelY;
+    public int markingLabelX;
+    public int markingLabelY;
+    public int speedLabelX;
+    public int speedLabelY;
+    public int jumpStrengthLabelX;
+    public int jumpStrengthLabelY;
+    public int healthLabelX;
+    public int healthLabelY;
+    public int genderFLabelX;
+    public int genderMLabelX;
+    public int genderLabelY;
 
     public ODonkeyScreen(ODonkeyMenu oDonkeyMenu, Inventory inventory, Component component) {
         super(oDonkeyMenu, inventory, component);
@@ -39,7 +39,7 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
     }
 
     @Override
-    protected void init() {
+    public void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
 

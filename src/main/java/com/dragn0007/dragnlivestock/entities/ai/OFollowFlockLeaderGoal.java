@@ -18,7 +18,7 @@ public class OFollowFlockLeaderGoal extends Goal {
       this.nextStartTick = this.nextStartTick(p_25249_);
    }
 
-   protected int nextStartTick(AbstractSchoolingOFish p_25252_) {
+   public int nextStartTick(AbstractSchoolingOFish p_25252_) {
       return reducedTickDelay(200 + p_25252_.getRandom().nextInt(200) % 20);
    }
 

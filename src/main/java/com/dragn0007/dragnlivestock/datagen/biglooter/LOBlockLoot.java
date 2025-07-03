@@ -15,7 +15,7 @@ public class LOBlockLoot extends BlockLootSubProvider {
     }
 
     @Override
-    protected void generate() {
+    public void generate() {
         dropSelf(LOBlocks.ACACIA_RABBIT_HUTCH.get());
         dropSelf(LOBlocks.BAMBOO_RABBIT_HUTCH.get());
         dropSelf(LOBlocks.BIRCH_RABBIT_HUTCH.get());
@@ -54,7 +54,7 @@ public class LOBlockLoot extends BlockLootSubProvider {
     }
 
     @Override
-    protected Iterable<Block> getKnownBlocks() {
+    public Iterable<Block> getKnownBlocks() {
         return LOBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
 }

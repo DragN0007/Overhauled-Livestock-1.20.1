@@ -19,21 +19,21 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
     public static final ResourceLocation MULE_INVENTORY_LOCATION = new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/o_horse.png");
     public final OMule oMule;
-    protected int breedLabelX;
-    protected int breedLabelY;
-    protected int baseColorLabelX;
-    protected int baseColorLabelY;
-    protected int markingLabelX;
-    protected int markingLabelY;
-    protected int speedLabelX;
-    protected int speedLabelY;
-    protected int jumpStrengthLabelX;
-    protected int jumpStrengthLabelY;
-    protected int healthLabelX;
-    protected int healthLabelY;
-    protected int genderFLabelX;
-    protected int genderMLabelX;
-    protected int genderLabelY;
+    public int breedLabelX;
+    public int breedLabelY;
+    public int baseColorLabelX;
+    public int baseColorLabelY;
+    public int markingLabelX;
+    public int markingLabelY;
+    public int speedLabelX;
+    public int speedLabelY;
+    public int jumpStrengthLabelX;
+    public int jumpStrengthLabelY;
+    public int healthLabelX;
+    public int healthLabelY;
+    public int genderFLabelX;
+    public int genderMLabelX;
+    public int genderLabelY;
 
     public OMuleScreen(OMuleMenu oMuleMenu, Inventory inventory, Component component) {
         super(oMuleMenu, inventory, component);
@@ -41,7 +41,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     }
 
     @Override
-    protected void init() {
+    public void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
 

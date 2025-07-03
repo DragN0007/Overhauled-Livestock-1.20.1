@@ -64,7 +64,7 @@ public class OBee extends Bee implements GeoEntity {
 		return OBeeModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 
-	protected static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OBee.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OBee.class, EntityDataSerializers.INT);
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -101,7 +101,7 @@ public class OBee extends Bee implements GeoEntity {
 	}
 
 	@Override
-	protected void defineSynchedData() {
+	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 	}

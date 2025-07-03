@@ -1,11 +1,11 @@
 package com.dragn0007.dragnlivestock;
 
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
+import com.dragn0007.dragnlivestock.compat.MECompatItems;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
-import com.dragn0007.dragnlivestock.compat.MECompatItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.network.FriendlyByteBuf;

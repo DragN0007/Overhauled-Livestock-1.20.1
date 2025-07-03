@@ -38,13 +38,13 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
 
    }
 
-   protected void onHitEntity(EntityHitResult p_37486_) {
+   public void onHitEntity(EntityHitResult p_37486_) {
       super.onHitEntity(p_37486_);
       p_37486_.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.0F);
    }
 
    @Override
-   protected void onHit(HitResult p_37488_) {
+   public void onHit(HitResult p_37488_) {
       super.onHit(p_37488_);
       if (!this.level().isClientSide) {
          int i = 1;
@@ -227,7 +227,7 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
       }
    }
 
-   protected Item getDefaultItem() {
+   public Item getDefaultItem() {
       return LOItems.FERTILIZED_EGG.get();
    }
 }

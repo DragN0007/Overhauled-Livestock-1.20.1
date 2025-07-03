@@ -23,7 +23,7 @@ public abstract class AbstractSchoolingOFish extends AbstractOFish {
         super(p_27523_, p_27524_);
     }
 
-    protected void registerGoals() {
+    public void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(5, new OFollowFlockLeaderGoal(this));
     }
@@ -36,7 +36,7 @@ public abstract class AbstractSchoolingOFish extends AbstractOFish {
         return super.getMaxSpawnClusterSize();
     }
 
-    protected boolean canRandomSwim() {
+    public boolean canRandomSwim() {
         return !this.isFollower();
     }
 

@@ -161,7 +161,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		return baseSpeed + multiplier;
 	}
 
-	protected int getInventorySize() {
+	public int getInventorySize() {
 		return 18;
 	}
 
@@ -250,7 +250,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

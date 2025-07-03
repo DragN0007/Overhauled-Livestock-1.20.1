@@ -104,7 +104,7 @@ public class Ox extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	protected int getInventorySize() {
+	public int getInventorySize() {
 		return this.hasChest() ? 26 : super.getInventorySize();
 	}
 
@@ -155,7 +155,7 @@ public class Ox extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

@@ -89,6 +89,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return LOOT_TABLE;
 	}
 
+	@Override
+	public boolean hasGrowableHair() {
+		return true;
+	}
+
 	public OHorse leader;
 	public int herdSize = 1;
 
@@ -544,7 +549,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 

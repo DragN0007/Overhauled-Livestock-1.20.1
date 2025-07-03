@@ -3,10 +3,6 @@ package com.dragn0007.dragnlivestock.entities.goat;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OGoatFollowCaravanGoal;
-import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
-import com.dragn0007.dragnlivestock.entities.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
@@ -74,8 +70,8 @@ import java.util.Random;
 public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	public static final EntityDimensions LONG_JUMPING_DIMENSIONS = EntityDimensions.scalable(0.9F, 1.3F).scale(0.7F);
-	protected static final ImmutableList<SensorType<? extends Sensor<? super OGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
-	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATE_RECENTLY, MemoryModuleType.BREED_TARGET, MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryModuleType.RAM_TARGET, MemoryModuleType.IS_PANICKING);
+	public static final ImmutableList<SensorType<? extends Sensor<? super OGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
+	public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATE_RECENTLY, MemoryModuleType.BREED_TARGET, MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryModuleType.RAM_TARGET, MemoryModuleType.IS_PANICKING);
 	private static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_GOAT = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	private boolean isLoweringHead;
 	private int lowerHeadTick;
@@ -86,7 +82,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
 	}
 
-	protected Brain.Provider<OGoat> brainProvider() {
+	public Brain.Provider<OGoat> brainProvider() {
 		return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
 	}
 
@@ -136,7 +132,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		));
 	}
 
-	protected int calculateFallDamage(float p_149389_, float p_149390_) {
+	public int calculateFallDamage(float p_149389_, float p_149390_) {
 		return super.calculateFallDamage(p_149389_, p_149390_) - 10;
 	}
 
@@ -255,7 +251,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	protected boolean canRide(Entity p_20339_) {
+	public boolean canRide(Entity p_20339_) {
 		return false;
 	}
 
@@ -335,19 +331,19 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return 1.6D;
 	}
 
-	protected SoundEvent getAmbientSound() {
+	public SoundEvent getAmbientSound() {
 		return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_AMBIENT : SoundEvents.GOAT_AMBIENT;
 	}
 
-	protected SoundEvent getHurtSound(DamageSource p_149387_) {
+	public SoundEvent getHurtSound(DamageSource p_149387_) {
 		return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_HURT : SoundEvents.GOAT_HURT;
 	}
 
-	protected SoundEvent getDeathSound() {
+	public SoundEvent getDeathSound() {
 		return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_DEATH : SoundEvents.GOAT_DEATH;
 	}
 
-	protected void playStepSound(BlockPos p_149382_, BlockState p_149383_) {
+	public void playStepSound(BlockPos p_149382_, BlockState p_149383_) {
 		this.playSound(SoundEvents.GOAT_STEP, 0.15F, 1.0F);
 	}
 	public boolean isFood(ItemStack stack) {
@@ -384,7 +380,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		super.aiStep();
 	}
 
-	protected void sendDebugPackets() {
+	public void sendDebugPackets() {
 		super.sendDebugPackets();
 		DebugPackets.sendEntityBrain(this);
 	}
@@ -689,12 +685,12 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 
 	@Override
-	protected int getInventorySize() {
+	public int getInventorySize() {
 		return 26;
 	}
 

@@ -17,19 +17,19 @@ public class FishTrapBlockEntity extends BaseContainerBlockEntity implements Men
 
     public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
 
-    protected FishTrapBlockEntity(BlockEntityType<?> entityType, BlockPos blockPos, BlockState state) {
+    public FishTrapBlockEntity(BlockEntityType<?> entityType, BlockPos blockPos, BlockState state) {
         super(entityType, blockPos, state);
     }
 
     public int catchTime = 200;
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable("container.dragnlivestock.fish_trap");
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+    public AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
         return new HopperMenu(containerId, inventory, this);
     }
 

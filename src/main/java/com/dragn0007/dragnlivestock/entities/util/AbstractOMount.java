@@ -82,7 +82,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.RODEO_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
-    protected void tickRidden(Player player, Vec3 vec3) {
+    public void tickRidden(Player player, Vec3 vec3) {
         Vec2 vec2 = this.getRiddenRotation(player);
 
         //bringing back the old horse head turning feature, because who thought getting rid of it was a good idea
@@ -128,7 +128,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
-    protected Vec3 getRiddenInput(Player player, Vec3 vec3) {
+    public Vec3 getRiddenInput(Player player, Vec3 vec3) {
         if (this.onGround() && this.playerJumpPendingScale == 0.0F && this.isStanding() && !this.allowStandSliding) {
             return Vec3.ZERO;
         } else {
@@ -152,9 +152,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public static final EntityDataAccessor<ItemStack> DECOR_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> SADDLE_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
-    protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.OPTIONAL_UUID);
 
-    protected boolean shouldEmote;
+    public boolean shouldEmote;
 
     public boolean isGroundTied() {
         return this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get();
@@ -200,7 +200,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
-    protected void createInventory() {
+    public void createInventory() {
         SimpleContainer simplecontainer = this.inventory;
         this.inventory = new SimpleContainer(this.getInventorySize());
         if (simplecontainer != null) {
@@ -336,6 +336,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.entityData.set(GENDER, gender);
     }
 
+    public boolean hasGrowableHair() {
+        return false;
+    }
+
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
@@ -352,7 +356,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && (this.isHorse(this) || this.isUnicorn(this))) {
+        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.hasGrowableHair()) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getManeType() == 3 || oHorse.getManeType() == 2) {
@@ -370,7 +374,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.isHorse(this)) {
+        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.hasGrowableHair() && !this.isUnicorn(this)) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getTailType() == 3 || oHorse.getTailType() == 2) {

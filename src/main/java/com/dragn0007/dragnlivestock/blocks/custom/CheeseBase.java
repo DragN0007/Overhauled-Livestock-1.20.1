@@ -16,7 +16,7 @@ public class CheeseBase extends HorizontalDirectionalBlock {
 
     public static final IntegerProperty AGE_TIME = IntegerProperty.create("age_time", 0, 17);
 
-    protected IntegerProperty getAgeTimeProperty() {
+    public IntegerProperty getAgeTimeProperty() {
         return AGE_TIME;
     }
 
@@ -36,7 +36,7 @@ public class CheeseBase extends HorizontalDirectionalBlock {
         return true;
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE_TIME);
     }
     public CheeseBase() {

@@ -54,7 +54,7 @@ public class OLlamaSpit extends Projectile {
       }
    }
 
-   protected void onHitEntity(EntityHitResult p_37241_) {
+   public void onHitEntity(EntityHitResult p_37241_) {
       super.onHitEntity(p_37241_);
       Entity entity = this.getOwner();
       if (entity instanceof LivingEntity livingentity) {
@@ -63,7 +63,7 @@ public class OLlamaSpit extends Projectile {
 
    }
 
-   protected void onHitBlock(BlockHitResult p_37239_) {
+   public void onHitBlock(BlockHitResult p_37239_) {
       super.onHitBlock(p_37239_);
       if (!this.level().isClientSide) {
          this.discard();
@@ -71,7 +71,7 @@ public class OLlamaSpit extends Projectile {
 
    }
 
-   protected void defineSynchedData() {
+   public void defineSynchedData() {
    }
 
    public void recreateFromPacket(ClientboundAddEntityPacket p_150162_) {

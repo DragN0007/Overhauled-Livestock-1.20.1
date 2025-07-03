@@ -160,7 +160,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	protected boolean canPerformRearing() {
+	public boolean canPerformRearing() {
 		return false;
 	}
 
