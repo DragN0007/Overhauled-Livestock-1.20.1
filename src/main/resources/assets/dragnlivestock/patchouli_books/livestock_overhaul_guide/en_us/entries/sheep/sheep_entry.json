@@ -5,16 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Sheep drop wool, meat, and bones. They can also be sheared, and milked for sheep cheese. O-Sheep cannot be dyed."
-    },
-    {
-      "type": "patchouli:entity",
-      "entity": "dragnlivestock:o_sheep{Variant:0}",
-      "name": "The O-Sheep",
-      "default_rotation": 45,
-      "scale": 0.8,
-      "rotate": "false",
-      "text": "A sheep."
+      "text": "O-Sheep drop wool, meat, and bones. They can also be sheared, and milked for sheep cheese. Some sheep, such as Hair breeds, drop leather instead of wool."
     }
   ]
 }

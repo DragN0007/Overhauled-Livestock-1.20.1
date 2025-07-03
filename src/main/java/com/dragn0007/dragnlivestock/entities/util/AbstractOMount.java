@@ -392,7 +392,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (this.isHorse(this) && itemStack.is(LOItems.OVERWORLD_UNICORN_HORN.get())) {
+        if (this.isHorse(this) && itemStack.is(Items.HEART_OF_THE_SEA)) {
             OHorse oHorse = (OHorse) this;
 
             if (oHorse.isUndead()) {
@@ -403,7 +403,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        if (this.isHorse(this) && itemStack.is(LOItems.NETHER_UNICORN_HORN.get())) {
+        if (this.isHorse(this) && itemStack.is(Items.COAL)) {
             OHorse oHorse = (OHorse) this;
 
             itemStack.finishUsingItem(level(), player);

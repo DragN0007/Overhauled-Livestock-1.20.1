@@ -5,11 +5,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Undead Horses replace both Skeleton and Zombie horses. You can see some of their rotted, exposed bone on the surface of their skin, and they’re also… dusty. $(br2)Undead Horses can do pretty much everything a normal horse can do. However, they don’t have quite as much health, and they aren’t very fast. They can, however, walk atop powdered snow!"
+      "text": "O-Undead Horses replace both Skeleton and Zombie horses. Occasionally, upon death, your O-Horse may turn undead. You can either let it rot, cure it with a Heart of the Sea, or keep it in whatever stage it's currently in with Coal."
     },
     {
       "type": "patchouli:text",
-      "text": "Undead Horses can’t have markings/ patterns like normal horses. They can, however, come in all of the same base colors as O-Horses."
+      "text": "Undead Horses come in multiple different stages and types. As each stage progresses, you have a chance to change your O-Horse's undead type by either taking it to the Nether, a cold biome, a desert, or keeping it in water."
     }
   ]
 }
