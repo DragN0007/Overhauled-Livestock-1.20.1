@@ -6,15 +6,6 @@
     {
       "type": "patchouli:text",
       "text": "O-Mountain Goats (O-Goat) drop chevon, goat horns and wool, and can be milked for goat milk. They can be carpeted and can carry chests, along with being able to climb up to 2 blocks vertically and walk atop powdered snow without falling in. They’re also strong enough to carry a player, but can’t be controlled."
-    },
-    {
-      "type": "patchouli:entity",
-      "entity": "dragnlivestock:o_goat{Variant:0,Gender:1}",
-      "name": "The O-Goat",
-      "default_rotation": 45,
-      "scale": 0.5,
-      "rotate": "false",
-      "text": "A white, male goat. Goats cannot have markings."
     }
   ]
 }
