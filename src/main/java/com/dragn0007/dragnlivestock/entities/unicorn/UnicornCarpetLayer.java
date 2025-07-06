@@ -1,7 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.unicorn;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseCarpetLayer;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -54,8 +56,13 @@ public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
                     }
                 } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                     resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-                } else {
+                } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
+                        itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                     resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                    String name = blanketItem.toString();
+                    String noSuffix = name.replaceAll("_.+", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/special/" + noSuffix + "_armor_blanket.png");
                 }
             }
         }
@@ -71,6 +78,8 @@ public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
                 resourceLocation = OHorseCarpetLayer.RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
             } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                 resourceLocation = OHorseCarpetLayer.WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+            } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
             }
         }
 

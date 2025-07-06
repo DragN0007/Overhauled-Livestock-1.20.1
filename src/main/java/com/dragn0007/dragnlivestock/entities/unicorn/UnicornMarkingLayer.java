@@ -54,7 +54,7 @@ public class UnicornMarkingLayer extends GeoRenderLayer<Unicorn> {
         SPLASHED_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/splashed_paint.png")),
         SPOTTED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/spotted.png")),
         STAR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/star.png")),
-        TOBIANO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/tobiano.png")),
+        TOBAINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/tobaino.png")),
         HALF_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/half_silver.png")),
         FULL_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/full_silver.png")),
         CORONET(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/overlay/coronet.png")),

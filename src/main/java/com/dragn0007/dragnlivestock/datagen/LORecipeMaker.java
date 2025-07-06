@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.datagen;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.MECompatItems;
+import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -25,6 +26,62 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AMERICAN_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("ABB")
+                                .pattern("CDC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AMERICAN_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AMERICAN_MODERN_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("ABB")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AMERICAN_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AMERICAN_RACING_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("ABB")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AMERICAN_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AMERICAN_WESTERN_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("ABB")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AMERICAN_WESTERN_BLANKET.get().toString()));
+
+
+
 
         ConditionalRecipe.builder()
                 .addCondition(new ModLoadedCondition("medievalembroidery"))

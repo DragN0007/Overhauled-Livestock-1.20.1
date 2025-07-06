@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock;
 
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.compat.MECompatItems;
+import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
@@ -14,6 +15,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -41,6 +43,8 @@ public class LivestockOverhaul
         LOBlocks.register(eventBus);
         EntityTypes.ENTITY_TYPES.register(eventBus);
         LOMenuTypes.register(eventBus);
+
+        CraftingHelper.register(new BlanketConfigCondition.Serializer(new ResourceLocation(MODID, "blanket_config_condition")));
 
         if (ModList.get().isLoaded("medievalembroidery")) {
             MECompatItems.register(eventBus);

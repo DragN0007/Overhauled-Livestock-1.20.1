@@ -1,4 +1,4 @@
-// 1.20.1	2025-06-30T00:58:36.4615345	Recipes
+// 1.20.1	2025-07-06T16:37:03.0466738	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 43b25a39d8cd493d5aedd8351340b99233fbe0de data/dragnlivestock/advancements/recipes/misc/berry_glazed_mutton_rib.json
 b9aa6a8d4052891e5a9c2e8426679bfbdd3bc1f6 data/dragnlivestock/advancements/recipes/misc/berry_glazed_pork_rib_chop.json
@@ -290,6 +290,10 @@ b86ba99021c4d2788b0a612020105f84d64b225a data/dragnlivestock/advancements/recipe
 0e4cf6345cd0ebbc5558a93e11eba1ef15245670 data/dragnlivestock/advancements/recipes/misc/yellow_wool_from_wool_dye_8.json
 bdbcbe51023b015d3223d34b001b70bead9bedf7 data/dragnlivestock/advancements/recipes/misc/yellow_wool_staple.json
 f9c9b38608fdcbadcc0898b1c1d49d52212f2d84 data/dragnlivestock/advancements/recipes/misc/yellow_wool_staple_8.json
+c1b0a51064f962683c3c9e0c15d6ee8bcf30a152 data/dragnlivestock/recipes/american_medieval_blanket.json
+d180552117496d92f13fd6454962b6ca22c0446a data/dragnlivestock/recipes/american_modern_blanket.json
+9f7309e477dccb298be8239382c411dae1fa96e4 data/dragnlivestock/recipes/american_racing_blanket.json
+b46447b93d9e77937eb5f412de7e9af074ae4aa7 data/dragnlivestock/recipes/american_western_blanket.json
 b5376edc933c5b337b5ec977aaa33ec2e73b5fe8 data/dragnlivestock/recipes/beef_strips.json
 adc8e7c88241dc7040073c40f68736ebadf15488 data/dragnlivestock/recipes/berry_glazed_mutton_rib.json
 813b5ca7799f00ea372796d302b327241ba0b9fd data/dragnlivestock/recipes/berry_glazed_pork_rib_chop.json

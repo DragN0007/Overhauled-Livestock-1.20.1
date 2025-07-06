@@ -374,6 +374,11 @@
   "block.dragnlivestock.raw_goat_cheese": "Raw Goat Cheese",
   "block.dragnlivestock.goat_cheese": "Goat Cheese",
 
+  "item.dragnlivestock.american_medieval_blanket": "American Medieval Blanket",
+  "item.dragnlivestock.american_modern_blanket": "American Modern Blanket",
+  "item.dragnlivestock.american_racing_blanket": "American Racing Blanket",
+  "item.dragnlivestock.american_western_blanket": "American Western Blanket",
+
   "item.dragnlivestock.black_medieval_blanket": "Black Medieval Blanket",
   "item.dragnlivestock.blue_medieval_blanket": "Blue Medieval Blanket",
   "item.dragnlivestock.brown_medieval_blanket": "Brown Medieval Blanket",
@@ -480,6 +485,11 @@
   "key.dragnlivestock.horse_wave": "Wave Emote - Horse",
   "key.dragnlivestock.horse_spanish_walk_toggle": "Spanish Walk - Horse",
 
+
+
+  "item.medievalembroidery.leather_rump_straps": "Leather Rump Straps",
+  "item.medievalembroidery.black_rump_straps": "Black Rump Straps",
+  "item.medievalembroidery.white_rump_straps": "White Rump Straps",
 
   "item.medievalembroidery.black_caparison_cape": "Black Cape Caparison",
   "item.medievalembroidery.black_caparison_full": "Black Full Caparison",

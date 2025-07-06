@@ -13,6 +13,13 @@ public class MECompatItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, "medievalembroidery");
 
+    public static final RegistryObject<Item> LEATHER_RUMP_STRAPS = ITEMS.register("leather_rump_straps",
+            () -> new CaparisonItem(DyeColor.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> BLACK_RUMP_STRAPS = ITEMS.register("black_rump_straps",
+            () -> new CaparisonItem(DyeColor.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_RUMP_STRAPS = ITEMS.register("white_rump_straps",
+            () -> new CaparisonItem(DyeColor.WHITE, new Item.Properties()));
+
     public static final RegistryObject<Item> BLACK_CAPARISON_CAPE = ITEMS.register("black_caparison_cape",
             () -> new CaparisonItem(DyeColor.BLACK, new Item.Properties()));
     public static final RegistryObject<Item> BLACK_CAPARISON_FULL = ITEMS.register("black_caparison_full",

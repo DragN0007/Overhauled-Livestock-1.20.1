@@ -256,7 +256,18 @@ public class LOItemGroup {
                         output.accept(LOItems.WHITE_WESTERN_BLANKET.get());
                         output.accept(LOItems.YELLOW_WESTERN_BLANKET.get());
 
+                        output.accept(LOItems.AMERICAN_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.AMERICAN_MODERN_BLANKET.get());
+                        output.accept(LOItems.AMERICAN_RACING_BLANKET.get());
+                        output.accept(LOItems.AMERICAN_WESTERN_BLANKET.get());
+
+
                         if (ModList.get().isLoaded("medievalembroidery")) {
+
+                            output.accept(MECompatItems.LEATHER_RUMP_STRAPS.get());
+                            output.accept(MECompatItems.BLACK_RUMP_STRAPS.get());
+                            output.accept(MECompatItems.WHITE_RUMP_STRAPS.get());
+
                             output.accept(MECompatItems.BLACK_CAPARISON_CAPE.get());
                             output.accept(MECompatItems.BLACK_CAPARISON_FULL.get());
                             output.accept(MECompatItems.BLACK_CAPARISON_HALF.get());

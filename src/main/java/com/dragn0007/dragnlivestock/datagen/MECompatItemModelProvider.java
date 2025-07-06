@@ -17,6 +17,10 @@ public class MECompatItemModelProvider extends ItemModelProvider {
     @Override
     public void registerModels() {
 
+        simpleMedievalItem(MECompatItems.LEATHER_RUMP_STRAPS);
+        simpleMedievalItem(MECompatItems.BLACK_RUMP_STRAPS);
+        simpleMedievalItem(MECompatItems.WHITE_RUMP_STRAPS);
+
         simpleMedievalItem(MECompatItems.BLACK_CAPARISON_CAPE);
         simpleMedievalItem(MECompatItems.BLACK_CAPARISON_FULL);
         simpleMedievalItem(MECompatItems.BLACK_CAPARISON_HALF);

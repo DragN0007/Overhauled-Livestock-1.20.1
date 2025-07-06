@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SaddleItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -27,18 +29,13 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
         ItemStack itemStack = animatable.getSaddleItem();
         if(!itemStack.isEmpty()) {
             ResourceLocation resourceLocation = null;
-            if (itemStack.is(Items.SADDLE)) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/horse_saddle.png");
-            } else if (itemStack.is(LOItems.BLACK_SADDLE.get())) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/black_horse_saddle.png");
-            } else if (itemStack.is(LOItems.WHITE_SADDLE.get())) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/white_horse_saddle.png");
-            } else if (itemStack.is(LOItems.LIGHT_SADDLE.get())) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/light_saddle.png");
-            } else if (itemStack.is(LOItems.BLACK_LIGHT_SADDLE.get())) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/black_light_saddle.png");
-            } else if (itemStack.is(LOItems.WHITE_LIGHT_SADDLE.get())) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/white_light_saddle.png");
+
+            // if youre another modder looking to add new saddles, use this pathway v
+            // it'll find the name for you so long as your registry item is named the same as your texture AND it's a SaddleItem
+            // make sure to put your saddle in the dragnlivestock:saddle tag so you can actually put it in the slot
+            // this works for all equines and caribou too, no extra steps required
+            if (itemStack.getItem() instanceof SaddleItem saddleItem) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
             }
 
             if(resourceLocation != null) {

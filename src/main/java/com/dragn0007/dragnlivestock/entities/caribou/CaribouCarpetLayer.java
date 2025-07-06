@@ -1,7 +1,10 @@
 package com.dragn0007.dragnlivestock.entities.caribou;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseCarpetLayer;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -37,7 +40,7 @@ public class CaribouCarpetLayer extends GeoRenderLayer<Caribou> {
 
         ResourceLocation resourceLocation = null;
 
-        if (!armorItemStack.isEmpty() && !itemStack.isEmpty()) {
+        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) {
             if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !(armorItemStack.getItem() == LOItems.RODEO_HARNESS.get())) {
 
                 if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
@@ -54,13 +57,18 @@ public class CaribouCarpetLayer extends GeoRenderLayer<Caribou> {
                     }
                 } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                     resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-                } else {
+                } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
+                        itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                     resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                    String name = blanketItem.toString();
+                    String noSuffix = name.replaceAll("_.+", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/special/" + noSuffix + "_armor_blanket.png");
                 }
             }
         }
 
-        if(!itemStack.isEmpty() && armorItemStack.isEmpty()) {
+        if(!itemStack.isEmpty() && armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) {
             if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                 resourceLocation = OHorseCarpetLayer.CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
             } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
@@ -71,6 +79,8 @@ public class CaribouCarpetLayer extends GeoRenderLayer<Caribou> {
                 resourceLocation = OHorseCarpetLayer.RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
             } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                 resourceLocation = OHorseCarpetLayer.WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+            } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
             }
         }
 

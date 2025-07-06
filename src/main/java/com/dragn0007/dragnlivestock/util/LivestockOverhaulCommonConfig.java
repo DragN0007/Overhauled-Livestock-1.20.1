@@ -53,6 +53,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
     public static final ForgeConfigSpec.BooleanValue COW_BELL_SOUND;
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -209,6 +210,9 @@ public class LivestockOverhaulCommonConfig {
 
         DECOMPISITION_STAGE_TIME = BUILDER.comment("Amount of time, in ticks, it takes for an Undead Horse to decompose to the next stage. Default is 72000.")
                 .define("Undead Decomp Stage Time", 72000);
+
+        ALLOW_SPECIAL_BLANKET_CRAFTING = BUILDER.comment("Should players be able to craft special event blankets? If this is false, servers can give out blankets as free event rewards instead (cannot be a real currency payment).")
+                .define("Allow Special Event Blanket Crafting", true);
 
         MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
                 .define("NON FUNCTIONAL", 3);

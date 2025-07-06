@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.WoolCarpetBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -206,8 +208,18 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
                     }
                 } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                     resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-                } else {
+                } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
+                        itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                     resourceLocation = ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                    String name = blanketItem.toString();
+                    String noSuffix = name.replaceAll("_.+", "");
+                    // ^ if youre another modder adding new blankets, make sure your blanket name is just one word
+                    // (i.e american_western_blanket.png)
+                    // in this case, "american" is your one word. if you do multiple words, the code will snip out any past the first one and
+                    // the armor variant of your carpet may not work. To get your armor variant for your carpet, just copy what
+                    // ive done in textures/entity/horse/armor/carpet/special
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/special/" + noSuffix + "_armor_blanket.png");
                 }
             }
         }
@@ -223,6 +235,13 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
                 resourceLocation = RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
             } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                 resourceLocation = WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+
+                // if youre another modder looking to add new blankets, use this pathway v
+                // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
+                // make sure to put your blanket in the dragnlivestock:special_blankets tag so you can actually put it in the slot
+                // this works for all equines and caribou too, no extra steps required
+            } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
             }
         }
 
