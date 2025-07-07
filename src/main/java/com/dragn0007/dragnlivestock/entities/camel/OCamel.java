@@ -819,12 +819,9 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 				breed = this.random.nextInt(CamelBreed.Breed.values().length);
 			}
 
-			int gender;
-			gender = this.random.nextInt(Gender.values().length);
-
 			calf.setVariant(variant);
 			calf.setOverlayVariant(overlay);
-			calf.setGender(gender);
+			calf.setGender(random.nextInt(Gender.values().length));
 			calf.setBreed(breed);
 		}
 

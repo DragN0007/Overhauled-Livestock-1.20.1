@@ -425,9 +425,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			piglet.setMarkingByBreed();
 		}
 
-		int gender;
-		gender = this.random.nextInt(OPig.Gender.values().length);
-		piglet.setGender(gender);
+		piglet.setGender(random.nextInt(Gender.values().length));
 
 		return piglet;
 	}

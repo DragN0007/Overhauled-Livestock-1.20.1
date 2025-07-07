@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dragnlivestock:item/spring_modern_blanket"
+  }
+}

@@ -351,6 +351,30 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.AMERICAN_MODERN_BLANKET);
         simpleItem(LOItems.AMERICAN_RACING_BLANKET);
         simpleItem(LOItems.AMERICAN_WESTERN_BLANKET);
+        simpleItem(LOItems.AUTUMN_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.AUTUMN_MODERN_BLANKET);
+        simpleItem(LOItems.AUTUMN_RACING_BLANKET);
+        simpleItem(LOItems.AUTUMN_WESTERN_BLANKET);
+        simpleItem(LOItems.ELDERBERRY_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.ELDERBERRY_MODERN_BLANKET);
+        simpleItem(LOItems.ELDERBERRY_RACING_BLANKET);
+        simpleItem(LOItems.ELDERBERRY_WESTERN_BLANKET);
+        simpleItem(LOItems.PEACH_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.PEACH_MODERN_BLANKET);
+        simpleItem(LOItems.PEACH_RACING_BLANKET);
+        simpleItem(LOItems.PEACH_WESTERN_BLANKET);
+        simpleItem(LOItems.SPRING_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.SPRING_MODERN_BLANKET);
+        simpleItem(LOItems.SPRING_RACING_BLANKET);
+        simpleItem(LOItems.SPRING_WESTERN_BLANKET);
+        simpleItem(LOItems.SUMMER_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.SUMMER_MODERN_BLANKET);
+        simpleItem(LOItems.SUMMER_RACING_BLANKET);
+        simpleItem(LOItems.SUMMER_WESTERN_BLANKET);
+        simpleItem(LOItems.WINTER_MEDIEVAL_BLANKET);
+        simpleItem(LOItems.WINTER_MODERN_BLANKET);
+        simpleItem(LOItems.WINTER_RACING_BLANKET);
+        simpleItem(LOItems.WINTER_WESTERN_BLANKET);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

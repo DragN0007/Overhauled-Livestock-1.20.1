@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.entities.unicorn;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.marking_layer.EquineEyeColorOverlay;
@@ -34,7 +33,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -573,9 +571,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 			((Unicorn) foal).setEyeVariant(eyes);
 
-			int gender;
-			gender = this.random.nextInt(Unicorn.Gender.values().length);
-			foal.setGender(gender);
+			foal.setGender(random.nextInt(Gender.values().length));
 
 			((Unicorn) foal).setFeatheringByBreed();
 			((Unicorn) foal).setManeType(3);

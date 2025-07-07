@@ -263,6 +263,30 @@ public class LOItemGroup {
                         output.accept(LOItems.AMERICAN_MODERN_BLANKET.get());
                         output.accept(LOItems.AMERICAN_RACING_BLANKET.get());
                         output.accept(LOItems.AMERICAN_WESTERN_BLANKET.get());
+                        output.accept(LOItems.AUTUMN_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.AUTUMN_MODERN_BLANKET.get());
+                        output.accept(LOItems.AUTUMN_RACING_BLANKET.get());
+                        output.accept(LOItems.AUTUMN_WESTERN_BLANKET.get());
+                        output.accept(LOItems.ELDERBERRY_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.ELDERBERRY_MODERN_BLANKET.get());
+                        output.accept(LOItems.ELDERBERRY_RACING_BLANKET.get());
+                        output.accept(LOItems.ELDERBERRY_WESTERN_BLANKET.get());
+                        output.accept(LOItems.PEACH_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.PEACH_MODERN_BLANKET.get());
+                        output.accept(LOItems.PEACH_RACING_BLANKET.get());
+                        output.accept(LOItems.PEACH_WESTERN_BLANKET.get());
+                        output.accept(LOItems.SPRING_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.SPRING_MODERN_BLANKET.get());
+                        output.accept(LOItems.SPRING_RACING_BLANKET.get());
+                        output.accept(LOItems.SPRING_WESTERN_BLANKET.get());
+                        output.accept(LOItems.SUMMER_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.SUMMER_MODERN_BLANKET.get());
+                        output.accept(LOItems.SUMMER_RACING_BLANKET.get());
+                        output.accept(LOItems.SUMMER_WESTERN_BLANKET.get());
+                        output.accept(LOItems.WINTER_MEDIEVAL_BLANKET.get());
+                        output.accept(LOItems.WINTER_MODERN_BLANKET.get());
+                        output.accept(LOItems.WINTER_RACING_BLANKET.get());
+                        output.accept(LOItems.WINTER_WESTERN_BLANKET.get());
 
 
                         if (ModList.get().isLoaded("medievalembroidery")) {

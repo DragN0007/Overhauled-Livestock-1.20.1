@@ -475,6 +475,54 @@ public class LOItems {
             () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
     public static final RegistryObject<Item> AMERICAN_WESTERN_BLANKET = ITEMS.register("american_western_blanket",
             () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> AUTUMN_MEDIEVAL_BLANKET = ITEMS.register("autumn_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> AUTUMN_MODERN_BLANKET = ITEMS.register("autumn_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> AUTUMN_RACING_BLANKET = ITEMS.register("autumn_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> AUTUMN_WESTERN_BLANKET = ITEMS.register("autumn_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> ELDERBERRY_MEDIEVAL_BLANKET = ITEMS.register("elderberry_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> ELDERBERRY_MODERN_BLANKET = ITEMS.register("elderberry_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> ELDERBERRY_RACING_BLANKET = ITEMS.register("elderberry_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> ELDERBERRY_WESTERN_BLANKET = ITEMS.register("elderberry_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PEACH_MEDIEVAL_BLANKET = ITEMS.register("peach_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PEACH_MODERN_BLANKET = ITEMS.register("peach_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PEACH_RACING_BLANKET = ITEMS.register("peach_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PEACH_WESTERN_BLANKET = ITEMS.register("peach_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SPRING_MEDIEVAL_BLANKET = ITEMS.register("spring_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SPRING_MODERN_BLANKET = ITEMS.register("spring_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SPRING_RACING_BLANKET = ITEMS.register("spring_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SPRING_WESTERN_BLANKET = ITEMS.register("spring_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SUMMER_MEDIEVAL_BLANKET = ITEMS.register("summer_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SUMMER_MODERN_BLANKET = ITEMS.register("summer_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SUMMER_RACING_BLANKET = ITEMS.register("summer_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> SUMMER_WESTERN_BLANKET = ITEMS.register("summer_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> WINTER_MEDIEVAL_BLANKET = ITEMS.register("winter_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> WINTER_MODERN_BLANKET = ITEMS.register("winter_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> WINTER_RACING_BLANKET = ITEMS.register("winter_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> WINTER_WESTERN_BLANKET = ITEMS.register("winter_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
 
     //Dyed Stuff
     public static final RegistryObject<Item> BLACK_BRAND_TAG = ITEMS.register("black_brand_tag",

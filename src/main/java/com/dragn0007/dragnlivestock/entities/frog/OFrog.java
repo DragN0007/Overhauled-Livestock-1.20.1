@@ -287,7 +287,7 @@ public class OFrog extends Animal implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 
-		if (!this.isInLove() || !this.isAlive() || eggsLaid >= 2) {
+		if (!this.isInLove() || !this.isAlive() || eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
 			return null;
 		}
 
@@ -299,7 +299,7 @@ public class OFrog extends Animal implements GeoEntity {
 	public void tick() {
 		super.tick();
 
-		if (eggsLaid >= 2 && eggLayCooldown >= 100) {
+		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 100) {
 			eggsLaid = 0;
 			eggLayCooldown = 0;
 		}

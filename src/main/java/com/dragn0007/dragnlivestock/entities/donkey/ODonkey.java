@@ -596,9 +596,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			}
 			((ODonkey) foal).setEyeVariant(eyes);
 
-			int gender;
-			gender = this.random.nextInt(ODonkey.Gender.values().length);
-			foal.setGender(gender);
+			foal.setGender(random.nextInt(Gender.values().length));
 
 
 			if (this.random.nextInt(3) >= 1) {

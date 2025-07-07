@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:blanket_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:blue_carpet"
+          },
+          "D": {
+            "item": "minecraft:gold_nugget"
+          }
+        },
+        "pattern": [
+          "DAD",
+          "DDD"
+        ],
+        "result": {
+          "item": "dragnlivestock:elderberry_medieval_blanket"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

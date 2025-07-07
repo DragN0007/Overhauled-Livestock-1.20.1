@@ -81,6 +81,325 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AMERICAN_WESTERN_BLANKET.get().toString()));
 
 
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AUTUMN_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.ORANGE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("ABB")
+                                .pattern("CDC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AUTUMN_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AUTUMN_MODERN_BLANKET.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.ORANGE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .pattern("ABB")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AUTUMN_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AUTUMN_RACING_BLANKET.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.ORANGE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .pattern("ABB")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AUTUMN_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.AUTUMN_WESTERN_BLANKET.get())
+                                .define('A', Items.PURPLE_CARPET)
+                                .define('B', Items.ORANGE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .pattern("ABB")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.AUTUMN_WESTERN_BLANKET.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("DAD")
+                                .pattern("DDD")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.ELDERBERRY_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_MODERN_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('C', Items.GOLD_NUGGET)
+                                .pattern("AAA")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.ELDERBERRY_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_RACING_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('C', Items.GOLD_NUGGET)
+                                .pattern("AAA")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.ELDERBERRY_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_WESTERN_BLANKET.get())
+                                .define('A', Items.BLUE_CARPET)
+                                .define('C', Items.GOLD_NUGGET)
+                                .pattern("AAA")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.ELDERBERRY_WESTERN_BLANKET.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PEACH_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("ABB")
+                                .pattern("CDC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.PEACH_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PEACH_MODERN_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("ABB")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.PEACH_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PEACH_RACING_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("ABB")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.PEACH_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PEACH_WESTERN_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.WHITE_CARPET)
+                                .pattern("ABB")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.PEACH_WESTERN_BLANKET.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPRING_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.LIGHT_BLUE_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("ABB")
+                                .pattern("CDC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SPRING_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPRING_MODERN_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.LIGHT_BLUE_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .pattern("ABB")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SPRING_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPRING_RACING_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.LIGHT_BLUE_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .pattern("ABB")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SPRING_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPRING_WESTERN_BLANKET.get())
+                                .define('A', Items.PINK_CARPET)
+                                .define('B', Items.LIGHT_BLUE_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .pattern("ABB")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SPRING_WESTERN_BLANKET.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SUMMER_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("ABB")
+                                .pattern("CDC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SUMMER_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SUMMER_MODERN_BLANKET.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .pattern("ABB")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SUMMER_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SUMMER_RACING_BLANKET.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .pattern("ABB")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SUMMER_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SUMMER_WESTERN_BLANKET.get())
+                                .define('A', Items.ORANGE_CARPET)
+                                .define('B', Items.RED_CARPET)
+                                .define('C', Items.YELLOW_CARPET)
+                                .pattern("ABB")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.SUMMER_WESTERN_BLANKET.get().toString()));
+
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WINTER_MEDIEVAL_BLANKET.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.WHITE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .define('D', Items.GOLD_NUGGET)
+                                .pattern("ABB")
+                                .pattern("CDC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.WINTER_MEDIEVAL_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WINTER_MODERN_BLANKET.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.WHITE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .pattern("ABB")
+                                .pattern("CC ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.WINTER_MODERN_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WINTER_RACING_BLANKET.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.WHITE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .pattern("ABB")
+                                .pattern("C  ")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.WINTER_RACING_BLANKET.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WINTER_WESTERN_BLANKET.get())
+                                .define('A', Items.LIGHT_BLUE_CARPET)
+                                .define('B', Items.WHITE_CARPET)
+                                .define('C', Items.BROWN_CARPET)
+                                .pattern("ABB")
+                                .pattern("CCC")
+                                .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.WINTER_WESTERN_BLANKET.get().toString()));
+
+
 
 
         ConditionalRecipe.builder()

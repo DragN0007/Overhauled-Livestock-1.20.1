@@ -608,13 +608,10 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 				++k;
 			}
 
-			int gender;
-			gender = this.random.nextInt(OLlama.Gender.values().length);
-
 			oLlama.setStrength(k);
 			oLlama.setVariant(variant);
 			oLlama.setOverlayVariant(overlay);
-			oLlama.setGender(gender);
+			oLlama.setGender(random.nextInt(Gender.values().length));
 		}
 
 		return oLlama;

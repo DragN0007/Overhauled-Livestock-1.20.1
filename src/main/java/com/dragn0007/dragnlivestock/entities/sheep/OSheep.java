@@ -634,9 +634,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			lamb.setHornsByBreed();
 		}
 
-		int gender;
-		gender = this.random.nextInt(OSheep.Gender.values().length);
-		lamb.setGender(gender);
+		lamb.setGender(random.nextInt(Gender.values().length));
 
 		return lamb;
 	}

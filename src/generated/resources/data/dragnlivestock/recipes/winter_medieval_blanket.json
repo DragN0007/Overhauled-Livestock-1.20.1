@@ -1,0 +1,38 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:blanket_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:light_blue_carpet"
+          },
+          "B": {
+            "item": "minecraft:white_carpet"
+          },
+          "C": {
+            "item": "minecraft:brown_carpet"
+          },
+          "D": {
+            "item": "minecraft:gold_nugget"
+          }
+        },
+        "pattern": [
+          "ABB",
+          "CDC"
+        ],
+        "result": {
+          "item": "dragnlivestock:winter_medieval_blanket"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

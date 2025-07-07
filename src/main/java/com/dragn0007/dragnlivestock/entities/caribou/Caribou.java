@@ -814,9 +814,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		((Caribou) calf).setEyeVariant(eyes);
 
-		int gender;
-		gender = this.random.nextInt(Caribou.Gender.values().length);
-		calf.setGender(gender);
+		calf.setGender(random.nextInt(Gender.values().length));
 
 		((Caribou) calf).setFeatheringByChance();
 

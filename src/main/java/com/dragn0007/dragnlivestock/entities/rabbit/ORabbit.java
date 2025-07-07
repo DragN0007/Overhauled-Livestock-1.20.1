@@ -593,9 +593,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			kit.setOverlayVariant(overlay);
 		}
 
-		int gender;
-		gender = this.random.nextInt(ORabbit.Gender.values().length);
-		kit.setGender(gender);
+		kit.setGender(random.nextInt(Gender.values().length));
 
 		kit.setDewlapByGender();
 

@@ -4,7 +4,6 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OGoatFollowCaravanGoal;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
@@ -612,9 +611,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		kid.setOverlayVariant(overlay);
 
-		int gender;
-		gender = this.random.nextInt(OSheep.Gender.values().length);
-		kid.setGender(gender);
+		kid.setGender(random.nextInt(Gender.values().length));
 
 		return kid;
 	}
