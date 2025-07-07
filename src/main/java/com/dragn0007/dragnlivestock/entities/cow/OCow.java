@@ -378,8 +378,8 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 					this.setBrandTagColor(color);
 				if (!player.getAbilities().instabuild) {
 					itemStack.shrink(1);
-					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 		}
 

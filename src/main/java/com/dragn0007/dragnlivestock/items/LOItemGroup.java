@@ -64,6 +64,8 @@ public class LOItemGroup {
 
                         output.accept(LOItems.UTILITY_KNIFE.get());
                         output.accept(LOItems.SPINDLE.get());
+                        output.accept(LOItems.COAT_OSCILLATOR.get());
+                        output.accept(LOItems.MARKING_OSCILLATOR.get());
 
                         output.accept(LOItems.GRUB_SWEATER.get());
 

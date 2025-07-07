@@ -237,6 +237,26 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (itemstack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				this.setVariant(this.getVariant() - 1);
+				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+			this.setVariant(this.getVariant() + 1);
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else if (itemstack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				this.setOverlayVariant(this.getOverlayVariant() - 1);
+				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+			this.setOverlayVariant(this.getOverlayVariant() + 1);
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
 		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
 			if (this.isTagged()) {
 				this.setTagged(false);

@@ -333,6 +333,26 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
+		if (itemstack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				this.setVariant(this.getVariant() - 1);
+				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+			this.setVariant(this.getVariant() + 1);
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else if (itemstack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				this.setOverlayVariant(this.getOverlayVariant() - 1);
+				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+			this.setOverlayVariant(this.getOverlayVariant() + 1);
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
 		if (itemstack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
 			player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());

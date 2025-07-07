@@ -25,7 +25,7 @@ public class UnicornHornItem extends Item {
 
     @Override
     public Rarity getRarity(ItemStack p_41461_) {
-        return Rarity.EPIC;
+        return Rarity.RARE;
     }
 
     public SoundEvent getDrinkingSound() {

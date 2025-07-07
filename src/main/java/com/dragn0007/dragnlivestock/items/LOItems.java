@@ -97,6 +97,10 @@ public class LOItems {
             () -> new UtilityKnifeItem());
     public static final RegistryObject<Item> SPINDLE = ITEMS.register("spindle",
             () -> new SpindleItem());
+    public static final RegistryObject<Item> COAT_OSCILLATOR = ITEMS.register("coat_oscillator",
+            () -> new OscillatorItem());
+    public static final RegistryObject<Item> MARKING_OSCILLATOR = ITEMS.register("marking_oscillator",
+            () -> new OscillatorItem());
 
     public static final RegistryObject<Item> GRUB_SWEATER = ITEMS.register("grub_sweater",
             () -> new GrubSweaterItem(new Item.Properties()));

@@ -1,7 +1,10 @@
 package com.dragn0007.dragnlivestock.entities.util;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
@@ -389,6 +392,28 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 oHorse.setTailType(nextTail.ordinal());
             }
             this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
+        if (itemStack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+            if (player.isShiftKeyDown()) {
+                this.setVariant(this.getVariant() - 1);
+                this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+            this.setVariant(this.getVariant() + 1);
+            this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
+        if (itemStack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+            if (player.isShiftKeyDown()) {
+                this.setOverlayVariant(this.getOverlayVariant() - 1);
+                this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+            this.setOverlayVariant(this.getOverlayVariant() + 1);
+            this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
@@ -790,6 +815,47 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         return flag;
+    }
+
+    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
+    public int getVariant() {
+        return this.entityData.get(VARIANT);
+    }
+    public void setVariant(int variant) {
+        this.entityData.set(VARIANT, variant);
+        this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation);
+    }
+    public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(AbstractOMount.class, LivestockOverhaul.RESOURCE_LOCATION);
+    public ResourceLocation getTextureResource() {
+        return this.entityData.get(VARIANT_TEXTURE);
+    }
+    public void setVariantTexture(String variant) {
+        ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
+        if (resourceLocation == null) {
+            resourceLocation = OHorseModel.Variant.BAY.resourceLocation;
+        }
+        this.entityData.set(VARIANT_TEXTURE, resourceLocation);
+    }
+
+
+    public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
+    public int getOverlayVariant() {
+        return this.entityData.get(OVERLAY);
+    }
+    public void setOverlayVariant(int variant) {
+        this.entityData.set(OVERLAY, variant);
+        this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation);
+    }
+    public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(AbstractOMount.class, LivestockOverhaul.RESOURCE_LOCATION);
+    public ResourceLocation getOverlayLocation() {
+        return this.entityData.get(OVERLAY_TEXTURE);
+    }
+    public void setOverlayVariantTexture(String variant) {
+        ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
+        if (resourceLocation == null) {
+            resourceLocation = EquineMarkingOverlay.NONE.resourceLocation;
+        }
+        this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
     }
 
 }

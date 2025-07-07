@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-06T23:58:19.5469806	Item Models: dragnlivestock
+// 1.20.1	2025-07-07T15:50:59.1966477	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -55,6 +55,7 @@ b7b4e7dc8af2067f26f705772be6c08fd378bec4 assets/dragnlivestock/models/item/chevo
 343cf952c6d6e9eee83b6896233eac8dc764c2a7 assets/dragnlivestock/models/item/chicken_jerky.json
 336960a5ba3d6d2ef44ceb4c6c641f9348d81124 assets/dragnlivestock/models/item/chicken_strips.json
 d3a27bff21cc9e08c17a896d351c8700a4f594c9 assets/dragnlivestock/models/item/chicken_thigh.json
+76f0e00387380db64ac19c32a0272771e01ffce8 assets/dragnlivestock/models/item/coat_oscillator.json
 c44a2f1d78f82e9079f9a22a6b7dc75a1efbf5f3 assets/dragnlivestock/models/item/cod_fillet.json
 9b33687842d5ab812db3d5ef31a92e03da88c98e assets/dragnlivestock/models/item/cod_roe.json
 bab767c1820c105153a0681852b73dc3d9e898aa assets/dragnlivestock/models/item/cooked_beef_rib_steak.json
@@ -199,6 +200,7 @@ a3c6f6553f173fd2dbf06603f18b5038469eee17 assets/dragnlivestock/models/item/magen
 42b008cc50e8584df5a0964f6a10acc822d4214a assets/dragnlivestock/models/item/male_gender_test_strip.json
 742287150d39806765e9a73af26f407fcd88a7b0 assets/dragnlivestock/models/item/mane_scissors.json
 78143501a0a5088d369c633bdc3788ec453c88fa assets/dragnlivestock/models/item/marans_egg.json
+1b4ae20aff81bdced3df2fd30a95f6f5e1571156 assets/dragnlivestock/models/item/marking_oscillator.json
 078479bf5dbe684aaf7bcb11b45c01c707026b4b assets/dragnlivestock/models/item/melon_soup.json
 d6f4d00edbf8321d75bc45e2e7ab92398ad6cf28 assets/dragnlivestock/models/item/minimal_copper_horse_armor.json
 60e1e17e55eb0234051923b8179839801fae1b36 assets/dragnlivestock/models/item/minimal_diamond_horse_armor.json
