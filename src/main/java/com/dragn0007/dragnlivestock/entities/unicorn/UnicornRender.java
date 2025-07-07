@@ -14,10 +14,9 @@ public class UnicornRender extends GeoEntityRenderer<Unicorn> {
         this.addRenderLayer(new UnicornMarkingLayer(this));
         this.addRenderLayer(new UnicornEyeLayer(this));
         this.addRenderLayer(new UnicornHornLayer(this));
+        this.addRenderLayer(new UnicornSaddleLayer(this));
         this.addRenderLayer(new UnicornArmorLayer(this));
         this.addRenderLayer(new UnicornCarpetLayer(this));
-        this.addRenderLayer(new UnicornSaddleLayer(this));
-        this.addRenderLayer(new UnicornShoeLayer(this));
     }
 
     @Override

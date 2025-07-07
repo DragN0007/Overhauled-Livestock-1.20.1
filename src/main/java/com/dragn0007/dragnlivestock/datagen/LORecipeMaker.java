@@ -4113,22 +4113,82 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("AAA")
+                .pattern("A A")
+                .pattern("B B")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
 
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_SADDLE.get())
-//                .requires(Items.SADDLE)
-//                .requires(Items.BLACK_DYE)
-//                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
-//                        .of(Items.SADDLE)
-//                        .build()))
-//                .save(pFinishedRecipeConsumer);
-//
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_SADDLE.get())
-//                .requires(Items.SADDLE)
-//                .requires(Items.WHITE_DYE)
-//                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
-//                        .of(Items.SADDLE)
-//                        .build()))
-//                .save(pFinishedRecipeConsumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_SADDLE.get())
+                .requires(Items.SADDLE)
+                .requires(Items.BLACK_DYE)
+                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SADDLE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_SADDLE.get())
+                .requires(Items.SADDLE)
+                .requires(Items.WHITE_DYE)
+                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SADDLE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_SADDLE.get())
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("AAA")
+                .pattern("B B")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_LIGHT_SADDLE.get())
+                .requires(LOItems.LIGHT_SADDLE.get())
+                .requires(Items.BLACK_DYE)
+                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SADDLE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_LIGHT_SADDLE.get())
+                .requires(LOItems.LIGHT_SADDLE.get())
+                .requires(Items.WHITE_DYE)
+                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SADDLE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.HEAVY_SADDLE.get())
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("B B")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_HEAVY_SADDLE.get())
+                .requires(LOItems.HEAVY_SADDLE.get())
+                .requires(Items.BLACK_DYE)
+                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SADDLE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_HEAVY_SADDLE.get())
+                .requires(LOItems.HEAVY_SADDLE.get())
+                .requires(Items.WHITE_DYE)
+                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.SADDLE)
+                        .build()))
+                .save(pFinishedRecipeConsumer);
 
 
 
@@ -4229,16 +4289,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .pattern("B ")
                 .unlockedBy("has_stone", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(Tags.Items.STONE).build()))
-                .save(pFinishedRecipeConsumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
-                .define('A', Items.LEATHER)
-                .define('B', Items.IRON_NUGGET)
-                .pattern("AAA")
-                .pattern("A A")
-                .pattern("B B")
-                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.LEATHER).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.LEATHER_HORSE_ARMOR)

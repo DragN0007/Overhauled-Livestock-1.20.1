@@ -168,6 +168,13 @@ public class LOItems {
             () -> new SaddleItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WHITE_LIGHT_SADDLE = ITEMS.register("white_light_saddle",
             () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HEAVY_SADDLE = ITEMS.register("heavy_saddle",
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BLACK_HEAVY_SADDLE = ITEMS.register("black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> WHITE_HEAVY_SADDLE = ITEMS.register("white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> RODEO_HARNESS = ITEMS.register("rodeo_harness",
             () -> new RodeoHarnessItem(new Item.Properties().stacksTo(1)));
 

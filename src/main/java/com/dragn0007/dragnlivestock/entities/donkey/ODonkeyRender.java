@@ -16,7 +16,6 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
         this.addRenderLayer(new ODonkeyArmorLayer(this));
         this.addRenderLayer(new ODonkeyCarpetLayer(this));
         this.addRenderLayer(new ODonkeySaddleLayer(this));
-        this.addRenderLayer(new ODonkeyShoeLayer(this));
     }
 
     @Override

@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-06T16:37:03.0436834	Item Models: dragnlivestock
+// 1.20.1	2025-07-06T23:28:42.8812701	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -12,6 +12,7 @@ fbd7bd6dd8bdddda3d6d315089ca5b1ee98aaf4a assets/dragnlivestock/models/item/beef_
 0257e7bccee123a3dd96871ff0f364f3bdea00d3 assets/dragnlivestock/models/item/berry_glazed_mutton_rib.json
 1640478dd896c578d4e2d362ee4d82cd7b5f1547 assets/dragnlivestock/models/item/berry_glazed_pork_rib_chop.json
 78c8c014ef616fe69e5a2930cd03f01e50463697 assets/dragnlivestock/models/item/black_brand_tag.json
+88d567d96d2887df53658e2f65906dfff0fa3231 assets/dragnlivestock/models/item/black_heavy_saddle.json
 bd8a535fa4413a9bdd0ff429989067dcb84ec128 assets/dragnlivestock/models/item/black_light_saddle.json
 4da28bf00dc4c21fc97270586692ea4d2db12db4 assets/dragnlivestock/models/item/black_medieval_blanket.json
 9883a8f3af28a4b7320f50db3f295781947dbafa assets/dragnlivestock/models/item/black_modern_blanket.json
@@ -140,6 +141,7 @@ a06ae0c0e7f0ce8835709317b379f6f1383bd0dd assets/dragnlivestock/models/item/grey_
 1c2fc93004d7f5e8223c12d7c315e56102b2e18d assets/dragnlivestock/models/item/griffith_inspired_horse_armor.json
 d466130c0261eeaa8459999a06c688e7d522a9c6 assets/dragnlivestock/models/item/grub.json
 9381cf27e5894c300a4ee9012dfa62c3a7a98ab9 assets/dragnlivestock/models/item/grub_sweater.json
+3aef21d37033eb34a6ee9e65244bf9346aaa03ac assets/dragnlivestock/models/item/heavy_saddle.json
 ff9cde1d2cd4752358cdf96a39b7c764533faa4e assets/dragnlivestock/models/item/horse.json
 c9cc254b7a84996b86660f68708472c297328e35 assets/dragnlivestock/models/item/horse_breeds.json
 482209f36b0e48f47540d5733b913f1bc706493b assets/dragnlivestock/models/item/horse_colors.json
@@ -272,6 +274,7 @@ a31388419b61f5a772e1fdee8e06d95ff87e0aaf assets/dragnlivestock/models/item/unico
 d1718307cea5014722342bcd2c740466eaf1e0a6 assets/dragnlivestock/models/item/unicorn_spawn_egg.json
 7c6cbaafe2856f60dafcd7bcae5441f6c6930ca8 assets/dragnlivestock/models/item/utility_knife.json
 bfeb71dc280f90cce46a1703c9c9712239634c36 assets/dragnlivestock/models/item/white_brand_tag.json
+3c6fd8b7b966a63ec994e881294ea3e82f0b1f12 assets/dragnlivestock/models/item/white_heavy_saddle.json
 47f4d977340381b25df26bcfa9173ec94558be4e assets/dragnlivestock/models/item/white_light_saddle.json
 11af4d19cb935d7fa516b639aa9e91f9cd6b75a1 assets/dragnlivestock/models/item/white_medieval_blanket.json
 1a17327a770a88afb7547222579ece3a1e460fb5 assets/dragnlivestock/models/item/white_modern_blanket.json
