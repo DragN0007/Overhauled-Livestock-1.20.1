@@ -705,7 +705,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public boolean isOx(Entity entity) {
-        return entity.getType() == EntityTypes.OX_ENTITY.get();
+        return entity.getType() == EntityTypes.O_COW_ENTITY.get();
     }
     public boolean isHorse(Entity entity) {
         return entity.getType() == EntityTypes.O_HORSE_ENTITY.get();

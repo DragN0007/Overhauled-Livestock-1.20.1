@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.cow;
 
-import com.dragn0007.dragnlivestock.entities.cow.ox.OCowBellLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,7 +14,6 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
         this.addRenderLayer(new OCowMarkingLayer(this));
         this.addRenderLayer(new OCowBrandTagLayer(this));
         this.addRenderLayer(new OCowHarnessLayer(this));
-        this.addRenderLayer(new OCowBellLayer(this));
     }
 
     @Override

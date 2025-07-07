@@ -35,7 +35,6 @@ public class LOItemGroup {
                         output.accept(LOItems.O_PIG_SPAWN_EGG.get());
                         output.accept(LOItems.O_MOOSHROOM_SPAWN_EGG.get());
                         output.accept(LOItems.O_CAMEL_SPAWN_EGG.get());
-                        output.accept(LOItems.OX_SPAWN_EGG.get());
                         output.accept(LOItems.O_GOAT_SPAWN_EGG.get());
                         output.accept(LOItems.O_FROG_SPAWN_EGG.get());
                         output.accept(LOItems.GRUB_SPAWN_EGG.get());

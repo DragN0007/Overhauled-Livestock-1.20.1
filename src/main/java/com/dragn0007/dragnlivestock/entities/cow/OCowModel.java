@@ -70,6 +70,7 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
 
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_cow.geo.json");
     public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_bull.geo.json");
+    public static final ResourceLocation OX = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/ox.geo.json");
     public static final ResourceLocation MEAT_FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/large_cow.geo.json");
     public static final ResourceLocation MEAT_MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/large_bull.geo.json");
     public static final ResourceLocation MINI_FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/mini_cow.geo.json");
@@ -81,6 +82,8 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
     public ResourceLocation getModelResource(OCow object) {
         if (object.isBaby()) {
             return BABY_MODEL;
+        } else if (object.getBreed() == 10) {
+            return OX;
         } else if (object.isMeatBreed()) {
             if (object.isMale()) {
                 return MEAT_MALE;

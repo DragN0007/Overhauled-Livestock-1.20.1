@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.entities.ai;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.datafixers.DataFixUtils;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.List;
@@ -63,7 +62,7 @@ public class SheepFollowHerdLeaderGoal extends Goal {
          this.timeToRecalcPath = this.adjustedTickDelay(10);
 
          OSheep leader = this.mob.leader;
-         if (mob.goalSelector.getRunningGoals().noneMatch(goal -> goal.getGoal() instanceof AvoidEntityGoal<?>)) {
+         if (mob.goalSelector.getRunningGoals().noneMatch(goal -> goal.getGoal() instanceof OAvoidEntityGoal<?>)) {
             if (leader != null) {
                double distanceSq = this.mob.distanceToSqr(leader);
                double minDistanceSq = 3.0D * 3.0D;

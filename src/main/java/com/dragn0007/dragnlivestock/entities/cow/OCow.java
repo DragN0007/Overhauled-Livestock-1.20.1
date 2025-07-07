@@ -4,34 +4,39 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
-import com.dragn0007.dragnlivestock.entities.cow.ox.OxModel;
+import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
+import com.dragn0007.dragnlivestock.gui.OxMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
@@ -43,6 +48,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -86,7 +92,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public boolean isMeatBreed() {
-		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 8;
+		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 8 || this.getBreed() == 10;
 	}
 
 	public boolean isNormalBreed() {
@@ -121,14 +127,6 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void playEmote(String emoteName, String loopType) {}
 	@Override
-	public void openInventory(Player player) {}
-	@Override
-	public void openCustomInventoryScreen(Player player) {}
-	@Override
-	public boolean isTamed() {
-		return false;
-	}
-	@Override
 	public boolean canWearArmor() {
 		return false;
 	}
@@ -139,6 +137,8 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
@@ -149,15 +149,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(3, new CattleFollowHerdLeaderGoal(this, 16.0F));
 		this.goalSelector.addGoal(1, new BullAroundLikeCrazyGoal(this, 1.7F));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 			livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get())
 		);
 
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 	}
@@ -213,23 +213,25 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			double offsetY = 1.1;
 			double offsetZ = -0.055;
 
-			if (this.isHarnessed()) {
-				if (this.isMale()) {
-					if (this.isMeatBreed()) {
-						offsetY = 1.3;
-					} else if (this.isNormalBreed()) {
-						offsetY = 1.0;
-					} else if (this.isMiniBreed()) {
-						offsetY = 0.8;
-					}
-				} else if (this.isFemale()) {
-					if (this.isMeatBreed()) {
-						offsetY = 1.2;
-					} else if (this.isNormalBreed()) {
-						offsetY = 0.7;
-					} else if (this.isMiniBreed()) {
-						offsetY = 0.4;
-					}
+			if (this.getBreed() == 10) {
+				offsetY = 1.4;
+			}
+
+			if (this.isMale()) {
+				if (this.isMeatBreed()) {
+					offsetY = 1.3;
+				} else if (this.isNormalBreed()) {
+					offsetY = 1.0;
+				} else if (this.isMiniBreed()) {
+					offsetY = 0.8;
+				}
+			} else if (this.isFemale()) {
+				if (this.isMeatBreed()) {
+					offsetY = 1.2;
+				} else if (this.isNormalBreed()) {
+					offsetY = 0.7;
+				} else if (this.isMiniBreed()) {
+					offsetY = 0.4;
 				}
 			} else {
 				if (this.isMale()) {
@@ -381,8 +383,8 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
-			if (this.isTagged() || this.isHarnessed()) {
+		if (itemStack.is(Items.SHEARS)) {
+			if (this.isTagged() || this.isHarnessed() || this.isBelled()) {
 				if (this.isTagged()) {
 					this.setTagged(false);
 				}
@@ -641,8 +643,13 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 
+		if (this.getBreed() == 10) {
+			this.setGender(1);
+		} else {
+			this.setGender(random.nextInt(OCow.Gender.values().length));
+		}
+
 		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
-		this.setGender(random.nextInt(OCow.Gender.values().length));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
@@ -717,72 +724,64 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		OCow partner = (OCow) ageableMob;
 		calf = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
 
-		if (this.random.nextInt(5) == 0) {
-			Ox oX = EntityTypes.OX_ENTITY.get().create(serverLevel);
-			if (oX != null) {
-				oX.setVariant(this.random.nextInt(OxModel.Variant.values().length));
-				return oX;
-			}
+		int breedChance = this.random.nextInt(5);
+		int breed;
+		if (breedChance == 0) {
+			breed = this.random.nextInt(CowBreed.Breed.values().length);
 		} else {
+			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+		}
+		calf.setBreed(breed);
 
-			int breedChance = this.random.nextInt(5);
-			int breed;
-			if (breedChance == 0) {
-				breed = this.random.nextInt(CowBreed.Breed.values().length);
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int variantChance = this.random.nextInt(14);
+			int variant;
+			if (variantChance < 6) {
+				variant = this.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
 			} else {
-				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+				variant = this.random.nextInt(OCowModel.Variant.values().length);
 			}
-			calf.setBreed(breed);
+			calf.setVariant(variant);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			calf.setColorByBreed();
+		}
 
-			if (!(breedChance == 0) && random.nextDouble() > 0.5) {
-				int variantChance = this.random.nextInt(14);
-				int variant;
-				if (variantChance < 6) {
-					variant = this.getVariant();
-				} else if (variantChance < 12) {
-					variant = partner.getVariant();
-				} else {
-					variant = this.random.nextInt(OCowModel.Variant.values().length);
-				}
-				calf.setVariant(variant);
-			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
-				calf.setColorByBreed();
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
+			if (overlayChance < 4) {
+				overlay = this.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
+			} else {
+				overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
 			}
+			calf.setOverlayVariant(overlay);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			calf.setMarkingByBreed();
+		}
 
-			if (!(breedChance == 0) && random.nextDouble() > 0.5) {
-				int overlayChance = this.random.nextInt(10);
-				int overlay;
-				if (overlayChance < 4) {
-					overlay = this.getOverlayVariant();
-				} else if (overlayChance < 8) {
-					overlay = partner.getOverlayVariant();
-				} else {
-					overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
-				}
-				calf.setOverlayVariant(overlay);
-			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
-				calf.setMarkingByBreed();
+		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+			int hornsChance = this.random.nextInt(10);
+			int hornType;
+			if (hornsChance < 4) {
+				hornType = this.getHornVariant();
+			} else if (hornsChance < 8) {
+				hornType = partner.getHornVariant();
+			} else {
+				hornType = this.random.nextInt(OCow.BreedHorns.values().length);
 			}
+			calf.setHornVariant(hornType);
+		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			calf.setHornsByBreed();
+		}
 
-			if (!(breedChance == 0) && random.nextDouble() > 0.5) {
-				int hornsChance = this.random.nextInt(10);
-				int hornType;
-				if (hornsChance < 4) {
-					hornType = this.getHornVariant();
-				} else if (hornsChance < 8) {
-					hornType = partner.getHornVariant();
-				} else {
-					hornType = this.random.nextInt(OCow.BreedHorns.values().length);
-				}
-				calf.setHornVariant(hornType);
-			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
-				calf.setHornsByBreed();
-			}
-
-			int gender;
-			gender = this.random.nextInt(OCow.Gender.values().length);
-			calf.setGender(gender);
-
+		if (calf.getBreed() == 10) {
+			calf.setGender(1);
+		} else {
+			calf.setGender(random.nextInt(OCow.Gender.values().length));
 		}
 
 		return calf;
@@ -908,6 +907,16 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 		}
 
+		if (this.getBreed() == 10) {
+			if (random.nextDouble() < 0.15) { //ox
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setMarkingByBreed() {
@@ -994,6 +1003,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 10) { //ox
+			if (random.nextDouble() < 0.15) {
+				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.15) {
 				this.setOverlayVariant(0);
 			}
 		}
@@ -1094,6 +1111,16 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 10) {
+			if (random.nextDouble() < 0.25) { //ox
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.25) {
+				int[] variants = {1, 3, 7, 8, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public enum BreedHorns {
@@ -1114,4 +1141,90 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
+
+	//ox stuff
+	public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.8D, AttributeModifier.Operation.MULTIPLY_TOTAL);
+
+	@Override
+	public boolean canJump() {
+		return false;
+	}
+
+	@Override
+	public int getInventorySize() {
+		if (this.getBreed() == 10) {
+			return this.hasChest() ? 26 : super.getInventorySize();
+		}
+		return super.getInventorySize();
+	}
+
+	@Override
+	public void openInventory(Player player) {
+		if(player instanceof ServerPlayer serverPlayer && this.isTamed() && this.getBreed() == 10) {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
+				return new OxMenu(containerId, inventory, this.inventory, this);
+			}, this.getDisplayName()), (data) -> {
+				data.writeInt(this.getInventorySize());
+				data.writeInt(this.getId());
+			});
+		}
+	}
+
+	@Override
+	public int saddleSlot() {
+		return 0;
+	}
+
+	@Override
+	public boolean handleEating(Player player, ItemStack stack) {
+		int i = 0;
+		int j = 0;
+		float f = 0.0F;
+		boolean flag = false;
+
+		if (this.getBreed() == 10) {
+			if (stack.is(LOTags.Items.O_COW_EATS)) {
+				i = 90;
+				j = 6;
+				f = 10.0F;
+				if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
+					flag = true;
+					this.setInLove(player);
+				}
+			}
+
+			if (this.getHealth() < this.getMaxHealth() && f > 0.0F) {
+				this.heal(f);
+				flag = true;
+			}
+
+			if (this.isBaby() && i > 0) {
+				this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+				if (!this.level().isClientSide) {
+					this.ageUp(i);
+				}
+
+				flag = true;
+			}
+
+			if (j > 0 && (flag || !this.isTamed()) && this.getTemper() < this.getMaxTemper()) {
+				flag = true;
+				if (!this.level().isClientSide) {
+					this.modifyTemper(j);
+				}
+			}
+
+			if (flag) {
+				this.gameEvent(GameEvent.ENTITY_INTERACT);
+				if (!this.isSilent()) {
+					SoundEvent soundevent = this.getEatingSound();
+					if (soundevent != null) {
+						this.level().playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+					}
+				}
+			}
+		}
+
+		return flag;
+	}
 }

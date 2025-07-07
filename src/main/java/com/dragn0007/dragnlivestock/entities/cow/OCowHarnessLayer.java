@@ -24,28 +24,72 @@ public class OCowHarnessLayer extends GeoRenderLayer<OCow> {
 
         ResourceLocation resourceLocation = null;
 
-        if (animatable.isHarnessed() || animatable.isBelled()) {
-            if (animatable.isHarnessed()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/rodeo_harness.png");
-            }
-            if (animatable.isBelled()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/bell.png");
-            }
-        } else {
-            return;
+        if (animatable.isHarnessed()) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/wagon_harness.png");
+
+            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+            poseStack.pushPose();
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType1,
+                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
         }
 
-        RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-        poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
-        getRenderer().reRender(getDefaultBakedModel(animatable),
-                poseStack,
-                bufferSource,
-                animatable,
-                renderType1,
-                bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                1, 1, 1, 1);
+        if (animatable.isBelled()) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/bell.png");
+
+            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+            poseStack.pushPose();
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType1,
+                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+        }
+
+        if (animatable.isSaddled()) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/wagon_harness.png");
+
+            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+            poseStack.pushPose();
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType1,
+                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+        }
+
+        if (animatable.hasChest()) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/saddlebags.png");
+
+            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+            poseStack.pushPose();
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType1,
+                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+        }
     }
 }

@@ -18,7 +18,6 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloo
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
-import com.dragn0007.dragnlivestock.entities.cow.ox.Ox;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
@@ -128,12 +127,6 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,2.5f)
                     .build(new ResourceLocation(MODID,"o_camel").toString()));
-
-    public static final RegistryObject<EntityType<Ox>> OX_ENTITY = ENTITY_TYPES.register("ox",
-            () -> EntityType.Builder.of(Ox::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"ox").toString()));
 
     public static final RegistryObject<EntityType<OGoat>> O_GOAT_ENTITY = ENTITY_TYPES.register("o_goat",
             () -> EntityType.Builder.of(OGoat::new,

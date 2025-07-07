@@ -54,7 +54,7 @@ public class OAvoidEntityGoal<T extends LivingEntity> extends Goal {
       if (this.toAvoid == null) {
          return false;
       } else {
-         Vec3 vec3 = DefaultRandomPos.getPosAway(this.mob, 24, 8, this.toAvoid.position());
+         Vec3 vec3 = DefaultRandomPos.getPosAway(this.mob, 8, 0, this.toAvoid.position());
          if (vec3 == null) {
             return false;
          } else if (this.toAvoid.distanceToSqr(vec3.x, vec3.y, vec3.z) < this.toAvoid.distanceToSqr(this.mob)) {
@@ -85,5 +85,12 @@ public class OAvoidEntityGoal<T extends LivingEntity> extends Goal {
          this.mob.getNavigation().setSpeedModifier(this.walkSpeedModifier);
       }
 
+      double dx = mob.getX() - this.toAvoid.getX();
+      double dz = mob.getZ() - this.toAvoid.getZ();
+      double angle = Math.atan2(dz, dx);
+      float yaw = (float) (Math.toDegrees(angle)) - 90F;
+      mob.setYRot(yaw);
+      mob.yBodyRot = yaw;
+      mob.yHeadRot = yaw;
    }
 }

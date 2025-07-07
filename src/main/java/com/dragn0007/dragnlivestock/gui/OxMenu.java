@@ -77,30 +77,28 @@ public class OxMenu extends AbstractContainerMenu {
         return !this.ox.hasInventoryChanged(this.container) && this.container.stillValid(player) && this.ox.isAlive() && this.ox.distanceTo(player) < 8.0F;
     }
 
+    @Override
     public ItemStack quickMoveStack(Player player, int slotId) {
+        ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotId);
-        if(!slot.hasItem()) {
-            return ItemStack.EMPTY;
-        }
+        if(slot.hasItem()) {
+            itemStack = slot.getItem().copy();
+            int containerSize = this.container.getContainerSize();
 
-        ItemStack itemStack = slot.getItem();
-        ItemStack itemStackCopy = itemStack.copy();
-        int containerSize = this.container.getContainerSize();
-
-        if(slotId < containerSize) {
-            if(!this.moveItemStackTo(itemStack, containerSize, containerSize + 36, true)) {
+            if(slotId < containerSize) {
+                if(!this.moveItemStackTo(itemStack, containerSize, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if(!this.moveItemStackTo(itemStack, 0, containerSize, false)) {
                 return ItemStack.EMPTY;
             }
-        } else if(slotId < containerSize + 36) {
-            if(!this.moveItemStackTo(itemStack, 0, containerSize, false)) {
-                return ItemStack.EMPTY;
+
+            if(itemStack.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
             }
         }
-
-        if(itemStack.getCount() == 0) {
-            slot.set(ItemStack.EMPTY);
-        }
-        slot.setChanged();
-        return itemStackCopy;
+        return itemStack;
     }
 }
