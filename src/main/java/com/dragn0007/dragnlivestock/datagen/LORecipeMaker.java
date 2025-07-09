@@ -401,6 +401,39 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
 
 
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LEATHER_RUMP_STRAPS.get())
+                                .define('A', Items.LEATHER)
+                                .define('B', Items.IRON_NUGGET)
+                                .pattern("BAB")
+                                .pattern("A A")
+                                .pattern("A A")
+                                .unlockedBy("has_iron", has(Items.IRON_NUGGET))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LEATHER_RUMP_STRAPS.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MECompatItems.BLACK_RUMP_STRAPS.get())
+                                .requires(MECompatItems.LEATHER_RUMP_STRAPS.get())
+                                .requires(Items.BLACK_DYE)
+                                .unlockedBy("has_rump_straps", has(MECompatItems.LEATHER_RUMP_STRAPS.get()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.BLACK_RUMP_STRAPS.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new ModLoadedCondition("medievalembroidery"))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MECompatItems.WHITE_RUMP_STRAPS.get())
+                                .requires(MECompatItems.LEATHER_RUMP_STRAPS.get())
+                                .requires(Items.WHITE_DYE)
+                                .unlockedBy("has_rump_straps", has(MECompatItems.LEATHER_RUMP_STRAPS.get()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.WHITE_RUMP_STRAPS.get().toString()));
+
 
         ConditionalRecipe.builder()
                 .addCondition(new ModLoadedCondition("medievalembroidery"))

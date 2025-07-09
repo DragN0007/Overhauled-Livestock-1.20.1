@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "medievalembroidery:leather_rump_straps"
+          },
+          {
+            "item": "minecraft:white_dye"
+          }
+        ],
+        "result": {
+          "item": "medievalembroidery:white_rump_straps"
+        }
+      }
+    }
+  ]
+}

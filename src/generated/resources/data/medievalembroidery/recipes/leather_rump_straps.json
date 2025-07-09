@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:leather"
+          },
+          "B": {
+            "item": "minecraft:iron_nugget"
+          }
+        },
+        "pattern": [
+          "BAB",
+          "A A",
+          "A A"
+        ],
+        "result": {
+          "item": "medievalembroidery:leather_rump_straps"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
