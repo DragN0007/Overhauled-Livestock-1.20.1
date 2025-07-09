@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Rabbits drop rabbit hide and meat. They can also be bred to have different patterns and tamed with veggies. While they won’t follow you, you can make them stay by right-clicking them. $(br2)O-Rabbits can come in 4 different breeds: $(br2)Default, Lop, Dwarf and Giant."
+      "text": "O-Rabbits drop rabbit hide and meat. They can also be bred to have different patterns and tamed with veggies. While they won’t follow you, you can make them stay by right-clicking them. $(br2)O-Rabbits can come in 4 different breeds: $(br2)Default, Lop, Dwarf and Giant. Only Default spawn in the wild, and other breeds must be bred in."
     },
     {
       "type": "patchouli:entity",
@@ -14,7 +14,7 @@
       "default_rotation": 45,
       "scale": 0.8,
       "rotate": "false",
-      "text": "A grey lop bunny with no markings."
+      "text": "A lop bunny with no markings."
     }
   ]
 }

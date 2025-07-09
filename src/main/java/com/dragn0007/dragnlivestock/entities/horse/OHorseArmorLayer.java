@@ -2,7 +2,9 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
+import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,6 +15,7 @@ import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.ModList;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
@@ -53,6 +56,8 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/" + horseArmorItem + ".png");
             } else if (armorItemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/" + horseArmorItem + ".png");
+            } else if (ModList.get().isLoaded("medievalembroidery") && (armorItemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !armorItemStack.isEmpty()) {
+                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
             } else {
                 return;
             }

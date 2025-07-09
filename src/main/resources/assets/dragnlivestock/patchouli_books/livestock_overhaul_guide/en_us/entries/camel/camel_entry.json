@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Camels are exclusive to 1.20.1(+) versions. They drop meat, leather, and bones, and can be saddled and ridden, along with carpeted. Camels are far faster than horses on sand, and can be right-clicked with a bucket every 5 minutes~ for water. Camels are also immune to cactus damage. $(br2)They come in lots of different patterns and colors. You can tame and breed Camels with cacti."
+      "text": "O-Camels are exclusive to 1.20.1(+) versions. They drop meat, leather, and bones, and can be saddled and ridden, along with carpeted. Camels are far faster than horses on sand, and can be right-clicked with a bucket every 5 minutes~ for water. Camels are also immune to cactus damage. $(br2)They come in lots of different patterns and colors. You can tame and breed Camels with cacti and multiple Camels can be put into a caravan, like Llamas."
     },
     {
       "type": "patchouli:entity",
@@ -14,7 +14,7 @@
       "default_rotation": 45,
       "scale": 0.8,
       "rotate": "false",
-      "text": "A cream camel with no markings."
+      "text": "A camel with no markings."
     }
   ]
 }

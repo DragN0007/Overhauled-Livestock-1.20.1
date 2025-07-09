@@ -1,5 +1,5 @@
 {
-  "name": "Extras",
+  "name": "Extras & Compatibilities",
   "icon": "minecraft:heart_of_the_sea",
   "category": "dragnlivestock:animals_category",
   "pages": [
@@ -27,6 +27,44 @@
       "scale": 0.7,
       "rotate": "false",
       "text": "The Headless Horseman, occasionally found roaming the night on his steed."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:coat_oscillator"
+      },
+      "text": "The Coat Oscillator item, which can only be used in Creative. It can switch between all the base coats of an O-Animal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:marking_oscillator"
+      },
+      "text": "The Marking Oscillator item, which can only be used in Creative. It can switch between all the markings of an O-Animal."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Riot Horse Armor comes with Deadly Dinos compatibility."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The American Soldier Draft horse breed comes with Deadly Dinos compatibility."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Obsidian Horse Armor comes with Medieval Embroidery compatibility."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "If TFC is installed, O-Horses can use TFC Horse Armors."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Caparisons come with Medieval Embroidery compatibility. They can be placed in the decor slot of an O-Horse and can be worn alongside armor. They are simply cosmetic and offer no protection."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Rump Straps come with Medieval Embroidery compatibility. They can be placed in the decor OR armor slot of an O-Horse, so they can be worn alongside armor or blankets. They are simply cosmetic and offer no protection."
     }
   ]
 }

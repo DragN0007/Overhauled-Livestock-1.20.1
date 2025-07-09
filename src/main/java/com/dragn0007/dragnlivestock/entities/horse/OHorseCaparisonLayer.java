@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
+import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -35,6 +36,8 @@ public class OHorseCaparisonLayer extends GeoRenderLayer<OHorse> {
         if (ModList.get().isLoaded("medievalembroidery")) {
             if ((itemStack.getItem() instanceof CaparisonItem caparisonItem) && !itemStack.isEmpty()) {
                 resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
+            } else if ((itemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !itemStack.isEmpty()) {
+                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
             }
         }
 

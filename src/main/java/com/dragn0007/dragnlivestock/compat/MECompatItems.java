@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.compat;
 
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
+import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,11 +15,11 @@ public class MECompatItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, "medievalembroidery");
 
     public static final RegistryObject<Item> LEATHER_RUMP_STRAPS = ITEMS.register("leather_rump_straps",
-            () -> new CaparisonItem(DyeColor.BROWN, new Item.Properties()));
+            () -> new RumpStrapItem(new Item.Properties()));
     public static final RegistryObject<Item> BLACK_RUMP_STRAPS = ITEMS.register("black_rump_straps",
-            () -> new CaparisonItem(DyeColor.BLACK, new Item.Properties()));
+            () -> new RumpStrapItem(new Item.Properties()));
     public static final RegistryObject<Item> WHITE_RUMP_STRAPS = ITEMS.register("white_rump_straps",
-            () -> new CaparisonItem(DyeColor.WHITE, new Item.Properties()));
+            () -> new RumpStrapItem(new Item.Properties()));
 
     public static final RegistryObject<Item> BLACK_CAPARISON_CAPE = ITEMS.register("black_caparison_cape",
             () -> new CaparisonItem(DyeColor.BLACK, new Item.Properties()));

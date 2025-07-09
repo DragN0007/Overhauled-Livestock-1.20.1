@@ -5,7 +5,22 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Horses (and other equines) can wear a variety of colorful blankets. You can choose from Carpet, Medieval, Modern, Racer or Western, in a variety of different dye colors. Similarly, if Medieval Embroidery is installed, you can use Caparisons in the same way."
+      "text": "O-Horses (and other equines) can wear a variety of colorful blankets. You can choose from Carpet, Medieval, Modern, Racer or Western, in a variety of different dye colors. Similarly, if Medieval Embroidery is installed, you can use Caparisons and Rump Straps in the same way."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:cyan_western_blanket"
+      },
+      "text": "Blankets can be placed in the decor slot of an O-Equine. They are simply cosmetic and offer no protection. Medieval, Modern, Racer and Western blankets are their own items, but normal vanilla carpets can be used too."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Caparisons come with Medieval Embroidery compatibility. They can be placed in the decor slot of an O-Horse and can be worn alongside armor. They are simply cosmetic and offer no protection."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Rump Straps come with Medieval Embroidery compatibility. They can be placed in the decor OR armor slot of an O-Horse, so they can be worn alongside armor or blankets. They are simply cosmetic and offer no protection."
     },
     {
       "type": "patchouli:text",
@@ -20,14 +35,14 @@
       "item": {
         "item": "dragnlivestock:mane_scissors"
       },
-      "text": "The $(l)Mane Scissors$() are used to cut the manes of O-Horses."
+      "text": "The $(l)Mane Scissors$() are used to cut the manes of O-Horses. Cutting your horse's mane offers no extra advantage other than looking pretty."
     },
     {
       "type": "patchouli:spotlight",
       "item": {
         "item": "dragnlivestock:tail_scissors"
       },
-      "text": "The $(l)Tail Scissors$() are used to cut the tails of O-Horses."
+      "text": "The $(l)Tail Scissors$() are used to cut the tails of O-Horses. Cutting your horse's tail offers no extra advantage other than looking pretty."
     }
   ]
 }

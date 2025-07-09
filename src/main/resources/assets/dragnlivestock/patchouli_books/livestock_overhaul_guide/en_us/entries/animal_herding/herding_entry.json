@@ -4,24 +4,12 @@
   "category": "dragnlivestock:animals_category",
   "pages": [
     {
-      "type": "patchouli:crafting",
-      "recipe": "dragnlivestock:gender_test_strip",
-      "recipe2": "dragnlivestock:grub_sweater"
+      "type": "patchouli:text",
+      "text": "Lots of O-Animals herd together naturally. They'll follow a 'leader' around in order to stay safe. This also means you can easily corral a group of cows, for example, without having to use a billion leads."
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "dragnlivestock:mane_scissors",
-      "recipe2": "dragnlivestock:tail_scissors"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "dragnlivestock:red_medieval_blanket",
-      "recipe2": "dragnlivestock:red_modern_blanket"
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "dragnlivestock:red_racing_blanket",
-      "recipe2": "dragnlivestock:red_western_blanket"
+      "type": "patchouli:text",
+      "text": "O-Horses can herd other animals while being ridden. These animals include Cows, Sheep, and Wild O-Horses. These animals will naturally run from your horse, so you can corral them into your pens."
     }
   ]
 }
