@@ -25,7 +25,7 @@ public class ORunAroundLikeCrazyGoal extends Goal {
    }
 
    public boolean canUse() {
-      if ((!this.mount.isTamed() && this.mount.isVehicle()) || (this.mount.isWearingHarness() && this.mount.isVehicle())) {
+      if ((!this.mount.isTamed() && this.mount.isVehicle()) || (this.mount.isWearingRodeoHarness() && this.mount.isVehicle())) {
          Vec3 vec3 = DefaultRandomPos.getPos(this.mount, 5, 4);
          if (vec3 == null) {
             return false;
@@ -51,7 +51,7 @@ public class ORunAroundLikeCrazyGoal extends Goal {
    public int secondsStayedOnTick = 0;
 
    public void tick() {
-      if (this.mount.isWearingHarness() && this.mount.isVehicle()) {
+      if (this.mount.isWearingRodeoHarness() && this.mount.isVehicle()) {
          if (this.mount.getRandom().nextInt(this.adjustedTickDelay(90)) == 10) {
 
             Entity entity = this.mount.getPassengers().get(0);

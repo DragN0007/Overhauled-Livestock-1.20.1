@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-09T01:16:24.3704419	Recipes
+// 1.20.1	2025-07-10T02:52:29.8416355	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 43b25a39d8cd493d5aedd8351340b99233fbe0de data/dragnlivestock/advancements/recipes/misc/berry_glazed_mutton_rib.json
 b9aa6a8d4052891e5a9c2e8426679bfbdd3bc1f6 data/dragnlivestock/advancements/recipes/misc/berry_glazed_pork_rib_chop.json
@@ -275,6 +275,7 @@ be6bf522932a1fe02c0cbb9b194e853b970924e5 data/dragnlivestock/advancements/recipe
 da42d280904b78933ae699df742fb1e4ac53940b data/dragnlivestock/advancements/recipes/misc/sweet_berry_soup.json
 bd820e6961fe9ff03725d1c061b29b769c33e210 data/dragnlivestock/advancements/recipes/misc/tail_scissors.json
 ffbda0cce31ffbbd293855611499c91042345962 data/dragnlivestock/advancements/recipes/misc/utility_knife.json
+1800cd42d98af8cb63154ffa9083ac75a3f2e254 data/dragnlivestock/advancements/recipes/misc/wagon_harness.json
 c86812018cc9fae8f730ac47b6214b6c7d4bfeb2 data/dragnlivestock/advancements/recipes/misc/white_brand_tag.json
 4a1726dbbe96944a7cb8e7ba7f33410c7a011606 data/dragnlivestock/advancements/recipes/misc/white_heavy_saddle.json
 9725e358ea144e39f997d3e04856d6d9906d7874 data/dragnlivestock/advancements/recipes/misc/white_light_saddle.json
@@ -598,6 +599,7 @@ f7c276589254f5caf6dd5934812964a7e0839afe data/dragnlivestock/recipes/summer_medi
 9dc4f8631166761cc7349baa175e4e57e7cdd271 data/dragnlivestock/recipes/sweet_berry_soup.json
 b8e1aa57c22e7f3e49127393901b6815fe47435a data/dragnlivestock/recipes/tail_scissors.json
 5b1962d8b33da953ded8667163576a2ef203fa9e data/dragnlivestock/recipes/utility_knife.json
+c3459682f7620e84123fe142a1661ab7e74b3134 data/dragnlivestock/recipes/wagon_harness.json
 f6fbed70c1ea1be444ec69a15f594cd5c9720c6a data/dragnlivestock/recipes/white_brand_tag.json
 0f66e46116bfee683154d19d448dd6537cbe3153 data/dragnlivestock/recipes/white_heavy_saddle.json
 26206bf087822154ff25814879d592d845d1b211 data/dragnlivestock/recipes/white_light_saddle.json

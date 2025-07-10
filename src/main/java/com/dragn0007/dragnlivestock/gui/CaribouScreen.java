@@ -82,7 +82,7 @@ public class CaribouScreen extends AbstractContainerScreen<CaribouMenu> {
         }
 
         if (this.caribou.hasChest()) {
-            graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 90, 54);
+            graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 79, y + 17, 0, this.imageHeight, 72, 54);
         }
 
         if (this.caribou.isFemale()) {

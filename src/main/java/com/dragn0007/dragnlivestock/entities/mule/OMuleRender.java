@@ -45,6 +45,12 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
                 model.getBone("back_right_shoe").ifPresent(b -> b.setHidden(true));
                 model.getBone("back_left_shoe").ifPresent(b -> b.setHidden(true));
             }
+
+            if (animatable.isWearingPullingHarness()) {
+                model.getBone("wagon_harness").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
+            }
         }
 
         if (animatable.getFeathering() == 0) {

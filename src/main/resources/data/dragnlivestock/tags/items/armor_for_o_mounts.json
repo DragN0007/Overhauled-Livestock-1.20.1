@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "dragnlivestock:rodeo_harness"
+    "dragnlivestock:rodeo_harness",
+    "dragnlivestock:wagon_harness"
   ]
 }

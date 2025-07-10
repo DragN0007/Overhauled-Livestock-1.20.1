@@ -65,7 +65,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 		return false;
 	}
 	@Override
-	public boolean isWearingHarness() {
+	public boolean isWearingRodeoHarness() {
 		return false;
 	}
 	@Override

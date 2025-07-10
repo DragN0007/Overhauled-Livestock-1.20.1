@@ -15,6 +15,8 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
 public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
     public OHorseSaddleLayer(GeoRenderer<OHorse> entityRendererIn) {
@@ -24,6 +26,8 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemStack itemStack = animatable.getSaddleItem();
+        List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
+        ItemStack armorItemStack = armorSlots.get(2);
         if(!itemStack.isEmpty()) {
             ResourceLocation resourceLocation = null;
 
@@ -31,7 +35,7 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
             // it'll find the name for you so long as your registry item is named the same as your texture AND it's a SaddleItem
             // make sure to put your saddle in the dragnlivestock:saddle tag so you can actually put it in the slot
             // this works for all equines and caribou too, no extra steps required
-            if (itemStack.getItem() instanceof SaddleItem saddleItem) {
+            if (itemStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
 
                 if (resourceLocation != null) {

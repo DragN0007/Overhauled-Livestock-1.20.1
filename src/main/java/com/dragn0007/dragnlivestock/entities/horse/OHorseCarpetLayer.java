@@ -192,7 +192,7 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
         ResourceLocation resourceLocation = null;
 
         if (!armorItemStack.isEmpty() && !itemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem) && !(itemStack.getItem() instanceof RumpStrapItem)) {
-            if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !(armorItemStack.getItem() == LOItems.RODEO_HARNESS.get())) {
+            if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
 
                 if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
                     if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {

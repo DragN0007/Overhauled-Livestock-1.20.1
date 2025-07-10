@@ -144,11 +144,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get() && (this.isWearingHarness() || !this.isTamed())
+				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get() && (this.isWearingRodeoHarness() || !this.isTamed())
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.3F, 1.3F, livingEntity ->
-				livingEntity instanceof OMule && livingEntity.isVehicle() && ((OMule) livingEntity).isSaddled() && (this.isWearingHarness() || !this.isTamed())
+				livingEntity instanceof OMule && livingEntity.isVehicle() && ((OMule) livingEntity).isSaddled() && (this.isWearingRodeoHarness() || !this.isTamed())
 		));
 	}
 
@@ -581,7 +581,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if ((!this.isTamed() || this.isWearingHarness()) && this.isVehicle() && !this.isJumping()) {
+		if ((!this.isTamed() || this.isWearingRodeoHarness()) && this.isVehicle() && !this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
 			controller.setAnimationSpeed(1.3);
 		} else if (this.isJumping()) {

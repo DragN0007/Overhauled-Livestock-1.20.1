@@ -27,7 +27,7 @@ public class UnicornSaddleLayer extends GeoRenderLayer<Unicorn> {
         if(!itemStack.isEmpty()) {
             ResourceLocation resourceLocation = null;
 
-            if (itemStack.getItem() instanceof SaddleItem saddleItem) {
+            if (itemStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
 
                 if (resourceLocation != null) {

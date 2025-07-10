@@ -125,6 +125,7 @@ public class LOItemGroup {
                         output.accept(LOItems.WHITE_LIGHT_SADDLE.get());
 
                         output.accept(LOItems.RODEO_HARNESS.get());
+                        output.accept(LOItems.WAGON_HARNESS.get());
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
 

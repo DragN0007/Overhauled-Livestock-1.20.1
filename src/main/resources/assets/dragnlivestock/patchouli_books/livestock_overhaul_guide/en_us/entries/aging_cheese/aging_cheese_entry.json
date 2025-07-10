@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Cheese can be made by crafting Raw Cheese and placing it down to age. The aging process generally takes around three days (affected by RandomTickSpeed)."
+      "text": "Cheese can be made by crafting Raw Cheese and placing it down to age. The aging process generally takes a few days (affected by RandomTickSpeed)."
     },
     {
       "type": "patchouli:crafting",

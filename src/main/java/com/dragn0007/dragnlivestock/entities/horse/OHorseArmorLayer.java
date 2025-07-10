@@ -47,6 +47,8 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
                 resourceLocation = new ResourceLocation("deadlydinos", "textures/entity/horse/armor/riot_horse_armor.png");
             } else if (armorItemStack.getItem() == LOItems.RODEO_HARNESS.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/rodeo_harness.png");
+            } else if (armorItemStack.getItem() == LOItems.WAGON_HARNESS.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/wagon_harness.png");
 
                 // if youre another modder looking to add new armor, use this pathway v
                 // it'll find the name for you so long as your registry item is named the same as your texture AND it's a HorseAmorItem or LightHorseArmorItem

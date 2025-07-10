@@ -75,6 +75,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             this.temper = temper;
     }
 
+
+
     public int modifyTemper(int p_30654_) {
         int i = Mth.clamp(this.getTemper() + p_30654_, 0, this.getMaxTemper());
         this.setTemper(i);
@@ -82,7 +84,15 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public boolean isWearingHarness() {
-        return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.RODEO_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
+        return this.isWearingPullingHarness() || this.isWearingRodeoHarness();
+    }
+
+    public boolean isWearingRodeoHarness() {
+        return (this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.RODEO_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty());
+    }
+
+    public boolean isWearingPullingHarness() {
+        return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.WAGON_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
     public void tickRidden(Player player, Vec3 vec3) {

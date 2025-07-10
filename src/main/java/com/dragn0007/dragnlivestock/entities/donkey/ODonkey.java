@@ -167,7 +167,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if ((!this.isTamed() || this.isWearingHarness()) && this.isVehicle() && !this.isJumping()) {
+		if ((!this.isTamed() || this.isWearingRodeoHarness()) && this.isVehicle() && !this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
 			controller.setAnimationSpeed(1.3);
 		} else if (this.isJumping()) {
