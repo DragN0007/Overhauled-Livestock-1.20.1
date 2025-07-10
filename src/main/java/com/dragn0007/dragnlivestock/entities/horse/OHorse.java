@@ -812,7 +812,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (!this.isBaby()) {
+		if (!this.isBaby() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
 			maneGrowthTick++;
 			tailGrowthTick++;
 

@@ -182,12 +182,17 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemstack.is(Items.BUCKET) && !this.isBaby() && (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) &&
-				(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-						(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.GOAT_MILK_BUCKET.get().getDefaultInstance());
-			player.setItemInHand(hand, itemstack1);
+		if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
+			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() &&
+					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
+							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
+				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+				ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.GOAT_MILK_BUCKET.get().getDefaultInstance());
+				player.setItemInHand(hand, itemstack1);
+				replenishMilkCounter = 0;
+				setMilked(true);
+			}
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
 		if (this.isTamed()) {

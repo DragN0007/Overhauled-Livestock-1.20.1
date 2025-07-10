@@ -116,6 +116,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 18.0D)
+				.add(Attributes.ATTACK_DAMAGE, 1.5D)
 				.add(Attributes.MOVEMENT_SPEED, 0.17F);
 	}
 
