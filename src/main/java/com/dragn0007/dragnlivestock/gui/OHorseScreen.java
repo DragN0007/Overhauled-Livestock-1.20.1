@@ -35,6 +35,8 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     public int genderFLabelX;
     public int genderMLabelX;
     public int genderLabelY;
+    public int decompStateLabelX;
+    public int decompStateLabelY;
 
     public OHorseScreen(OHorseMenu oHorseMenu, Inventory inventory, Component component) {
         super(oHorseMenu, inventory, component);
@@ -67,6 +69,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
         healthLabelX = leftPos + 1;
         healthLabelY = topPos + 210;
+
+        decompStateLabelX = leftPos + 1;
+        decompStateLabelY = topPos + 220;
     }
 
     public void renderBg(GuiGraphics graphics, float f, int i, int j) {
@@ -122,6 +127,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             renderSpeedLabel(graphics);
             renderJumpStrengthLabel(graphics);
             renderHealthLabel(graphics);
+            if (oHorse.isUndead()) {
+                renderDecompLabel(graphics);
+            }
         }
 
         if (LivestockOverhaulClientConfig.ACCESSIBILITY_GENDER_IDENTIFIER.get()) {
@@ -208,6 +216,33 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             graphics.drawString(this.font, male, genderMLabelX, genderLabelY, 0xFFFFFF, false);
         } else {
             graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
+        }
+    }
+
+    private void renderDecompLabel(GuiGraphics graphics) {
+        String decompText = getDecompText(this.oHorse.getDecompVariant());
+        String labelText = "Undead Decomp Stage: " + decompText;
+        String preserved = labelText + " (Preserved)";
+
+        if (!oHorse.canDecompose()) {
+            graphics.drawString(this.font, preserved, decompStateLabelX, decompStateLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, labelText, decompStateLabelX, decompStateLabelY, 0xFFFFFF, false);
+        }
+    }
+
+    private String getDecompText(int i) {
+        switch (i) {
+            case 0: return "None";
+            case 1: return "Minimal";
+            case 2: return "Moderate";
+            case 3: return "Extreme";
+            case 4: return "Skeletal";
+            case 5: return "Wither";
+            case 6: return "Stray";
+            case 7: return "Drowned";
+            case 8: return "Husk";
+            default: return "Unknown";
         }
     }
 

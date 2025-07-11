@@ -409,22 +409,22 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             if (player.isShiftKeyDown()) {
                 this.setVariant(this.getVariant() - 1);
                 this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                return InteractionResult.SUCCESS;
             }
             this.setVariant(this.getVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
+            return InteractionResult.SUCCESS;
         }
 
         if (itemStack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
             if (player.isShiftKeyDown()) {
                 this.setOverlayVariant(this.getOverlayVariant() - 1);
                 this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                return InteractionResult.SUCCESS;
             }
             this.setOverlayVariant(this.getOverlayVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
+            return InteractionResult.SUCCESS;
         }
 
         if (this.isHorse(this) && itemStack.is(Items.HEART_OF_THE_SEA)) {
@@ -436,20 +436,25 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 this.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
                 this.level().playSound(null, this, SoundEvents.TOTEM_USE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
             }
+
+            return InteractionResult.SUCCESS;
         }
 
         if (this.isHorse(this) && itemStack.is(Items.COAL)) {
             OHorse oHorse = (OHorse) this;
 
-            itemStack.finishUsingItem(level(), player);
-            this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+            if (oHorse.isUndead()) {
+                itemStack.finishUsingItem(level(), player);
+                this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 
-            if (oHorse.isUndead() && oHorse.canDecompose()) {
-                oHorse.setCanDecompose(false);
+                if (oHorse.canDecompose()) {
+                    oHorse.setCanDecompose(false);
+                } else if (!oHorse.canDecompose()) {
+                    oHorse.setCanDecompose(true);
+                }
             }
-            if (oHorse.isUndead() && !oHorse.canDecompose()) {
-                oHorse.setCanDecompose(true);
-            }
+
+            return InteractionResult.SUCCESS;
         }
 
         if(!this.isBaby()) {

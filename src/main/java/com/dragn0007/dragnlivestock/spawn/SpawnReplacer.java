@@ -1110,7 +1110,6 @@ public class SpawnReplacer {
 
                     oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
                     oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
-                    oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
                     oHorse.setUndead(true);
 
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
@@ -1134,10 +1133,16 @@ public class SpawnReplacer {
                         oHorse.setColorByBreed();
                         oHorse.setMarkingByBreed();
                         oHorse.setFeatheringByBreed();
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_NETHER)) {
+                            oHorse.setDecompVariant(5);
+                        } else {
+                            oHorse.setDecompVariant(4);
+                        }
                     } else {
                         oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
+                        oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
@@ -1180,7 +1185,6 @@ public class SpawnReplacer {
 
                     oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
                     oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
-                    oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
                     oHorse.setUndead(true);
 
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
@@ -1204,10 +1208,22 @@ public class SpawnReplacer {
                         oHorse.setColorByBreed();
                         oHorse.setMarkingByBreed();
                         oHorse.setFeatheringByBreed();
+                        if (oHorse.isInWaterOrRain()) {
+                            oHorse.setDecompVariant(7);
+                        } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            oHorse.setDecompVariant(8);
+                        } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            oHorse.setDecompVariant(6);
+                        } else {
+                            int[] decompStage = {1, 2, 3};
+                            int decompRandomIndex = new Random().nextInt(decompStage.length);
+                            oHorse.setDecompVariant(decompStage[decompRandomIndex]);
+                        }
                     } else {
                         oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
+                        oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {

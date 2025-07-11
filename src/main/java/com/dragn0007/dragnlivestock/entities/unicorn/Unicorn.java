@@ -688,7 +688,10 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 		if (this.getSpecies() == 0) {
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
 				int[] variants = {4, 8, 9, 11, 16, 18, 19, 24, 25, 29, 30};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -700,7 +703,10 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 		if (this.getSpecies() == 1) {
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
 				int[] variants = {0, 1, 2, 3, 5, 6, 10, 12, 13, 17, 20, 21, 26};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -712,7 +718,10 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 		if (this.getSpecies() == 2) {
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(UnicornModel.Variant.values().length));
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
 				int[] variants = {7, 8, 11, 15, 22, 23, 28, 31};
 				int randomIndex = new Random().nextInt(variants.length);

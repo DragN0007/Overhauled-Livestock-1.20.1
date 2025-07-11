@@ -8,6 +8,10 @@
       "text": "The natural breed of wild O-Horses is the Mustang, regardless of biome, unless configured otherwise. $(br)Some breeds come with different chances for feathering around their hooves. These are just general chances; every breed has a very small chance of getting any feathering type. $(br2)-Stock: Generally None $(br)-Warmblood: Half or None $(br)-Draft/ Coldblood: Full or Half $(br)-Pony: Full or Half $(br)-Racer: Generally None"
     },
     {
+      "type": "patchouli:text",
+      "text": "Draft horses can wear Heavy Armors without being slowed down. Other breeds, however, will be over-encumbered by heavy armor, and should wear Light Armor instead. Racing breeds will be slowed by *any* armor."
+    },
+    {
       "type": "patchouli:entity",
       "entity": "dragnlivestock:o_horse{Variant:10, Overlay:17, Breed:0, Mane:3, Tail:2, Feathering:1}",
       "name": "Mustang (0)",

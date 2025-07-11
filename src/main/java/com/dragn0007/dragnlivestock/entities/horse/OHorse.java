@@ -100,6 +100,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public OHorse(EntityType<? extends OHorse> type, Level level) {
 		super(type, level);
+		this.setCanDecompose(true);
 	}
 
 	@Override
