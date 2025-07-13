@@ -237,6 +237,13 @@ public class SpawnReplacer {
                     //debug only. annoying to see it spam the console
 //                    System.out.println("[Livestock Overhaul]: Replaced a vanilla horse with an O-Horse!");
 
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get()) {
+                        if (event.getLevel().isClientSide) {
+                            oHorse.remove(Entity.RemovalReason.DISCARDED);
+                        }
+                        oHorse.remove(Entity.RemovalReason.DISCARDED);
+                    }
+
                     event.setCanceled(true);
                 }
             }

@@ -8,6 +8,7 @@ public class LivestockOverhaulCommonConfig {
 
 
     public static final ForgeConfigSpec.BooleanValue REPLACE_SPAWN_EGG_ANIMALS;
+    public static final ForgeConfigSpec.ConfigValue<Double> SPAWN_PREVENTION_PERCENT;
     public static final ForgeConfigSpec.BooleanValue REPLACE_HORSES;
     public static final ForgeConfigSpec.BooleanValue REPLACE_MULES;
     public static final ForgeConfigSpec.BooleanValue REPLACE_DONKEYS;
@@ -67,6 +68,10 @@ public class LivestockOverhaulCommonConfig {
         REPLACE_SPAWN_EGG_ANIMALS = BUILDER.comment("Should vanilla animals spawned via Spawn Egg be replaced with O-Animals?" +
                         "\nNote that if this is turned on, all previously-spawned vanilla animals will be converted regardless of spawn type.")
                 .define("Replace Spawn Egg Vanilla Animals", false);
+
+        SPAWN_PREVENTION_PERCENT = BUILDER.comment("Percent of O-Animals that should be removed on-spawn. Higher the number = more O-Animals removed." +
+                        "This may help lower-end servers or computers run LO a little better if set to a higher value, since not as many animals will spawn. Does NOT affect LO Addon animals.")
+                .define("Spawn Rate Prevention Percent", 0.0);
 
         REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
                 .define("Replace Horses", true);

@@ -110,7 +110,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.setXRot(playerXRot);
         this.xRotO = this.getXRot();
 
-        if (LivestockOverhaulCommonConfig.OLD_HORSE_TURNING.get()) {
+        if (LivestockOverhaulCommonConfig.OLD_HORSE_TURNING.get() && this.onGround()) {
             if (Math.abs(degrees) > maxHeadYRot) {
                 float turnSpeed = 8.0f;
                 float yaw = yRot + Mth.clamp(degrees, -turnSpeed, turnSpeed);
