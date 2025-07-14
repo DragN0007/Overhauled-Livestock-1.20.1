@@ -20,7 +20,7 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
 
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
 
-        if (neck != null) {
+        if (neck != null && animatable.onGround()) {
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
             neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
             float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
