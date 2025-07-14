@@ -35,7 +35,7 @@ public class BiomeHitter {
         context.register(CARIBOU, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.CARIBOU_ENTITY.get(),
-                        5,
+                        2,
                         1,
                         3
                 ))));

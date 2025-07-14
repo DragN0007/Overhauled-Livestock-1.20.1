@@ -69,9 +69,9 @@ public class LivestockOverhaulCommonConfig {
                         "\nNote that if this is turned on, all previously-spawned vanilla animals will be converted regardless of spawn type.")
                 .define("Replace Spawn Egg Vanilla Animals", false);
 
-        SPAWN_PREVENTION_PERCENT = BUILDER.comment("Percent of O-Animals that should be removed on-spawn. Higher the number = more O-Animals removed." +
-                        "This may help lower-end servers or computers run LO a little better if set to a higher value, since not as many animals will spawn. Does NOT affect LO Addon animals.")
-                .define("Spawn Rate Prevention Percent", 0.0);
+        SPAWN_PREVENTION_PERCENT = BUILDER.comment("Percent of O-Animals that should be removed on-spawn. Higher the number = more O-Animals removed. Default is 0.3 (30%)" +
+                        "\nThis may help lower-end servers or computers run LO a little better if set to a higher value, since not as many animals will spawn. Only affects common farm animals (since they spawn most often) and does not affect anything vanilla or from other mods.")
+                .define("Spawn Rate Prevention Percent", 0.30);
 
         REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
                 .define("Replace Horses", true);

@@ -1265,7 +1265,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 					this.setHornVariant(0);
 				} else if (random.nextDouble() > 0.20) {
 					this.setHornVariant(1);
-					System.out.println("Setting horns for Female Hair Sheep");
 				}
 			} else if (this.isMale()) {
 				if (random.nextDouble() < 0.02) {
@@ -1274,7 +1273,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 					this.setHornVariant(1);
 				} else if (random.nextDouble() > 0.15) {
 					this.setHornVariant(2);
-				System.out.println("Setting horns for Male Hair Sheep");
 				}
 			}
 		}
