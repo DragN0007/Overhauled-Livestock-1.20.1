@@ -137,7 +137,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
-//		this.goalSelector.addGoal(1, new SleepyGoal(this));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
 				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
@@ -712,9 +711,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public void addFollowers(Stream<? extends OHorse> stream) {
-		stream.limit(this.getMaxHerdSize() - this.herdSize).filter((horse) -> {
-			return horse != this;
-		}).forEach((horse) -> {
+		stream.limit(this.getMaxHerdSize() - this.herdSize).filter((horse) -> horse != this).forEach((horse) -> {
 			horse.startFollowing(this);
 		});
 	}
@@ -846,20 +843,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				decompTick = 0;
 			}
 		}
-
-//		if (this.level().isNight() && !this.isVehicle()) {
-//			this.setSleeping(true);
-//		}
-
-//		if (--this.sleepCounter <= 0 && this.shouldSleep()) {
-//			this.staySleepingCounter++;
-//			setSleeping(true);
-//			if (this.staySleepingCounter >= 1200) {
-//				this.sleepCounter = this.random.nextInt(300) + 300;
-//				this.staySleepingCounter = 0;
-//				setSleeping(false);
-//			}
-//		}
 
 		Entity controllingPassenger = this.getControllingPassenger();
 		Entity entity = controllingPassenger;
