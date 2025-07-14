@@ -27,7 +27,6 @@ import software.bernie.geckolib.GeckoLib;
 
 import java.util.Optional;
 
-
 @Mod(LivestockOverhaul.MODID)
 public class LivestockOverhaul
 {
