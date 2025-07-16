@@ -193,7 +193,15 @@ public class SpawnReplacer {
 
                     //spawn breeds except for compat-only ones if the config allows it
                     if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-                        if (!ModList.get().isLoaded("deadlydinos")) {
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            int[] breeds = {10, 13};
+                            int randomIndex = new Random().nextInt(breeds.length);
+                            oHorse.setBreed(breeds[randomIndex]);
+                        } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            int[] breeds = {1, 5, 6, 8, 12};
+                            int randomIndex = new Random().nextInt(breeds.length);
+                            oHorse.setBreed(breeds[randomIndex]);
+                        } else if (!ModList.get().isLoaded("deadlydinos")) {
                             int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
                             int randomIndex = new Random().nextInt(breeds.length);
                             oHorse.setBreed(breeds[randomIndex]);
