@@ -729,6 +729,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
 		if (!this.isUndead() && random.nextDouble() < 0.03 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
+			if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+				System.out.println("[DragN's Livestock Overhaul!]: An OHorse has turned undead at: " + this.getOnPos());
+			}
 			if (this.getHealth() <= 4) {
 				this.heal(10);
 				this.setUndead(true);

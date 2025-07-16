@@ -1,7 +1,7 @@
 package com.dragn0007.dragnlivestock;
 
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
-import com.dragn0007.dragnlivestock.compat.MECompatItems;
+import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
@@ -55,8 +55,35 @@ public class LivestockOverhaul
 
         MinecraftForge.EVENT_BUS.register(this);
 
+
+
         System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
         System.out.println("[DragN's Livestock Overhaul!] Do not remove this mod without running the Failsafe Config!");
+
+        //debug
+        if (ModList.get().isLoaded("jade")) {
+            System.out.println("[DragN's Livestock Overhaul!] Jade is installed! We're compatible!");
+        } else {
+            System.out.println("[DragN's Livestock Overhaul!] Jade is not installed.");
+        }
+
+        if (ModList.get().isLoaded("deadlydinos")) {
+            System.out.println("[DragN's Livestock Overhaul!] Deadly Dinos is installed! We're compatible!");
+        } else {
+            System.out.println("[DragN's Livestock Overhaul!] Deadly Dinos is not installed.");
+        }
+
+        if (ModList.get().isLoaded("medievalembroidery")) {
+            System.out.println("[DragN's Livestock Overhaul!] Medieval Embroidery is installed! We're compatible!");
+        } else {
+            System.out.println("[DragN's Livestock Overhaul!] Medieval Embroidery is not installed.");
+        }
+
+        if (ModList.get().isLoaded("tfc")) {
+            System.out.println("[DragN's Livestock Overhaul!] TerraFirmaCraft is installed! We're compatible!");
+        } else {
+            System.out.println("[DragN's Livestock Overhaul!] TerraFirmaCraft is not installed.");
+        }
     }
 
     private void setup(final FMLCommonSetupEvent event) {

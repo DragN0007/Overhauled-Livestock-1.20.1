@@ -65,6 +65,7 @@ import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.pig.OPigMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
@@ -242,8 +243,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oHorse);
                     vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
 
-                    //debug only. annoying to see it spam the console
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla horse with an O-Horse!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla horse with an O-Horse at: " + oHorse.getOnPos());
+                    }
 
                     if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oHorse.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
@@ -294,8 +296,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oDonkey);
                     vanillaDonkey.remove(Entity.RemovalReason.DISCARDED);
 
-                    //debug only. annoying to see it spam the console
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla donkey with an O-Donkey!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla donkey with an O-Donkey at: " + oDonkey.getOnPos());
+                    }
 
                     if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
@@ -348,8 +351,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oMule);
                     vanillaMule.remove(Entity.RemovalReason.DISCARDED);
 
-                    //debug only. annoying to see it spam the console
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla mule with an O-Mule!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla mule with an O-Mule at: " + oMule.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -644,7 +648,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oCow);
                     vanillacow.remove(Entity.RemovalReason.DISCARDED);
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla cow with an O-Cow!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla cow with an O-Cow at: " + oCow.getOnPos());
+                    }
 
                     if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oCow.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
@@ -728,7 +734,9 @@ public class SpawnReplacer {
                         oChicken.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla chicken with an O-Chicken!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla chicken with an O-Chicken at: " + oChicken.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -759,7 +767,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oSalmon);
                     vanillasalmon.remove(Entity.RemovalReason.DISCARDED);
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla salmon with an O-Salmon!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla salmon with an O-Salmon at: " + oSalmon.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -788,7 +798,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oCod);
                     vanillacod.remove(Entity.RemovalReason.DISCARDED);
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla cod with an O-Cod!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla cod with an O-Cod at: " + oCod.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -808,6 +820,11 @@ public class SpawnReplacer {
 
                 bee.remove(Entity.RemovalReason.DISCARDED);
                 event.getLevel().addFreshEntity(oBee);
+
+                if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                    System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla bee with an O-Bee at: " + oBee.getOnPos());
+                }
+
                 // we need to handle beehive data and replace it with oBee data
                 if(oBee.getHivePos() != null) {
                     BlockEntity blockEntity = event.getLevel().getBlockEntity(oBee.getHivePos());
@@ -871,8 +888,9 @@ public class SpawnReplacer {
                         oRabbit.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla rabbit with an O-Rabbit!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla rabbit with an O-Rabbit at: " + oRabbit.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -937,7 +955,9 @@ public class SpawnReplacer {
                         oSheep.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla sheep with an O-Sheep!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla sheep with an O-Sheep at: " + oSheep.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -981,8 +1001,9 @@ public class SpawnReplacer {
                         oLlama.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla llama with an O-Llama!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla llama with an O-Llama at: " + oLlama.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1013,6 +1034,7 @@ public class SpawnReplacer {
                         oPig.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
                     }
 
+                    oPig.setBreed(random.nextInt(PigBreed.Breed.values().length));
                     oPig.setGender(random.nextInt(OPig.Gender.values().length));
 
                     if (event.getLevel().isClientSide) {
@@ -1029,7 +1051,9 @@ public class SpawnReplacer {
                         oPig.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla pig with an O-Llama!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla pig with an O-Pig at: " + oPig.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1080,7 +1104,9 @@ public class SpawnReplacer {
                         oMooshroom.remove(Entity.RemovalReason.DISCARDED);
                     }
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla mooshroom with an O-Mooshroom!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla mooshroom with an O-Mooshroom at: " + oMooshroom.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1117,7 +1143,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oCamel);
                     vanillacamel.remove(Entity.RemovalReason.DISCARDED);
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla camel with an O-Camel!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla camel with an O-Camel at: " + oCamel.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1157,7 +1185,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oGoat);
                     vanillagoat.remove(Entity.RemovalReason.DISCARDED);
 
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla goat with an O-Goat!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla goat with an O-Goat at: " + oGoat.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1232,8 +1262,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oHorse);
                     skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
 
-                    //debug only. annoying to see it spam the console
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla horse with an O-Horse!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla skeleton horse with an O-Undead Horse at: " + oHorse.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1313,8 +1344,9 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oHorse);
                     zombieHorse.remove(Entity.RemovalReason.DISCARDED);
 
-                    //debug only. annoying to see it spam the console
-//                    System.out.println("[Livestock Overhaul]: Replaced a vanilla horse with an O-Horse!");
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla zombie horse with an O-Undead Horse at: " + oHorse.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1347,6 +1379,10 @@ public class SpawnReplacer {
 
                     event.getLevel().addFreshEntity(oFrog);
                     frog.remove(Entity.RemovalReason.DISCARDED);
+
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla frog with an O-Frog at: " + oFrog.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1390,6 +1426,10 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(unicorn);
                     rabbit.remove(Entity.RemovalReason.DISCARDED);
 
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla rabbit with a Unicorn at: " + unicorn.getOnPos());
+                    }
+
                     event.setCanceled(true);
                 }
             }
@@ -1427,6 +1467,10 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(unicorn);
                     brute.remove(Entity.RemovalReason.DISCARDED);
 
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla piglin brute with a Unicorn at: " + unicorn.getOnPos());
+                    }
+
                     event.setCanceled(true);
                 }
             }
@@ -1463,6 +1507,10 @@ public class SpawnReplacer {
 
                     event.getLevel().addFreshEntity(unicorn);
                     enderMan.remove(Entity.RemovalReason.DISCARDED);
+
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                        System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla enderman with a Unicorn at: " + unicorn.getOnPos());
+                    }
 
                     event.setCanceled(true);
                 }
@@ -1853,6 +1901,32 @@ public class SpawnReplacer {
 
                 event.getLevel().addFreshEntity(frog);
                 oFrog.remove(Entity.RemovalReason.DISCARDED);
+
+                event.setCanceled(true);
+            }
+        }
+
+        //Camel
+        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && event.getEntity() instanceof OCamel) {
+            OCamel oCamel = (OCamel) event.getEntity();
+
+            if (event.getLevel().isClientSide) {
+                return;
+            }
+
+            Camel camel = EntityType.CAMEL.create(event.getLevel());
+            if (camel != null) {
+                camel.copyPosition(oCamel);
+
+                camel.setCustomName(oCamel.getCustomName());
+                camel.setAge(oCamel.getAge());
+
+                if (event.getLevel().isClientSide) {
+                    oCamel.remove(Entity.RemovalReason.DISCARDED);
+                }
+
+                event.getLevel().addFreshEntity(camel);
+                oCamel.remove(Entity.RemovalReason.DISCARDED);
 
                 event.setCanceled(true);
             }

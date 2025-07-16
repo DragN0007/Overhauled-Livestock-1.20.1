@@ -720,5 +720,10 @@
   "item.medievalembroidery.white_yellow_caparison_cape": "White Checkerboard Yellow Cape Caparison",
   "item.medievalembroidery.white_yellow_caparison_full": "White Checkerboard Yellow Full Caparison",
   "item.medievalembroidery.white_yellow_caparison_half": "White Checkerboard Yellow Half Caparison",
-  "item.medievalembroidery.white_yellow_caparison_shoulder": "White Checkerboard Yellow Shoulder Caparison"
+  "item.medievalembroidery.white_yellow_caparison_shoulder": "White Checkerboard Yellow Shoulder Caparison",
+
+
+  "tooltip.dragnlivestock.jade.female.tooltip": "Female",
+  "tooltip.dragnlivestock.jade.male.tooltip": "Male",
+  "config.jade.plugin_dragnlivestock.o_tooltips": "Display O-Livestock Genders & Breeds"
 }

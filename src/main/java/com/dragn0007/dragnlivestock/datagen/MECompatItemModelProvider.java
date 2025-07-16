@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.datagen;
 
-import com.dragn0007.dragnlivestock.compat.MECompatItems;
+import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

@@ -525,6 +525,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		this.spawnByBiome(this.level().getBiome(this.getOnPos()));
 		setVariant(random.nextInt(OLlamaModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
+		setWooly(random.nextInt(Wooly.values().length));
 		this.setGender(random.nextInt(OLlama.Gender.values().length));
 		this.setRandomStrength();
 
