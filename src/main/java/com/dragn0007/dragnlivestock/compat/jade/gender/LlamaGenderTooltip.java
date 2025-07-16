@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.compat.jade.gender;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

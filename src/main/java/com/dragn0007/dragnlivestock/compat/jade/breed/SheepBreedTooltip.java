@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.compat.jade.breed;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
