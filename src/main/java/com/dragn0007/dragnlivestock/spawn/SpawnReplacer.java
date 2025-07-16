@@ -620,7 +620,7 @@ public class SpawnReplacer {
                                 oCow.setBreed(9);
                             }
                         } else {
-                            int[] variants = {0, 3, 6, 7, 8};
+                            int[] variants = {0, 6, 7, 8};
                             int randomIndex = new Random().nextInt(variants.length);
                             oCow.setBreed(variants[randomIndex]);
                         }
