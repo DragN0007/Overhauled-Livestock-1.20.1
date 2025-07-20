@@ -126,6 +126,7 @@ public class LOItemGroup {
 
                         output.accept(LOItems.RODEO_HARNESS.get());
                         output.accept(LOItems.WAGON_HARNESS.get());
+                        output.accept(LOItems.MARTINGALE_HARNESS.get());
 
 //                        output.accept(LOItems.COVERED_WAGON.get());
 

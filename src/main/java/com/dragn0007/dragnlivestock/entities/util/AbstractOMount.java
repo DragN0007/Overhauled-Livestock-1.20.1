@@ -95,6 +95,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.WAGON_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
+    public boolean isWearingMartingale() {
+        return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.MARTINGALE_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
+    }
+
     public void tickRidden(Player player, Vec3 vec3) {
         Vec2 vec2 = this.getRiddenRotation(player);
 

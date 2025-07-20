@@ -108,12 +108,6 @@ O-Rabbit
 Caribou
 /summon dragnlivestock:caribou ~ ~ ~ {Texture:".png"}
 
-Overworld Unicorn
-/summon dragnlivestock:overworld_unicorn ~ ~ ~ {Texture:".png"}
-
-Nether Unicorn
-/summon dragnlivestock:nether_unicorn ~ ~ ~ {Texture:".png"}
-
-End Unicorn
-/summon dragnlivestock:end_unicorn ~ ~ ~ {Texture:".png"}
+Unicorn
+/summon dragnlivestock:unicorn ~ ~ ~ {Texture:".png"}
 ```

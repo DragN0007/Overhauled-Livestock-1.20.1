@@ -13,11 +13,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "O-Cows come in multiple different breeds. This includes: $(br2)-(0) Angus $(br)-(1) Longhorn $(br)-(2) Brahman $(br)-(3) Mini $(br)-(4) Watusi $(br)-(5) Corriente $(br)-(6) Holstein $(br)-(7) Jersey $(br)-(8) Hereford $(br)-(9) Highland"
+      "text": "O-Cows come in multiple different breeds. These include: $(br2)-(0) Angus $(br)-(1) Longhorn $(br)-(2) Brahman $(br)-(3) Mini $(br)-(4) Watusi $(br)-(5) Corriente $(br)-(6) Holstein $(br)-(7) Jersey $(br)-(8) Hereford $(br)-(9) Highland $(br)-(10) Ox"
     },
     {
       "type": "patchouli:text",
-      "text": "Angus, Brahman, Watusi and Hereford cattle are meat cows, which means they generally drop more meat and are bigger. Holstein and Jersey, on the other hand, are dairy cattle, so they can give milk much faster than other cows."
+      "text": "Angus, Brahman, Watusi and Hereford cattle are meat cows, which means they generally drop more meat and are bigger. Holstein and Jersey, on the other hand, are dairy cattle, so they can give milk much faster than other cows. $(br2) Oxen are larger breeds of cattle that can only be male. They can carry chests and be saddled and ridden. They're are much bigger than other cattle breeds, so they're hard to miss!"
     }
   ]
 }

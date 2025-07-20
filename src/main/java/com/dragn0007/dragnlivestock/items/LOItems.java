@@ -177,9 +177,10 @@ public class LOItems {
 
     public static final RegistryObject<Item> RODEO_HARNESS = ITEMS.register("rodeo_harness",
             () -> new RodeoHarnessItem(new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> WAGON_HARNESS = ITEMS.register("wagon_harness",
             () -> new WagonHarnessItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> MARTINGALE_HARNESS = ITEMS.register("martingale_harness",
+            () -> new HarnessItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));

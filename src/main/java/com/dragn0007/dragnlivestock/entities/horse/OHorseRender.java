@@ -24,6 +24,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
     public void preRender(PoseStack poseStack, OHorse animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
         if (!animatable.isBaby()) {
+
             if (animatable.hasChest()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
             } else {

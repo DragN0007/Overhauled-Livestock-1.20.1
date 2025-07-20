@@ -4206,6 +4206,15 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(Items.LEATHER).build()))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MARTINGALE_HARNESS.get())
+                .define('A', Items.LEATHER)
+                .pattern("A  ")
+                .pattern(" A ")
+                .pattern("A A")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
 
 //        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOBlocks.ACACIA_RABBIT_HUTCH.get(), 4)
 //                .define('A', Blocks.ACACIA_LOG)
