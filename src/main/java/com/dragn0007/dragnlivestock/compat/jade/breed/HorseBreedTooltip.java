@@ -16,7 +16,7 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
-        if (entityAccessor.getEntity() instanceof OHorse animal) {
+        if (entityAccessor.getEntity() instanceof OHorse animal && entityAccessor.getEntity().getClass() == OHorse.class) {
             String breeds = getBreeds(animal.getBreed());
             tooltip.add(Component.translatable(breeds));
         }

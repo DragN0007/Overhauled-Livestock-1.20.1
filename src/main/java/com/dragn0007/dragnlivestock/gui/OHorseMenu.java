@@ -45,7 +45,8 @@ public class OHorseMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, oHorseSlots++, 8, 36) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem || itemStack.getItem() instanceof RumpStrapItem) {
+                if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem ||
+                        itemStack.getItem() instanceof CaparisonItem || itemStack.getItem() instanceof RumpStrapItem) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
                 if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
@@ -63,7 +64,8 @@ public class OHorseMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, oHorseSlots++, 8, 54) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS) || itemStack.getItem() instanceof CaparisonItem || itemStack.getItem() instanceof RumpStrapItem) {
+                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS) || itemStack.getItem() instanceof CaparisonItem ||
+                        itemStack.getItem() instanceof RumpStrapItem) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
                 return false;
@@ -74,21 +76,6 @@ public class OHorseMenu extends AbstractContainerMenu {
                 return OHorseMenu.this.oHorse.canWearArmor();
             }
         });
-
-//        this.addSlot(new Slot(this.container, oHorseSlots++, 8, 54) {
-//            @Override
-//            public boolean mayPlace(ItemStack itemStack) {
-//                if (itemStack.getItem() instanceof HorseShoeItem) {
-//                    return !this.hasItem() && OHorseMenu.this.oHorse.canWearShoes();
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean isActive() {
-//                return OHorseMenu.this.oHorse.canWearShoes();
-//            }
-//        });
 
         if(this.oHorse.hasChest() && (this.oHorse.isStockBreed() || this.oHorse.isWarmbloodedBreed())) { //stock or warmblood
             for(int y = 0; y < 3; y++) {

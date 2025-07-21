@@ -67,6 +67,16 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return FOOD_ITEMS.test(stack);
     }
 
+    @Override
+    public int getMaxHeadXRot() {
+        return 40;
+    }
+
+    @Override
+    public int getMaxHeadYRot() {
+        return 60;
+    }
+
     public int getTemper() {
         return this.temper;
     }
@@ -74,8 +84,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public void setTemper(int temper) {
             this.temper = temper;
     }
-
-
 
     public int modifyTemper(int p_30654_) {
         int i = Mth.clamp(this.getTemper() + p_30654_, 0, this.getMaxTemper());

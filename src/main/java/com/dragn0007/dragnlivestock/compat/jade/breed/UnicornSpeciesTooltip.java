@@ -17,7 +17,7 @@ public class UnicornSpeciesTooltip implements IEntityComponentProvider {
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (entityAccessor.getEntity() instanceof Unicorn animal) {
-            String breeds = getBreeds(animal.getBreed());
+            String breeds = getBreeds(animal.getSpecies());
             tooltip.add(Component.translatable(breeds));
         }
     }

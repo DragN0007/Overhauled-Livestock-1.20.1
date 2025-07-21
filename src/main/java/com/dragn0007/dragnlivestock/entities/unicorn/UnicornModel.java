@@ -74,8 +74,12 @@ public class UnicornModel extends DefaultedEntityGeoModel<Unicorn> {
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/unicorn.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
+    public static final ResourceLocation BABY = new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/baby_o_horse.geo.json");
     @Override
     public ResourceLocation getModelResource(Unicorn object) {
+        if (object.isBaby()) {
+            return BABY;
+        }
         return MODEL;
     }
 

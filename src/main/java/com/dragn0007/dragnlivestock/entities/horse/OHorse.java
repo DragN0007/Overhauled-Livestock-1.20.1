@@ -1246,7 +1246,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			} else {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
-			((OHorse) foal).setVariant(overlay);
+			((OMule) foal).setVariant(overlay);
 
 			((OMule) foal).setOverlayVariant(overlay);
 			((OMule) foal).setVariant(random.nextInt(OMuleModel.Variant.values().length));

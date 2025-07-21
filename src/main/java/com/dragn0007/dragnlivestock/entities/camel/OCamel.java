@@ -97,6 +97,16 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
+	@Override
+	public int getMaxHeadXRot() {
+		return 40;
+	}
+
+	@Override
+	public int getMaxHeadYRot() {
+		return 60;
+	}
+
 	@Nullable
 	public OCamel caravanHead;
 	@Nullable

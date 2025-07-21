@@ -38,19 +38,11 @@ public class OCamelRender extends GeoEntityRenderer<OCamel> {
         }
 
         if (entity.isBaby()) {
-            if (entity.getBreed() == 1) {
-                model.getBone("halter").ifPresent(b -> b.setHidden(true));
-                model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
-                model.getBone("carpet").ifPresent(b -> b.setHidden(true));
-                model.getBone("carpet2").ifPresent(b -> b.setHidden(true));
-                poseStack.scale(0.5F, 0.5F, 0.5F);
-            } else if (entity.getBreed() == 0) {
-                model.getBone("halter").ifPresent(b -> b.setHidden(true));
-                model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
-                model.getBone("carpet").ifPresent(b -> b.setHidden(true));
-                model.getBone("carpet2").ifPresent(b -> b.setHidden(true));
-                poseStack.scale(1F, 1F, 1F);
-            }
+            model.getBone("halter").ifPresent(b -> b.setHidden(true));
+            model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
+            model.getBone("carpet").ifPresent(b -> b.setHidden(true));
+            model.getBone("carpet2").ifPresent(b -> b.setHidden(true));
+            poseStack.scale(0.5F, 0.5F, 0.5F);
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

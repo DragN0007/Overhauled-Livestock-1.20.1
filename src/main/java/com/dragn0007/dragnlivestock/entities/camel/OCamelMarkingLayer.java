@@ -20,8 +20,13 @@ public class OCamelMarkingLayer extends GeoRenderLayer<OCamel> {
     public void render(PoseStack poseStack, OCamel animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
         poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
+        if (animatable.isBaby()) {
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+        } else {
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+        }
         poseStack.popPose();
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,

@@ -505,7 +505,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		AbstractOMount foal;
-		if (ageableMob instanceof OHorse partnerHorse) {
+		if (ageableMob instanceof OHorse partnerHorse && ageableMob.getClass() == OHorse.class) {
 
 			if (random.nextDouble() > 0.05) {
 				foal = EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
@@ -522,12 +522,12 @@ public class Unicorn extends OHorse implements GeoEntity {
 			} else {
 				overlay = this.random.nextInt(UnicornMarkingLayer.Overlay.values().length);
 			}
-			((OHorse) foal).setVariant(overlay);
+			(foal).setVariant(overlay);
 
 			((OHorse) foal).setManeType(3);
 			((OHorse) foal).setTailType(3);
-			((OHorse) foal).setOverlayVariant(overlay);
-			((OHorse) foal).setVariant(random.nextInt(OHorseModel.Variant.values().length));
+			(foal).setOverlayVariant(overlay);
+			(foal).setVariant(random.nextInt(OHorseModel.Variant.values().length));
 
 		} else {
 			Unicorn partner = (Unicorn) ageableMob;
@@ -547,7 +547,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			} else {
 				variant = this.random.nextInt(UnicornModel.Variant.values().length);
 			}
-			((Unicorn) foal).setVariant(variant);
+			(foal).setVariant(variant);
 
 			int overlayChance = this.random.nextInt(10);
 			int overlay;
@@ -558,7 +558,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 			} else {
 				overlay = this.random.nextInt(UnicornMarkingLayer.Overlay.values().length);
 			}
-			((Unicorn) foal).setOverlayVariant(overlay);
+			(foal).setOverlayVariant(overlay);
 
 			int eyeColorChance = this.random.nextInt(11);
 			int eyes;

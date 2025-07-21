@@ -191,7 +191,11 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
 
         ResourceLocation resourceLocation = null;
 
-        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem) && !(itemStack.getItem() instanceof RumpStrapItem)) {
+        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() &&
+                !(itemStack.getItem() instanceof CaparisonItem) &&
+                !(itemStack.getItem() instanceof RumpStrapItem) &&
+                !(armorItemStack.getItem() instanceof CaparisonItem) &&
+                !(armorItemStack.getItem() instanceof RumpStrapItem)) {
             if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
 
                 if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
@@ -224,7 +228,8 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
             }
         }
 
-        if(!itemStack.isEmpty() && armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) {
+        if((!itemStack.isEmpty() && armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) ||
+                (!itemStack.isEmpty() && ((armorItemStack.getItem() instanceof CaparisonItem) || (armorItemStack.getItem() instanceof RumpStrapItem)))) {
             if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                 resourceLocation = CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
             } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {

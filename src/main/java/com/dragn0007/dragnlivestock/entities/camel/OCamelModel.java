@@ -18,14 +18,16 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
     @Override
     public void setCustomAnimations(OCamel animatable, long instanceId, AnimationState<OCamel> animationState) {
 
+        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
 
         if (neck != null && animatable.onGround()) {
-            EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
             neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
             float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
             neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
         }
+
     }
 
     public enum Variant {
@@ -54,12 +56,8 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_camel.animation.json");
-
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_camel.geo.json");
     @Override
     public ResourceLocation getModelResource(OCamel object) {
-        if(object.isBaby() && object.getBreed() == 0)
-            return BABY_MODEL;
         return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
