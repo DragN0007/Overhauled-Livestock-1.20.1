@@ -33,7 +33,7 @@ public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
 
     @Override
     public void render(PoseStack poseStack, Unicorn animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        ItemStack itemStack = animatable.getDecorItem();
+        ItemStack itemStack = animatable.getFlowerItem();
         List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
         ItemStack armorItemStack = armorSlots.get(2);
 

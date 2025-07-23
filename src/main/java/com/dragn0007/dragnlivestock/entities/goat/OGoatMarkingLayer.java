@@ -18,25 +18,21 @@ public class OGoatMarkingLayer extends GeoRenderLayer<OGoat> {
 
     @Override
     public void render(PoseStack poseStack, OGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-
-        if (animatable.isBaby()) {
-            poseStack.scale(2.0F, 2.0F, 2.0F);
+        if (!animatable.isBaby()) {
+            RenderType renderMarkingType = RenderType.entityCutout(((OGoat) animatable).getOverlayLocation());
+            poseStack.pushPose();
+            poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderMarkingType,
+                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+            super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
-
-        RenderType renderMarkingType = RenderType.entityCutout(((OGoat)animatable).getOverlayLocation());
-        poseStack.pushPose();
-        poseStack.scale(1.0F, 1.0F, 1.0F);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
-        getRenderer().reRender(getDefaultBakedModel(animatable),
-                poseStack,
-                bufferSource,
-                animatable,
-                renderMarkingType,
-                bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                1, 1, 1, 1);
-        super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
     }
 
     public enum Overlay {

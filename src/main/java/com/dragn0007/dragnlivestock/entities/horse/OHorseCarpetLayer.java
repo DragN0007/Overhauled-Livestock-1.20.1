@@ -185,72 +185,124 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
 
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        ItemStack itemStack = animatable.getDecorItem();
+        ItemStack itemStack = animatable.getFlowerItem();
         List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
         ItemStack armorItemStack = armorSlots.get(2);
 
         ResourceLocation resourceLocation = null;
 
-        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() &&
-                !(itemStack.getItem() instanceof CaparisonItem) &&
-                !(itemStack.getItem() instanceof RumpStrapItem) &&
-                !(armorItemStack.getItem() instanceof CaparisonItem) &&
-                !(armorItemStack.getItem() instanceof RumpStrapItem)) {
-            if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
+        if (!itemStack.isEmpty()) {
+            if (!armorItemStack.isEmpty() &&
+                    !(itemStack.getItem() instanceof CaparisonItem) &&
+                    !(itemStack.getItem() instanceof RumpStrapItem) &&
+                    !(armorItemStack.getItem() instanceof CaparisonItem) &&
+                    !(armorItemStack.getItem() instanceof RumpStrapItem)) {
+                if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
 
-                if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
-                    if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                        resourceLocation = LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-                    } else {
-                        resourceLocation = LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
+                        if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                            resourceLocation = LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                        } else {
+                            resourceLocation = LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                        }
+                    } else if (armorItemStack.getItem() == LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get()) {
+                        if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                            resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                        } else {
+                            resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                        }
+                    } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                        resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                    } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
+                            itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
+                        resourceLocation = ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                        String name = blanketItem.toString();
+                        String noSuffix = name.replaceAll("_.+", "");
+                        // ^ if youre another modder adding new blankets, make sure your blanket name is just one word
+                        // (i.e american_western_blanket.png)
+                        // in this case, "american" is your one word. if you do multiple words, the code will snip out any past the first one and
+                        // the armor variant of your carpet may not work. To get your armor variant for your carpet, just copy what
+                        // ive done in textures/entity/horse/armor/carpet/special
+                        resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/special/" + noSuffix + "_armor_blanket.png");
                     }
-                } else if (armorItemStack.getItem() == LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get()) {
-                    if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                        resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-                    } else {
-                        resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
-                    }
-                } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                    resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-                } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
-                        itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                    resourceLocation = ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
-                } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
-                    String name = blanketItem.toString();
-                    String noSuffix = name.replaceAll("_.+", "");
-                    // ^ if youre another modder adding new blankets, make sure your blanket name is just one word
-                    // (i.e american_western_blanket.png)
-                    // in this case, "american" is your one word. if you do multiple words, the code will snip out any past the first one and
-                    // the armor variant of your carpet may not work. To get your armor variant for your carpet, just copy what
-                    // ive done in textures/entity/horse/armor/carpet/special
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/special/" + noSuffix + "_armor_blanket.png");
                 }
             }
-        }
 
-        if((!itemStack.isEmpty() && armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) ||
-                (!itemStack.isEmpty() && ((armorItemStack.getItem() instanceof CaparisonItem) || (armorItemStack.getItem() instanceof RumpStrapItem)))) {
-            if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                resourceLocation = CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
-            } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
-                resourceLocation = MEDIEVAL_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
-            } else if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
-                resourceLocation = MODERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
-            } else if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
-                resourceLocation = RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
-            } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                resourceLocation = WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+            if ((armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) ||
+                    (((armorItemStack.getItem() instanceof CaparisonItem) || (armorItemStack.getItem() instanceof RumpStrapItem)))) {
+                if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                    resourceLocation = CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
+                    resourceLocation = MEDIEVAL_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                } else if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
+                    resourceLocation = MODERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                } else if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
+                    resourceLocation = RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
+                    resourceLocation = WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
 
-                // if youre another modder looking to add new blankets, use this pathway v
-                // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
-                // make sure to put your blanket in the dragnlivestock:special_blankets tag so you can actually put it in the slot
-                // this works for all equines and caribou too, no extra steps required
-            } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
+                    // if youre another modder looking to add new blankets, use this pathway v
+                    // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
+                    // make sure to put your blanket in the dragnlivestock:special_blankets tag so you can actually put it in the slot
+                    // this works for all equines and caribou too, no extra steps required
+                } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
+                }
+            }
+
+            if (resourceLocation != null) {
+                RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                poseStack.pushPose();
+                poseStack.scale(1.0f, 1.0f, 1.0f);
+                poseStack.translate(0.0d, 0.0d, 0.0d);
+                poseStack.popPose();
+                getRenderer().reRender(getDefaultBakedModel(animatable),
+                        poseStack,
+                        bufferSource,
+                        animatable,
+                        renderType1,
+                        bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1, 1, 1, 1);
             }
         }
 
-        if(resourceLocation != null) {
+
+        if (animatable.getFlowerItem() != null && animatable.getFlowerItem().is(LOTags.Items.HAIR_FLOWERS)) {
+            if (animatable.getFlowerType() == 0) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_mane.png");
+                RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                poseStack.pushPose();
+                poseStack.scale(1.0f, 1.0f, 1.0f);
+                poseStack.translate(0.0d, 0.0d, 0.0d);
+                poseStack.popPose();
+                getRenderer().reRender(getDefaultBakedModel(animatable),
+                        poseStack,
+                        bufferSource,
+                        animatable,
+                        renderType1,
+                        bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1, 1, 1, 1);
+            }
+
+            if (animatable.getFlowerType() == 1) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_tail.png");
+                RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                poseStack.pushPose();
+                poseStack.scale(1.0f, 1.0f, 1.0f);
+                poseStack.translate(0.0d, 0.0d, 0.0d);
+                poseStack.popPose();
+                getRenderer().reRender(getDefaultBakedModel(animatable),
+                        poseStack,
+                        bufferSource,
+                        animatable,
+                        renderType1,
+                        bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1, 1, 1, 1);
+            }
+
+            if (animatable.getFlowerType() == 2) {
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_tail.png");
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
             poseStack.pushPose();
             poseStack.scale(1.0f, 1.0f, 1.0f);
@@ -263,6 +315,24 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
                     renderType1,
                     bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                     1, 1, 1, 1);
+
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_mane.png");
+            RenderType renderType2 = RenderType.entityCutout(resourceLocation);
+            poseStack.pushPose();
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType2,
+                    bufferSource.getBuffer(renderType2), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+            }
+
         }
+
     }
+
 }

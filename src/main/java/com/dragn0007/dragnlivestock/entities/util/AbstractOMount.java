@@ -370,10 +370,15 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+            if (this.isHorse(this)) {
+                OHorse oHorse = (OHorse) this;
+                oHorse.setFlowerType(0);
+                oHorse.setFlowerItem(Items.AIR.getDefaultInstance());
+            }
+
             if (this.hasChest()) {
                 this.dropEquipment();
                 this.inventory.removeAllItems();
-
                 this.setChest(false);
                 this.playChestEquipsSound();
 
@@ -439,22 +444,35 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
+        if (this.isHorse(this)) {
+            OHorse oHorse = (OHorse) this;
+            if (this.isHorse(this) && itemStack.is(LOTags.Items.HAIR_FLOWERS)) {
+                if (oHorse.getFlowerType() == 0) {
+                    oHorse.setFlowerType(1);
+                } else if (oHorse.getFlowerType() == 1) {
+                    oHorse.setFlowerType(2);
+                } else if (oHorse.getFlowerType() == 2) {
+                    oHorse.setFlowerType(0);
+                }
+                oHorse.setFlowerItem(itemStack);
+                this.playSound(SoundEvents.FLOWERING_AZALEA_PLACE, 0.5f, 1f);
+                return InteractionResult.SUCCESS;
+            }
+        }
+
         if (this.isHorse(this) && itemStack.is(Items.HEART_OF_THE_SEA)) {
             OHorse oHorse = (OHorse) this;
-
             if (oHorse.isUndead()) {
                 oHorse.setDecompVariant(0);
                 oHorse.setUndead(false);
                 this.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
                 this.level().playSound(null, this, SoundEvents.TOTEM_USE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
             }
-
             return InteractionResult.SUCCESS;
         }
 
         if (this.isHorse(this) && itemStack.is(Items.COAL)) {
             OHorse oHorse = (OHorse) this;
-
             if (oHorse.isUndead()) {
                 itemStack.finishUsingItem(level(), player);
                 this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
@@ -465,7 +483,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                     oHorse.setCanDecompose(true);
                 }
             }
-
             return InteractionResult.SUCCESS;
         }
 

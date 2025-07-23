@@ -68,10 +68,10 @@ public class LOTags {
         public static final TagKey<Item> EGG = forgeTag("egg");
         public static final TagKey<Item> VEGETABLES = forgeTag("vegetables");
 
-        public static final TagKey<Item> SADDLE = tag("saddle");
-
         public static final TagKey<Item> SWEM_CANTAZARITE_POTION = forgeTag("swem_cantazarite_potion");
 
+
+        public static final TagKey<Item> SADDLE = tag("saddle");
         public static final TagKey<Item> DECOR_FOR_O_MOUNTS = tag("decor_for_o_mounts");
         public static final TagKey<Item> ARMOR_FOR_O_MOUNTS = tag("armor_for_o_mounts");
         public static final TagKey<Item> CARPET_BLANKETS = tag("carpet_blankets");
@@ -80,6 +80,7 @@ public class LOTags {
         public static final TagKey<Item> RACING_BLANKETS = tag("racing_blankets");
         public static final TagKey<Item> WESTERN_BLANKETS = tag("western_blankets");
         public static final TagKey<Item> CAPARISONS = tag("caparisons");
+        public static final TagKey<Item> HAIR_FLOWERS = tag("hair_flowers");
 
         public static final TagKey<Item> LO_ARMORS = tag("lo_armor_do_not_change");
 
