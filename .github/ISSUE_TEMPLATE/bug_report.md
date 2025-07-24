@@ -20,7 +20,7 @@ This form is for 1.20.1 versions. LO-1.18.2 is depreciated/ outdated as of 2025.
 
 **Screenshot (Optional):**
 
-**Have you tried removing other mods? Did the issue persist after removing them?:**
+**Please remove all other mods and test on a fresh world. Did the issue persist after removing them?:**
 
 **Are you on Singleplayer or a Server?:**
 
