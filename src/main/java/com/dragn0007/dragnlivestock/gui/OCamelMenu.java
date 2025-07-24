@@ -42,7 +42,7 @@ public class OCamelMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, OCamelSlots++, 8, 36) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.getItem() instanceof HorseArmorItem) {
+                if (itemStack.is(LOTags.Items.CAMEL_ARMOR)) {
                     return !this.hasItem() && OCamelMenu.this.oCamel.canWearArmor();
                 } else if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
                     return !this.hasItem() && OCamelMenu.this.oCamel.canWearArmor();
@@ -55,21 +55,6 @@ public class OCamelMenu extends AbstractContainerMenu {
                 return OCamelMenu.this.oCamel.canWearArmor();
             }
         });
-
-//        this.addSlot(new Slot(this.container, OCamelSlots++, 8, 54) {
-//            @Override
-//            public boolean mayPlace(ItemStack itemStack) {
-//                if (itemStack.getItem() instanceof HorseShoeItem) {
-//                    return !this.hasItem() && OCamelMenu.this.OCamel.canWearShoes();
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean isActive() {
-//                return OCamelMenu.this.OCamel.canWearShoes();
-//            }
-//        });
 
         if(this.oCamel.hasChest()) {
             for(int y = 0; y < 3; y++) {

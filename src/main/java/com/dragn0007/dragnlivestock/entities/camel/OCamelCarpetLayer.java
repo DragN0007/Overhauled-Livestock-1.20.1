@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WoolCarpetBlock;
@@ -47,14 +48,19 @@ public class OCamelCarpetLayer extends GeoRenderLayer<OCamel> {
     @Override
     public void render(PoseStack poseStack, OCamel animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemStack itemStack = animatable.getDecorItem();
+
         if(!itemStack.isEmpty()) {
-            ResourceLocation resourceLocation;
-            if(itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                DyeColor dyeColor = ((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor();
-                resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
-            } else {
-                DyeColor dyeColor = ((DyeItem)itemStack.getItem()).getDyeColor();
-                resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
+            ResourceLocation resourceLocation = null;
+            if (!itemStack.is(LOTags.Items.CAMEL_ARMOR) && !(itemStack.getItem() instanceof HorseArmorItem)) {
+                if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
+                    DyeColor dyeColor = ((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor();
+                    resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
+                } else {
+                    DyeColor dyeColor = ((DyeItem) itemStack.getItem()).getDyeColor();
+                    resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
+                }
+            } else if (itemStack.is(LOTags.Items.CAMEL_ARMOR) && itemStack.getItem() instanceof HorseArmorItem horseArmorItem) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/armor/" + horseArmorItem + ".png");
             }
 
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);

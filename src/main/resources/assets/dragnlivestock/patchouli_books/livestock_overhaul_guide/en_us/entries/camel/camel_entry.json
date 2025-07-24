@@ -8,6 +8,10 @@
       "text": "O-Camels are exclusive to 1.20.1(+) versions. They drop meat, leather, and bones, and can be saddled and ridden, along with carpeted. Camels are far faster than horses on sand, and can be right-clicked with a bucket every 5 minutes~ for water. Camels are also immune to cactus damage. $(br2)They come in lots of different patterns and colors. You can tame and breed Camels with cacti and multiple Camels can be put into a caravan, like Llamas."
     },
     {
+      "type": "patchouli:text",
+      "text": "O-Camels can wear most Heavy horse armor. They cannot/ do not have to wear Light variants, since they're strong and are not slowed by heavy armor."
+    },
+    {
       "type": "patchouli:entity",
       "entity": "dragnlivestock:o_camel{Variant:5}",
       "name": "The O-Camel",

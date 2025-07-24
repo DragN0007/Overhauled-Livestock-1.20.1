@@ -240,21 +240,29 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (isMoving) {
 			if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
-				if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.87 * controller.getAnimationSpeed() + animationSpeed));
-
-				} else if (this.isOnSand() && currentSpeed > speedThreshold && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("trot_sprint", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.90 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.84 * controller.getAnimationSpeed() + animationSpeed));
 
-				} else if (this.isVehicle() && currentSpeed > speedThreshold) {
+				} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
 					controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+
+				} else if (this.isOnSand() && this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.88 * controller.getAnimationSpeed() + animationSpeed));
 
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
 				if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
@@ -265,15 +273,13 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 					controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
 				}
 			}
-
 		} else {
-			if (this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
+			if (this.isGroundTied()) {
 				controller.setAnimation(RawAnimation.begin().then("ground_tie", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(1.0);
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(1.0);
 			}
+			controller.setAnimationSpeed(1.0);
 		}
 
 		return PlayState.CONTINUE;
@@ -408,7 +414,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 
 	@Override
 	public boolean isArmor(ItemStack itemStack) {
-		return itemStack.is(ItemTags.WOOL_CARPETS);
+		return itemStack.is(ItemTags.WOOL_CARPETS) || itemStack.is(LOTags.Items.CAMEL_ARMOR);
 	}
 
 	@Override
@@ -660,12 +666,18 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	public void updateContainerEquipment() {
 		if(!this.level().isClientSide) {
 			this.setSaddleItem(this.inventory.getItem(this.saddleSlot()));
+			this.setArmorEquipment(this.inventory.getItem(this.armorSlot()));
 			this.setDecorItem(this.inventory.getItem(this.decorSlot()));
 		}
 	}
 
 	@Override
 	public int decorSlot() {
+		return 1;
+	}
+
+	@Override
+	public int armorSlot() {
 		return 1;
 	}
 

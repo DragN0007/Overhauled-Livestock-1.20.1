@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:leather_horse_armor",
+    "minecraft:iron_horse_armor",
+    "minecraft:golden_horse_armor",
+    "minecraft:diamond_horse_armor",
+    "dragnlivestock:netherite_horse_armor",
+    "dragnlivestock:chainmail_horse_armor",
+    "dragnlivestock:copper_horse_armor",
+    "dragnlivestock:quartz_horse_armor",
+    "dragnlivestock:emerald_horse_armor",
+
+    "dragnlivestock:obsidian_horse_armor"
+  ]
+}
