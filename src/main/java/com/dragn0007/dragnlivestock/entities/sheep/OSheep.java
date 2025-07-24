@@ -598,7 +598,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 		lamb.setBreed(breed);
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+		if (!(breedChance == 0)) {
 			int variantChance = this.random.nextInt(14);
 			int variant;
 			if (variantChance < 6) {
@@ -609,11 +609,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				variant = this.random.nextInt(OSheepModel.Variant.values().length);
 			}
 			lamb.setVariant(variant);
-		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+		} else if (random.nextDouble() < 0.5) {
 			lamb.setColorByBreed();
 		}
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+		if (!(breedChance == 0)) {
 			int overlayChance = this.random.nextInt(10);
 			int overlay;
 			if (overlayChance < 4) {
@@ -624,11 +624,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				overlay = this.random.nextInt(OSheepMarkingLayer.Overlay.values().length);
 			}
 			lamb.setOverlayVariant(overlay);
-		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+		} else if (random.nextDouble() < 0.5) {
 			lamb.setMarkingByBreed();
 		}
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+		if (!(breedChance == 0)) {
 			int woolColorChance = this.random.nextInt(10);
 			int woolColor;
 			if (woolColorChance < 4) {
@@ -639,11 +639,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				woolColor = this.random.nextInt(OSheepWoolLayer.Overlay.values().length);
 			}
 			lamb.setWoolVariant(woolColor);
-		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+		} else if (random.nextDouble() < 0.5) {
 			lamb.setWoolColorByBreed();
 		}
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+		if (!(breedChance == 0)) {
 			int hornsChance = this.random.nextInt(10);
 			int hornType;
 			if (hornsChance < 4) {
@@ -654,7 +654,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				hornType = this.random.nextInt(OSheep.BreedHorns.values().length);
 			}
 			lamb.setHornVariant(hornType);
-		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+		} else if (random.nextDouble() < 0.5) {
 			lamb.setHornsByBreed();
 		}
 

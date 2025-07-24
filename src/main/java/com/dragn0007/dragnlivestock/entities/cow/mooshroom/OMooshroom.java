@@ -339,7 +339,7 @@ public class OMooshroom extends OCow implements GeoEntity {
         }
         calf.setVariant(variant);
 
-        if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+        if (!(breedChance == 0)) {
             int overlayChance = this.random.nextInt(10);
             int overlay;
             if (overlayChance < 4) {
@@ -350,7 +350,7 @@ public class OMooshroom extends OCow implements GeoEntity {
                 overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
             }
             calf.setOverlayVariant(overlay);
-        } else if (breedChance == 0 && random.nextDouble() < 0.5) {
+        } else if (random.nextDouble() < 0.5) {
             calf.setMarkingByBreed();
         }
 
@@ -365,7 +365,7 @@ public class OMooshroom extends OCow implements GeoEntity {
         }
         calf.setMushroomVariant(mushrooms);
 
-        if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+        if (!(breedChance == 0)) {
             int hornsChance = this.random.nextInt(10);
             int hornType;
             if (hornsChance < 4) {
@@ -376,7 +376,7 @@ public class OMooshroom extends OCow implements GeoEntity {
                 hornType = this.random.nextInt(OCow.BreedHorns.values().length);
             }
             calf.setHornVariant(hornType);
-        } else if (breedChance == 0 && random.nextDouble() < 0.5) {
+        } else if (random.nextDouble() < 0.5) {
             calf.setHornsByBreed();
         }
 

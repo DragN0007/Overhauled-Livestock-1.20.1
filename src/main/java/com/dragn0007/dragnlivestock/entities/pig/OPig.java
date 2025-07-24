@@ -414,7 +414,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		}
 		piglet.setBreed(breed);
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+		if (!(breedChance == 0)) {
 			int variantChance = this.random.nextInt(14);
 			int variant;
 			if (variantChance < 6) {
@@ -425,11 +425,11 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 				variant = this.random.nextInt(OPigModel.Variant.values().length);
 			}
 			piglet.setVariant(variant);
-		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+		} else if (random.nextDouble() < 0.5) {
 			piglet.setColorByBreed();
 		}
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
+		if (!(breedChance == 0)) {
 			int overlayChance = this.random.nextInt(10);
 			int overlay;
 			if (overlayChance < 4) {
@@ -440,7 +440,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);
 			}
 			piglet.setOverlayVariant(overlay);
-		} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+		} else if (random.nextDouble() < 0.5) {
 			piglet.setMarkingByBreed();
 		}
 

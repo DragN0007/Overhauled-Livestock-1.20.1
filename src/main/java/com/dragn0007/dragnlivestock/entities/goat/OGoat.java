@@ -601,7 +601,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		} else if (variantChance < 12) {
 			variant = partner.getVariant();
 		} else {
-			variant = this.random.nextInt(OSheepModel.Variant.values().length);
+			variant = this.random.nextInt(OGoatModel.Variant.values().length);
 		}
 		kid.setVariant(variant);
 
