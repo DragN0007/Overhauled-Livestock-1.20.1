@@ -27,6 +27,16 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOUNT_KEY.get())
+                .define('A', Items.GOLD_NUGGET)
+                .pattern(" A")
+                .pattern("A ")
+                .unlockedBy("has_gold", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.GOLD_NUGGET).build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
         ConditionalRecipe.builder()
                 .addCondition(new BlanketConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "blanket_config_condition")))
                 .addRecipe(

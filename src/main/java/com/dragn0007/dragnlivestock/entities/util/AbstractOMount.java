@@ -395,7 +395,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        if (itemStack.is(LOItems.MOUNT_KEY.get()) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
+        if (itemStack.is(LOItems.MOUNT_KEY.get()) && player.isShiftKeyDown() && this.isOwnedBy(player) && this.isTamed()) {
             if (!this.isLocked()) {
                 this.setLocked(true);
                 if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
