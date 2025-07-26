@@ -61,7 +61,8 @@ public class UnicornModel extends DefaultedEntityGeoModel<Unicorn> {
         GRULLA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/grulla.png")),
         BLUE_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/blue_dun.png")),
         CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/cinnamon.png")),
-        END(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/end.png"));
+        END(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/end.png")),
+        STRAWBERRY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/unicorn/strawberry_roan.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {

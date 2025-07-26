@@ -12,6 +12,8 @@ public class LivestockOverhaulClientConfig {
     public static final ForgeConfigSpec.BooleanValue RENDER_BRAND_TAGS;
     public static final ForgeConfigSpec.BooleanValue CHICKEN_LEG_BAND;
     public static final ForgeConfigSpec.BooleanValue CHICKEN_NECK_TAG;
+    public static final ForgeConfigSpec.ConfigValue<Integer> SPRINT_X;
+    public static final ForgeConfigSpec.ConfigValue<Integer> SPRINT_Y;
     public static final ForgeConfigSpec.BooleanValue ACCESSIBILITY_GENDER_IDENTIFIER;
 
     static {
@@ -34,6 +36,12 @@ public class LivestockOverhaulClientConfig {
 
         CHICKEN_NECK_TAG = BUILDER.comment("Should Neck Tags render on Chickens that have been tagged? Might be good for those who have trouble seeing leg bands.")
                 .define("Render Chicken Neck Tags", false);
+
+        SPRINT_X = BUILDER.comment("X location value for the Sprint HUD. Default is 92.")
+                .define("Horse Sprint HUD X Location", 92);
+
+        SPRINT_Y = BUILDER.comment("Y location value for the Sprint HUD. Default is 52.")
+                .define("Horse Sprint HUD Y Location", 52);
 
         ACCESSIBILITY_GENDER_IDENTIFIER = BUILDER.comment("Should text that states the gender of an O-Mount render along with the colored dot?")
                 .define("Visual Accessibility Gender Text", false);

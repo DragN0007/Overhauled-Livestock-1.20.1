@@ -72,7 +72,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	public void openInventory(Player player) {
 	}
 	@Override
-	public void doPlayerRide(Player p_30634_) {
+	public void doPlayerRide(Player player) {
 	}
 	@Override
 	public boolean canAddPassenger(Entity entity) {

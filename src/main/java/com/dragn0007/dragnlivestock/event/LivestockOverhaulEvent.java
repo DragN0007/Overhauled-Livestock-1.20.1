@@ -107,7 +107,7 @@ public class LivestockOverhaulEvent {
 
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
 
-        event.put(EntityTypes.UNICORN_ENTITY.get(), Unicorn.createBaseHorseAttributes().build());
+        event.put(EntityTypes.UNICORN_ENTITY.get(), Unicorn.createUnicornAttributes().build());
 
         event.put(EntityTypes.WHEAT_MOOBLOOM_ENTITY.get(), WheatMoobloom.createAttributes().build());
         event.put(EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get(), SweetBerryMoobloom.createAttributes().build());

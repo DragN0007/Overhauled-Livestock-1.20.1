@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
@@ -23,8 +24,8 @@ public class SprintHUD {
             Player player = (Player) minecraft.getCameraEntity();
 
             if(!minecraft.options.hideGui && player instanceof LocalPlayer && player.getVehicle() instanceof OHorse oHorse) {
-                int x = (screenWidth / 2) + 92;
-                int y = screenHeight - 52;
+                int x = (screenWidth / 2) + LivestockOverhaulClientConfig.SPRINT_X.get();
+                int y = screenHeight - LivestockOverhaulClientConfig.SPRINT_Y.get();
 
                 if (oHorse.isWarmbloodedBreed()) {
                     if (oHorse.sprintTick >= ((oHorse.maxSprint + oHorse.warmbloodSprintAddition) * 0.90)) {

@@ -128,7 +128,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.setXRot(playerXRot);
         this.xRotO = this.getXRot();
 
-        if (LivestockOverhaulCommonConfig.OLD_HORSE_TURNING.get() && this.onGround()) {
+        if (LivestockOverhaulCommonConfig.OLD_HORSE_TURNING.get()) {
             if (Math.abs(degrees) > maxHeadYRot) {
                 float turnSpeed = 8.0f;
                 float yaw = yRot + Mth.clamp(degrees, -turnSpeed, turnSpeed);
@@ -395,7 +395,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-       if (itemStack.is(LOItems.MOUNT_KEY.get()) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
+        if (itemStack.is(LOItems.MOUNT_KEY.get()) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
             if (!this.isLocked()) {
                 this.setLocked(true);
                 if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
@@ -452,9 +452,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
         if (itemStack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
             if (player.isShiftKeyDown()) {
-                this.setVariant(this.getVariant() - 1);
-                this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-                return InteractionResult.SUCCESS;
+                if (this.getVariant() > 0) {
+                    this.setVariant(this.getVariant() - 1);
+                    this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                    return InteractionResult.SUCCESS;
+                }
             }
             this.setVariant(this.getVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
@@ -463,9 +465,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
         if (itemStack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
             if (player.isShiftKeyDown()) {
-                this.setOverlayVariant(this.getOverlayVariant() - 1);
-                this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-                return InteractionResult.SUCCESS;
+                if (this.getOverlayVariant() > 0) {
+                    this.setOverlayVariant(this.getOverlayVariant() - 1);
+                    this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                    return InteractionResult.SUCCESS;
+                }
             }
             this.setOverlayVariant(this.getOverlayVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
@@ -546,13 +550,13 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
-        if(!this.isBaby()) {
-            if(this.isTamed() && player.isSecondaryUseActive()) {
+        if (!this.isBaby()) {
+            if (this.isTamed() && player.isSecondaryUseActive()) {
                 this.openInventory(player);
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            if(this.isVehicle()) {
+            if (this.isVehicle()) {
                 return super.mobInteract(player, hand);
             }
         }
@@ -571,9 +575,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
-        if(this.isSaddle(itemStack) && this.isSaddleable() && !this.isSaddled()) {
+        if (this.isSaddle(itemStack) && this.isSaddleable() && !this.isSaddled()) {
             // item is a saddle, entity can be saddled, and isn't already wearing a saddle
-            if(!this.level().isClientSide) {
+            if (!this.level().isClientSide) {
                 this.level().gameEvent(this, GameEvent.EQUIP, this.position());
                 ItemStack saddleItem = itemStack.copy();
                 this.inventory.setItem(this.saddleSlot(), saddleItem);
@@ -584,25 +588,25 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if(!itemStack.isEmpty()) {
-            if(this.isFood(itemStack)) {
+        if (!itemStack.isEmpty()) {
+            if (this.isFood(itemStack)) {
                 return this.fedFood(player, itemStack);
             }
 
             InteractionResult interactionResult = itemStack.interactLivingEntity(player, this, hand);
-            if(interactionResult.consumesAction()) {
+            if (interactionResult.consumesAction()) {
                 return interactionResult;
             }
 
-            if(!this.isTamed()) {
+            if (!this.isTamed()) {
                 this.makeMad();
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            if(!this.hasChest() && itemStack.is(Blocks.CHEST.asItem())) {
+            if (!this.hasChest() && itemStack.is(Blocks.CHEST.asItem())) {
                 this.setChest(true);
                 this.playChestEquipsSound();
-                if(!player.getAbilities().instabuild) {
+                if (!player.getAbilities().instabuild) {
                     itemStack.shrink(1);
                 }
 
@@ -611,7 +615,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
 
             boolean canSaddle = !this.isBaby() && !this.isSaddled() && this.isSaddle(itemStack);
-            if(this.isArmor(itemStack) || canSaddle) {
+            if (this.isArmor(itemStack) || canSaddle) {
                 this.openInventory(player);
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
@@ -640,20 +644,25 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
-        if(this.isVehicle()) {
-            if (this.canAddPassenger(this)) {
-                this.doPlayerRide(player);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
-            }
-            return super.mobInteract(player, hand);
-        }
-
         if(this.isBaby()) {
             return super.mobInteract(player, hand);
         } else {
             this.doPlayerRide(player);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
+    }
+
+    protected void doPlayerRide(Player player) {
+        this.setEating(false);
+        this.setStanding(false);
+        if (!this.level().isClientSide) {
+            player.setYRot(this.getYRot());
+            player.setXRot(this.getXRot());
+            if ((this.isLocked() && this.isOwnedBy(player)) || !this.isLocked() || !this.isTamed()) {
+                player.startRiding(this);
+            }
+        }
+
     }
 
     @Override

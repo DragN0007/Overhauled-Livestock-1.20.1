@@ -114,7 +114,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		}
 	}
 
-	public static AttributeSupplier.Builder createBaseHorseAttributes() {
+	public static AttributeSupplier.Builder createUnicornAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.JUMP_STRENGTH)
 				.add(Attributes.MAX_HEALTH, 80.0D)
@@ -131,7 +131,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	}
 
 	public float generateRandomMaxHealth() {
-		return 24.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
+		return 60.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
 	}
 
 	public double generateRandomJumpStrength() {
@@ -708,7 +708,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
-				int[] variants = {0, 1, 2, 3, 5, 6, 10, 12, 13, 17, 20, 21, 26};
+				int[] variants = {0, 1, 2, 3, 5, 6, 10, 12, 13, 17, 20, 21, 26, 32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {

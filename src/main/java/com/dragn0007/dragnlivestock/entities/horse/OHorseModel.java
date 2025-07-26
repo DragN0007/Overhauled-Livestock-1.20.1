@@ -78,7 +78,8 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         BAY_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/bay_dun.png")),
         GRULLA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/grulla.png")),
         BLUE_DUN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/blue_dun.png")),
-        CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/cinnamon.png"));
+        CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/cinnamon.png")),
+        STRAWBERRY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/strawberry_roan.png"));
 
         //Add new entries to bottom when mod is public, else horses will change textures during update.
 
