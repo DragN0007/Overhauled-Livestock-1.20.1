@@ -15,7 +15,6 @@ import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -351,6 +350,23 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		ItemStack itemStack = player.getItemInHand(hand);
 		Item item = itemStack.getItem();
 
+		if (itemStack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild && this.getBreed() >= 0 && this.getBreed() < 10) {
+			if (player.isShiftKeyDown()) {
+				if (this.getBreed() > 0) {
+					this.setBreed(this.getBreed() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			if (this.getBreed() < 9) {
+				CowBreed.Breed currentBreed = CowBreed.Breed.values()[this.getBreed()];
+				CowBreed.Breed nextBreed = currentBreed.next();
+				this.setBreed(nextBreed.ordinal());
+				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+				return InteractionResult.SUCCESS;
+			}
+		}
+
 		if (this.isFood(itemStack)) {
 			int i = this.getAge();
 			if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
@@ -432,6 +448,18 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 				this.setBelled(true);
 			}
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		}
+
+		if (this.isFood(itemStack)) {
+			if (!player.getAbilities().instabuild) {
+				itemStack.shrink(1);
+			}
+
+			if (!this.isTamed() && this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+				this.setTamed(true);
+			}
+
+			return InteractionResult.SUCCESS;
 		}
 
 		if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
@@ -1147,11 +1175,6 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.8D, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
 	@Override
-	public boolean canJump() {
-		return false;
-	}
-
-	@Override
 	public int getInventorySize() {
 		if (this.getBreed() == 10) {
 			return this.hasChest() ? 26 : super.getInventorySize();
@@ -1174,58 +1197,5 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public int saddleSlot() {
 		return 0;
-	}
-
-	@Override
-	public boolean handleEating(Player player, ItemStack stack) {
-		int i = 0;
-		int j = 0;
-		float f = 0.0F;
-		boolean flag = false;
-
-		if (this.getBreed() == 10) {
-			if (stack.is(LOTags.Items.O_COW_EATS)) {
-				i = 90;
-				j = 6;
-				f = 10.0F;
-				if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
-					flag = true;
-					this.setInLove(player);
-				}
-			}
-
-			if (this.getHealth() < this.getMaxHealth() && f > 0.0F) {
-				this.heal(f);
-				flag = true;
-			}
-
-			if (this.isBaby() && i > 0) {
-				this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
-				if (!this.level().isClientSide) {
-					this.ageUp(i);
-				}
-
-				flag = true;
-			}
-
-			if (j > 0 && (flag || !this.isTamed()) && this.getTemper() < this.getMaxTemper()) {
-				flag = true;
-				if (!this.level().isClientSide) {
-					this.modifyTemper(j);
-				}
-			}
-
-			if (flag) {
-				this.gameEvent(GameEvent.ENTITY_INTERACT);
-				if (!this.isSilent()) {
-					SoundEvent soundevent = this.getEatingSound();
-					if (soundevent != null) {
-						this.level().playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
-					}
-				}
-			}
-		}
-
-		return flag;
 	}
 }

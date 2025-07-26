@@ -20,6 +20,10 @@ public class RabbitBreed {
         public static Breed breedFromOrdinal(int ordinal) {
             return Breed.values()[ordinal % Breed.values().length];
         }
+
+        public RabbitBreed.Breed next() {
+            return RabbitBreed.Breed.values()[(this.ordinal() + 1) % RabbitBreed.Breed.values().length];
+        }
     }
 
 }

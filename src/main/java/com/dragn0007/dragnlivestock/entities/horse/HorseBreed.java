@@ -30,5 +30,9 @@ public enum HorseBreed {
         return HorseBreed.values()[ordinal % HorseBreed.values().length];
     }
 
+    public HorseBreed next() {
+        return HorseBreed.values()[(this.ordinal() + 1) % HorseBreed.values().length];
+    }
+
 }
 

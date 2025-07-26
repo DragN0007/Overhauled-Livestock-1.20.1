@@ -16,7 +16,8 @@
   "tooltip.dragnlivestock.wool_dye.tooltip": "More efficient for wool than normal dye.",
   "tooltip.dragnlivestock.spindle.tooltip": "Weaves Staples of Wool into Wool Blocks.",
   "tooltip.dragnlivestock.utility_knife.tooltip": "Cuts Meat Strips for Jerky production.",
-  "tooltip.dragnlivestock.oscillator.tooltip": "A Creative-Use-Only item that allows the user to change the coat or marking of an O-Animal via interaction. Right-Click the animal to go up one variant, or Shift-Right-Click to go down.",
+  "tooltip.dragnlivestock.oscillator.tooltip": "A Creative-Use-Only item that allows the user to change the coat, marking or breed of an O-Animal via interaction. Right-Click the animal to go up one variant, or Shift-Right-Click to go down.",
+  "tooltip.dragnlivestock.mount_key.tooltip": "Quite literally locks your O-Mount so others can't ride it or get into it's inventory. Works universally.",
 
   "tooltip.dragnlivestock.wandering.tooltip": "Your Companion is Wandering",
   "tooltip.dragnlivestock.following.tooltip": "Your Companion is Following",
@@ -132,8 +133,10 @@
 
   "item.dragnlivestock.utility_knife": "Utility Knife",
   "item.dragnlivestock.spindle": "Spindle",
+  "item.dragnlivestock.mount_key": "Mount Key",
   "item.dragnlivestock.coat_oscillator": "Coat Oscillator",
   "item.dragnlivestock.marking_oscillator": "Marking Oscillator",
+  "item.dragnlivestock.breed_oscillator": "Breed Oscillator",
 
   "item.dragnlivestock.black_brand_tag": "Black Brand Tag",
   "item.dragnlivestock.blue_brand_tag": "Blue Brand Tag",
@@ -726,5 +729,7 @@
 
   "tooltip.dragnlivestock.jade.female.tooltip": "Female",
   "tooltip.dragnlivestock.jade.male.tooltip": "Male",
-  "config.jade.plugin_dragnlivestock.o_tooltips": "Display O-Livestock Genders & Breeds"
+  "config.jade.plugin_dragnlivestock.o_tooltips": "Display O-Livestock Genders & Breeds",
+  "tooltip.dragnlivestock.jade.unlocked.tooltip": "Unlocked",
+  "tooltip.dragnlivestock.jade.locked.tooltip": "Locked"
 }

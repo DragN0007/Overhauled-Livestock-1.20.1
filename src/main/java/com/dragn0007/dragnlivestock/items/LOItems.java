@@ -95,8 +95,10 @@ public class LOItems {
 
     public static final RegistryObject<Item> UTILITY_KNIFE = ITEMS.register("utility_knife", UtilityKnifeItem::new);
     public static final RegistryObject<Item> SPINDLE = ITEMS.register("spindle", SpindleItem::new);
+    public static final RegistryObject<Item> MOUNT_KEY = ITEMS.register("mount_key", KeyItem::new);
     public static final RegistryObject<Item> COAT_OSCILLATOR = ITEMS.register("coat_oscillator", OscillatorItem::new);
     public static final RegistryObject<Item> MARKING_OSCILLATOR = ITEMS.register("marking_oscillator", OscillatorItem::new);
+    public static final RegistryObject<Item> BREED_OSCILLATOR = ITEMS.register("breed_oscillator", OscillatorItem::new);
 
     public static final RegistryObject<Item> GRUB_SWEATER = ITEMS.register("grub_sweater",
             () -> new GrubSweaterItem(new Item.Properties()));

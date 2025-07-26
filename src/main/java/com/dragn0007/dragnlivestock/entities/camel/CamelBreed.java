@@ -18,6 +18,10 @@ public class CamelBreed {
         public static Breed breedFromOrdinal(int ordinal) {
             return Breed.values()[ordinal % Breed.values().length];
         }
+
+        public CamelBreed.Breed next() {
+            return CamelBreed.Breed.values()[(this.ordinal() + 1) % CamelBreed.Breed.values().length];
+        }
     }
 
 }

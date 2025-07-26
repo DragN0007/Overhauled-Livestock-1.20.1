@@ -2,18 +2,25 @@ package com.dragn0007.dragnlivestock.entities.util;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
+import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.marking_layer.EquineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
+import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -47,7 +54,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
@@ -177,7 +183,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public static final EntityDataAccessor<ItemStack> DECOR_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
     public static final EntityDataAccessor<ItemStack> SADDLE_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
-    public static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.OPTIONAL_UUID);
 
     public boolean shouldEmote;
 
@@ -215,7 +220,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public abstract void playEmote(String emoteName, String loopType);
 
     public void openInventory(Player player) {
-        if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
+        if(player instanceof ServerPlayer serverPlayer && this.isTamed() && ((this.isOwnedBy(player) && this.isLocked()) || !this.isLocked())) {
             NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
                 return new OMountMenu(containerId, inventory, this.inventory, this);
             }, this.getDisplayName()), (data) -> {
@@ -299,6 +304,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
     public boolean shouldSleep() {
         return ((this.level().isNight() && !this.isVehicle()) || (this.isGroundTied() && !this.isVehicle()));
+    }
+
+    public boolean isOwnedBy(LivingEntity entity) {
+        return entity == this.getOwner();
     }
 
     public boolean isWearingShoes() {
@@ -386,6 +395,25 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+       if (itemStack.is(LOItems.MOUNT_KEY.get()) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
+            if (!this.isLocked()) {
+                this.setLocked(true);
+                if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                    player.displayClientMessage(Component.translatable("Mount Locked, [DEBUG]Owned By: " + this.getOwner()).withStyle(ChatFormatting.GOLD), true);
+                } else {
+                    player.displayClientMessage(Component.translatable("Mount Locked").withStyle(ChatFormatting.GOLD), true);
+                }
+            } else {
+                this.setLocked(false);
+                if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+                    player.displayClientMessage(Component.translatable("Mount Unlocked, [DEBUG]Owned By: " + this.getOwner()).withStyle(ChatFormatting.GOLD), true);
+                } else {
+                    player.displayClientMessage(Component.translatable("Mount Unlocked").withStyle(ChatFormatting.GOLD), true);
+                }
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
         if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.hasGrowableHair()) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
@@ -442,6 +470,38 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             this.setOverlayVariant(this.getOverlayVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
             return InteractionResult.SUCCESS;
+        }
+
+        if (itemStack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+            if (this.isHorse(this) || this.isMule(this) || this.isCamel(this)) {
+                if (player.isShiftKeyDown()) {
+                    if (this.getBreed() > 0) {
+                        this.setBreed(this.getBreed() - 1);
+                        this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+                if (this.isHorse(this)) {
+                    OHorse oHorse = (OHorse) this;
+                    HorseBreed currentBreed = HorseBreed.values()[oHorse.getBreed()];
+                    HorseBreed nextBreed = currentBreed.next();
+                    oHorse.setBreed(nextBreed.ordinal());
+                }
+                if (this.isMule(this)) {
+                    OMule mule = (OMule) this;
+                    MuleBreed currentBreed = MuleBreed.values()[mule.getBreed()];
+                    MuleBreed nextBreed = currentBreed.next();
+                    mule.setBreed(nextBreed.ordinal());
+                }
+                if (this.isCamel(this)) {
+                    OCamel camel = (OCamel) this;
+                    CamelBreed.Breed currentBreed = CamelBreed.Breed.values()[camel.getBreed()];
+                    CamelBreed.Breed nextBreed = currentBreed.next();
+                    camel.setBreed(nextBreed.ordinal());
+                }
+                this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                return InteractionResult.SUCCESS;
+            }
         }
 
         if (this.isHorse(this)) {
@@ -603,13 +663,21 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     private static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
 
+    public static final EntityDataAccessor<Boolean> LOCKED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
+    public boolean isLocked() {
+        return this.entityData.get(LOCKED);
+    }
+    public void setLocked(boolean locked) {
+        this.entityData.set(LOCKED, locked);
+    }
+
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_ID_CHEST, false);
         this.entityData.define(DECOR_ITEM, ItemStack.EMPTY);
         this.entityData.define(SADDLE_ITEM, ItemStack.EMPTY);
-        this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
+        this.entityData.define(LOCKED, false);
     }
 
     public ItemStack getDecorItem() {
@@ -634,6 +702,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         if(!this.getDecorItem().isEmpty()) {
             compoundTag.put("DecorItem", this.getDecorItem().save(new CompoundTag()));
         }
+
+        compoundTag.putBoolean("Locked", this.isLocked());
 
         if (this.hasChest()) {
             ListTag listtag = new ListTag();
@@ -673,6 +743,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             this.inventory.setItem(this.decorSlot(), decorItem);
         }
 
+        if (compoundTag.contains("Locked")) {
+            this.setLocked(compoundTag.getBoolean("Locked"));
+        }
+
         if (this.hasChest()) {
             ListTag listtag = compoundTag.getList("Items", 10);
 
@@ -686,6 +760,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         this.updateContainerEquipment();
+
     }
 
     @Override
@@ -779,18 +854,17 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public boolean isHorse(Entity entity) {
         return entity.getType() == EntityTypes.O_HORSE_ENTITY.get();
     }
-    public boolean isGoat(Entity entity) {
-        return entity.getType() == EntityTypes.O_GOAT_ENTITY.get();
-    }
     public boolean isUnicorn(Entity entity) {
         return entity.getType() == EntityTypes.UNICORN_ENTITY.get();
     }
-    public boolean isEquine(Entity entity) {
-        return
-                entity.getType() == EntityTypes.O_HORSE_ENTITY.get() ||
-                entity.getType() == EntityTypes.O_MULE_ENTITY.get() ||
-                entity.getType() == EntityTypes.O_DONKEY_ENTITY.get() ||
-                entity.getType() == EntityTypes.UNICORN_ENTITY.get();
+    public boolean isMule(Entity entity) {
+        return entity.getType() == EntityTypes.O_MULE_ENTITY.get();
+    }
+    public boolean isDonkey(Entity entity) {
+        return entity.getType() == EntityTypes.O_DONKEY_ENTITY.get();
+    }
+    public boolean isCamel(Entity entity) {
+        return entity.getType() == EntityTypes.O_CAMEL_ENTITY.get();
     }
 
     public void handleSpeedRequest(int speedMod) {
@@ -900,6 +974,17 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             resourceLocation = EquineMarkingOverlay.NONE.resourceLocation;
         }
         this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
+    }
+
+    public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
+    public ResourceLocation getModelResource() {
+        return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
+    }
+    public int getBreed() {
+        return this.entityData.get(BREED);
+    }
+    public void setBreed(int breed) {
+        this.entityData.set(BREED, breed);
     }
 
 }

@@ -28,8 +28,7 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
         }
 
         if (animatable.isBaby()) {
-            poseStack.scale(2.0F, 2.0F, 2.0F);
-            poseStack.translate(0.0d, 0.0d, 0.0d);
+            return;
         }
 
         RenderType renderMarkingType = RenderType.entityCutout(((OSheep)animatable).getWoolLocation());

@@ -379,8 +379,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public LivingEntity getControllingPassenger() {
 		LivingEntity firstPassenger = (LivingEntity) this.getFirstPassenger();
-		if (firstPassenger != null && this.isSaddled()) {
-			return firstPassenger;
+		if (!(firstPassenger instanceof ServerPlayer player)) {
+			if (firstPassenger != null && this.isSaddled()) {
+				return firstPassenger;
+			}
+		} else {
+			if (((this.isOwnedBy(player) && this.isLocked()) || !this.isLocked()) && this.isSaddled()) {
+				return firstPassenger;
+			}
 		}
 		return null;
 	}
@@ -539,7 +545,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public void openInventory(Player player) {
-		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
+		if(player instanceof ServerPlayer serverPlayer && this.isTamed() && ((this.isOwnedBy(player) && this.isLocked()) || !this.isLocked())) {
 			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
 				return new OHorseMenu(containerId, inventory, this.inventory, this);
 			}, this.getDisplayName()), (data) -> {

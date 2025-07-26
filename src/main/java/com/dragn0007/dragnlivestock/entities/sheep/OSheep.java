@@ -244,6 +244,19 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			this.setOverlayVariant(this.getOverlayVariant() + 1);
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else if (itemstack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				if (this.getBreed() > 0) {
+					this.setBreed(this.getBreed() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			SheepBreed.Breed currentBreed = SheepBreed.Breed.values()[this.getBreed()];
+			SheepBreed.Breed nextBreed = currentBreed.next();
+			this.setBreed(nextBreed.ordinal());
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.SUCCESS;
 		}
 
 		if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() &&

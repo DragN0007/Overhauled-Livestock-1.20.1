@@ -18,6 +18,10 @@ public class CowBreed {
         public static CowBreed.Breed breedFromOrdinal(int ordinal) {
             return CowBreed.Breed.values()[ordinal % CowBreed.Breed.values().length];
         }
+
+        public CowBreed.Breed next() {
+            return CowBreed.Breed.values()[(this.ordinal() + 1) % CowBreed.Breed.values().length];
+        }
     }
 
 }

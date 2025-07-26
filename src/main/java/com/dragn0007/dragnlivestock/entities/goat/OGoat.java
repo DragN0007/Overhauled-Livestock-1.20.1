@@ -5,7 +5,6 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.gui.OxMenu;
@@ -141,6 +140,10 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
+
+		if (itemstack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			return InteractionResult.PASS;
+		}
 
 		if (item instanceof BrandTagItem) {
 			setTagged(true);

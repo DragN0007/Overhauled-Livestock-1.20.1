@@ -18,5 +18,9 @@ public enum MuleBreed {
         return MuleBreed.values()[ordinal % MuleBreed.values().length];
     }
 
+    public MuleBreed next() {
+        return MuleBreed.values()[(this.ordinal() + 1) % MuleBreed.values().length];
+    }
+
 }
 

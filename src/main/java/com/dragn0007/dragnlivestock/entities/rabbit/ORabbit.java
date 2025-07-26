@@ -5,7 +5,6 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
-import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -191,6 +190,19 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			this.setOverlayVariant(this.getOverlayVariant() + 1);
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else if (itemstack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				if (this.getBreed() > 0) {
+					this.setBreed(this.getBreed() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			RabbitBreed.Breed currentBreed = RabbitBreed.Breed.values()[this.getBreed()];
+			RabbitBreed.Breed nextBreed = currentBreed.next();
+			this.setBreed(nextBreed.ordinal());
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.SUCCESS;
 		}
 
 		if (this.level().isClientSide) {
@@ -581,7 +593,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		int breedChance = this.random.nextInt(5);
 		int breed;
 		if (breedChance == 0) {
-			breed = this.random.nextInt(SheepBreed.Breed.values().length);
+			breed = this.random.nextInt(RabbitBreed.Breed.values().length);
 		} else {
 			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
 		}

@@ -14,6 +14,10 @@ public class SheepBreed {
         public static Breed breedFromOrdinal(int ordinal) {
             return Breed.values()[ordinal % Breed.values().length];
         }
+
+        public SheepBreed.Breed next() {
+            return SheepBreed.Breed.values()[(this.ordinal() + 1) % SheepBreed.Breed.values().length];
+        }
     }
 
 }
