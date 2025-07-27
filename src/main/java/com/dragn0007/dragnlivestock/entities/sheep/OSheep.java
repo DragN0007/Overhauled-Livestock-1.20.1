@@ -283,16 +283,16 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 
 		if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
-			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() &&
-					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-				ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.SHEEP_MILK_BUCKET.get().getDefaultInstance());
-				player.setItemInHand(hand, itemstack1);
-				replenishMilkCounter = 0;
-				setMilked(true);
+			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+				if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
+					player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+					ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.SHEEP_MILK_BUCKET.get().getDefaultInstance());
+					player.setItemInHand(hand, itemstack1);
+					replenishMilkCounter = 0;
+					setMilked(true);
+				}
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
 		return super.mobInteract(player, hand);

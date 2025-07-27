@@ -463,23 +463,23 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
-			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed() &&
-					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-				ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
-				player.setItemInHand(hand, itemstack1);
-				replenishMilkCounter = 0;
-				setMilked(true);
-			} else if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed() &&
-					(!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() ||
-							(LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-				player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-				ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
-				player.setItemInHand(hand, itemstack1);
-				replenishMilkCounter = 0;
-				setMilked(true);
-			}
+			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed()) {
+				if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
+					player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+					ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
+					player.setItemInHand(hand, itemstack1);
+					replenishMilkCounter = 0;
+					setMilked(true);
+				}
+			} else if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed()) {
+					if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
+						player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+						ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
+						player.setItemInHand(hand, itemstack1);
+						replenishMilkCounter = 0;
+						setMilked(true);
+					}
+				}
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 

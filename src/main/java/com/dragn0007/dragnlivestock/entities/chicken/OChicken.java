@@ -552,7 +552,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public void tick() {
 		super.tick();
 
-		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 100) {
+		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 300) {
 			eggsLaid = 0;
 			eggLayCooldown = 0;
 		}

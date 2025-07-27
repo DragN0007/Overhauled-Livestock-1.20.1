@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    " A",
+    "A "
+  ],
+  "result": {
+    "item": "dragnlivestock:mount_key"
+  },
+  "show_notification": true
+}

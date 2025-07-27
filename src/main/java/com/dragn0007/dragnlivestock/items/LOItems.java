@@ -212,7 +212,7 @@ public class LOItems {
     public static final RegistryObject<Item> SUSSEX_SILKIE_EGG = ITEMS.register("sussex_silkie_egg",
              () -> new Item((new Item.Properties()).stacksTo(64)));
     public static final RegistryObject<Item> AYAM_CEMANI_EGG = ITEMS.register("ayam_cemani_egg",
-            () -> new Item((new Item.Properties()).stacksTo(1)));
+            () -> new Item((new Item.Properties()).stacksTo(64)));
 
 //    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
 
