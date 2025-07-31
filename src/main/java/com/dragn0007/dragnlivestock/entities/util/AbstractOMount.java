@@ -379,10 +379,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
-            if (this.isHorse(this)) {
-                OHorse oHorse = (OHorse) this;
-                oHorse.setFlowerType(0);
-                oHorse.setFlowerItem(Items.AIR.getDefaultInstance());
+            if (this.isEquine(this)) {
+                AbstractOMount equine = this;
+                equine.setFlowerType(0);
+                equine.setFlowerItem(Items.AIR.getDefaultInstance());
             }
 
             if (this.hasChest()) {
@@ -508,17 +508,17 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
-        if (this.isHorse(this)) {
-            OHorse oHorse = (OHorse) this;
-            if (this.isHorse(this) && itemStack.is(LOTags.Items.HAIR_FLOWERS)) {
-                if (oHorse.getFlowerType() == 0) {
-                    oHorse.setFlowerType(1);
-                } else if (oHorse.getFlowerType() == 1) {
-                    oHorse.setFlowerType(2);
-                } else if (oHorse.getFlowerType() == 2) {
-                    oHorse.setFlowerType(0);
+        if (this.isEquine(this)) {
+            AbstractOMount mount = this;
+            if (this.isEquine(this) && itemStack.is(LOTags.Items.HAIR_FLOWERS)) {
+                if (mount.getFlowerType() == 0) {
+                    mount.setFlowerType(1);
+                } else if (mount.getFlowerType() == 1) {
+                    mount.setFlowerType(2);
+                } else if (mount.getFlowerType() == 2) {
+                    mount.setFlowerType(0);
                 }
-                oHorse.setFlowerItem(itemStack);
+                mount.setFlowerItem(itemStack);
                 this.playSound(SoundEvents.FLOWERING_AZALEA_PLACE, 0.5f, 1f);
                 return InteractionResult.SUCCESS;
             }
@@ -875,6 +875,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public boolean isCamel(Entity entity) {
         return entity.getType() == EntityTypes.O_CAMEL_ENTITY.get();
     }
+    public boolean isEquine(Entity entity) {
+        return entity.getType() == EntityTypes.O_HORSE_ENTITY.get() ||
+                entity.getType() == EntityTypes.O_DONKEY_ENTITY.get() ||
+                entity.getType() == EntityTypes.O_MULE_ENTITY.get() ||
+                entity.getType() == EntityTypes.UNICORN_ENTITY.get();
+    }
 
     public void handleSpeedRequest(int speedMod) {
         AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
@@ -994,6 +1000,22 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
     public void setBreed(int breed) {
         this.entityData.set(BREED, breed);
+    }
+
+    public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
+    public ItemStack getFlowerItem() {
+        return this.entityData.get(FLOWER_ITEM);
+    }
+    public void setFlowerItem(ItemStack decorItem) {
+        this.entityData.set(FLOWER_ITEM, decorItem);
+    }
+
+    public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
+    public int getFlowerType() {
+        return this.entityData.get(FLOWER_TYPE);
+    }
+    public void setFlowerType(int decompVariant) {
+        this.entityData.set(FLOWER_TYPE, decompVariant);
     }
 
 }

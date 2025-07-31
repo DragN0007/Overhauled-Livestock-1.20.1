@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.util;
 
+import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class LivestockOverhaulCommonConfig {
@@ -55,6 +56,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue COW_BELL_SOUND;
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
+    public static final ForgeConfigSpec.BooleanValue DYNAMIC_RESOURCES;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
@@ -204,6 +206,9 @@ public class LivestockOverhaulCommonConfig {
 
         GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
                 .define("Ground Tie When Dismounted", true);
+
+        DYNAMIC_RESOURCES = BUILDER.comment("Should Dynamic Resources be turned on? Only turn this on if you're running a DR resource pack. (Experimental)")
+                .define("Dynamic Resources", false);
 
         DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev or testing on your server temporarily.")
                 .define("Debug Logs On [DEV]", false);

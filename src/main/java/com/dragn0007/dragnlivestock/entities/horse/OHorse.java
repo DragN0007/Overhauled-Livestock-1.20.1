@@ -1079,12 +1079,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (tag.contains("Variant_Texture")) {
-			this.setVariantTexture(tag.getString("Variant_Texture"));
-		}
+		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+			if (tag.contains("Variant_Texture")) {
+				this.setVariantTexture(tag.getString("Variant_Texture"));
+			}
 
-		if (tag.contains("Overlay_Texture")) {
-			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+			if (tag.contains("Overlay_Texture")) {
+				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+			}
 		}
 
 		if (tag.contains("Reindeer_Variant")) {
@@ -1093,11 +1095,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (tag.contains("Decomp_Stage")) {
 			this.setDecompVariant(tag.getInt("Decomp_Stage"));
-		}
-
-		if(tag.contains("FlowerItem")) {
-			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
-			this.setFlowerItem(decorItem);
 		}
 
 		if (tag.contains("Gender")) {
@@ -1143,6 +1140,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("Flower_Type")) {
 			this.setFlowerType(tag.getInt("Flower_Type"));
 		}
+
+		if(tag.contains("FlowerItem")) {
+			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
+			this.setFlowerItem(decorItem);
+		}
 	}
 
 	@Override
@@ -1151,13 +1153,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
-		tag.putString("Variant_Texture", this.getTextureResource().toString());
-		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+			tag.putString("Variant_Texture", this.getTextureResource().toString());
+			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		}
 		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
 		tag.putInt("Decomp_Stage", this.getDecompVariant());
-		if(!this.getFlowerItem().isEmpty()) {
-			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
-		}
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Mane", this.getManeType());
 		tag.putInt("Tail", this.getTailType());
@@ -1169,6 +1170,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putBoolean("Undead", this.isUndead());
 		tag.putBoolean("CanDecompose", this.canDecompose());
 		tag.putInt("Flower_Type", this.getFlowerType());
+		if(!this.getFlowerItem().isEmpty()) {
+			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
+		}
 	}
 
 	@Override

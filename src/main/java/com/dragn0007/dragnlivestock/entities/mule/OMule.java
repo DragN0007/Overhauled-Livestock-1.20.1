@@ -36,6 +36,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -469,6 +470,23 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.entityData.set(FEATHERING, feathering);
 	}
 
+
+	public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.ITEM_STACK);
+	public ItemStack getFlowerItem() {
+		return this.entityData.get(FLOWER_ITEM);
+	}
+	public void setFlowerItem(ItemStack decorItem) {
+		this.entityData.set(FLOWER_ITEM, decorItem);
+	}
+
+	public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
+	public int getFlowerType() {
+		return this.entityData.get(FLOWER_TYPE);
+	}
+	public void setFlowerType(int decompVariant) {
+		this.entityData.set(FLOWER_TYPE, decompVariant);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -481,12 +499,14 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			this.setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (tag.contains("Variant_Texture")) {
-			this.setVariantTexture(tag.getString("Variant_Texture"));
-		}
+		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+			if (tag.contains("Variant_Texture")) {
+				this.setVariantTexture(tag.getString("Variant_Texture"));
+			}
 
-		if (tag.contains("Overlay_Texture")) {
-			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+			if (tag.contains("Overlay_Texture")) {
+				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+			}
 		}
 
 		if (tag.contains("Gender")) {
@@ -508,6 +528,15 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		if (tag.contains("SprintTime")) {
 			this.sprintTick = tag.getInt("SprintTime");
 		}
+
+		if (tag.contains("Flower_Type")) {
+			this.setFlowerType(tag.getInt("Flower_Type"));
+		}
+
+		if(tag.contains("FlowerItem")) {
+			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
+			this.setFlowerItem(decorItem);
+		}
 	}
 
 	@Override
@@ -515,13 +544,19 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
-		tag.putString("Variant_Texture", this.getTextureResource().toString());
-		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+			tag.putString("Variant_Texture", this.getTextureResource().toString());
+			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+		}
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Feathering", this.getFeathering());
 		tag.putInt("Eyes", this.getEyeVariant());
 		tag.putInt("SprintTime", this.sprintTick);
+		tag.putInt("Flower_Type", this.getFlowerType());
+		if(!this.getFlowerItem().isEmpty()) {
+			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
+		}
 	}
 
 	@Override
@@ -565,6 +600,8 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.entityData.define(BREED, 0);
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
+		this.entityData.define(FLOWER_ITEM, ItemStack.EMPTY);
+		this.entityData.define(FLOWER_TYPE, 0);
 	}
 
 	public void setFeatheringByBreed() {
