@@ -50,6 +50,8 @@ Livestock Overhaul comes with a built-in custom texture option for its animals.
 This means you can create your own textures, whilst still keeping the OG ones from the mod intact.
 No coding from you required. It's as simple as a texture pack!
 
+Make sure to turn on the Dyanmic Resources config in the livestock-common.
+
 I would suggest putting the pack server-side and having your players always have it on. If they remove it
 and re-enable it, and they still can't see the texture, they should restart their game.
 
