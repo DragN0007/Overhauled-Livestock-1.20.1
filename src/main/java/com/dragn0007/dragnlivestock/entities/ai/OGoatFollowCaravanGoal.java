@@ -1,7 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.goat.OGoat;
+import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoat;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -12,12 +12,12 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class OGoatFollowCaravanGoal extends Goal {
-   public final OGoat goat;
+   public final OMountainGoat goat;
    private double speedModifier;
    private static final int CARAVAN_LIMIT = 8;
    private int distCheckCounter;
 
-   public OGoatFollowCaravanGoal(OGoat goat, double speedMod) {
+   public OGoatFollowCaravanGoal(OMountainGoat goat, double speedMod) {
       this.goat = goat;
       this.speedModifier = speedMod;
       this.setFlags(EnumSet.of(Flag.MOVE));
@@ -29,11 +29,11 @@ public class OGoatFollowCaravanGoal extends Goal {
             EntityType<?> entitytype = p_25505_.getType();
             return entitytype == EntityTypes.O_GOAT_ENTITY.get();
          });
-         OGoat llama = null;
+         OMountainGoat llama = null;
          double d0 = Double.MAX_VALUE;
 
          for(Entity entity : list) {
-            OGoat llama1 = (OGoat)entity;
+            OMountainGoat llama1 = (OMountainGoat)entity;
             if (llama1.inCaravan() && !llama1.hasCaravanTail()) {
                double d1 = this.goat.distanceToSqr(llama1);
                if (!(d1 > d0)) {
@@ -45,7 +45,7 @@ public class OGoatFollowCaravanGoal extends Goal {
 
          if (llama == null) {
             for(Entity entity1 : list) {
-               OGoat llama2 = (OGoat)entity1;
+               OMountainGoat llama2 = (OMountainGoat)entity1;
                if (llama2.isLeashed() && !llama2.hasCaravanTail()) {
                   double d2 = this.goat.distanceToSqr(llama2);
                   if (!(d2 > d0)) {
@@ -104,7 +104,7 @@ public class OGoatFollowCaravanGoal extends Goal {
    public void tick() {
       if (this.goat.inCaravan()) {
          if (!(this.goat.getLeashHolder() instanceof LeashFenceKnotEntity)) {
-            OGoat llama = this.goat.getCaravanHead();
+            OMountainGoat llama = this.goat.getCaravanHead();
             double d0 = (double)this.goat.distanceTo(llama);
             float f = 2.0F;
             Vec3 vec3 = (new Vec3(llama.getX() - this.goat.getX(), llama.getY() - this.goat.getY(), llama.getZ() - this.goat.getZ())).normalize().scale(Math.max(d0 - 2.0D, 0.0D));
@@ -113,14 +113,14 @@ public class OGoatFollowCaravanGoal extends Goal {
       }
    }
 
-   private boolean firstIsLeashed(OGoat p_25507_, int p_25508_) {
+   private boolean firstIsLeashed(OMountainGoat p_25507_, int p_25508_) {
       if (p_25508_ > 8) {
          return false;
       } else if (p_25507_.inCaravan()) {
          if (p_25507_.getCaravanHead().isLeashed()) {
             return true;
          } else {
-            OGoat llama = p_25507_.getCaravanHead();
+            OMountainGoat llama = p_25507_.getCaravanHead();
             ++p_25508_;
             return this.firstIsLeashed(llama, p_25508_);
          }

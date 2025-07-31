@@ -1,22 +1,22 @@
-package com.dragn0007.dragnlivestock.entities.goat;
+package com.dragn0007.dragnlivestock.entities.mountain_goat;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class OGoatRender extends GeoEntityRenderer<OGoat> {
+public class OMountainGoatRender extends GeoEntityRenderer<OMountainGoat> {
 
-    public OGoatRender(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new OGoatModel());
-        this.addRenderLayer(new OGoatMarkingLayer(this));
-        this.addRenderLayer(new OGoatCarpetLayer(this));
-        this.addRenderLayer(new OGoatChestLayer(this));
-        this.addRenderLayer(new OGoatBrandTagLayer(this));
+    public OMountainGoatRender(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new OMountainGoatModel());
+        this.addRenderLayer(new OMountainGoatMarkingLayer(this));
+        this.addRenderLayer(new OMountainGoatCarpetLayer(this));
+        this.addRenderLayer(new OMountainGoatChestLayer(this));
+        this.addRenderLayer(new OMountainGoatBrandTagLayer(this));
     }
 
     @Override
-    public void render(OGoat entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(OMountainGoat entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
 
         if(entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);

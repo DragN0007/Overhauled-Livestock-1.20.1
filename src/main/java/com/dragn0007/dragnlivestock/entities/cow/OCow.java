@@ -1198,4 +1198,9 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public int saddleSlot() {
 		return 0;
 	}
+
+	@Override
+	public boolean canJump() {
+		return false;
+	}
 }

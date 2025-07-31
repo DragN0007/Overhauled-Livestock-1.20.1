@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.goat;
+package com.dragn0007.dragnlivestock.entities.mountain_goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;
@@ -9,14 +9,14 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
-public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
+public class OMountainGoatModel extends DefaultedEntityGeoModel<OMountainGoat> {
 
-    public OGoatModel() {
+    public OMountainGoatModel() {
         super(new ResourceLocation(LivestockOverhaul.MODID, "o_goat"), true);
     }
 
     @Override
-    public void setCustomAnimations(OGoat animatable, long instanceId, AnimationState<OGoat> animationState) {
+    public void setCustomAnimations(OMountainGoat animatable, long instanceId, AnimationState<OMountainGoat> animationState) {
 
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
@@ -63,16 +63,16 @@ public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_goat.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OGoat object) {
+    public ResourceLocation getModelResource(OMountainGoat object) {
         return MODEL;
     }
 
-    public ResourceLocation getTextureResource(OGoat object) {
+    public ResourceLocation getTextureResource(OMountainGoat object) {
         return object.getTextureLocation();
     }
 
     @Override
-    public ResourceLocation getAnimationResource(OGoat animatable) {
+    public ResourceLocation getAnimationResource(OMountainGoat animatable) {
         return ANIMATION;
     }
 }

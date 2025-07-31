@@ -67,8 +67,11 @@
   "item.dragnlivestock.ox_spawn_egg": "Ox Spawn Egg",
   "entity.dragnlivestock.ox": "Ox",
 
-  "item.dragnlivestock.o_goat_spawn_egg": "O-Goat Spawn Egg",
-  "entity.dragnlivestock.o_goat": "O-Goat",
+  "item.dragnlivestock.o_goat_spawn_egg": "O-Mountain Goat Spawn Egg",
+  "entity.dragnlivestock.o_goat": "O-Mountain Goat",
+
+  "item.dragnlivestock.farm_goat_spawn_egg": "O-Goat Spawn Egg",
+  "entity.dragnlivestock.farm_goat": "O-Goat",
 
   "item.dragnlivestock.o_undead_horse_spawn_egg": "O-Undead Horse Spawn Egg",
   "entity.dragnlivestock.o_undead_horse": "O-Undead Horse",

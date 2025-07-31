@@ -46,9 +46,9 @@ import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogEyeLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
-import com.dragn0007.dragnlivestock.entities.goat.OGoat;
-import com.dragn0007.dragnlivestock.entities.goat.OGoatMarkingLayer;
-import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
+import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoat;
+import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoatMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseDecompLayer;
@@ -1161,21 +1161,21 @@ public class SpawnReplacer {
                     return;
                 }
 
-                OGoat oGoat = EntityTypes.O_GOAT_ENTITY.get().create(event.getLevel());
+                OMountainGoat oGoat = EntityTypes.O_GOAT_ENTITY.get().create(event.getLevel());
                 if (oGoat != null) {
                     oGoat.copyPosition(vanillagoat);
 
                     oGoat.setCustomName(vanillagoat.getCustomName());
                     oGoat.setAge(vanillagoat.getAge());
 
-                    oGoat.setGender(random.nextInt(OGoat.Gender.values().length));
+                    oGoat.setGender(random.nextInt(OMountainGoat.Gender.values().length));
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oGoat.setColor();
                         oGoat.setMarking();
                     } else {
-                        oGoat.setVariant(random.nextInt(OGoatModel.Variant.values().length));
-                        oGoat.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+                        oGoat.setVariant(random.nextInt(OMountainGoatModel.Variant.values().length));
+                        oGoat.setOverlayVariant(random.nextInt(OMountainGoatMarkingLayer.Overlay.values().length));
                     }
 
                     if (event.getLevel().isClientSide) {
@@ -1855,8 +1855,8 @@ public class SpawnReplacer {
         }
 
         //Goat
-        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && event.getEntity() instanceof OGoat) {
-            OGoat oGoat = (OGoat) event.getEntity();
+        if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && event.getEntity() instanceof OMountainGoat) {
+            OMountainGoat oGoat = (OMountainGoat) event.getEntity();
 
             if (event.getLevel().isClientSide) {
                 return;

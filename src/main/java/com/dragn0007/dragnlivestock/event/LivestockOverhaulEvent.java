@@ -45,8 +45,8 @@ import com.dragn0007.dragnlivestock.entities.frog.OFrogRender;
 import com.dragn0007.dragnlivestock.entities.frog.ReplacedTadpoleRender;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
 import com.dragn0007.dragnlivestock.entities.frog.food.GrubRender;
-import com.dragn0007.dragnlivestock.entities.goat.OGoat;
-import com.dragn0007.dragnlivestock.entities.goat.OGoatRender;
+import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoat;
+import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoatRender;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseRender;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
@@ -98,7 +98,7 @@ public class LivestockOverhaulEvent {
         event.put(EntityTypes.O_MULE_ENTITY.get(), OMule.createBaseHorseAttributes().build());
         event.put(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroom.createAttributes().build());
         event.put(EntityTypes.O_CAMEL_ENTITY.get(), OCamel.createBaseHorseAttributes().build());
-        event.put(EntityTypes.O_GOAT_ENTITY.get(), OGoat.createAttributes().build());
+        event.put(EntityTypes.O_GOAT_ENTITY.get(), OMountainGoat.createAttributes().build());
         event.put(EntityTypes.O_FROG_ENTITY.get(), OFrog.createAttributes().build());
 
         event.put(EntityTypes.CARIBOU_ENTITY.get(), Caribou.createBaseHorseAttributes().build());
@@ -138,7 +138,7 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.O_MULE_ENTITY.get(), OMuleRender::new);
         EntityRenderers.register(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroomRender::new);
         EntityRenderers.register(EntityTypes.O_CAMEL_ENTITY.get(), OCamelRender::new);
-        EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatRender::new);
+        EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OMountainGoatRender::new);
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
         EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);
