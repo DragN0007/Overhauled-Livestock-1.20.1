@@ -25,7 +25,7 @@ public class OHorseCaparisonLayer extends GeoRenderLayer<OHorse> {
 
     @Override
     public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        ItemStack itemStack = animatable.getFlowerItem();
+        ItemStack itemStack = animatable.getDecorItem();
 
         ResourceLocation resourceLocation = null;
 
