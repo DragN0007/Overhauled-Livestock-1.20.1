@@ -21,6 +21,7 @@ import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
+import com.dragn0007.dragnlivestock.entities.goat.FarmGoat;
 import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
@@ -34,6 +35,7 @@ import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -133,6 +135,12 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(0.9f,1f)
                     .build(new ResourceLocation(MODID,"o_goat").toString()));
+
+    public static final RegistryObject<EntityType<FarmGoat>> FARM_GOAT_ENTITY = ENTITY_TYPES.register("farm_goat",
+            () -> EntityType.Builder.of(FarmGoat::new,
+                            MobCategory.CREATURE)
+                    .sized(0.9f,1f)
+                    .build(new ResourceLocation(MODID,"farm_goat").toString()));
 
     public static final RegistryObject<EntityType<OFrog>> O_FROG_ENTITY = ENTITY_TYPES.register("o_frog",
             () -> EntityType.Builder.of(OFrog::new,
