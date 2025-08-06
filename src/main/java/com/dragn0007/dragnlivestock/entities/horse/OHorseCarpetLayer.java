@@ -334,6 +334,24 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
             }
         }
 
+        if (!(animatable.getDecompVariant() == 4) && !(animatable.getDecompVariant() == 5) && !(animatable.getDecompVariant() == 6)) {
+            if (animatable.isBranded()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/mustang_brand.png");
+                RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                poseStack.pushPose();
+                poseStack.scale(1.0f, 1.0f, 1.0f);
+                poseStack.translate(0.0d, 0.0d, 0.0d);
+                poseStack.popPose();
+                getRenderer().reRender(getDefaultBakedModel(animatable),
+                        poseStack,
+                        bufferSource,
+                        animatable,
+                        renderType1,
+                        bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1, 1, 1, 1);
+            }
+        }
+
     }
 
 }

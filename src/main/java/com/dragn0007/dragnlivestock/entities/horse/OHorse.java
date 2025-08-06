@@ -1063,6 +1063,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(FLOWER_TYPE, decompVariant);
 	}
 
+	public static final EntityDataAccessor<Boolean> BRANDED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
+	public boolean isBranded() {
+		return this.entityData.get(BRANDED);
+	}
+	public void setIsBranded(boolean canBeBranded) {
+		this.entityData.set(BRANDED, canBeBranded);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -1145,6 +1153,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
 			this.setFlowerItem(decorItem);
 		}
+
+		if (tag.contains("IsBranded")) {
+			this.setIsBranded(tag.getBoolean("IsBranded"));
+		}
 	}
 
 	@Override
@@ -1173,6 +1185,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if(!this.getFlowerItem().isEmpty()) {
 			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
 		}
+		tag.putBoolean("IsBranded", this.isBranded());
 	}
 
 	@Override
@@ -1242,6 +1255,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(DECOMPOSE, false);
 		this.entityData.define(FLOWER_ITEM, ItemStack.EMPTY);
 		this.entityData.define(FLOWER_TYPE, 0);
+		this.entityData.define(BRANDED, false);
 	}
 
 	public boolean canMate(Animal animal) {
