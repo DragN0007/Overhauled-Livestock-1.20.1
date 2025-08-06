@@ -544,10 +544,10 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
 			tag.putString("Variant_Texture", this.getTextureResource().toString());
 			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		}
+//		}
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Feathering", this.getFeathering());

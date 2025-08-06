@@ -482,7 +482,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
 			if (tag.contains("Variant_Texture")) {
 				this.setVariantTexture(tag.getString("Variant_Texture"));
 			}
@@ -490,7 +490,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			if (tag.contains("Overlay_Texture")) {
 				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 			}
-		}
+//		}
 
 		if (tag.contains("Dewlap")) {
 			this.setDewlap(tag.getInt("Dewlap"));
@@ -507,10 +507,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
 			tag.putString("Variant_Texture", this.getTextureResource().toString());
 			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		}
+//		}
 		tag.putInt("Dewlap", this.getDewlap());
 		tag.putInt("Gender", this.getGender());
 	}

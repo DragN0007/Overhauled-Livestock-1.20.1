@@ -207,8 +207,8 @@ public class LivestockOverhaulCommonConfig {
         GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
                 .define("Ground Tie When Dismounted", true);
 
-        DYNAMIC_RESOURCES = BUILDER.comment("Should Dynamic Resources be turned on? Only turn this on if you're running a DR resource pack. (Experimental)")
-                .define("Dynamic Resources", false);
+        DYNAMIC_RESOURCES = BUILDER.comment("(THIS DOESN'T DO ANYTHING YET!) Should Dynamic Resources be turned on? Only turn this on if you're running a DR resource pack. (Experimental)")
+                .define("Dynamic Resources (WIP)", false);
 
         DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev or testing on your server temporarily.")
                 .define("Debug Logs On [DEV]", false);

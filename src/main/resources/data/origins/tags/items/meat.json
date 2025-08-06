@@ -17,6 +17,8 @@
     "dragnlivestock:game_jerky",
     "dragnlivestock:generic_jerky",
 
-    "#forge:cheese"
+    "#forge:cheese",
+    "#forge:raw_meats",
+    "#forge:cooked_meats"
   ]
 }
