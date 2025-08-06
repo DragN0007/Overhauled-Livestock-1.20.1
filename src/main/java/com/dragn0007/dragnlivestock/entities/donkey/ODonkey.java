@@ -39,6 +39,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -403,7 +404,6 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
 	}
 
-
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
 	public ResourceLocation getEyeTextureResource() {
 		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
@@ -413,6 +413,22 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	}
 	public void setEyeVariant(int eyeVariant) {
 		this.entityData.set(EYES, eyeVariant);
+	}
+
+	public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.ITEM_STACK);
+	public ItemStack getFlowerItem() {
+		return this.entityData.get(FLOWER_ITEM);
+	}
+	public void setFlowerItem(ItemStack decorItem) {
+		this.entityData.set(FLOWER_ITEM, decorItem);
+	}
+
+	public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
+	public int getFlowerType() {
+		return this.entityData.get(FLOWER_TYPE);
+	}
+	public void setFlowerType(int decompVariant) {
+		this.entityData.set(FLOWER_TYPE, decompVariant);
 	}
 
 	@Override
@@ -448,6 +464,15 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		if (tag.contains("SprintTime")) {
 			this.sprintTick = tag.getInt("SprintTime");
 		}
+
+		if (tag.contains("Flower_Type")) {
+			this.setFlowerType(tag.getInt("Flower_Type"));
+		}
+
+		if(tag.contains("FlowerItem")) {
+			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
+			this.setFlowerItem(decorItem);
+		}
 	}
 
 	@Override
@@ -462,6 +487,10 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Eyes", this.getEyeVariant());
 		tag.putInt("SprintTime", this.sprintTick);
+		tag.putInt("Flower_Type", this.getFlowerType());
+		if(!this.getFlowerItem().isEmpty()) {
+			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
+		}
 	}
 
 	@Override
@@ -509,6 +538,8 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.entityData.define(VARIANT_TEXTURE, ODonkeyModel.Variant.BROWN.resourceLocation);
 		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation);
 		this.entityData.define(EYES, 0);
+		this.entityData.define(FLOWER_ITEM, ItemStack.EMPTY);
+		this.entityData.define(FLOWER_TYPE, 0);
 	}
 
 	public boolean canMate(Animal animal) {

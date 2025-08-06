@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.unicorn;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.marking_layer.EquineEyeColorOverlay;
@@ -312,6 +313,22 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.entityData.set(FEATHERING, feathering);
 	}
 
+	public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.ITEM_STACK);
+	public ItemStack getFlowerItem() {
+		return this.entityData.get(FLOWER_ITEM);
+	}
+	public void setFlowerItem(ItemStack decorItem) {
+		this.entityData.set(FLOWER_ITEM, decorItem);
+	}
+
+	public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
+	public int getFlowerType() {
+		return this.entityData.get(FLOWER_TYPE);
+	}
+	public void setFlowerType(int decompVariant) {
+		this.entityData.set(FLOWER_TYPE, decompVariant);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
@@ -378,6 +395,15 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 		}
 
+		if (tag.contains("Flower_Type")) {
+			this.setFlowerType(tag.getInt("Flower_Type"));
+		}
+
+		if(tag.contains("FlowerItem")) {
+			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
+			this.setFlowerItem(decorItem);
+		}
+
 		this.updateContainerEquipment();
 	}
 
@@ -398,6 +424,10 @@ public class Unicorn extends OHorse implements GeoEntity {
 		tag.putInt("Horn", this.getHornVariant());
 		tag.putInt("SprintTime", this.sprintTick);
 		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
+		tag.putInt("Flower_Type", this.getFlowerType());
+		if(!this.getFlowerItem().isEmpty()) {
+			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
+		}
 
 		if (this.hasChest()) {
 			ListTag listtag = new ListTag();
@@ -465,6 +495,8 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
 		this.entityData.define(HORN, 0);
+		this.entityData.define(FLOWER_ITEM, ItemStack.EMPTY);
+		this.entityData.define(FLOWER_TYPE, 0);
 	}
 
 	public boolean canMate(Animal animal) {
