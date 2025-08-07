@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.util;
 
-import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class LivestockOverhaulCommonConfig {

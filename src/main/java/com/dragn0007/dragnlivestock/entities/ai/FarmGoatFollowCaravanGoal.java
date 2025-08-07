@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.entities.ai;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.goat.FarmGoat;
-import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoat;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.Goal;
