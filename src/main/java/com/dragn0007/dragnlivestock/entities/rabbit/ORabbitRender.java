@@ -22,18 +22,16 @@ public class ORabbitRender extends GeoEntityRenderer<ORabbit> {
 
             if (entity.getDewlap() == 0) {
                 model.getBone("dewlap").ifPresent(b -> b.setHidden(true));
-            } else {
-                model.getBone("dewlap").ifPresent(b -> b.setHidden(false));
-            }
-
-            if (entity.getDewlap() == 1) {
+            } else if (entity.getDewlap() == 1) {
                 model.getBone("dewlap").ifPresent(b -> b.setScaleX(0.8F));
                 model.getBone("dewlap").ifPresent(b -> b.setScaleY(0.8F));
                 model.getBone("dewlap").ifPresent(b -> b.setScaleZ(0.8F));
+                model.getBone("dewlap").ifPresent(b -> b.setHidden(false));
             } else {
                 model.getBone("dewlap").ifPresent(b -> b.setScaleX(1.0F));
                 model.getBone("dewlap").ifPresent(b -> b.setScaleY(1.0F));
                 model.getBone("dewlap").ifPresent(b -> b.setScaleZ(1.0F));
+                model.getBone("dewlap").ifPresent(b -> b.setHidden(false));
             }
         }
 
