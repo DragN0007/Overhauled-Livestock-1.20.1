@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.gui.UnicornMenu;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +19,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
@@ -39,6 +41,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
@@ -78,6 +81,56 @@ public class Unicorn extends OHorse implements GeoEntity {
 	}
 
 	@Override
+	public boolean handleEating(Player player, ItemStack stack) {
+		int i = 0;
+		int j = 0;
+		float f = 0.0F;
+		boolean flag = false;
+		if (isFood(stack)) {
+			i = 90;
+			j = 6;
+			f = 10.0F;
+			if (this.isTamed() && this.getAge() == 0 && this.canFallInLove()) {
+				flag = true;
+				this.setInLove(player);
+			}
+		}
+
+		if (this.getHealth() < this.getMaxHealth() && f > 0.0F) {
+			this.heal(f);
+			flag = true;
+		}
+
+		if (this.isBaby() && i > 0) {
+			this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+			if (!this.level().isClientSide) {
+				this.ageUp(i);
+			}
+
+			flag = true;
+		}
+
+		if (j > 0 && (flag || !this.isTamed()) && this.getTemper() < this.getMaxTemper()) {
+			flag = true;
+			if (!this.level().isClientSide) {
+				this.modifyTemper(j);
+			}
+		}
+
+		if (flag) {
+			this.gameEvent(GameEvent.ENTITY_INTERACT);
+			if (!this.isSilent()) {
+				SoundEvent soundevent = this.getEatingSound();
+				if (soundevent != null) {
+					this.level().playSound(null, this.getX(), this.getY(), this.getZ(), this.getEatingSound(), this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+				}
+			}
+		}
+
+		return flag;
+	}
+
+	@Override
 	public boolean hasGrowableHair() {
 		return true;
 	}
@@ -103,11 +156,11 @@ public class Unicorn extends OHorse implements GeoEntity {
 	public static final Ingredient NETHER_FOOD_ITEMS = Ingredient.of(Items.NETHERITE_SCRAP, Items.QUARTZ_BLOCK, Items.GOLD_BLOCK);
 	public static final Ingredient END_FOOD_ITEMS = Ingredient.of(Items.DRAGON_BREATH, Items.END_CRYSTAL, Items.ENDER_PEARL);
 	public boolean isFood(ItemStack stack) {
-		if (this.getBreed() == 0) {
+		if (this.getSpecies() == 0) {
 			return OVERWORLD_FOOD_ITEMS.test(stack);
-		} else if (this.getBreed() == 1) {
+		} else if (this.getSpecies() == 1) {
 			return NETHER_FOOD_ITEMS.test(stack);
-		} else if (this.getBreed() == 2) {
+		} else if (this.getSpecies() == 2) {
 			return END_FOOD_ITEMS.test(stack);
 		} else {
 			return FOOD_ITEMS.test(stack);
