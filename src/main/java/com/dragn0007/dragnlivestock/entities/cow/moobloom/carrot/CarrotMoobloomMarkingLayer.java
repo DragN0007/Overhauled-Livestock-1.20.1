@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot;
 
-import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

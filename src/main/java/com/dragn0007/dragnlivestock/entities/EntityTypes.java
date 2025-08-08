@@ -19,13 +19,13 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerry
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
-import com.dragn0007.dragnlivestock.entities.farmgoat.FarmGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
-import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;

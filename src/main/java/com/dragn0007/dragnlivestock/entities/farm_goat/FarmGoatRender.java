@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.farmgoat;
+package com.dragn0007.dragnlivestock.entities.farm_goat;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;

@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.farmgoat;
+package com.dragn0007.dragnlivestock.entities.farm_goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;

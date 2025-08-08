@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.marking_layer;
+package com.dragn0007.dragnlivestock.entities.util.marking_layer;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import net.minecraft.resources.ResourceLocation;

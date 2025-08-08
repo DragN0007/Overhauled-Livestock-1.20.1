@@ -2,7 +2,7 @@ package com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering;
 
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
-import com.dragn0007.dragnlivestock.entities.marking_layer.BovineMarkingOverlay;
+import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
