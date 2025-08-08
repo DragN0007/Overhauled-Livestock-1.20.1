@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.mountain_goat;
+package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
@@ -66,12 +66,12 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable {
+public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	public static final EntityDimensions LONG_JUMPING_DIMENSIONS = EntityDimensions.scalable(0.9F, 1.3F).scale(0.7F);
-	public static final ImmutableList<SensorType<? extends Sensor<? super OMountainGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
+	public static final ImmutableList<SensorType<? extends Sensor<? super OGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
 	public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATE_RECENTLY, MemoryModuleType.BREED_TARGET, MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryModuleType.RAM_TARGET, MemoryModuleType.IS_PANICKING);
-	private static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_GOAT = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_GOAT = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	private boolean isLoweringHead;
 	private int lowerHeadTick;
 
@@ -81,11 +81,11 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset
 	}
 
-	public Brain.Provider<OMountainGoat> brainProvider() {
+	public Brain.Provider<OGoat> brainProvider() {
 		return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
 	}
 
-	public OMountainGoat(EntityType<? extends OMountainGoat> type, Level level) {
+	public OGoat(EntityType<? extends OGoat> type, Level level) {
 		super(type, level);
 	}
 
@@ -305,9 +305,9 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 	}
 
 	@Nullable
-	public OMountainGoat caravanHead;
+	public OGoat caravanHead;
 	@Nullable
-	public OMountainGoat caravanTail;
+	public OGoat caravanTail;
 
 	public void leaveCaravan() {
 		if (this.caravanHead != null) {
@@ -317,7 +317,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		this.caravanHead = null;
 	}
 
-	public void joinCaravan(OMountainGoat p_30767_) {
+	public void joinCaravan(OGoat p_30767_) {
 		this.caravanHead = p_30767_;
 		this.caravanHead.caravanTail = this;
 	}
@@ -331,7 +331,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 	}
 
 	@Nullable
-	public OMountainGoat getCaravanHead() {
+	public OGoat getCaravanHead() {
 		return this.caravanHead;
 	}
 
@@ -397,9 +397,9 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDimensions(pose);
 	}
 
-	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
-		return OMountainGoatModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		return OGoatModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -409,8 +409,8 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 	}
 
 
-	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.INT);
-	public ResourceLocation getOverlayLocation() {return OMountainGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
+	public ResourceLocation getOverlayLocation() {return OGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
@@ -418,8 +418,8 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		this.entityData.set(OVERLAY, overlayVariant);
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
 	}
@@ -444,7 +444,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		}
 	}
 
-	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	public boolean isSheared() {
 		return this.entityData.get(SHEARED);
 	}
@@ -452,7 +452,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		this.entityData.set(SHEARED, sheared);
 	}
 
-	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OMountainGoat.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.BOOLEAN);
 	public boolean wasMilked() {
 		return this.entityData.get(MILKED);
 	}
@@ -553,8 +553,8 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 			this.setColor();
 			this.setMarking();
 		} else {
-			this.setVariant(random.nextInt(OMountainGoatModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(OMountainGoatMarkingLayer.Overlay.values().length));
+			this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
 		}
 
 		RandomSource randomsource = serverLevelAccessor.getRandom();
@@ -575,13 +575,13 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
 			return false;
-		} else if (!(animal instanceof OMountainGoat)) {
+		} else if (!(animal instanceof OGoat)) {
 			return false;
 		} else {
 			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((OMountainGoat) animal).canParent();
+				return this.canParent() && ((OGoat) animal).canParent();
 			} else {
-				OMountainGoat partner = (OMountainGoat) animal;
+				OGoat partner = (OGoat) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
 					return isFemale();
 				}
@@ -593,8 +593,8 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		OMountainGoat kid;
-		OMountainGoat partner = (OMountainGoat) ageableMob;
+		OGoat kid;
+		OGoat partner = (OGoat) ageableMob;
 		kid = EntityTypes.O_GOAT_ENTITY.get().create(serverLevel);
 
 		int variantChance = this.random.nextInt(14);
@@ -604,7 +604,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 		} else if (variantChance < 12) {
 			variant = partner.getVariant();
 		} else {
-			variant = this.random.nextInt(OMountainGoatModel.Variant.values().length);
+			variant = this.random.nextInt(OGoatModel.Variant.values().length);
 		}
 		kid.setVariant(variant);
 
@@ -627,7 +627,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 	public void setColor() {
 
 		if (random.nextDouble() < 0.10) {
-			this.setVariant(random.nextInt(OMountainGoatModel.Variant.values().length));
+			this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
 		} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
 			int[] variants = {0, 5, 6, 10};
 			int randomIndex = new Random().nextInt(variants.length);
@@ -641,7 +641,7 @@ public class OMountainGoat extends AbstractOMount implements GeoEntity, Taggable
 	public void setMarking() {
 
 		if (random.nextDouble() < 0.10) {
-			this.setOverlayVariant(random.nextInt(OMountainGoatMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
 		} else if (random.nextDouble() > 0.10) {
 			this.setOverlayVariant(0);
 		}

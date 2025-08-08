@@ -11,15 +11,15 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class FarmGoatMarkingLayer extends GeoRenderLayer<FarmGoat> {
-    public FarmGoatMarkingLayer(GeoRenderer entityRendererIn) {
+public class OGoatMarkingLayer extends GeoRenderLayer<OGoat> {
+    public OGoatMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, FarmGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, OGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((FarmGoat) animatable).getOverlayLocation());
+            RenderType renderMarkingType = RenderType.entityCutout(((OGoat) animatable).getOverlayLocation());
             poseStack.pushPose();
             poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);

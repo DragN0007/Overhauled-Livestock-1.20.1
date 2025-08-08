@@ -107,8 +107,7 @@ public class LivestockOverhaul
             return resourceLocation;
         }
     };
-
-     public static final EntityDataSerializer<Optional<DyeColor>> DYE_COLOR = EntityDataSerializer.optional(FriendlyByteBuf::writeEnum, (friendlyByteBuf) -> friendlyByteBuf.readEnum(DyeColor.class));
+    public static final EntityDataSerializer<Optional<DyeColor>> DYE_COLOR = EntityDataSerializer.optional(FriendlyByteBuf::writeEnum, (friendlyByteBuf) -> friendlyByteBuf.readEnum(DyeColor.class));
 
     static {
         EntityDataSerializers.registerSerializer(RESOURCE_LOCATION);

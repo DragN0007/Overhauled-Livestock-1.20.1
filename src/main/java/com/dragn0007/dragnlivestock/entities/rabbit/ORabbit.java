@@ -174,18 +174,22 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 
 		if (itemstack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
 			if (player.isShiftKeyDown()) {
-				this.setVariant(this.getVariant() - 1);
-				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-				return InteractionResult.sidedSuccess(this.level().isClientSide);
+				if (this.getVariant() > 0) {
+					this.setVariant(this.getVariant() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
 			}
 			this.setVariant(this.getVariant() + 1);
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		} else if (itemstack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
 			if (player.isShiftKeyDown()) {
-				this.setOverlayVariant(this.getOverlayVariant() - 1);
-				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-				return InteractionResult.sidedSuccess(this.level().isClientSide);
+				if (this.getOverlayVariant() > 0) {
+					this.setOverlayVariant(this.getOverlayVariant() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
 			}
 			this.setOverlayVariant(this.getOverlayVariant() + 1);
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
@@ -483,13 +487,13 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		}
 
 //		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			if (tag.contains("Variant_Texture")) {
-				this.setVariantTexture(tag.getString("Variant_Texture"));
-			}
-
-			if (tag.contains("Overlay_Texture")) {
-				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-			}
+//			if (tag.contains("Variant_Texture")) {
+//				this.setVariantTexture(tag.getString("Variant_Texture"));
+//			}
+//
+//			if (tag.contains("Overlay_Texture")) {
+//				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+//			}
 //		}
 
 		if (tag.contains("Dewlap")) {

@@ -443,15 +443,15 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			this.setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			if (tag.contains("Variant_Texture")) {
-				this.setVariantTexture(tag.getString("Variant_Texture"));
-			}
-
-			if (tag.contains("Overlay_Texture")) {
-				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-			}
-		}
+//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+//			if (tag.contains("Variant_Texture")) {
+//				this.setVariantTexture(tag.getString("Variant_Texture"));
+//			}
+//
+//			if (tag.contains("Overlay_Texture")) {
+//				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+//			}
+//		}
 
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
@@ -480,10 +480,10 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			tag.putString("Variant_Texture", this.getTextureResource().toString());
-			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		}
+//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
+//			tag.putString("Variant_Texture", this.getTextureResource().toString());
+//			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
+//		}
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Eyes", this.getEyeVariant());
 		tag.putInt("SprintTime", this.sprintTick);

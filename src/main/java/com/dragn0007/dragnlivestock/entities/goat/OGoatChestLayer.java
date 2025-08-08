@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.mountain_goat;
+package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,13 +14,13 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
-public class OMountainGoatChestLayer extends GeoRenderLayer<OMountainGoat> {
-    public OMountainGoatChestLayer(GeoRenderer<OMountainGoat> entityRendererIn) {
+public class OGoatChestLayer extends GeoRenderLayer<OGoat> {
+    public OGoatChestLayer(GeoRenderer<OGoat> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, OMountainGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, OGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
         ResourceLocation resourceLocation = null;
 

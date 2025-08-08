@@ -21,11 +21,11 @@ import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
-import com.dragn0007.dragnlivestock.entities.goat.FarmGoat;
+import com.dragn0007.dragnlivestock.entities.farmgoat.FarmGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
-import com.dragn0007.dragnlivestock.entities.mountain_goat.OMountainGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
@@ -129,8 +129,8 @@ public class EntityTypes {
                     .sized(1.5f,2.5f)
                     .build(new ResourceLocation(MODID,"o_camel").toString()));
 
-    public static final RegistryObject<EntityType<OMountainGoat>> O_GOAT_ENTITY = ENTITY_TYPES.register("o_goat",
-            () -> EntityType.Builder.of(OMountainGoat::new,
+    public static final RegistryObject<EntityType<OGoat>> O_GOAT_ENTITY = ENTITY_TYPES.register("o_goat",
+            () -> EntityType.Builder.of(OGoat::new,
                             MobCategory.CREATURE)
                     .sized(0.9f,1f)
                     .build(new ResourceLocation(MODID,"o_goat").toString()));

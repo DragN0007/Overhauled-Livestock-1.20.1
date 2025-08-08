@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.mountain_goat;
+package com.dragn0007.dragnlivestock.entities.farmgoat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,15 +11,15 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class OMountainGoatMarkingLayer extends GeoRenderLayer<OMountainGoat> {
-    public OMountainGoatMarkingLayer(GeoRenderer entityRendererIn) {
+public class FarmGoatMarkingLayer extends GeoRenderLayer<FarmGoat> {
+    public FarmGoatMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, OMountainGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, FarmGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((OMountainGoat) animatable).getOverlayLocation());
+            RenderType renderMarkingType = RenderType.entityCutout(((FarmGoat) animatable).getOverlayLocation());
             poseStack.pushPose();
             poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);

@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.mountain_goat;
+package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
@@ -16,7 +16,7 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
-public class OMountainGoatBrandTagLayer extends GeoRenderLayer<OMountainGoat> {
+public class OGoatBrandTagLayer extends GeoRenderLayer<OGoat> {
     public static final ResourceLocation[] TEXTURE_LOCATION = new ResourceLocation[]{
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/tag/white_brand_tag.png"),
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/tag/orange_brand_tag.png"),
@@ -36,12 +36,12 @@ public class OMountainGoatBrandTagLayer extends GeoRenderLayer<OMountainGoat> {
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/tag/black_brand_tag.png")
     };
 
-    public OMountainGoatBrandTagLayer(GeoRenderer<OMountainGoat> entityRendererIn) {
+    public OGoatBrandTagLayer(GeoRenderer<OGoat> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, OMountainGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, OGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         DyeColor dyeColor = animatable.getBrandTagColor();
         ResourceLocation resourceLocation = null;
 
