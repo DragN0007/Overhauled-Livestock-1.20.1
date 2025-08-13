@@ -15,6 +15,8 @@ end by turning off Entity Shadows on your options *and*
 on your shaders. This is a Geckolib issue; we can't fix it on our end.
 
 -Player is not positioned correctly on horse 'Bow' emote. 
+
+-Horse bay bug
 ```
 
 ## Licensing & Copyrights
