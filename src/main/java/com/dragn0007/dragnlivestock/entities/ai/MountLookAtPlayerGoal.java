@@ -75,6 +75,8 @@ public class MountLookAtPlayerGoal extends Goal {
          return false;
       } else if (this.mob.isGroundTied()) {
          return false;
+      } else if (this.mob.isVehicle()) {
+         return false;
       } else if (this.mob.distanceToSqr(this.lookAt) > (double)(this.lookDistance * this.lookDistance)) {
          return false;
       } else {

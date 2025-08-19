@@ -135,8 +135,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 this.setYRot(yaw);
                 this.yRotO = yaw;
                 this.yBodyRot = yaw;
-            } else {
-                this.yBodyRot = yRot;
             }
         } else {
             this.setRot(vec2.y, vec2.x);
@@ -375,6 +373,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
+    protected boolean canAddPassenger(Entity p_20354_) {
+        return super.canAddPassenger(p_20354_);
+    }
+
+    @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
@@ -565,7 +568,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            if (this.isVehicle()) {
+            if(this.isVehicle()) {
+                if (this.canAddPassenger(this)) {
+                    this.doPlayerRide(player);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
+                }
                 return super.mobInteract(player, hand);
             }
         }

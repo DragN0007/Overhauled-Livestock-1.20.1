@@ -2,10 +2,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
-import com.dragn0007.dragnlivestock.entities.ai.HorseFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
-import com.dragn0007.dragnlivestock.entities.ai.ORunAroundLikeCrazyGoal;
+import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
@@ -133,10 +130,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.7D));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
 		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 12.0F));
 		this.goalSelector.addGoal(3, new HorseFollowHerdLeaderGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D, AbstractOMount.class));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.addGoal(4, new MountLookAtPlayerGoal(this, Player.class, 12.0F));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
 				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
@@ -429,7 +426,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						break;
 					case 1:
 						offsetY = 1.05;
-						offsetZ = -1.23;
+						offsetZ = -0.7;
 						break;
 				}
 			}
@@ -453,7 +450,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						break;
 					case 1:
 						offsetY = 1.25;
-						offsetZ = -1.2;
+						offsetZ = -0.7;
 						break;
 				}
 			}
@@ -465,7 +462,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						break;
 					case 1:
 						offsetY = 0.97;
-						offsetZ = -1.2;
+						offsetZ = -0.7;
 						break;
 				}
 			}
@@ -481,7 +478,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						break;
 					case 1:
 						offsetY = 1.4;
-						offsetZ = -1.2;
+						offsetZ = -0.7;
 						break;
 				}
 			}
@@ -505,7 +502,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						break;
 					case 1:
 						offsetY = 1.45;
-						offsetZ = -1.2;
+						offsetZ = -0.7;
 						break;
 				}
 			}
@@ -515,7 +512,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 14) {
-				offsetY = 1.33;
+				switch (i) {
+					case 0:
+						offsetY = 1.33;
+						break;
+					case 1:
+						offsetY = 1.33;
+						offsetZ = -0.7;
+						break;
+				}
 			}
 
 			if (month == Month.DECEMBER && (day == 24 || day == 25)) {

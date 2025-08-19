@@ -329,11 +329,33 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public boolean canAddPassenger(Entity entity) {
+		if (!(this.getBreed() == 2)) {
+			return this.getPassengers().size() < 1;
+		} else if (this.getBreed() == 2) {
+			return this.getPassengers().size() < 2;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public LivingEntity getControllingPassenger() {
+		LivingEntity firstPassenger = (LivingEntity) this.getFirstPassenger();
+		if (firstPassenger != null && this.isSaddled()) {
+			return firstPassenger;
+		}
+		return null;
+	}
+
+	@Override
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
 			double offsetX = 0;
 			double offsetY = 1.2;
 			double offsetZ = -0.2;
+
+			int i = this.getPassengers().indexOf(entity);
 
 			if (getModelResource().equals(MuleBreed.STOCK.resourceLocation)) {
 				offsetY = 0.85;
@@ -345,7 +367,15 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getModelResource().equals(MuleBreed.DRAFT.resourceLocation)) {
-				offsetY = 1.2;
+				switch (i) {
+					case 0:
+						offsetY = 1.2;
+						break;
+					case 1:
+						offsetY = 1.2;
+						offsetZ = -0.7;
+						break;
+				}
 			}
 
 			if (this.isJumping()) {
