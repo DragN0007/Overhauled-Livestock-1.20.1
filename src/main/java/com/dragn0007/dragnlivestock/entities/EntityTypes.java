@@ -32,6 +32,7 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
+import com.dragn0007.dragnlivestock.entities.wagon.CoveredWagon;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -244,5 +245,11 @@ public class EntityTypes {
                             MobCategory.CREATURE)
                     .sized(1.5f,1.5f)
                     .build(new ResourceLocation(MODID,"peach_moobloom").toString()));
+
+    public static final RegistryObject<EntityType<CoveredWagon>> COVERED_WAGON = ENTITY_TYPES.register("covered_wagon",
+            () -> EntityType.Builder.of(CoveredWagon::new,
+                    MobCategory.MISC)
+                    .sized(3.0F, 3.0F)
+                    .build(new ResourceLocation(MODID, "covered_wagon").toString()));
 }
 

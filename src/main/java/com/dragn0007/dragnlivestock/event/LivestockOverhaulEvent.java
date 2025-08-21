@@ -65,6 +65,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornRender;
+import com.dragn0007.dragnlivestock.entities.wagon.WagonRenderer;
 import com.dragn0007.dragnlivestock.gui.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -158,6 +159,7 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get(), BeetrootMoobloomRender::new);
         EntityRenderers.register(EntityTypes.AZALEA_MOOBLOOM_ENTITY.get(), AzaleaMoobloomRender::new);
         EntityRenderers.register(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloomRender::new);
+        EntityRenderers.register(EntityTypes.COVERED_WAGON.get(), c -> new WagonRenderer<>(c, "covered_wagon"));
 
 //        EntityRenderers.register(EntityTypes.COVERED_WAGON_ENTITY.get(), CoveredWagonRender::new);
 
@@ -178,5 +180,6 @@ public class LivestockOverhaulEvent {
     public static void spawnPlacementRegisterEvent(SpawnPlacementRegisterEvent event) {
         event.register(EntityTypes.CARIBOU_ENTITY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityTypes.GRUB_ENTITY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
-        }
+    }
+
 }
