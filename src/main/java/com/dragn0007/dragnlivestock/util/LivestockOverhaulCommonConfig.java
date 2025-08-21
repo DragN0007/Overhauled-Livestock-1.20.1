@@ -55,6 +55,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue COW_BELL_SOUND;
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
+    public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue DYNAMIC_RESOURCES;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
@@ -205,6 +206,9 @@ public class LivestockOverhaulCommonConfig {
 
         GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
                 .define("Ground Tie When Dismounted", true);
+
+        CREATIVE_BRANDING = BUILDER.comment("Should only those in Creative Mode be able to 'Mustang Brand' horses?")
+                .define("Creative-Only Mustang Branding", false);
 
         DYNAMIC_RESOURCES = BUILDER.comment("(THIS DOESN'T DO ANYTHING YET!) Should Dynamic Resources be turned on? Only turn this on if you're running a DR resource pack. (Experimental)")
                 .define("Dynamic Resources (WIP)", false);

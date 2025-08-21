@@ -1404,6 +1404,7 @@ public class SpawnReplacer {
                     unicorn.copyPosition(rabbit);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
                     unicorn.setSpecies(0);
+                    unicorn.randomizeUnicornAttributes();
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         unicorn.setColorByBreed();
@@ -1445,6 +1446,7 @@ public class SpawnReplacer {
                     unicorn.copyPosition(brute);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
                     unicorn.setSpecies(1);
+                    unicorn.randomizeUnicornAttributes();
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         unicorn.setColorByBreed();
@@ -1486,6 +1488,7 @@ public class SpawnReplacer {
                     unicorn.copyPosition(enderMan);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
                     unicorn.setSpecies(2);
+                    unicorn.randomizeUnicornAttributes();
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         unicorn.setColorByBreed();

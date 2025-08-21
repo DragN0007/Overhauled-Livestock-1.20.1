@@ -417,7 +417,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.hasGrowableHair() && this.isOwnedBy(player)) {
+        if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.hasGrowableHair() && (this.isOwnedBy(player) || !this.isTamed())) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getManeType() == 3 || oHorse.getManeType() == 2) {
@@ -435,7 +435,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.hasGrowableHair() && !this.isUnicorn(this) && this.isOwnedBy(player)) {
+        if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.hasGrowableHair() && !this.isUnicorn(this) && (this.isOwnedBy(player) || !this.isTamed())) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
                 if (oHorse.getTailType() == 3 || oHorse.getTailType() == 2) {
@@ -453,7 +453,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(Items.PACKED_ICE) && this.isHorse(this)) {
+        if (itemStack.is(Items.PACKED_ICE) && this.isHorse(this) && ((player.getAbilities().instabuild && LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get()) || !LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get())) {
             OHorse oHorse = (OHorse) this;
             if (!oHorse.isBranded() && (!oHorse.isTamed() || player.getAbilities().instabuild)) {
                 oHorse.setIsBranded(true);

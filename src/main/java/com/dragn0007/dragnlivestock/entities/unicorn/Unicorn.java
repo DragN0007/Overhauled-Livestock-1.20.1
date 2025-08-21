@@ -175,8 +175,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 				.add(Attributes.ATTACK_KNOCKBACK, 2F);
 	}
 
-	@Override
-	public void randomizeOHorseAttributes() {
+	public void randomizeUnicornAttributes() {
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.generateRandomMaxHealth());
 		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.generateRandomSpeed());
 		this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomJumpStrength());
@@ -529,7 +528,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		int randomMane = 1 + this.getRandom().nextInt(3);
 		this.setManeType(randomMane);
 
-		this.randomizeOHorseAttributes();
+		this.randomizeUnicornAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -657,6 +656,17 @@ public class Unicorn extends OHorse implements GeoEntity {
 				eyes = this.random.nextInt(EquineEyeColorOverlay.values().length);
 			}
 			((Unicorn) foal).setEyeVariant(eyes);
+
+			int hornColorChance = this.random.nextInt(11);
+			int horn;
+			if (hornColorChance < 5) {
+				horn = this.getHornVariant();
+			} else if (hornColorChance < 10) {
+				horn = partner.getHornVariant();
+			} else {
+				horn = this.random.nextInt(EquineEyeColorOverlay.values().length);
+			}
+			((Unicorn) foal).setHornVariant(horn);
 
 			foal.setGender(random.nextInt(Gender.values().length));
 

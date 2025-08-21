@@ -25,7 +25,7 @@ public class OCowHarnessLayer extends GeoRenderLayer<OCow> {
         ResourceLocation resourceLocation = null;
 
         if (animatable.isHarnessed()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/wagon_harness.png");
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/rodeo_harness.png");
 
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
             poseStack.pushPose();

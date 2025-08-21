@@ -672,13 +672,13 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 
+		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
+
 		if (this.getBreed() == 10) {
 			this.setGender(1);
 		} else {
 			this.setGender(random.nextInt(OCow.Gender.values().length));
 		}
-
-		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();

@@ -120,7 +120,7 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
 
     private void renderBaseCoatLabel(GuiGraphics graphics) {
         String text = this.oDonkey.getTextureResource().toString(); //texture name
-        String noFillerText = text.replaceAll(".+donkey_", ""); //remove 'donkey_' and anything before it
+        String noFillerText = text.replaceAll(".+donkey/", ""); //remove 'donkey_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
         String replaceDefault = noPNGText.replace("default", "grey");
@@ -137,7 +137,7 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
 
     private void renderMarkingLabel(GuiGraphics graphics) {
         String text = this.oDonkey.getOverlayLocation().toString();
-        String noFillerText = text.replaceAll(".+overlay_", "");
+        String noFillerText = text.replaceAll(".+overlay/", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
         String addPinkNoseText = noPNGText.replace("pink", "pink-nosed");

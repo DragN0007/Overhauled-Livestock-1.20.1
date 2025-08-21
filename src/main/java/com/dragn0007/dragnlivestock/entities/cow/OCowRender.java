@@ -66,8 +66,30 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
                 model.getBone("utters").ifPresent(b -> b.setScaleZ(1.0F));
             }
 
+            if (entity.wasMilked()) {
+                if (entity.isDairyBreed()) {
+                    model.getBone("utters").ifPresent(b -> b.setScaleY(1.2F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleX(1.2F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleZ(1.2F));
+                } else {
+                    model.getBone("utters").ifPresent(b -> b.setScaleY(0.8F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleX(0.8F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleZ(0.8F));
+                }
+            } else if (!entity.wasMilked()) {
+                if (entity.isDairyBreed()) {
+                    model.getBone("utters").ifPresent(b -> b.setScaleY(1.5F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleX(1.5F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleZ(1.5F));
+                } else {
+                    model.getBone("utters").ifPresent(b -> b.setScaleY(1.0F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleX(1.0F));
+                    model.getBone("utters").ifPresent(b -> b.setScaleZ(1.0F));
+                }
+            }
+
             if (!(entity.getHornVariant() == 0)) {
-                model.getBone("horn_connection").ifPresent(b -> b.setScaleY(2.0F));
+                model.getBone("horn_connection").ifPresent(b -> b.setScaleY(2.3F));
             } else {
                 model.getBone("horn_connection").ifPresent(b -> b.setScaleY(1.0F));
             }

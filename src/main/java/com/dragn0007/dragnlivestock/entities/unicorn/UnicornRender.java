@@ -14,6 +14,7 @@ public class UnicornRender extends GeoEntityRenderer<Unicorn> {
         this.addRenderLayer(new UnicornMarkingLayer(this));
         this.addRenderLayer(new UnicornEyeLayer(this));
         this.addRenderLayer(new UnicornHornLayer(this));
+        this.addRenderLayer(new UnicornCaparisonLayer(this));
         this.addRenderLayer(new UnicornSaddleLayer(this));
         this.addRenderLayer(new UnicornArmorLayer(this));
         this.addRenderLayer(new UnicornCarpetLayer(this));
@@ -21,8 +22,6 @@ public class UnicornRender extends GeoEntityRenderer<Unicorn> {
 
     @Override
     public void preRender(PoseStack poseStack, Unicorn entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-
-        model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
 
         if (!entity.isBaby()) {
             if (entity.hasChest()) {
