@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.wagon.base;
 
 import com.dragn0007.dragnlivestock.client.ClientProxy;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +17,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntity {
@@ -39,6 +43,9 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
     private double lerpXRot = 0;
     private double lerpYRot = 0;
 
+    private float wheelRot = 0; // Used for animating the wheels
+    private float wheelRotO = 0;
+
     public AbstractGeckolibVehicle(EntityType<? extends AbstractGeckolibVehicle> type, Level level,
                                    double wheelWidth, double wheelLength, Vec3[] riders) {
         super(type, level);
@@ -54,12 +61,20 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
         super.tick();
         tickLerp();
 
-        if(isControlledByLocalInstance()) {
+        if(level().isClientSide && getControllingPassenger() == Minecraft.getInstance().player)
             ClientProxy.controlVehicleLocal(this);
+
+        if(isControlledByLocalInstance()) {
+            if(getControllingPassenger() == null)
+                setImpulses(0, 0);
             tickRidden();
         }
-        else {
-            setDeltaMovement(Vec3.ZERO);
+
+        if(level().isClientSide) {
+            Vec3 vel = getDeltaMovement();
+            boolean reversing = getForward().dot(vel) < 0; // Dot product is negative if not in same direction
+            wheelRotO = wheelRot;
+            wheelRot += (float)getDeltaMovement().horizontalDistance() * (reversing ? -2F : 2F);
         }
     }
 
@@ -94,13 +109,13 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
     }
 
     /**
-     * @return The tilt of the vehicle (in degrees) based on rays cast under each wheel.
+     * @return The tilt of the id (in degrees) based on rays cast under each wheel.
      */
     protected float calculateTargetXRot() {
         Level level = level();
         Vec3 pos = position();
 
-        final double rayLength = wheelWidth*2;
+        final double rayLength = wheelLength*2;
         final float yaw = getYRot();
 
         Vec3 fl = rotateY(-wheelWidth, 0, wheelLength, yaw).add(pos); // World-space positions of each corner of the bounding box, rotated.
@@ -108,7 +123,7 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
         Vec3 bl = rotateY(-wheelWidth, 0, -wheelLength, yaw).add(pos);
         Vec3 br = rotateY(wheelWidth, 0, -wheelLength, yaw).add(pos);
 
-        // Cast a ray down from each corner to figure out where we are height-wise. Max length of wheelLength makes a max angle of 45 degrees.
+        // Cast a ray down from each corner to figure out where we are height-wise. Max length of wheelLength*2 makes a max angle of 45 degrees.
         BlockHitResult flr = level.clip(new ClipContext(fl, fl.subtract(0, rayLength, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
         BlockHitResult frr = level.clip(new ClipContext(fr, fr.subtract(0, rayLength, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
         BlockHitResult blr = level.clip(new ClipContext(bl, bl.subtract(0, rayLength, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
@@ -214,6 +229,10 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
         return i;
     }
 
+    public float getWheelRot(float partial) {
+        return Mth.lerp(partial, wheelRotO, wheelRot);
+    }
+
     @Override
     public void lerpTo(double x, double y, double z, float yRot, float xRot, int steps, boolean teleport) {
         lerpX = x;
@@ -255,6 +274,15 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return animCache;
+    }
+
+    @Override
+    public void registerControllers(ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, vehicle -> {
+            if(getDeltaMovement().horizontalDistance() > 0.01F)
+                return vehicle.setAndContinue(ANIM_MOVE);
+            return PlayState.STOP;
+        }));
     }
 
 }

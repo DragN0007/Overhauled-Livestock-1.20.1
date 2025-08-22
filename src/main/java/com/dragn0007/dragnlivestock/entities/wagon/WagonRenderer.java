@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -30,7 +31,6 @@ public class WagonRenderer<T extends AbstractWagon> extends GeoEntityRenderer<T>
         Vec3 mid = new Vec3(0, 0, pitch < 0 ? -wLength : wLength); // Pivot point is different for positive vs negative rotation.
 
         pose.mulPose(Axis.YP.rotationDegrees(yaw));
-
         pose.translate(-mid.x, 0, -mid.z);
         pose.mulPose(Axis.XP.rotationDegrees(pitch));
         pose.translate(mid.x, 0, mid.z);

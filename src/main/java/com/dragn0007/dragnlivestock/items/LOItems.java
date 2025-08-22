@@ -790,6 +790,9 @@ public class LOItems {
     public static final RegistryObject<Item> UNICORN_BREEDS = ITEMS.register("unicorn_breeds",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon",
+            () -> new WagonItem(EntityTypes.COVERED_WAGON::get, new Item.Properties().stacksTo(1)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

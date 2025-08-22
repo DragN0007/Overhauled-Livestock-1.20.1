@@ -4,10 +4,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,8 +25,8 @@ public abstract class AbstractInventoryWagon extends AbstractWagon implements Me
     private final LazyOptional<ItemStackHandler> itemHandlerOptional;
 
     public AbstractInventoryWagon(EntityType<? extends AbstractWagon> type, Level level, double maxSpeed, double acceleration, float turnRate,
-                                  int capacity, double draughtX, double draughtY, double wheelWidth, double wheelLength, Vec3[] riders) {
-        super(type, level, maxSpeed, acceleration, turnRate, draughtX, draughtY, wheelWidth, wheelLength, riders);
+                                  int maxHealth, int capacity, double draughtX, double draughtY, double wheelWidth, double wheelLength, Vec3[] riders) {
+        super(type, level, maxSpeed, acceleration, turnRate, maxHealth, draughtX, draughtY, wheelWidth, wheelLength, riders);
         this.inventory = NonNullList.withSize(capacity, ItemStack.EMPTY);
         this.itemHandler = new ItemStackHandler(inventory);
         this.itemHandlerOptional = LazyOptional.of(() -> itemHandler);
@@ -68,6 +65,13 @@ public abstract class AbstractInventoryWagon extends AbstractWagon implements Me
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         return cap == ForgeCapabilities.ITEM_HANDLER ? itemHandlerOptional.cast() : super.getCapability(cap, side);
+    }
+
+    @Override
+    protected void onDestroyed(boolean dropItem) {
+        super.onDestroyed(dropItem);
+        if(!level().isClientSide)
+            Containers.dropContents(level(), blockPosition(), inventory);
     }
 
 }

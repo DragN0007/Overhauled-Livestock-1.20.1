@@ -161,8 +161,6 @@ public class LivestockOverhaulEvent {
         EntityRenderers.register(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloomRender::new);
         EntityRenderers.register(EntityTypes.COVERED_WAGON.get(), c -> new WagonRenderer<>(c, "covered_wagon"));
 
-//        EntityRenderers.register(EntityTypes.COVERED_WAGON_ENTITY.get(), CoveredWagonRender::new);
-
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);
         MenuScreens.register(LOMenuTypes.O_MOUNT_MENU.get(), OMountScreen::new);
@@ -171,6 +169,8 @@ public class LivestockOverhaulEvent {
         MenuScreens.register(LOMenuTypes.O_CAMEL_MENU.get(), OCamelScreen::new);
         MenuScreens.register(LOMenuTypes.O_CARIBOU_MENU.get(), CaribouScreen::new);
         MenuScreens.register(LOMenuTypes.UNICORN_MENU.get(), UnicornScreen::new);
+
+        MenuScreens.register(LOMenuTypes.COVERED_WAGON.get(), CoveredWagonScreen::new);
 
         //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
