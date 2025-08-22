@@ -618,7 +618,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
 					}
-				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
+				} else if (this.isVehicle() && getForward().dot(getDeltaMovement()) < 0) {
 					if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));

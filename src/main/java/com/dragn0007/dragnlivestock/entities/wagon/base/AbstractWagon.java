@@ -43,25 +43,25 @@ import java.util.UUID;
 
 public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
-    private static final Random RANDOM = new Random();
+    protected static final Random RANDOM = new Random();
 
-    private static final EntityDataAccessor<Float> DATA_HEALTH = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Integer> DATA_TYPE = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Float> DATA_HEALTH = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.FLOAT);
+    protected static final EntityDataAccessor<Integer> DATA_TYPE = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.INT);
 
-    private static final double GRAVITY = 0.04D;
-    private static final double HORIZONTAL_TETHER = 0.5D * 0.5D; // Use sqr for performance
+    protected static final double GRAVITY = 0.04D;
+    protected static final double HORIZONTAL_TETHER = 0.5D * 0.5D; // Use sqr for performance
 
-    private final double maxSpeed;
-    private final double acceleration;
-    private final float turnRate;
-    private final int maxHealth;
+    protected final double maxSpeed;
+    protected final double acceleration;
+    protected final float turnRate;
+    protected final int maxHealth;
 
-    private double speed = 0;
+    protected double speed = 0;
     public UUID owner;
 
     protected final Vec3[] animalPositions;
-    private final Mob[] animals;
-    private final UUID[] animalUuids; // Only used for first-tick save behaviour.
+    protected final Mob[] animals;
+    protected final UUID[] animalUuids; // Only used for first-tick save behaviour.
 
     public AbstractWagon(EntityType<? extends AbstractWagon> type, Level level, double maxSpeed, double acceleration,
                          float turnRate, int maxHealth, Vec3[] animalPositions, double wheelWidth, double wheelLength, Vec3[] riders) {
@@ -86,7 +86,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         super.tick();
     }
 
-    private void validateDraughtAnimals() {
+    protected void validateDraughtAnimals() {
         if(firstTick || level().getGameTime() % 100 == 0) { // Repeated checks help resolve chunk loading issues.
             for(int i = 0; i < animals.length; i++) {
                 Mob animal = tryGetDraught(i);
@@ -138,7 +138,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         setXRot(rotlerp(getXRot(), calculateTargetXRot(), 3)); // 3 is just a magic scaling number for smoothing.
     }
 
-    private void handleAcceleration() {
+    protected void handleAcceleration() {
         float forward = getForwardImpulse();
 
         boolean isFull = true;
@@ -156,7 +156,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         speed += Mth.sign(forward == 0 ? diff : forward) * Math.min(Math.abs(accel), Math.abs(diff));
     }
 
-    private void handleSteering() {
+    protected void handleSteering() {
         float f = (float)(speed / maxSpeed);
         float steer = -getLeftImpulse() * turnRate * f;
 
@@ -221,7 +221,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     protected boolean tryHitching(Player player) {
         final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
-                player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
+                                player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
                         h -> h.getLeashHolder() == player && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)).stream()
                 .findFirst()
                 .orElse(null);
@@ -239,7 +239,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         return animal != null;
     }
 
-    private boolean tryMountMob(Player player) {
+    protected boolean tryMountMob(Player player) {
         Mob mob = level().getEntitiesOfClass(Mob.class, new AABB(
                         player.getX()-7, player.getY()-7, player.getZ()-7,
                         player.getX()+7, player.getY()+7, player.getZ()+7
@@ -257,7 +257,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         initDraught(animal, index);
     }
 
-    private void initDraught(Mob animal, int index) {
+    protected void initDraught(Mob animal, int index) {
         if(animal == null)
             return;
         animal.ejectPassengers();
@@ -266,14 +266,14 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         setAnimalPos(animal, rotateY(animalPositions[index], rot).add(position()), rot);
     }
 
-    private boolean isAnimalInRange(int index) {
+    protected boolean isAnimalInRange(int index) {
         final Mob animal = getAnimal(index);
         if(animal == null)
             return false;
         return animal.isAlive() && animal.position().subtract(rotateY(animalPositions[index], getYRot()).add(position())).horizontalDistanceSqr() < HORIZONTAL_TETHER;
     }
 
-    private void setAnimalPos(Mob animal, Vec3 pos, float rot) {
+    protected void setAnimalPos(Mob animal, Vec3 pos, float rot) {
         if(animal == null)
             return;
         animal.setYRot(rot);
@@ -282,7 +282,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         animal.setPos(pos);
     }
 
-    private Vec3 collideSteering(int index, float angle) {
+    protected Vec3 collideSteering(int index, float angle) {
         Mob animal = getAnimal(index);
         if(animal == null)
             return Vec3.ZERO;
@@ -354,7 +354,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         });
     }
 
-    private Mob tryGetDraught(int index) {
+    protected Mob tryGetDraught(int index) {
         final UUID uuid = animalUuids[index];
         if(uuid == null)
             return null;
@@ -370,7 +370,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 .orElse(null);
     }
 
-    private void setDraught(Mob animal, int index) {
+    protected void setDraught(Mob animal, int index) {
         Mob old = getAnimal(index);
         if(old != null)
             old.setNoAi(false);
@@ -504,7 +504,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         DARK_OAK(Blocks.DARK_OAK_PLANKS),
         MANGROVE(Blocks.MANGROVE_PLANKS);
 
-        private final Block planks;
+        protected final Block planks;
 
         Type(Block planks) {
             this.planks = planks;
