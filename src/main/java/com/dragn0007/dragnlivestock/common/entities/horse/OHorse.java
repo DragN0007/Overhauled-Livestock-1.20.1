@@ -1,9 +1,9 @@
 package com.dragn0007.dragnlivestock.common.entities.horse;
 
 import com.dragn0007.dragnlivestock.blocks.client.LOKeyMappings;
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.client.render.model.entity.OHorseModel;
-import com.dragn0007.dragnlivestock.common.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.common.entities.ai.*;
 import com.dragn0007.dragnlivestock.common.entities.ODonkey;
 import com.dragn0007.dragnlivestock.common.entities.mule.OMule;
@@ -15,7 +15,6 @@ import com.dragn0007.dragnlivestock.common.entities.util.marking_layer.EquineMar
 import com.dragn0007.dragnlivestock.common.menus.OHorseMenu;
 import com.dragn0007.dragnlivestock.common.items.LOItems;
 import com.dragn0007.dragnlivestock.common.items.custom.LightHorseArmorItem;
-import com.dragn0007.dragnlivestock.common.LOTags;
 import com.dragn0007.dragnlivestock.blocks.client.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
@@ -137,12 +136,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new MountLookAtPlayerGoal(this, Player.class, 12.0F));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
-				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
-						(entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+				(entity.getType().is(EntityTypes.WOLVES) && !this.isTamed()) ||
+						(entity.getType().is(EntityTypes.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get() && (this.isWearingRodeoHarness() || !this.isTamed())
+				livingEntity.getType().is(EntityTypes.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get() && (this.isWearingRodeoHarness() || !this.isTamed())
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.3F, 1.3F, livingEntity ->
@@ -1287,7 +1286,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		AbstractOMount foal;
 		if (ageableMob instanceof ODonkey partnerDonkey) {
 
-			foal = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
+			foal = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
 			int overlayChance = this.random.nextInt(10);
 			int overlay;
@@ -1317,7 +1316,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		} else {
 			OHorse partner = (OHorse) ageableMob;
-			foal = EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
+			foal = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
 
 			int breedChance = this.random.nextInt(5);
 			int breed;

@@ -1,10 +1,10 @@
 package com.dragn0007.dragnlivestock.common.entities.camel;
 
 import com.dragn0007.dragnlivestock.blocks.client.LOKeyMappings;
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.client.render.entity.camel.OCamelMarkingLayer;
 import com.dragn0007.dragnlivestock.blocks.client.render.model.entity.OCamelModel;
-import com.dragn0007.dragnlivestock.common.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.common.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.common.entities.ai.OCamelFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.common.entities.util.AbstractOMount;
@@ -198,16 +198,16 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(2, new OCamelFollowCaravanGoal(this, (double)1.5F));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(EntityTypes.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.CATS) &&
+				entity.getType().is(EntityTypes.CATS) &&
 						!(entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(EntityTypes.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
 		));
 	}
 
@@ -811,7 +811,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		OCamel calf = (OCamel) ageableMob;
 		if (ageableMob instanceof OCamel) {
 			OCamel partnerCamel = (OCamel) ageableMob;
-			calf = EntityTypes.O_CAMEL_ENTITY.get().create(serverLevel);
+			calf = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_CAMEL_ENTITY.get().create(serverLevel);
 
 			int i = this.random.nextInt(9);
 			int variant;

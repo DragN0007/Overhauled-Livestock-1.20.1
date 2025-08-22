@@ -1,8 +1,8 @@
 package com.dragn0007.dragnlivestock.common.entities.cow;
 
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.client.render.model.entity.OCowModel;
-import com.dragn0007.dragnlivestock.common.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.common.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.common.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.common.entities.ai.OAvoidEntityGoal;
@@ -151,15 +151,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(1, new BullAroundLikeCrazyGoal(this, 1.7F));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-			livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
+			livingEntity.getType().is(EntityTypes.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get())
+				livingEntity.getType().is(EntityTypes.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get())
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
+				livingEntity.getType().is(EntityTypes.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 	}
 
@@ -752,7 +752,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OCow calf;
 		OCow partner = (OCow) ageableMob;
-		calf = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
+		calf = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_COW_ENTITY.get().create(serverLevel);
 
 		int breedChance = this.random.nextInt(5);
 		int breed;

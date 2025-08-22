@@ -132,13 +132,13 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
-				(entity.getType().is(LOTags.Entity_Types.WOLVES) && !this.isTamed()) ||
-						(entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+				(entity.getType().is(LOTags.EntityTypes.WOLVES) && !this.isTamed()) ||
+						(entity.getType().is(LOTags.EntityTypes.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
-				(entity.getType().is(LOTags.Entity_Types.HUNTING_DOGS) && !this.isTamed()) ||
-						(entity.getType().is(LOTags.Entity_Types.HUNTING_DOGS) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+				(entity.getType().is(LOTags.EntityTypes.HUNTING_DOGS) && !this.isTamed()) ||
+						(entity.getType().is(LOTags.EntityTypes.HUNTING_DOGS) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 	}
 
@@ -783,7 +783,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		Caribou calf;
 		Caribou partner = (Caribou) ageableMob;
-		calf = EntityTypes.CARIBOU_ENTITY.get().create(serverLevel);
+		calf = com.dragn0007.dragnlivestock.common.entities.EntityTypes.CARIBOU_ENTITY.get().create(serverLevel);
 
 		int variantChance = this.random.nextInt(14);
 		int variant;

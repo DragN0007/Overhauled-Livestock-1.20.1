@@ -1,9 +1,9 @@
 package com.dragn0007.dragnlivestock.common.entities.rabbit;
 
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.client.render.entity.rabbit.ORabbitMarkingLayer;
 import com.dragn0007.dragnlivestock.blocks.client.render.model.entity.ORabbitModel;
-import com.dragn0007.dragnlivestock.common.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.common.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.blocks.client.render.entity.sheep.OSheepMarkingLayer;
 import com.dragn0007.dragnlivestock.blocks.client.render.model.entity.OSheepModel;
@@ -123,19 +123,19 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
+				livingEntity.getType().is(EntityTypes.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.CATS) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
+				livingEntity.getType().is(EntityTypes.CATS) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
+				livingEntity.getType().is(EntityTypes.HUNTING_DOGS) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.FOXES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
+				livingEntity.getType().is(EntityTypes.FOXES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame()) && !this.isTame()
 		));
 	}
 
@@ -598,7 +598,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		ORabbit kit;
 		ORabbit partner = (ORabbit) ageableMob;
-		kit = EntityTypes.O_RABBIT_ENTITY.get().create(serverLevel);
+		kit = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_RABBIT_ENTITY.get().create(serverLevel);
 
 		int breedChance = this.random.nextInt(5);
 		int breed;

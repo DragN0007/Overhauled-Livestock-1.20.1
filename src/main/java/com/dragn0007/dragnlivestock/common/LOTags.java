@@ -93,7 +93,7 @@ public class LOTags {
         }
     }
 
-    public static class Entity_Types {
+    public static class EntityTypes {
         public static final TagKey<EntityType<?>> HORSES = forgeTag("horses");
         public static final TagKey<EntityType<?>> WOLVES = forgeTag("wolves");
         public static final TagKey<EntityType<?>> FOXES = forgeTag("foxes");
@@ -101,12 +101,16 @@ public class LOTags {
         public static final TagKey<EntityType<?>> HERDING_DOGS = forgeTag("herding_dogs");
         public static final TagKey<EntityType<?>> DOGS = forgeTag("dogs");
         public static final TagKey<EntityType<?>> HUNTING_DOGS = forgeTag("hunting_dogs");
-        public static final TagKey<EntityType<?>> DRAUGHT_ANIMALS = forgeTag("draught_animals");
-        public static final TagKey<EntityType<?>> CANNOT_MOUNT_WAGON = forgeTag("cannot_mount_wagon");
+        public static final TagKey<EntityType<?>> DRAUGHT_ANIMALS = tag("draught_animals");
+        public static final TagKey<EntityType<?>> CANNOT_MOUNT_WAGON = tag("cannot_mount_wagon");
 
 
         public static TagKey<EntityType<?>> forgeTag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", name));
+        }
+
+        public static TagKey<EntityType<?>> tag (String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, LivestockOverhaul.id(name));
         }
     }
 

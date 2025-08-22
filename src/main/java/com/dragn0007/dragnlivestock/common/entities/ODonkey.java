@@ -123,16 +123,16 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(LOTags.EntityTypes.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.CATS) &&
+				entity.getType().is(LOTags.EntityTypes.CATS) &&
 						!(entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(LOTags.EntityTypes.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
 		));
 	}
 
@@ -566,7 +566,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 		if (ageableMob instanceof OHorse partnerHorse) {
 
-			foal = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
+			foal = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
 			int overlayChance = this.random.nextInt(10);
 			int overlay;
@@ -596,7 +596,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 		} else {
 			ODonkey partner = (ODonkey) ageableMob;
-			foal = EntityTypes.O_DONKEY_ENTITY.get().create(serverLevel);
+			foal = com.dragn0007.dragnlivestock.common.entities.EntityTypes.O_DONKEY_ENTITY.get().create(serverLevel);
 
 			int variantChance = this.random.nextInt(14);
 			int variant;

@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.common.entities.mule;
 
 import com.dragn0007.dragnlivestock.blocks.client.LOKeyMappings;
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.client.render.model.entity.OMuleModel;
 import com.dragn0007.dragnlivestock.common.entities.ai.GroundTieGoal;
@@ -10,7 +11,6 @@ import com.dragn0007.dragnlivestock.common.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.common.entities.util.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.common.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.common.menus.OMuleMenu;
-import com.dragn0007.dragnlivestock.common.LOTags;
 import com.dragn0007.dragnlivestock.blocks.client.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
@@ -130,16 +130,16 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Wolf.class, false));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(EntityTypes.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.CATS) &&
+				entity.getType().is(EntityTypes.CATS) &&
 						!(entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(EntityTypes.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
 		));
 	}
 

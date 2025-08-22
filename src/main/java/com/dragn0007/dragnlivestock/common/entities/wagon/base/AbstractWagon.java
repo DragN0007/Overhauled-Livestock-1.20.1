@@ -1,7 +1,7 @@
 package com.dragn0007.dragnlivestock.common.entities.wagon.base;
 
 import com.dragn0007.dragnlivestock.blocks.client.ClientProxy;
-import com.dragn0007.dragnlivestock.common.LOTags.Entity_Types;
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -221,7 +221,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     private boolean tryHitching(Player player) {
         final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
                 player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
-                        h -> h.getLeashHolder() == player && h.getType().is(Entity_Types.DRAUGHT_ANIMALS)).stream()
+                        h -> h.getLeashHolder() == player && h.getType().is(EntityTypes.DRAUGHT_ANIMALS)).stream()
                 .findFirst()
                 .orElse(null);
 
@@ -242,7 +242,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         Mob mob = level().getEntitiesOfClass(Mob.class, new AABB(
                         player.getX()-7, player.getY()-7, player.getZ()-7,
                         player.getX()+7, player.getY()+7, player.getZ()+7
-                ), h -> h.getLeashHolder() == player && !h.getType().is(Entity_Types.CANNOT_MOUNT_WAGON)).stream()
+                ), h -> h.getLeashHolder() == player && !h.getType().is(EntityTypes.CANNOT_MOUNT_WAGON)).stream()
                 .findFirst().orElse(null);
 
         if(mob != null && !level().isClientSide && canAddPassenger(mob))

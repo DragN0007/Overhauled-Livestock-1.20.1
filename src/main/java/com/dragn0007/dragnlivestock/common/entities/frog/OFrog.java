@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.common.entities.frog;
 
+import com.dragn0007.dragnlivestock.common.LOTags.EntityTypes;
 import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.client.render.entity.frog.OFrogEyeLayer;
 import com.dragn0007.dragnlivestock.blocks.client.render.entity.frog.OFrogMarkingLayer;
@@ -99,19 +100,19 @@ public class OFrog extends Animal implements GeoEntity {
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.WOLVES))
+				livingEntity.getType().is(EntityTypes.WOLVES))
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.CATS))
+				livingEntity.getType().is(EntityTypes.CATS))
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS))
+				livingEntity.getType().is(EntityTypes.HUNTING_DOGS))
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.FOXES))
+				livingEntity.getType().is(EntityTypes.FOXES))
 		);
 	}
 
