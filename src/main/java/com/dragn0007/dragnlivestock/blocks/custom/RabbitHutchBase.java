@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.blocks.custom;
 
-import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.common.LOTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;

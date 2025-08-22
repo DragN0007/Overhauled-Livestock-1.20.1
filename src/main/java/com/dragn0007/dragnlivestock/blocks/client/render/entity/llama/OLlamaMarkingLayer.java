@@ -1,0 +1,72 @@
+package com.dragn0007.dragnlivestock.blocks.client.render.entity.llama;
+
+import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.common.entities.llama.OLlama;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+
+public class OLlamaMarkingLayer extends GeoRenderLayer<OLlama> {
+    public OLlamaMarkingLayer(GeoRenderer entityRendererIn) {
+        super(entityRendererIn);
+    }
+
+    @Override
+    public void render(PoseStack poseStack, OLlama animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        if (!animatable.isBaby()) {
+            RenderType renderMarkingType = RenderType.entityCutout(((OLlama) animatable).getOverlayLocation());
+            poseStack.pushPose();
+            poseStack.scale(1.0f, 1.0f, 1.0f);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderMarkingType,
+                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+        }
+    }
+
+    public enum Overlay {
+        NONE(LivestockOverhaul.id("textures/entity/llama/overlay/none.png")),
+        BLACK_BALD(LivestockOverhaul.id("textures/entity/llama/overlay/black_bald.png")),
+        BLACK_NECK(LivestockOverhaul.id("textures/entity/llama/overlay/black_neck.png")),
+        BLACK_SOCKS(LivestockOverhaul.id("textures/entity/llama/overlay/black_socks.png")),
+        BLACK_TAILED(LivestockOverhaul.id("textures/entity/llama/overlay/black_tailed.png")),
+        BLUE_NECK(LivestockOverhaul.id("textures/entity/llama/overlay/blue_neck.png")),
+        FEW_SPOT(LivestockOverhaul.id("textures/entity/llama/overlay/few_spot.png")),
+        HALF_BLACK(LivestockOverhaul.id("textures/entity/llama/overlay/half_black.png")),
+        LARGE_SPOT(LivestockOverhaul.id("textures/entity/llama/overlay/large_spot.png")),
+        RED_BALD(LivestockOverhaul.id("textures/entity/llama/overlay/red_bald.png")),
+        RED_BLACK(LivestockOverhaul.id("textures/entity/llama/overlay/red_black.png")),
+        SANDY_BALD(LivestockOverhaul.id("textures/entity/llama/overlay/sandy_bald.png")),
+        SANDY_SOCKS(LivestockOverhaul.id("textures/entity/llama/overlay/sandy_socks.png")),
+        SANDY_TAILED(LivestockOverhaul.id("textures/entity/llama/overlay/sandy_tailed.png")),
+        TAN_BLACK(LivestockOverhaul.id("textures/entity/llama/overlay/tan_black.png")),
+        WHITE_BALD(LivestockOverhaul.id("textures/entity/llama/overlay/white_bald.png")),
+        WHITE_BLACK(LivestockOverhaul.id("textures/entity/llama/overlay/white_black.png")),
+        WHITE_NECK(LivestockOverhaul.id("textures/entity/llama/overlay/white_neck.png")),
+        WHITE_SOCKS(LivestockOverhaul.id("textures/entity/llama/overlay/white_socks.png")),
+        WHITE_TAILED(LivestockOverhaul.id("textures/entity/llama/overlay/white_tailed.png")),
+        ;
+
+        //Add new entries to bottom when mod is public, else llamas will change textures during update.
+
+        public final ResourceLocation resourceLocation;
+        Overlay(ResourceLocation resourceLocation) {
+            this.resourceLocation = resourceLocation;
+        }
+
+        public static Overlay overlayFromOrdinal(int overlay) { return Overlay.values()[overlay % Overlay.values().length];
+        }
+    }
+
+}

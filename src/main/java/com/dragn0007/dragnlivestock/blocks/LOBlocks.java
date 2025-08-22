@@ -1,8 +1,8 @@
 package com.dragn0007.dragnlivestock.blocks;
 
-import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.common.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.custom.*;
-import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.common.items.LOItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
