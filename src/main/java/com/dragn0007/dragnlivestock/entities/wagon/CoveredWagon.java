@@ -18,8 +18,13 @@ public class CoveredWagon extends AbstractInventoryWagon {
             new Vec3(0, 1D, -2.25D)
     };
 
+    public static final Vec3[] ANIMALS = new Vec3[] {
+            new Vec3(-0.5D, 0, 4.75D),
+            new Vec3(0.5D, 0, 4.75D)
+    };
+
     public CoveredWagon(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, 0.1D, 2.0D, 2.0F, 60, 36, 0.5D, 4.75D, 1.25D, 1.4D, RIDERS);
+        super(type, level, 0.1D, 2.0D, 2.0F, 60, 36, ANIMALS, 1.25D, 1.4D, RIDERS);
     }
 
     @Override

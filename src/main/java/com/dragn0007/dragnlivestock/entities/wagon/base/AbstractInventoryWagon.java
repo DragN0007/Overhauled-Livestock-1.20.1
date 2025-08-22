@@ -25,8 +25,8 @@ public abstract class AbstractInventoryWagon extends AbstractWagon implements Me
     private final LazyOptional<ItemStackHandler> itemHandlerOptional;
 
     public AbstractInventoryWagon(EntityType<? extends AbstractWagon> type, Level level, double maxSpeed, double acceleration, float turnRate,
-                                  int maxHealth, int capacity, double draughtX, double draughtY, double wheelWidth, double wheelLength, Vec3[] riders) {
-        super(type, level, maxSpeed, acceleration, turnRate, maxHealth, draughtX, draughtY, wheelWidth, wheelLength, riders);
+                                  int maxHealth, int capacity, Vec3[] draughtAnimalPositions, double wheelWidth, double wheelLength, Vec3[] riders) {
+        super(type, level, maxSpeed, acceleration, turnRate, maxHealth, draughtAnimalPositions, wheelWidth, wheelLength, riders);
         this.inventory = NonNullList.withSize(capacity, ItemStack.EMPTY);
         this.itemHandler = new ItemStackHandler(inventory);
         this.itemHandlerOptional = LazyOptional.of(() -> itemHandler);

@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -41,11 +43,8 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     private static final Random RANDOM = new Random();
 
-    private static final EntityDataAccessor<Integer> DATA_DRAUGHT_LEFT = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_DRAUGHT_RIGHT = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> DATA_HEALTH = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Integer> DATA_TYPE = SynchedEntityData.defineId(AbstractWagon.class, EntityDataSerializers.INT);
-
 
     private static final double GRAVITY = 0.04D;
     private static final double HORIZONTAL_TETHER = 0.5D * 0.5D; // Use sqr for performance
@@ -55,24 +54,23 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     private final float turnRate;
     private final int maxHealth;
 
-    private final double draughtX;
-    private final double draughtY;
-
     private double speed = 0;
     public UUID owner;
 
-    private final Mob[] draughtAnimals = new Mob[2];
-    private final UUID[] draughtAnimalUuids = new UUID[2]; // Only used for first-tick save behaviour.
+    private final Vec3[] animalPositions;
+    private final Mob[] animals;
+    private final UUID[] animalUuids; // Only used for first-tick save behaviour.
 
     public AbstractWagon(EntityType<? extends AbstractWagon> type, Level level, double maxSpeed, double acceleration,
-                         float turnRate, int maxHealth, double draughtX, double draughtY, double wheelWidth, double wheelLength, Vec3[] riders) {
+                         float turnRate, int maxHealth, Vec3[] animalPositions, double wheelWidth, double wheelLength, Vec3[] riders) {
         super(type, level, wheelWidth, wheelLength, riders);
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;
         this.turnRate = turnRate;
         this.maxHealth = maxHealth;
-        this.draughtX = draughtX;
-        this.draughtY = draughtY;
+        this.animalPositions = animalPositions;
+        this.animals = new Mob[animalPositions.length];
+        this.animalUuids = new UUID[animals.length];
     }
 
     @Override
@@ -88,53 +86,48 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     private void validateDraughtAnimals() {
         if(firstTick || level().getGameTime() % 100 == 0) { // Repeated checks help resolve chunk loading issues.
-            Mob animal = tryGetDraught(Side.LEFT);
-            if(animal != null)
-                setDraught(animal, Side.LEFT);
-
-            animal = tryGetDraught(Side.RIGHT);
-            if(animal != null)
-                setDraught(animal, Side.RIGHT);
+            for(int i = 0; i < animals.length; i++) {
+                Mob animal = tryGetDraught(i);
+                if(animal != null)
+                    setDraught(animal, i);
+            }
         }
-
-        if(!isAnimalInRange(Side.LEFT))
-            setDraught(null, Side.LEFT);
-        if(!isAnimalInRange(Side.LEFT))
-            setDraught(null, Side.RIGHT);
+        for(int i = 0; i < animals.length; i++) {
+            if(!isAnimalInRange(i))
+                setDraught(null, i);
+        }
     }
 
     @Override
     public void tickRidden() {
-        final Mob left = getDraught(Side.LEFT);
-        final Mob right = getDraught(Side.RIGHT);
-
         handleSteering();
-        handleAcceleration(left, right);
+        handleAcceleration();
 
         final Vec3 forward = getForward().multiply(1, 0, 1);
         final Vec3 velocity = forward.scale(speed);
 
-        final Vec3 leftMove = left != null ? left.collide(velocity) : null;
-        final Vec3 rightMove = right != null ? right.collide(velocity) : null;
         Vec3 move = collide(velocity);
 
-        if(leftMove != null && leftMove.horizontalDistanceSqr() < move.horizontalDistanceSqr()) // Get the smallest distance in case there's blocking
-            move = leftMove;
-        if(rightMove != null && rightMove.horizontalDistanceSqr() < move.horizontalDistanceSqr())
-            move = rightMove;
+        for(int i = 0; i < animals.length; i++) { // Get the smallest distance in case there's blocking
+            Mob animal = getAnimal(i);
+            if(animal != null) {
+                Vec3 m = animal.collide(velocity);
+                if(m.horizontalDistanceSqr() < move.horizontalDistanceSqr())
+                    move = m;
+            }
+        }
 
         move = move.multiply(1, 0, 1); // "Flatten" the move vector so entities can individually handle their step heights.
 
         if(!isNoGravity())
             move = move.add(0, -GRAVITY, 0);
 
-        if(left != null) {
-            left.setDeltaMovement(move.add(0, left.getDeltaMovement().y, 0));
-            left.move(MoverType.SELF, left.getDeltaMovement());
-        }
-        if(right != null) {
-            right.setDeltaMovement(move.add(0, right.getDeltaMovement().y, 0));
-            right.move(MoverType.SELF, right.getDeltaMovement());
+        for(int i = 0; i < animals.length; i++) {
+            Mob animal = getAnimal(i);
+            if(animal != null) {
+                animal.setDeltaMovement(move.add(0, animal.getDeltaMovement().y, 0));
+                animal.move(MoverType.SELF, animal.getDeltaMovement());
+            }
         }
 
         setDeltaMovement(move.add(0, getDeltaMovement().y, 0));
@@ -142,10 +135,18 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         setXRot(rotlerp(getXRot(), calculateTargetXRot(), 3)); // 3 is just a magic scaling number for smoothing.
     }
 
-    private void handleAcceleration(Mob left, Mob right) {
+    private void handleAcceleration() {
         float forward = getForwardImpulse();
 
-        double targetSpeed = left != null && right != null ? forward * maxSpeed : 0;
+        boolean isFull = true;
+        for(int i = 0; i < animals.length; i++) {
+            if(getAnimal(i) == null) {
+                isFull = false;
+                break;
+            }
+        }
+
+        double targetSpeed = isFull ? forward * maxSpeed : 0;
         double diff = targetSpeed - speed;
         double accel = maxSpeed / (acceleration * 20);
 
@@ -159,19 +160,21 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         if(steer == 0)
             return;
 
-        Vec3 leftDisplace = collideSteering(Side.LEFT, steer);
-        Vec3 rightDisplace = collideSteering(Side.RIGHT, steer);
+        Vec3[] displacements = new Vec3[animals.length];
 
-        if(leftDisplace.equals(Vec3.ZERO) || rightDisplace.equals(Vec3.ZERO))
-            return;
-
-        final Mob left = getDraught(Side.LEFT);
-        final Mob right = getDraught(Side.RIGHT);
+        for(int i = 0; i < animals.length; i++) {
+            displacements[i] = collideSteering(i, steer);
+            if(displacements[i].equals(Vec3.ZERO))
+                return;
+        }
 
         setYRot(Mth.wrapDegrees(getYRot() + steer));
         float yRot = getYRot();
-        setAnimalPos(left, left.position().add(leftDisplace), yRot);
-        setAnimalPos(right, right.position().add(rightDisplace), yRot);
+
+        for(int i = 0; i < animals.length; i++) {
+            Mob animal = getAnimal(i);
+            setAnimalPos(animal, animal.position().add(displacements[i]), yRot);
+        }
     }
 
     @Override
@@ -221,11 +224,12 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 .orElse(null);
 
         if(!level().isClientSide && animal != null) {
-            if(getDraught(Side.LEFT) == null)
-                hitch(animal, Side.LEFT);
-            else if(getDraught(Side.RIGHT) == null)
-                hitch(animal, Side.RIGHT);
-
+            for(int i = 0; i < animalPositions.length; i++) {
+                if(getAnimal(i) == null) {
+                    hitch(animal, i);
+                    break;
+                }
+            }
             animal.dropLeash(true, !player.isCreative());
         }
 
@@ -245,24 +249,25 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         return mob != null;
     }
 
-    private void hitch(Mob animal, Side side) {
-        setDraught(animal, side);
-        initDraught(animal, side);
+    private void hitch(Mob animal, int index) {
+        setDraught(animal, index);
+        initDraught(animal, index);
     }
 
-    private void initDraught(Mob animal, Side side) {
+    private void initDraught(Mob animal, int index) {
         if(animal == null)
             return;
         animal.ejectPassengers();
         animal.setDeltaMovement(Vec3.ZERO);
-        setAnimalPos(animal, getAnimalPos(side), getYRot());
+        float rot = getYRot();
+        setAnimalPos(animal, rotateY(animalPositions[index], rot).add(position()), rot);
     }
 
-    private boolean isAnimalInRange(Side side) {
-        final Mob animal = getDraught(side);
+    private boolean isAnimalInRange(int index) {
+        final Mob animal = getAnimal(index);
         if(animal == null)
             return false;
-        return animal.isAlive() && animal.position().subtract(getAnimalPos(side)).horizontalDistanceSqr() < HORIZONTAL_TETHER;
+        return animal.isAlive() && animal.position().subtract(rotateY(animalPositions[index], getYRot()).add(position())).horizontalDistanceSqr() < HORIZONTAL_TETHER;
     }
 
     private void setAnimalPos(Mob animal, Vec3 pos, float rot) {
@@ -274,16 +279,12 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         animal.setPos(pos);
     }
 
-    private Vec3 getAnimalPos(Side side) {
-        return position().add(rotateY(new Vec3(side == Side.LEFT ? -draughtX : draughtX, 0, draughtY), getYRot()));
-    }
-
-    private Vec3 collideSteering(Side side, float angle) {
-        Mob animal = getDraught(side);
+    private Vec3 collideSteering(int index, float angle) {
+        Mob animal = getAnimal(index);
         if(animal == null)
             return Vec3.ZERO;
 
-        Vec3 desired = rotateY(new Vec3(side == Side.LEFT ? -draughtX : draughtX, 0, draughtY), getYRot() + angle); // Local post-rotation position
+        Vec3 desired = rotateY(animalPositions[index], getYRot() + angle); // Local post-rotation position
         Vec3 local = animal.position().subtract(position()).multiply(1, 0, 1); // Local starting position.
 
         Vec3 displacement = desired.subtract(local);
@@ -296,29 +297,17 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     }
 
     @Nullable
-    private Mob getDraught(Side side) {
-        final int id = side == Side.LEFT ? entityData.get(DATA_DRAUGHT_LEFT) : entityData.get(DATA_DRAUGHT_RIGHT);
-        final int index = side.ordinal();
+    private Mob getAnimal(int index) {
+        final UUID uuid = animalUuids[index];
+        Mob animal = animals[index];
 
-        Mob animal = draughtAnimals[index];
-        if(animal != null && animal.getId() == id && animal.isAlive())
-            return animal;
+        if(uuid == null)
+            return null;
 
-        if(id != -1) {
-            animal = (Mob)level().getEntity(id);
-        }
-        else {
-            UUID uuid = getDraughtUuid(side);
-            if(uuid != null)
-                animal = (Mob)level().getEntities().get(uuid);
-        }
+        if(animal == null && level().getEntities().get(uuid) instanceof Mob mob)
+            animal = mob;
 
-        if(animal != null && animal.isAlive()) {
-            draughtAnimals[index] = animal;
-            return animal;
-        }
-
-        return null;
+        return animal != null && animal.isAlive() ? animal : null;
     }
 
     @Override
@@ -362,12 +351,12 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         });
     }
 
-    private Mob tryGetDraught(Side side) {
-        final UUID uuid = getDraughtUuid(side);
+    private Mob tryGetDraught(int index) {
+        final UUID uuid = animalUuids[index];
         if(uuid == null)
             return null;
 
-        final Mob animal = getDraught(side);
+        final Mob animal = getAnimal(index);
         if(animal != null)
             return animal;
 
@@ -378,28 +367,15 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 .orElse(null);
     }
 
-    private void setDraught(Mob animal, Side side) {
-        Mob old = getDraught(side);
+    private void setDraught(Mob animal, int index) {
+        Mob old = getAnimal(index);
         if(old != null)
             old.setNoAi(false);
-
-        int id = -1;
-        if(animal != null) {
-            id = animal.getId();
+        if(animal != null)
             animal.setNoAi(true);
-        }
 
-        draughtAnimals[side.ordinal()] = animal;
-        entityData.set(side == Side.LEFT ? DATA_DRAUGHT_LEFT : DATA_DRAUGHT_RIGHT, id);
-    }
-
-    @Nullable
-    private UUID getDraughtUuid(Side side) {
-        return draughtAnimalUuids[side.ordinal()];
-    }
-
-    private void setDraughtUuid(Side side, UUID value) {
-        draughtAnimalUuids[side.ordinal()] = value;
+        animals[index] = animal;
+        animalUuids[index] = animal != null ? animal.getUUID() : null;
     }
 
     @Override
@@ -429,13 +405,10 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         if(level().isClientSide)
             return;
 
-        Mob animal = getDraught(Side.LEFT);
-        if(animal != null)
-            animal.setNoAi(false);
-
-        animal = getDraught(Side.RIGHT);
-        if(animal != null)
-            animal.setNoAi(false);
+        for(Mob animal : animals) {
+            if(animal != null)
+                animal.setNoAi(false);
+        }
 
         ejectPassengers();
         discard();
@@ -456,24 +429,34 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
-        Mob left = getDraught(Side.LEFT);
-        Mob right = getDraught(Side.RIGHT);
-
         if(owner != null)
             tag.putUUID("owner", owner);
-        if(left != null)
-            tag.putUUID("leftDraughtAnimal", left.getUUID());
-        if(right != null)
-            tag.putUUID("rightDraughtAnimal", right.getUUID());
+
+        ListTag animals = new ListTag();
+
+        for(int i = 0; i < this.animals.length; i++) {
+            Mob animal = this.animals[i];
+            if(animal != null) {
+                CompoundTag t = new CompoundTag();
+                t.putUUID("uuid", animal.getUUID());
+                animals.add(t);
+            }
+        }
+
+        tag.put("draughtAnimals", animals);
         tag.putInt("woodType", getWoodType().ordinal());
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        if(tag.contains("leftDraughtAnimal"))
-            setDraughtUuid(Side.LEFT, tag.getUUID("leftDraughtAnimal"));
-        if(tag.contains("rightDraughtAnimal"))
-            setDraughtUuid(Side.RIGHT, tag.getUUID("rightDraughtAnimal"));
+        ListTag animals = tag.getList("draughtAnimals", Tag.TAG_COMPOUND);
+
+        int i = 0;
+        for(Tag t : animals) {
+            CompoundTag compound = (CompoundTag)t;
+            animalUuids[i] = compound.getUUID("uuid");
+        }
+
         if(tag.contains("owner"))
             owner = tag.getUUID("owner");
         setWoodType(Type.values()[tag.getInt("woodtype")]);
@@ -497,8 +480,6 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     @Override
     protected void defineSynchedData() {
-        entityData.define(DATA_DRAUGHT_LEFT, -1);
-        entityData.define(DATA_DRAUGHT_RIGHT, -1);
         entityData.define(DATA_TYPE, 0);
         entityData.define(DATA_HEALTH, (float)maxHealth);
     }
@@ -515,10 +496,6 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     public double getMaxSpeed() {
         return maxSpeed;
-    }
-
-    private enum Side {
-        LEFT, RIGHT
     }
 
     public enum Type {
