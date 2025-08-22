@@ -2,6 +2,8 @@ package com.dragn0007.dragnlivestock.items;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
+import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon.Type;
+import com.dragn0007.dragnlivestock.items.custom.WagonItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -130,7 +132,14 @@ public class LOItemGroup {
                         output.accept(LOItems.WAGON_HARNESS.get());
                         output.accept(LOItems.MARTINGALE_HARNESS.get());
 
-//                        output.accept(LOItems.COVERED_WAGON.get());
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.SPRUCE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.BIRCH));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.JUNGLE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.ACACIA));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.CHERRY));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.DARK_OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.MANGROVE));
 
                         output.accept(LOItems.FERTILIZED_EGG.get());
                         output.accept(LOItems.FERTILIZED_AMERAUCANA_EGG.get());

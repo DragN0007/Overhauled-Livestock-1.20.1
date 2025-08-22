@@ -7,12 +7,16 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.network.LOPackets;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -28,12 +32,13 @@ import software.bernie.geckolib.GeckoLib;
 import java.util.Optional;
 
 @Mod(LivestockOverhaul.MODID)
-public class LivestockOverhaul
-{
-    public static final String MODID = "dragnlivestock";
+public class LivestockOverhaul {
 
-     public LivestockOverhaul()
-    {
+    public static final String MODID = "dragnlivestock";
+    public static final TagKey<EntityType<?>> DRAUGHT_ANIMALS = TagKey.create(Registries.ENTITY_TYPE, LivestockOverhaul.id("draught_animals"));
+    public static final TagKey<EntityType<?>> CANNOT_MOUNT_WAGON = TagKey.create(Registries.ENTITY_TYPE, LivestockOverhaul.id("cannot_mount_wagon"));
+
+    public LivestockOverhaul() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
@@ -42,6 +47,8 @@ public class LivestockOverhaul
         LOBlocks.register(eventBus);
         EntityTypes.ENTITY_TYPES.register(eventBus);
         LOMenuTypes.register(eventBus);
+        LOSoundEvents.REGISTRY.register(eventBus);
+        LOPackets.register();
 
         CraftingHelper.register(new BlanketConfigCondition.Serializer(new ResourceLocation(MODID, "blanket_config_condition")));
 
@@ -108,6 +115,11 @@ public class LivestockOverhaul
         }
     };
     public static final EntityDataSerializer<Optional<DyeColor>> DYE_COLOR = EntityDataSerializer.optional(FriendlyByteBuf::writeEnum, (friendlyByteBuf) -> friendlyByteBuf.readEnum(DyeColor.class));
+
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(MODID, path);
+    }
 
     static {
         EntityDataSerializers.registerSerializer(RESOURCE_LOCATION);
