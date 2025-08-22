@@ -95,8 +95,14 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         }
         for(int i = 0; i < animals.length; i++) {
             Mob animal = getAnimal(i);
-            if(animal == null || animal.isLeashed() || !isAnimalInRange(i))
+            if(animal == null)
+                continue;
+
+            animal.setNoAi(true);
+            if(animal.isLeashed())
                 setAnimal(null, i);
+            else if(!isAnimalInRange(i))
+                animal.setPos(rotateY(animalPositions[i], getYRot()).add(position()));
         }
     }
 
@@ -278,7 +284,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         animal.setYRot(rot);
         animal.setYBodyRot(rot);
         animal.setYHeadRot(rot);
-        animal.setPos(pos);
+        animal.teleportTo(pos.x, pos.y, pos.z);
     }
 
     private Vec3 collideSteering(int index, float angle) {
