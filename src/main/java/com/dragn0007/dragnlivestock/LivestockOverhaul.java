@@ -35,8 +35,6 @@ import java.util.Optional;
 public class LivestockOverhaul {
 
     public static final String MODID = "dragnlivestock";
-    public static final TagKey<EntityType<?>> DRAUGHT_ANIMALS = TagKey.create(Registries.ENTITY_TYPE, LivestockOverhaul.id("draught_animals"));
-    public static final TagKey<EntityType<?>> CANNOT_MOUNT_WAGON = TagKey.create(Registries.ENTITY_TYPE, LivestockOverhaul.id("cannot_mount_wagon"));
 
     public LivestockOverhaul() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

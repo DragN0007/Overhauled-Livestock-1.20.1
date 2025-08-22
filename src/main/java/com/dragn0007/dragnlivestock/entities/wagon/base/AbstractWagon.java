@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.wagon.base;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.client.ClientProxy;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -57,7 +58,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     private double speed = 0;
     public UUID owner;
 
-    private final Vec3[] animalPositions;
+    protected final Vec3[] animalPositions;
     private final Mob[] animals;
     private final UUID[] animalUuids; // Only used for first-tick save behaviour.
 
@@ -216,10 +217,10 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         return super.interact(player, hand);
     }
 
-    private boolean tryHitching(Player player) {
+    protected boolean tryHitching(Player player) {
         final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
                 player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
-                        h -> h.getLeashHolder() == player && h.getType().is(LivestockOverhaul.DRAUGHT_ANIMALS)).stream()
+                        h -> h.getLeashHolder() == player && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)).stream()
                 .findFirst()
                 .orElse(null);
 
@@ -240,7 +241,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         Mob mob = level().getEntitiesOfClass(Mob.class, new AABB(
                         player.getX()-7, player.getY()-7, player.getZ()-7,
                         player.getX()+7, player.getY()+7, player.getZ()+7
-                ), h -> h.getLeashHolder() == player && !h.getType().is(LivestockOverhaul.CANNOT_MOUNT_WAGON)).stream()
+                ), h -> h.getLeashHolder() == player && !h.getType().is(LOTags.Entity_Types.CANNOT_MOUNT_WAGON)).stream()
                 .findFirst().orElse(null);
 
         if(mob != null && !level().isClientSide && canAddPassenger(mob))
@@ -249,7 +250,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         return mob != null;
     }
 
-    private void hitch(Mob animal, int index) {
+    protected void hitch(Mob animal, int index) {
         setDraught(animal, index);
         initDraught(animal, index);
     }
@@ -297,7 +298,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     }
 
     @Nullable
-    private Mob getAnimal(int index) {
+    protected Mob getAnimal(int index) {
         final UUID uuid = animalUuids[index];
         Mob animal = animals[index];
 

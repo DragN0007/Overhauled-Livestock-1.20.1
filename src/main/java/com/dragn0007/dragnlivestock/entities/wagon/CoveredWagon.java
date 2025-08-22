@@ -1,13 +1,17 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.gui.CoveredWagonMenu;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class CoveredWagon extends AbstractInventoryWagon {
@@ -19,12 +23,33 @@ public class CoveredWagon extends AbstractInventoryWagon {
     };
 
     public static final Vec3[] ANIMALS = new Vec3[] {
-            new Vec3(-0.5D, 0, 4.75D),
-            new Vec3(0.5D, 0, 4.75D)
+            new Vec3(-0.7D, 0, 4.75D),
+            new Vec3(0.7D, 0, 4.75D)
     };
 
     public CoveredWagon(EntityType<? extends AbstractWagon> type, Level level) {
         super(type, level, 0.1D, 2.0D, 2.0F, 60, 36, ANIMALS, 1.25D, 1.4D, RIDERS);
+    }
+
+    @Override
+    protected boolean tryHitching(Player player) {
+        final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
+                                player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
+                        h -> h.getLeashHolder() == player && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)).stream()
+                .findFirst()
+                .orElse(null);
+
+        if(!level().isClientSide && animal != null) {
+            for(int i = 0; i < animalPositions.length; i++) {
+                if(getAnimal(i) == null) {
+                    hitch(animal, i);
+                    break;
+                }
+            }
+            animal.dropLeash(true, !player.isCreative());
+        }
+
+        return animal != null;
     }
 
     @Override
