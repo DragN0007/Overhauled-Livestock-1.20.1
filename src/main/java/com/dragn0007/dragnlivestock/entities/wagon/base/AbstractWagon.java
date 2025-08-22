@@ -7,6 +7,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -93,7 +94,8 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
             }
         }
         for(int i = 0; i < animals.length; i++) {
-            if(!isAnimalInRange(i))
+            Mob animal = getAnimal(i);
+            if(animal == null || animal.isLeashed() || !isAnimalInRange(i))
                 setDraught(null, i);
         }
     }
@@ -436,30 +438,23 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
         for(int i = 0; i < this.animals.length; i++) {
             Mob animal = this.animals[i];
-            if(animal != null) {
-                CompoundTag t = new CompoundTag();
-                t.putUUID("uuid", animal.getUUID());
-                animals.add(t);
-            }
+            if(animal != null)
+                animals.add(NbtUtils.createUUID(animal.getUUID()));
         }
 
-        tag.put("draughtAnimals", animals);
+        tag.put("animals", animals);
         tag.putInt("woodType", getWoodType().ordinal());
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        ListTag animals = tag.getList("draughtAnimals", Tag.TAG_COMPOUND);
-
-        int i = 0;
-        for(Tag t : animals) {
-            CompoundTag compound = (CompoundTag)t;
-            animalUuids[i] = compound.getUUID("uuid");
-        }
+        ListTag animals = tag.getList("animals", Tag.TAG_INT_ARRAY);
+        for(int i = 0; i < animals.size(); i++)
+            animalUuids[i] = NbtUtils.loadUUID(animals.get(i));
 
         if(tag.contains("owner"))
             owner = tag.getUUID("owner");
-        setWoodType(Type.values()[tag.getInt("woodtype")]);
+        setWoodType(Type.values()[tag.getInt("woodType")]);
     }
 
     public float getHealth() {
