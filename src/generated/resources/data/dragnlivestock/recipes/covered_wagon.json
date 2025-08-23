@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "minecraft:planks"
+    },
+    "B": {
+      "item": "minecraft:white_wool"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "AAA",
+    "C C"
+  ],
+  "result": {
+    "item": "dragnlivestock:covered_wagon"
+  },
+  "show_notification": true
+}

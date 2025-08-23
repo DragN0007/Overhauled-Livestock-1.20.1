@@ -30,6 +30,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -192,9 +193,61 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
             return InteractionResult.PASS;
 
         final boolean isClientSide = level().isClientSide;
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (stack.is(ItemTags.PLANKS)) {
+            if(isClientSide)
+                return InteractionResult.SUCCESS;
+
+            if (stack.is(Items.OAK_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.OAK);
+            } else if (stack.is(Items.ACACIA_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.ACACIA);
+            } else if (stack.is(Items.BIRCH_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.BIRCH);
+            } else if (stack.is(Items.CHERRY_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.CHERRY);
+            } else if (stack.is(Items.CRIMSON_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.CRIMSON);
+            } else if (stack.is(Items.DARK_OAK_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.DARK_OAK);
+            } else if (stack.is(Items.JUNGLE_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.JUNGLE);
+            } else if (stack.is(Items.MANGROVE_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.MANGROVE);
+            } else if (stack.is(Items.SPRUCE_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.SPRUCE);
+            } else if (stack.is(Items.WARPED_PLANKS)) {
+                if (isClientSide)
+                    return InteractionResult.SUCCESS;
+                this.setWoodType(Type.WARPED);
+            }
+
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+        }
 
         if(player.isSecondaryUseActive()) {
-            ItemStack stack = player.getItemInHand(hand);
 
             if(stack.is(ItemTags.AXES)) {
                 if(!isClientSide && player.getUUID().equals(owner))
@@ -507,7 +560,9 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         JUNGLE(Blocks.JUNGLE_PLANKS),
         ACACIA(Blocks.ACACIA_PLANKS),
         CHERRY(Blocks.CHERRY_PLANKS),
+        CRIMSON(Blocks.CRIMSON_PLANKS),
         DARK_OAK(Blocks.DARK_OAK_PLANKS),
+        WARPED(Blocks.WARPED_PLANKS),
         MANGROVE(Blocks.MANGROVE_PLANKS);
 
         protected final Block planks;

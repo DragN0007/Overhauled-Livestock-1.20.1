@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.datagen;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
+import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -26,6 +27,49 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.COVERED_WAGON.get())
+                .define('A', ItemTags.PLANKS)
+                .define('B', Items.WHITE_WOOL)
+                .define('C', Items.IRON_INGOT)
+                .pattern("BBB")
+                .pattern("AAA")
+                .pattern("C C")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIVESTOCK_WAGON.get())
+                .define('A', ItemTags.PLANKS)
+                .define('C', Items.IRON_INGOT)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("C C")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GOODS_CART.get())
+                .define('A', ItemTags.PLANKS)
+                .define('B', Items.WHITE_WOOL)
+                .define('C', Items.IRON_INGOT)
+                .pattern("BB ")
+                .pattern("AAA")
+                .pattern("C C")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.TRANSPORT_CART.get())
+                .define('A', ItemTags.PLANKS)
+                .define('C', Items.IRON_INGOT)
+                .pattern("AAA")
+                .pattern("C C")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOUNT_KEY.get())
                 .define('A', Items.GOLD_NUGGET)

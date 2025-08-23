@@ -3,12 +3,14 @@ package com.dragn0007.dragnlivestock.entities.wagon;
 import com.dragn0007.dragnlivestock.common.gui.CoveredWagonMenu;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -54,6 +56,10 @@ public class CoveredWagon extends AbstractInventoryWagon {
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new CoveredWagonMenu(id, inventory, this);
+    }
+
+    public ItemStack getPickResult() {
+        return LOItems.COVERED_WAGON.get().getDefaultInstance();
     }
 
 }

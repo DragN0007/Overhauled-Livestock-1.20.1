@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "C C"
+  ],
+  "result": {
+    "item": "dragnlivestock:livestock_wagon"
+  },
+  "show_notification": true
+}
