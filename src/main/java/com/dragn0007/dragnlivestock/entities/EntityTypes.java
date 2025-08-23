@@ -33,6 +33,9 @@ import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.wagon.CoveredWagon;
+import com.dragn0007.dragnlivestock.entities.wagon.GoodsCart;
+import com.dragn0007.dragnlivestock.entities.wagon.LivestockWagon;
+import com.dragn0007.dragnlivestock.entities.wagon.TransportCart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -246,10 +249,26 @@ public class EntityTypes {
                     .sized(1.5f,1.5f)
                     .build(new ResourceLocation(MODID,"peach_moobloom").toString()));
 
+
     public static final RegistryObject<EntityType<CoveredWagon>> COVERED_WAGON = ENTITY_TYPES.register("covered_wagon",
             () -> EntityType.Builder.of(CoveredWagon::new,
                     MobCategory.MISC)
                     .sized(3.0F, 3.0F)
                     .build(new ResourceLocation(MODID, "covered_wagon").toString()));
+    public static final RegistryObject<EntityType<LivestockWagon>> LIVESTOCK_WAGON = ENTITY_TYPES.register("livestock_wagon",
+            () -> EntityType.Builder.of(LivestockWagon::new,
+                            MobCategory.MISC)
+                    .sized(3.0F, 3.0F)
+                    .build(new ResourceLocation(MODID, "livestock_wagon").toString()));
+    public static final RegistryObject<EntityType<GoodsCart>> GOODS_CART = ENTITY_TYPES.register("goods_cart",
+            () -> EntityType.Builder.of(GoodsCart::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 2.0F)
+                    .build(new ResourceLocation(MODID, "goods_cart").toString()));
+    public static final RegistryObject<EntityType<TransportCart>> TRANSPORT_CART = ENTITY_TYPES.register("transport_cart",
+            () -> EntityType.Builder.of(TransportCart::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 1.5F)
+                    .build(new ResourceLocation(MODID, "transport_cart").toString()));
 }
 

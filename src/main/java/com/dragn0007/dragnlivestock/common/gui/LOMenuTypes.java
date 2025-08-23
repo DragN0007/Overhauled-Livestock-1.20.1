@@ -20,7 +20,11 @@ public class LOMenuTypes {
     public static final RegistryObject<MenuType<CaribouMenu>> O_CARIBOU_MENU = registerMenuType("ocaribou_menu", CaribouMenu::new);
     public static final RegistryObject<MenuType<OxMenu>> OX_MENU = registerMenuType("ox_menu", OxMenu::new);
     public static final RegistryObject<MenuType<UnicornMenu>> UNICORN_MENU = registerMenuType("unicorn_menu", UnicornMenu::new);
+
     public static final RegistryObject<MenuType<CoveredWagonMenu>> COVERED_WAGON = registerMenuType("covered_wagon", CoveredWagonMenu::new);
+    public static final RegistryObject<MenuType<LivestockWagonMenu>> LIVESTOCK_WAGON = registerMenuType("livestock_wagon", LivestockWagonMenu::new);
+    public static final RegistryObject<MenuType<GoodsCartMenu>> GOODS_CART = registerMenuType("goods_cart", GoodsCartMenu::new);
+    public static final RegistryObject<MenuType<TransportCartMenu>> TRANSPORT_CART = registerMenuType("transport_cart", TransportCartMenu::new);
 
     public static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENU_TYPES.register(name, () -> IForgeMenuType.create(factory));

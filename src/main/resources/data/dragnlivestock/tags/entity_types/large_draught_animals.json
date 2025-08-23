@@ -3,8 +3,10 @@
   "values": [
     "dragnlivestock:o_horse",
     "dragnlivestock:o_mule",
-    "dragnlivestock:unicorn",
+    "dragnlivestock:o_camel",
     "dragnlivestock:o_cow",
+    "dragnlivestock:caribou",
+    "dragnlivestock:unicorn",
 
     {
       "id": "permafrost:qorse",

@@ -214,8 +214,6 @@ public class LOItems {
     public static final RegistryObject<Item> AYAM_CEMANI_EGG = ITEMS.register("ayam_cemani_egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
 
-//    public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon", CoveredWagonItem::new);
-
 
     //Food/ Items
     public static final RegistryObject<Item> SHEEP_MILK_BUCKET = ITEMS.register("sheep_milk_bucket",
@@ -792,6 +790,12 @@ public class LOItems {
 
     public static final RegistryObject<Item> COVERED_WAGON = ITEMS.register("covered_wagon",
             () -> new WagonItem(EntityTypes.COVERED_WAGON::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LIVESTOCK_WAGON = ITEMS.register("livestock_wagon",
+            () -> new WagonItem(EntityTypes.LIVESTOCK_WAGON::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GOODS_CART = ITEMS.register("goods_cart",
+            () -> new WagonItem(EntityTypes.GOODS_CART::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> TRANSPORT_CART = ITEMS.register("transport_cart",
+            () -> new WagonItem(EntityTypes.TRANSPORT_CART::get, new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

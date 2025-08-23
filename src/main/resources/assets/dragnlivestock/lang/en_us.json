@@ -18,9 +18,6 @@
   "tooltip.dragnlivestock.utility_knife.tooltip": "Cuts Meat Strips for Jerky production.",
   "tooltip.dragnlivestock.oscillator.tooltip": "A Creative-Use-Only item that allows the user to change the coat, marking or breed of an O-Animal via interaction. Right-Click the animal to go up one variant, or Shift-Right-Click to go down.",
   "tooltip.dragnlivestock.mount_key.tooltip": "Quite literally locks your O-Mount so others can't ride it or get into it's inventory. Works universally.",
-  "tooltip.dragnlivestock.large_wagon.tooltip": "Can be pulled by horses, mules and oxen.",
-  "tooltip.dragnlivestock.medium_wagon.tooltip": "Can be pulled by horses, mules, donkeys and oxen.",
-  "tooltip.dragnlivestock.small_wagon.tooltip": "Can be pulled by horses, mules, donkeys, goats and oxen.",
 
   "tooltip.dragnlivestock.wandering.tooltip": "Your Companion is Wandering",
   "tooltip.dragnlivestock.following.tooltip": "Your Companion is Following",
@@ -135,6 +132,12 @@
 
   "item.dragnlivestock.covered_wagon": "Covered Wagon",
   "entity.dragnlivestock.covered_wagon": "Covered Wagon",
+  "item.dragnlivestock.livestock_wagon": "Livestock Wagon",
+  "entity.dragnlivestock.livestock_wagon": "Livestock Wagon",
+  "item.dragnlivestock.goods_cart": "Goods Cart",
+  "entity.dragnlivestock.goods_cart": "Goods Cart",
+  "item.dragnlivestock.transport_cart": "Transport Cart",
+  "entity.dragnlivestock.transport_cart": "Transport Cart",
 
 
   "item.dragnlivestock.utility_knife": "Utility Knife",

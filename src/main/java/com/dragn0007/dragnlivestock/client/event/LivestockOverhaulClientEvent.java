@@ -72,7 +72,6 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
         EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);
-
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.UNICORN_ENTITY.get(), UnicornRender::new);
         EntityRenderers.register(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorsemanRender::new);
@@ -88,7 +87,11 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get(), BeetrootMoobloomRender::new);
         EntityRenderers.register(EntityTypes.AZALEA_MOOBLOOM_ENTITY.get(), AzaleaMoobloomRender::new);
         EntityRenderers.register(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloomRender::new);
+
         EntityRenderers.register(EntityTypes.COVERED_WAGON.get(), c -> new WagonRenderer<>(c, "covered_wagon"));
+        EntityRenderers.register(EntityTypes.LIVESTOCK_WAGON.get(), c -> new WagonRenderer<>(c, "livestock_wagon"));
+        EntityRenderers.register(EntityTypes.GOODS_CART.get(), c -> new WagonRenderer<>(c, "goods_cart"));
+        EntityRenderers.register(EntityTypes.TRANSPORT_CART.get(), c -> new WagonRenderer<>(c, "transport_cart"));
 
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);
@@ -100,6 +103,9 @@ public class LivestockOverhaulClientEvent {
         MenuScreens.register(LOMenuTypes.UNICORN_MENU.get(), UnicornScreen::new);
 
         MenuScreens.register(LOMenuTypes.COVERED_WAGON.get(), CoveredWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.LIVESTOCK_WAGON.get(), LivestockWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.GOODS_CART.get(), GoodsCartScreen::new);
+        MenuScreens.register(LOMenuTypes.TRANSPORT_CART.get(), TransportCartScreen::new);
 
         //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
