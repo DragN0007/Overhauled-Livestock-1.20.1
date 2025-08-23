@@ -9,27 +9,47 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Controls:$()$(br2)-Lead a pulling animal, such as a horse, to the wagon and shift-right-click the wagon to hitch it. $(br2)-Leash the horse again to un-hitch it. $(br2)-Lead a NON-pulling animal, such as a pig, to the wagon and shift-right-click the wagon to put the animal inside. $(br2)-Right click the wagon with any (vanilla) planks to change it's wood type."
+      "text": "$(l)Controls:$()$(br2)-Lead a pulling animal, such as a horse, to the wagon and shift-right-click the wagon to hitch it. $(br2)-Leash the horse again to un-hitch it. $(br2)-Lead a NON-pulling animal, such as a pig, to the wagon and shift-right-click the wagon to put the animal inside."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Covered Wagon:$()$(br2)-Inventory Slots: 36 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 3 $(br2)-Large Pullers Only"
+      "text": "$(l)Controls:$() $(br2)-Right click the wagon with any (vanilla) planks to change it's wood type. $(br2)-Right click the wagon with an axe to pick it up intact. $(br2)-Hit the wagon with an axe to destroy it and get scraps back."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:covered_wagon"
+      },
+      "text": "-Inventory Slots: 36 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 3 $(br2)-Large Pullers Only",
+      "title": "Covered Wagon"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:livestock_wagon"
+      },
+      "text": "-Inventory Slots: 9 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 7 $(br2)-Large Pullers Only",
+      "title": "Livestock Wagon"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:goods_cart"
+      },
+      "text": "-Inventory Slots: 36 $(br2)-Speed: x0.25 $(br2)-Health: 40 $(br2)-Seats: 1 $(br2)-Medium+ Pullers",
+      "title": "Goods Cart"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:goods_cart"
+      },
+      "text": "-Inventory Slots: 18 $(br2)-Speed: x0.3 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Small Pullers",
+      "title": "Transport Cart"
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Livestock Wagon:$()$(br2)-Inventory Slots: 9 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 7 $(br2)-Large Pullers Only"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "$(l)Goods Cart:$()$(br2)-Inventory Slots: 36 $(br2)-Speed: x0.25 $(br2)-Health: 40 $(br2)-Seats: 1 $(br2)-Medium+ Pullers"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "$(l)Transport Cart:$()$(br2)-Inventory Slots: 18 $(br2)-Speed: x0.3 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Small Pullers"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "$(l)Pull Types$()$(br2)Large: Horses, Mules, Oxen, Camels, Caribou, Unicorns $(br2)Medium:Donkeys, Mules, Caribou $(br2)Small:Donkeys, Goats, Dogs, Wolves"
+      "text": "$(l)Pull Types$()$(br2)Large: Horses, Mules, Oxen, Camels, Caribou, Unicorns $(br2)Medium: Donkeys, Mules, Caribou $(br2)Small: Donkeys, Goats, Dogs, Wolves"
     }
   ]
 }
