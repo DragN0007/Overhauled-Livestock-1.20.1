@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.wagon.base;
 
-import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.client.ClientProxy;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.core.BlockPos;
@@ -91,13 +90,20 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
             for(int i = 0; i < animals.length; i++) {
                 Mob animal = tryGetDraught(i);
                 if(animal != null)
-                    setDraught(animal, i);
+                    setAnimal(animal, i);
             }
         }
         for(int i = 0; i < animals.length; i++) {
             Mob animal = getAnimal(i);
             if(animal == null || animal.isLeashed() || !isAnimalInRange(i))
-                setDraught(null, i);
+                if(animal == null)
+                    continue;
+
+            animal.setNoAi(true);
+            if(animal.isLeashed())
+                setAnimal(null, i);
+            else if(!isAnimalInRange(i))
+                animal.setPos(rotateY(animalPositions[i], getYRot()).add(position()));
         }
     }
 
@@ -253,7 +259,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     }
 
     protected void hitch(Mob animal, int index) {
-        setDraught(animal, index);
+        setAnimal(animal, index);
         initDraught(animal, index);
     }
 
@@ -279,7 +285,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         animal.setYRot(rot);
         animal.setYBodyRot(rot);
         animal.setYHeadRot(rot);
-        animal.setPos(pos);
+        animal.teleportTo(pos.x, pos.y, pos.z);
     }
 
     protected Vec3 collideSteering(int index, float angle) {
@@ -370,9 +376,9 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 .orElse(null);
     }
 
-    protected void setDraught(Mob animal, int index) {
-        Mob old = getAnimal(index);
-        if(old != null)
+    protected void setAnimal(Mob animal, int index) {
+        Mob old = animals[0];
+        if(old != null && old != animal)
             old.setNoAi(false);
         if(animal != null)
             animal.setNoAi(true);

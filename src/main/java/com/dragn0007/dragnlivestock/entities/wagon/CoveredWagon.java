@@ -1,9 +1,8 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
-import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.common.gui.CoveredWagonMenu;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
-import com.dragn0007.dragnlivestock.gui.CoveredWagonMenu;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -17,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 public class CoveredWagon extends AbstractInventoryWagon {
 
     public static final Vec3[] RIDERS = new Vec3[] {
-            new Vec3(0, 1.75D, 2.4D),
+            new Vec3(0, 1.75D, 2.2D),
             new Vec3(-0.43D, 1.25D, 0D),
             new Vec3(0, 1D, -2.25D)
     };

@@ -251,7 +251,7 @@ public class OMooshroom extends OCow implements GeoEntity {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
         if (data == null) {
-            data = new AgeableMobGroupData(0.2F);
+            data = new AgeableMob.AgeableMobGroupData(0.2F);
         }
         Random random = new Random();
         setBreed(random.nextInt(CowBreed.Breed.values().length));

@@ -1,10 +1,10 @@
 package com.dragn0007.dragnlivestock.client;
 
 import com.dragn0007.dragnlivestock.client.sounds.WagonSoundInstance;
+import com.dragn0007.dragnlivestock.common.network.LOPackets;
+import com.dragn0007.dragnlivestock.common.network.packets.VehicleControlPacket;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractGeckolibVehicle;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
-import com.dragn0007.dragnlivestock.network.LOPackets;
-import com.dragn0007.dragnlivestock.network.packets.VehicleControlPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 

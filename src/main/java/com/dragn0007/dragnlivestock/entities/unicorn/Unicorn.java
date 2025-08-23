@@ -1,13 +1,13 @@
 package com.dragn0007.dragnlivestock.entities.unicorn;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.common.gui.UnicornMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
-import com.dragn0007.dragnlivestock.gui.UnicornMenu;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -162,7 +162,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		} else if (this.getSpecies() == 2) {
 			return END_FOOD_ITEMS.test(stack);
 		} else {
-			return FOOD_ITEMS.test(stack);
+			return AbstractOMount.FOOD_ITEMS.test(stack);
 		}
 	}
 
@@ -257,7 +257,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	}
 
 	@Override
-	public void positionRider(Entity entity, MoveFunction moveFunction) {
+	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
 			double offsetX = 0;
 			double offsetY = 1.4;
@@ -500,7 +500,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
 		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
+			data = new AgeableMob.AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
 

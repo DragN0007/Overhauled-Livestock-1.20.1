@@ -19,6 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -254,7 +255,7 @@ public class SweetBerryMoobloom extends AbstractMoobloom implements GeoEntity {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
         if (data == null) {
-            data = new AgeableMobGroupData(0.2F);
+            data = new AgeableMob.AgeableMobGroupData(0.2F);
         }
         Random random = new Random();
         setVariant(random.nextInt(SweetBerryMoobloomModel.Variant.values().length));

@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,19 +18,19 @@ import java.util.stream.Stream;
 public class RawPorkJerky extends JerkyBase {
 
     public static final VoxelShape NORTH = Stream.of(
-            Block.box(3, 0, 14, 13, 14, 16)
+            box(3, 0, 14, 13, 14, 16)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape EAST = Stream.of(
-            Block.box(0, 0, 3, 2, 14, 13)
+            box(0, 0, 3, 2, 14, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2,BooleanOp.OR)).get();
 
     public static final VoxelShape SOUTH = Stream.of(
-            Block.box(3, 0, 0, 13, 14, 2)
+            box(3, 0, 0, 13, 14, 2)
     ).reduce((v1, v2) -> Shapes.join(v1, v2,BooleanOp.OR)).get();
 
     public static final VoxelShape WEST = Stream.of(
-            Block.box(14, 0, 3, 16, 14, 13)
+            box(14, 0, 3, 16, 14, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2,BooleanOp.OR)).get();
 
     public RawPorkJerky() {
