@@ -23,6 +23,7 @@ public class LOMenuTypes {
 
     public static final RegistryObject<MenuType<CoveredWagonMenu>> COVERED_WAGON = registerMenuType("covered_wagon", CoveredWagonMenu::new);
     public static final RegistryObject<MenuType<LivestockWagonMenu>> LIVESTOCK_WAGON = registerMenuType("livestock_wagon", LivestockWagonMenu::new);
+    public static final RegistryObject<MenuType<LumberWagonMenu>> LUMBER_WAGON = registerMenuType("lumber_wagon", LumberWagonMenu::new);
     public static final RegistryObject<MenuType<GoodsCartMenu>> GOODS_CART = registerMenuType("goods_cart", GoodsCartMenu::new);
     public static final RegistryObject<MenuType<TransportCartMenu>> TRANSPORT_CART = registerMenuType("transport_cart", TransportCartMenu::new);
 

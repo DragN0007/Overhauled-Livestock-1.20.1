@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.common.gui;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
 public class GoodsCartMenu extends AbstractWagonMenu {
 
@@ -13,5 +14,4 @@ public class GoodsCartMenu extends AbstractWagonMenu {
     public GoodsCartMenu(int id, Inventory inventory, FriendlyByteBuf data) {
         this(id, inventory, getWagon(inventory, data));
     }
-
 }

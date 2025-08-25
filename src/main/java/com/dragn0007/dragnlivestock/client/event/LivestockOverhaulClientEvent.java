@@ -90,6 +90,7 @@ public class LivestockOverhaulClientEvent {
 
         EntityRenderers.register(EntityTypes.COVERED_WAGON.get(), c -> new WagonRenderer<>(c, "covered_wagon"));
         EntityRenderers.register(EntityTypes.LIVESTOCK_WAGON.get(), c -> new WagonRenderer<>(c, "livestock_wagon"));
+        EntityRenderers.register(EntityTypes.LUMBER_WAGON.get(), c -> new WagonRenderer<>(c, "lumber_wagon"));
         EntityRenderers.register(EntityTypes.GOODS_CART.get(), c -> new WagonRenderer<>(c, "goods_cart"));
         EntityRenderers.register(EntityTypes.TRANSPORT_CART.get(), c -> new WagonRenderer<>(c, "transport_cart"));
 
@@ -104,6 +105,7 @@ public class LivestockOverhaulClientEvent {
 
         MenuScreens.register(LOMenuTypes.COVERED_WAGON.get(), CoveredWagonScreen::new);
         MenuScreens.register(LOMenuTypes.LIVESTOCK_WAGON.get(), LivestockWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.LUMBER_WAGON.get(), LumberWagonScreen::new);
         MenuScreens.register(LOMenuTypes.GOODS_CART.get(), GoodsCartScreen::new);
         MenuScreens.register(LOMenuTypes.TRANSPORT_CART.get(), TransportCartScreen::new);
 
@@ -111,7 +113,6 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
     }
 
-    public static final KeyMapping CLEAR = new KeyMapping("key.dragnlivestock.clear", InputConstants.KEY_MINUS, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_SPEED_UP = new KeyMapping("key.dragnlivestock.horse_speed_up", InputConstants.KEY_LCONTROL, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_SLOW_DOWN = new KeyMapping("key.dragnlivestock.horse_slow_down", InputConstants.KEY_LALT, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_BOW = new KeyMapping("key.dragnlivestock.horse_bow", InputConstants.KEY_B, "key.dragnlivestock.categories.dragnlivestock");
@@ -119,11 +120,10 @@ public class LivestockOverhaulClientEvent {
     public static final KeyMapping HORSE_SPANISH_WALK_TOGGLE = new KeyMapping("key.dragnlivestock.horse_spanish_walk_toggle", InputConstants.KEY_DOWN, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_WAVE = new KeyMapping("key.dragnlivestock.horse_wave", InputConstants.KEY_G, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_LEVADE = new KeyMapping("key.dragnlivestock.horse_levade", InputConstants.KEY_L, "key.dragnlivestock.categories.dragnlivestock");
-    public static final KeyMapping HORSE_WALK_BACKWARDS = new KeyMapping("key.dragnlivestock.horse_walk_backwards", InputConstants.KEY_S, "key.dragnlivestock.categories.dragnlivestock");
 
     @SubscribeEvent
     public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
-        KeyMapping[] keyMappings = {CLEAR, HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE, HORSE_WALK_BACKWARDS};
+        KeyMapping[] keyMappings = {HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE};
         for (KeyMapping keyMapping : keyMappings) {
             event.register(keyMapping);
         }

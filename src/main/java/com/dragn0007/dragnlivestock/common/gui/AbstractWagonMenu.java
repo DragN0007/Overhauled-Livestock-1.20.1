@@ -1,18 +1,25 @@
 package com.dragn0007.dragnlivestock.common.gui;
 
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.wagon.LumberWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.items.SlotItemHandler;
 
 public abstract class AbstractWagonMenu extends AbstractContainerMenu {
 
-    private final AbstractInventoryWagon wagon;
+    protected final AbstractInventoryWagon wagon;
 
     public AbstractWagonMenu(MenuType<? extends AbstractWagonMenu> type, int id, Inventory inventory, AbstractInventoryWagon wagon,
                              int perRow, int xInv, int yInv) {
@@ -21,7 +28,15 @@ public abstract class AbstractWagonMenu extends AbstractContainerMenu {
 
         for(int y = 0; y < wagon.getItems().getSlots() / perRow; y++) {
             for(int x = 0; x < perRow; x++) {
-                addSlot(new SlotItemHandler(wagon.getItems(), x + y*perRow, 8 + x*18, 18 + y*18));
+                addSlot(new SlotItemHandler(wagon.getItems(), x + y*perRow, 8 + x*18, 18 + y*18) {
+                    @Override
+                    public boolean mayPlace(ItemStack itemStack) {
+                        if (wagon.getType().is(LOTags.Entity_Types.LUMBER_WAGON)) {
+                            return itemStack.is(ItemTags.LOGS) || itemStack.is(ItemTags.PLANKS) || itemStack.getItem() instanceof AxeItem;
+                        }
+                        return true;
+                    }
+                });
             }
         }
 
@@ -71,5 +86,4 @@ public abstract class AbstractWagonMenu extends AbstractContainerMenu {
     public static AbstractInventoryWagon getWagon(Inventory inventory, FriendlyByteBuf data) {
         return inventory.player.level().getEntity(data.readInt()) instanceof AbstractInventoryWagon wagon ? wagon : null;
     }
-
 }

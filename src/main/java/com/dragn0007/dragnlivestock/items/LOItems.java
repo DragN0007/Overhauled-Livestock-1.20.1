@@ -792,6 +792,8 @@ public class LOItems {
             () -> new WagonItem(EntityTypes.COVERED_WAGON::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LIVESTOCK_WAGON = ITEMS.register("livestock_wagon",
             () -> new WagonItem(EntityTypes.LIVESTOCK_WAGON::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LUMBER_WAGON = ITEMS.register("lumber_wagon",
+            () -> new WagonItem(EntityTypes.LUMBER_WAGON::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> GOODS_CART = ITEMS.register("goods_cart",
             () -> new WagonItem(EntityTypes.GOODS_CART::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TRANSPORT_CART = ITEMS.register("transport_cart",

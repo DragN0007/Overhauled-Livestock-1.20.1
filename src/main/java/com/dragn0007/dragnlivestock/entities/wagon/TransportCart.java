@@ -27,7 +27,7 @@ public class TransportCart extends AbstractInventoryWagon {
     };
 
     public TransportCart(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, 0.3D, 2.0D, 3.5F, 20, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, 0.3D, 2.0D, 3.0F, 20, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override

@@ -20,7 +20,7 @@
       "item": {
         "item": "dragnlivestock:covered_wagon"
       },
-      "text": "-Inventory Slots: 36 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 3 $(br2)-Large Pullers Only",
+      "text": "-Capacity: 36 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 3 $(br2)-Pullers: 2 $(br2)-Large Pullers Only",
       "title": "Covered Wagon"
     },
     {
@@ -28,15 +28,23 @@
       "item": {
         "item": "dragnlivestock:livestock_wagon"
       },
-      "text": "-Inventory Slots: 9 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 7 $(br2)-Large Pullers Only",
+      "text": "-Capacity: 9 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 7 $(br2)-Pullers: 2 $(br2)-Large Pullers Only",
       "title": "Livestock Wagon"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:lumber_wagon"
+      },
+      "text": "-Capacity: 54 $(br2)-Speed: x0.1 $(br2)-Health: 60 $(br2)-Seats: 1 $(br2)-Pullers: 4 $(br2)-Large Pullers Only $(br2)*Can only hold logs, planks and axes.",
+      "title": "Lumber Wagon"
     },
     {
       "type": "patchouli:spotlight",
       "item": {
         "item": "dragnlivestock:goods_cart"
       },
-      "text": "-Inventory Slots: 36 $(br2)-Speed: x0.25 $(br2)-Health: 40 $(br2)-Seats: 1 $(br2)-Medium+ Pullers",
+      "text": "-Capacity: 36 $(br2)-Speed: x0.25 $(br2)-Health: 40 $(br2)-Seats: 1 $(br2)-Pullers: 1 $(br2)-Medium+ Pullers",
       "title": "Goods Cart"
     },
     {
@@ -44,7 +52,7 @@
       "item": {
         "item": "dragnlivestock:goods_cart"
       },
-      "text": "-Inventory Slots: 18 $(br2)-Speed: x0.3 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Small Pullers",
+      "text": "-Capacity: 18 $(br2)-Speed: x0.3 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Pullers: 1 $(br2)-Small Pullers",
       "title": "Transport Cart"
     },
     {

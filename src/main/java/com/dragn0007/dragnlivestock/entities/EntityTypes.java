@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities;
 
+import com.dragn0007.dragnlivestock.common.gui.LumberWagonMenu;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
@@ -32,10 +33,7 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
-import com.dragn0007.dragnlivestock.entities.wagon.CoveredWagon;
-import com.dragn0007.dragnlivestock.entities.wagon.GoodsCart;
-import com.dragn0007.dragnlivestock.entities.wagon.LivestockWagon;
-import com.dragn0007.dragnlivestock.entities.wagon.TransportCart;
+import com.dragn0007.dragnlivestock.entities.wagon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -258,8 +256,13 @@ public class EntityTypes {
     public static final RegistryObject<EntityType<LivestockWagon>> LIVESTOCK_WAGON = ENTITY_TYPES.register("livestock_wagon",
             () -> EntityType.Builder.of(LivestockWagon::new,
                             MobCategory.MISC)
-                    .sized(3.0F, 3.0F)
+                    .sized(3.0F, 4.0F)
                     .build(new ResourceLocation(MODID, "livestock_wagon").toString()));
+    public static final RegistryObject<EntityType<LumberWagon>> LUMBER_WAGON = ENTITY_TYPES.register("lumber_wagon",
+            () -> EntityType.Builder.of(LumberWagon::new,
+                            MobCategory.MISC)
+                    .sized(3.0F, 3.0F)
+                    .build(new ResourceLocation(MODID, "lumber_wagon").toString()));
     public static final RegistryObject<EntityType<GoodsCart>> GOODS_CART = ENTITY_TYPES.register("goods_cart",
             () -> EntityType.Builder.of(GoodsCart::new,
                             MobCategory.MISC)

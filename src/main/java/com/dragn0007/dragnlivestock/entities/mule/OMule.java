@@ -166,6 +166,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.015;
+		double speedRunThreshold = 0.01;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -182,16 +183,16 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving) {
-				if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
+				if (getForward().dot(getDeltaMovement()) > 0) {
 					if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
-					} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
 						controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
-					} else if (this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+					} else if ((this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
 						controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
@@ -206,7 +207,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 						controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
 					}
-				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
+			} else if (getForward().dot(getDeltaMovement()) < 0) {
 					if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
