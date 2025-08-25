@@ -37,24 +37,19 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
     }
 
     public enum Variant {
-        LEGHORN_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_leghorn_rooster.png")),
-        AMERICAUNA_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_ameraucana_rooster.png")),
-        CREAM_LEGBAR_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_cream_legbar_rooster.png")),
-        MARANS_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_marans_rooster.png")),
-        OLIVE_EGGER_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_olive_egger_rooster.png")),
-        SUSSEX_SILKIE_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_sussex_silkie_rooster.png")),
-
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_brown.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_white.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_cream.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_grey.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_silver.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_blue.png")),
-        DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_dark_brown.png")),
-        AYAM_CEMANI_ROOSTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_ayam_cemani_rooster.png")),
-        AYAM_CEMANI(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chicken_ayam_cemani.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/brown.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/cream.png")),
+        GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/gold.png")),
+        LILAC(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/lilac.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/mahogany.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/red.png")),
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/silver.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/tan.png")),
+        VOID(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/void.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/white.png")),
         ;
 
         //Add new entries to bottom when mod is public, else chickens will change textures during update.
@@ -68,10 +63,9 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
         }
     }
 
-//    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_chicken.geo.json");
-    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/chicken_overhauled.animation.json");
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_chicken_overhauled.geo.json");
-    public static final ResourceLocation BABY_TEXTURE = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/baby_chicken.png");
+    public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_chicken.animation.json");
+    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_chicken.geo.json");
+    public static final ResourceLocation BABY_TEXTURE = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/cream.png");
 
     @Override
     public ResourceLocation getModelResource(OChicken object) {

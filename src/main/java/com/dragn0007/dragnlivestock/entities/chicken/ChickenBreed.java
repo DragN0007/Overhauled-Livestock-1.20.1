@@ -12,7 +12,7 @@ public class ChickenBreed {
         MARANS(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/marans.geo.json")),
         OLIVE_EGGER(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/olive_egger.geo.json")),
         SUSSEX_SILKIE(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/sussex_silkie.geo.json")),
-        AYAM_CEMANI(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/ameraucana.geo.json"));
+        AYAM_CEMANI(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/o_chicken.geo.json"));
 
         public final ResourceLocation resourceLocation;
 

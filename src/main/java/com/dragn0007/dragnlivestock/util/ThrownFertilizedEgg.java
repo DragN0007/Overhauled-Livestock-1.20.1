@@ -59,19 +59,9 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-               if (chicken.isFemale()) {
-                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
-                  chicken.setVariant(randomVariant);
-               }
-
-               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-               chicken.setOverlayVariant(randomOverlayVariant);
-
                chicken.setBreed(0);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(0);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }
@@ -84,19 +74,9 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-               if (chicken.isFemale()) {
-                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
-                  chicken.setVariant(randomVariant);
-               }
-
-               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-               chicken.setOverlayVariant(randomOverlayVariant);
-
                chicken.setBreed(1);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(1);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }
@@ -109,19 +89,9 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-               if (chicken.isFemale()) {
-                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
-                  chicken.setVariant(randomVariant);
-               }
-
-               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-               chicken.setOverlayVariant(randomOverlayVariant);
-
                chicken.setBreed(2);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(2);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }
@@ -134,19 +104,9 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-               if (chicken.isFemale()) {
-                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
-                  chicken.setVariant(randomVariant);
-               }
-
-               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-               chicken.setOverlayVariant(randomOverlayVariant);
-
                chicken.setBreed(3);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(3);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }
@@ -159,19 +119,9 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-               if (chicken.isFemale()) {
-                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
-                  chicken.setVariant(randomVariant);
-               }
-
-               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-               chicken.setOverlayVariant(randomOverlayVariant);
-
                chicken.setBreed(4);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(4);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }
@@ -184,18 +134,9 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.setGender(random.nextInt(OChicken.Gender.values().length));
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
-               if (chicken.isFemale()) {
-                  int randomVariant = 6 + this.level().getRandom().nextInt(9);
-                  chicken.setVariant(randomVariant);
-               }
-
-               int randomOverlayVariant = this.level().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-               chicken.setOverlayVariant(randomOverlayVariant);
                chicken.setBreed(5);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(5);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }
@@ -209,14 +150,8 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
                chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
 
                chicken.setBreed(6);
-
-               if (chicken.isMale()) {
-                  chicken.setVariant(15);
-               }
-
-               if (chicken.isFemale()) {
-                  chicken.setVariant(16);
-               }
+               chicken.setColorByBreed();
+               chicken.setMarkingByBreed();
 
                this.level().addFreshEntity(chicken);
             }

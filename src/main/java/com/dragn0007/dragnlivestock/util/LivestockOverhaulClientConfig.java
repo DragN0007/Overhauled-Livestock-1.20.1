@@ -10,8 +10,6 @@ public class LivestockOverhaulClientConfig {
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_TIMER;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_HUD;
     public static final ForgeConfigSpec.BooleanValue RENDER_BRAND_TAGS;
-    public static final ForgeConfigSpec.BooleanValue CHICKEN_LEG_BAND;
-    public static final ForgeConfigSpec.BooleanValue CHICKEN_NECK_TAG;
     public static final ForgeConfigSpec.ConfigValue<Integer> SPRINT_X;
     public static final ForgeConfigSpec.ConfigValue<Integer> SPRINT_Y;
     public static final ForgeConfigSpec.BooleanValue ACCESSIBILITY_GENDER_IDENTIFIER;
@@ -30,12 +28,6 @@ public class LivestockOverhaulClientConfig {
 
         RENDER_BRAND_TAGS = BUILDER.comment("Should Brand Tags render on animals that have been tagged?")
                 .define("Render Brand Tags", true);
-
-        CHICKEN_LEG_BAND = BUILDER.comment("Should Leg Bands render on Chickens that have been tagged?")
-                .define("Render Chicken Leg Bands", true);
-
-        CHICKEN_NECK_TAG = BUILDER.comment("Should Neck Tags render on Chickens that have been tagged? Might be good for those who have trouble seeing leg bands.")
-                .define("Render Chicken Neck Tags", false);
 
         SPRINT_X = BUILDER.comment("X location value for the Sprint HUD. Default is 92.")
                 .define("Horse Sprint HUD X Location", 92);

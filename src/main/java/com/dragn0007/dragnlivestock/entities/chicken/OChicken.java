@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -71,7 +72,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
 		}
-		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && (this.getBreed() == 2 || this.getBreed() == 5)) {
+		if (!ModList.get().isLoaded("tfc") && !LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return LOOT_TABLE;
 		}
 		if (ModList.get().isLoaded("tfc")) {
@@ -430,49 +431,176 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
-		setBreed(random.nextInt(ChickenBreed.Breed.values().length));
-		setGender(random.nextInt(OChicken.Gender.values().length));
+		this.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
+		this.setGender(random.nextInt(OChicken.Gender.values().length));
 
-		if (this.isFemale()) {
-			int randomVariant = 6 + this.getRandom().nextInt(9);
-			this.setVariant(randomVariant);
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			this.setColorByBreed();
+			this.setMarkingByBreed();
+		} else {
+			this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
 		}
-
-		if (this.isMale() && this.getBreed() == 0) {
-			setVariant(0);
-		}
-
-		if (this.isMale() && this.getBreed() == 1) {
-			setVariant(1);
-		}
-
-		if (this.isMale() && this.getBreed() == 2) {
-			setVariant(2);
-		}
-
-		if (this.isMale() && this.getBreed() == 3) {
-			setVariant(3);
-		}
-
-		if (this.isMale() && this.getBreed() == 4) {
-			setVariant(4);
-		}
-
-		if (this.isMale() && this.getBreed() == 5) {
-			setVariant(5);
-		}
-
-		if (this.isMale() && this.getBreed() == 6) {
-			setVariant(15);
-		}
-
-		if (this.isFemale() && this.getBreed() == 6) {
-			setVariant(16);
-		}
-
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+	}
+
+	public void setColorByBreed() {
+
+		if (this.getBreed() == 0) { //leghorn
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				int[] variants = {0, 2, 4, 5, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.15) {
+				this.setVariant(12);
+			}
+		}
+
+		if (this.getBreed() == 1) { //ameraucana
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				int[] variants = {0, 2, 5, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {1, 6, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) { //cream legbar
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				int[] variants = {6, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {2, 3};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //marans
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {0, 2, 7, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //olive egger
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				this.setVariant(1);
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {0, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) { //sussex silkie
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				this.setVariant(10);
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {4, 5, 12};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 6) { //ayam cemani
+			this.setVariant(11);
+		}
+
+	}
+
+	public void setMarkingByBreed() {
+
+		if (this.getBreed() == 0) { //leghorn
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
+				this.setOverlayVariant(0);
+			} else if (random.nextDouble() > 0.25) {
+				this.setOverlayVariant(47);
+			}
+		}
+
+		if (this.getBreed() == 1) { //ameraucana
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
+				this.setOverlayVariant(0);
+			} else if (random.nextDouble() > 0.25) {
+				int[] variants = {33, 34, 35, 36};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) { //cream legbar
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
+				this.setOverlayVariant(0);
+			} else if (random.nextDouble() > 0.25) {
+				int[] variants = {33, 34, 35, 36};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //marans
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 4) { //olive egger
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
+				int[] variants = {34, 35, 36};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.25) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //sussex silkie
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
+				int[] variants = {2, 4};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.25) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 6) { //ayam cemani
+			this.setOverlayVariant(0);
+		}
+
 	}
 
 	@Override
@@ -494,21 +622,16 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		FEMALE,
 		MALE
 	}
-
 	public boolean isFemale() {
 		return this.getGender() == 0;
 	}
-
 	public boolean isMale() {
 		return this.getGender() == 1;
 	}
-
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
-
 	public int getGender() {
 		return this.entityData.get(GENDER);
 	}
-
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
 	}

@@ -680,45 +680,43 @@ public class SpawnReplacer {
 
                     oChicken.setCustomName(vanillachicken.getCustomName());
                     oChicken.setAge(vanillachicken.getAge());
-
-                    oChicken.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
                     oChicken.setGender(random.nextInt(OChicken.Gender.values().length));
 
-                    if (oChicken.isFemale()) {
-                        int randomVariant = 6 + event.getLevel().getRandom().nextInt(9);
-                        oChicken.setVariant(randomVariant);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            if (random.nextDouble() < 0.20) {
+                                int[] variants = {0, 1, 2, 3, 4, 5};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oChicken.setBreed(variants[randomIndex]);
+                            } else {
+                                int[] variants = {2, 4};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oChicken.setBreed(variants[randomIndex]);
+                            }
+                        } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            if (random.nextDouble() < 0.20) {
+                                int[] variants = {0, 1, 2, 3, 4, 5};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oChicken.setBreed(variants[randomIndex]);
+                            } else {
+                                oChicken.setBreed(3);
+                            }
+                        } else {
+                            int[] variants = {0, 1, 5};
+                            int randomIndex = new Random().nextInt(variants.length);
+                            oChicken.setBreed(variants[randomIndex]);
+                        }
+                    } else {
+                        oChicken.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
                     }
 
-                    if (oChicken.isMale() && oChicken.getBreed() == 0) {
-                        oChicken.setVariant(0);
+                    if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+                        oChicken.setColorByBreed();
+                        oChicken.setMarkingByBreed();
+                    } else {
+                        oChicken.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+                        oChicken.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
                     }
-
-                    if (oChicken.isMale() && oChicken.getBreed() == 1) {
-                        oChicken.setVariant(1);
-                    }
-
-                    if (oChicken.isMale() && oChicken.getBreed() == 2) {
-                        oChicken.setVariant(2);
-                    }
-
-                    if (oChicken.isMale() && oChicken.getBreed() == 3) {
-                        oChicken.setVariant(3);
-                    }
-
-                    if (oChicken.isMale() && oChicken.getBreed() == 4) {
-                        oChicken.setVariant(4);
-                    }
-
-                    if (oChicken.isMale() && oChicken.getBreed() == 5) {
-                        oChicken.setVariant(5);
-                    }
-
-                    if (oChicken.isMale() && oChicken.getBreed() == 6) {
-                        oChicken.setVariant(15); //this isnt supposed to happen, but just in case
-                    }
-
-                    int randomOverlayVariant = event.getLevel().getRandom().nextInt(OChickenMarkingLayer.Overlay.values().length);
-                    oChicken.setOverlayVariant(randomOverlayVariant);
 
                     if (event.getLevel().isClientSide) {
                         vanillachicken.remove(Entity.RemovalReason.DISCARDED);
@@ -1648,6 +1646,8 @@ public class SpawnReplacer {
             Chicken chicken = EntityType.CHICKEN.create(event.getLevel());
             if (chicken != null) {
                 chicken.copyPosition(oChicken1);
+
+
 
                 chicken.setCustomName(oChicken1.getCustomName());
                 chicken.setAge(oChicken1.getAge());
