@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.wagon.base;
 
 import com.dragn0007.dragnlivestock.client.ClientProxy;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -288,6 +289,9 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         if(!level().isClientSide && animal != null) {
             for(int i = 0; i < animalPositions.length; i++) {
                 if(getAnimal(i) == null) {
+                    if (animal instanceof OCow cow && !(cow.getBreed() == 10)) {
+                        return false;
+                    }
                     hitch(animal, i);
                     break;
                 }

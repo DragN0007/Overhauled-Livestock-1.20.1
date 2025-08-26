@@ -48,8 +48,8 @@ public class LivestockWagon extends AbstractInventoryWagon {
 
         if(!level().isClientSide && animal != null) {
             for(int i = 0; i < animalPositions.length; i++) {
-                if((getAnimal(i) == null) || ((getAnimal(i) == null) && animal instanceof OCow cow && cow.getBreed() == 10)) {
-                    if (animal instanceof OCow cow && !(cow.getBreed() == 10)) { //todo
+                if(getAnimal(i) == null) {
+                    if (animal instanceof OCow cow && !(cow.getBreed() == 10)) {
                         return false;
                     }
                     hitch(animal, i);

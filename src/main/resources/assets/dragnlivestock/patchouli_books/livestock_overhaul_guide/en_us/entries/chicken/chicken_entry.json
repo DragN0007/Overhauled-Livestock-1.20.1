@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The egg laying cooldown on O-Chickens is 10-15 minutes rather than the vanilla 5-10 minutes. However, this is configurable in the livestock-overhaul-common.toml. $(br)The type of egg laid depends soley on the hen's breed, not the rooster's."
+      "text": "The egg laying cooldown on O-Chickens is 10-15 minutes rather than the vanilla 5-10 minutes. However, this is configurable in the livestock-overhaul-common.toml. $(br)The type of egg laid depends solely on the hen's breed, not the rooster's."
     },
     {
       "type": "patchouli:entity",

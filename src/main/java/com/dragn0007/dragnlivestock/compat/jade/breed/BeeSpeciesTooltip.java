@@ -28,11 +28,10 @@ public class BeeSpeciesTooltip implements IEntityComponentProvider {
             case 1: return "Ashy Mining Bee";
             case 2: return "Garden Bee";
             case 3: return "Honey Bee";
-            case 4: return "Racka";
-            case 5: return "Red Mason Bee";
-            case 6: return "Red-Tailed Bee";
-            case 7: return "Tawny Mining Bee";
-            case 8: return "Tree Bumble Bee";
+            case 4: return "Red Mason Bee";
+            case 5: return "Red-Tailed Bee";
+            case 6: return "Tawny Mining Bee";
+            case 7: return "Tree Bumble Bee";
             default: return "Unknown";
         }
     }
