@@ -36,10 +36,10 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cod");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cod");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cod");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cod");
 
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_cod");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_cod");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -84,9 +84,9 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 		return SoundEvents.COD_FLOP;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 

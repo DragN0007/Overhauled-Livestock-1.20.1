@@ -293,7 +293,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public int sleepCounter = this.random.nextInt(300) + 300;
     public int staySleepingCounter = 0;
-    private boolean sleeping = false;
+    protected boolean sleeping = false;
     public boolean isSleeping() {
         return this.sleeping;
     }
@@ -686,7 +686,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return true;
     }
 
-    private static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Boolean> LOCKED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
     public boolean isLocked() {

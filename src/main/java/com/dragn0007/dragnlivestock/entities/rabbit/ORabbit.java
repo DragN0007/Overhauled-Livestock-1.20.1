@@ -62,9 +62,9 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_rabbit");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/rabbit");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/rabbit");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_rabbit");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/rabbit");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/rabbit");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -264,9 +264,9 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		return 1F;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 

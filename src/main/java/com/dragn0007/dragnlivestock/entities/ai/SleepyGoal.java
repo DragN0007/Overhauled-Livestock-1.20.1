@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import java.util.EnumSet;
 
 public class SleepyGoal extends Goal {
-   private final AbstractOMount mob;
+   protected final AbstractOMount mob;
 
    public SleepyGoal(AbstractOMount oMount) {
       this.mob = oMount;

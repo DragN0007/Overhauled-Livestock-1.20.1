@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities;
 
-import com.dragn0007.dragnlivestock.common.gui.LumberWagonMenu;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
@@ -251,7 +250,7 @@ public class EntityTypes {
     public static final RegistryObject<EntityType<CoveredWagon>> COVERED_WAGON = ENTITY_TYPES.register("covered_wagon",
             () -> EntityType.Builder.of(CoveredWagon::new,
                     MobCategory.MISC)
-                    .sized(3.0F, 3.0F)
+                    .sized(3.0F, 1.0F)
                     .build(new ResourceLocation(MODID, "covered_wagon").toString()));
     public static final RegistryObject<EntityType<LivestockWagon>> LIVESTOCK_WAGON = ENTITY_TYPES.register("livestock_wagon",
             () -> EntityType.Builder.of(LivestockWagon::new,
@@ -268,10 +267,20 @@ public class EntityTypes {
                             MobCategory.MISC)
                     .sized(1.5F, 2.0F)
                     .build(new ResourceLocation(MODID, "goods_cart").toString()));
+    public static final RegistryObject<EntityType<MiningCart>> MINING_CART = ENTITY_TYPES.register("mining_cart",
+            () -> EntityType.Builder.of(MiningCart::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 2.0F)
+                    .build(new ResourceLocation(MODID, "mining_cart").toString()));
     public static final RegistryObject<EntityType<TransportCart>> TRANSPORT_CART = ENTITY_TYPES.register("transport_cart",
             () -> EntityType.Builder.of(TransportCart::new,
                             MobCategory.MISC)
                     .sized(1.5F, 1.5F)
                     .build(new ResourceLocation(MODID, "transport_cart").toString()));
+    public static final RegistryObject<EntityType<Plow>> PLOW = ENTITY_TYPES.register("plow",
+            () -> EntityType.Builder.of(Plow::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 2.0F)
+                    .build(new ResourceLocation(MODID, "plow").toString()));
 }
 

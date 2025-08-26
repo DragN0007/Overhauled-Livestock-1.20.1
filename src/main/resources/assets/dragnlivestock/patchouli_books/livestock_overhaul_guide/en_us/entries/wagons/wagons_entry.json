@@ -50,10 +50,26 @@
     {
       "type": "patchouli:spotlight",
       "item": {
-        "item": "dragnlivestock:goods_cart"
+        "item": "dragnlivestock:mining_cart"
+      },
+      "text": "-Capacity: 54 $(br2)-Speed: x0.12 $(br2)-Health: 40 $(br2)-Seats: 1 $(br2)-Pullers: 1 $(br2)-Medium+ Pullers $(br2)*Can only hold stone, ore, other mined materials, shovels and pickaxes.",
+      "title": "Mining Cart "
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:transport_cart"
       },
       "text": "-Capacity: 18 $(br2)-Speed: x0.3 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Pullers: 1 $(br2)-Small Pullers",
       "title": "Transport Cart"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:plow"
+      },
+      "text": "-Capacity: 36 $(br2)-Speed: x0.1 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Pullers: 2 $(br2)-Medium+ Pullers $(br2)*Press Space while riding to switch to till and harvest modes.",
+      "title": "Plow"
     },
     {
       "type": "patchouli:text",

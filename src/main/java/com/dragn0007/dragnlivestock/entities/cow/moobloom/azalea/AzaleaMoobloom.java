@@ -80,7 +80,7 @@ public class AzaleaMoobloom extends AbstractMoobloom implements GeoEntity {
     // Generates the base texture
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(AzaleaMoobloom.class, EntityDataSerializers.BOOLEAN);

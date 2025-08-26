@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import java.util.EnumSet;
 
 public class GroundTieGoal extends Goal {
-   private final AbstractOMount mob;
+   protected final AbstractOMount mob;
 
    public GroundTieGoal(AbstractOMount oMount) {
       this.mob = oMount;

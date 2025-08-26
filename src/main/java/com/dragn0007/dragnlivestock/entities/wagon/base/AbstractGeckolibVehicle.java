@@ -25,26 +25,26 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntity {
 
-    private static final RawAnimation ANIM_MOVE = RawAnimation.begin().thenLoop("move.forwards");
+    protected static final RawAnimation ANIM_MOVE = RawAnimation.begin().thenLoop("move.forwards");
 
-    private final AnimatableInstanceCache animCache = GeckoLibUtil.createInstanceCache(this);
+    protected final AnimatableInstanceCache animCache = GeckoLibUtil.createInstanceCache(this);
 
-    private final double wheelWidth;
-    private final double wheelLength;
-    private final Vec3[] riders;
+    protected final double wheelWidth;
+    protected final double wheelLength;
+    protected final Vec3[] riders;
 
-    private float forwardImpulse = 0; // Inputs
-    private float leftImpulse = 0;
+    protected float forwardImpulse = 0; // Inputs
+    protected float leftImpulse = 0;
 
-    private int lerpSteps = 0;
-    private double lerpX = 0;
-    private double lerpY = 0;
-    private double lerpZ = 0;
-    private double lerpXRot = 0;
-    private double lerpYRot = 0;
+    protected int lerpSteps = 0;
+    protected double lerpX = 0;
+    protected double lerpY = 0;
+    protected double lerpZ = 0;
+    protected double lerpXRot = 0;
+    protected double lerpYRot = 0;
 
-    private float wheelRot = 0; // Used for animating the wheels
-    private float wheelRotO = 0;
+    protected float wheelRot = 0; // Used for animating the wheels
+    protected float wheelRotO = 0;
 
     public AbstractGeckolibVehicle(EntityType<? extends AbstractGeckolibVehicle> type, Level level,
                                    double wheelWidth, double wheelLength, Vec3[] riders) {
@@ -198,7 +198,7 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
         return Mth.lerp(partialTick, xRotO, getXRot());
     }
 
-    private void tickLerp() {
+    protected void tickLerp() {
         if(isControlledByLocalInstance()) {
             lerpSteps = 0;
             syncPacketPositionCodec(getX(), getY(), getZ());
@@ -219,7 +219,7 @@ public abstract class AbstractGeckolibVehicle extends Entity implements GeoEntit
         }
     }
 
-    private int getPassengerIndex(Entity passenger) {
+    protected int getPassengerIndex(Entity passenger) {
         int i = 0;
         for(Entity ent : getPassengers()) {
             if(ent == passenger)

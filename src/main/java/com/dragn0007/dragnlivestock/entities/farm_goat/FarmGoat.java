@@ -71,9 +71,9 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public static final EntityDimensions LONG_JUMPING_DIMENSIONS = EntityDimensions.scalable(0.9F, 1.3F).scale(0.7F);
 	public static final ImmutableList<SensorType<? extends Sensor<? super FarmGoat>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_ADULT, SensorType.HURT_BY, SensorType.GOAT_TEMPTATIONS);
 	public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.ATE_RECENTLY, MemoryModuleType.BREED_TARGET, MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ADULT, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryModuleType.RAM_TARGET, MemoryModuleType.IS_PANICKING);
-	private static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_GOAT = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
-	private boolean isLoweringHead;
-	private int lowerHeadTick;
+	protected static final EntityDataAccessor<Boolean> DATA_IS_SCREAMING_GOAT = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
+	protected boolean isLoweringHead;
+	protected int lowerHeadTick;
 
 	@Override
 	public Vec3 getLeashOffset() {
@@ -89,9 +89,9 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_goat");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/goat");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/goat");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_goat");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/goat");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/goat");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -268,9 +268,9 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return 2F;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
@@ -418,7 +418,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(OVERLAY, overlayVariant);
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));

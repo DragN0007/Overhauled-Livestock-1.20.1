@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.camel;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.client.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.common.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
@@ -71,9 +70,9 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_camel");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/camel");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/camel");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_camel");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/camel");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/camel");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -222,9 +221,9 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		return Math.max(randomSpeed, 0.20);
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.02;
 
@@ -286,7 +285,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 
-	private <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if(tAnimationState.isMoving() || !this.shouldEmote) {
@@ -455,16 +454,16 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		return blockState.is(LOTags.Blocks.SAND) || blockState.is(Blocks.COARSE_DIRT) || blockState.is(Blocks.GRAVEL);
 	}
 
-	private void applySpeedEffect() {
+	protected void applySpeedEffect() {
 		MobEffectInstance speedEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0, false, false);
 		this.addEffect(speedEffectInstance);
 	}
 
-	private boolean hasSpeedEffect() {
+	protected boolean hasSpeedEffect() {
 		return this.hasEffect(MobEffects.MOVEMENT_SPEED);
 	}
 
-	private void removeSpeedEffect() {
+	protected void removeSpeedEffect() {
 		this.removeEffect(MobEffects.MOVEMENT_SPEED);
 	}
 
@@ -636,7 +635,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(MANE, feathering);
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));

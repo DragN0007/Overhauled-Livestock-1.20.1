@@ -13,9 +13,9 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class ReplacedTadpole implements GeoReplacedEntity {
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (tAnimationState.isMoving()) {

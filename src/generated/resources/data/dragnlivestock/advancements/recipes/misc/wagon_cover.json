@@ -3,15 +3,15 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:transport_cart"
+        "recipe": "dragnlivestock:wagon_cover"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_wood": {
+    "has_wool": {
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "tag": "minecraft:wool"
           }
         ]
       },
@@ -20,13 +20,13 @@
   },
   "requirements": [
     [
-      "has_wood",
+      "has_wool",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:transport_cart"
+      "dragnlivestock:wagon_cover"
     ]
   },
   "sends_telemetry_event": false

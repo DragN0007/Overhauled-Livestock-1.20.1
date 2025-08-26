@@ -37,9 +37,9 @@ public class OBee extends Bee implements GeoEntity {
 		super(entityType, level);
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 
 		AnimationController<T> controller = tAnimationState.getController();
 

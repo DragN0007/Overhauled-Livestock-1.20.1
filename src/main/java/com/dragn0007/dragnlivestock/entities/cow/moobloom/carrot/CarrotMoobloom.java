@@ -102,7 +102,7 @@ public class CarrotMoobloom extends AbstractMoobloom implements GeoEntity {
         return super.mobInteract(player, hand);
     }
 
-    private int tickCounter = 0;
+    protected int tickCounter = 0;
 
     @Override
     public void tick() {
@@ -147,7 +147,7 @@ public class CarrotMoobloom extends AbstractMoobloom implements GeoEntity {
     // Generates the base texture
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(CarrotMoobloom.class, EntityDataSerializers.BOOLEAN);

@@ -71,9 +71,9 @@ import java.util.Random;
 
 public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/caribou");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/caribou");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/caribou");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/caribou");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -255,7 +255,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		return false;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
@@ -264,7 +264,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		controllers.add(new AnimationController<>(this, "emoteController", 5, this::emotePredicate));
 	}
 
-	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
@@ -359,7 +359,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		this.shouldEmote = true;
 	}
 
-	private <T extends GeoAnimatable> PlayState emotePredicate(AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState emotePredicate(AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (tAnimationState.isMoving() || !this.shouldEmote) {
@@ -372,17 +372,17 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		return PlayState.CONTINUE;
 	}
 
-	private void applySpeedEffect() {
+	protected void applySpeedEffect() {
 		MobEffect speedEffect = MobEffect.byId(1);
 		MobEffectInstance speedEffectInstance = new MobEffectInstance(speedEffect, 200, 0, false, false);
 		this.addEffect(speedEffectInstance);
 	}
 
-	private boolean hasSpeedEffect() {
+	protected boolean hasSpeedEffect() {
 		return this.hasEffect(MobEffect.byId(1));
 	}
 
-	private void removeSpeedEffect() {
+	protected void removeSpeedEffect() {
 		this.removeEffect(MobEffect.byId(1));
 	}
 
@@ -588,7 +588,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(FEATHERING, feathering);
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));

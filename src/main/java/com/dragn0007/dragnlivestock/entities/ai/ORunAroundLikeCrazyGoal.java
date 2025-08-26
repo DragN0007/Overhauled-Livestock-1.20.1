@@ -12,11 +12,11 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 
 public class ORunAroundLikeCrazyGoal extends Goal {
-   private final AbstractOMount mount;
-   private final double speedModifier;
-   private double posX;
-   private double posY;
-   private double posZ;
+   protected final AbstractOMount mount;
+   protected final double speedModifier;
+   protected double posX;
+   protected double posY;
+   protected double posZ;
 
    public ORunAroundLikeCrazyGoal(AbstractOMount p_25890_, double p_25891_) {
       this.mount = p_25890_;

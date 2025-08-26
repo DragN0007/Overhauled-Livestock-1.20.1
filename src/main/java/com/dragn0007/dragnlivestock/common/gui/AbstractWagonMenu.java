@@ -1,7 +1,5 @@
 package com.dragn0007.dragnlivestock.common.gui;
 
-import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.wagon.LumberWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,8 +10,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -32,7 +31,23 @@ public abstract class AbstractWagonMenu extends AbstractContainerMenu {
                     @Override
                     public boolean mayPlace(ItemStack itemStack) {
                         if (wagon.getType().is(LOTags.Entity_Types.LUMBER_WAGON)) {
-                            return itemStack.is(ItemTags.LOGS) || itemStack.is(ItemTags.PLANKS) || itemStack.getItem() instanceof AxeItem;
+                            return itemStack.is(ItemTags.LOGS) ||
+                                    itemStack.is(ItemTags.PLANKS) ||
+                                    itemStack.getItem() instanceof AxeItem;
+                        } else if (wagon.getType().is(LOTags.Entity_Types.MINING_CART)) {
+                            return itemStack.is(Tags.Items.STONE) ||
+                                    itemStack.is(Tags.Items.ORES) ||
+                                    itemStack.is(Tags.Items.COBBLESTONE) ||
+                                    itemStack.is(ItemTags.DIRT) ||
+                                    itemStack.is(Tags.Items.INGOTS) ||
+                                    itemStack.is(Tags.Items.RAW_MATERIALS) ||
+                                    itemStack.is(Tags.Items.GEMS_DIAMOND) ||
+                                    itemStack.is(Tags.Items.GEMS_EMERALD) ||
+                                    itemStack.is(Tags.Items.GEMS_LAPIS) ||
+                                    itemStack.is(Tags.Items.GEMS_AMETHYST) ||
+                                    itemStack.is(Tags.Items.GEMS_QUARTZ) ||
+                                    itemStack.getItem() instanceof ShovelItem ||
+                                    itemStack.getItem() instanceof PickaxeItem;
                         }
                         return true;
                     }

@@ -10,7 +10,6 @@ import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
 import com.dragn0007.dragnlivestock.entities.chicken.ChickenBreed;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
-import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.CowBreed;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;

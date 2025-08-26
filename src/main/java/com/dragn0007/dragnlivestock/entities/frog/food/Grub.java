@@ -60,7 +60,7 @@ public class Grub extends Animal implements GeoEntity {
 				.add(Attributes.MOVEMENT_SPEED, 0.16D);
 	}
 
-	private boolean hasSweater = false;
+	protected boolean hasSweater = false;
 
 	public boolean hasSweater() {
 		return this.hasSweater;
@@ -99,9 +99,9 @@ public class Grub extends Animal implements GeoEntity {
 		return 1F;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 

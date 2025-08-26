@@ -29,7 +29,7 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
 
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(AbstractOFish.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(AbstractOFish.class, EntityDataSerializers.BOOLEAN);
 
     public AbstractOFish(EntityType<? extends AbstractOFish> p_27461_, Level p_27462_) {
         super(p_27461_, p_27462_);
@@ -145,7 +145,7 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
     }
 
     static class FishMoveControl extends MoveControl {
-        private final AbstractOFish fish;
+        protected final AbstractOFish fish;
 
         FishMoveControl(AbstractOFish p_27501_) {
             super(p_27501_);
@@ -181,7 +181,7 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
     }
 
     static class FishSwimGoal extends RandomSwimmingGoal {
-        private final AbstractOFish fish;
+        protected final AbstractOFish fish;
 
         public FishSwimGoal(AbstractOFish p_27505_) {
             super(p_27505_, 1.0D, 40);

@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 
 public abstract class AbstractSchoolingOFish extends AbstractOFish {
     @Nullable
-    private AbstractSchoolingOFish leader;
-    private int schoolSize = 1;
+    protected AbstractSchoolingOFish leader;
+    protected int schoolSize = 1;
 
     public AbstractSchoolingOFish(EntityType<? extends AbstractSchoolingOFish> p_27523_, Level p_27524_) {
         super(p_27523_, p_27524_);
@@ -55,11 +55,11 @@ public abstract class AbstractSchoolingOFish extends AbstractOFish {
         this.leader = null;
     }
 
-    private void addFollower() {
+    protected void addFollower() {
         ++this.schoolSize;
     }
 
-    private void removeFollower() {
+    protected void removeFollower() {
         --this.schoolSize;
     }
 

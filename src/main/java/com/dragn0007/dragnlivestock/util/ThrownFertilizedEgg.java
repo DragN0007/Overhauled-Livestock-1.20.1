@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.util;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
-import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;

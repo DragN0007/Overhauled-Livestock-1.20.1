@@ -5,16 +5,17 @@
     "A": {
       "tag": "minecraft:planks"
     },
-    "C": {
-      "item": "minecraft:iron_ingot"
+    "B": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "AAA",
-    "C C"
+    "BBB",
+    "BAB",
+    "BBB"
   ],
   "result": {
-    "item": "dragnlivestock:transport_cart"
+    "item": "dragnlivestock:wagon_wheel_frame"
   },
   "show_notification": true
 }

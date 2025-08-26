@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:iron_ingot"
+  },
+  "base": {
+    "item": "dragnlivestock:wagon_wheel_frame"
+  },
+  "result": {
+    "item": "dragnlivestock:wagon_wheel"
+  },
+  "template": {
+    "item": "minecraft:stick"
+  }
+}

@@ -157,7 +157,7 @@ public class FloweringMoobloom extends AbstractMoobloom implements GeoEntity {
     // Generates the base texture
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(FloweringMoobloom.class, EntityDataSerializers.BOOLEAN);

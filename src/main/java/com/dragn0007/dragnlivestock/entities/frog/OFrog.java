@@ -56,9 +56,9 @@ public class OFrog extends Animal implements GeoEntity {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_frog");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/frog");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/frog");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_frog");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/frog");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/frog");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -125,9 +125,9 @@ public class OFrog extends Animal implements GeoEntity {
 		return 2F;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 
@@ -335,7 +335,7 @@ public class OFrog extends Animal implements GeoEntity {
 		}
 	}
 
-	private void dropFertilizedEgg(ServerLevel serverLevel) {
+	protected void dropFertilizedEgg(ServerLevel serverLevel) {
 
 		ItemStack fertilizedEgg = new ItemStack(Items.FROGSPAWN);
 		ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);

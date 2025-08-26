@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
-import com.dragn0007.dragnlivestock.entities.sheep.*;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -64,9 +63,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		super(type, level);
 	}
 
-	private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_chicken");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/chicken");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/chicken");
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_chicken");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/chicken");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/chicken");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -133,9 +132,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		return 1F;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 
@@ -353,7 +352,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(BREED, breed);
 	}
 
-	private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.BOOLEAN);
 	public DyeColor getBrandTagColor() {
 		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
@@ -685,7 +684,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		}
 	}
 
-	private void dropFertilizedEgg(ServerLevel serverLevel) {
+	protected void dropFertilizedEgg(ServerLevel serverLevel) {
 		if (!this.isFemale() || !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
 			return;
 		}

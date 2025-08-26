@@ -17,9 +17,9 @@ public class MountLookAtPlayerGoal extends Goal {
    @Nullable
    public Entity lookAt;
    public final float lookDistance;
-   private int lookTime;
+   protected int lookTime;
    public final float probability;
-   private final boolean onlyHorizontal;
+   protected final boolean onlyHorizontal;
    public final Class<? extends LivingEntity> lookAtType;
    public final TargetingConditions lookAtContext;
 

@@ -20,9 +20,9 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractInventoryWagon extends AbstractWagon implements MenuProvider {
 
-    private final NonNullList<ItemStack> inventory;
-    private final ItemStackHandler itemHandler;
-    private final LazyOptional<ItemStackHandler> itemHandlerOptional;
+    protected final NonNullList<ItemStack> inventory;
+    protected final ItemStackHandler itemHandler;
+    protected final LazyOptional<ItemStackHandler> itemHandlerOptional;
 
     public AbstractInventoryWagon(EntityType<? extends AbstractWagon> type, Level level, double maxSpeed, double acceleration, float turnRate,
                                   int maxHealth, int capacity, Vec3[] draughtAnimalPositions, double wheelWidth, double wheelLength, Vec3[] riders) {
@@ -38,9 +38,11 @@ public abstract class AbstractInventoryWagon extends AbstractWagon implements Me
         if(superResult != InteractionResult.PASS)
             return superResult;
 
-        if(isAlive() && !level().isClientSide && player.isSecondaryUseActive()) {
-            NetworkHooks.openScreen((ServerPlayer)player, this, buf -> buf.writeInt(getId()));
-            return InteractionResult.CONSUME;
+        if (!(level().isNight())) { //todo
+            if (isAlive() && !level().isClientSide && player.isSecondaryUseActive()) {
+                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(getId()));
+                return InteractionResult.CONSUME;
+            }
         }
 
         return InteractionResult.PASS;

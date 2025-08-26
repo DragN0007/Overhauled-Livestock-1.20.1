@@ -38,9 +38,9 @@ public class AbstractMoobloom extends OCow implements GeoEntity {
         super(type, level);
     }
 
-    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
-    private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
-    private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
+    protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
+    protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
+    protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
     @Override
     public @NotNull ResourceLocation getDefaultLootTable() {
         if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -117,7 +117,7 @@ public class AbstractMoobloom extends OCow implements GeoEntity {
 
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(AbstractMoobloom.class, EntityDataSerializers.BOOLEAN);

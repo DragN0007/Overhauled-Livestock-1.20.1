@@ -2,20 +2,26 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
+    "#": {
       "tag": "minecraft:planks"
     },
+    "A": {
+      "item": "dragnlivestock:wagon_body"
+    },
     "B": {
-      "item": "minecraft:white_wool"
+      "item": "dragnlivestock:wagon_axel"
     },
     "C": {
-      "item": "minecraft:iron_ingot"
+      "item": "dragnlivestock:wagon_cover"
+    },
+    "D": {
+      "tag": "minecraft:beds"
     }
   },
   "pattern": [
-    "BBB",
-    "AAA",
-    "C C"
+    " C ",
+    "#AD",
+    "B B"
   ],
   "result": {
     "item": "dragnlivestock:covered_wagon"

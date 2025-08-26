@@ -40,8 +40,8 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 		super(type, level);
 	}
 
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/salmon");
-	private static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_salmon");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/salmon");
+	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_salmon");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (ModList.get().isLoaded("tfc")) {
@@ -83,9 +83,9 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 		return SoundEvents.SALMON_FLOP;
 	}
 
-	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 

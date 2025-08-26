@@ -92,7 +92,9 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.LIVESTOCK_WAGON.get(), c -> new WagonRenderer<>(c, "livestock_wagon"));
         EntityRenderers.register(EntityTypes.LUMBER_WAGON.get(), c -> new WagonRenderer<>(c, "lumber_wagon"));
         EntityRenderers.register(EntityTypes.GOODS_CART.get(), c -> new WagonRenderer<>(c, "goods_cart"));
+        EntityRenderers.register(EntityTypes.MINING_CART.get(), c -> new WagonRenderer<>(c, "mining_cart"));
         EntityRenderers.register(EntityTypes.TRANSPORT_CART.get(), c -> new WagonRenderer<>(c, "transport_cart"));
+        EntityRenderers.register(EntityTypes.PLOW.get(), c -> new WagonRenderer<>(c, "plow"));
 
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);
@@ -107,6 +109,7 @@ public class LivestockOverhaulClientEvent {
         MenuScreens.register(LOMenuTypes.LIVESTOCK_WAGON.get(), LivestockWagonScreen::new);
         MenuScreens.register(LOMenuTypes.LUMBER_WAGON.get(), LumberWagonScreen::new);
         MenuScreens.register(LOMenuTypes.GOODS_CART.get(), GoodsCartScreen::new);
+        MenuScreens.register(LOMenuTypes.MINING_CART.get(), MiningCartScreen::new);
         MenuScreens.register(LOMenuTypes.TRANSPORT_CART.get(), TransportCartScreen::new);
 
         //Vanilla Replacers

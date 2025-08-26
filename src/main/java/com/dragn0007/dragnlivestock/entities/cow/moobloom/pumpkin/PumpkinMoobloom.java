@@ -103,7 +103,7 @@ public class PumpkinMoobloom extends AbstractMoobloom implements GeoEntity {
         return super.mobInteract(player, hand);
     }
 
-    private int tickCounter = 0;
+    protected int tickCounter = 0;
 
     @Override
     public void tick() {
@@ -150,7 +150,7 @@ public class PumpkinMoobloom extends AbstractMoobloom implements GeoEntity {
     // Generates the base texture
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(PumpkinMoobloom.class, EntityDataSerializers.BOOLEAN);

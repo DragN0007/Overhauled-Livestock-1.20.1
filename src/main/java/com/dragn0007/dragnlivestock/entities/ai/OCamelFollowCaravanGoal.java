@@ -13,9 +13,9 @@ import java.util.List;
 
 public class OCamelFollowCaravanGoal extends Goal {
    public final OCamel llama;
-   private double speedModifier;
-   private static final int CARAVAN_LIMIT = 8;
-   private int distCheckCounter;
+   protected double speedModifier;
+   protected static final int CARAVAN_LIMIT = 8;
+   protected int distCheckCounter;
 
    public OCamelFollowCaravanGoal(OCamel llama, double speedMod) {
       this.llama = llama;
@@ -113,7 +113,7 @@ public class OCamelFollowCaravanGoal extends Goal {
       }
    }
 
-   private boolean firstIsLeashed(OCamel p_25507_, int p_25508_) {
+   protected boolean firstIsLeashed(OCamel p_25507_, int p_25508_) {
       if (p_25508_ > 8) {
          return false;
       } else if (p_25507_.inCaravan()) {

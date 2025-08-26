@@ -140,8 +140,12 @@
   "entity.dragnlivestock.freight_wagon": "Freight Wagon",
   "item.dragnlivestock.goods_cart": "Goods Cart",
   "entity.dragnlivestock.goods_cart": "Goods Cart",
+  "item.dragnlivestock.mining_cart": "Mining Cart",
+  "entity.dragnlivestock.mining_cart": "Mining Cart",
   "item.dragnlivestock.transport_cart": "Transport Cart",
   "entity.dragnlivestock.transport_cart": "Transport Cart",
+  "item.dragnlivestock.plow": "Plow",
+  "entity.dragnlivestock.plow": "Plow",
 
 
   "item.dragnlivestock.utility_knife": "Utility Knife",

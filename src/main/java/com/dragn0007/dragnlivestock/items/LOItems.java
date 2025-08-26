@@ -796,8 +796,23 @@ public class LOItems {
             () -> new WagonItem(EntityTypes.LUMBER_WAGON::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> GOODS_CART = ITEMS.register("goods_cart",
             () -> new WagonItem(EntityTypes.GOODS_CART::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> MINING_CART = ITEMS.register("mining_cart",
+            () -> new WagonItem(EntityTypes.MINING_CART::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TRANSPORT_CART = ITEMS.register("transport_cart",
             () -> new WagonItem(EntityTypes.TRANSPORT_CART::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> PLOW = ITEMS.register("plow",
+            () -> new WagonItem(EntityTypes.PLOW::get, new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WAGON_WHEEL_FRAME = ITEMS.register("wagon_wheel_frame",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WAGON_WHEEL = ITEMS.register("wagon_wheel",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WAGON_AXEL = ITEMS.register("wagon_axel",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WAGON_BODY = ITEMS.register("wagon_body",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WAGON_COVER = ITEMS.register("wagon_cover",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

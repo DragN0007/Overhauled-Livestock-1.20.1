@@ -31,7 +31,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -309,8 +308,9 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 ), h -> h.getLeashHolder() == player && !h.getType().is(LOTags.Entity_Types.CANNOT_MOUNT_WAGON)).stream()
                 .findFirst().orElse(null);
 
-        if(mob != null && !level().isClientSide && canAddPassenger(mob))
+        if(mob != null && !level().isClientSide && canAddPassenger(mob)) {
             mob.startRiding(this);
+        }
 
         return mob != null;
     }

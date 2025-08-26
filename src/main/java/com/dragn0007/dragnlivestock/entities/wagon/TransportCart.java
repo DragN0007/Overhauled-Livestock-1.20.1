@@ -1,7 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
-import com.dragn0007.dragnlivestock.common.gui.CoveredWagonMenu;
 import com.dragn0007.dragnlivestock.common.gui.TransportCartMenu;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -40,7 +40,7 @@ public class TransportCart extends AbstractInventoryWagon {
 
         if(!level().isClientSide && animal != null) {
             for(int i = 0; i < animalPositions.length; i++) {
-                if(getAnimal(i) == null) {
+                if((getAnimal(i) == null) || ((getAnimal(i) == null) && animal instanceof OCow cow && cow.getBreed() == 10)) {
                     hitch(animal, i);
                     break;
                 }

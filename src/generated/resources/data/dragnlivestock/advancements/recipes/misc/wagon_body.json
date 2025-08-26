@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:goods_cart"
+        "recipe": "dragnlivestock:wagon_body"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:goods_cart"
+      "dragnlivestock:wagon_body"
     ]
   },
   "sends_telemetry_event": false

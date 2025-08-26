@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.datagen;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
-import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -28,46 +27,53 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.COVERED_WAGON.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_WHEEL_FRAME.get())
                 .define('A', ItemTags.PLANKS)
-                .define('B', Items.WHITE_WOOL)
-                .define('C', Items.IRON_INGOT)
+                .define('B', Items.STICK)
                 .pattern("BBB")
-                .pattern("AAA")
-                .pattern("C C")
+                .pattern("BAB")
+                .pattern("BBB")
                 .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIVESTOCK_WAGON.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_BODY.get())
                 .define('A', ItemTags.PLANKS)
+                .define('B', Items.STICK)
                 .define('C', Items.IRON_INGOT)
                 .pattern("AAA")
                 .pattern("AAA")
-                .pattern("C C")
+                .pattern("BCB")
                 .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GOODS_CART.get())
-                .define('A', ItemTags.PLANKS)
-                .define('B', Items.WHITE_WOOL)
-                .define('C', Items.IRON_INGOT)
-                .pattern("BB ")
-                .pattern("AAA")
-                .pattern("C C")
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_COVER.get())
+                .define('A', Items.LEATHER)
+                .define('B', ItemTags.WOOL)
+                .pattern("BBB")
+                .pattern("BAB")
+                .pattern("A A")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.COVERED_WAGON.get())
+                .define('#', ItemTags.PLANKS)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .define('C', LOItems.WAGON_COVER.get())
+                .define('D', ItemTags.BEDS)
+                .pattern(" C ")
+                .pattern("#AD")
+                .pattern("B B")
                 .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.TRANSPORT_CART.get())
-                .define('A', ItemTags.PLANKS)
-                .define('C', Items.IRON_INGOT)
-                .pattern("AAA")
-                .pattern("C C")
-                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.PLANKS).build()))
-                .save(pFinishedRecipeConsumer);
+
 
 
 

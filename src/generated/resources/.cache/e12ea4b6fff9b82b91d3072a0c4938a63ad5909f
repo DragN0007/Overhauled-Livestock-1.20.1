@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-26T03:21:16.8205289	Item Models: dragnlivestock
+// 1.20.1	2025-08-26T01:49:36.1054485	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -298,7 +298,12 @@ a31388419b61f5a772e1fdee8e06d95ff87e0aaf assets/dragnlivestock/models/item/unico
 432cd7bdf292db9b411018eebe5fd2da5c90a52f assets/dragnlivestock/models/item/unicorn_sirloin_steak.json
 d1718307cea5014722342bcd2c740466eaf1e0a6 assets/dragnlivestock/models/item/unicorn_spawn_egg.json
 7c6cbaafe2856f60dafcd7bcae5441f6c6930ca8 assets/dragnlivestock/models/item/utility_knife.json
+67c81d7ed4b9be40d50e31a47f07de2b1bda06a3 assets/dragnlivestock/models/item/wagon_axel.json
+dfdf1bf11ac5b2b1aeceb61a0c2a4013dfb67a5c assets/dragnlivestock/models/item/wagon_body.json
+db28931e5d225a1acf153cb949754cfb33074c55 assets/dragnlivestock/models/item/wagon_cover.json
 68e5084b09458f41fd529362f5424b02e26aff91 assets/dragnlivestock/models/item/wagon_harness.json
+8d18e1069954635e676ed6972e72569761a4e6ab assets/dragnlivestock/models/item/wagon_wheel.json
+f8388f0c14324b5f3b82491cceafdc9b76d6e744 assets/dragnlivestock/models/item/wagon_wheel_frame.json
 bfeb71dc280f90cce46a1703c9c9712239634c36 assets/dragnlivestock/models/item/white_brand_tag.json
 3c6fd8b7b966a63ec994e881294ea3e82f0b1f12 assets/dragnlivestock/models/item/white_heavy_saddle.json
 47f4d977340381b25df26bcfa9173ec94558be4e assets/dragnlivestock/models/item/white_light_saddle.json

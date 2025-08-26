@@ -110,7 +110,7 @@ public class LOTags {
         public static final TagKey<EntityType<?>> CANNOT_MOUNT_WAGON = tag("cannot_mount_wagon");
 
         public static final TagKey<EntityType<?>> LUMBER_WAGON = tag("lumber_wagon");
-        public static final TagKey<EntityType<?>> MINING_WAGON = tag("mining_wagon");
+        public static final TagKey<EntityType<?>> MINING_CART = tag("mining_cart");
 
         public static TagKey<EntityType<?>> forgeTag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", name));

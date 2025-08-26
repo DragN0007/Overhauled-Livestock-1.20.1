@@ -57,10 +57,10 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.xpReward = 50;
 	}
 
-	private static final ResourceLocation O_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/overworld_unicorn");
-	private static final ResourceLocation N_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/nether_unicorn");
-	private static final ResourceLocation E_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/end_unicorn");
-	private static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
+	protected static final ResourceLocation O_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/overworld_unicorn");
+	protected static final ResourceLocation N_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/nether_unicorn");
+	protected static final ResourceLocation E_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/end_unicorn");
+	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {

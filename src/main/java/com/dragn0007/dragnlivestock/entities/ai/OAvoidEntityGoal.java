@@ -15,8 +15,8 @@ import java.util.function.Predicate;
 
 public class OAvoidEntityGoal<T extends LivingEntity> extends Goal {
    public final PathfinderMob mob;
-   private final double walkSpeedModifier;
-   private final double sprintSpeedModifier;
+   protected final double walkSpeedModifier;
+   protected final double sprintSpeedModifier;
    @Nullable
    public T toAvoid;
    public final float maxDist;
@@ -26,7 +26,7 @@ public class OAvoidEntityGoal<T extends LivingEntity> extends Goal {
    public final Class<T> avoidClass;
    public final Predicate<LivingEntity> avoidPredicate;
    public final Predicate<LivingEntity> predicateOnAvoidEntity;
-   private final TargetingConditions avoidEntityTargeting;
+   protected final TargetingConditions avoidEntityTargeting;
 
    public OAvoidEntityGoal(PathfinderMob mob, Class<T> avoid, Predicate<LivingEntity> livingEntityPredicate, float maxDist, double walkSpeed, double sprintSpeed, Predicate<LivingEntity> entityPredicate) {
       this.mob = mob;

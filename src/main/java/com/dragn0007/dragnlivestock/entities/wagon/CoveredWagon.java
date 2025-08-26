@@ -6,6 +6,8 @@ import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
@@ -57,6 +59,16 @@ public class CoveredWagon extends AbstractInventoryWagon {
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new CoveredWagonMenu(id, inventory, this);
+    }
+
+    @Override
+    public InteractionResult interact(Player player, InteractionHand hand) {
+
+        if (player.isSecondaryUseActive() && level().isNight()) {
+            player.startSleeping(this.blockPosition().offset(-1, 1, 0));
+        }
+
+        return super.interact(player, hand);
     }
 
     public ItemStack getPickResult() {

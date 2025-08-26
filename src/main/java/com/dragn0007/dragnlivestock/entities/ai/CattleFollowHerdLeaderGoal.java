@@ -14,7 +14,7 @@ public class CattleFollowHerdLeaderGoal extends Goal {
    public int timeToRecalcPath;
    public int nextStartTick;
    public final float stopDistance;
-   private final PathNavigation navigation;
+   protected final PathNavigation navigation;
 
    public CattleFollowHerdLeaderGoal(OCow oCow, float stopDist) {
       this.mob = oCow;

@@ -146,6 +146,12 @@ public class LOItemGroup {
                         output.accept(LOItems.NETHER_UNICORN_HORN.get());
                         output.accept(LOItems.END_UNICORN_HORN.get());
 
+                        output.accept(LOItems.WAGON_WHEEL_FRAME.get());
+                        output.accept(LOItems.WAGON_WHEEL.get());
+                        output.accept(LOItems.WAGON_AXEL.get());
+                        output.accept(LOItems.WAGON_BODY.get());
+                        output.accept(LOItems.WAGON_COVER.get());
+
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.OAK));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.ACACIA));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.COVERED_WAGON.get()), Type.BIRCH));
@@ -186,6 +192,16 @@ public class LOItemGroup {
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.GOODS_CART.get()), Type.MANGROVE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.GOODS_CART.get()), Type.SPRUCE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.GOODS_CART.get()), Type.WARPED));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.ACACIA));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.BIRCH));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.CHERRY));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.CRIMSON));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.DARK_OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.JUNGLE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.MANGROVE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.SPRUCE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.MINING_CART.get()), Type.WARPED));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.TRANSPORT_CART.get()), Type.OAK));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.TRANSPORT_CART.get()), Type.ACACIA));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.TRANSPORT_CART.get()), Type.BIRCH));
@@ -196,6 +212,16 @@ public class LOItemGroup {
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.TRANSPORT_CART.get()), Type.MANGROVE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.TRANSPORT_CART.get()), Type.SPRUCE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.TRANSPORT_CART.get()), Type.WARPED));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.ACACIA));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.BIRCH));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.CHERRY));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.CRIMSON));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.DARK_OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.JUNGLE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.MANGROVE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.SPRUCE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.PLOW.get()), Type.WARPED));
 
                         output.accept(LOItems.BLACK_WOOL_STAPLE.get());
                         output.accept(LOItems.BLUE_WOOL_STAPLE.get());

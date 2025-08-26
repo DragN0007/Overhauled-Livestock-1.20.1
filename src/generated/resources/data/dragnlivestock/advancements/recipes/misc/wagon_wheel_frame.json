@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dragnlivestock:livestock_wagon"
+        "recipe": "dragnlivestock:wagon_wheel_frame"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "dragnlivestock:livestock_wagon"
+      "dragnlivestock:wagon_wheel_frame"
     ]
   },
   "sends_telemetry_event": false

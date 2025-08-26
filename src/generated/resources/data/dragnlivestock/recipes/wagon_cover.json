@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "A": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:leather"
     },
-    "C": {
-      "item": "minecraft:iron_ingot"
+    "B": {
+      "tag": "minecraft:wool"
     }
   },
   "pattern": [
-    "AAA",
-    "AAA",
-    "C C"
+    "BBB",
+    "BAB",
+    "A A"
   ],
   "result": {
-    "item": "dragnlivestock:livestock_wagon"
+    "item": "dragnlivestock:wagon_cover"
   },
   "show_notification": true
 }

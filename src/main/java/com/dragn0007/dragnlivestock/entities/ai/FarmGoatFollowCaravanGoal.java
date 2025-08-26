@@ -13,9 +13,9 @@ import java.util.List;
 
 public class FarmGoatFollowCaravanGoal extends Goal {
    public final FarmGoat goat;
-   private double speedModifier;
-   private static final int CARAVAN_LIMIT = 8;
-   private int distCheckCounter;
+   protected double speedModifier;
+   protected static final int CARAVAN_LIMIT = 8;
+   protected int distCheckCounter;
 
    public FarmGoatFollowCaravanGoal(FarmGoat goat, double speedMod) {
       this.goat = goat;
@@ -113,7 +113,7 @@ public class FarmGoatFollowCaravanGoal extends Goal {
       }
    }
 
-   private boolean firstIsLeashed(FarmGoat p_25507_, int p_25508_) {
+   protected boolean firstIsLeashed(FarmGoat p_25507_, int p_25508_) {
       if (p_25508_ > 8) {
          return false;
       } else if (p_25507_.inCaravan()) {

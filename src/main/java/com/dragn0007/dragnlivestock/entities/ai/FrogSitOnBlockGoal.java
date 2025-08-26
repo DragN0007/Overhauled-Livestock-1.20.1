@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class FrogSitOnBlockGoal extends MoveToBlockGoal {
-   private final OFrog frog;
+   protected final OFrog frog;
 
    public FrogSitOnBlockGoal(OFrog p_25149_, double p_25150_) {
       super(p_25149_, p_25150_, 8);

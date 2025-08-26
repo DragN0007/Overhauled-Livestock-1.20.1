@@ -13,9 +13,9 @@ import java.util.List;
 
 public class OLlamaFollowCaravanGoal extends Goal {
    public final OLlama llama;
-   private double speedModifier;
-   private static final int CARAVAN_LIMIT = 8;
-   private int distCheckCounter;
+   protected double speedModifier;
+   protected static final int CARAVAN_LIMIT = 8;
+   protected int distCheckCounter;
 
    public OLlamaFollowCaravanGoal(OLlama llama, double speedMod) {
       this.llama = llama;
@@ -113,7 +113,7 @@ public class OLlamaFollowCaravanGoal extends Goal {
       }
    }
 
-   private boolean firstIsLeashed(OLlama p_25507_, int p_25508_) {
+   protected boolean firstIsLeashed(OLlama p_25507_, int p_25508_) {
       if (p_25508_ > 8) {
          return false;
       } else if (p_25507_.inCaravan()) {

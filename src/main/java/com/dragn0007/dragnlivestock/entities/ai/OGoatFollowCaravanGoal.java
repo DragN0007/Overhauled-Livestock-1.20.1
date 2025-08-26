@@ -13,9 +13,9 @@ import java.util.List;
 
 public class OGoatFollowCaravanGoal extends Goal {
    public final OGoat goat;
-   private double speedModifier;
-   private static final int CARAVAN_LIMIT = 8;
-   private int distCheckCounter;
+   protected double speedModifier;
+   protected static final int CARAVAN_LIMIT = 8;
+   protected int distCheckCounter;
 
    public OGoatFollowCaravanGoal(OGoat goat, double speedMod) {
       this.goat = goat;
@@ -113,7 +113,7 @@ public class OGoatFollowCaravanGoal extends Goal {
       }
    }
 
-   private boolean firstIsLeashed(OGoat p_25507_, int p_25508_) {
+   protected boolean firstIsLeashed(OGoat p_25507_, int p_25508_) {
       if (p_25508_ > 8) {
          return false;
       } else if (p_25507_.inCaravan()) {

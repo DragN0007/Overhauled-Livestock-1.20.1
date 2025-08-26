@@ -71,6 +71,12 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.MARKING_OSCILLATOR);
         simpleItem(LOItems.BREED_OSCILLATOR);
 
+        simpleItem(LOItems.WAGON_WHEEL_FRAME);
+        simpleItem(LOItems.WAGON_WHEEL);
+        simpleItem(LOItems.WAGON_AXEL);
+        simpleItem(LOItems.WAGON_BODY);
+        simpleItem(LOItems.WAGON_COVER);
+
         simpleItem(LOItems.BLACK_BRAND_TAG);
         simpleItem(LOItems.BLUE_BRAND_TAG);
         simpleItem(LOItems.BROWN_BRAND_TAG);

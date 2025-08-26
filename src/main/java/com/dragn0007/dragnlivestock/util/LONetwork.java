@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.util;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,6 +21,31 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LONetwork {
+
+    public static class ToggleTillerPowerRequest {
+        private final int id;
+
+        public ToggleTillerPowerRequest(int id) {
+            this.id = id;
+        }
+
+        public static void encode(ToggleTillerPowerRequest msg, FriendlyByteBuf buffer) {
+            buffer.writeInt(msg.id);
+        }
+
+        public static ToggleTillerPowerRequest decode(FriendlyByteBuf buffer) {
+            return new ToggleTillerPowerRequest(buffer.readInt());
+        }
+
+        public static void handle(ToggleTillerPowerRequest msg, Supplier<NetworkEvent.Context> context) {
+            ServerPlayer player = context.get().getSender();
+            if(player != null) {
+                if(player.level().getEntity(msg.id) instanceof Plow plow) {
+                    plow.cycleMode();
+                }
+            }
+        }
+    }
 
     public static class HandleHorseSpeedRequest {
         private final int speedMod;
@@ -138,6 +164,7 @@ public class LONetwork {
             INSTANCE.registerMessage(0, HandleHorseSpeedRequest.class, HandleHorseSpeedRequest::encode, HandleHorseSpeedRequest::decode, HandleHorseSpeedRequest::handle);
             INSTANCE.registerMessage(1, PlayEmoteRequest.class, PlayEmoteRequest::encode, PlayEmoteRequest::decode, PlayEmoteRequest::handle);
             INSTANCE.registerMessage(2, PlayEmoteResponse.class, PlayEmoteResponse::encode, PlayEmoteResponse::decode, PlayEmoteResponse::handle);
+            INSTANCE.registerMessage(3, ToggleTillerPowerRequest.class, ToggleTillerPowerRequest::encode, ToggleTillerPowerRequest::decode, ToggleTillerPowerRequest::handle);
         });
     }
 }
