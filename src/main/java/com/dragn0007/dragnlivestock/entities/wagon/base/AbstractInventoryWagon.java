@@ -38,11 +38,9 @@ public abstract class AbstractInventoryWagon extends AbstractWagon implements Me
         if(superResult != InteractionResult.PASS)
             return superResult;
 
-        if (!(level().isNight())) { //todo
-            if (isAlive() && !level().isClientSide && player.isSecondaryUseActive()) {
-                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(getId()));
-                return InteractionResult.CONSUME;
-            }
+        if (isAlive() && !level().isClientSide && player.isSecondaryUseActive()) {
+            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(getId()));
+            return InteractionResult.CONSUME;
         }
 
         return InteractionResult.PASS;

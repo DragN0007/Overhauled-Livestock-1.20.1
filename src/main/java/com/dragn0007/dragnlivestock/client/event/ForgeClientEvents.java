@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.client.event;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
@@ -39,6 +40,12 @@ public class ForgeClientEvents {
 
         if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.HORSE_LEVADE.getKey().getValue()) {
             LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("levade", "play_once"));
+        }
+
+        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.PLOW_MODE.getKey().getValue()) {
+            if (player.getVehicle() instanceof Plow plow) {
+                LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(plow.getId()));
+            }
         }
     }
 }

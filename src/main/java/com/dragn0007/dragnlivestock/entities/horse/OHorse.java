@@ -577,8 +577,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
-		double speedThreshold = 0.02;
-		double speedRunThreshold = 0.015;
+		double speedThreshold = 0.025;
+		double speedRunThreshold = 0.02;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 

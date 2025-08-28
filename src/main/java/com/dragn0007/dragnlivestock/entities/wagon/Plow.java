@@ -10,6 +10,8 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,6 +20,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,6 +35,8 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
+import static com.dragn0007.dragnlivestock.LivestockOverhaul.mod;
+
 public class Plow extends AbstractInventoryWagon {
 
     public static final Vec3[] RIDERS = new Vec3[] {
@@ -39,8 +44,8 @@ public class Plow extends AbstractInventoryWagon {
     };
 
     public static final Vec3[] ANIMALS = new Vec3[] {
-            new Vec3(-0.7D, 0, 3.75D),
-            new Vec3(0.7D, 0, 3.75D)
+            new Vec3(-0.7D, 0, 2.5D),
+            new Vec3(0.7D, 0, 2.5D)
     };
 
     public Plow(EntityType<? extends Plow> type, Level level) {
@@ -79,7 +84,7 @@ public class Plow extends AbstractInventoryWagon {
 
     public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(Plow.class, LivestockOverhaul.MODE);
 
-    public SimpleContainer inventory;
+    public Vec3 lastClientPos = Vec3.ZERO;
     public Vec3 lastServerPos = Vec3.ZERO;
     protected int tillerCooldown = 0;
 
@@ -125,9 +130,30 @@ public class Plow extends AbstractInventoryWagon {
                 List<ItemStack> drops = Block.getDrops(blockState, (ServerLevel) this.level(), pos, null);
                 drops.remove(new ItemStack(cropBlock.asItem()));
                 drops.forEach(itemStack -> {
-                    if(this.inventory.canAddItem(itemStack)) {
-                        this.inventory.addItem(itemStack);
-                    } else {
+                    boolean added = false;
+
+                    for (int i = 0; i < inventory.size(); i++) {
+                        ItemStack slotStack = inventory.get(i);
+
+                        if (slotStack.isEmpty()) {
+                            inventory.set(i, itemStack.copy());
+                            added = true;
+                            break;
+                        } else if (ItemStack.isSameItemSameTags(slotStack, itemStack)
+                                && slotStack.getCount() < slotStack.getMaxStackSize()) {
+
+                            int transferable = Math.min(itemStack.getCount(), slotStack.getMaxStackSize() - slotStack.getCount());
+                            slotStack.grow(transferable);
+                            itemStack.shrink(transferable);
+
+                            if (itemStack.isEmpty()) {
+                                added = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!added && !itemStack.isEmpty()) {
                         this.spawnAtLocation(itemStack);
                     }
                 });
@@ -173,7 +199,7 @@ public class Plow extends AbstractInventoryWagon {
         this.tillNewFarmland(rightPos);
     }
 
-    protected void handleInput(Input input) {
+    private void handleInput(Input input) {
         this.tillerCooldown = Math.max(this.tillerCooldown - 1, 0);
         if(input.jumping && this.tillerCooldown == 0) {
             LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(this.getId()));
@@ -183,6 +209,9 @@ public class Plow extends AbstractInventoryWagon {
 
     @Override
     public void tick() {
+        super.tick();
+        this.lastClientPos = this.position();
+
         if(this.isControlledByLocalInstance()) {
             if(this.getControllingPassenger() instanceof LocalPlayer player) {
                 this.handleInput(player.input);
@@ -200,8 +229,7 @@ public class Plow extends AbstractInventoryWagon {
                 }
             }
         }
-        
-        super.tick();
+
     }
 
     @Override
