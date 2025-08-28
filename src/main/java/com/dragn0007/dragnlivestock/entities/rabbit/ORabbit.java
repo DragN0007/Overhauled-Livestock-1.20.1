@@ -534,8 +534,8 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			this.setColorByWildStatus();
 			this.setMarkingByWildStatus();
 		} else {
-			this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			this.setVariant(random.nextInt(ORabbitModel.Variant.values().length));
+			this.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
 		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
