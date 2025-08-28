@@ -112,7 +112,7 @@ dependencies {
 //    implementation fg.deobf("curse.maven:dragns-deadly-dinos-reconstructed-1293235:6689976")
 
     //nbtenks made by gotenks
-    implementation fg.deobf("curse.maven:nbtenks-1255827:6514118")
+//    implementation fg.deobf("curse.maven:nbtenks-1255827:6514118")
 
     implementation fg.deobf("curse.maven:jade-324717:5876199")
     implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")

@@ -212,12 +212,6 @@ public class Plow extends AbstractInventoryWagon {
         super.tick();
         this.lastClientPos = this.position();
 
-        if(this.isControlledByLocalInstance()) {
-            if(this.getControllingPassenger() instanceof LocalPlayer player) {
-                this.handleInput(player.input);
-            }
-        }
-
         if(!this.level().isClientSide) {
             Vec3 diff = this.lastServerPos.subtract(this.position());
             this.lastServerPos = this.position();
