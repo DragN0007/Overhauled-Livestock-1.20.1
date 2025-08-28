@@ -8,6 +8,10 @@
     {
       "id": "permafrost:quagga",
       "required": false
+    },
+    {
+      "id": "permafrost:dinofelis",
+      "required": false
     }
   ]
 }
