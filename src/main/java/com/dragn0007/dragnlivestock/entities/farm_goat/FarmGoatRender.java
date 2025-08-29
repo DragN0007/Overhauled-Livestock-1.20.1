@@ -10,7 +10,7 @@ public class FarmGoatRender extends GeoEntityRenderer<FarmGoat> {
     public FarmGoatRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new FarmGoatModel());
         this.addRenderLayer(new FarmGoatMarkingLayer(this));
-        this.addRenderLayer(new FarmGoatCarpetLayer(this));
+        this.addRenderLayer(new FarmGoatFaceMarkingLayer(this));
         this.addRenderLayer(new FarmGoatChestLayer(this));
         this.addRenderLayer(new FarmGoatBrandTagLayer(this));
     }
@@ -20,8 +20,7 @@ public class FarmGoatRender extends GeoEntityRenderer<FarmGoat> {
 
         if(entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
-            model.getBone("male_horns").ifPresent(b -> b.setHidden(true));
-            model.getBone("female_horns").ifPresent(b -> b.setHidden(true));
+            model.getBone("horns").ifPresent(b -> b.setHidden(true));
         } else {
             poseStack.scale(1F, 1F, 1F);
 
@@ -31,19 +30,7 @@ public class FarmGoatRender extends GeoEntityRenderer<FarmGoat> {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(true));
             }
 
-            if(entity.isMale()) {
-                model.getBone("male_horns").ifPresent(b -> b.setHidden(false));
-            } else {
-                model.getBone("male_horns").ifPresent(b -> b.setHidden(true));
-            }
-
-            if(entity.isFemale()) {
-                model.getBone("female_horns").ifPresent(b -> b.setHidden(false));
-            } else {
-                model.getBone("female_horns").ifPresent(b -> b.setHidden(true));
-            }
-
-            if (entity.isSheared()) {
+            if (entity.isSheared() || !(entity.getBreed() == 4)) {
                 model.getBone("wool_body").ifPresent(b -> b.setHidden(true));
                 model.getBone("wool_neck").ifPresent(b -> b.setHidden(true));
                 model.getBone("right_thigh_wool").ifPresent(b -> b.setHidden(true));

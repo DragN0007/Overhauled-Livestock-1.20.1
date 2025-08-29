@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
 import com.dragn0007.dragnlivestock.common.gui.LargeWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;

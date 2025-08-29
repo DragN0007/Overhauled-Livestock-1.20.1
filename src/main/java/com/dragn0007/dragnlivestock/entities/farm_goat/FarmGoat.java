@@ -5,9 +5,9 @@ import com.dragn0007.dragnlivestock.common.gui.OxMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.FarmGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
-import com.dragn0007.dragnlivestock.entities.sheep.OSheepMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
+import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -122,6 +122,8 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(2, new FarmGoatFollowCaravanGoal(this, (double)1.6F));
 
+		//todo Goat following
+
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
@@ -135,15 +137,11 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return super.calculateFallDamage(p_149389_, p_149390_) - 10;
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_GOAT_EATS);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_GOAT_EATS); //todo
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
-
-		if (itemstack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
-			return InteractionResult.PASS;
-		}
 
 		if (item instanceof BrandTagItem) {
 			setTagged(true);
@@ -175,7 +173,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
-			} else if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() &&
+			} else if (itemstack.is(Items.SHEARS) && this.getBreed() == 4 && !player.isShiftKeyDown() && !this.isBaby() &&
 					(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get())) {
 				player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 				this.setSheared(true);
@@ -186,7 +184,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
-			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !(this.getBreed() == 5)) {
 				if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
 					player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 					ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.GOAT_MILK_BUCKET.get().getDefaultInstance());
@@ -194,8 +192,16 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 					replenishMilkCounter = 0;
 					setMilked(true);
 				}
-				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			} else if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.getBreed() == 5) {
+				if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
+					player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+					ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, LOItems.GOAT_MILK_BUCKET.get().getDefaultInstance());
+					player.setItemInHand(hand, itemstack1);
+					replenishMilkCounter = 0;
+					setMilked(true);
+				}
 			}
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
 		if (this.isTamed()) {
@@ -253,7 +259,11 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		replenishMilkCounter++;
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !(this.getBreed() == 5)) {
+			this.setMilked(false);
+		}
+
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.getBreed() == 5) {
 			this.setMilked(false);
 		}
 	}
@@ -397,6 +407,15 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDimensions(pose);
 	}
 
+	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	public int getBreed() {
+		return this.entityData.get(BREED);
+	}
+	public void setBreed(int breed) {
+		this.entityData.set(BREED, breed);
+	}
+
+
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
 		return FarmGoatModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
@@ -417,6 +436,26 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setOverlayVariant(int overlayVariant) {
 		this.entityData.set(OVERLAY, overlayVariant);
 	}
+
+
+	public static final EntityDataAccessor<Integer> FACE_OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	public ResourceLocation getFaceOverlayLocation() {return FarmGoatFaceMarkingLayer.Overlay.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
+	public int getFaceOverlayVariant() {
+		return this.entityData.get(FACE_OVERLAY);
+	}
+	public void setFaceOverlayVariant(int overlayVariant) {
+		this.entityData.set(FACE_OVERLAY, overlayVariant);
+	}
+
+
+	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	public int getHornVariant() {
+		return this.entityData.get(HORN_TYPE);
+	}
+	public void setHornVariant(int hornVariant) {
+		this.entityData.set(HORN_TYPE, hornVariant);
+	}
+
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
@@ -483,6 +522,14 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			this.setOverlayVariant(tag.getInt("Overlay"));
 		}
 
+		if (tag.contains("Face_Overlay")) {
+			this.setFaceOverlayVariant(tag.getInt("Face_Overlay"));
+		}
+
+		if (tag.contains("HornType")) {
+			setHornVariant(tag.getInt("HornType"));
+		}
+
 		if (tag.contains("Gender")) {
 			setGender(tag.getInt("Gender"));
 		}
@@ -517,6 +564,8 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
+		tag.putInt("Face_Overlay", this.getFaceOverlayVariant());
+		tag.putInt("HornType", getHornVariant());
 		tag.putInt("Gender", getGender());
 		tag.putBoolean("Sheared", this.isSheared());
 		tag.putInt("ShearedTime", this.regrowWoolCounter);
@@ -532,6 +581,8 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(FACE_OVERLAY, 0);
+		this.entityData.define(HORN_TYPE, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
@@ -549,12 +600,18 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		Random random = new Random();
 		this.setGender(random.nextInt(Gender.values().length));
 
+		this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
+
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-			this.setColor();
-			this.setMarking();
+			this.setColorByBreed();
+			this.setMarkingByBreed();
+			this.setFaceMarkingByBreed();
+			this.setHornVariant(random.nextInt(BreedHorns.values().length));
 		} else {
 			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
 			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			this.setHornVariant(random.nextInt(BreedHorns.values().length));
 		}
 
 		RandomSource randomsource = serverLevelAccessor.getRandom();
@@ -597,34 +654,68 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		FarmGoat partner = (FarmGoat) ageableMob;
 		kid = EntityTypes.FARM_GOAT_ENTITY.get().create(serverLevel);
 
-		int variantChance = this.random.nextInt(14);
-		int variant;
-		if (variantChance < 6) {
-			variant = this.getVariant();
-		} else if (variantChance < 12) {
-			variant = partner.getVariant();
+		int breedChance = this.random.nextInt(5);
+		int breed;
+		if (breedChance == 0) {
+			breed = this.random.nextInt(GoatBreed.Breed.values().length);
 		} else {
-			variant = this.random.nextInt(FarmGoatModel.Variant.values().length);
+			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
 		}
-		kid.setVariant(variant);
+		kid.setBreed(breed);
 
-		int overlayChance = this.random.nextInt(10);
-		int overlay;
-		if (overlayChance < 4) {
-			overlay = this.getOverlayVariant();
-		} else if (overlayChance < 8) {
-			overlay = partner.getOverlayVariant();
+		if (!(breedChance == 0)) {
+			int variantChance = this.random.nextInt(14);
+			int variant;
+			if (variantChance < 6) {
+				variant = this.getVariant();
+			} else if (variantChance < 12) {
+				variant = partner.getVariant();
+			} else {
+				variant = this.random.nextInt(FarmGoatModel.Variant.values().length);
+			}
+			kid.setVariant(variant);
+		} else if (random.nextDouble() < 0.5) {
+			kid.setColorByBreed();
+		}
+
+		if (!(breedChance == 0)) {
+			int overlayChance = this.random.nextInt(10);
+			int overlay;
+			if (overlayChance < 4) {
+				overlay = this.getOverlayVariant();
+			} else if (overlayChance < 8) {
+				overlay = partner.getOverlayVariant();
+			} else {
+				overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
+			}
+			kid.setOverlayVariant(overlay);
+		} else if (random.nextDouble() < 0.5) {
+			kid.setMarkingByBreed();
+		}
+
+		if (!(breedChance == 0)) {
+			int hornsChance = this.random.nextInt(10);
+			int hornType;
+			if (hornsChance < 4) {
+				hornType = this.getHornVariant();
+			} else if (hornsChance < 8) {
+				hornType = partner.getHornVariant();
+			} else {
+				hornType = this.random.nextInt(FarmGoat.BreedHorns.values().length);
+			}
+			kid.setHornVariant(hornType);
+		}
+
+		if (kid.getBreed() == 10) {
+			kid.setGender(1);
 		} else {
-			overlay = this.random.nextInt(OSheepMarkingLayer.Overlay.values().length);
+			kid.setGender(random.nextInt(FarmGoat.Gender.values().length));
 		}
-		kid.setOverlayVariant(overlay);
-
-		kid.setGender(random.nextInt(Gender.values().length));
 
 		return kid;
 	}
 
-	public void setColor() {
+	public void setColorByBreed() {
 
 		if (random.nextDouble() < 0.10) {
 			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
@@ -638,12 +729,22 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	}
 
-	public void setMarking() {
+	public void setMarkingByBreed() {
 
 		if (random.nextDouble() < 0.10) {
 			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
 		} else if (random.nextDouble() > 0.10) {
 			this.setOverlayVariant(0);
+		}
+
+	}
+
+	public void setFaceMarkingByBreed() {
+
+		if (random.nextDouble() < 0.10) {
+			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+		} else if (random.nextDouble() > 0.10) {
+			this.setFaceOverlayVariant(0);
 		}
 
 	}
@@ -705,7 +806,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
 		Random random = new Random();
 
-		if (!this.isSheared()) {
+		if (!this.isSheared() && this.getBreed() == 4) {
 			this.dropWoolByColorAndMarking();
 		}
 
@@ -925,6 +1026,20 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 				this.spawnAtLocation(Items.WHITE_WOOL, 1);
 			}
+		}
+	}
+
+	public enum BreedHorns {
+		NONE,
+		BACKWARDS_CURL,
+		SMALL,
+		POLYCERATE,
+		UPWARDS_CURL,
+		CORKSCREW,
+		OUTWARDS_FANNING;
+
+		public static FarmGoat.BreedHorns hornsFromOrdinal(int ordinal) {
+			return FarmGoat.BreedHorns.values()[ordinal % FarmGoat.BreedHorns.values().length];
 		}
 	}
 
