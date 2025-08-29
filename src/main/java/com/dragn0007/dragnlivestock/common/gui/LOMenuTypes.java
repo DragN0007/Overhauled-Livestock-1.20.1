@@ -21,12 +21,13 @@ public class LOMenuTypes {
     public static final RegistryObject<MenuType<OxMenu>> OX_MENU = registerMenuType("ox_menu", OxMenu::new);
     public static final RegistryObject<MenuType<UnicornMenu>> UNICORN_MENU = registerMenuType("unicorn_menu", UnicornMenu::new);
 
-    public static final RegistryObject<MenuType<CoveredWagonMenu>> COVERED_WAGON = registerMenuType("covered_wagon", CoveredWagonMenu::new);
-    public static final RegistryObject<MenuType<LivestockWagonMenu>> LIVESTOCK_WAGON = registerMenuType("livestock_wagon", LivestockWagonMenu::new);
+    public static final RegistryObject<MenuType<HugeWagonMenu>> HUGE_INVENTORY_WAGON = registerMenuType("huge_wagon", HugeWagonMenu::new); //104
+    public static final RegistryObject<MenuType<LargeWagonMenu>> LARGE_INVENTORY_WAGON = registerMenuType("large_wagon", LargeWagonMenu::new); //54
+    public static final RegistryObject<MenuType<DefaultWagonMenu>> DEFAULT_INVENTORY_WAGON = registerMenuType("default_wagon", DefaultWagonMenu::new); //36
+    public static final RegistryObject<MenuType<SmallWagonMenu>> SMALL_INVENTORY_WAGON = registerMenuType("small_wagon", SmallWagonMenu::new); //18
+    public static final RegistryObject<MenuType<TinyWagonMenu>> TINY_INVENTORY_WAGON = registerMenuType("tiny_wagon", TinyWagonMenu::new); //9
     public static final RegistryObject<MenuType<LumberWagonMenu>> LUMBER_WAGON = registerMenuType("lumber_wagon", LumberWagonMenu::new);
-    public static final RegistryObject<MenuType<GoodsCartMenu>> GOODS_CART = registerMenuType("goods_cart", GoodsCartMenu::new);
     public static final RegistryObject<MenuType<MiningCartMenu>> MINING_CART = registerMenuType("mining_cart", MiningCartMenu::new);
-    public static final RegistryObject<MenuType<TransportCartMenu>> TRANSPORT_CART = registerMenuType("transport_cart", TransportCartMenu::new);
 
     public static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENU_TYPES.register(name, () -> IForgeMenuType.create(factory));

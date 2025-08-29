@@ -3,7 +3,9 @@ package com.dragn0007.dragnlivestock.client.event;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.client.entities.wagon.WagonRenderer;
 import com.dragn0007.dragnlivestock.client.gui.*;
+import com.dragn0007.dragnlivestock.common.gui.HugeWagonMenu;
 import com.dragn0007.dragnlivestock.common.gui.LOMenuTypes;
+import com.dragn0007.dragnlivestock.common.gui.LargeWagonMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.bee.OBeeRenderer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelRender;
@@ -105,12 +107,12 @@ public class LivestockOverhaulClientEvent {
         MenuScreens.register(LOMenuTypes.O_CARIBOU_MENU.get(), CaribouScreen::new);
         MenuScreens.register(LOMenuTypes.UNICORN_MENU.get(), UnicornScreen::new);
 
-        MenuScreens.register(LOMenuTypes.COVERED_WAGON.get(), CoveredWagonScreen::new);
-        MenuScreens.register(LOMenuTypes.LIVESTOCK_WAGON.get(), LivestockWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.HUGE_INVENTORY_WAGON.get(), HugeWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.DEFAULT_INVENTORY_WAGON.get(), DefaultWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.SMALL_INVENTORY_WAGON.get(), SmallWagonScreen::new);
+        MenuScreens.register(LOMenuTypes.TINY_INVENTORY_WAGON.get(), TinyWagonScreen::new);
         MenuScreens.register(LOMenuTypes.LUMBER_WAGON.get(), LumberWagonScreen::new);
-        MenuScreens.register(LOMenuTypes.GOODS_CART.get(), GoodsCartScreen::new);
         MenuScreens.register(LOMenuTypes.MINING_CART.get(), MiningCartScreen::new);
-        MenuScreens.register(LOMenuTypes.TRANSPORT_CART.get(), TransportCartScreen::new);
 
         //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);

@@ -28,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class Plow extends AbstractInventoryWagon {
+public class LargePlow extends AbstractInventoryWagon {
 
     public static final Vec3[] RIDERS = new Vec3[] {
             new Vec3(0, 1.8D, -0.5D)
@@ -39,8 +39,8 @@ public class Plow extends AbstractInventoryWagon {
             new Vec3(0.7D, 0, 2.5D)
     };
 
-    public Plow(EntityType<? extends Plow> type, Level level) {
-        super(type, level, 0.1D, 2.0D, 3.0F, 20, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
+    public LargePlow(EntityType<? extends LargePlow> type, Level level) {
+        super(type, level, 0.1D, 2.0D, 3.0F, 20, 54, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Plow extends AbstractInventoryWagon {
         return new DefaultWagonMenu(id, inventory, this);
     }
 
-    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(Plow.class, LivestockOverhaul.MODE);
+    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(LargePlow.class, LivestockOverhaul.MODE);
 
     public Vec3 lastClientPos = Vec3.ZERO;
     public Vec3 lastServerPos = Vec3.ZERO;
@@ -162,31 +162,43 @@ public class Plow extends AbstractInventoryWagon {
     }
 
     public void harvest() {
+        Vec3 longleft = this.calcOffset(-1, 0.2, -2.65);
         Vec3 left = this.calcOffset(-1, 0.2, -1.65);
         Vec3 mid = this.calcOffset(0, 0.2, -1.65);
         Vec3 right = this.calcOffset(1, 0.2, -1.65);
+        Vec3 longright = this.calcOffset(1, 0.2, -2.65);
 
+        BlockPos longleftPos = new BlockPos((int)Math.floor(longleft.x), (int)Math.floor(longleft.y), (int)Math.floor(longleft.z));
         BlockPos leftPos = new BlockPos((int)Math.floor(left.x), (int)Math.floor(left.y), (int)Math.floor(left.z));
         BlockPos midPos = new BlockPos((int)Math.floor(mid.x), (int)Math.floor(mid.y), (int)Math.floor(mid.z));
         BlockPos rightPos = new BlockPos((int)Math.floor(right.x), (int)Math.floor(right.y), (int)Math.floor(right.z));
+        BlockPos longrightPos = new BlockPos((int)Math.floor(longright.x), (int)Math.floor(longright.y), (int)Math.floor(longright.z));
 
+        this.harvestCrop(longleftPos);
         this.harvestCrop(leftPos);
         this.harvestCrop(midPos);
         this.harvestCrop(rightPos);
+        this.harvestCrop(longrightPos);
     }
 
     public void till() {
+        Vec3 longleft = this.calcOffset(-1, 0.2, -2.65);
         Vec3 left = this.calcOffset(-1, 0.2, -1.65);
         Vec3 mid = this.calcOffset(0, 0.2, -1.65);
         Vec3 right = this.calcOffset(1, 0.2, -1.65);
+        Vec3 longright = this.calcOffset(1, 0.2, -2.65);
 
-        BlockPos leftPos = new BlockPos((int) Math.floor(left.x), (int) Math.floor(left.y), (int) Math.floor(left.z));
-        BlockPos midPos = new BlockPos((int) Math.floor(mid.x), (int) Math.floor(mid.y), (int) Math.floor(mid.z));
-        BlockPos rightPos = new BlockPos((int) Math.floor(right.x), (int) Math.floor(right.y), (int) Math.floor(right.z));
+        BlockPos longleftPos = new BlockPos((int)Math.floor(longleft.x), (int)Math.floor(longleft.y), (int)Math.floor(longleft.z));
+        BlockPos leftPos = new BlockPos((int)Math.floor(left.x), (int)Math.floor(left.y), (int)Math.floor(left.z));
+        BlockPos midPos = new BlockPos((int)Math.floor(mid.x), (int)Math.floor(mid.y), (int)Math.floor(mid.z));
+        BlockPos rightPos = new BlockPos((int)Math.floor(right.x), (int)Math.floor(right.y), (int)Math.floor(right.z));
+        BlockPos longrightPos = new BlockPos((int)Math.floor(longright.x), (int)Math.floor(longright.y), (int)Math.floor(longright.z));
 
+        this.tillNewFarmland(longleftPos);
         this.tillNewFarmland(leftPos);
         this.tillNewFarmland(midPos);
         this.tillNewFarmland(rightPos);
+        this.tillNewFarmland(longrightPos);
     }
 
     @Override

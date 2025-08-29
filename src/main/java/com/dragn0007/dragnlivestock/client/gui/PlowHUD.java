@@ -1,9 +1,7 @@
 package com.dragn0007.dragnlivestock.client.gui;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;

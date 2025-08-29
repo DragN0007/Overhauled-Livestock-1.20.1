@@ -1,6 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
-import com.dragn0007.dragnlivestock.common.gui.LivestockWagonMenu;
+import com.dragn0007.dragnlivestock.common.gui.TinyWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
@@ -60,7 +60,7 @@ public class LivestockWagon extends AbstractInventoryWagon {
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new LivestockWagonMenu(id, inventory, this);
+        return new TinyWagonMenu(id, inventory, this);
     }
 
     public ItemStack getPickResult() {
