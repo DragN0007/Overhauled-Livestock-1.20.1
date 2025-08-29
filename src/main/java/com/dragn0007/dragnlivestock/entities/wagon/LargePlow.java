@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.wagon;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
+import com.dragn0007.dragnlivestock.common.gui.LargeWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -66,14 +67,14 @@ public class LargePlow extends AbstractInventoryWagon {
 
     public ItemStack getPickResult() {
         return LOItems.PLOW.get().getDefaultInstance();
-    }
+    } //todo
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new DefaultWagonMenu(id, inventory, this);
+        return new LargeWagonMenu(id, inventory, this);
     }
 
-    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(LargePlow.class, LivestockOverhaul.MODE);
+    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(LargePlow.class, LivestockOverhaul.MODE_2);
 
     public Vec3 lastClientPos = Vec3.ZERO;
     public Vec3 lastServerPos = Vec3.ZERO;

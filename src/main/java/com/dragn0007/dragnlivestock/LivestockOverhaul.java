@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.common.network.LOPackets;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.wagon.LargePlow;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -95,6 +96,7 @@ public class LivestockOverhaul {
     }
 
     public static final EntityDataSerializer<Plow.Mode> MODE = EntityDataSerializer.simpleEnum(Plow.Mode.class);
+    public static final EntityDataSerializer<LargePlow.Mode> MODE_2 = EntityDataSerializer.simpleEnum(LargePlow.Mode.class);
 
     public static final EntityDataSerializer<ResourceLocation> RESOURCE_LOCATION = new EntityDataSerializer<>() {
         @Override
@@ -123,6 +125,7 @@ public class LivestockOverhaul {
         EntityDataSerializers.registerSerializer(RESOURCE_LOCATION);
         EntityDataSerializers.registerSerializer(DYE_COLOR);
         EntityDataSerializers.registerSerializer(MODE);
+        EntityDataSerializers.registerSerializer(MODE_2);
     }
 
     public static float mod(float n, float m) {

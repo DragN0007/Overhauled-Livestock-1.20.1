@@ -5,10 +5,25 @@
     "dragnlivestock:o_goat",
 
     {
-      "id": "dragnpets:o_dog",
+      "id": "dragnpets:bernese",
       "required": false
     },
-
+    {
+      "id": "dragnpets:husky",
+      "required": false
+    },
+    {
+      "id": "dragnpets:rottweiler",
+      "required": false
+    },
+    {
+      "id": "dragnpets:pyrenees",
+      "required": false
+    },
+    {
+      "id": "dragnpets:labrador",
+      "required": false
+    },
     {
       "id": "dragnpets:o_wolf",
       "required": false
