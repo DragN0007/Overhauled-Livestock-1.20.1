@@ -23,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -49,6 +50,7 @@ public class LivestockOverhaul {
         LOMenuTypes.register(eventBus);
         LOSoundEvents.REGISTRY.register(eventBus);
         LOPackets.register();
+        MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent warn) -> warn(warn.getEntity()));
 
         CraftingHelper.register(new BlanketConfigCondition.Serializer(new ResourceLocation(MODID, "blanket_config_condition")));
 
@@ -84,33 +86,38 @@ public class LivestockOverhaul {
                 entity.displayClientMessage(Component.empty().append
                         (Component.literal(
                                         "[DragN's Livestock Overhaul!] Found DragN's Deadly Dinos!")
-                                .withStyle(ChatFormatting.GOLD)), false);
+                                .withStyle(ChatFormatting.AQUA)), false);
             }
 
             if (ModList.get().isLoaded("medievalembroidery")) {
                 entity.displayClientMessage(Component.empty().append
                         (Component.literal(
                                         "[DragN's Livestock Overhaul!] Found Medieval Embroidery!")
-                                .withStyle(ChatFormatting.GOLD)), false);
+                                .withStyle(ChatFormatting.AQUA)), false);
             }
 
             if (ModList.get().isLoaded("tfc")) {
                 entity.displayClientMessage(Component.empty().append
                         (Component.literal(
                                         "[DragN's Livestock Overhaul!] Found TerraFirmaCraft!")
-                                .withStyle(ChatFormatting.GOLD)), false);
+                                .withStyle(ChatFormatting.AQUA)), false);
             }
 
             if (ModList.get().isLoaded("jade")) {
                 entity.displayClientMessage(Component.empty().append
                         (Component.literal(
                                         "[DragN's Livestock Overhaul!] Found Jade!")
-                                .withStyle(ChatFormatting.GOLD)), false);
+                                .withStyle(ChatFormatting.AQUA)), false);
             }
+
+            entity.displayClientMessage(Component.empty().append
+                    (Component.literal(
+                                    "Found directly-compatible mods!")
+                            .withStyle(ChatFormatting.GOLD)), false);
         } else {
             entity.displayClientMessage(Component.empty().append
                     (Component.literal(
-                                    "[DragN's Livestock Overhaul!] Found no directly-compatible mods.")
+                                    "Found no directly-compatible mods.")
                             .withStyle(ChatFormatting.GOLD)), false);
         }
     }
