@@ -12,6 +12,14 @@
     {
       "id": "permafrost:dinofelis",
       "required": false
+    },
+    {
+      "id": "swemaddendum:mule",
+      "required": false
+    },
+    {
+      "id": "swemaddendum:donkey",
+      "required": false
     }
   ]
 }

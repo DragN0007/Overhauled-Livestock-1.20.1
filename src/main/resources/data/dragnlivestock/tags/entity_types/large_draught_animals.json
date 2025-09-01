@@ -85,6 +85,10 @@
       "required": false
     },
     {
+      "id": "swemaddendum:fjord",
+      "required": false
+    },
+    {
       "id": "swemaddendum:friesian",
       "required": false
     },
@@ -118,6 +122,10 @@
     },
     {
       "id": "swemaddendum:pegasus",
+      "required": false
+    },
+    {
+      "id": "swemaddendum:mule",
       "required": false
     }
   ]
