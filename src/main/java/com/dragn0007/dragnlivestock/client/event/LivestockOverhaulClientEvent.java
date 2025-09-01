@@ -24,10 +24,11 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerry
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloomRender;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomRender;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyRender;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoatRender;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogRender;
 import com.dragn0007.dragnlivestock.entities.frog.ReplacedTadpoleRender;
 import com.dragn0007.dragnlivestock.entities.frog.food.GrubRender;
-import com.dragn0007.dragnlivestock.entities.goat.OGoatGoatRender;
+import com.dragn0007.dragnlivestock.entities.goat.OGoatRender;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseRender;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorsemanRender;
 import com.dragn0007.dragnlivestock.entities.llama.OLlamaRender;
@@ -68,9 +69,10 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.O_MULE_ENTITY.get(), OMuleRender::new);
         EntityRenderers.register(EntityTypes.O_MOOSHROOM_ENTITY.get(), OMooshroomRender::new);
         EntityRenderers.register(EntityTypes.O_CAMEL_ENTITY.get(), OCamelRender::new);
-        EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatGoatRender::new);
+        EntityRenderers.register(EntityTypes.O_GOAT_ENTITY.get(), OGoatRender::new);
         EntityRenderers.register(EntityTypes.O_FROG_ENTITY.get(), OFrogRender::new);
 
+        EntityRenderers.register(EntityTypes.FARM_GOAT_ENTITY.get(), FarmGoatRender::new);
         EntityRenderers.register(EntityTypes.CARIBOU_ENTITY.get(), CaribouRender::new);
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.UNICORN_ENTITY.get(), UnicornRender::new);
@@ -92,6 +94,7 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.LIVESTOCK_WAGON.get(), c -> new WagonRenderer<>(c, "livestock_wagon"));
         EntityRenderers.register(EntityTypes.LUMBER_WAGON.get(), c -> new WagonRenderer<>(c, "lumber_wagon"));
         EntityRenderers.register(EntityTypes.GOODS_CART.get(), c -> new WagonRenderer<>(c, "goods_cart"));
+        EntityRenderers.register(EntityTypes.DOG_SLED.get(), c -> new WagonRenderer<>(c, "dog_sled"));
         EntityRenderers.register(EntityTypes.MINING_CART.get(), c -> new WagonRenderer<>(c, "mining_cart"));
         EntityRenderers.register(EntityTypes.TRANSPORT_CART.get(), c -> new WagonRenderer<>(c, "transport_cart"));
         EntityRenderers.register(EntityTypes.PLOW.get(), c -> new WagonRenderer<>(c, "plow"));

@@ -65,15 +65,76 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .define('A', LOItems.WAGON_BODY.get())
                 .define('B', LOItems.WAGON_AXEL.get())
                 .define('C', LOItems.WAGON_COVER.get())
-                .define('D', ItemTags.BEDS)
                 .pattern(" C ")
-                .pattern("#AD")
+                .pattern("#A#")
                 .pattern("B B")
                 .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIVESTOCK_WAGON.get())
+                .define('#', Items.STICK)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .pattern("###")
+                .pattern("#A#")
+                .pattern("B B")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LUMBER_WAGON.get())
+                .define('#', ItemTags.LOGS)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .pattern("#A#")
+                .pattern("B B")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GOODS_CART.get())
+                .define('#', ItemTags.PLANKS)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .define('C', LOItems.WAGON_COVER.get())
+                .pattern(" C ")
+                .pattern("#A#")
+                .pattern(" B ")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MINING_CART.get())
+                .define('#', Tags.Items.STONE)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .pattern("#A#")
+                .pattern(" B ")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.TRANSPORT_CART.get())
+                .define('#', Items.CHEST)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .pattern(" A#")
+                .pattern(" B ")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PLOW.get())
+                .define('#', Items.IRON_HOE)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .pattern(" # ")
+                .pattern("#A#")
+                .pattern(" B ")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
 
 
 

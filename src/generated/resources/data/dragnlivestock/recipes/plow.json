@@ -3,25 +3,22 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:iron_hoe"
     },
     "A": {
       "item": "dragnlivestock:wagon_body"
     },
     "B": {
       "item": "dragnlivestock:wagon_axel"
-    },
-    "C": {
-      "item": "dragnlivestock:wagon_cover"
     }
   },
   "pattern": [
-    " C ",
+    " # ",
     "#A#",
-    "B B"
+    " B "
   ],
   "result": {
-    "item": "dragnlivestock:covered_wagon"
+    "item": "dragnlivestock:plow"
   },
   "show_notification": true
 }

@@ -3,25 +3,21 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:chest"
     },
     "A": {
       "item": "dragnlivestock:wagon_body"
     },
     "B": {
       "item": "dragnlivestock:wagon_axel"
-    },
-    "C": {
-      "item": "dragnlivestock:wagon_cover"
     }
   },
   "pattern": [
-    " C ",
-    "#A#",
-    "B B"
+    " A#",
+    " B "
   ],
   "result": {
-    "item": "dragnlivestock:covered_wagon"
+    "item": "dragnlivestock:transport_cart"
   },
   "show_notification": true
 }

@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.common.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
@@ -663,7 +664,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         if(this.isBaby()) {
             return super.mobInteract(player, hand);
         } else {
-            this.doPlayerRide(player);
+            if (!(this instanceof FarmGoat)) {
+                this.doPlayerRide(player);
+            }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
     }

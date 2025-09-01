@@ -11,15 +11,15 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class FarmGoatFaceMarkingLayer extends GeoRenderLayer<FarmGoat> {
-    public FarmGoatFaceMarkingLayer(GeoRenderer entityRendererIn) {
+public class FarmGoatEyeLayer extends GeoRenderLayer<FarmGoat> {
+    public FarmGoatEyeLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
     public void render(PoseStack poseStack, FarmGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(animatable.getFaceOverlayLocation());
+            RenderType renderMarkingType = RenderType.entityCutout(animatable.getEyeLocation());
             poseStack.pushPose();
             poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);
@@ -37,18 +37,9 @@ public class FarmGoatFaceMarkingLayer extends GeoRenderLayer<FarmGoat> {
 
     public enum Overlay {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
-        BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/bald.png")),
-        BIG_BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/big_blaze.png")),
-        BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/blaze.png")),
-        BOER_STRIPE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/boer_stripe.png")),
-        BROCKLES(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/brockles.png")),
-        FROSTED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/frosted.png")),
-        LIPSTICK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/lipstick.png")),
-        LIPSTICK_BROCKLES(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/lipstick_brockles.png")),
-        POLL_SPOT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/poll_spot.png")),
-        RED_CHEEK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/red_cheek.png")),
-        SNIP(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/snip.png")),
-        STAR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/star.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/eye/brown.png")),
+        AMBER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/eye/amber.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/eye/blue.png")),
         ;
 
         //Add new entries to bottom when mod is public, else goats will change textures during update.

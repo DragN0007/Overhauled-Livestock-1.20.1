@@ -3,25 +3,21 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "minecraft:planks"
+      "tag": "minecraft:logs"
     },
     "A": {
       "item": "dragnlivestock:wagon_body"
     },
     "B": {
       "item": "dragnlivestock:wagon_axel"
-    },
-    "C": {
-      "item": "dragnlivestock:wagon_cover"
     }
   },
   "pattern": [
-    " C ",
     "#A#",
     "B B"
   ],
   "result": {
-    "item": "dragnlivestock:covered_wagon"
+    "item": "dragnlivestock:lumber_wagon"
   },
   "show_notification": true
 }

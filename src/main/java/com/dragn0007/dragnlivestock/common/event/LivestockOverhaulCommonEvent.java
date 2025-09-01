@@ -21,6 +21,7 @@ import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerry
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.food.Grub;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
@@ -64,6 +65,7 @@ public class LivestockOverhaulCommonEvent {
         event.put(EntityTypes.O_GOAT_ENTITY.get(), OGoat.createAttributes().build());
         event.put(EntityTypes.O_FROG_ENTITY.get(), OFrog.createAttributes().build());
 
+        event.put(EntityTypes.FARM_GOAT_ENTITY.get(), FarmGoat.createAttributes().build());
         event.put(EntityTypes.CARIBOU_ENTITY.get(), Caribou.createBaseHorseAttributes().build());
         event.put(EntityTypes.GRUB_ENTITY.get(), Grub.createAttributes().build());
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
@@ -86,6 +88,7 @@ public class LivestockOverhaulCommonEvent {
     public static void spawnPlacementRegisterEvent(SpawnPlacementRegisterEvent event) {
         event.register(EntityTypes.CARIBOU_ENTITY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(EntityTypes.GRUB_ENTITY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityTypes.FARM_GOAT_ENTITY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
     }
 
 }

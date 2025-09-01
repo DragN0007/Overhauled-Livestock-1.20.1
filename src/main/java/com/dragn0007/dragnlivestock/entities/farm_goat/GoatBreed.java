@@ -7,7 +7,7 @@ public class GoatBreed {
         MEAT,
         NUBIAN,
         WARM,
-        WOOLLY,
+        FIBROUS,
         DAIRY;
 
         public static GoatBreed.Breed breedFromOrdinal(int ordinal) {

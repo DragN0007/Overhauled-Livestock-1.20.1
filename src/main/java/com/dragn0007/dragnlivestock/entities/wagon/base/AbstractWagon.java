@@ -281,7 +281,9 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     protected boolean tryHitching(Player player) {
         final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
                                 player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
-                        h -> h.getLeashHolder() == player && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)).stream()
+                        h -> h.getLeashHolder() == player
+//                                && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)
+                ).stream()
                 .findFirst()
                 .orElse(null);
 

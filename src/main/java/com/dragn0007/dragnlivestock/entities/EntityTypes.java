@@ -267,6 +267,11 @@ public class EntityTypes {
                             MobCategory.MISC)
                     .sized(1.5F, 2.0F)
                     .build(new ResourceLocation(MODID, "goods_cart").toString()));
+    public static final RegistryObject<EntityType<DogSled>> DOG_SLED = ENTITY_TYPES.register("dog_sled",
+            () -> EntityType.Builder.of(DogSled::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 0.5F)
+                    .build(new ResourceLocation(MODID, "dog_sled").toString()));
     public static final RegistryObject<EntityType<MiningCart>> MINING_CART = ENTITY_TYPES.register("mining_cart",
             () -> EntityType.Builder.of(MiningCart::new,
                             MobCategory.MISC)

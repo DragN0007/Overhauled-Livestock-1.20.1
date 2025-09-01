@@ -5,9 +5,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class OGoatGoatRender extends GeoEntityRenderer<OGoat> {
+public class OGoatRender extends GeoEntityRenderer<OGoat> {
 
-    public OGoatGoatRender(EntityRendererProvider.Context renderManager) {
+    public OGoatRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OGoatModel());
         this.addRenderLayer(new OGoatMarkingLayer(this));
         this.addRenderLayer(new OGoatCarpetLayer(this));

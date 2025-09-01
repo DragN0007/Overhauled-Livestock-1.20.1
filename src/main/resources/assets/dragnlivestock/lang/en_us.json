@@ -130,6 +130,12 @@
   "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
 
 
+  "item.dragnlivestock.wagon_wheel_frame": "Wagon Wheel Frame",
+  "item.dragnlivestock.wagon_wheel": "Wagon Wheel",
+  "item.dragnlivestock.wagon_axel": "Wagon Axel",
+  "item.dragnlivestock.wagon_body": "Wagon Body",
+  "item.dragnlivestock.wagon_cover": "Wagon Cover",
+
   "item.dragnlivestock.covered_wagon": "Covered Wagon",
   "entity.dragnlivestock.covered_wagon": "Covered Wagon",
   "item.dragnlivestock.livestock_wagon": "Livestock Wagon",
@@ -140,6 +146,8 @@
   "entity.dragnlivestock.freight_wagon": "Freight Wagon",
   "item.dragnlivestock.goods_cart": "Goods Cart",
   "entity.dragnlivestock.goods_cart": "Goods Cart",
+  "item.dragnlivestock.dog_sled": "Dog Sled",
+  "entity.dragnlivestock.dog_sled": "Dog Sled",
   "item.dragnlivestock.mining_cart": "Mining Cart",
   "entity.dragnlivestock.mining_cart": "Mining Cart",
   "item.dragnlivestock.transport_cart": "Transport Cart",

@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.OxMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.FarmGoatFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.ai.GoatFollowOwnerGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -13,8 +14,10 @@ import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -122,7 +125,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(2, new FarmGoatFollowCaravanGoal(this, (double)1.6F));
 
-		//todo Goat following
+		this.goalSelector.addGoal(6, new GoatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
@@ -275,7 +278,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	@Override
 	public float getStepHeight() {
-		return 2F;
+		return 1F;
 	}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -447,6 +450,15 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(FACE_OVERLAY, overlayVariant);
 	}
 
+	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	public ResourceLocation getEyeLocation() {return FarmGoatFaceMarkingLayer.Overlay.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
+	public int getEyeVariant() {
+		return this.entityData.get(EYES);
+	}
+	public void setEyeVariant(int overlayVariant) {
+		this.entityData.set(EYES, overlayVariant);
+	}
+
 
 	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public int getHornVariant() {
@@ -514,6 +526,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+		if (tag.contains("Breed")) {
+			setBreed(tag.getInt("Breed"));
+		}
+
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
 		}
@@ -524,6 +540,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (tag.contains("Face_Overlay")) {
 			this.setFaceOverlayVariant(tag.getInt("Face_Overlay"));
+		}
+
+		if (tag.contains("Eyes")) {
+			this.setEyeVariant(tag.getInt("Eyes"));
 		}
 
 		if (tag.contains("HornType")) {
@@ -562,8 +582,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Breed", getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
+		tag.putInt("Eyes", this.getEyeVariant());
 		tag.putInt("Face_Overlay", this.getFaceOverlayVariant());
 		tag.putInt("HornType", getHornVariant());
 		tag.putInt("Gender", getGender());
@@ -579,8 +601,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(EYES, 0);
 		this.entityData.define(FACE_OVERLAY, 0);
 		this.entityData.define(HORN_TYPE, 0);
 		this.entityData.define(GENDER, 0);
@@ -598,8 +622,8 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			data = new AgeableMobGroupData(0.2F);
 		}
 		Random random = new Random();
-		this.setGender(random.nextInt(Gender.values().length));
 
+		this.setGender(random.nextInt(Gender.values().length));
 		this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
@@ -607,10 +631,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			this.setMarkingByBreed();
 			this.setFaceMarkingByBreed();
 			this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			this.setEyeVariant(random.nextInt(FarmGoatEyeLayer.Overlay.values().length));
 		} else {
 			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
 			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
 			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			this.setEyeVariant(random.nextInt(FarmGoatEyeLayer.Overlay.values().length));
 			this.setHornVariant(random.nextInt(BreedHorns.values().length));
 		}
 
@@ -706,45 +732,155 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			kid.setHornVariant(hornType);
 		}
 
-		if (kid.getBreed() == 10) {
-			kid.setGender(1);
-		} else {
-			kid.setGender(random.nextInt(FarmGoat.Gender.values().length));
-		}
+		kid.setGender(random.nextInt(FarmGoat.Gender.values().length));
 
 		return kid;
 	}
 
 	public void setColorByBreed() {
 
-		if (random.nextDouble() < 0.10) {
+		if (this.getBreed() == 0) { //classic
 			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
-		} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
-			int[] variants = {0, 5, 6, 10};
-			int randomIndex = new Random().nextInt(variants.length);
-			this.setVariant(variants[randomIndex]);
-		} else if (random.nextDouble() > 0.30) {
-			this.setVariant(10);
+		}
+
+		if (this.getBreed() == 1) { //meat
+			if (random.nextDouble() <= 0.03) {
+				this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.03) {
+				int[] variants = {0, 1, 3, 4, 7, 10, 11, 12, 13, 14, 15, 16, 18, 20};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) { //nubian
+			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
+		}
+
+		if (this.getBreed() == 3) { //warm
+			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
+		}
+
+		if (this.getBreed() == 4) { //fibrous
+			if (random.nextDouble() <= 0.03) {
+				this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.03) {
+				int[] variants = {0, 1, 3, 4, 7, 10, 11, 12, 13, 14, 15, 16, 18, 20};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 5) { //dairy
+			if (random.nextDouble() <= 0.06) {
+				this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.06) {
+				int[] variants = {2, 5, 6, 8, 9, 17, 19};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
 		}
 
 	}
 
 	public void setMarkingByBreed() {
 
-		if (random.nextDouble() < 0.10) {
+		if (this.getBreed() == 0) { //classic
 			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
-		} else if (random.nextDouble() > 0.10) {
-			this.setOverlayVariant(0);
+		}
+
+		if (this.getBreed() == 1) { //meat
+			if (random.nextDouble() <= 0.10) {
+				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.40) {
+				int[] variants = {22, 23, 24, 25};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else {
+				this.setOverlayVariant(35);
+			}
+		}
+
+		if (this.getBreed() == 2) { //nubian
+			if (random.nextDouble() <= 0.10) {
+				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {29, 30, 31, 32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //warm
+			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+		}
+
+		if (this.getBreed() == 4) { //fibrous
+			if (random.nextDouble() <= 0.02) {
+				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //dairy
+			if (random.nextDouble() <= 0.15) {
+				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				this.setOverlayVariant(0);
+			}
 		}
 
 	}
 
 	public void setFaceMarkingByBreed() {
 
-		if (random.nextDouble() < 0.10) {
+		if (this.getBreed() == 0) { //classic
 			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
-		} else if (random.nextDouble() > 0.10) {
-			this.setFaceOverlayVariant(0);
+		}
+
+		if (this.getBreed() == 1) { //meat
+			if (random.nextDouble() <= 0.05) {
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.40) {
+				int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 11};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setFaceOverlayVariant(variants[randomIndex]);
+			} else {
+				int[] variants = {2, 3};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setFaceOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 2) { //nubian
+			if (random.nextDouble() <= 0.05) {
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {6, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setFaceOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 3) { //warm
+			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+		}
+
+		if (this.getBreed() == 4) { //fibrous
+			if (random.nextDouble() <= 0.02) {
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				this.setFaceOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //dairy
+			if (random.nextDouble() <= 0.15) {
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				this.setFaceOverlayVariant(0);
+			}
 		}
 
 	}
@@ -819,7 +955,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void dropWoolByColorAndMarking() {
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			if (this.getVariant() == 0 && !(this.getOverlayVariant() == 3)) {
+			if (this.getVariant() == 3 && !(this.getOverlayVariant() == 38)) {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -831,10 +967,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				if (this.getOverlayVariant() == 0) {
 					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
 				}
-			}
-
-			if ((this.getVariant() == 2 || this.getVariant() == 3 || this.getVariant() == 6 || this.getVariant() == 7 || this.getVariant() == 8)
-					&& !(this.getOverlayVariant() == 3)) {
+			} else if ((this.getVariant() == 0 || this.getVariant() == 1 ||
+					this.getVariant() == 2 || this.getVariant() == 4 ||
+					this.getVariant() == 6 || this.getVariant() == 7 ||
+					this.getVariant() == 10 || this.getVariant() == 14 ||
+					this.getVariant() == 15 || this.getVariant() == 18)
+					&& !(this.getOverlayVariant() == 38)) {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -846,9 +984,43 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				if (this.getOverlayVariant() == 0) {
 					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
 				}
-			}
+			} else if ((this.getVariant() == 16 || this.getVariant() == 17) && !(this.getOverlayVariant() == 38)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
+				}
 
-			if ((this.getVariant() == 1 || this.getVariant() == 5) && !(this.getOverlayVariant() == 3)) {
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
+				}
+			} else if (this.getVariant() == 12 || this.getVariant() == 13 && !(this.getOverlayVariant() == 38)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
+				}
+			} else if ((this.getVariant() == 20) && !(this.getOverlayVariant() == 38)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				}
+			} else {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -862,55 +1034,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				}
 			}
 
-			if (this.getVariant() == 6 && !(this.getOverlayVariant() == 3)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
-				}
-			}
-
-			if ((this.getVariant() == 4 || this.getVariant() == 9 || this.getVariant() == 10) && !(this.getOverlayVariant() == 3)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
-				}
-			}
-
-
-			if (this.getOverlayVariant() == 1 || this.getOverlayVariant() == 7 || this.getOverlayVariant() == 9 ||
-					this.getOverlayVariant() == 10  || this.getOverlayVariant() == 12 || this.getOverlayVariant() == 13 ||
-					this.getOverlayVariant() == 14 || this.getOverlayVariant() == 15) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
-				}
-			}
-
-			if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6 || this.getOverlayVariant() == 6) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
-				}
-			}
-
-
-			if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
+			if (this.getOverlayVariant() == 38) { //pure white, only drop white wool
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -925,7 +1049,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 			//if vanilla loot
 		} else {
-			if (this.getVariant() == 0 && !(this.getOverlayVariant() == 3)) {
+			if (this.getVariant() == 3 && !(this.getOverlayVariant() == 38)) {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(Items.BLACK_WOOL, 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -937,10 +1061,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				if (this.getOverlayVariant() == 0) {
 					this.spawnAtLocation(Items.BLACK_WOOL, 1);
 				}
-			}
-
-			if ((this.getVariant() == 2 || this.getVariant() == 3 || this.getVariant() == 6 || this.getVariant() == 7 || this.getVariant() == 8)
-					&& !(this.getOverlayVariant() == 3)) {
+			} else if ((this.getVariant() == 0 || this.getVariant() == 1 ||
+					this.getVariant() == 2 || this.getVariant() == 4 ||
+					this.getVariant() == 6 || this.getVariant() == 7 ||
+					this.getVariant() == 10 || this.getVariant() == 14 ||
+					this.getVariant() == 15 || this.getVariant() == 18)
+					&& !(this.getOverlayVariant() == 38)) {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(Items.BROWN_WOOL, 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -952,9 +1078,43 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				if (this.getOverlayVariant() == 0) {
 					this.spawnAtLocation(Items.BROWN_WOOL, 1);
 				}
-			}
+			} else if ((this.getVariant() == 16 || this.getVariant() == 17) && !(this.getOverlayVariant() == 38)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 1);
+				}
 
-			if ((this.getVariant() == 1 || this.getVariant() == 5) && !(this.getOverlayVariant() == 3)) {
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.GRAY_WOOL, 1);
+				}
+			} else if (this.getVariant() == 12 || this.getVariant() == 13 && !(this.getOverlayVariant() == 38)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
+				}
+			} else if ((this.getVariant() == 20) && !(this.getOverlayVariant() == 38)) {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 3);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 2);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 1);
+				}
+
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(Items.WHITE_WOOL, 1);
+				}
+			} else {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(Items.GRAY_WOOL, 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
@@ -968,54 +1128,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				}
 			}
 
-			if (this.getVariant() == 6 && !(this.getOverlayVariant() == 3)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(Items.LIGHT_GRAY_WOOL, 1);
-				}
-			}
-
-			if ((this.getVariant() == 4 || this.getVariant() == 9 || this.getVariant() == 10) && !(this.getOverlayVariant() == 3)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(Items.WHITE_WOOL, 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(Items.WHITE_WOOL, 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(Items.WHITE_WOOL, 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(Items.WHITE_WOOL, 1);
-				}
-			}
-
-			if (this.getOverlayVariant() == 1 || this.getOverlayVariant() == 7 || this.getOverlayVariant() == 9 ||
-					this.getOverlayVariant() == 10  || this.getOverlayVariant() == 12 || this.getOverlayVariant() == 13 ||
-					this.getOverlayVariant() == 14 || this.getOverlayVariant() == 15) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(Items.WHITE_WOOL, 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(Items.WHITE_WOOL, 1);
-				}
-			}
-
-			if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(Items.BLACK_WOOL, 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(Items.BLACK_WOOL, 1);
-				}
-			}
-
-
-			if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
+			if (this.getOverlayVariant() == 38) { //pure white, only drop white wool
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(Items.WHITE_WOOL, 3);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {

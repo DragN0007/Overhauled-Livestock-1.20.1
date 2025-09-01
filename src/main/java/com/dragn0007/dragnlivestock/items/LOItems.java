@@ -81,6 +81,8 @@ public class LOItems {
     public static final RegistryObject<Item> PEACH_MOOBLOOM_SPAWN_EGG = ITEMS.register("peach_moobloom_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.PEACH_MOOBLOOM_ENTITY, 0xffd6c3, 0xffe9dd, new Item.Properties().stacksTo(64)));
 
+    public static final RegistryObject<Item> FARM_GOAT_SPAWN_EGG = ITEMS.register("farm_goat_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.FARM_GOAT_ENTITY, 0xae6e40, 0x6f3e20, new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> CARIBOU_SPAWN_EGG = ITEMS.register("caribou_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.CARIBOU_ENTITY, 0x846957, 0xfff7ed, new Item.Properties().stacksTo(64)));
 
@@ -796,6 +798,8 @@ public class LOItems {
             () -> new WagonItem(EntityTypes.LUMBER_WAGON::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> GOODS_CART = ITEMS.register("goods_cart",
             () -> new WagonItem(EntityTypes.GOODS_CART::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> DOG_SLED = ITEMS.register("dog_sled",
+            () -> new WagonItem(EntityTypes.DOG_SLED::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MINING_CART = ITEMS.register("mining_cart",
             () -> new WagonItem(EntityTypes.MINING_CART::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TRANSPORT_CART = ITEMS.register("transport_cart",

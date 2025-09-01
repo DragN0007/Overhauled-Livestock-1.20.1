@@ -18,10 +18,10 @@
   "pattern": [
     " C ",
     "#A#",
-    "B B"
+    " B "
   ],
   "result": {
-    "item": "dragnlivestock:covered_wagon"
+    "item": "dragnlivestock:goods_cart"
   },
   "show_notification": true
 }
