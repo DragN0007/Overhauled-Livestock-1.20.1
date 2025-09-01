@@ -12,10 +12,14 @@ import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -37,7 +41,6 @@ public class LivestockOverhaul {
 
     public LivestockOverhaul() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
         LOItems.register(eventBus);
         LOItemGroup.register(eventBus);
@@ -59,40 +62,57 @@ public class LivestockOverhaul {
 
         MinecraftForge.EVENT_BUS.register(this);
 
-
-
         System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
         System.out.println("[DragN's Livestock Overhaul!] Do not remove this mod without running the Failsafe Config!");
-
-        //debug
-        if (ModList.get().isLoaded("jade")) {
-            System.out.println("[DragN's Livestock Overhaul!] Jade is installed! We're compatible!");
-        } else {
-            System.out.println("[DragN's Livestock Overhaul!] Jade is not installed.");
-        }
-
-        if (ModList.get().isLoaded("deadlydinos")) {
-            System.out.println("[DragN's Livestock Overhaul!] Deadly Dinos is installed! We're compatible!");
-        } else {
-            System.out.println("[DragN's Livestock Overhaul!] Deadly Dinos is not installed.");
-        }
-
-        if (ModList.get().isLoaded("medievalembroidery")) {
-            System.out.println("[DragN's Livestock Overhaul!] Medieval Embroidery is installed! We're compatible!");
-        } else {
-            System.out.println("[DragN's Livestock Overhaul!] Medieval Embroidery is not installed.");
-        }
-
-        if (ModList.get().isLoaded("tfc")) {
-            System.out.println("[DragN's Livestock Overhaul!] TerraFirmaCraft is installed! We're compatible!");
-        } else {
-            System.out.println("[DragN's Livestock Overhaul!] TerraFirmaCraft is not installed.");
-        }
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-//        LivestockTrader.registerTrades();
-//        OVillagerTradingManager.register(FMLJavaModLoadingContext.get().getModEventBus());
+    public static void warn(Player entity){
+
+        if (!LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+            return;
+        }
+
+        entity.displayClientMessage(Component.empty().append
+                (Component.literal(
+                                "[DragN's Livestock Overhaul!] Debug Logs are turned on! You can disable this message by switching Debug Logs to False in the livestock-overhaul-common.toml." +
+                                        "\nChecking for compatible mods...")
+                        .withStyle(ChatFormatting.GOLD)), false);
+
+        if (ModList.get().isLoaded("deadlydinos") || ModList.get().isLoaded("medievalembroidery") ||
+                ModList.get().isLoaded("tfc") || ModList.get().isLoaded("jade")) {
+            if (ModList.get().isLoaded("deadlydinos")) {
+                entity.displayClientMessage(Component.empty().append
+                        (Component.literal(
+                                        "[DragN's Livestock Overhaul!] Found DragN's Deadly Dinos!")
+                                .withStyle(ChatFormatting.GOLD)), false);
+            }
+
+            if (ModList.get().isLoaded("medievalembroidery")) {
+                entity.displayClientMessage(Component.empty().append
+                        (Component.literal(
+                                        "[DragN's Livestock Overhaul!] Found Medieval Embroidery!")
+                                .withStyle(ChatFormatting.GOLD)), false);
+            }
+
+            if (ModList.get().isLoaded("tfc")) {
+                entity.displayClientMessage(Component.empty().append
+                        (Component.literal(
+                                        "[DragN's Livestock Overhaul!] Found TerraFirmaCraft!")
+                                .withStyle(ChatFormatting.GOLD)), false);
+            }
+
+            if (ModList.get().isLoaded("jade")) {
+                entity.displayClientMessage(Component.empty().append
+                        (Component.literal(
+                                        "[DragN's Livestock Overhaul!] Found Jade!")
+                                .withStyle(ChatFormatting.GOLD)), false);
+            }
+        } else {
+            entity.displayClientMessage(Component.empty().append
+                    (Component.literal(
+                                    "[DragN's Livestock Overhaul!] Found no directly-compatible mods.")
+                            .withStyle(ChatFormatting.GOLD)), false);
+        }
     }
 
     public static final EntityDataSerializer<Plow.Mode> MODE = EntityDataSerializer.simpleEnum(Plow.Mode.class);
@@ -114,8 +134,6 @@ public class LivestockOverhaul {
             return resourceLocation;
         }
     };
-    public static final EntityDataSerializer<Optional<DyeColor>> DYE_COLOR = EntityDataSerializer.optional(FriendlyByteBuf::writeEnum, (friendlyByteBuf) -> friendlyByteBuf.readEnum(DyeColor.class));
-
 
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MODID, path);
@@ -123,7 +141,6 @@ public class LivestockOverhaul {
 
     static {
         EntityDataSerializers.registerSerializer(RESOURCE_LOCATION);
-        EntityDataSerializers.registerSerializer(DYE_COLOR);
         EntityDataSerializers.registerSerializer(MODE);
         EntityDataSerializers.registerSerializer(MODE_2);
     }
