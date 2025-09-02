@@ -51,7 +51,7 @@ public class MountLookAtPlayerGoal extends Goal {
    public boolean canUse() {
       if (this.mob.getRandom().nextFloat() >= this.probability) {
          return false;
-      } else if (this.mob.isGroundTied() || this.mob.shouldSleep()) {
+      } else if (this.mob.isGroundTied()) {
          return false;
       } else {
          if (this.mob.getTarget() != null) {

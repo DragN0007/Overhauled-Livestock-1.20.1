@@ -218,7 +218,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				return InteractionResult.SUCCESS;
 			}
 
-			if (!this.hasChest() && itemstack.is(Blocks.CHEST.asItem()) && this.isOwnedBy(player)) {
+			if (!this.hasChest() && itemstack.is(Blocks.CHEST.asItem())) {
 				this.setChest(true);
 				this.playChestEquipsSound();
 				if (!player.getAbilities().instabuild) {
@@ -247,6 +247,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			if (!this.level().isClientSide) {
 				if (this.random.nextInt(5) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 					this.setTamed(true);
+					this.setOwnerUUID(player.getUUID());
 					this.level().broadcastEntityEvent(this, (byte)7);
 				} else {
 					this.level().broadcastEntityEvent(this, (byte)6);
@@ -257,6 +258,11 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		} else {
 			return super.mobInteract(player, hand);
 		}
+	}
+
+	@Override
+	public boolean canWearArmor() {
+		return false;
 	}
 
 	public int replenishMilkCounter = 0;

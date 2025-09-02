@@ -210,7 +210,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 				return InteractionResult.SUCCESS;
 			}
 
-			if (!this.hasChest() && itemstack.is(Blocks.CHEST.asItem()) && this.isOwnedBy(player)) {
+			if (!this.hasChest() && itemstack.is(Blocks.CHEST.asItem())) {
 				this.setChest(true);
 				this.playChestEquipsSound();
 				if (!player.getAbilities().instabuild) {

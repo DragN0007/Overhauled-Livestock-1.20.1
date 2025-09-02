@@ -291,19 +291,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
-    public int sleepCounter = this.random.nextInt(300) + 300;
-    public int staySleepingCounter = 0;
-    protected boolean sleeping = false;
-    public boolean isSleeping() {
-        return this.sleeping;
-    }
-    public void setSleeping(boolean sleeping) {
-        this.sleeping = sleeping;
-    }
-    public boolean shouldSleep() {
-        return ((this.level().isNight() && !this.isVehicle()) || (this.isGroundTied() && !this.isVehicle()));
-    }
-
     public boolean isOwnedBy(LivingEntity entity) {
         return entity == this.getOwner();
     }

@@ -119,32 +119,11 @@ public class LivestockOverhaul {
     public static final EntityDataSerializer<Plow.Mode> MODE = EntityDataSerializer.simpleEnum(Plow.Mode.class);
     public static final EntityDataSerializer<LargePlow.Mode> MODE_2 = EntityDataSerializer.simpleEnum(LargePlow.Mode.class);
 
-//    public static final EntityDataSerializer<ResourceLocation> RESOURCE_LOCATION = new EntityDataSerializer<>() {
-//        @Override
-//        public void write(FriendlyByteBuf buf, ResourceLocation resourceLocation) {
-//            buf.writeResourceLocation(resourceLocation);
-//        }
-//
-//        @Override
-//        public ResourceLocation read(FriendlyByteBuf buf) {
-//            return buf.readResourceLocation();
-//        }
-//
-//        @Override
-//        public ResourceLocation copy(ResourceLocation resourceLocation) {
-//            return resourceLocation;
-//        }
-//    };
-//    public static final EntityDataSerializer<Optional<DyeColor>> DYE_COLOR = EntityDataSerializer.optional(FriendlyByteBuf::writeEnum, (friendlyByteBuf) -> friendlyByteBuf.readEnum(DyeColor.class));
-
-
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MODID, path);
     }
 
     static {
-//        EntityDataSerializers.registerSerializer(RESOURCE_LOCATION);
-//        EntityDataSerializers.registerSerializer(DYE_COLOR);
         EntityDataSerializers.registerSerializer(MODE);
         EntityDataSerializers.registerSerializer(MODE_2);
     }
