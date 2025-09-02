@@ -196,17 +196,13 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 
 	@Override
 	public void setVariant(int variant) {
-		this.entityData.set(VARIANT_TEXTURE, HeadlessHorsemanModel.Variant.variantFromOrdinal(variant).resourceLocation);
+		this.entityData.set(VARIANT_TEXTURE, HeadlessHorsemanModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 		this.entityData.set(VARIANT, variant);
 	}
 
 	@Override
 	public void setVariantTexture(String variant) {
-		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
-		if (resourceLocation == null) {
-			resourceLocation = HeadlessHorsemanModel.Variant.HEADLESS_HORSEMAN.resourceLocation;
-		}
-		this.entityData.set(VARIANT_TEXTURE, resourceLocation);
+		this.entityData.set(VARIANT_TEXTURE, variant);
 	}
 
 	@Override

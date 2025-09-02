@@ -11,6 +11,8 @@ import software.bernie.geckolib.model.data.EntityModelData;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
 
@@ -137,13 +139,15 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         return HorseBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+
     @Override
     public ResourceLocation getTextureResource(OHorse object) {
         if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
             if (month == Month.DECEMBER && (day == 24 || day == 25)) {
                 return object.getReindeerTextureResource();
             }
-            return object.getTextureResource();
+            return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
         } else if (object.getDecompVariant() == 4) {
             return OHorseDecompLayer.UndeadStage.SKELETAL.resourceLocation;
         } else if (object.getDecompVariant() == 5) {
@@ -151,7 +155,7 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         } else if (object.getDecompVariant() == 6) {
             return OHorseDecompLayer.UndeadStage.STRAY.resourceLocation;
         }
-        return object.getTextureResource();
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override

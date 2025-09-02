@@ -14,10 +14,8 @@ import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -432,7 +430,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public ResourceLocation getOverlayLocation() {return FarmGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public String getOverlayLocation() {return FarmGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}

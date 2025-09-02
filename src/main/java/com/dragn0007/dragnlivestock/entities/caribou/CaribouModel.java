@@ -9,6 +9,9 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
 
     public CaribouModel() {
@@ -68,9 +71,11 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
         return MODEL;
     }
 
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+
     @Override
     public ResourceLocation getTextureResource(Caribou object) {
-        return object.getTextureResource();
+        return TEXTURE_CACHE.computeIfAbsent(object.getOverlayLocation(), ResourceLocation::tryParse);
     }
 
     @Override

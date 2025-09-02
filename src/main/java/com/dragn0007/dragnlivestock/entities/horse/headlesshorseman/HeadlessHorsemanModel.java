@@ -1,8 +1,12 @@
 package com.dragn0007.dragnlivestock.entities.horse.headlesshorseman;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HeadlessHorsemanModel extends GeoModel<HeadlessHorseman> {
 
@@ -25,9 +29,12 @@ public class HeadlessHorsemanModel extends GeoModel<HeadlessHorseman> {
         return MODEL;
     }
 
+
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+
     @Override
     public ResourceLocation getTextureResource(HeadlessHorseman object) {
-        return object.getTextureResource();
+        return TEXTURE_CACHE.computeIfAbsent(object.getOverlayLocation(), ResourceLocation::tryParse);
     }
 
     @Override

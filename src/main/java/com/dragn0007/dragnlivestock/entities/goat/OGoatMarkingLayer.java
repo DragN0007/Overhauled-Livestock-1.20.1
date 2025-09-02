@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,15 +12,23 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OGoatMarkingLayer extends GeoRenderLayer<OGoat> {
     public OGoatMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+    public ResourceLocation getTexture(OGoat animatable) {
+        return TEXTURE_CACHE.computeIfAbsent(animatable.getOverlayLocation(), ResourceLocation::tryParse);
+    }
+
     @Override
     public void render(PoseStack poseStack, OGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((OGoat) animatable).getOverlayLocation());
+            RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
             poseStack.pushPose();
             poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);

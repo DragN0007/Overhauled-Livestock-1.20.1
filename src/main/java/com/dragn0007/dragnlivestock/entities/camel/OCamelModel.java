@@ -9,6 +9,9 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
 
     public OCamelModel() {
@@ -61,9 +64,11 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
         return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+
     @Override
     public ResourceLocation getTextureResource(OCamel object) {
-        return object.getTextureResource();
+        return TEXTURE_CACHE.computeIfAbsent(object.getOverlayLocation(), ResourceLocation::tryParse);
     }
 
     @Override

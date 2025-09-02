@@ -410,7 +410,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
-	public ResourceLocation getOverlayLocation() {return OGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public String getOverlayLocation() {return OGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}

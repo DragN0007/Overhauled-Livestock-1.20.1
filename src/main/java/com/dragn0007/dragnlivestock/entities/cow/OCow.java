@@ -534,7 +534,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public ResourceLocation getOverlayLocation() {return BovineMarkingOverlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public String getOverlayLocation() {return BovineMarkingOverlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}

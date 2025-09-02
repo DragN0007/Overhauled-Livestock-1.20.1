@@ -525,18 +525,14 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
-		this.entityData.set(VARIANT_TEXTURE, CaribouModel.Variant.variantFromOrdinal(variant).resourceLocation);
+		this.entityData.set(VARIANT_TEXTURE, CaribouModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
-	public static final EntityDataAccessor<ResourceLocation> VARIANT_TEXTURE = SynchedEntityData.defineId(Caribou.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public ResourceLocation getTextureResource() {
+	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.STRING);
+	public String getTextureResource() {
 		return this.entityData.get(VARIANT_TEXTURE);
 	}
 	public void setVariantTexture(String variant) {
-		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
-		if (resourceLocation == null) {
-			resourceLocation = CaribouModel.Variant.BAY.resourceLocation;
-		}
-		this.entityData.set(VARIANT_TEXTURE, resourceLocation);
+		this.entityData.set(VARIANT_TEXTURE, variant);
 	}
 
 
@@ -546,18 +542,14 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
-		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation);
+		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation.toString());
 	}
-	public static final EntityDataAccessor<ResourceLocation> OVERLAY_TEXTURE = SynchedEntityData.defineId(Caribou.class, LivestockOverhaul.RESOURCE_LOCATION);
-	public ResourceLocation getOverlayLocation() {
+	public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.STRING);
+	public String getOverlayLocation() {
 		return this.entityData.get(OVERLAY_TEXTURE);
 	}
 	public void setOverlayVariantTexture(String variant) {
-		ResourceLocation resourceLocation = ResourceLocation.tryParse(variant);
-		if (resourceLocation == null) {
-			resourceLocation = EquineMarkingOverlay.NONE.resourceLocation;
-		}
-		this.entityData.set(OVERLAY_TEXTURE, resourceLocation);
+		this.entityData.set(OVERLAY_TEXTURE, variant);
 	}
 
 
@@ -712,8 +704,8 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(GENDER, 0);
-		this.entityData.define(VARIANT_TEXTURE, CaribouModel.Variant.BAY.resourceLocation);
-		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation);
+		this.entityData.define(VARIANT_TEXTURE, CaribouModel.Variant.BAY.resourceLocation.toString());
+		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation.toString());
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
 		this.entityData.define(TAGGED, false);
 		this.entityData.define(FEATHERING, 0);

@@ -11,15 +11,23 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FarmGoatMarkingLayer extends GeoRenderLayer<FarmGoat> {
     public FarmGoatMarkingLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+    public ResourceLocation getTexture(FarmGoat animatable) {
+        return TEXTURE_CACHE.computeIfAbsent(animatable.getOverlayLocation(), ResourceLocation::tryParse);
+    }
+
     @Override
     public void render(PoseStack poseStack, FarmGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((FarmGoat) animatable).getOverlayLocation());
+            RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
             poseStack.pushPose();
             poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);
