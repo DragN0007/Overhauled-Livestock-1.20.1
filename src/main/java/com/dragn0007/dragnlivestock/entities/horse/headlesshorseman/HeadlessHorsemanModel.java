@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.horse.headlesshorseman;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

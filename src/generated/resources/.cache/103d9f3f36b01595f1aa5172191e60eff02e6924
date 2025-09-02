@@ -1,3 +1,7 @@
-// 1.20.1	2025-07-17T16:07:38.0075874	Registries
+// 1.20.1	2025-09-02T00:09:03.1936564	Registries
 494dd574e42a07e6250e8608e89101e422f6d1b5 data/dragnlivestock/forge/biome_modifier/caribou.json
+9599b27276b714b564d1ba7ec8b88f65cb9bddb0 data/dragnlivestock/forge/biome_modifier/farm_goat_cold.json
+b7fcd6f0897c0d8579b73f3daab531e821959199 data/dragnlivestock/forge/biome_modifier/farm_goat_hot.json
+58c0f54ea90af4d4f2892bc5475db64c26bfe9ec data/dragnlivestock/forge/biome_modifier/farm_goat_plains.json
+242ee9ad1603e2d321c16cb4e0afd881bde85d4f data/dragnlivestock/forge/biome_modifier/farm_goat_sparse.json
 8f001747f1fd53407d2692431e2f019889150a4c data/dragnlivestock/forge/biome_modifier/grub.json

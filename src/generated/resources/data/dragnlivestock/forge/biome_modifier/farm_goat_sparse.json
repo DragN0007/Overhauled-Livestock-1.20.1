@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#forge:is_sparse",
+  "spawners": {
+    "type": "dragnlivestock:farm_goat",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 2
+  }
+}

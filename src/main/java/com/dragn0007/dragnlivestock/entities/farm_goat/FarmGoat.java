@@ -48,9 +48,11 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
@@ -214,6 +216,17 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 				this.gameEvent(GameEvent.EAT, this);
 				return InteractionResult.SUCCESS;
+			}
+
+			if (!this.hasChest() && itemstack.is(Blocks.CHEST.asItem()) && this.isOwnedBy(player)) {
+				this.setChest(true);
+				this.playChestEquipsSound();
+				if (!player.getAbilities().instabuild) {
+					itemstack.shrink(1);
+				}
+
+				this.createInventory();
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 		}
 
@@ -622,7 +635,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		Random random = new Random();
 
 		this.setGender(random.nextInt(Gender.values().length));
-		this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
+		this.setBreedByBiome();
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
@@ -643,6 +656,34 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.ageBoundaryReached();
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+	}
+
+	public void setBreedByBiome() {
+		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+			if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+				if (random.nextDouble() < 0.10) {
+					this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
+				} else {
+					this.setBreed(3);
+				}
+			} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+				if (random.nextDouble() < 0.10) {
+					this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
+				} else {
+					this.setBreed(4);
+				}
+			} else {
+				if (random.nextDouble() < 0.10) {
+					this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
+				} else {
+					int[] variants = {0, 1, 2, 5};
+					int randomIndex = new Random().nextInt(variants.length);
+					this.setBreed(variants[randomIndex]);
+				}
+			}
+		} else {
+			this.setBreed(random.nextInt(GoatBreed.Breed.values().length));
+		}
 	}
 
 	@Override

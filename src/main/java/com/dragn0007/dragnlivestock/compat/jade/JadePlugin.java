@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
@@ -41,5 +42,6 @@ public class JadePlugin implements IWailaPlugin {
         registration.registerEntityComponent(new RabbitBreedTooltip(), ORabbit.class);
         registration.registerEntityComponent(new SheepBreedTooltip(), OSheep.class);
         registration.registerEntityComponent(new UnicornSpeciesTooltip(), Unicorn.class);
+        registration.registerEntityComponent(new GoatBreedTooltip(), FarmGoat.class);
     }
 }

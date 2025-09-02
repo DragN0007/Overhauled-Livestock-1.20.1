@@ -47,6 +47,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -207,6 +208,17 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 				this.gameEvent(GameEvent.EAT, this);
 				return InteractionResult.SUCCESS;
+			}
+
+			if (!this.hasChest() && itemstack.is(Blocks.CHEST.asItem()) && this.isOwnedBy(player)) {
+				this.setChest(true);
+				this.playChestEquipsSound();
+				if (!player.getAbilities().instabuild) {
+					itemstack.shrink(1);
+				}
+
+				this.createInventory();
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
 		}
 
