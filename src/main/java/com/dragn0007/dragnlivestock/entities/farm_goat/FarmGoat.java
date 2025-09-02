@@ -140,7 +140,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return super.calculateFallDamage(p_149389_, p_149390_) - 10;
 	}
 
-	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_GOAT_EATS); //todo
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.FARM_GOAT_EATS);
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
@@ -239,7 +239,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (!this.isTamed() && this.isFood(itemstack)) {
+		if (!this.isTamed() && (itemstack.is(Items.RAW_COPPER) || itemstack.is(Items.COPPER_INGOT))) {
 			if (!player.getAbilities().instabuild) {
 				itemstack.shrink(1);
 			}
@@ -992,7 +992,27 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
-
+			if (this.getBreed() == 1) {
+				if (random.nextDouble() < 0.40) {
+					this.spawnAtLocation(LOItems.CHEVON.get(), 2);
+					this.spawnAtLocation(LOItems.CHEVON_RIB.get(), 2);
+					this.spawnAtLocation(LOItems.CHEVON_LOIN.get(), 2);
+					this.spawnAtLocation(Items.LEATHER, 2);
+				} else if (random.nextDouble() > 0.40) {
+					this.spawnAtLocation(LOItems.CHEVON.get());
+					this.spawnAtLocation(LOItems.CHEVON_RIB.get());
+					this.spawnAtLocation(LOItems.CHEVON_LOIN.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			} else {
+				if (!(this.getBreed() == 4)) {
+					if (random.nextDouble() < 0.40) {
+						this.spawnAtLocation(Items.LEATHER, 2);
+					} else if (random.nextDouble() > 0.40) {
+						this.spawnAtLocation(Items.LEATHER);
+					}
+				}
+			}
 		}
 
 	}
@@ -1015,8 +1035,8 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			} else if ((this.getVariant() == 0 || this.getVariant() == 1 ||
 					this.getVariant() == 2 || this.getVariant() == 4 ||
 					this.getVariant() == 6 || this.getVariant() == 7 ||
-					this.getVariant() == 10 || this.getVariant() == 14 ||
-					this.getVariant() == 15 || this.getVariant() == 18)
+					this.getVariant() == 10 || this.getVariant() == 11 ||
+					this.getVariant() == 14 || this.getVariant() == 15 || this.getVariant() == 18)
 					&& !(this.getOverlayVariant() == 38)) {
 				if (random.nextDouble() < 0.20) {
 					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 3);

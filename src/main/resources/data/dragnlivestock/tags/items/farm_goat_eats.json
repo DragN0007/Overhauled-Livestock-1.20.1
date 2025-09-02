@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:copper_ingot",
+    "minecraft:raw_copper",
+    "#dragnlivestock:o_goat_eats"
+  ]
+}

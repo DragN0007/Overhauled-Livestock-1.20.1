@@ -1,0 +1,15 @@
+{
+  "name": "O-Farm Goat",
+  "icon": "minecraft:goat_horn",
+  "category": "dragnlivestock:animals_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Farm Goats drop chevon, goat horns and wool, and can be milked for goat milk. Farm Goats are tamed with Copper, and can be bred/ healed with any normal Goat food. They can carry chests and follow their owner while doing so, along with being able to climb up to 2 blocks vertically. Multiple Goats can be put into a caravan, like Llamas."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O-Farm Goats come in multiple different breeds. These include: $(br2)-(0) Classic $(br)-(1) Meat $(br)-(2) Nubian $(br)-(3) Warm $(br)-(4) Fibrous $(br)-(5) Dairy $(br)Most goats drop leather, but only Fibrous goats can be shorn or killed for wool."
+    }
+  ]
+}

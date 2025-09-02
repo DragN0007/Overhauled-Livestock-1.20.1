@@ -26,6 +26,7 @@ public class LOTags {
         public static final TagKey<Item> O_PIG_EATS = tag("o_pig_eats");
         public static final TagKey<Item> O_RABBIT_EATS = tag("o_rabbit_eats");
         public static final TagKey<Item> O_SHEEP_EATS = tag("o_sheep_eats");
+        public static final TagKey<Item> FARM_GOAT_EATS = tag("farm_goat_eats");
         public static final TagKey<Item> GRUB_EATS = tag("grub_eats");
 
         public static final TagKey<Item> RAW_CHICKEN = forgeTag("raw_chicken");

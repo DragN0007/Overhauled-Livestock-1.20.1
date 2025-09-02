@@ -1,11 +1,11 @@
 {
-  "name": "O-Goat",
+  "name": "O-Mountain Goat",
   "icon": "minecraft:goat_horn",
   "category": "dragnlivestock:animals_category",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Mountain Goats (O-Goats) drop chevon, goat horns and wool, and can be milked for goat milk. They can be carpeted and can carry chests, along with being able to climb up to 2 blocks vertically and walk atop powdered snow without falling in. They’re also strong enough to carry a player, but can’t be controlled. Multiple Goats can be put into a caravan, like Llamas."
+      "text": "O-Mountain Goats drop chevon, goat horns and wool, and can be milked for goat milk. They can be carpeted and can carry chests, along with being able to climb up to 2 blocks vertically and walk atop powdered snow without falling in. They’re also strong enough to carry a player, but can’t be controlled. Multiple Goats can be put into a caravan, like Llamas."
     }
   ]
 }
