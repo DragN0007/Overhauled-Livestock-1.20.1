@@ -72,6 +72,14 @@
       "title": "Plow"
     },
     {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:dog_sled"
+      },
+      "text": "-Capacity: 36 $(br2)-Speed: x0.42 $(br2)-Health: 40 $(br2)-Seats: 2 $(br2)-Pullers: 6 $(br2)-Huskies, Bernese, Rottweilers, Pyrenees, Labradors, Wolves $(br2)*Only available with LO: Pets installed.",
+      "title": "Dog Sled"
+    },
+    {
       "type": "patchouli:text",
       "text": "$(l)Pull Types$()$(br2)Large: Horses, Mules, Oxen, Camels, Caribou, Unicorns $(br2)Medium: Donkeys, Mules, Caribou $(br2)Small: Donkeys, Goats, Dogs, Wolves"
     }
