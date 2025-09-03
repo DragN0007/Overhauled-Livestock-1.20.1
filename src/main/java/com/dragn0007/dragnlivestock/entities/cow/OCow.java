@@ -170,6 +170,9 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.02;
 
@@ -179,7 +182,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
 			controller.setAnimationSpeed(1.3);
 		} else {
-			if (tAnimationState.isMoving()) {
+			if (isMoving) {
 				if (currentSpeed > speedThreshold) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(1.1);

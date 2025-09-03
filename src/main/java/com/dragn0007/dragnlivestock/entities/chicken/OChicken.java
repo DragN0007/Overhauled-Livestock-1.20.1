@@ -135,23 +135,28 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if (!onGround()) {
+		if (!this.onGround()) {
 			controller.setAnimation(RawAnimation.begin().then("flap", Animation.LoopType.LOOP));
-		}
-
-		if (tAnimationState.isMoving()) {
+			controller.setAnimationSpeed(1.5);
+		} else if (isMoving) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(1.1);
 			} else {
 				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimationSpeed(1.1);
 			}
 		} else {
 			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimationSpeed(0.8);
 		}
 
 		return PlayState.CONTINUE;
