@@ -1432,7 +1432,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getEntity().getClass() == PiglinBrute.class && random.nextDouble() < 0.02) {
+            if (event.getEntity().getClass() == PiglinBrute.class && random.nextDouble() < 0.01) {
                 PiglinBrute brute = (PiglinBrute) event.getEntity();
 
                 if (event.getLevel().isClientSide) {
@@ -1474,7 +1474,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getEntity().getClass() == EnderMan.class && random.nextDouble() < 0.005 && event.getLevel().getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
+            if (event.getEntity().getClass() == EnderMan.class && random.nextDouble() < 0.002 && event.getLevel().getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
                 EnderMan enderMan = (EnderMan) event.getEntity();
 
                 if (event.getLevel().isClientSide) {
