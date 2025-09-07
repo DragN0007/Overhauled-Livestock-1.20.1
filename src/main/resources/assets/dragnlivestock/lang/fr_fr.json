@@ -1,0 +1,150 @@
+{
+  "itemGroup.overhauled_livestock": "Bétails Remainié",
+  "itemGroup.overhauled_livestock_food": "Bétails Remainié : Nourriture",
+
+  "item.dragnlivestock.o_horse_spawn_egg": "Œuf d'Apparition de Cheval-R",
+  "entity.dragnlivestock.o_horse": "Cheval-R",
+
+  "item.dragnlivestock.o_donkey_spawn_egg": "Œuf d'Apparition d'Âne-R",
+  "entity.dragnlivestock.o_donkey": "Âne-R",
+
+  "item.dragnlivestock.o_mule_spawn_egg": "Œuf d'Apparition de Mule-R",
+  "entity.dragnlivestock.o_mule": "Mule-R",
+
+  "item.dragnlivestock.o_cow_spawn_egg": "Œuf d'Apparition de Vache-R",
+  "entity.dragnlivestock.o_cow": "Vache-R",
+
+  "item.dragnlivestock.o_chicken_spawn_egg": "Œuf d'Apparition de Poulet-R",
+  "entity.dragnlivestock.o_chicken": "Poulet-R",
+
+  "item.dragnlivestock.o_salmon_spawn_egg": "Œuf d'Apparition de Saumon-R",
+  "entity.dragnlivestock.o_salmon": "Saumon-R",
+
+  "item.dragnlivestock.o_cod_spawn_egg": "Œuf d'Apparition de Morue-R",
+  "entity.dragnlivestock.o_cod": "Morue-R",
+
+  "item.dragnlivestock.o_bee_spawn_egg": "Œuf d'Apparition d'Abeille-R",
+  "entity.dragnlivestock.o_bee": "Abeille-R",
+
+  "item.dragnlivestock.o_rabbit_spawn_egg": "Œuf d'Apparition de Lapin-R",
+  "entity.dragnlivestock.o_rabbit": "Lapin-R",
+
+  "item.dragnlivestock.o_pig_spawn_egg": "Œuf d'Apparition de Cochon-R",
+  "entity.dragnlivestock.o_pig": "Cochon-R",
+
+  "item.dragnlivestock.o_sheep_spawn_egg": "Œuf d'Apparition de Mouton",
+  "entity.dragnlivestock.o_sheep": "Mouton-R",
+
+  "item.dragnlivestock.o_llama_spawn_egg": "Œuf d'Apparition de Lama-R",
+  "entity.dragnlivestock.o_llama": "Lama-R",
+
+  "item.dragnlivestock.o_mooshroom_spawn_egg": "Œuf d'Apparition de Mooshroom",
+  "entity.dragnlivestock.o_mooshroom": "Mooshroom-R",
+
+  "item.dragnlivestock.ox_spawn_egg": "Œuf d'Apparition de Bœuf",
+  "entity.dragnlivestock.ox": "Bœuf",
+
+
+  "item.dragnlivestock.overworld_unicorn_spawn_egg": "Pendentitif de Licorne de Surface",
+  "entity.dragnlivestock.overworld_unicorn": "Licorne de Surface",
+
+  "item.dragnlivestock.nether_unicorn_spawn_egg": "Pendentitif de Licorne de Nether",
+  "entity.dragnlivestock.nether_unicorn": "Licorne de Nether",
+
+  "item.dragnlivestock.end_unicorn_spawn_egg": "Pendentitif de Licorne de l'Ender",
+  "entity.dragnlivestock.end_unicorn": "Licorne de l'Ender",
+
+  "entity.dragnlivestock.headless_horseman": "Le Cavalier sans Tête",
+
+
+  "item.dragnlivestock.brand_tag": "Étiquette de Marque",
+  "tooltip.dragnlivestock.brand_tag.tooltip": "Cet itème n'est pas immédiatement functionnel",
+
+  "item.dragnlivestock.mane_scissors": "Ciseaux pour le Crinière",
+  "item.dragnlivestock.tail_scissors": "Ciseaux pour la Queue",
+  "tooltip.dragnlivestock.for_horses.tooltip": "Pour les Chevaux !",
+
+  "item.dragnlivestock.netherite_horse_armor": "Caparaçon de Netherite",
+  "item.dragnlivestock.griffith_inspired_horse_armor": "Griffith-Inspired Horse Armor",
+
+  "item.dragnlivestock.gender_test_strip": "Bande de Teste au Genre",
+  "item.dragnlivestock.male_gender_test_strip": "Bande de Teste d'Mâle",
+  "item.dragnlivestock.female_gender_test_strip": "Bande de Teste de Femelle",
+  "tooltip.dragnlivestock.male_test.tooltip": "Cet animal est mâle !",
+  "tooltip.dragnlivestock.female_test.tooltip": "Cet animal est femelle !",
+  "tooltip.dragnlivestock.test_strip.tooltip": "Pourrait être utilisés sur Équins-R, Lapins-R, Lamaes-R, et des Bœuf.",
+
+  "item.dragnlivestock.egg": "Œuf",
+  "item.dragnlivestock.fertilized_egg": "Œuf Fertilizé",
+
+  "item.dragnlivestock.sheep_milk_bucket": "Seau de Lait de Mouton",
+  "item.dragnlivestock.llama_milk_bucket": "Seau de Lait de Lama",
+
+  "item.dragnlivestock.cow_milk_jug": "Pot du Lait de Vache",
+  "item.dragnlivestock.sheep_milk_jug": "Pot du Lait de Mouton",
+  "item.dragnlivestock.llama_milk_jug": "Pot du Lait de Lama",
+
+  "item.dragnlivestock.cheese": "Fromage",
+  "item.dragnlivestock.sheep_cheese": "Fromage de Mouton",
+  "item.dragnlivestock.llama_cheese": "Fromage de Lama",
+
+  "item.dragnlivestock.egg_salad": "Salade aux Œufs",
+
+  "item.dragnlivestock.beef_sirloin_steak": "Aloyau-t-au Bœuf",
+  "item.dragnlivestock.beef_rib_steak": "Entrecôte au Bœuf",
+  "item.dragnlivestock.cooked_beef_sirloin_steak": "Aloyau de Bœuf Cuit",
+  "item.dragnlivestock.cooked_beef_rib_steak": "Entrecôte de Bœuf Cuit",
+
+  "item.dragnlivestock.horse": "Cheval",
+  "item.dragnlivestock.horse_sirloin_steak": "Aloyau de Cheval",
+  "item.dragnlivestock.horse_rib_steak": "Entrecôte de Cheval",
+  "item.dragnlivestock.cooked_horse": "Cheval Cuit",
+  "item.dragnlivestock.cooked_horse_sirloin_steak": "Aloyau de Cheval Cuit",
+  "item.dragnlivestock.cooked_horse_rib_steak": "Entrecôte de Cheval Cuit",
+
+  "item.dragnlivestock.llama": "Lama",
+  "item.dragnlivestock.llama_loin": "Aloyau de Lama",
+  "item.dragnlivestock.llama_rib": "Entrecôte de Lama",
+  "item.dragnlivestock.cooked_llama": "Lama Cuit",
+  "item.dragnlivestock.cooked_llama_loin": "Aloyau de Lama Cuit",
+  "item.dragnlivestock.cooked_llama_rib": "Entrecôte de Lama Cuit",
+
+  "item.dragnlivestock.mutton_loin": "Longe de Mouton",
+  "item.dragnlivestock.mutton_rib": "Côte de Mouton",
+  "item.dragnlivestock.cooked_mutton_loin": "Filet de Mouton Cuit",
+  "item.dragnlivestock.cooked_mutton_rib": "Côte de Mouton Cuit",
+
+  "item.dragnlivestock.pork_tenderloin": "Filet de Porc",
+  "item.dragnlivestock.pork_rib_chop": "Côte de Porc",
+  "item.dragnlivestock.cooked_pork_tenderloin": "Filet de Porc Cuit",
+  "item.dragnlivestock.cooked_pork_rib_chop": "Côte de Porc Cuit",
+
+  "item.dragnlivestock.fish_oil": "Huile de Poisson",
+  "item.dragnlivestock.roe": "Œufs de Poisson",
+
+  "item.dragnlivestock.chicken_thigh": "Cuisse de Poulet",
+  "item.dragnlivestock.cooked_chicken_thigh": "Cuisse de Poulet Cuit",
+
+  "item.dragnlivestock.rabbit_thigh": "Cuisse de Lapin",
+  "item.dragnlivestock.cooked_rabbit_thigh": "Cuisse de Lapin Cuit",
+
+  "item.dragnlivestock.unicorn": "Licorne",
+  "item.dragnlivestock.unicorn_sirloin_steak": "Aloyau de Licorne",
+  "item.dragnlivestock.unicorn_rib_steak": "Entrecôte de Licorne",
+  "item.dragnlivestock.cooked_unicorn": "Licorne Cuit",
+  "item.dragnlivestock.cooked_unicorn_sirloin_steak": "Aloyau de Licorne Cuit",
+  "item.dragnlivestock.cooked_unicorn_rib_steak": "Entrecôte de Licorne Cuit",
+
+  "item.dragnlivestock.overworld_unicorn_horn": "Corne de Licorne de Surface",
+  "item.dragnlivestock.nether_unicorn_horn": "Corne de Licorne de Nether",
+  "item.dragnlivestock.end_unicorn_horn": "Corne de Licorne de l'Ender",
+
+  "key.dragnlivestock.categories.dragnlivestock": "Remaniement de Bétails de DragN",
+  "key.dragnlivestock.horse_speed_up": "Accélérer - Cheval",
+  "key.dragnlivestock.horse_slow_down": "Ralentir - Cheval",
+  "key.dragnlivestock.horse_bow": "S'incliner - Cheval",
+  "key.dragnlivestock.horse_piaffe": "Piaffe - Cheval",
+  "key.dragnlivestock.horse_levade": "Levade - Cheval",
+  "key.dragnlivestock.horse_wave": "Saluer du Sabot - Cheval",
+  "key.dragnlivestock.horse_spanish_walk_toggle": "Promenade Espagnol - Cheval"
+}
