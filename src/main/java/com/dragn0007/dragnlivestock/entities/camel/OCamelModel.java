@@ -68,7 +68,7 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
 
     @Override
     public ResourceLocation getTextureResource(OCamel object) {
-        return TEXTURE_CACHE.computeIfAbsent(object.getOverlayLocation(), ResourceLocation::tryParse);
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override

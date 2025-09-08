@@ -22,31 +22,6 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LONetwork {
 
-    public static class ToggleTillerPowerRequest {
-        private final int id;
-
-        public ToggleTillerPowerRequest(int id) {
-            this.id = id;
-        }
-
-        public static void encode(ToggleTillerPowerRequest msg, FriendlyByteBuf buffer) {
-            buffer.writeInt(msg.id);
-        }
-
-        public static ToggleTillerPowerRequest decode(FriendlyByteBuf buffer) {
-            return new ToggleTillerPowerRequest(buffer.readInt());
-        }
-
-        public static void handle(ToggleTillerPowerRequest msg, Supplier<NetworkEvent.Context> context) {
-            ServerPlayer player = context.get().getSender();
-            if(player != null) {
-                if(player.level().getEntity(msg.id) instanceof Plow plow) {
-                    plow.cycleMode();
-                }
-            }
-        }
-    }
-
     public static class HandleHorseSpeedRequest {
         private final int speedMod;
 
@@ -150,6 +125,31 @@ public class LONetwork {
         }
     }
 
+    public static class ToggleTillerPowerRequest {
+        private final int id;
+
+        public ToggleTillerPowerRequest(int id) {
+            this.id = id;
+        }
+
+        public static void encode(ToggleTillerPowerRequest msg, FriendlyByteBuf buffer) {
+            buffer.writeInt(msg.id);
+        }
+
+        public static ToggleTillerPowerRequest decode(FriendlyByteBuf buffer) {
+            return new ToggleTillerPowerRequest(buffer.readInt());
+        }
+
+        public static void handle(ToggleTillerPowerRequest msg, Supplier<NetworkEvent.Context> context) {
+            ServerPlayer player = context.get().getSender();
+            if(player != null) {
+                if(player.level().getEntity(msg.id) instanceof Plow plow) {
+                    plow.cycleMode();
+                }
+            }
+        }
+    }
+
     public static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(LivestockOverhaul.MODID, "lo_network"),
@@ -167,4 +167,5 @@ public class LONetwork {
             INSTANCE.registerMessage(3, ToggleTillerPowerRequest.class, ToggleTillerPowerRequest::encode, ToggleTillerPowerRequest::decode, ToggleTillerPowerRequest::handle);
         });
     }
+
 }

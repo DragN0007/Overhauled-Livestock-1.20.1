@@ -67,7 +67,7 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
 
     @Override
     public ResourceLocation getTextureResource(ODonkey object) {
-        return TEXTURE_CACHE.computeIfAbsent(object.getOverlayLocation(), ResourceLocation::tryParse);
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override

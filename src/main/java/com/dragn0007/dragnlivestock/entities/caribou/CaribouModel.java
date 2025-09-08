@@ -75,7 +75,7 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
 
     @Override
     public ResourceLocation getTextureResource(Caribou object) {
-        return TEXTURE_CACHE.computeIfAbsent(object.getOverlayLocation(), ResourceLocation::tryParse);
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override

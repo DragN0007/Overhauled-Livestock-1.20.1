@@ -5,7 +5,10 @@ import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import net.minecraft.client.player.Input;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -189,10 +192,26 @@ public class Plow extends AbstractInventoryWagon {
         this.tillNewFarmland(rightPos);
     }
 
+    public int tillerCooldown = 0;
+
+    public void handleInput(Input input) {
+        this.tillerCooldown = Math.max(this.tillerCooldown - 1, 0);
+            if (input.jumping && this.tillerCooldown == 0) {
+                LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(this.getId()));
+                this.tillerCooldown = 10;
+            }
+    }
+
     @Override
     public void tick() {
         super.tick();
         this.lastClientPos = this.position();
+
+        if(this.isControlledByLocalInstance()) {
+            if(this.getControllingPassenger() instanceof LocalPlayer player) {
+                this.handleInput(player.input);
+            }
+        }
 
         if(!this.level().isClientSide) {
             Vec3 diff = this.lastServerPos.subtract(this.position());
