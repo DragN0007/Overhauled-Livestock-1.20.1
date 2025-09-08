@@ -1,133 +1,124 @@
 {
-  "translator.dragnlivestock.en_us": "DragN0007",
+  "translator.dragnlivestock.es_mx": "DragN0007",
 
   "itemGroup.overhauled_livestock": "Overhauled Livestock",
-  "itemGroup.overhauled_livestock_food": "Overhauled Livestock: Food",
+  "itemGroup.overhauled_livestock_food": "Overhauled Livestock: La Comida",
 
-  "tooltip.dragnlivestock.not_functional.tooltip": "This item isn't fully functional yet.",
-  "tooltip.dragnlivestock.for_horses.tooltip": "For horses!",
-  "tooltip.dragnlivestock.for_equines.tooltip": "For equines!",
-  "tooltip.dragnlivestock.grub_sweater.tooltip": "Grubs get cold too.",
-  "tooltip.dragnlivestock.male_test.tooltip": "This animal is male!",
-  "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
-  "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Animals that have genders.",
-  "tooltip.dragnlivestock.two_seater.tooltip": "Only \"Draft\" and \"Coldblood\" horse breeds can comfortably carry two players!",
-  "tooltip.dragnlivestock.brand_tag.tooltip": "Can be used on Cows, Cow Variants, Sheep, Goats, Pigs, Chickens, Caribou, and Camels.",
-  "tooltip.dragnlivestock.rodeo_harness.tooltip": "Can be used on horses and bulls to allow them to buck players off freely, regardless of tame status.",
-  "tooltip.dragnlivestock.wool_staple.tooltip": "Can be processed into Wool Blocks.",
-  "tooltip.dragnlivestock.wool_dye.tooltip": "More efficient for wool than normal dye.",
-  "tooltip.dragnlivestock.spindle.tooltip": "Weaves Staples of Wool into Wool Blocks.",
-  "tooltip.dragnlivestock.utility_knife.tooltip": "Cuts Meat Strips for Jerky production.",
-  "tooltip.dragnlivestock.oscillator.tooltip": "A Creative-Use-Only item that allows the user to change the coat, marking or breed of an O-Animal via interaction. Right-Click the animal to go up one variant, or Shift-Right-Click to go down.",
-  "tooltip.dragnlivestock.mount_key.tooltip": "Quite literally locks your O-Mount so others can't ride it or get into it's inventory. Works universally.",
+  "tooltip.dragnlivestock.not_functional.tooltip": "No funcional en este momento.",
+  "tooltip.dragnlivestock.for_horses.tooltip": "¡Para caballos!",
+  "tooltip.dragnlivestock.for_equines.tooltip": "¡Para equinos!",
+  "tooltip.dragnlivestock.grub_sweater.tooltip": "Las larvas pueden ser frías.",
+  "tooltip.dragnlivestock.male_test.tooltip": "¡Este animal es macho!",
+  "tooltip.dragnlivestock.female_test.tooltip": "¡Este animal es hembra!",
+  "tooltip.dragnlivestock.test_strip.tooltip": "Se puede utilizar en animales de Overhauled que tengan género.",
+  "tooltip.dragnlivestock.two_seater.tooltip": "¡Sólo las razas de caballos \"Draught\" y \"Coldblood\" pueden transportar cómodamente a dos jugadores!",
+  "tooltip.dragnlivestock.brand_tag.tooltip": "Se puede utilizar en vacas, variantes de vaca, ovejas, cabras, cerdos, pollos, caribúes y camellos.",
+  "tooltip.dragnlivestock.rodeo_harness.tooltip": "Se puede utilizar en caballos y toros para permitirles derribar a los jugadores libremente, independientemente de que estén domesticados o no.",
+  "tooltip.dragnlivestock.wool_staple.tooltip": "Puede ser procesado en Lana Bloques.",
+  "tooltip.dragnlivestock.wool_dye.tooltip": "Más efectivo para la lana que el tinte normal.",
+  "tooltip.dragnlivestock.spindle.tooltip": "Teje grapas de lana para formar bloques de lana.",
+  "tooltip.dragnlivestock.utility_knife.tooltip": "Cortar tiras de carne para hacer cecina.",
+  "tooltip.dragnlivestock.oscillator.tooltip": "Un objeto exclusivo del Modo Creativo que te permite cambiar el pelaje, las marcas o la raza de un animal mediante la interacción. Haz clic derecho en el animal para mejorar una variante o haz clic derecho con la tecla Mayús para mejorarla.",
+  "tooltip.dragnlivestock.mount_key.tooltip": "Bloquea tu montura de Overhauled para que otros no puedan usarla ni acceder a su inventario. Funciona universalmente.",
 
-  "tooltip.dragnlivestock.wandering.tooltip": "Your Companion is Wandering",
-  "tooltip.dragnlivestock.following.tooltip": "Your Companion is Following",
+  "tooltip.dragnlivestock.wandering.tooltip": "Tu compañero está vagando",
+  "tooltip.dragnlivestock.following.tooltip": "Tu compañero te está siguiendo",
 
-  "item.dragnlivestock.o_horse_spawn_egg": "O-Horse Spawn Egg",
-  "entity.dragnlivestock.o_horse": "O-Horse",
+  "item.dragnlivestock.o_horse_spawn_egg": "Generar Caballo de Overhauled",
+  "entity.dragnlivestock.o_horse": "Caballo de Overhauled",
 
-  "item.dragnlivestock.o_donkey_spawn_egg": "O-Donkey Spawn Egg",
-  "entity.dragnlivestock.o_donkey": "O-Donkey",
+  "item.dragnlivestock.o_donkey_spawn_egg": "Generar Burro de Overhauled",
+  "entity.dragnlivestock.o_donkey": "Burro de Overhauled",
 
-  "item.dragnlivestock.o_mule_spawn_egg": "O-Mule Spawn Egg",
-  "entity.dragnlivestock.o_mule": "O-Mule",
+  "item.dragnlivestock.o_mule_spawn_egg": "Generar Mula de Overhauled",
+  "entity.dragnlivestock.o_mule": "Generar Mula de Overhauled",
 
-  "item.dragnlivestock.o_cow_spawn_egg": "O-Cow Spawn Egg",
-  "entity.dragnlivestock.o_cow": "O-Cow",
+  "item.dragnlivestock.o_cow_spawn_egg": "Generar Vaca de Overhauled",
+  "entity.dragnlivestock.o_cow": "Vaca de Overhauled",
 
-  "item.dragnlivestock.o_chicken_spawn_egg": "O-Chicken Spawn Egg",
-  "entity.dragnlivestock.o_chicken": "O-Chicken",
+  "item.dragnlivestock.o_chicken_spawn_egg": "Generar Pollo de Overhauled",
+  "entity.dragnlivestock.o_chicken": "Generar Pollo de Overhauled",
 
-  "item.dragnlivestock.o_salmon_spawn_egg": "O-Salmon Spawn Egg",
-  "entity.dragnlivestock.o_salmon": "O-Salmon",
+  "item.dragnlivestock.o_salmon_spawn_egg": "Generar Salmón de Overhauled",
+  "entity.dragnlivestock.o_salmon": "Salmón de Overhauled",
 
-  "item.dragnlivestock.o_cod_spawn_egg": "O-Cod Spawn Egg",
-  "entity.dragnlivestock.o_cod": "O-Cod",
+  "item.dragnlivestock.o_cod_spawn_egg": "Generar Bacalao de Overhauled",
+  "entity.dragnlivestock.o_cod": "Bacalao de Overhauled",
 
-  "item.dragnlivestock.o_bee_spawn_egg": "O-Bee Spawn Egg",
-  "entity.dragnlivestock.o_bee": "O-Bee",
+  "item.dragnlivestock.o_bee_spawn_egg": "Generar Abeja de Overhauled",
+  "entity.dragnlivestock.o_bee": "Abeja de Overhauled",
 
-  "item.dragnlivestock.o_rabbit_spawn_egg": "O-Rabbit Spawn Egg",
-  "entity.dragnlivestock.o_rabbit": "O-Rabbit",
+  "item.dragnlivestock.o_rabbit_spawn_egg": "Generar Conejo de Overhauled",
+  "entity.dragnlivestock.o_rabbit": "Conejo de Overhauled",
 
-  "item.dragnlivestock.o_pig_spawn_egg": "O-Pig Spawn Egg",
-  "entity.dragnlivestock.o_pig": "O-Pig",
+  "item.dragnlivestock.o_pig_spawn_egg": "Generar Cerdo de Overhauled",
+  "entity.dragnlivestock.o_pig": "Cerdo de Overhauled",
 
-  "item.dragnlivestock.o_sheep_spawn_egg": "O-Sheep Spawn Egg",
-  "entity.dragnlivestock.o_sheep": "O-Sheep",
+  "item.dragnlivestock.o_sheep_spawn_egg": "Generar Oveja de Overhauled",
+  "entity.dragnlivestock.o_sheep": "Oveja de Overhauled",
 
-  "item.dragnlivestock.o_llama_spawn_egg": "O-Llama Spawn Egg",
-  "entity.dragnlivestock.o_llama": "O-Llama",
+  "item.dragnlivestock.o_llama_spawn_egg": "Generar Llama de Overhauled",
+  "entity.dragnlivestock.o_llama": "Llama de Overhauled",
 
-  "item.dragnlivestock.o_mooshroom_spawn_egg": "O-Mooshroom Spawn Egg",
-  "entity.dragnlivestock.o_mooshroom": "O-Mooshroom",
+  "item.dragnlivestock.o_mooshroom_spawn_egg": "Generar Mooshroom de Overhauled",
+  "entity.dragnlivestock.o_mooshroom": "Mooshroom de Overhauled",
 
-  "item.dragnlivestock.o_camel_spawn_egg": "O-Camel Spawn Egg",
-  "entity.dragnlivestock.o_camel": "O-Camel",
+  "item.dragnlivestock.o_camel_spawn_egg": "Generar Camello de Overhauled",
+  "entity.dragnlivestock.o_camel": "Camello de Overhauled",
 
-  "item.dragnlivestock.ox_spawn_egg": "Ox Spawn Egg",
-  "entity.dragnlivestock.ox": "Ox",
+  "item.dragnlivestock.o_goat_spawn_egg": "Generar Cabra Montesa de Overhauled",
+  "entity.dragnlivestock.o_goat": "Cabra Montesa de Overhauled",
 
-  "item.dragnlivestock.o_goat_spawn_egg": "O-Mountain Goat Spawn Egg",
-  "entity.dragnlivestock.o_goat": "O-Mountain Goat",
+  "item.dragnlivestock.farm_goat_spawn_egg": "Generar Cabra de Overhauled",
+  "entity.dragnlivestock.farm_goat": "Cabra de Overhauled",
 
-  "item.dragnlivestock.farm_goat_spawn_egg": "O-Farm Goat Spawn Egg",
-  "entity.dragnlivestock.farm_goat": "O-Farm Goat",
+  "item.dragnlivestock.o_undead_horse_spawn_egg": "Generar Caballo No-Muerto de Overhauled",
+  "entity.dragnlivestock.o_undead_horse": "Caballo No-Muerto de Overhauled",
 
-  "item.dragnlivestock.o_undead_horse_spawn_egg": "O-Undead Horse Spawn Egg",
-  "entity.dragnlivestock.o_undead_horse": "O-Undead Horse",
+  "item.dragnlivestock.o_frog_spawn_egg": "Generar Rana de Overhauled",
+  "entity.dragnlivestock.o_frog": "Rana de Overhauled",
 
-  "item.dragnlivestock.o_frog_spawn_egg": "O-Frog Spawn Egg",
-  "entity.dragnlivestock.o_frog": "O-Frog",
+  "item.dragnlivestock.grub_spawn_egg": "Generar Larva",
+  "entity.dragnlivestock.grub": "Larva",
 
-  "item.dragnlivestock.grub_spawn_egg": "Grub Spawn Egg",
-  "entity.dragnlivestock.grub": "Grub",
+  "item.dragnlivestock.caribou_spawn_egg": "Generar Caribú",
+  "entity.dragnlivestock.caribou": "Caribú",
 
-  "item.dragnlivestock.caribou_spawn_egg": "Caribou Spawn Egg",
-  "entity.dragnlivestock.caribou": "Caribou",
-
-  "item.dragnlivestock.trader_mule_spawn_egg": "Trader Mule Spawn Egg",
-  "entity.dragnlivestock.trader_mule": "Trader Mule",
-
-  "item.dragnlivestock.livestock_trader_spawn_egg": "Livestock Trader Spawn Egg",
-  "entity.dragnlivestock.livestock_trader": "Livestock Trader",
-
-  "item.dragnlivestock.wheat_moobloom_spawn_egg": "Wheat Moobloom Spawn Egg",
+  "item.dragnlivestock.wheat_moobloom_spawn_egg": "Generar Wheat Moobloom",
   "entity.dragnlivestock.wheat_moobloom": "Wheat Moobloom",
 
-  "item.dragnlivestock.sweet_berry_moobloom_spawn_egg": "Sweet Berry Moobloom Spawn Egg",
+  "item.dragnlivestock.sweet_berry_moobloom_spawn_egg": "Generar Sweet Berry Moobloom",
   "entity.dragnlivestock.sweet_berry_moobloom": "Sweet Berry Moobloom",
 
-  "item.dragnlivestock.pumpkin_moobloom_spawn_egg": "Pumpkin Moobloom Spawn Egg",
+  "item.dragnlivestock.pumpkin_moobloom_spawn_egg": "Generar Pumpkin Moobloom",
   "entity.dragnlivestock.pumpkin_moobloom": "Pumpkin Moobloom",
 
-  "item.dragnlivestock.potato_moobloom_spawn_egg": "Potato Moobloom Spawn Egg",
+  "item.dragnlivestock.potato_moobloom_spawn_egg": "Generar Potato Moobloom",
   "entity.dragnlivestock.potato_moobloom": "Potato Moobloom",
 
-  "item.dragnlivestock.melon_moobloom_spawn_egg": "Melon Moobloom Spawn Egg",
+  "item.dragnlivestock.melon_moobloom_spawn_egg": "Generar Melon Moobloom",
   "entity.dragnlivestock.melon_moobloom": "Melon Moobloom",
 
-  "item.dragnlivestock.glow_berry_moobloom_spawn_egg": "Glow Berry  Moobloom Spawn Egg",
+  "item.dragnlivestock.glow_berry_moobloom_spawn_egg": "Generar Glow Berry  Moobloom",
   "entity.dragnlivestock.glow_berry_moobloom": "Glow Berry  Moobloom",
 
-  "item.dragnlivestock.flowering_moobloom_spawn_egg": "Flowering Moobloom Spawn Egg",
+  "item.dragnlivestock.flowering_moobloom_spawn_egg": "Generar Flowering Moobloom",
   "entity.dragnlivestock.flowering_moobloom": "Flowering Moobloom",
 
-  "item.dragnlivestock.carrot_moobloom_spawn_egg": "Carrot Moobloom Spawn Egg",
+  "item.dragnlivestock.carrot_moobloom_spawn_egg": "Generar Carrot Moobloom",
   "entity.dragnlivestock.carrot_moobloom": "Carrot Moobloom",
 
-  "item.dragnlivestock.beetroot_moobloom_spawn_egg": "Beetroot Moobloom Spawn Egg",
+  "item.dragnlivestock.beetroot_moobloom_spawn_egg": "Generar Beetroot Moobloom",
   "entity.dragnlivestock.beetroot_moobloom": "Beetroot Moobloom",
 
-  "item.dragnlivestock.azalea_moobloom_spawn_egg": "Azalea Moobloom Spawn Egg",
+  "item.dragnlivestock.azalea_moobloom_spawn_egg": "Generar Azalea Moobloom",
   "entity.dragnlivestock.azalea_moobloom": "Azalea Moobloom",
 
-  "item.dragnlivestock.peach_moobloom_spawn_egg": "Peach Moobloom Spawn Egg",
+  "item.dragnlivestock.peach_moobloom_spawn_egg": "Generar Peach Moobloom",
   "entity.dragnlivestock.peach_moobloom": "Peach Moobloom",
 
-  "item.dragnlivestock.unicorn_spawn_egg": "Unicorn Spawn Egg",
-  "entity.dragnlivestock.unicorn": "Unicorn",
+  "item.dragnlivestock.unicorn_spawn_egg": "Generar Unicornio",
+  "entity.dragnlivestock.unicorn": "Unicornio",
 
   "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
 
@@ -756,9 +747,9 @@
   "item.medievalembroidery.white_yellow_caparison_shoulder": "White Checkerboard Yellow Shoulder Caparison",
 
 
-  "config.jade.plugin_dragnlivestock.o_tooltips": "Display O-Livestock Genders & Breeds",
   "tooltip.dragnlivestock.jade.female.tooltip": "Female",
   "tooltip.dragnlivestock.jade.male.tooltip": "Male",
-  "config.jade.plugin_dragnlivestock.dry_time": "Display O-Jerky Dry Percent",
-  "config.jade.plugin_dragnlivestock.age_time": "Display O-Cheese Age Percent"
+  "config.jade.plugin_dragnlivestock.o_tooltips": "Display O-Livestock Genders & Breeds",
+  "tooltip.dragnlivestock.jade.unlocked.tooltip": "Unlocked",
+  "tooltip.dragnlivestock.jade.locked.tooltip": "Locked"
 }

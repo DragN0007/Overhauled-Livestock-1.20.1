@@ -1,0 +1,34 @@
+package com.dragn0007.dragnlivestock.compat.jade.block;
+
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.blocks.custom.JerkyBase;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+
+public class JerkyTooltipProvider implements IBlockComponentProvider {
+
+    public static final IntegerProperty DRY_TIME = JerkyBase.DRY_TIME;
+
+    @Override
+    public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+        if (accessor.getBlockState().hasProperty(DRY_TIME)) {
+            int time = accessor.getBlockState().getValue(DRY_TIME);
+            if (accessor.getBlock() instanceof JerkyBase block) {
+                int max = block.getMaxDryTime();
+                int timeFromMax = (max - time);
+                int total = (max - timeFromMax);
+                tooltip.add(Component.literal(total + "% Dried"));
+            }
+        }
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return new ResourceLocation(LivestockOverhaul.MODID, "dry_time");
+    }
+}
