@@ -18,7 +18,8 @@ public enum HorseBreed {
     MONGOLIAN(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/mongolian.geo.json")),
     SHIRE(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/shire.geo.json")),
     AKHAL_TEKE(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/akhal_teke.geo.json")),
-    AMERICAN_SOLDIER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/american_soldier.geo.json"));
+    AMERICAN_SOLDIER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/american_soldier.geo.json")),
+    WELSH(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/welsh.geo.json"));
 
     public final ResourceLocation resourceLocation;
 

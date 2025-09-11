@@ -207,6 +207,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		else if (breed == 13) {
 			baseHealth = 15.0F;
 			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
+		else if (breed == 14) {
+			baseHealth = 28.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+		}
+		else if (breed == 15) {
+			baseHealth = 18.0F;
+			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
 		} else {
 			return 15.0F + (float) this.random.nextInt(4) + (float) this.random.nextInt(5);
 		}
@@ -270,6 +278,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			return baseStrength + multiplier;
 		}
 		if (breed == 13) {
+			baseStrength = 0.3F;
+			return baseStrength + multiplier;
+		}
+		if (breed == 14) {
+			baseStrength = 0.2F;
+			return baseStrength + multiplier;
+		}
+		if (breed == 15) {
 			baseStrength = 0.3F;
 			return baseStrength + multiplier;
 		} else {
@@ -337,6 +353,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (breed == 13) {
 			baseSpeed = 0.3F;
 			return baseSpeed + multiplier;
+		}
+		if (breed == 14) {
+			baseSpeed = 0.2F;
+			return baseSpeed + multiplier;
+		}
+		if (breed == 15) {
+			baseSpeed = 0.2F;
+			return baseSpeed + multiplier;
 		} else {
 			return baseSpeed + multiplier;
 		}
@@ -347,7 +371,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public boolean isPonyBreed() {
-		return this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11;
+		return this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11 || this.getBreed() == 15;
 	}
 
 	public boolean isStockBreed() {
@@ -521,6 +545,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						offsetZ = -0.7;
 						break;
 				}
+			}
+
+			if (getBreed() == 15) {
+				offsetY = 0.62;
 			}
 
 			if (month == Month.DECEMBER && (day == 24 || day == 25)) {
@@ -1710,6 +1738,23 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
+		if (this.getBreed() == 15) { //welsh ponies tend to come in browns, roans and greys
+			if (random.nextDouble() < 0.05) {
+				int[] variants = {4, 5, 8, 11, 19, 25, 26, 27, 28, 29, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
+				int[] variants = {1, 2, 3, 7, 9, 16, 17, 18, 20, 21};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {0, 6, 10, 12, 13, 15, 22, 23, 24, 31};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+
 	}
 
 	public void setMarkingByBreed() {
@@ -1845,6 +1890,17 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.setOverlayVariant(variants[randomIndex]);
 			}
 		}
+
+		if (this.getBreed() == 15) { //welsh ponies can come in any pattern naturally, but often come with socks or a face marking (or no markings)
+			if (random.nextDouble() < 0.20) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.20) {
+				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 
 	}
 

@@ -39,6 +39,7 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
             case 12: return "Shire";
             case 13: return "Akhal-Teke";
             case 14: return "American Soldier";
+            case 15: return "Welsh Pony";
             default: return "Unknown";
         }
     }
