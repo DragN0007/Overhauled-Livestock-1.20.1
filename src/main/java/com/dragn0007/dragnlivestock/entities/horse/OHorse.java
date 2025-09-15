@@ -623,7 +623,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving) {
-				if (getForward().dot(getDeltaMovement()) > 0) {
+				if (this.getForward().dot(getDeltaMovement()) > 0) {
 				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
@@ -647,7 +647,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
 				}
-			} else if (getForward().dot(getDeltaMovement()) < 0) {
+			} else if (this.getForward().dot(getDeltaMovement()) < 0) {
 					if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
