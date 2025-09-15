@@ -1,8 +1,8 @@
 {
   "translator.dragnlivestock.en_us": "DragN0007",
 
-  "itemGroup.overhauled_livestock": "Overhauled Livestock",
-  "itemGroup.overhauled_livestock_food": "Overhauled Livestock: Food",
+  "itemGroup.overhauled_livestock": "O-Livestock",
+  "itemGroup.overhauled_livestock_food": "O-Livestock: Food",
 
   "tooltip.dragnlivestock.not_functional.tooltip": "This item isn't fully functional yet.",
   "tooltip.dragnlivestock.for_horses.tooltip": "For horses!",

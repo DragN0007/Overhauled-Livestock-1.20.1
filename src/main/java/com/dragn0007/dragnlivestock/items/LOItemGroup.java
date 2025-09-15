@@ -20,7 +20,7 @@ public class LOItemGroup {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LivestockOverhaul.MODID);
 
     public static final RegistryObject<CreativeModeTab> LIVESTOCK_OVERHAUL_GROUP = CREATIVE_MODE_TABS.register("overhauled_livestock",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(LOItems.LIVESTOCK_OVERHAUL.get())).title(Component.translatable("itemGroup.overhauled_livestock"))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(LOItems.LIVESTOCK_OVERHAUL.get())).title(Component.translatable("itemGroup.overhauled_livestock")).withSearchBar()
                     .displayItems((displayParameters, output) -> {
 
                         output.accept(LOItems.O_HORSE_SPAWN_EGG.get());

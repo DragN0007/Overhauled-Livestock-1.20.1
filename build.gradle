@@ -140,10 +140,10 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
-mixin {
-    add sourceSets.main, 'mixins.dragnlivestock.refmap.json'
-    config 'mixins.dragnlivestock.json'
-}
+//mixin {
+//    add sourceSets.main, 'mixins.dragnlivestock.refmap.json'
+//    config 'mixins.dragnlivestock.json'
+//}
 
 tasks.named('jar', Jar).configure {
     manifest {
