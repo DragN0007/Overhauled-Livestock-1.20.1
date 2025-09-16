@@ -1,10 +1,14 @@
 package com.dragn0007.dragnlivestock.blocks.custom;
 
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CryingObsidianBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -60,7 +64,24 @@ public class JerkyBase extends HorizontalDirectionalBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction face = context.getClickedFace();
+        Level level = context.getLevel();
+        BlockPos clickedPos = context.getClickedPos();
+        BlockState state = level.getBlockState(clickedPos);
+
+        if (face == Direction.UP || face == Direction.DOWN) {
+            return null;
+        }
+
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        Direction facing = state.getValue(FACING);
+        BlockPos attachedPos = pos.relative(facing.getOpposite());
+        BlockState attachedState = level.getBlockState(attachedPos);
+        return attachedState.isFaceSturdy(level, attachedPos, facing);
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter blockReader, BlockPos pos, CollisionContext context) {
@@ -83,4 +104,10 @@ public class JerkyBase extends HorizontalDirectionalBlock {
     public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_) {
         return super.getCollisionShape(p_60572_, p_60573_, p_60574_, p_60575_);
     }
+
+    @Override
+    public boolean isCollisionShapeFullBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return false;
+    }
+
 }

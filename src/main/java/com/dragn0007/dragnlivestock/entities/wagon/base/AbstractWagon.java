@@ -23,7 +23,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
@@ -36,6 +38,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -282,7 +285,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
                                 player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
                         h -> h.getLeashHolder() == player
-//                                && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)
+                                && h.getType().is(LOTags.Entity_Types.DRAUGHT_ANIMALS)
                 ).stream()
                 .findFirst()
                 .orElse(null);
@@ -290,11 +293,16 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         if(!level().isClientSide && animal != null) {
             for(int i = 0; i < animalPositions.length; i++) {
                 if(getAnimal(i) == null) {
-                    if (animal instanceof OCow cow && !(cow.getBreed() == 10)) {
-                        return false;
+                    if (animal instanceof OCow cow) {
+                        if (cow.getBreed() == 10) {
+                            hitch(animal, i);
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        hitch(animal, i);
+                        break;
                     }
-                    hitch(animal, i);
-                    break;
                 }
             }
             animal.dropLeash(true, !player.isCreative());
@@ -448,23 +456,27 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if(isInvulnerableTo(source))
+        if (this.isInvulnerableTo(source)) {
             return false;
+        } else if (!this.level().isClientSide && !this.isRemoved()) {
+            level().playSound(null, blockPosition(), SoundEvents.WOOD_BREAK, SoundSource.MASTER);
+            double w = getBbWidth();
+            double h = getBbHeight();
+            ((ServerLevel)level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SPRUCE_PLANKS.defaultBlockState()),
+                    getX(), getY(), getZ(), 100, w, h, w, 0);
+            this.setHealth(this.getHealth() - amount);
+            this.markHurt();
+            this.gameEvent(GameEvent.ENTITY_DAMAGE, source.getEntity());
+
+            if(getHealth() <= 0) {
+                onDestroyed(false);
+            }
+
+            return true;
+        }
 
         if(level().isClientSide || isRemoved())
             return true;
-
-        level().playSound(null, blockPosition(), SoundEvents.WOOD_BREAK, SoundSource.MASTER);
-        double w = getBbWidth();
-        double h = getBbHeight();
-        ((ServerLevel)level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SPRUCE_PLANKS.defaultBlockState()),
-                getX(), getY(), getZ(), 100, w, h, w, 0);
-
-        setHealth(getHealth() - amount);
-        gameEvent(GameEvent.ENTITY_DAMAGE, source.getEntity());
-
-        if(getHealth() <= 0)
-            onDestroyed(false);
 
         return true;
     }

@@ -36,6 +36,7 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -68,6 +69,7 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -623,7 +625,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving) {
-				if (this.getForward().dot(getDeltaMovement()) > 0) {
+//				if (this.getForward().dot(getDeltaMovement()) > 0) {
 				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
@@ -647,7 +649,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 					controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
 				}
-			} else if (this.getForward().dot(getDeltaMovement()) < 0) {
+//			} else
+			if (this.getForward().dot(getDeltaMovement()) < 0) {
 					if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
@@ -758,7 +761,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (!this.isUndead() && random.nextDouble() < 0.03 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
+		if (!this.isUndead() && random.nextDouble() < 0.3 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get() && !damageSource.is(DamageTypes.PLAYER_ATTACK)) {
 			if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
 				System.out.println("[DragN's Livestock Overhaul!]: An OHorse has turned undead at: " + this.getOnPos());
 			}
@@ -796,6 +799,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public int maneGrowthTick;
 	public int tailGrowthTick;
 	public int decompTick;
+	public int trainStatsTick;
 
 	@Override
 	public void tick() {
@@ -807,6 +811,25 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.herdSize = 1;
 			}
 		}
+
+//		if (this.isVehicle() && this.getControllingPassenger().is(Objects.requireNonNull(this.getOwner()))) {
+//			if (this.isTamed() && this.isSaddled()) {
+//				trainStatsTick++;
+//				if (trainStatsTick >= 100) {
+//					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
+//					double speedValue = speedAttribute.getValue();
+//					speedAttribute.setBaseValue(speedValue + 1.0D);
+//
+//					AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
+//					double jumpValue = jumpAttribute.getValue();
+//					jumpAttribute.setBaseValue(jumpValue + 1.0D);
+//
+//					trainStatsTick = 0;
+//				}
+//			}
+//		} else {
+//			return;
+//		}
 
 		List<ItemStack> armorSlots = (List<ItemStack>) this.getArmorSlots();
 		ItemStack armorItemStack = armorSlots.get(2);

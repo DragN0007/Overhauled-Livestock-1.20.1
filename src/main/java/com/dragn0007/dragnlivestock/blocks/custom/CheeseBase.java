@@ -1,7 +1,12 @@
 package com.dragn0007.dragnlivestock.blocks.custom;
 
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -50,5 +55,14 @@ public class CheeseBase extends HorizontalDirectionalBlock {
     @Override
     public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_) {
         return super.getCollisionShape(p_60572_, p_60573_, p_60574_, p_60575_);
+    }
+
+    @Override
+    public boolean isCollisionShapeFullBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return false;
+    }
+
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return Block.canSupportCenter(pLevel, pPos.below(), Direction.UP);
     }
 }

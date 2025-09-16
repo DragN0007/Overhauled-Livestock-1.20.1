@@ -209,13 +209,20 @@ public class Unicorn extends OHorse implements GeoEntity {
 	public boolean canStandOnFluid(FluidState fluidState) {
 		if (this.getSpecies() == 1) {
 			return fluidState.is(FluidTags.LAVA);
+		} else {
+			return false;
 		}
-		return false;
+	}
+
+	@Override
+	public boolean fireImmune() {
+		return true;
 	}
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (this.getSpecies() == 1 && (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.EXPLOSION))) {
+		if (this.getSpecies() == 1 && (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.ON_FIRE)
+				|| damageSource.is(DamageTypes.LAVA) || damageSource.is(DamageTypes.EXPLOSION))) {
 			return false;
 		}
 

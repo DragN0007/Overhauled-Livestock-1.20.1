@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Controls:$() $(br2)-Right click the wagon with any (vanilla) planks to change it's wood type. $(br2)-Right click the wagon with an axe to pick it up intact. $(br2)-Hit the wagon with an axe to destroy it and get scraps back."
+      "text": "$(l)Controls:$() $(br2)-Right click the wagon with any (vanilla) planks to change it's wood type. $(br2)-Right click the wagon with an axe to pick it up intact. $(br2)-Hit the wagon a few times to destroy it and get scraps back."
     },
     {
       "type": "patchouli:spotlight",
