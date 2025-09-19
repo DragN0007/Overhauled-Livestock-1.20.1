@@ -127,10 +127,11 @@ public class LivestockOverhaulClientEvent {
     public static final KeyMapping HORSE_WAVE = new KeyMapping("key.dragnlivestock.horse_wave", InputConstants.KEY_G, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_LEVADE = new KeyMapping("key.dragnlivestock.horse_levade", InputConstants.KEY_L, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping PLOW_MODE = new KeyMapping("key.dragnlivestock.plow_mode", InputConstants.KEY_SPACE, "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HORSE_WALK_BACKWARDS = new KeyMapping("key.dragnlivestock.horse_walk_backwards", InputConstants.KEY_S, "key.dragnlivestock.categories.dragnlivestock");
 
     @SubscribeEvent
     public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
-        KeyMapping[] keyMappings = {HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE, PLOW_MODE};
+        KeyMapping[] keyMappings = {HORSE_SPEED_UP, HORSE_SLOW_DOWN, HORSE_BOW, HORSE_PIAFFE, HORSE_SPANISH_WALK_TOGGLE, HORSE_WAVE, HORSE_LEVADE, HORSE_WALK_BACKWARDS, PLOW_MODE};
         for (KeyMapping keyMapping : keyMappings) {
             event.register(keyMapping);
         }

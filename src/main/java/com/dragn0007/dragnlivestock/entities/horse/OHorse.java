@@ -603,7 +603,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		controllers.add(new AnimationController<>(this, "emoteController", 5, this::emotePredicate));
 	}
 
-	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+	private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
@@ -625,32 +625,36 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving) {
-//				if (this.getForward().dot(getDeltaMovement()) > 0) {
-				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
-					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+				if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
+					if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
+						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
-				} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
-					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))
+							|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
+						if (this.isOnSand()) {
+							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.75 * controller.getAnimationSpeed() + animationSpeed));
+						} else {
+							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						}
 
-				} else if ((this.isOnSand() && this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
-					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+						if (LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown()) {
+							controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						} else {
+							controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+						}
 
-				} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+					} else {
+						controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
+					}
 
-				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-					controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-				} else {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
-				}
-//			} else
-			if (this.getForward().dot(getDeltaMovement()) < 0) {
+				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
 					if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
 						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
@@ -659,6 +663,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
 					}
 				}
+
 			} else {
 				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
@@ -761,25 +766,32 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (!this.isUndead() && random.nextDouble() < 0.3 && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get() && !damageSource.is(DamageTypes.PLAYER_ATTACK)) {
-			if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
-				System.out.println("[DragN's Livestock Overhaul!]: An OHorse has turned undead at: " + this.getOnPos());
-			}
-			if (this.getHealth() <= 4) {
-				this.heal(10);
-				this.setUndead(true);
-				this.level().playSound(null, this, this.getDeathSound(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
-				this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-				this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-				this.level().playSound(null, this, SoundEvents.ZOMBIE_HORSE_AMBIENT, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
-				return false;
+		Entity entity = damageSource.getEntity();
+		if (entity != null && !(entity instanceof Player)) {
+			if (!this.isUndead() && random.nextDouble() <= LivestockOverhaulCommonConfig.UNDEAD_HORSE_CHANCE.get() &&
+					LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
+				if (this.getHealth() <= 4) {
+					if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+						System.out.println("[DragN's Livestock Overhaul!]: An O-Horse has turned undead at: " + this.getOnPos());
+					}
+					this.heal(20);
+					this.setUndead(true);
+					this.level().playSound(null, this, this.getDeathSound(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
+					this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+					this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+					this.level().playSound(null, this, SoundEvents.ZOMBIE_HORSE_AMBIENT, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
+					return false;
+				}
 			}
 		}
+
 		if (this.isUndead()) {
-			if (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.EXPLOSION)) {
+			if (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.ON_FIRE)
+					|| damageSource.is(DamageTypes.DROWN) || damageSource.is(DamageTypes.EXPLOSION)) {
 				return false;
 			}
 		}
+
 		return super.hurt(damageSource, v);
 	}
 

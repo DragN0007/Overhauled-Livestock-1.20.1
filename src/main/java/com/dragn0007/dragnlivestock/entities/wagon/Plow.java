@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
+import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -12,6 +13,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -219,9 +221,14 @@ public class Plow extends AbstractInventoryWagon {
 
     }
 
+    protected static final EntityDataAccessor<Float> DATA_HEALTH = SynchedEntityData.defineId(Plow.class, EntityDataSerializers.FLOAT);
+    protected static final EntityDataAccessor<Integer> DATA_TYPE = SynchedEntityData.defineId(Plow.class, EntityDataSerializers.INT);
+
     @Override
     protected void defineSynchedData() {
         this.entityData.define(MODE, Mode.NO);
+        entityData.define(DATA_TYPE, 0);
+        entityData.define(DATA_HEALTH, (float)maxHealth);
         super.defineSynchedData();
     }
 

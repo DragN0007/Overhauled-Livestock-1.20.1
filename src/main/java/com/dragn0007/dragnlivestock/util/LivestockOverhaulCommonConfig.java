@@ -48,6 +48,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
     public static final ForgeConfigSpec.BooleanValue UNICORN_BREEDING;
     public static final ForgeConfigSpec.BooleanValue UNDEAD_HORSE_DEATH;
+    public static final ForgeConfigSpec.ConfigValue<Double> UNDEAD_HORSE_CHANCE;
     public static final ForgeConfigSpec.ConfigValue<Integer> DECOMPISITION_STAGE_TIME;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
@@ -224,6 +225,9 @@ public class LivestockOverhaulCommonConfig {
 
         UNDEAD_HORSE_DEATH = BUILDER.comment("Should O-Horses have a small chance to turn Undead upon death?")
                 .define("Occasional Horse Turns Undead", true);
+
+        UNDEAD_HORSE_CHANCE = BUILDER.comment("Chance of an O-Horse turning undead after dying to a natural cause. Default is 0.03 (3%).")
+                .define("Undead Horse Chance", 0.03);
 
         DECOMPISITION_STAGE_TIME = BUILDER.comment("Amount of time, in ticks, it takes for an Undead Horse to decompose to the next stage. Default is 72000.")
                 .define("Undead Decomp Stage Time", 72000);
