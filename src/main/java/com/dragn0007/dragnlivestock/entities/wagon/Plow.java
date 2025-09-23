@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.client.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
@@ -19,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -202,10 +204,31 @@ public class Plow extends AbstractInventoryWagon {
         this.tillNewFarmland(rightPos);
     }
 
+
+    public int tillerCooldown = 0;
+
+    public void handleInput(Input input) {
+        this.tillerCooldown = Math.max(this.tillerCooldown - 1, 0);
+        if(LivestockOverhaulClientEvent.PLOW_MODE.isDown() && this.tillerCooldown == 0) {
+            LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(this.getId()));
+            this.tillerCooldown = 10;
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
         this.lastClientPos = this.position();
+
+        if(this.isControlledByLocalInstance()) {
+            if(this.getControllingPassenger() instanceof LocalPlayer player) {
+                this.handleInput(player.input);
+            }
+
+            if(this.lastClientPos.x != this.position().x || this.lastClientPos.y != this.position().y || this.lastClientPos.z != this.position().z) {
+                this.syncPacketPositionCodec(this.position().x, this.position().y, this.position().z);
+            }
+        }
 
         if(!this.level().isClientSide) {
             Vec3 diff = this.lastServerPos.subtract(this.position());

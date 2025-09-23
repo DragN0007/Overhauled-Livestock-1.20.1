@@ -476,14 +476,12 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			if (tag.contains("Variant_Texture")) {
-				this.setVariantTexture(tag.getString("Variant_Texture"));
-			}
+		if (tag.contains("Variant_Texture")) {
+			this.setVariantTexture(tag.getString("Variant_Texture"));
+		}
 
-			if (tag.contains("Overlay_Texture")) {
-				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-			}
+		if (tag.contains("Overlay_Texture")) {
+			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
 
 		if (tag.contains("Dewlap")) {
@@ -501,10 +499,8 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			tag.putString("Variant_Texture", this.getTextureResource().toString());
-			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		}
+		tag.putString("Variant_Texture", this.getTextureResource().toString());
+		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Dewlap", this.getDewlap());
 		tag.putInt("Gender", this.getGender());
 	}
@@ -582,6 +578,27 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		return false;
 	}
 
+	public int maxBabyAmount = LivestockOverhaulCommonConfig.MAX_RABBIT_BABIES.get();
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
+
+	public void tick() {
+		super.tick();
+
+		if (babiesBirthed > 0) {
+			babyCooldown++;
+		}
+
+		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
+			babiesBirthed = 0;
+			babyCooldown = 0;
+		}
+
+		if (babyCooldown >= 20) {
+			babyCooldown = 0;
+		}
+	}
+
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		ORabbit kit;
@@ -626,6 +643,18 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		kit.setGender(random.nextInt(Gender.values().length));
 
 		kit.setDewlapByGender();
+
+		babiesBirthed++;
+
+		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
+			if (random.nextDouble() <= 0.25) {
+				spawnChildFromBreeding(serverLevel, partner);
+				babiesBirthed++;
+			} else if (random.nextDouble() <= 0.50 && babiesBirthed < (maxBabyAmount * 0.50)) {
+				spawnChildFromBreeding(serverLevel, partner);
+				babiesBirthed++;
+			}
+		}
 
 		return kit;
 	}

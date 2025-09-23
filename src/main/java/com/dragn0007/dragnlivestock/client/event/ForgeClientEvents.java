@@ -42,10 +42,10 @@ public class ForgeClientEvents {
             LONetwork.INSTANCE.sendToServer(new LONetwork.PlayEmoteRequest("levade", "play_once"));
         }
 
-        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.PLOW_MODE.getKey().getValue()) {
-            if (player.getVehicle() instanceof Plow plow) {
-                LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(plow.getId()));
-            }
-        }
+//        if (event.getAction() == InputConstants.RELEASE && event.getKey() == LivestockOverhaulClientEvent.PLOW_MODE.getKey().getValue()) {
+//            if (player.getVehicle() instanceof Plow plow) {
+//                LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(plow.getId()));
+//            }
+//        }
     }
 }

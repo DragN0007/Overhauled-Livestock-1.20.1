@@ -671,7 +671,10 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 
-		if (this.isMale() || !this.isInLove() || !this.isAlive() || eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
+		if ((this.isMale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get())
+				|| !this.isInLove()
+				|| !this.isAlive()
+				|| eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
 			return null;
 		}
 
@@ -690,59 +693,61 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	protected void dropFertilizedEgg(ServerLevel serverLevel) {
-		if (!this.isFemale() || !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+		if (!this.isFemale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
 			return;
 		}
 
 		int rareChickenChance = this.random.nextInt(48);
 
-		if(this.isFemale() && this.getBreed() == 0) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+		if ((this.isFemale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) || !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+			if (this.getBreed() == 0) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && this.getBreed() == 1) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+			if (this.isFemale() && this.getBreed() == 1) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && this.getBreed() == 2) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+			if (this.isFemale() && this.getBreed() == 2) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && this.getBreed() == 3) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_MARANS_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+			if (this.isFemale() && this.getBreed() == 3) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_MARANS_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && this.getBreed() == 4) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+			if (this.isFemale() && this.getBreed() == 4) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && this.getBreed() == 5) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+			if (this.isFemale() && this.getBreed() == 5) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && this.getBreed() == 6) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-		}
+			if (this.isFemale() && this.getBreed() == 6) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
 
-		if(this.isFemale() && rareChickenChance <= 1) {
-			ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
-			ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-			serverLevel.addFreshEntity(eggEntity);
-			eggsLaid = 3;
+			if (this.isFemale() && rareChickenChance <= 1) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+				eggsLaid = 3;
+			}
 		}
 
 		serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 1.0F, 1.0F);

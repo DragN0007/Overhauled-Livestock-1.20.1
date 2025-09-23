@@ -265,7 +265,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
         DecimalFormat limitDec = new DecimalFormat("#.###");
         String num = limitDec.format(speed);
-        String labelText = "Speed: " + num;
+        String baseSpeedText = "Base Speed: " + num;
+        int trainingNum = oHorse.speedTrained;
+        String labelText = baseSpeedText + ", Training: +" + trainingNum;
 
         graphics.drawString(this.font, labelText, speedLabelX, speedLabelY, 0xFFFFFF, false);
     }
@@ -279,7 +281,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
         DecimalFormat limitDec = new DecimalFormat("#.###");
         String num = limitDec.format(jumpHeight);
-        String labelText = "Jump Strength: " + num;
+        String baseJumpText = "Jump Strength: " + num;
+        int trainingNum = oHorse.jumpTrained;
+        String labelText = baseJumpText + ", Training: +" + trainingNum;
 
         graphics.drawString(this.font, labelText, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
     }
@@ -288,7 +292,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
     private void renderHealthLabel(GuiGraphics graphics) {
         String text = String.valueOf(this.oHorse.getMaxHealth());
-        String labelText = "Max Health: " + text;
+        String baseHealthText = "Base Health: " + text;
+        int trainingNum = oHorse.healthTrained;
+        String labelText = baseHealthText + ", Training: +" + trainingNum;
 
         graphics.drawString(this.font, labelText, healthLabelX, healthLabelY, 0xFFFFFF, false);
     }

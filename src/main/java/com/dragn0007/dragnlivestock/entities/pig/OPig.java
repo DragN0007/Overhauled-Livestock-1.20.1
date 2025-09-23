@@ -410,8 +410,17 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 	public void tick() {
 		super.tick();
-		if (babiesBirthed >= LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get() && babyCooldown >= 20) {
+
+		if (babiesBirthed > 0) {
+			babyCooldown++;
+		}
+
+		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
 			babiesBirthed = 0;
+			babyCooldown = 0;
+		}
+
+		if (babyCooldown >= 20) {
 			babyCooldown = 0;
 		}
 	}
@@ -462,6 +471,18 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		}
 
 		piglet.setGender(random.nextInt(Gender.values().length));
+
+		babiesBirthed++;
+
+		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
+			if (random.nextDouble() <= 0.25) {
+				spawnChildFromBreeding(serverLevel, partner);
+				babiesBirthed++;
+			} else if (random.nextDouble() <= 0.50 && babiesBirthed < (maxBabyAmount * 0.50)) {
+				spawnChildFromBreeding(serverLevel, partner);
+				babiesBirthed++;
+			}
+		}
 
 		return piglet;
 	}

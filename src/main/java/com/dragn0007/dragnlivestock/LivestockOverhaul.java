@@ -10,6 +10,7 @@ import com.dragn0007.dragnlivestock.entities.wagon.LargePlow;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.gson.JsonSyntaxException;
@@ -27,6 +28,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib.GeckoLib;
 
@@ -37,6 +39,7 @@ public class LivestockOverhaul {
 
     public LivestockOverhaul() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.addListener(this::setup);
 
         LOItems.register(eventBus);
         LOItemGroup.register(eventBus);
@@ -61,6 +64,10 @@ public class LivestockOverhaul {
 
         System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
         System.out.println("[DragN's Livestock Overhaul!] Do not remove this mod without running the Failsafe Config!");
+    }
+
+    private void setup(FMLCommonSetupEvent event) {
+        LONetwork.init();
     }
 
     public static void warn(Player entity){

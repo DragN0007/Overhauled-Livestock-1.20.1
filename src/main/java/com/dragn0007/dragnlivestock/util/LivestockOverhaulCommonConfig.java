@@ -52,12 +52,15 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> DECOMPISITION_STAGE_TIME;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
     public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_HORSE_TRAINING;
+    public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_TRAIN_TIME;
+    public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_TRAIN_AMOUNT;
     public static final ForgeConfigSpec.BooleanValue COW_BELL_SOUND;
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
-    public static final ForgeConfigSpec.BooleanValue DYNAMIC_RESOURCES;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
@@ -73,8 +76,10 @@ public class LivestockOverhaulCommonConfig {
                         "\nNote that if this is turned on, all previously-spawned vanilla animals will be converted regardless of spawn type.")
                 .define("Replace Spawn Egg Vanilla Animals", false);
 
-        SPAWN_PREVENTION_PERCENT = BUILDER.comment("Percent of O-Animals that should be removed on-spawn. Higher the number = more O-Animals removed. Default is 0.3 (30%)" +
-                        "\nThis may help lower-end servers or computers run LO a little better if set to a higher value, since not as many animals will spawn. Only affects common farm animals (since they spawn most often) and does not affect anything vanilla or from other mods.")
+        SPAWN_PREVENTION_PERCENT = BUILDER.comment("Percent of O-Animals that should be removed on-spawn. " +
+                        "Higher the number = more O-Animals removed. Default is 0.3 (30%)" +
+                        "\nThis may help lower-end servers or computers run LO a little better if set to a higher value, since not as many animals will spawn. " +
+                        "Only affects common farm animals (since they spawn most often) and does not affect anything vanilla or from other mods.")
                 .define("Spawn Rate Prevention Percent", 0.30);
 
         REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
@@ -140,20 +145,30 @@ public class LivestockOverhaulCommonConfig {
         GENDERS_AFFECT_BREEDING = BUILDER.comment("Should an animal's gender affect how it breeds?")
                 .define("Genders Affect Breeding", true);
 
-        CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
+        CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. " +
+                        "Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
                 .define("Chicken Egg Lay Cooldown", 12000);
 
-        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a non-dairy-breed animal. Default is 48000 ticks, or 40 minutes.")
+        MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a non-dairy-breed animal. " +
+                        "Default is 48000 ticks, or 40 minutes.")
                 .define("Average Milking Cooldown", 48000);
 
-        DAIRY_MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a dairy-breed animal. Default is 12000 ticks, or 10 minutes.")
+        DAIRY_MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a dairy-breed animal. " +
+                        "Default is 12000 ticks, or 10 minutes.")
                 .define("Dairy Breed Milking Cooldown", 12000);
 
-        SHEEP_WOOL_REGROWTH_TIME = BUILDER.comment("Amount of time, in ticks, that you must wait to shear an O-Sheep, Goat or Llama. Default is 24000 ticks, or 20 minutes.")
+        SHEEP_WOOL_REGROWTH_TIME = BUILDER.comment("Amount of time, in ticks, that you must wait to shear an O-Sheep, Goat or Llama. " +
+                        "Default is 24000 ticks, or 20 minutes.")
                 .define("Wool Regrowth Time", 24000);
 
         CHICKEN_EGG_LAY_AMOUNT = BUILDER.comment("Amount of Fertilized Eggs a hen should lay after mating. Default is 3.")
-                .define("Chicken Egg Lay Amount", 3);
+                .define("Max Fertilized Chicken Eggs", 3);
+
+        MAX_PIG_BABIES = BUILDER.comment("Maximum amount of piglets a pig can have at once. Default is 3.")
+                .define("Max Pig Babies", 3);
+
+        MAX_RABBIT_BABIES = BUILDER.comment("Maximum amount of kits a rabbit can have at once. Default is 3.")
+                .define("Max Rabbit Babies", 3);
         BUILDER.pop();
 
         BUILDER.push("Herding");
@@ -177,19 +192,32 @@ public class LivestockOverhaulCommonConfig {
         USE_VANILLA_LOOT = BUILDER.comment("Should O-Animals use vanilla loot instead of the loot included in the mod?")
                 .define("Use Vanilla Animal Loot", false);
 
-        NATURAL_HORSE_BREEDS = BUILDER.comment("Should O-Horses be able to spawn with any breed naturally? (They spawn only as wild Mustangs by default)")
+        NATURAL_HORSE_BREEDS = BUILDER.comment("Should O-Horses be able to spawn with any breed naturally? Default is Mustangs only.")
                 .define("Naturally Spawning O-Horse Breeds", false);
 
         BASE_HORSE_SPRINT_TIME = BUILDER.comment("Base time an O-Horse can run for at full speed, in seconds. Default is 45s.")
                 .define("Base Horse Sprint Time", 45);
 
+        ALLOW_HORSE_TRAINING = BUILDER.comment("Should players be able to train their O-Horse's stats by riding them " +
+                        "over an extended period of time?")
+                .define("Allow Horse Training", true);
+
+        HORSE_TRAIN_TIME = BUILDER.comment("Time it takes (whilst riding), in ticks, to train an O-Horse up one level of it's stats. " +
+                        "Default is 48000 (40 minutes of riding).")
+                .define("Stat Training Time", 48000);
+
+        HORSE_TRAIN_AMOUNT = BUILDER.comment("Amount of times a player can level up their O-Horse's stats. Default is 3.")
+                .define("Stat Training Max", 5);
+
         HORSE_HAIR_GROWTH = BUILDER.comment("Should O-Horses's manes and tails be able to grow over time?")
                 .define("Horse Hair Growth Progression", true);
 
-        HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. Default is 72000.")
+        HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. " +
+                        "Default is 72000 (3 ingame days).")
                 .define("Horse Hair Growth Time", 72000);
 
-        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed and gender, along with their breed depending on the biome?")
+        SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed and gender, " +
+                        "along with their breed depending on the biome?")
                 .define("Spawn By Breed & Biome", true);
 
         EYES_BY_COLOR = BUILDER.comment("Should O-Animals' eye colors, if applicable, depend on their coat/ coloring?")
@@ -211,10 +239,8 @@ public class LivestockOverhaulCommonConfig {
         CREATIVE_BRANDING = BUILDER.comment("Should only those in Creative Mode be able to 'Mustang Brand' horses?")
                 .define("Creative-Only Mustang Branding", false);
 
-        DYNAMIC_RESOURCES = BUILDER.comment("(THIS DOESN'T DO ANYTHING YET!) Should Dynamic Resources be turned on? Only turn this on if you're running a DR resource pack. (Experimental)")
-                .define("Dynamic Resources (WIP)", false);
-
-        DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev or testing on your server temporarily.")
+        DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev " +
+                        "or testing on your server temporarily.")
                 .define("Debug Logs On [DEV]", false);
         BUILDER.pop();
 
@@ -229,14 +255,13 @@ public class LivestockOverhaulCommonConfig {
         UNDEAD_HORSE_CHANCE = BUILDER.comment("Chance of an O-Horse turning undead after dying to a natural cause. Default is 0.03 (3%).")
                 .define("Undead Horse Chance", 0.03);
 
-        DECOMPISITION_STAGE_TIME = BUILDER.comment("Amount of time, in ticks, it takes for an Undead Horse to decompose to the next stage. Default is 72000.")
+        DECOMPISITION_STAGE_TIME = BUILDER.comment("Amount of time, in ticks, it takes for an Undead Horse to decompose to the next stage. " +
+                        "Default is 72000 (3 ingame days).")
                 .define("Undead Decomp Stage Time", 72000);
 
-        ALLOW_SPECIAL_BLANKET_CRAFTING = BUILDER.comment("Should players be able to craft special event blankets? If this is false, servers can give out blankets as free event rewards instead (cannot be a real currency payment).")
+        ALLOW_SPECIAL_BLANKET_CRAFTING = BUILDER.comment("Should players be able to craft special event blankets? " +
+                        "If this is false, servers can give out blankets as free event rewards instead (cannot be a real currency payment).")
                 .define("Allow Special Event Blanket Crafting", true);
-
-        MAX_PIG_BABIES = BUILDER.comment("NON FUNCTIONAL")
-                .define("NON FUNCTIONAL", 3);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

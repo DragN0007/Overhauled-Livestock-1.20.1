@@ -154,6 +154,19 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (babiesBirthed > 0) {
+			babyCooldown++;
+		}
+
+		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
+			babiesBirthed = 0;
+			babyCooldown = 0;
+		}
+
+		if (babyCooldown >= 20) {
+			babyCooldown = 0;
+		}
+
 		regrowWoolCounter++;
 
 		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
@@ -600,6 +613,10 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		return false;
 	}
 
+	public int maxBabyAmount = 2;
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
+
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OSheep lamb;
@@ -676,6 +693,15 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 
 		lamb.setGender(random.nextInt(Gender.values().length));
+
+		babiesBirthed++;
+
+		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
+			if (random.nextDouble() <= 0.30) {
+				spawnChildFromBreeding(serverLevel, partner);
+				babiesBirthed++;
+			}
+		}
 
 		return lamb;
 	}

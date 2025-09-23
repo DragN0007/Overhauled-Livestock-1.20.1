@@ -36,7 +36,6 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -69,7 +68,6 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -153,219 +151,87 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public float generateRandomOHorseMaxHealth() {
 		float baseHealth;
-		int breed = getBreed();
-		if (breed == 0) {
-			baseHealth = 16.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 1) {
-			baseHealth = 20.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 2) {
-			baseHealth = 16.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 3) {
-			baseHealth = 14.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 4) {
-			baseHealth = 13.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 5) {
-			baseHealth = 18.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 6) {
-			baseHealth = 18.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 7) {
-			baseHealth = 16.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 8) {
-			baseHealth = 24.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 9) {
-			baseHealth = 17.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 10) {
-			baseHealth = 18.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 11) {
-			baseHealth = 20.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 12) {
-			baseHealth = 24.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 13) {
-			baseHealth = 15.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 14) {
-			baseHealth = 28.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		}
-		else if (breed == 15) {
-			baseHealth = 18.0F;
-			return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-		} else {
-			return 15.0F + (float) this.random.nextInt(4) + (float) this.random.nextInt(5);
-		}
+		switch (this.getBreed()) {
+			case 0:
+			default:
+				baseHealth = 16.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+			case 1, 11:
+				baseHealth = 20.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+            case 3:
+				baseHealth = 14.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+			case 4:
+				baseHealth = 13.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+			case 5, 10, 6, 15:
+				baseHealth = 18.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+            case 8, 12:
+				baseHealth = 24.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+			case 9:
+				baseHealth = 17.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+            case 13:
+				baseHealth = 15.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+			case 14:
+				baseHealth = 28.0F;
+				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
+        }
 	}
 
 	public double generateRandomOHorseJumpStrength() {
 		double baseStrength = 0.4F;
-		int breed = getBreed();
 		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.25D;
 
-		if (breed == 0) {
-			baseStrength = 0.5F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 1) {
-			baseStrength = 0.3F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 2) {
-			baseStrength = 0.4F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 3) {
-			baseStrength = 0.35F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 4) {
-			baseStrength = 0.35F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 5) {
-			baseStrength = 0.35F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 6) {
-			baseStrength = 0.3F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 7) {
-			baseStrength = 0.4F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 8) {
-			baseStrength = 0.25F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 9) {
-			baseStrength = 0.55F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 10) {
-			baseStrength = 0.4F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 11) {
-			baseStrength = 0.3F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 12) {
-			baseStrength = 0.2F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 13) {
-			baseStrength = 0.3F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 14) {
-			baseStrength = 0.2F;
-			return baseStrength + multiplier;
-		}
-		if (breed == 15) {
-			baseStrength = 0.3F;
-			return baseStrength + multiplier;
-		} else {
-			return baseStrength + this.random.nextDouble() * 0.15D;
-		}
+		switch (this.getBreed()) {
+			case 0:
+			default:
+				baseStrength = 0.5F;
+				return baseStrength + multiplier;
+			case 1, 6, 11, 13, 15:
+				baseStrength = 0.3F;
+				return baseStrength + multiplier;
+			case 2, 7, 10:
+				baseStrength = 0.4F;
+				return baseStrength + multiplier;
+			case 3, 4, 5:
+				baseStrength = 0.35F;
+				return baseStrength + multiplier;
+            case 8:
+				baseStrength = 0.25F;
+				return baseStrength + multiplier;
+			case 9:
+				baseStrength = 0.55F;
+				return baseStrength + multiplier;
+            case 12, 14:
+				baseStrength = 0.2F;
+				return baseStrength + multiplier;
+        }
 	}
 
 	public double generateRandomOHorseSpeed() {
 		double baseSpeed = 0.0F;
-		int breed = getBreed();
 		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.30D;
 
-		if (breed == 0) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 1) {
-			baseSpeed = 0.15F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 2) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 3) {
-			baseSpeed = 0.15F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 4) {
-			baseSpeed = 0.28F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 5) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 6) {
-			baseSpeed = 0.15F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 7) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 8) {
-			baseSpeed = 0.15F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 9) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 10) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 11) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 12) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 13) {
-			baseSpeed = 0.3F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 14) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		}
-		if (breed == 15) {
-			baseSpeed = 0.2F;
-			return baseSpeed + multiplier;
-		} else {
-			return baseSpeed + multiplier;
-		}
+		switch (this.getBreed()) {
+			case 0:
+			default:
+				baseSpeed = 0.2F;
+				return baseSpeed + multiplier;
+			case 1, 3, 6, 8:
+				baseSpeed = 0.15F;
+				return baseSpeed + multiplier;
+            case 4:
+				baseSpeed = 0.28F;
+				return baseSpeed + multiplier;
+            case 13:
+				baseSpeed = 0.3F;
+				return baseSpeed + multiplier;
+        }
 	}
 
 	public boolean isDraftBreed() {
@@ -391,7 +257,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public boolean canAddPassenger(Entity entity) {
 		if (!this.isDraftBreed()) {
-			return this.getPassengers().size() < 1;
+			return this.getPassengers().isEmpty();
 		} else if (this.isDraftBreed()) {
 			return this.getPassengers().size() < 2;
 		} else {
@@ -439,14 +305,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			double offsetY = 1.0;
 			double offsetZ = -0.055;
 
-			int i = this.getPassengers().indexOf(entity);
+			int passengers = this.getPassengers().indexOf(entity);
 
 			if (getBreed() == 0) {
 				offsetY = 1.03;
 			}
 
 			if (getBreed() == 1) {
-				switch (i) {
+				switch (passengers) {
 					case 0:
 						offsetY = 1.05;
 						break;
@@ -470,7 +336,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 5) {
-				switch (i) {
+				switch (passengers) {
 					case 0:
 						offsetY = 1.3;
 						break;
@@ -482,7 +348,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 6) {
-				switch (i) {
+				switch (passengers) {
 					case 0:
 						offsetY = 0.97;
 						break;
@@ -498,7 +364,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 8) {
-				switch (i) {
+				switch (passengers) {
 					case 0:
 						offsetY = 1.4;
 						break;
@@ -522,7 +388,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 12) {
-				switch (i) {
+				switch (passengers) {
 					case 0:
 						offsetY = 1.45;
 						break;
@@ -538,7 +404,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			if (getBreed() == 14) {
-				switch (i) {
+				switch (passengers) {
 					case 0:
 						offsetY = 1.33;
 						break;
@@ -812,6 +678,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public int tailGrowthTick;
 	public int decompTick;
 	public int trainStatsTick;
+	public int speedTrained;
+	public int jumpTrained;
+	public int healthTrained;
 
 	@Override
 	public void tick() {
@@ -824,24 +693,42 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-//		if (this.isVehicle() && this.getControllingPassenger().is(Objects.requireNonNull(this.getOwner()))) {
-//			if (this.isTamed() && this.isSaddled()) {
-//				trainStatsTick++;
-//				if (trainStatsTick >= 100) {
-//					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
-//					double speedValue = speedAttribute.getValue();
-//					speedAttribute.setBaseValue(speedValue + 1.0D);
-//
-//					AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
-//					double jumpValue = jumpAttribute.getValue();
-//					jumpAttribute.setBaseValue(jumpValue + 1.0D);
-//
-//					trainStatsTick = 0;
-//				}
-//			}
-//		} else {
-//			return;
-//		}
+		if (this.isVehicle() && this.getControllingPassenger() == this.getOwner()) {
+			if (this.isTamed() && this.isSaddled()) {
+				trainStatsTick++;
+				if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
+					System.out.println("Train Stats Tick: " + trainStatsTick);
+				}
+				if (trainStatsTick >= 100) {
+					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
+                    assert speedAttribute != null;
+                    double speedValue = speedAttribute.getValue();
+                    if (speedValue < 0.28F && !(speedTrained >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+						speedAttribute.setBaseValue(speedValue + 0.005);
+						speedTrained++;
+					}
+
+					AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
+                    assert jumpAttribute != null;
+                    double jumpValue = jumpAttribute.getValue();
+					if (jumpValue < 1.0F && !(jumpTrained >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+						jumpAttribute.setBaseValue(jumpValue + 0.005);
+						jumpTrained++;
+					}
+
+					AttributeInstance healthAttribute = this.getAttribute(Attributes.MAX_HEALTH);
+                    assert healthAttribute != null;
+                    double healthValue = healthAttribute.getValue();
+					if (healthValue < 40.0D && !(healthTrained >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+						healthAttribute.setBaseValue(healthValue + 1.0D);
+						healthTrained++;
+					}
+					trainStatsTick = 0;
+				}
+			}
+		} else {
+			return;
+		}
 
 		List<ItemStack> armorSlots = (List<ItemStack>) this.getArmorSlots();
 		ItemStack armorItemStack = armorSlots.get(2);
@@ -1144,14 +1031,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			if (tag.contains("Variant_Texture")) {
-				this.setVariantTexture(tag.getString("Variant_Texture"));
-			}
+		if (tag.contains("Variant_Texture")) {
+			this.setVariantTexture(tag.getString("Variant_Texture"));
+		}
 
-			if (tag.contains("Overlay_Texture")) {
-				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-			}
+		if (tag.contains("Overlay_Texture")) {
+			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
 		}
 
 		if (tag.contains("Reindeer_Variant")) {
@@ -1214,6 +1099,22 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("IsBranded")) {
 			this.setIsBranded(tag.getBoolean("IsBranded"));
 		}
+
+		if (tag.contains("TrainingTime")) {
+			this.trainStatsTick = tag.getInt("TrainingTime");
+		}
+
+		if (tag.contains("SpeedTrained")) {
+			this.speedTrained = tag.getInt("SpeedTrained");
+		}
+
+		if (tag.contains("JumpTrained")) {
+			this.jumpTrained = tag.getInt("JumpTrained");
+		}
+
+		if (tag.contains("HealthTrained")) {
+			this.healthTrained = tag.getInt("HealthTrained");
+		}
 	}
 
 	@Override
@@ -1222,10 +1123,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-			tag.putString("Variant_Texture", this.getTextureResource().toString());
-			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-		}
+		tag.putString("Variant_Texture", this.getTextureResource().toString());
+		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Reindeer_Variant", this.getReindeerVariant());
 		tag.putInt("Decomp_Stage", this.getDecompVariant());
 		tag.putInt("Gender", this.getGender());
@@ -1243,6 +1142,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
 		}
 		tag.putBoolean("IsBranded", this.isBranded());
+		tag.putInt("TrainingTime", this.trainStatsTick);
+		tag.putInt("SpeedTrained", this.speedTrained);
+		tag.putInt("JumpTrained", this.jumpTrained);
+		tag.putInt("HealthTrained", this.healthTrained);
 	}
 
 	@Override
