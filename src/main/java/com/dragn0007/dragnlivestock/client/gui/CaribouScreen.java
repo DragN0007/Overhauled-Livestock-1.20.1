@@ -87,11 +87,19 @@ public class CaribouScreen extends AbstractContainerScreen<CaribouMenu> {
         }
 
         if (this.caribou.isFemale()) {
-            graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
+            if (this.caribou.isSnipped()) {
+                graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 107, this.imageHeight + 54, 8, 8);
+            } else {
+                graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
+            }
         }
 
         if (this.caribou.isMale()) {
-            graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 98, this.imageHeight + 54, 8, 8);
+            if (this.caribou.isSnipped()) {
+                graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 115, this.imageHeight + 54, 8, 8);
+            } else {
+                graphics.blit(CARIBOU_INVENTORY_LOCATION, x + 161, y + 9, 98, this.imageHeight + 54, 8, 8);
+            }
         }
 
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.caribou);

@@ -6,6 +6,8 @@ import com.dragn0007.dragnlivestock.common.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OCamelFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -778,19 +780,14 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		} else if (!(animal instanceof OCamel)) {
 			return false;
 		} else {
-			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((OCamel) animal).canParent();
-			} else {
-				OCamel partner = (OCamel) animal;
-				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
-					return isFemale();
+			if (!this.isSnipped() && !((AbstractOMount) animal).isSnipped()) {
+				if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+					return this.canParent() && ((AbstractOMount) animal).canParent();
+				} else {
+					AbstractOMount partner = (AbstractOMount) animal;
+					if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+						return this.isFemale();
+					}
 				}
 			}
 		}

@@ -4,10 +4,13 @@ import com.dragn0007.dragnlivestock.common.gui.OMountMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
+import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
@@ -440,12 +443,36 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (itemStack.is(Items.PACKED_ICE) && this.isHorse(this) && ((player.getAbilities().instabuild && LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get()) || !LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get())) {
+        if (itemStack.is(Items.PACKED_ICE) && this.isHorse(this) && ((player.getAbilities().instabuild && LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get()) ||
+                !LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get())) {
             OHorse oHorse = (OHorse) this;
             if (!oHorse.isBranded() && (!oHorse.isTamed() || player.getAbilities().instabuild)) {
                 oHorse.setIsBranded(true);
                 this.playSound(SoundEvents.LAVA_EXTINGUISH, 0.5f, 1f);
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+        }
+
+        if (itemStack.is(LOItems.UTILITY_KNIFE.get()) && ((player.getAbilities().instabuild && LivestockOverhaulCommonConfig.CREATIVE_SNIPPING.get()) ||
+                !LivestockOverhaulCommonConfig.CREATIVE_SNIPPING.get()) && ((this.isOwnedBy(player) || player.getAbilities().instabuild) || !this.isTamed())) {
+            if (!(this instanceof OGoat) && !(this instanceof FarmGoat) && !(this instanceof OCow)) {
+                if (player.isShiftKeyDown()) {
+                    if (!this.isSnipped()) {
+                        this.setSnipped(true);
+                        this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+            }
+        }
+
+        if (itemStack.is(Items.GLISTERING_MELON_SLICE) && player.getAbilities().instabuild) {
+            if (player.isShiftKeyDown()) {
+                if (this.isSnipped()) {
+                    this.setSnipped(false);
+                    this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
 
@@ -692,6 +719,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.entityData.define(DECOR_ITEM, ItemStack.EMPTY);
         this.entityData.define(SADDLE_ITEM, ItemStack.EMPTY);
         this.entityData.define(LOCKED, false);
+        this.entityData.define(SNIPPED, false);
     }
 
     public ItemStack getDecorItem() {
@@ -718,6 +746,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         compoundTag.putBoolean("Locked", this.isLocked());
+
+        compoundTag.putBoolean("IsSnipped", this.isSnipped());
 
         if (this.hasChest()) {
             ListTag listtag = new ListTag();
@@ -759,6 +789,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
         if (compoundTag.contains("Locked")) {
             this.setLocked(compoundTag.getBoolean("Locked"));
+        }
+
+        if (compoundTag.contains("IsSnipped")) {
+            this.setSnipped(compoundTag.getBoolean("IsSnipped"));
         }
 
         if (this.hasChest()) {
@@ -955,6 +989,14 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return flag;
     }
 
+    public static final EntityDataAccessor<Boolean> SNIPPED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
+    public boolean isSnipped() {
+        return this.entityData.get(SNIPPED);
+    }
+    public void setSnipped(boolean snipped) {
+        this.entityData.set(SNIPPED, snipped);
+    }
+
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
     public int getVariant() {
         return this.entityData.get(VARIANT);
@@ -970,7 +1012,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public void setVariantTexture(String variant) {
         this.entityData.set(VARIANT_TEXTURE, variant);
     }
-
 
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
     public int getOverlayVariant() {

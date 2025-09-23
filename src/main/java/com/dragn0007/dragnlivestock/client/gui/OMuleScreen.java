@@ -92,15 +92,23 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
         }
 
 //        if (this.OMule.canWearShoes()) {
-//            graphics.blit(HORSE_INVENTORY_LOCATION, x + 7, y + 53, 54, this.imageHeight + 54, 18, 18);
+//            graphics.blit(MULE_INVENTORY_LOCATION, x + 7, y + 53, 54, this.imageHeight + 54, 18, 18);
 //        }
 
         if (this.oMule.isFemale()) {
-            graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
+            if (this.oMule.isSnipped()) {
+                graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 107, this.imageHeight + 54, 8, 8);
+            } else {
+                graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 90, this.imageHeight + 54, 8, 8);
+            }
         }
 
         if (this.oMule.isMale()) {
-            graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 98, this.imageHeight + 54, 8, 8);
+            if (this.oMule.isSnipped()) {
+                graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 115, this.imageHeight + 54, 8, 8);
+            } else {
+                graphics.blit(MULE_INVENTORY_LOCATION, x + 161, y + 9, 98, this.imageHeight + 54, 8, 8);
+            }
         }
 
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, x + 51, y + 60, 17, (float)(x + 51), (float)(y + 75 - 50), this.oMule);

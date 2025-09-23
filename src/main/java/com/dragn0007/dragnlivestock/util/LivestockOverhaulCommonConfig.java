@@ -46,6 +46,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue SPAWN_BY_BREED;
     public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
     public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
+    public static final ForgeConfigSpec.BooleanValue HORSES_RUN_FROM_PLAYERS;
     public static final ForgeConfigSpec.BooleanValue UNICORN_BREEDING;
     public static final ForgeConfigSpec.BooleanValue UNDEAD_HORSE_DEATH;
     public static final ForgeConfigSpec.ConfigValue<Double> UNDEAD_HORSE_CHANCE;
@@ -61,6 +62,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
+    public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
@@ -227,6 +229,9 @@ public class LivestockOverhaulCommonConfig {
                         "\nTurning this off will make mounts use the post-1.12 turning, which is simply just pivoting in place.")
                 .define("Advanced Horse Turning", true);
 
+        HORSES_RUN_FROM_PLAYERS = BUILDER.comment("Should wild O-Horses run from players?")
+                .define("Wild Horses Run From Players", true);
+
         COW_BELL_SOUND = BUILDER.comment("Should cow bells make noise/ ding?")
                 .define("Cow Bell Ding", true);
 
@@ -238,6 +243,9 @@ public class LivestockOverhaulCommonConfig {
 
         CREATIVE_BRANDING = BUILDER.comment("Should only those in Creative Mode be able to 'Mustang Brand' horses?")
                 .define("Creative-Only Mustang Branding", false);
+
+        CREATIVE_SNIPPING = BUILDER.comment("Should only those in Creative Mode be able to snip (geld or spay) mounts?")
+                .define("Creative-Only Snipping", false);
 
         DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev " +
                         "or testing on your server temporarily.")

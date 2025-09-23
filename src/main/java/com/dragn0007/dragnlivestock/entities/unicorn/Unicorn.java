@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.UnicornMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
+import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
@@ -550,7 +551,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		} else if (!(animal instanceof Unicorn) && !(animal instanceof OHorse)) {
 			return false;
 		} else {
-			if (LivestockOverhaulCommonConfig.UNICORN_BREEDING.get()) {
+			if (!this.isSnipped() && !((OHorse) animal).isSnipped()) {
 				if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
 					return this.canParent() && ((AbstractOMount) animal).canParent();
 				} else {

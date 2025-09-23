@@ -140,6 +140,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						(entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, Player.class, 15.0F, 1.8F, 1.8F, player ->
+				(player instanceof Player && !player.isCrouching() && !this.isTamed() && LivestockOverhaulCommonConfig.HORSES_RUN_FROM_PLAYERS.get())
+		));
+
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get() && (this.isWearingRodeoHarness() || !this.isTamed())
 		));
@@ -884,6 +888,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return SoundEvents.HORSE_ANGRY;
 	}
 
+	public static final EntityDataAccessor<Boolean> SNIPPED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
+
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public ResourceLocation getModelResource() {
 		return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
@@ -894,7 +900,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void setBreed(int breed) {
 		this.entityData.set(BREED, breed);
 	}
-
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public int getVariant() {
@@ -911,7 +916,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void setVariantTexture(String variant) {
 		this.entityData.set(VARIANT_TEXTURE, variant);
 	}
-
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public int getOverlayVariant() {
@@ -1224,12 +1228,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		} else if (!(animal instanceof ODonkey) && !(animal instanceof OHorse)) {
 			return false;
 		} else {
-			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((AbstractOMount) animal).canParent();
-			} else {
-				AbstractOMount partner = (AbstractOMount) animal;
-				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return this.isFemale();
+			if (!this.isSnipped() && !((AbstractOMount) animal).isSnipped()) {
+				if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+					return this.canParent() && ((AbstractOMount) animal).canParent();
+				} else {
+					AbstractOMount partner = (AbstractOMount) animal;
+					if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+						return this.isFemale();
+					}
 				}
 			}
 		}

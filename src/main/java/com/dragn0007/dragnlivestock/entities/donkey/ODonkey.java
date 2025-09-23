@@ -542,12 +542,14 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		} else if (!(animal instanceof ODonkey) && !(animal instanceof OHorse)) {
 			return false;
 		} else {
-			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((AbstractOMount) animal).canParent();
-			} else {
-				AbstractOMount partner = (AbstractOMount) animal;
-				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return this.isFemale();
+			if (!this.isSnipped() && !((AbstractOMount) animal).isSnipped()) {
+				if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+					return this.canParent() && ((AbstractOMount) animal).canParent();
+				} else {
+					AbstractOMount partner = (AbstractOMount) animal;
+					if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
+						return this.isFemale();
+					}
 				}
 			}
 		}
