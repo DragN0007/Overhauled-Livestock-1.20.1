@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.client.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
+import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -88,7 +89,8 @@ public class Plow extends AbstractInventoryWagon {
         return new DefaultWagonMenu(id, inventory, this);
     }
 
-    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(Plow.class, LivestockOverhaul.MODE);
+//    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(Plow.class, LivestockOverhaul.MODE);
+    public static final EntityDataAccessor<Integer> MODE = SynchedEntityData.defineId(Plow.class, EntityDataSerializers.INT);
 
     public Vec3 lastClientPos = Vec3.ZERO;
     public Vec3 lastServerPos = Vec3.ZERO;
@@ -109,12 +111,16 @@ public class Plow extends AbstractInventoryWagon {
         }
     }
 
-    public Mode mode() {
+//    public Mode mode() {
+//        return this.entityData.get(MODE);
+//    }
+
+    public int mode() {
         return this.entityData.get(MODE);
     }
 
     public void cycleMode() {
-        this.entityData.set(MODE, this.entityData.get(MODE).next());
+        this.entityData.set(MODE, (this.entityData.get(MODE) +1) % 3);
     }
 
     protected Vec3 calcOffset(double x, double y, double z) {
@@ -209,7 +215,7 @@ public class Plow extends AbstractInventoryWagon {
 
     public void handleInput(Input input) {
         this.tillerCooldown = Math.max(this.tillerCooldown - 1, 0);
-        if(LivestockOverhaulClientEvent.PLOW_MODE.isDown() && this.tillerCooldown == 0) {
+        if(input.jumping && this.tillerCooldown == 0) {
             LONetwork.INSTANCE.sendToServer(new LONetwork.ToggleTillerPowerRequest(this.getId()));
             this.tillerCooldown = 10;
         }
@@ -220,25 +226,19 @@ public class Plow extends AbstractInventoryWagon {
         super.tick();
         this.lastClientPos = this.position();
 
-        if(this.isControlledByLocalInstance()) {
-            if(this.getControllingPassenger() instanceof LocalPlayer player) {
-                this.handleInput(player.input);
-            }
-
-            if(this.lastClientPos.x != this.position().x || this.lastClientPos.y != this.position().y || this.lastClientPos.z != this.position().z) {
-                this.syncPacketPositionCodec(this.position().x, this.position().y, this.position().z);
-            }
-        }
-
         if(!this.level().isClientSide) {
             Vec3 diff = this.lastServerPos.subtract(this.position());
             this.lastServerPos = this.position();
-            if(this.isVehicle() && diff.length() != 0) {
-                if(this.entityData.get(MODE) == Mode.TILL) {
+            if(this.isVehicle() && diff.length() != 2) {
+                if(this.entityData.get(MODE) == 0) {
                     this.till();
-                } else if(this.entityData.get(MODE) == Mode.HARVEST) {
+                } else if(this.entityData.get(MODE) == 1) {
                     this.harvest();
                 }
+            }
+        } else {
+            if(this.getControllingPassenger() instanceof LocalPlayer player) {
+                this.handleInput(player.input);
             }
         }
 
@@ -249,22 +249,22 @@ public class Plow extends AbstractInventoryWagon {
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(MODE, Mode.NO);
+        super.defineSynchedData();
+        this.entityData.define(MODE, 0);
         entityData.define(DATA_TYPE, 0);
         entityData.define(DATA_HEALTH, (float)maxHealth);
-        super.defineSynchedData();
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
-        this.entityData.set(MODE, Mode.values()[compoundTag.getInt("Mode")]);
         super.readAdditionalSaveData(compoundTag);
+        this.entityData.set(MODE, compoundTag.getInt("Mode"));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
-        compoundTag.putInt("Mode", this.entityData.get(MODE).ordinal());
         super.addAdditionalSaveData(compoundTag);
+        compoundTag.putInt("Mode", this.entityData.get(MODE));
     }
 
 }

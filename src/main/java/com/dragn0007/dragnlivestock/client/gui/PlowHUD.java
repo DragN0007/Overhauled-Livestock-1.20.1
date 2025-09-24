@@ -22,8 +22,9 @@ public class PlowHUD {
             Player player = (Player) minecraft.getCameraEntity();
 
             if(!minecraft.options.hideGui && player instanceof LocalPlayer && player.getVehicle() instanceof Plow plow) {
-                Plow.Mode mode = plow.mode();
+                Plow.Mode mode = Plow.Mode.values()[plow.mode()];
                 ResourceLocation texture = mode.texture;
+                LivestockOverhaul.LOGGER.info(String.valueOf(texture));
 
                 int x = (screenWidth / 2) + 92;
                 int y = screenHeight - 32;

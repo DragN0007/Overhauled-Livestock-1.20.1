@@ -6,7 +6,6 @@ import com.dragn0007.dragnlivestock.common.network.LOPackets;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.wagon.LargePlow;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -14,6 +13,7 @@ import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataSerializer;
@@ -30,16 +30,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
 @Mod(LivestockOverhaul.MODID)
 public class LivestockOverhaul {
 
     public static final String MODID = "dragnlivestock";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public LivestockOverhaul() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener(this::setup);
 
         LOItems.register(eventBus);
         LOItemGroup.register(eventBus);
@@ -64,10 +65,6 @@ public class LivestockOverhaul {
 
         System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
         System.out.println("[DragN's Livestock Overhaul!] Do not remove this mod without running the Failsafe Config!");
-    }
-
-    private void setup(FMLCommonSetupEvent event) {
-        LONetwork.init();
     }
 
     public static void warn(Player entity){
@@ -124,22 +121,14 @@ public class LivestockOverhaul {
         }
     }
 
-    public static final EntityDataSerializer<Plow.Mode> MODE = EntityDataSerializer.simpleEnum(Plow.Mode.class);
-    public static final EntityDataSerializer<LargePlow.Mode> MODE_2 = EntityDataSerializer.simpleEnum(LargePlow.Mode.class);
-
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MODID, path);
     }
 
-    static {
-        EntityDataSerializers.registerSerializer(MODE);
-        EntityDataSerializers.registerSerializer(MODE_2);
-    }
-
-    public static float mod(float n, float m) {
-        while(n < 0) {
-            n += m;
-        }
-        return n % m;
-    }
+//    public static final EntityDataSerializer<Plow.Mode> MODE = EntityDataSerializer.simpleEnum(Plow.Mode.class);
+//    public static final EntityDataSerializer<LargePlow.Mode> MODE_2 = EntityDataSerializer.simpleEnum(LargePlow.Mode.class);
+//    static {
+//        EntityDataSerializers.registerSerializer(MODE);
+//        EntityDataSerializers.registerSerializer(MODE_2);
+//    }
 }
