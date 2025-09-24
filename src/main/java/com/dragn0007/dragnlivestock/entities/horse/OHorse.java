@@ -699,11 +699,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.isVehicle() && this.getControllingPassenger() == this.getOwner()) {
 			if (this.isTamed() && this.isSaddled()) {
+				if (this.speedTrained < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
+						|| this.jumpTrained < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
+						|| this.healthTrained < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
 				trainStatsTick++;
 				if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
 					System.out.println("Train Stats Tick: " + trainStatsTick);
 				}
-				if (trainStatsTick >= 100) {
+				if (trainStatsTick >= LivestockOverhaulCommonConfig.HORSE_TRAIN_TIME.get()) {
 					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
                     assert speedAttribute != null;
                     double speedValue = speedAttribute.getValue();
@@ -730,6 +733,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					trainStatsTick = 0;
 				}
 			}
+				}
 		} else {
 			return;
 		}
