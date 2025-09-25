@@ -2,11 +2,8 @@ package com.dragn0007.dragnlivestock.blocks.custom;
 
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RawCheese extends CheeseBase {

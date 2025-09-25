@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.compat.jade.block;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.custom.CheeseBase;
-import com.dragn0007.dragnlivestock.blocks.custom.JerkyBase;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;

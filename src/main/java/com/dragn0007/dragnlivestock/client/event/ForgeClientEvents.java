@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.client.event;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;

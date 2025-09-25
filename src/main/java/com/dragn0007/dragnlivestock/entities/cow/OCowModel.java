@@ -55,7 +55,12 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
         GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/grey.png")),
         STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/strawberry.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/white.png"));
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/white.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/chocolate.png")),
+        GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/gold.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/mahogany.png")),
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/silver.png"))
+        ;
 
         //Add new entries to bottom when mod is public, else cows will change textures during update.
 

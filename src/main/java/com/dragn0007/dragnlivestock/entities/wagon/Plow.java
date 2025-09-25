@@ -1,12 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.wagon;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.client.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.common.gui.DefaultWagonMenu;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
-import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -23,7 +20,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

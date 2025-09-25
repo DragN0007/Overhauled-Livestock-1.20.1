@@ -6,11 +6,11 @@ import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
+import com.dragn0007.dragnlivestock.entities.farm_goat.GoatBreed;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
-import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
@@ -503,7 +503,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         if (itemStack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
-            if (this.isHorse(this) || this.isMule(this) || this.isCamel(this)) {
+            if (this.isHorse(this) || this.isMule(this) || this.isCamel(this) || this instanceof FarmGoat) {
                 if (player.isShiftKeyDown()) {
                     if (this.getBreed() > 0) {
                         this.setBreed(this.getBreed() - 1);
@@ -528,6 +528,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                     CamelBreed.Breed currentBreed = CamelBreed.Breed.values()[camel.getBreed()];
                     CamelBreed.Breed nextBreed = currentBreed.next();
                     camel.setBreed(nextBreed.ordinal());
+                }
+                if (this instanceof FarmGoat) {
+                    FarmGoat goat = (FarmGoat) this;
+                    GoatBreed.Breed currentBreed = GoatBreed.Breed.values()[goat.getBreed()];
+                    GoatBreed.Breed nextBreed = currentBreed.next();
+                    goat.setBreed(nextBreed.ordinal());
                 }
                 this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
                 return InteractionResult.SUCCESS;

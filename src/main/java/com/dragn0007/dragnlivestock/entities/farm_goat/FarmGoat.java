@@ -167,6 +167,11 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 					this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
 					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
+				if (this.isCollared()) {
+					this.setCollared(false);
+					this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
+				}
 				if (this.hasChest()) {
 					this.dropEquipment();
 					this.inventory.removeAllItems();
@@ -183,6 +188,36 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				this.dropWoolByColorAndMarking();
 				regrowWoolCounter = 0;
 				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+		}
+
+		if (this.isTamed()) {
+			if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+				this.heal(2.0F);
+				if (!player.getAbilities().instabuild) {
+					itemstack.shrink(1);
+				}
+
+				this.gameEvent(GameEvent.EAT, this);
+				return InteractionResult.SUCCESS;
+			} else {
+				if (item instanceof DyeItem) {
+					DyeItem dyeitem = (DyeItem) item;
+					if (this.isOwnedBy(player)) {
+						this.setCollared(true);
+						DyeColor dyecolor = dyeitem.getDyeColor();
+						if (dyecolor != this.getCollarColor()) {
+							this.setCollarColor(dyecolor);
+							if (!player.getAbilities().instabuild) {
+								itemstack.shrink(1);
+							}
+
+							return InteractionResult.SUCCESS;
+						}
+
+						return super.mobInteract(player, hand);
+					}
+				}
 			}
 		}
 
@@ -427,6 +462,22 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDimensions(pose);
 	}
 
+	public static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	public DyeColor getCollarColor() {
+		return DyeColor.byId(this.entityData.get(DATA_COLLAR_COLOR));
+	}
+	public void setCollarColor(DyeColor p_30398_) {
+		this.entityData.set(DATA_COLLAR_COLOR, p_30398_.getId());
+	}
+
+	public static final EntityDataAccessor<Boolean> COLLARED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
+	public boolean isCollared() {
+		return this.entityData.get(COLLARED);
+	}
+	public void setCollared(boolean collared) {
+		this.entityData.set(COLLARED, collared);
+	}
+
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public int getBreed() {
 		return this.entityData.get(BREED);
@@ -434,7 +485,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setBreed(int breed) {
 		this.entityData.set(BREED, breed);
 	}
-
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
@@ -447,7 +497,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(VARIANT, variant);
 	}
 
-
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public String getOverlayLocation() {return FarmGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
 	public int getOverlayVariant() {
@@ -456,7 +505,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setOverlayVariant(int overlayVariant) {
 		this.entityData.set(OVERLAY, overlayVariant);
 	}
-
 
 	public static final EntityDataAccessor<Integer> FACE_OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public ResourceLocation getFaceOverlayLocation() {return FarmGoatFaceMarkingLayer.Overlay.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
@@ -476,7 +524,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(EYES, overlayVariant);
 	}
 
-
 	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public int getHornVariant() {
 		return this.entityData.get(HORN_TYPE);
@@ -484,7 +531,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setHornVariant(int hornVariant) {
 		this.entityData.set(HORN_TYPE, hornVariant);
 	}
-
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
@@ -594,6 +640,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 
 		this.setScreamingGoat(tag.getBoolean("IsScreamingGoat"));
+
+		if(tag.contains("Collared")) {
+			this.setCollared(tag.getBoolean("Collared"));
+		}
 	}
 
 	@Override
@@ -613,6 +663,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		tag.putBoolean("Tagged", this.isTagged());
 		tag.putByte("BrandTagColor", (byte)this.getBrandTagColor().getId());
 		tag.putBoolean("IsScreamingGoat", this.isScreamingGoat());
+		tag.putBoolean("Collared", this.isCollared());
 	}
 
 	@Override
@@ -626,10 +677,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.define(HORN_TYPE, 0);
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+		this.entityData.define(DATA_COLLAR_COLOR, DyeColor.RED.getId());
 		this.entityData.define(TAGGED, false);
 		this.entityData.define(SHEARED, false);
 		this.entityData.define(MILKED, false);
 		this.entityData.define(DATA_IS_SCREAMING_GOAT, false);
+		this.entityData.define(COLLARED, false);
 	}
 
 	@Override

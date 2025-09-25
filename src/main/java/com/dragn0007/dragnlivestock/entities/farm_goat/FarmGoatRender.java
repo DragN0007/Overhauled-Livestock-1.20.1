@@ -16,6 +16,7 @@ public class FarmGoatRender extends GeoEntityRenderer<FarmGoat> {
         this.addRenderLayer(new FarmGoatEyeLayer(this));
         this.addRenderLayer(new FarmGoatChestLayer(this));
         this.addRenderLayer(new FarmGoatBrandTagLayer(this));
+        this.addRenderLayer(new FarmGoatCollarLayer(this));
     }
 
     @Override

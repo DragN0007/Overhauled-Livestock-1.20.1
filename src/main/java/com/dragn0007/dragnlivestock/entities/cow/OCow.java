@@ -865,7 +865,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //longhorn
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 3, 4, 5, 7, 8};
+				int[] variants = {2, 3, 4, 5, 7, 8, 10, 12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -875,7 +875,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //brahman
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 8, 9};
+				int[] variants = {1, 2, 3, 4, 5, 6, 8, 9, 11, 12, 13};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -889,7 +889,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) {
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 3, 5};
+				int[] variants = {2, 3, 5, 10, 12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -899,7 +899,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //corriente
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 2, 3, 4, 5, 8, 9};
+				int[] variants = {0, 2, 3, 4, 5, 8, 9, 10, 12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -909,7 +909,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //holstein
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 2, 9};
+				int[] variants = {0, 2, 9, 10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -929,7 +929,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //hereford
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 5};
+				int[] variants = {2, 5, 10, 12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -943,7 +943,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.15) { //ox
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.15) {
-				int[] variants = {2, 8};
+				int[] variants = {2, 8, 10, 12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}

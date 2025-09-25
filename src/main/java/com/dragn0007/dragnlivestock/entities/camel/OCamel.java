@@ -6,8 +6,6 @@ import com.dragn0007.dragnlivestock.common.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OCamelFollowCaravanGoal;
-import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;

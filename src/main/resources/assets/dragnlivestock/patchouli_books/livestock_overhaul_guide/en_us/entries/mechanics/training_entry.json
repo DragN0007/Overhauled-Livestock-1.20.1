@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Horse's core stats can be trained to be better over time. The best way to train your horse's stats is to ride it (saddled) over an extended period of time, taking it on adventures."
+      "text": "O-Horse's core stats can be trained to be better over time. The best way to train your horse's stats is to ride it (saddled) over an extended period of time, taking it on adventures. Only the owner/ tamer of a horse can train it."
     },
     {
       "type": "patchouli:text",
