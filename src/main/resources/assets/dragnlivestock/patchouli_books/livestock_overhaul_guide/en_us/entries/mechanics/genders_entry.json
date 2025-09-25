@@ -1,7 +1,7 @@
 {
   "name": "Gender Information",
   "icon": "dragnlivestock:gender_test_strip",
-  "category": "dragnlivestock:genders_category",
+  "category": "dragnlivestock:mechanics_category",
   "pages": [
     {
       "type": "patchouli:text",

@@ -1,7 +1,7 @@
 {
   "name": "Endurance & Sprinting",
   "icon": "minecraft:saddle",
-  "category": "dragnlivestock:mount_controls_category",
+  "category": "dragnlivestock:mechanics_category",
   "pages": [
     {
       "type": "patchouli:text",

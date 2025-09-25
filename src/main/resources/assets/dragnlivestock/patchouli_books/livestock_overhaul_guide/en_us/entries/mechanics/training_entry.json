@@ -1,0 +1,15 @@
+{
+  "name": "Horse Training",
+  "icon": "minecraft:saddle",
+  "category": "dragnlivestock:mechanics_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O-Horse's core stats can be trained to be better over time. The best way to train your horse's stats is to ride it (saddled) over an extended period of time, taking it on adventures."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Trainable stats are Speed, Jump, and Health. The default maximum amount of times you can train up your horse's stats is 5, and there is a max number you can hit for stats (for example, the max for training speed is ~12.7)."
+    }
+  ]
+}

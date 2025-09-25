@@ -42,6 +42,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HorseArmorItem;
@@ -682,9 +683,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public int tailGrowthTick;
 	public int decompTick;
 	public int trainStatsTick;
-	public int speedTrained;
-	public int jumpTrained;
-	public int healthTrained;
 
 	@Override
 	public void tick() {
@@ -697,38 +695,43 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.isVehicle() && this.getControllingPassenger() == this.getOwner()) {
+		if (this.isVehicle() && this.getControllingPassenger() == this.getOwner() && this.getClass() == OHorse.class) {
 			if (this.isTamed() && this.isSaddled()) {
-				if (this.speedTrained < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
-						|| this.jumpTrained < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
-						|| this.healthTrained < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
+				if (this.getSpeedTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
+						|| this.getJumpTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
+						|| this.getHealthTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
+
 				trainStatsTick++;
-				if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
-					System.out.println("Train Stats Tick: " + trainStatsTick);
-				}
+
 				if (trainStatsTick >= LivestockOverhaulCommonConfig.HORSE_TRAIN_TIME.get()) {
 					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
                     assert speedAttribute != null;
                     double speedValue = speedAttribute.getValue();
-                    if (speedValue < 0.28F && !(speedTrained >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+                    if (speedValue < 0.28F && !(getSpeedTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
 						speedAttribute.setBaseValue(speedValue + 0.005);
-						speedTrained++;
+						setSpeedTrained(getSpeedTrained() + 1);
+					} else if (speedValue > 0.28F) {
+						setSpeedTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
 					}
 
 					AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
                     assert jumpAttribute != null;
                     double jumpValue = jumpAttribute.getValue();
-					if (jumpValue < 1.0F && !(jumpTrained >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+                    if (jumpValue < 1.0F && !(getJumpTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
 						jumpAttribute.setBaseValue(jumpValue + 0.005);
-						jumpTrained++;
+						setJumpTrained(getJumpTrained() + 1);
+					} else if (jumpValue > 1.0F) {
+						setJumpTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
 					}
 
 					AttributeInstance healthAttribute = this.getAttribute(Attributes.MAX_HEALTH);
                     assert healthAttribute != null;
                     double healthValue = healthAttribute.getValue();
-					if (healthValue < 40.0D && !(healthTrained >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+                    if (healthValue < 40.0D && !(getHealthTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
 						healthAttribute.setBaseValue(healthValue + 1.0D);
-						healthTrained++;
+						setHealthTrained(getHealthTrained() + 1);
+					} else if (healthValue > 40.0D) {
+						setHealthTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
 					}
 					trainStatsTick = 0;
 				}
@@ -892,8 +895,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return SoundEvents.HORSE_ANGRY;
 	}
 
-	public static final EntityDataAccessor<Boolean> SNIPPED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
-
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public ResourceLocation getModelResource() {
 		return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
@@ -938,9 +939,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public ResourceLocation getEyeTextureResource() {
-		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
-	}
 	public int getEyeVariant() {
 		return this.entityData.get(EYES);
 	}
@@ -1021,6 +1019,30 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 	public void setIsBranded(boolean canBeBranded) {
 		this.entityData.set(BRANDED, canBeBranded);
+	}
+
+	public static final EntityDataAccessor<Integer> SPEED_TRAINED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public int getSpeedTrained() {
+		return this.entityData.get(SPEED_TRAINED);
+	}
+	public void setSpeedTrained(int trained) {
+		this.entityData.set(SPEED_TRAINED, trained);
+	}
+
+	public static final EntityDataAccessor<Integer> JUMP_TRAINED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public int getJumpTrained() {
+		return this.entityData.get(JUMP_TRAINED);
+	}
+	public void setJumpTrained(int trained) {
+		this.entityData.set(JUMP_TRAINED, trained);
+	}
+
+	public static final EntityDataAccessor<Integer> HEALTH_TRAINED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public int getHealthTrained() {
+		return this.entityData.get(HEALTH_TRAINED);
+	}
+	public void setHealthTrained(int trained) {
+		this.entityData.set(HEALTH_TRAINED, trained);
 	}
 
 	@Override
@@ -1113,15 +1135,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		if (tag.contains("SpeedTrained")) {
-			this.speedTrained = tag.getInt("SpeedTrained");
+			this.setSpeedTrained(tag.getInt("SpeedTrained"));
 		}
 
 		if (tag.contains("JumpTrained")) {
-			this.jumpTrained = tag.getInt("JumpTrained");
+			this.setJumpTrained(tag.getInt("JumpTrained"));
 		}
 
 		if (tag.contains("HealthTrained")) {
-			this.healthTrained = tag.getInt("HealthTrained");
+			this.setHealthTrained(tag.getInt("HealthTrained"));
 		}
 	}
 
@@ -1151,9 +1173,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 		tag.putBoolean("IsBranded", this.isBranded());
 		tag.putInt("TrainingTime", this.trainStatsTick);
-		tag.putInt("SpeedTrained", this.speedTrained);
-		tag.putInt("JumpTrained", this.jumpTrained);
-		tag.putInt("HealthTrained", this.healthTrained);
+		tag.putInt("SpeedTrained", this.getSpeedTrained());
+		tag.putInt("JumpTrained", this.getJumpTrained());
+		tag.putInt("HealthTrained", this.getHealthTrained());
 	}
 
 	@Override
@@ -1224,6 +1246,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(FLOWER_ITEM, ItemStack.EMPTY);
 		this.entityData.define(FLOWER_TYPE, 0);
 		this.entityData.define(BRANDED, false);
+		this.entityData.define(SPEED_TRAINED, 0);
+		this.entityData.define(JUMP_TRAINED, 0);
+		this.entityData.define(HEALTH_TRAINED, 0);
 	}
 
 	public boolean canMate(Animal animal) {

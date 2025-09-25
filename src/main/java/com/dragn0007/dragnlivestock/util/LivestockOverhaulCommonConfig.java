@@ -64,6 +64,14 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
+    public static final ForgeConfigSpec.ConfigValue<Double> COVERED_WAGON_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> DOG_SLED_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> GOODS_CART_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> LIVESTOCK_WAGON_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> LUMBER_WAGON_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> MINING_CART_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> TRANSPORT_CART_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> PLOW_SPEED_MULT;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -208,7 +216,7 @@ public class LivestockOverhaulCommonConfig {
                         "Default is 48000 (40 minutes of riding).")
                 .define("Stat Training Time", 48000);
 
-        HORSE_TRAIN_AMOUNT = BUILDER.comment("Amount of times a player can level up their O-Horse's stats. Default is 3.")
+        HORSE_TRAIN_AMOUNT = BUILDER.comment("Amount of times a player can level up their O-Horse's stats. Default is 5.")
                 .define("Stat Training Max", 5);
 
         HORSE_HAIR_GROWTH = BUILDER.comment("Should O-Horses's manes and tails be able to grow over time?")
@@ -270,6 +278,17 @@ public class LivestockOverhaulCommonConfig {
         ALLOW_SPECIAL_BLANKET_CRAFTING = BUILDER.comment("Should players be able to craft special event blankets? " +
                         "If this is false, servers can give out blankets as free event rewards instead (cannot be a real currency payment).")
                 .define("Allow Special Event Blanket Crafting", true);
+        BUILDER.pop();
+
+        BUILDER.push("Wagons");
+        COVERED_WAGON_SPEED_MULT = BUILDER.define("Covered Wagon Speed Multiplier", 0.1);
+        DOG_SLED_SPEED_MULT = BUILDER.define("Dog Sled Speed Multiplier", 0.42);
+        GOODS_CART_SPEED_MULT = BUILDER.define("Goods Cart Speed Multiplier", 0.25);
+        LIVESTOCK_WAGON_SPEED_MULT = BUILDER.define("Livestock Wagon Speed Multiplier", 0.1);
+        LUMBER_WAGON_SPEED_MULT = BUILDER.define("Lumber Wagon Speed Multiplier", 0.1);
+        MINING_CART_SPEED_MULT = BUILDER.define("Mining Cart Speed Multiplier", 0.12);
+        TRANSPORT_CART_SPEED_MULT = BUILDER.define("Transport Cart Speed Multiplier", 0.3);
+        PLOW_SPEED_MULT = BUILDER.define("Plow Speed Multiplier", 0.1);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

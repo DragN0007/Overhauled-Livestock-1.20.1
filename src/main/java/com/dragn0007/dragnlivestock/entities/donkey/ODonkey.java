@@ -109,6 +109,14 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomJumpStrength());
 	}
 
+	public int getInventorySize() {
+		if (this.hasChest()) {
+			return 18;
+		} else {
+			return 3;
+		}
+	}
+
 	@Override
 	public void registerGoals() {
 		super.registerGoals();

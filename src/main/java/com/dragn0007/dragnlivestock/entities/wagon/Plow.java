@@ -10,6 +10,7 @@ import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -19,9 +20,11 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -48,7 +51,7 @@ public class Plow extends AbstractInventoryWagon {
     };
 
     public Plow(EntityType<? extends Plow> type, Level level) {
-        super(type, level, 0.1D, 2.0D, 3.0F, 20, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.PLOW_SPEED_MULT.get(), 2.0D, 3.0F, 20, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override
@@ -89,7 +92,6 @@ public class Plow extends AbstractInventoryWagon {
         return new DefaultWagonMenu(id, inventory, this);
     }
 
-//    public static final EntityDataAccessor<Mode> MODE = SynchedEntityData.defineId(Plow.class, LivestockOverhaul.MODE);
     public static final EntityDataAccessor<Integer> MODE = SynchedEntityData.defineId(Plow.class, EntityDataSerializers.INT);
 
     public Vec3 lastClientPos = Vec3.ZERO;
@@ -110,10 +112,6 @@ public class Plow extends AbstractInventoryWagon {
             return Mode.values()[(this.ordinal() + 1) % Mode.values().length];
         }
     }
-
-//    public Mode mode() {
-//        return this.entityData.get(MODE);
-//    }
 
     public int mode() {
         return this.entityData.get(MODE);
@@ -182,6 +180,20 @@ public class Plow extends AbstractInventoryWagon {
         }
     }
 
+    protected void destroyFoliage(BlockPos pos) {
+        BlockState blockState = this.level().getBlockState(pos);
+        if (blockState.is(Blocks.GRASS) || blockState.is(Blocks.TALL_GRASS) ||
+                blockState.is(Blocks.DEAD_BUSH) || blockState.is(Blocks.FERN) || blockState.is(Blocks.LARGE_FERN)
+                || blockState.is(BlockTags.FLOWERS) || blockState.is(BlockTags.SNOW)) {
+            blockState.getBlock().getDrops(blockState, (ServerLevel) level(), pos, null).forEach
+                    (stack -> level().addFreshEntity(new ItemEntity(level(),
+                            pos.getX() + 0.5,
+                            pos.getY() + 0.5,
+                            pos.getZ() + 0.5, stack)));
+            this.level().removeBlock(pos, false);
+        }
+    }
+
     public void harvest() {
         Vec3 left = this.calcOffset(-1, 0.2, -1.65);
         Vec3 mid = this.calcOffset(0, 0.2, -1.65);
@@ -200,14 +212,25 @@ public class Plow extends AbstractInventoryWagon {
         Vec3 left = this.calcOffset(-1, 0.2, -1.65);
         Vec3 mid = this.calcOffset(0, 0.2, -1.65);
         Vec3 right = this.calcOffset(1, 0.2, -1.65);
+        Vec3 upLeft = this.calcOffset(-1, 0.5, -1.65);
+        Vec3 upMid = this.calcOffset(0, 0.5, -1.65);
+        Vec3 upRight = this.calcOffset(1, 0.5, -1.65);
 
         BlockPos leftPos = new BlockPos((int) Math.floor(left.x), (int) Math.floor(left.y), (int) Math.floor(left.z));
         BlockPos midPos = new BlockPos((int) Math.floor(mid.x), (int) Math.floor(mid.y), (int) Math.floor(mid.z));
         BlockPos rightPos = new BlockPos((int) Math.floor(right.x), (int) Math.floor(right.y), (int) Math.floor(right.z));
 
+        BlockPos upLeftPos = new BlockPos((int) Math.floor(upLeft.x), (int) Math.floor(upLeft.y), (int) Math.floor(upLeft.z));
+        BlockPos upMidPos = new BlockPos((int) Math.floor(upMid.x), (int) Math.floor(upMid.y), (int) Math.floor(upMid.z));
+        BlockPos upRightPos = new BlockPos((int) Math.floor(upRight.x), (int) Math.floor(upRight.y), (int) Math.floor(upRight.z));
+
         this.tillNewFarmland(leftPos);
         this.tillNewFarmland(midPos);
         this.tillNewFarmland(rightPos);
+
+        this.destroyFoliage(upLeftPos);
+        this.destroyFoliage(upMidPos);
+        this.destroyFoliage(upRightPos);
     }
 
 

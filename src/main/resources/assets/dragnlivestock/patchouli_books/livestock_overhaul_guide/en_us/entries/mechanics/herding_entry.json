@@ -1,7 +1,7 @@
 {
   "name": "Herding",
   "icon": "minecraft:lead",
-  "category": "dragnlivestock:animals_category",
+  "category": "dragnlivestock:mechanics_category",
   "pages": [
     {
       "type": "patchouli:text",

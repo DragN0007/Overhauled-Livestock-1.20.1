@@ -1,7 +1,7 @@
 {
   "name": "Horse Customization",
   "icon": "dragnlivestock:red_medieval_blanket",
-  "category": "dragnlivestock:animals_category",
+  "category": "dragnlivestock:mechanics_category",
   "pages": [
     {
       "type": "patchouli:text",

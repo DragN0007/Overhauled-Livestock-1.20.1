@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractInventoryWagon;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
@@ -27,7 +28,7 @@ public class TransportCart extends AbstractInventoryWagon {
     };
 
     public TransportCart(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, 0.3D, 2.0D, 3.0F, 20, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.TRANSPORT_CART_SPEED_MULT.get(), 2.0D, 3.0F, 20, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override

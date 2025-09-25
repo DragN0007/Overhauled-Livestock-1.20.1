@@ -1,7 +1,7 @@
 {
   "name": "Wool Processing",
   "icon": "dragnlivestock:white_wool_staple",
-  "category": "dragnlivestock:recipes_category",
+  "category": "dragnlivestock:mechanics_category",
   "pages": [
     {
       "type": "patchouli:text",

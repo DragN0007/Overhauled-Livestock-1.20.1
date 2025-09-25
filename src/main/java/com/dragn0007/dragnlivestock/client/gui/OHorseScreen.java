@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -274,10 +275,15 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         DecimalFormat limitDec = new DecimalFormat("#.###");
         String num = limitDec.format(speed);
         String baseSpeedText = "Base Speed: " + num;
-        int trainingNum = oHorse.speedTrained;
-        String labelText = baseSpeedText + ", Training: +" + trainingNum;
+        int trainingNum = oHorse.getSpeedTrained();
+        String notMaxLabel = baseSpeedText + ", Training: +" + trainingNum;
+        String maxLabel = baseSpeedText + ", Training: Maxed";
 
-        graphics.drawString(this.font, labelText, speedLabelX, speedLabelY, 0xFFFFFF, false);
+        if (oHorse.getSpeedTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
+            graphics.drawString(this.font, notMaxLabel, speedLabelX, speedLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, maxLabel, speedLabelX, speedLabelY, 0xFFFFFF, false);
+        }
     }
 
     //This code is slightly altered to fit as a label rather than a tooltip
@@ -290,10 +296,16 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         DecimalFormat limitDec = new DecimalFormat("#.###");
         String num = limitDec.format(jumpHeight);
         String baseJumpText = "Jump Strength: " + num;
-        int trainingNum = oHorse.jumpTrained;
-        String labelText = baseJumpText + ", Training: +" + trainingNum;
+        int trainingNum = oHorse.getJumpTrained();
 
-        graphics.drawString(this.font, labelText, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
+        String notMaxLabel = baseJumpText + ", Training: +" + trainingNum;
+        String maxLabel = baseJumpText + ", Training: Maxed";
+
+        if (oHorse.getJumpTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
+            graphics.drawString(this.font, notMaxLabel, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, maxLabel, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
+        }
     }
     //End of CC-Licensed code ^
 
@@ -301,10 +313,15 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     private void renderHealthLabel(GuiGraphics graphics) {
         String text = String.valueOf(this.oHorse.getMaxHealth());
         String baseHealthText = "Base Health: " + text;
-        int trainingNum = oHorse.healthTrained;
-        String labelText = baseHealthText + ", Training: +" + trainingNum;
+        int trainingNum = oHorse.getHealthTrained();
+        String notMaxLabel = baseHealthText + ", Training: +" + trainingNum;
+        String maxLabel = baseHealthText + ", Training: Maxed";
 
-        graphics.drawString(this.font, labelText, healthLabelX, healthLabelY, 0xFFFFFF, false);
+        if (oHorse.getHealthTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
+            graphics.drawString(this.font, notMaxLabel, healthLabelX, healthLabelY, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(this.font, maxLabel, healthLabelX, healthLabelY, 0xFFFFFF, false);
+        }
     }
 
 }
