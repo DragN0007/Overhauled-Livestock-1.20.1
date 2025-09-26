@@ -81,7 +81,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Pull Types$()$(br2)Large: Horses, Mules, Oxen, Camels, Caribou, Unicorns $(br2)Medium: Donkeys, Mules, Caribou $(br2)Small: Donkeys, Goats, Dogs, Wolves"
+      "text": "$(l)Pull Types$()$(br2)Large: Horses, Mules, Oxen, Camels, Caribou, Unicorns $(br2)Medium: Donkeys, Mules, Caribou $(br2)Small: Donkeys, Mountain Goats, Dogs, Wolves"
     }
   ]
 }

@@ -39,22 +39,18 @@ public class TransportCart extends AbstractInventoryWagon {
                 .findFirst()
                 .orElse(null);
 
-        if(!level().isClientSide && animal != null) {
-            for(int i = 0; i < animalPositions.length; i++) {
-                if(getAnimal(i) == null) {
-                    if (animal instanceof OCow cow) {
-                        if (cow.getBreed() == 10) {
-                            hitch(animal, i);
-                        } else {
-                            return false;
-                        }
-                    } else {
+        if (!level().isClientSide && animal != null) {
+            if (!(animal instanceof OCow) ||
+                    (animal instanceof OCow entity && entity.getBreed() == 10)) {
+
+                for (int i = 0; i < animalPositions.length; i++) {
+                    if (getAnimal(i) == null) {
                         hitch(animal, i);
                         break;
                     }
                 }
+                animal.dropLeash(true, !player.isCreative());
             }
-            animal.dropLeash(true, !player.isCreative());
         }
 
         return animal != null;

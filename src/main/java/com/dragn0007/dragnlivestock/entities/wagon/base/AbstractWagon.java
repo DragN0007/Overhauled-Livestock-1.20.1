@@ -290,16 +290,8 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         if(!level().isClientSide && animal != null) {
             for(int i = 0; i < animalPositions.length; i++) {
                 if(getAnimal(i) == null) {
-                    if (animal instanceof OCow cow) {
-                        if (cow.getBreed() == 10) {
-                            hitch(animal, i);
-                        } else {
-                            return false;
-                        }
-                    } else {
-                        hitch(animal, i);
-                        break;
-                    }
+                    hitch(animal, i);
+                    break;
                 }
             }
             animal.dropLeash(true, !player.isCreative());

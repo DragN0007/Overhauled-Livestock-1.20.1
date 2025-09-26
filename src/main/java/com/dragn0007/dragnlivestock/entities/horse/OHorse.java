@@ -140,10 +140,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						(entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 
-		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, Player.class, 15.0F, 1.8F, 1.8F, player ->
-				(player instanceof Player && !player.isCrouching())
-		));
-
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.HORSES) && (livingEntity instanceof AbstractHorse && livingEntity.isVehicle()) && !this.isLeashed() && LivestockOverhaulCommonConfig.HORSE_HERD_ANIMALS.get() && (this.isWearingRodeoHarness() || !this.isTamed())
 		));

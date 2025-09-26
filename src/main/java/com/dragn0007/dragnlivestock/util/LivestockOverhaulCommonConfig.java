@@ -46,7 +46,6 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue SPAWN_BY_BREED;
     public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
     public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
-    public static final ForgeConfigSpec.BooleanValue HORSES_RUN_FROM_PLAYERS;
     public static final ForgeConfigSpec.BooleanValue UNICORN_BREEDING;
     public static final ForgeConfigSpec.BooleanValue UNDEAD_HORSE_DEATH;
     public static final ForgeConfigSpec.ConfigValue<Double> UNDEAD_HORSE_CHANCE;
@@ -236,9 +235,6 @@ public class LivestockOverhaulCommonConfig {
         OLD_HORSE_TURNING = BUILDER.comment("Should O-Horses and other mounts turn their heads similarly to old 1.12 horses when ridden?" +
                         "\nTurning this off will make mounts use the post-1.12 turning, which is simply just pivoting in place.")
                 .define("Advanced Horse Turning", true);
-
-        HORSES_RUN_FROM_PLAYERS = BUILDER.comment("Should wild O-Horses run from players?")
-                .define("Wild Horses Run From Players", true);
 
         COW_BELL_SOUND = BUILDER.comment("Should cow bells make noise/ ding?")
                 .define("Cow Bell Ding", true);
