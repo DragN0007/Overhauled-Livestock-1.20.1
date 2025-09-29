@@ -57,6 +57,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
@@ -550,6 +552,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 } else if (mount.getFlowerType() == 2) {
                     mount.setFlowerType(0);
                 }
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
                 mount.setFlowerItem(itemStack);
                 this.playSound(SoundEvents.FLOWERING_AZALEA_PLACE, 0.5f, 1f);
                 return InteractionResult.SUCCESS;
@@ -561,6 +566,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             if (oHorse.isUndead()) {
                 oHorse.setDecompVariant(0);
                 oHorse.setUndead(false);
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+
                 this.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
                 this.level().playSound(null, this, SoundEvents.TOTEM_USE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
             }
@@ -571,6 +580,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             OHorse oHorse = (OHorse) this;
             if (oHorse.isUndead()) {
                 itemStack.finishUsingItem(level(), player);
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
                 this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 
                 if (oHorse.canDecompose()) {
@@ -580,6 +592,34 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 }
             }
             return InteractionResult.SUCCESS;
+        }
+
+        if (this.isHorse(this) && itemStack.is(LOItems.HALLOW_HEART.get()) && this.isOwnedBy(player)) {
+            LocalDate date = LocalDate.now();
+            Month month = date.getMonth();
+            int day = date.getDayOfMonth();
+            OHorse oHorse = (OHorse) this;
+            if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && !oHorse.isHallow()) {
+                AttributeInstance speedAttribute = oHorse.getAttribute(Attributes.MOVEMENT_SPEED);
+                assert speedAttribute != null;
+                double speedValue = speedAttribute.getBaseValue();
+                speedAttribute.setBaseValue(speedValue + 0.02);
+                AttributeInstance healthAttribute = oHorse.getAttribute(Attributes.MAX_HEALTH);
+                assert healthAttribute != null;
+                double healthValue = healthAttribute.getBaseValue();
+                healthAttribute.setBaseValue(healthValue + 10.0D);
+                oHorse.setHallow(true);
+                oHorse.setUndead(true);
+                oHorse.setCanDecompose(false);
+                oHorse.setVariant(2);
+                oHorse.setOverlayVariant(0);
+                oHorse.setEyeVariant(10);
+                this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+                this.level().playSound(null, this, SoundEvents.SOUL_ESCAPE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
+                this.level().playSound(null, this, SoundEvents.AMBIENT_CAVE.get(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
+            return InteractionResult.SUCCESS;
+            }
         }
 
         if (!this.isBaby()) {

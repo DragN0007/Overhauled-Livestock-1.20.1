@@ -20,6 +20,7 @@
   "tooltip.dragnlivestock.utility_knife.tooltip": "Cuts Meat Strips for Jerky production.",
   "tooltip.dragnlivestock.oscillator.tooltip": "A Creative-Use-Only item that allows the user to change the coat, marking or breed of an O-Animal via interaction. Right-Click the animal to go up one variant, or Shift-Right-Click to go down.",
   "tooltip.dragnlivestock.mount_key.tooltip": "Quite literally locks your O-Mount so others can't ride it or get into it's inventory. Works universally.",
+  "tooltip.dragnlivestock.hallow_heart.tooltip": "Can be applied to an O-Horse to give it the Hallowed Soul of the Headless Horseman's steed. This transaction is not reversible...",
 
   "tooltip.dragnlivestock.wandering.tooltip": "Your Companion is Wandering",
   "tooltip.dragnlivestock.following.tooltip": "Your Companion is Following",
@@ -130,7 +131,7 @@
   "entity.dragnlivestock.unicorn": "Unicorn",
 
   "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
-
+  "item.dragnlivestock.hallow_heart": "Hallow Heart",
 
   "item.dragnlivestock.wagon_wheel_frame": "Wagon Wheel Frame",
   "item.dragnlivestock.wagon_wheel": "Wagon Wheel",

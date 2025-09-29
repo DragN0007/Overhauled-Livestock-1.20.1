@@ -27,6 +27,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 @Mod(LivestockOverhaul.MODID)
 public class LivestockOverhaul {
 
@@ -63,55 +66,63 @@ public class LivestockOverhaul {
 
     public static void warn(Player entity){
 
-        if (!LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
-            return;
+        LocalDate date = LocalDate.now();
+        Month month = date.getMonth();
+        int day = date.getDayOfMonth();
+
+        if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2))) {
+            entity.displayClientMessage(Component.empty().append
+                    (Component.literal("[DragN's Livestock Overhaul!] Spooky souls fill the air, defeat the Headless Horseman to make your horse his steed's heir...")
+                            .withStyle(ChatFormatting.DARK_RED)), false);
         }
 
-        entity.displayClientMessage(Component.empty().append
-                (Component.literal(
-                                "[DragN's Livestock Overhaul!] Debug Logs are turned on! You can disable this message by switching Debug Logs to False in the livestock-overhaul-common.toml." +
-                                        "\nChecking for compatible mods...")
-                        .withStyle(ChatFormatting.GOLD)), false);
-
-        if (ModList.get().isLoaded("deadlydinos") || ModList.get().isLoaded("medievalembroidery") ||
-                ModList.get().isLoaded("tfc") || ModList.get().isLoaded("jade")) {
-            if (ModList.get().isLoaded("deadlydinos")) {
-                entity.displayClientMessage(Component.empty().append
-                        (Component.literal(
-                                        "[DragN's Livestock Overhaul!] Found DragN's Deadly Dinos!")
-                                .withStyle(ChatFormatting.AQUA)), false);
-            }
-
-            if (ModList.get().isLoaded("medievalembroidery")) {
-                entity.displayClientMessage(Component.empty().append
-                        (Component.literal(
-                                        "[DragN's Livestock Overhaul!] Found Medieval Embroidery!")
-                                .withStyle(ChatFormatting.AQUA)), false);
-            }
-
-            if (ModList.get().isLoaded("tfc")) {
-                entity.displayClientMessage(Component.empty().append
-                        (Component.literal(
-                                        "[DragN's Livestock Overhaul!] Found TerraFirmaCraft!")
-                                .withStyle(ChatFormatting.AQUA)), false);
-            }
-
-            if (ModList.get().isLoaded("jade")) {
-                entity.displayClientMessage(Component.empty().append
-                        (Component.literal(
-                                        "[DragN's Livestock Overhaul!] Found Jade!")
-                                .withStyle(ChatFormatting.AQUA)), false);
-            }
-
+        if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
             entity.displayClientMessage(Component.empty().append
                     (Component.literal(
-                                    "Found directly-compatible mods!")
+                                    "[DragN's Livestock Overhaul!] Debug Logs are turned on! You can disable this message by switching Debug Logs to False in the livestock-overhaul-common.toml." +
+                                            "\nChecking for compatible mods...")
                             .withStyle(ChatFormatting.GOLD)), false);
-        } else {
-            entity.displayClientMessage(Component.empty().append
-                    (Component.literal(
-                                    "Found no directly-compatible mods.")
-                            .withStyle(ChatFormatting.GOLD)), false);
+
+            if (ModList.get().isLoaded("deadlydinos") || ModList.get().isLoaded("medievalembroidery") ||
+                    ModList.get().isLoaded("tfc") || ModList.get().isLoaded("jade")) {
+                if (ModList.get().isLoaded("deadlydinos")) {
+                    entity.displayClientMessage(Component.empty().append
+                            (Component.literal(
+                                            "[DragN's Livestock Overhaul!] Found DragN's Deadly Dinos!")
+                                    .withStyle(ChatFormatting.AQUA)), false);
+                }
+
+                if (ModList.get().isLoaded("medievalembroidery")) {
+                    entity.displayClientMessage(Component.empty().append
+                            (Component.literal(
+                                            "[DragN's Livestock Overhaul!] Found Medieval Embroidery!")
+                                    .withStyle(ChatFormatting.AQUA)), false);
+                }
+
+                if (ModList.get().isLoaded("tfc")) {
+                    entity.displayClientMessage(Component.empty().append
+                            (Component.literal(
+                                            "[DragN's Livestock Overhaul!] Found TerraFirmaCraft!")
+                                    .withStyle(ChatFormatting.AQUA)), false);
+                }
+
+                if (ModList.get().isLoaded("jade")) {
+                    entity.displayClientMessage(Component.empty().append
+                            (Component.literal(
+                                            "[DragN's Livestock Overhaul!] Found Jade!")
+                                    .withStyle(ChatFormatting.AQUA)), false);
+                }
+
+                entity.displayClientMessage(Component.empty().append
+                        (Component.literal(
+                                        "Found directly-compatible mods!")
+                                .withStyle(ChatFormatting.GOLD)), false);
+            } else {
+                entity.displayClientMessage(Component.empty().append
+                        (Component.literal(
+                                        "Found no directly-compatible mods.")
+                                .withStyle(ChatFormatting.GOLD)), false);
+            }
         }
     }
 

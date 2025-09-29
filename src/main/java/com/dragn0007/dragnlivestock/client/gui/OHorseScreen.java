@@ -234,9 +234,12 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         String decompText = getDecompText(this.oHorse.getDecompVariant());
         String labelText = "Undead Decomp Stage: " + decompText;
         String preserved = labelText + " (Preserved)";
+        String hallow = "Hallowed Soul";
 
-        if (!oHorse.canDecompose()) {
+        if (!oHorse.canDecompose() && !oHorse.isHallow()) {
             graphics.drawString(this.font, preserved, decompStateLabelX, decompStateLabelY, 0xFFFFFF, false);
+        } else if (oHorse.isHallow()) {
+            graphics.drawString(this.font, hallow, decompStateLabelX, decompStateLabelY, 0xAA0000, false);
         } else {
             graphics.drawString(this.font, labelText, decompStateLabelX, decompStateLabelY, 0xFFFFFF, false);
         }

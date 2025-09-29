@@ -304,11 +304,14 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         Mob mob = level().getEntitiesOfClass(Mob.class, new AABB(
                         player.getX()-7, player.getY()-7, player.getZ()-7,
                         player.getX()+7, player.getY()+7, player.getZ()+7
-                ), h -> h.getLeashHolder() == player && !h.getType().is(LOTags.Entity_Types.CANNOT_MOUNT_WAGON)).stream()
-                .findFirst().orElse(null);
+                ), h -> h.getLeashHolder() == player
+                        && !h.getType().is(LOTags.Entity_Types.CANNOT_MOUNT_WAGON)
+                ).stream().findFirst().orElse(null);
 
-        if(mob != null && !level().isClientSide && canAddPassenger(mob)) {
-            mob.startRiding(this);
+        if (mob != null && !level().isClientSide && canAddPassenger(mob)) {
+            if (!(mob instanceof OCow) || (mob instanceof OCow entity && entity.getBreed() != 10)) {
+                mob.startRiding(this);
+            }
         }
 
         return mob != null;

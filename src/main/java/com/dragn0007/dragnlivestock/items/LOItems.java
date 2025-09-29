@@ -762,7 +762,7 @@ public class LOItems {
     public static final RegistryObject<Item> YELLOW_WESTERN_BLANKET = ITEMS.register("yellow_western_blanket",
             () -> new BlanketItem(DyeColor.YELLOW, new Item.Properties()));
 
-
+    public static final RegistryObject<Item> HALLOW_HEART = ITEMS.register("hallow_heart", HallowHeartItem::new);
 
     //Icons (UNOBTAINABLE)
     public static final RegistryObject<Item> LIVESTOCK_OVERHAUL = ITEMS.register("livestock_overhaul",

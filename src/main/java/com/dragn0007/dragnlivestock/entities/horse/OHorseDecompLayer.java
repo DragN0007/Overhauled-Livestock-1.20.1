@@ -22,6 +22,10 @@ public class OHorseDecompLayer extends GeoRenderLayer<OHorse> {
         UndeadStage overlay = UndeadStage.overlayFromOrdinal(animatable.getDecompVariant());
         RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
 
+        if (animatable.isHallow()) {
+            return;
+        }
+
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
                 bufferSource,

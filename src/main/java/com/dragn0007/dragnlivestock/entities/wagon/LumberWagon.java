@@ -43,9 +43,9 @@ public class LumberWagon extends AbstractInventoryWagon {
                 .orElse(null);
 
         if (!level().isClientSide && animal != null) {
-            if (!(animal instanceof OCow) ||
-                    (animal instanceof OCow entity && entity.getBreed() == 10)) {
-
+            if (animal instanceof OCow entity && entity.getBreed() != 10) {
+                tryMountMob(player);
+            } else if (!(animal instanceof OCow) || (animal instanceof OCow entity && entity.getBreed() == 10)) {
                 for (int i = 0; i < animalPositions.length; i++) {
                     if (getAnimal(i) == null) {
                         hitch(animal, i);

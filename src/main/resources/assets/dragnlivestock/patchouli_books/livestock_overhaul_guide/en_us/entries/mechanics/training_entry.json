@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Trainable stats are Speed, Jump, and Health. The default maximum amount of times you can train up your horse's stats is 5, and there is a max number you can hit for stats (for example, the max for training speed is ~12.7)."
+      "text": "Trainable stats are Speed, Jump, and Health. The default maximum amount of times you can train up your horse's stats is 5, and there is a max number you can hit for stats (for example, the max for training speed is ~12)."
     }
   ]
 }

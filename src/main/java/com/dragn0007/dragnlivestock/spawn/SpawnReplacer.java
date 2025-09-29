@@ -103,6 +103,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -160,21 +162,45 @@ public class SpawnReplacer {
                     return;
                 }
 
-                if (event.getLevel().isNight() && event.getLevel().getRandom().nextDouble() < 0.02) {
-                    HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(event.getLevel());
+                LocalDate date = LocalDate.now();
+                Month month = date.getMonth();
+                int day = date.getDayOfMonth();
 
-                    if (headlessHorseman != null) {
-                        headlessHorseman.copyPosition(vanillaHorse);
-                        event.getLevel().addFreshEntity(headlessHorseman);
+                if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2))) {
+                    if (event.getLevel().isNight() && event.getLevel().getRandom().nextDouble() <= 0.12) {
+                        HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(event.getLevel());
 
-                        headlessHorseman.setVariant(0);
+                        if (headlessHorseman != null) {
+                            headlessHorseman.copyPosition(vanillaHorse);
+                            event.getLevel().addFreshEntity(headlessHorseman);
 
-                        if (event.getLevel().isClientSide) {
+                            headlessHorseman.setVariant(0);
+
+                            if (event.getLevel().isClientSide) {
+                                vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                            }
+
+                            event.getLevel().addFreshEntity(headlessHorseman);
                             vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
                         }
+                    }
+                } else {
+                    if (event.getLevel().isNight() && event.getLevel().getRandom().nextDouble() <= 0.02) {
+                        HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(event.getLevel());
 
-                        event.getLevel().addFreshEntity(headlessHorseman);
-                        vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                        if (headlessHorseman != null) {
+                            headlessHorseman.copyPosition(vanillaHorse);
+                            event.getLevel().addFreshEntity(headlessHorseman);
+
+                            headlessHorseman.setVariant(0);
+
+                            if (event.getLevel().isClientSide) {
+                                vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                            }
+
+                            event.getLevel().addFreshEntity(headlessHorseman);
+                            vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                        }
                     }
                 }
 

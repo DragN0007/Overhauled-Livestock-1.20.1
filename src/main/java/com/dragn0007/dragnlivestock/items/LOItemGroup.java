@@ -14,6 +14,9 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class LOItemGroup {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
@@ -22,6 +25,9 @@ public class LOItemGroup {
     public static final RegistryObject<CreativeModeTab> LIVESTOCK_OVERHAUL_GROUP = CREATIVE_MODE_TABS.register("overhauled_livestock",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(LOItems.LIVESTOCK_OVERHAUL.get())).title(Component.translatable("itemGroup.overhauled_livestock")).withSearchBar()
                     .displayItems((displayParameters, output) -> {
+                        LocalDate date = LocalDate.now();
+                        Month month = date.getMonth();
+                        int day = date.getDayOfMonth();
 
                         output.accept(LOItems.O_HORSE_SPAWN_EGG.get());
                         output.accept(LOItems.O_DONKEY_SPAWN_EGG.get());

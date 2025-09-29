@@ -387,6 +387,8 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.WINTER_MODERN_BLANKET);
         simpleItem(LOItems.WINTER_RACING_BLANKET);
         simpleItem(LOItems.WINTER_WESTERN_BLANKET);
+
+        simpleItem(LOItems.HALLOW_HEART);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

@@ -14,7 +14,8 @@ public enum EquineEyeColorOverlay {
         GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/eyes/green.png")),
         BLUE_GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/eyes/heterochromic_blue_and_gold.png")),
         BROWN_GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/eyes/heterochromic_brown_and_green.png")),
-        BROWN_BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/eyes/heterochromic_dark_brown_and_blue.png"));
+        BROWN_BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/eyes/heterochromic_dark_brown_and_blue.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/eyes/red.png"));
 
         public final ResourceLocation resourceLocation;
         EquineEyeColorOverlay(ResourceLocation resourceLocation) {

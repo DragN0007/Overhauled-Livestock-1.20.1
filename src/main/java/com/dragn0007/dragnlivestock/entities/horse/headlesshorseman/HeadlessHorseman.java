@@ -1,10 +1,16 @@
 package com.dragn0007.dragnlivestock.entities.horse.headlesshorseman;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,8 +27,13 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -34,9 +45,22 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Random;
 
 public class HeadlessHorseman extends OHorse implements GeoEntity {
+
+	@Override
+	public @NotNull ResourceLocation getDefaultLootTable() {
+		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
+		}
+		if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
+		}
+		return LOOT_TABLE;
+	}
 
 	public HeadlessHorseman(EntityType<? extends HeadlessHorseman> type, Level level) {
 		super(type, level);
@@ -152,9 +176,9 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	public void aiStep() {
 		super.aiStep();
 
-			if (this.isAlive() && this.isSunBurnTick()) {
-				this.setSecondsOnFire(8);
-			}
+		if (this.isAlive() && this.isSunBurnTick()) {
+			this.setSecondsOnFire(8);
+		}
 
 		this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 	}
@@ -168,6 +192,35 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 		if (damageSource.is(DamageTypes.MAGIC) || damageSource.is(DamageTypes.EXPLOSION)) {
 		}
 		return super.hurt(damageSource, amount);
+	}
+
+	@Override
+	public SoundEvent getAmbientSound() {
+		super.getAmbientSound();
+		return SoundEvents.ZOMBIE_HORSE_AMBIENT;
+	}
+
+	@Override
+	public SoundEvent getDeathSound() {
+		return SoundEvents.ZOMBIE_HORSE_DEATH;
+	}
+
+	@Nullable
+	@Override
+	public SoundEvent getEatingSound() {
+		return SoundEvents.HORSE_EAT;
+	}
+
+	@Override
+	public SoundEvent getHurtSound(DamageSource damageSource) {
+		super.getHurtSound(damageSource);
+		return SoundEvents.ZOMBIE_HORSE_HURT;
+	}
+
+	@Override
+	public SoundEvent getAngrySound() {
+		super.getAngrySound();
+		return SoundEvents.HORSE_ANGRY;
 	}
 
 	@Override
@@ -225,5 +278,23 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		return null;
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+
+		Random random = new Random();
+		LocalDate date = LocalDate.now();
+		Month month = date.getMonth();
+		int day = date.getDayOfMonth();
+
+		if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2))) {
+			this.spawnAtLocation(LOItems.HALLOW_HEART.get());
+		}
+
+		this.spawnAtLocation(Items.RED_CARPET);
+		this.spawnAtLocation(Items.BLACK_CANDLE);
+		this.spawnAtLocation(Items.JACK_O_LANTERN);
 	}
 }

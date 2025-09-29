@@ -623,11 +623,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-
-		if (this.isUndead()) {
+		if (this.isUndead() && !this.isHallow()) {
 			this.level().addParticle(ParticleTypes.ASH, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
+		} else if (this.isHallow()) {
+			this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
 		}
-
 	}
 
 	@Override
@@ -701,17 +701,17 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				if (trainStatsTick >= LivestockOverhaulCommonConfig.HORSE_TRAIN_TIME.get()) {
 					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
                     assert speedAttribute != null;
-                    double speedValue = speedAttribute.getValue();
-                    if (speedValue < 0.28F && !(getSpeedTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+                    double speedValue = speedAttribute.getBaseValue();
+                    if (speedValue < 0.284F && !(getSpeedTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
 						speedAttribute.setBaseValue(speedValue + 0.005);
 						setSpeedTrained(getSpeedTrained() + 1);
-					} else if (speedValue > 0.28F) {
+					} else if (speedValue > 0.284F) {
 						setSpeedTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
 					}
 
 					AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
                     assert jumpAttribute != null;
-                    double jumpValue = jumpAttribute.getValue();
+                    double jumpValue = jumpAttribute.getBaseValue();
                     if (jumpValue < 1.0F && !(getJumpTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
 						jumpAttribute.setBaseValue(jumpValue + 0.005);
 						setJumpTrained(getJumpTrained() + 1);
@@ -721,7 +721,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 					AttributeInstance healthAttribute = this.getAttribute(Attributes.MAX_HEALTH);
                     assert healthAttribute != null;
-                    double healthValue = healthAttribute.getValue();
+                    double healthValue = healthAttribute.getBaseValue();
                     if (healthValue < 40.0D && !(getHealthTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
 						healthAttribute.setBaseValue(healthValue + 1.0D);
 						setHealthTrained(getHealthTrained() + 1);
@@ -786,7 +786,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.isUndead() && this.getDecompVariant() < 4 && this.canDecompose()) {
+		if (this.isUndead() && this.getDecompVariant() < 4 && this.canDecompose() && !this.isHallow()) {
 			decompTick++;
 
 			if (decompTick >= LivestockOverhaulCommonConfig.DECOMPISITION_STAGE_TIME.get()) {
@@ -976,6 +976,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(UNDEAD, undead);
 	}
 
+	public static final EntityDataAccessor<Boolean> HALLOW = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
+	public boolean isHallow() {
+		return this.entityData.get(HALLOW);
+	}
+	public void setHallow(boolean hallow) {
+		this.entityData.set(HALLOW, hallow);
+	}
+
 	public static final EntityDataAccessor<Integer> DECOMP = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public int getDecompVariant() {
 		return this.entityData.get(DECOMP);
@@ -1140,6 +1148,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("HealthTrained")) {
 			this.setHealthTrained(tag.getInt("HealthTrained"));
 		}
+
+		if (tag.contains("IsHallow")) {
+			this.setHallow(tag.getBoolean("IsHallow"));
+		}
 	}
 
 	@Override
@@ -1171,6 +1183,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("SpeedTrained", this.getSpeedTrained());
 		tag.putInt("JumpTrained", this.getJumpTrained());
 		tag.putInt("HealthTrained", this.getHealthTrained());
+		tag.putBoolean("IsHallow", this.isHallow());
 	}
 
 	@Override
@@ -1244,6 +1257,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(SPEED_TRAINED, 0);
 		this.entityData.define(JUMP_TRAINED, 0);
 		this.entityData.define(HEALTH_TRAINED, 0);
+		this.entityData.define(HALLOW, false);
 	}
 
 	public boolean canMate(Animal animal) {

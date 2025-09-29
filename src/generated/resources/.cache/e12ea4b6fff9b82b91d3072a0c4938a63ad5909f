@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-26T01:49:36.1054485	Item Models: dragnlivestock
+// 1.20.1	2025-09-29T00:59:23.8715328	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -151,6 +151,7 @@ a06ae0c0e7f0ce8835709317b379f6f1383bd0dd assets/dragnlivestock/models/item/grey_
 1c2fc93004d7f5e8223c12d7c315e56102b2e18d assets/dragnlivestock/models/item/griffith_inspired_horse_armor.json
 d466130c0261eeaa8459999a06c688e7d522a9c6 assets/dragnlivestock/models/item/grub.json
 9381cf27e5894c300a4ee9012dfa62c3a7a98ab9 assets/dragnlivestock/models/item/grub_sweater.json
+af39a97631bd515ebf70cc57b7e09c0b61e2ca7c assets/dragnlivestock/models/item/hallow_heart.json
 3aef21d37033eb34a6ee9e65244bf9346aaa03ac assets/dragnlivestock/models/item/heavy_saddle.json
 ff9cde1d2cd4752358cdf96a39b7c764533faa4e assets/dragnlivestock/models/item/horse.json
 c9cc254b7a84996b86660f68708472c297328e35 assets/dragnlivestock/models/item/horse_breeds.json
