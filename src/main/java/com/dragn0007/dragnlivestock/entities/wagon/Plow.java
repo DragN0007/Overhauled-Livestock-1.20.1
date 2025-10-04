@@ -47,7 +47,7 @@ public class Plow extends AbstractInventoryWagon {
     };
 
     public Plow(EntityType<? extends Plow> type, Level level) {
-        super(type, level, LivestockOverhaulCommonConfig.PLOW_SPEED_MULT.get(), 2.0D, 3.0F, 20, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.PLOW_SPEED_MULT.get(), 2.0D, 3.0F, 80, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override

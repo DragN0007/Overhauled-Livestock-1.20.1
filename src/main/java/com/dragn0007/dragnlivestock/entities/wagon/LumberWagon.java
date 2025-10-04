@@ -31,7 +31,7 @@ public class LumberWagon extends AbstractInventoryWagon {
     };
 
     public LumberWagon(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, LivestockOverhaulCommonConfig.LUMBER_WAGON_SPEED_MULT.get(), 2.2D, 2.0F, 60, 54, ANIMALS, 1.25D, 1.4D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.LUMBER_WAGON_SPEED_MULT.get(), 2.2D, 2.0F, 120, 54, ANIMALS, 1.25D, 1.4D, RIDERS);
     }
 
     @Override

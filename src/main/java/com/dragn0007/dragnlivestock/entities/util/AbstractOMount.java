@@ -981,10 +981,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
     }
 
-    double x = this.getX() - this.xo;
-    double z = this.getZ() - this.zo;
-    public boolean isMoving = (x * x + z * z) > 0.0001;
-
     @Override
     public boolean handleEating(Player player, ItemStack stack) {
         int i = 0;

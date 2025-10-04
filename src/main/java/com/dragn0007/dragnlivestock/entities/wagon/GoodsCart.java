@@ -28,7 +28,7 @@ public class GoodsCart extends AbstractInventoryWagon {
     };
 
     public GoodsCart(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, LivestockOverhaulCommonConfig.GOODS_CART_SPEED_MULT.get(), 2.0D, 3.0F, 40, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.GOODS_CART_SPEED_MULT.get(), 2.0D, 3.0F, 80, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override

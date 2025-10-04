@@ -18,6 +18,7 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -664,8 +665,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public MobType getMobType() {
 		if (this.isUndead()) {
 			return MobType.UNDEAD;
+		} else {
+			return super.getMobType();
 		}
-		return null;
 	}
 
 	public int maxSprint = 20 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
@@ -806,35 +808,33 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		Entity controllingPassenger = this.getControllingPassenger();
-		Entity entity = controllingPassenger;
-		int sprintLeftInSeconds = sprintTick / 20;
-		double x = this.getX() - this.xo;
-		double z = this.getZ() - this.zo;
-		boolean isMoving = (x * x + z * z) > 0.0001;
+        int sprintLeftInSeconds = sprintTick / 20;
 
-		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger() && isMoving) {
+//		System.out.println("General Sprint Tick: " + sprintTick);
+
+		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0)) {
 			sprintTick--;
+			System.out.println("Sprinting Sprint Tick: " + sprintTick);
 			if (controllingPassenger != null && !(sprintTick <= 0)) {
-				if (controllingPassenger instanceof Player player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
+				if (this.level().isClientSide && controllingPassenger instanceof LocalPlayer player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
 					player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
 				}
 			}
 		}
 
-		if ((!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) || !isMoving)) {
-			if (((this.isWarmbloodedBreed() && sprintTick < (maxSprint + warmbloodSprintAddition)) ||
+		if ((!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
+			if ((this.isWarmbloodedBreed() && sprintTick < (maxSprint + warmbloodSprintAddition)) ||
 					(this.isStockBreed() && sprintTick < (maxSprint + stockSprintAddition)) ||
 					(this.isDraftBreed() && sprintTick < (maxSprint + draftSprintAddition)) ||
 					(this.isPonyBreed() && sprintTick < (maxSprint + ponySprintAddition)) ||
-					(this.isRacingBreed() && sprintTick < maxSprint)) && isMoving) {
-				sprintTick++;
-			} else if (((this.isWarmbloodedBreed() && sprintTick < (maxSprint + warmbloodSprintAddition)) ||
-					(this.isStockBreed() && sprintTick < (maxSprint + stockSprintAddition)) ||
-					(this.isDraftBreed() && sprintTick < (maxSprint + draftSprintAddition)) ||
-					(this.isPonyBreed() && sprintTick < (maxSprint + ponySprintAddition)) ||
-					(this.isRacingBreed() && sprintTick < maxSprint)) && !isMoving) {
-				sprintTick++;
-				sprintTick++;
+					(this.isRacingBreed() && sprintTick < maxSprint)) {
+//				if (movementSquared > 0.0001) {
+//					sprintTick++;
+//					System.out.println("Walking / Cantering Sprint Tick: " + sprintTick);
+//				} else {
+					sprintTick++;
+					System.out.println("Unmoving Sprint Tick: " + sprintTick);
+//				}
 			}
 		}
 
@@ -842,14 +842,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
 			this.handleSpeedRequest(-1);
 			movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-			if (controllingPassenger != null) {
-				if (controllingPassenger instanceof Player player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
-					player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
-				}
-			}
-		} else if (entity == null || !this.hasControllingPassenger()) {
-			return;
-		}
+            if (this.level().isClientSide && controllingPassenger instanceof LocalPlayer player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
+                player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
+            }
+        }
 	}
 
 	@Override
