@@ -129,11 +129,4 @@ public class LivestockOverhaul {
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MODID, path);
     }
-
-//    public static final EntityDataSerializer<Plow.Mode> MODE = EntityDataSerializer.simpleEnum(Plow.Mode.class);
-//    public static final EntityDataSerializer<LargePlow.Mode> MODE_2 = EntityDataSerializer.simpleEnum(LargePlow.Mode.class);
-//    static {
-//        EntityDataSerializers.registerSerializer(MODE);
-//        EntityDataSerializers.registerSerializer(MODE_2);
-//    }
 }

@@ -15,7 +15,6 @@ import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
-import com.dragn0007.dragnlivestock.items.custom.HorseShoeItem;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -177,11 +176,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("3c50e848-b2e3-404a-9879-7550b12dd09b");
-    public static final UUID SHOE_MODIFIER_UUID = UUID.fromString("d9b2d63d-5baf-4f2d-9e24-d80b02e6d17c");
     public static final UUID SPRINT_SPEED_MOD_UUID = UUID.fromString("c9379664-01b5-4e19-a7e9-11264453bdce");
+    public static final UUID TROT_SPEED_MOD_UUID = UUID.fromString("b0c44eda-c7c8-4c2f-abc1-f351d8bfc972");
     public static final UUID WALK_SPEED_MOD_UUID = UUID.fromString("59b55c98-e39b-45e2-846c-f91f3e9ea861");
 
     public static final AttributeModifier SPRINT_SPEED_MOD = new AttributeModifier(SPRINT_SPEED_MOD_UUID, "Sprint speed mod", 0.3D, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static final AttributeModifier TROT_SPEED_MOD = new AttributeModifier(TROT_SPEED_MOD_UUID, "Trot speed mod", -0.4D, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.7D, AttributeModifier.Operation.MULTIPLY_TOTAL); // KEEP THIS NEGATIVE. It is calculated by adding 1. So -0.1 actually means 0.9
 
     public static final EntityDataAccessor<ItemStack> DECOR_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
@@ -263,45 +263,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.isInLove();
     }
 
-    public boolean isShoe(ItemStack itemStack) {
-        return itemStack.getItem() instanceof HorseShoeItem;
-    }
-
-    public boolean canWearShoes() {
-        return false;
-    }
-
-    public ItemStack getShoes() {
-        return this.getItemBySlot(EquipmentSlot.CHEST);
-    }
-
-    public void setShoes(ItemStack itemStack) {
-        this.setItemSlot(EquipmentSlot.CHEST, itemStack);
-        this.setDropChance(EquipmentSlot.CHEST, 0f);
-    }
-
-    public void setShoeEquipment(ItemStack itemStack) {
-        this.setShoes(itemStack);
-        if (!this.level().isClientSide) {
-            this.getAttribute(Attributes.ARMOR).removeModifier(SHOE_MODIFIER_UUID);
-
-            if (itemStack.getItem() instanceof HorseShoeItem horseShoeItem) {
-                int protection = horseShoeItem.getProtection();
-                if (protection > 0) {
-                    this.getAttribute(Attributes.ARMOR).addTransientModifier(
-                            new AttributeModifier(SHOE_MODIFIER_UUID, "Horse shoe armor bonus", (double) protection, AttributeModifier.Operation.ADDITION)
-                    );
-                }
-            }
-        }
-    }
-
     public boolean isOwnedBy(LivingEntity entity) {
         return entity == this.getOwner();
-    }
-
-    public boolean isWearingShoes() {
-        return !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
     @Override
@@ -938,6 +901,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity livingEntity) {
         this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(SPRINT_SPEED_MOD);
+        this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TROT_SPEED_MOD);
         this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(WALK_SPEED_MOD);
         return super.getDismountLocationForPassenger(livingEntity);
     }
@@ -969,6 +933,22 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public void handleSpeedRequest(int speedMod) {
         AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
+
+//        if (speedMod != 1 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
+//            movementSpeed.removeModifier(SPRINT_SPEED_MOD);
+//        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
+//            movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
+//        } else if (speedMod == 0) {
+//            movementSpeed.removeModifiers();
+//        } else if (speedMod != -1 && movementSpeed.hasModifier(TROT_SPEED_MOD)) {
+//            movementSpeed.removeModifier(TROT_SPEED_MOD);
+//        } else if (speedMod == -1 && !movementSpeed.hasModifier(TROT_SPEED_MOD)) {
+//            movementSpeed.addTransientModifier(TROT_SPEED_MOD);
+//        } else if (speedMod != -2 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+//            movementSpeed.removeModifier(WALK_SPEED_MOD);
+//        } else if (speedMod == -2 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+//            movementSpeed.addTransientModifier(WALK_SPEED_MOD);
+//        }
 
         if (speedMod == -1 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
             movementSpeed.removeModifier(SPRINT_SPEED_MOD);

@@ -476,6 +476,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.025;
 		double speedRunThreshold = 0.02;
+		double speedTrotThreshold = 0.015;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -497,7 +498,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
-					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))
+//					} else if ((this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedTrotThreshold)) {
+//						controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+//						controller.setAnimationSpeed(Math.max(0.1, 0.75 * controller.getAnimationSpeed() + animationSpeed));
+
+					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD))
 							|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
 						if (this.isOnSand()) {
 							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
@@ -698,44 +703,42 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 						|| this.getJumpTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
 						|| this.getHealthTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
 
-				trainStatsTick++;
+					trainStatsTick++;
 
-				if (trainStatsTick >= LivestockOverhaulCommonConfig.HORSE_TRAIN_TIME.get()) {
-					AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
-                    assert speedAttribute != null;
-                    double speedValue = speedAttribute.getBaseValue();
-                    if (speedValue < 0.284F && !(getSpeedTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
-						speedAttribute.setBaseValue(speedValue + 0.005);
-						setSpeedTrained(getSpeedTrained() + 1);
-					} else if (speedValue > 0.284F) {
-						setSpeedTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
-					}
+					if (trainStatsTick >= LivestockOverhaulCommonConfig.HORSE_TRAIN_TIME.get()) {
+						AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
+						assert speedAttribute != null;
+						double speedValue = speedAttribute.getBaseValue();
+						if (speedValue < 0.284F && !(getSpeedTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+							speedAttribute.setBaseValue(speedValue + 0.005);
+							setSpeedTrained(getSpeedTrained() + 1);
+						} else if (speedValue > 0.284F) {
+							setSpeedTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
+						}
 
-					AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
-                    assert jumpAttribute != null;
-                    double jumpValue = jumpAttribute.getBaseValue();
-                    if (jumpValue < 1.0F && !(getJumpTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
-						jumpAttribute.setBaseValue(jumpValue + 0.005);
-						setJumpTrained(getJumpTrained() + 1);
-					} else if (jumpValue > 1.0F) {
-						setJumpTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
-					}
+						AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
+						assert jumpAttribute != null;
+						double jumpValue = jumpAttribute.getBaseValue();
+						if (jumpValue < 1.0F && !(getJumpTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+							jumpAttribute.setBaseValue(jumpValue + 0.005);
+							setJumpTrained(getJumpTrained() + 1);
+						} else if (jumpValue > 1.0F) {
+							setJumpTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
+						}
 
-					AttributeInstance healthAttribute = this.getAttribute(Attributes.MAX_HEALTH);
-                    assert healthAttribute != null;
-                    double healthValue = healthAttribute.getBaseValue();
-                    if (healthValue < 40.0D && !(getHealthTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
-						healthAttribute.setBaseValue(healthValue + 1.0D);
-						setHealthTrained(getHealthTrained() + 1);
-					} else if (healthValue > 40.0D) {
-						setHealthTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
+						AttributeInstance healthAttribute = this.getAttribute(Attributes.MAX_HEALTH);
+						assert healthAttribute != null;
+						double healthValue = healthAttribute.getBaseValue();
+						if (healthValue < 40.0D && !(getHealthTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
+							healthAttribute.setBaseValue(healthValue + 1.0D);
+							setHealthTrained(getHealthTrained() + 1);
+						} else if (healthValue > 40.0D) {
+							setHealthTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
+						}
+						trainStatsTick = 0;
 					}
-					trainStatsTick = 0;
 				}
 			}
-				}
-		} else {
-			return;
 		}
 
 		List<ItemStack> armorSlots = (List<ItemStack>) this.getArmorSlots();
@@ -808,33 +811,35 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		Entity controllingPassenger = this.getControllingPassenger();
-        int sprintLeftInSeconds = sprintTick / 20;
+		Entity entity = controllingPassenger;
+		int sprintLeftInSeconds = sprintTick / 20;
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
-//		System.out.println("General Sprint Tick: " + sprintTick);
-
-		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0)) {
+		if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !(sprintTick <= 0) && this.hasControllingPassenger() && isMoving) {
 			sprintTick--;
-			System.out.println("Sprinting Sprint Tick: " + sprintTick);
 			if (controllingPassenger != null && !(sprintTick <= 0)) {
-				if (this.level().isClientSide && controllingPassenger instanceof LocalPlayer player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
+				if (controllingPassenger instanceof Player player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
 					player.displayClientMessage(Component.translatable("Sprint Left: " + sprintLeftInSeconds + "s").withStyle(ChatFormatting.GOLD), true);
 				}
 			}
 		}
 
-		if ((!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-			if ((this.isWarmbloodedBreed() && sprintTick < (maxSprint + warmbloodSprintAddition)) ||
+		if ((!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) || !isMoving)) {
+			if (((this.isWarmbloodedBreed() && sprintTick < (maxSprint + warmbloodSprintAddition)) ||
 					(this.isStockBreed() && sprintTick < (maxSprint + stockSprintAddition)) ||
 					(this.isDraftBreed() && sprintTick < (maxSprint + draftSprintAddition)) ||
 					(this.isPonyBreed() && sprintTick < (maxSprint + ponySprintAddition)) ||
-					(this.isRacingBreed() && sprintTick < maxSprint)) {
-//				if (movementSquared > 0.0001) {
-//					sprintTick++;
-//					System.out.println("Walking / Cantering Sprint Tick: " + sprintTick);
-//				} else {
-					sprintTick++;
-					System.out.println("Unmoving Sprint Tick: " + sprintTick);
-//				}
+					(this.isRacingBreed() && sprintTick < maxSprint)) && isMoving) {
+				sprintTick++;
+			} else if (((this.isWarmbloodedBreed() && sprintTick < (maxSprint + warmbloodSprintAddition)) ||
+					(this.isStockBreed() && sprintTick < (maxSprint + stockSprintAddition)) ||
+					(this.isDraftBreed() && sprintTick < (maxSprint + draftSprintAddition)) ||
+					(this.isPonyBreed() && sprintTick < (maxSprint + ponySprintAddition)) ||
+					(this.isRacingBreed() && sprintTick < maxSprint)) && !isMoving) {
+				sprintTick++;
+				sprintTick++;
 			}
 		}
 
@@ -842,10 +847,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
 			this.handleSpeedRequest(-1);
 			movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-            if (this.level().isClientSide && controllingPassenger instanceof LocalPlayer player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
-                player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
-            }
-        }
+			if (controllingPassenger != null) {
+				if (controllingPassenger instanceof Player player && LivestockOverhaulClientConfig.HORSE_SPRINT_TIMER.get()) {
+					player.displayClientMessage(Component.translatable("Sprint Depleted").withStyle(ChatFormatting.DARK_RED), true);
+				}
+			}
+		}
 	}
 
 	@Override

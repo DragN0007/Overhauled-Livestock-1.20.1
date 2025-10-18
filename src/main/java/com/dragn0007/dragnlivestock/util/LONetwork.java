@@ -3,7 +3,6 @@ package com.dragn0007.dragnlivestock.util;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
-import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
