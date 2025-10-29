@@ -7,7 +7,6 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
-import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
@@ -581,22 +580,22 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			} else {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
-			((OMule) foal).setVariant(overlay);
+			foal.setVariant(overlay);
 
-			((OMule) foal).setOverlayVariant(overlay);
-			((OMule) foal).setVariant(random.nextInt(OMuleModel.Variant.values().length));
+			foal.setOverlayVariant(overlay);
+			foal.setVariant(random.nextInt(OMuleModel.Variant.values().length));
 
 			if (partnerHorse.isStockBreed() || partnerHorse.isWarmbloodedBreed() || partnerHorse.isRacingBreed()) {
-				((OMule) foal).setBreed(0);
+				foal.setBreed(0);
 			}
-
 			if (partnerHorse.isPonyBreed()) {
-				((OMule) foal).setBreed(1);
+				foal.setBreed(1);
+			}
+			if (partnerHorse.isDraftBreed()) {
+				foal.setBreed(2);
 			}
 
-			if (partnerHorse.isDraftBreed()) {
-				((OMule) foal).setBreed(2);
-			}
+			foal.setGender(random.nextInt(Gender.values().length));
 
 		} else {
 			ODonkey partner = (ODonkey) ageableMob;

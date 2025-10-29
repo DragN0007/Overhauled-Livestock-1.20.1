@@ -39,22 +39,25 @@ public class CaribouRender extends GeoEntityRenderer<Caribou> {
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
             }
 
-            if (entity.isFemale()) {
-                model.getBone("right_antler").ifPresent(b -> b.setScaleX(0.6F));
-                model.getBone("right_antler").ifPresent(b -> b.setScaleY(0.6F));
-                model.getBone("right_antler").ifPresent(b -> b.setScaleZ(0.6F));
-                model.getBone("left_antler").ifPresent(b -> b.setScaleX(0.6F));
-                model.getBone("left_antler").ifPresent(b -> b.setScaleY(0.6F));
-                model.getBone("left_antler").ifPresent(b -> b.setScaleZ(0.6F));
-            }
-
-            if (entity.isMale()) {
-                model.getBone("right_antler").ifPresent(b -> b.setScaleX(1F));
-                model.getBone("right_antler").ifPresent(b -> b.setScaleY(1F));
-                model.getBone("right_antler").ifPresent(b -> b.setScaleZ(1F));
-                model.getBone("left_antler").ifPresent(b -> b.setScaleX(1F));
-                model.getBone("left_antler").ifPresent(b -> b.setScaleY(1F));
-                model.getBone("left_antler").ifPresent(b -> b.setScaleZ(1F));
+            if (!entity.isBaby()) {
+                if (entity.isFemale()) {
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleX(0.6F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleY(0.6F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleZ(0.6F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleX(0.6F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleY(0.6F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleZ(0.6F));
+                } else if (entity.isMale()) {
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleX(1F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleY(1F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleZ(1F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleX(1F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleY(1F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleZ(1F));
+                }
+            } else {
+                model.getBone("right_antler").ifPresent(b -> b.setHidden(true));
+                model.getBone("right_antler").ifPresent(b -> b.setHidden(false));
             }
         }
 

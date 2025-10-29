@@ -18,7 +18,6 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -1299,22 +1298,22 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			} else {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
-			((OMule) foal).setVariant(overlay);
+			foal.setVariant(overlay);
 
-			((OMule) foal).setOverlayVariant(overlay);
-			((OMule) foal).setVariant(random.nextInt(OMuleModel.Variant.values().length));
+			foal.setOverlayVariant(overlay);
+			foal.setVariant(random.nextInt(OMuleModel.Variant.values().length));
 
 			if (this.isStockBreed() || this.isWarmbloodedBreed() || this.isRacingBreed()) {
-				((OMule) foal).setBreed(0);
+				foal.setBreed(0);
 			}
-
 			if (this.isPonyBreed()) {
-				((OMule) foal).setBreed(1);
+				foal.setBreed(1);
+			}
+			if (this.isDraftBreed()) {
+				foal.setBreed(2);
 			}
 
-			if (this.isDraftBreed()) {
-				((OMule) foal).setBreed(2);
-			}
+			foal.setGender(random.nextInt(Gender.values().length));
 
 		} else {
 			OHorse partner = (OHorse) ageableMob;

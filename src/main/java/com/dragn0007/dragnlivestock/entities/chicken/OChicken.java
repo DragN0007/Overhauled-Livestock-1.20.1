@@ -404,6 +404,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		}
 
 		this.isChickenJockey = tag.getBoolean("IsChickenJockey");
+
 		if (tag.contains("EggLayTime")) {
 			this.eggTime = tag.getInt("EggLayTime");
 		}

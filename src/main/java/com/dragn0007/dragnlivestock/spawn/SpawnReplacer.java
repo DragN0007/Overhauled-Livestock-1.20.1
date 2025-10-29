@@ -92,6 +92,7 @@ import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -106,8 +107,10 @@ import net.minecraftforge.fml.common.Mod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
@@ -272,7 +275,7 @@ public class SpawnReplacer {
                         System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla horse with an O-Horse at: " + oHorse.getOnPos());
                     }
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oHorse.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillaHorse.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oHorse.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -325,7 +328,7 @@ public class SpawnReplacer {
                         System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla donkey with an O-Donkey at: " + oDonkey.getOnPos());
                     }
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillaDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oDonkey.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -677,7 +680,7 @@ public class SpawnReplacer {
                         System.out.println("[DragN's Livestock Overhaul!]: Replaced a vanilla cow with an O-Cow at: " + oCow.getOnPos());
                     }
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oCow.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oCow.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillacow.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oCow.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -706,6 +709,12 @@ public class SpawnReplacer {
                     oChicken.setCustomName(vanillachicken.getCustomName());
                     oChicken.setAge(vanillachicken.getAge());
                     oChicken.setGender(random.nextInt(OChicken.Gender.values().length));
+                    oChicken.setChickenJockey(vanillachicken.isChickenJockey());
+
+                    List<Entity> passengers = vanillachicken.getPassengers().stream().collect(Collectors.toList());
+                    for (Entity passenger : passengers) {
+                        passenger.startRiding(oChicken, true);
+                    }
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
@@ -750,7 +759,7 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oChicken);
                     vanillachicken.remove(Entity.RemovalReason.DISCARDED);
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oChicken.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oChicken.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillachicken.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oChicken.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -904,7 +913,7 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oRabbit);
                     vanillarabbit.remove(Entity.RemovalReason.DISCARDED);
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get()) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oRabbit.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillarabbit.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oRabbit.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -971,7 +980,7 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oSheep);
                     vanillasheep.remove(Entity.RemovalReason.DISCARDED);
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oSheep.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oSheep.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillasheep.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oSheep.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -991,7 +1000,8 @@ public class SpawnReplacer {
         OLlama oLlama = EntityTypes.O_LLAMA_ENTITY.get().create(event.getLevel());
         if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && event.getEntity() instanceof Llama vanillallama) {
 
-            if (event.getEntity().getClass() == Llama.class && (((!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+            if (((event.getEntity().getClass() == Llama.class) || (event.getEntity().getClass() == TraderLlama.class)) &&
+                    (((!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
 
                 if (event.getLevel().isClientSide) {
                     return;
@@ -1004,11 +1014,19 @@ public class SpawnReplacer {
                     oLlama.setOwnerUUID(vanillallama.getOwnerUUID());
                     oLlama.setAge(vanillallama.getAge());
 
+                    Entity leashHolder = vanillallama.getLeashHolder();
+                    if (leashHolder != null) {
+                        oLlama.setLeashedTo(leashHolder, true);
+                    }
+
+                    if (vanillallama instanceof TraderLlama) {
+                    oLlama.setSwag(DyeColor.byId(random.nextInt(DyeColor.values().length)));
+                    }
+
                     oLlama.setWooly(random.nextInt(OLlama.Wooly.values().length));
                     oLlama.setVariant(random.nextInt(OLlamaModel.Variant.values().length));
                     oLlama.setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
-
-                    oLlama.setGender(random.nextInt(OPig.Gender.values().length));
+                    oLlama.setGender(random.nextInt(OLlama.Gender.values().length));
 
                     if (event.getLevel().isClientSide) {
                         vanillallama.remove(Entity.RemovalReason.DISCARDED);
@@ -1017,7 +1035,7 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oLlama);
                     vanillallama.remove(Entity.RemovalReason.DISCARDED);
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oLlama.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oLlama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (event.getLevel().isClientSide) {
                             oLlama.remove(Entity.RemovalReason.DISCARDED);
                         }
