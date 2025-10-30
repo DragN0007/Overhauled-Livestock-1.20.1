@@ -83,6 +83,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.*;
@@ -93,6 +94,8 @@ import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -1020,7 +1023,7 @@ public class SpawnReplacer {
                     }
 
                     if (vanillallama instanceof TraderLlama) {
-                    oLlama.setSwag(DyeColor.byId(random.nextInt(DyeColor.values().length)));
+                        oLlama.setChest(true);
                     }
 
                     oLlama.setWooly(random.nextInt(OLlama.Wooly.values().length));

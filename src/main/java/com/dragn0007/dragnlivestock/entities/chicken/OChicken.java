@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -652,13 +653,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			} else {
 				OChicken partner = (OChicken) animal;
 				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return true;
-				}
-
-				boolean partnerIsFemale = partner.isFemale();
-				boolean partnerIsMale = partner.isMale();
-				if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() && this.canParent() && partner.canParent()
-						&& ((isFemale() && partnerIsMale) || (isMale() && partnerIsFemale))) {
 					return isFemale();
 				}
 			}
@@ -687,7 +681,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public void tick() {
 		super.tick();
 
-		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 300) {
+		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 0) {
+			this.resetLove();
 			eggsLaid = 0;
 			eggLayCooldown = 0;
 		}
@@ -707,43 +702,43 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && this.getBreed() == 1) {
+			if (this.getBreed() == 1) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && this.getBreed() == 2) {
+			if (this.getBreed() == 2) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && this.getBreed() == 3) {
+			if (this.getBreed() == 3) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_MARANS_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && this.getBreed() == 4) {
+			if (this.getBreed() == 4) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && this.getBreed() == 5) {
+			if (this.getBreed() == 5) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && this.getBreed() == 6) {
+			if (this.getBreed() == 6) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}
 
-			if (this.isFemale() && rareChickenChance <= 1) {
+			if (rareChickenChance <= 1) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
@@ -763,9 +758,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		super.positionRider(p_289537_, p_289541_);
 		float f = Mth.sin(this.yBodyRot * ((float)Math.PI / 180F));
 		float f1 = Mth.cos(this.yBodyRot * ((float)Math.PI / 180F));
-		float f2 = 0.1F;
-		float f3 = 0.0F;
-		p_289541_.accept(p_289537_, this.getX() + (double)(0.1F * f), this.getY(0.5D) + p_289537_.getMyRidingOffset() + 0.0D, this.getZ() - (double)(0.1F * f1));
+		p_289541_.accept(p_289537_, this.getX() + (double)(0.1F * f), this.getY(0.15D) + p_289537_.getMyRidingOffset() + 0.0D, this.getZ() - (double)(0.1F * f1));
 		if (p_289537_ instanceof LivingEntity) {
 			((LivingEntity)p_289537_).yBodyRot = this.yBodyRot;
 		}
