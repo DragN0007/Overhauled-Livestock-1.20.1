@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -681,10 +680,14 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public void tick() {
 		super.tick();
 
-		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 0) {
-			this.resetLove();
-			eggsLaid = 0;
-			eggLayCooldown = 0;
+		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
+			if (this.isFemale() && eggLayCooldown >= 6000) {
+				this.resetLove();
+				eggsLaid = 0;
+				eggLayCooldown = 0;
+			} else if (this.isMale() && eggLayCooldown >= 0) {
+				this.resetLove();
+			}
 		}
 	}
 

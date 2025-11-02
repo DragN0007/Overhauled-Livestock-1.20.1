@@ -581,7 +581,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
                 this.level().playSound(null, this, SoundEvents.SOUL_ESCAPE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
                 this.level().playSound(null, this, SoundEvents.AMBIENT_CAVE.get(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
-            return InteractionResult.SUCCESS;
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                return InteractionResult.SUCCESS;
             }
         }
 
@@ -642,7 +645,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            if (!this.hasChest() && itemStack.is(Blocks.CHEST.asItem()) && this.isOwnedBy(player)) {
+            if (!this.hasChest() && itemStack.is(Blocks.CHEST.asItem())) {
                 this.setChest(true);
                 this.playChestEquipsSound();
                 if (!player.getAbilities().instabuild) {

@@ -1375,14 +1375,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 			((OHorse) foal).setEyeVariant(eyes);
 
-			int gender;
-			gender = this.random.nextInt(OHorse.Gender.values().length);
-			foal.setGender(gender);
-
+			foal.setGender(random.nextInt(Gender.values().length));
 			((OHorse) foal).setFeatheringByBreed();
 			((OHorse) foal).setManeType(3);
 			((OHorse) foal).setTailType(2);
-
 
 			if (this.random.nextInt(3) >= 1) {
 				((OHorse) foal).generateRandomOHorseJumpStrength();
