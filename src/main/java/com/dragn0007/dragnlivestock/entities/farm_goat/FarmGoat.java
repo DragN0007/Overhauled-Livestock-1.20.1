@@ -6,7 +6,6 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.FarmGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.ai.GoatFollowOwnerGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
-import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
