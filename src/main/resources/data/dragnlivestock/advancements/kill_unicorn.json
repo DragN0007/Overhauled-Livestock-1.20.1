@@ -1,41 +1,13 @@
 {
   "criteria": {
-    "dragnlivestock:overworld_unicorn": {
+    "dragnlivestock:unicorn": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "dragnlivestock:overworld_unicorn"
-            }
-          }
-        ]
-      },
-      "trigger": "minecraft:player_killed_entity"
-    },
-    "dragnlivestock:nether_unicorn": {
-      "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "dragnlivestock:nether_unicorn"
-            }
-          }
-        ]
-      },
-      "trigger": "minecraft:player_killed_entity"
-    },
-    "dragnlivestock:end_unicorn": {
-      "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "dragnlivestock:end_unicorn"
+              "type": "dragnlivestock:unicorn"
             }
           }
         ]
@@ -56,14 +28,12 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Dream Killer"
+      "text": "Killer of Dreams"
     }
   },
   "requirements": [
     [
-      "dragnlivestock:overworld_unicorn",
-      "dragnlivestock:nether_unicorn",
-      "dragnlivestock:end_unicorn"
+      "dragnlivestock:unicorn"
     ]
   ],
   "sends_telemetry_event": true

@@ -657,7 +657,9 @@ public class SpawnReplacer {
 
                     oCow.copyPosition(vanillacow);
                     oCow.setGender(random.nextInt(OCow.Gender.values().length));
-                    oCow.setQuality(random.nextInt(30));
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        oCow.setQuality(random.nextInt(30));
+                    }
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oCow.setColorByBreed();
@@ -742,6 +744,10 @@ public class SpawnReplacer {
                         }
                     } else {
                         oChicken.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
+                    }
+
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        oChicken.setQuality(random.nextInt(30));
                     }
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
@@ -898,6 +904,10 @@ public class SpawnReplacer {
                         oRabbit.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
                     }
 
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        oRabbit.setQuality(random.nextInt(30));
+                    }
+
                     oRabbit.copyPosition(vanillarabbit);
 
                     oRabbit.setCustomName(vanillarabbit.getCustomName());
@@ -964,6 +974,10 @@ public class SpawnReplacer {
 
                     oSheep.copyPosition(vanillasheep);
                     oSheep.setGender(random.nextInt(OSheep.Gender.values().length));
+
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        oSheep.setQuality(random.nextInt(30));
+                    }
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oSheep.setColorByBreed();
@@ -1077,6 +1091,10 @@ public class SpawnReplacer {
 
                     oPig.setBreed(random.nextInt(PigBreed.Breed.values().length));
                     oPig.setGender(random.nextInt(OPig.Gender.values().length));
+
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        oPig.setQuality(random.nextInt(30));
+                    }
 
                     if (event.getLevel().isClientSide) {
                         vanillapig.remove(Entity.RemovalReason.DISCARDED);
@@ -1210,6 +1228,10 @@ public class SpawnReplacer {
                     oGoat.setAge(vanillagoat.getAge());
 
                     oGoat.setGender(random.nextInt(OGoat.Gender.values().length));
+
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        oGoat.setQuality(random.nextInt(30));
+                    }
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oGoat.setColor();

@@ -1,0 +1,18 @@
+{
+  "name": "Animal Quality",
+  "icon": "minecraft:gold_ingot",
+  "category": "dragnlivestock:mechanics_category",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "minecraft:gold_ingot"
+      },
+      "text": "Quality is a rating that appears in some different farm animals. You can see the rating an animal has on it's Jade display if it's installed. Quality affects the amount of drops an animal gives, and it's byproducts. Most wild animals spawn with a rating of 0-30%, and can be bred for a higher quality."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ratings: $(br)-25%: Fine $(br)-50%: Great $(br)-75%: Fantastic $(br)-100%: Exquisite $(br2)The better the rating, the more the animal drops. A better rating can also make an animal milkable or shearable sooner, or have a chance to lay more than one egg at a time. Animals that have the Quality rating are Chickens, Cows, Goats, Pigs, Rabbits, and Sheep."
+    }
+  ]
+}

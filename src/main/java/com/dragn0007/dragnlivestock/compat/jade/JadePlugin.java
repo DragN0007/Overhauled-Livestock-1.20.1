@@ -6,12 +6,13 @@ import com.dragn0007.dragnlivestock.compat.jade.block.CheeseTooltipProvider;
 import com.dragn0007.dragnlivestock.compat.jade.block.JerkyTooltipProvider;
 import com.dragn0007.dragnlivestock.compat.jade.breed.*;
 import com.dragn0007.dragnlivestock.compat.jade.gender.*;
-import com.dragn0007.dragnlivestock.compat.jade.other.CowQualityTooltip;
+import com.dragn0007.dragnlivestock.compat.jade.other.*;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
+import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
@@ -20,6 +21,7 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import net.minecraft.world.entity.animal.Sheep;
 import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
@@ -52,6 +54,12 @@ public class JadePlugin implements IWailaPlugin {
         registration.registerBlockComponent(new CheeseTooltipProvider(), CheeseBase.class);
         registration.registerBlockComponent(new JerkyTooltipProvider(), JerkyBase.class);
 
+        registration.registerEntityComponent(new ChickenQualityTooltip(), OChicken.class);
         registration.registerEntityComponent(new CowQualityTooltip(), OCow.class);
+        registration.registerEntityComponent(new FarmGoatQualityTooltip(), FarmGoat.class);
+        registration.registerEntityComponent(new GoatQualityTooltip(), OGoat.class);
+        registration.registerEntityComponent(new PigQualityTooltip(), OPig.class);
+        registration.registerEntityComponent(new RabbitQualityTooltip(), ORabbit.class);
+        registration.registerEntityComponent(new SheepQualityTooltip(), OSheep.class);
     }
 }

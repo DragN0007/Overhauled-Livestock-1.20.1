@@ -51,109 +51,71 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             i = 4;
          }
 
+         OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
+         chicken.setAge(-24000);
+         chicken.setGender(random.nextInt(OChicken.Gender.values().length));
+         chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(0);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
          }
 
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_AMERAUCANA_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(1);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
          }
 
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(2);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
          }
 
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_MARANS_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(3);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
          }
 
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(4);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
          }
 
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(5);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
          }
 
          for (int j = 0; j < i; ++j) {
             if (getItem().is(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get())) {
-               OChicken chicken = EntityTypes.O_CHICKEN_ENTITY.get().create(this.level());
-               chicken.setAge(-24000);
-               chicken.setGender(random.nextInt(OChicken.Gender.values().length));
-               chicken.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-
                chicken.setBreed(6);
-               chicken.setColorByBreed();
-               chicken.setMarkingByBreed();
-
                this.level().addFreshEntity(chicken);
             }
+         }
+
+         chicken.setColorByBreed();
+         chicken.setMarkingByBreed();
+
+         if (random.nextDouble() <= 0.05) {
+            chicken.setQuality(random.nextInt((100 - 75) + 1) + 75);
+         } else if (random.nextDouble() > 0.05 && random.nextDouble() <= 0.20) {
+            chicken.setQuality(random.nextInt((74 - 50) + 1) + 50);
+         } else if (random.nextDouble() >= 0.20 && random.nextDouble() < 0.50) {
+            chicken.setQuality(random.nextInt((49 - 25) + 1) + 25);
+         } else {
+            chicken.setQuality(random.nextInt((24 - 10) + 1) + 10);
          }
 
          this.level().broadcastEntityEvent(this, (byte) 3);
