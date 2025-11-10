@@ -87,8 +87,11 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
@@ -96,7 +99,7 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 				controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
 		}
 
-		if(tAnimationState.isMoving()) {
+		if(isMoving) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("swim_sprint", Animation.LoopType.LOOP));
 			} else if(currentSpeed < speedThreshold) {

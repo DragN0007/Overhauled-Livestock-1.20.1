@@ -40,10 +40,13 @@ public class OBee extends Bee implements GeoEntity {
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if(tAnimationState.isMoving()) {
+		if(isMoving) {
 				controller.setAnimation(RawAnimation.begin().then("flap", Animation.LoopType.LOOP));
 		} else {
 				if (!tAnimationState.isMoving() && !this.onGround()) {

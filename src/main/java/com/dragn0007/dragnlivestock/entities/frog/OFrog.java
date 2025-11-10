@@ -128,12 +128,15 @@ public class OFrog extends Animal implements GeoEntity {
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
 	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+		double x = this.getX() - this.xo;
+		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
+		boolean isMoving = (x * x + z * z) > 0.0001;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		if (tAnimationState.isMoving()) {
+		if (isMoving) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("hop", Animation.LoopType.LOOP));
 				controller.setAnimationSpeed(2.0);
