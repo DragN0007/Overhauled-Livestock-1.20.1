@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -15,19 +16,21 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
 public class GrubSweaterLayer extends GeoRenderLayer<Grub> {
+    
     public GrubSweaterLayer(GeoRenderer<Grub> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
     public void render(PoseStack poseStack, Grub animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-
+        DyeColor dyeColor = animatable.getSweaterColor();
         ResourceLocation resourceLocation = null;
 
+        if (dyeColor != null) {
+            resourceLocation =  new ResourceLocation(LivestockOverhaul.MODID,"textures/entity/grub/sweater/" + animatable.getSweaterColor().toString().toLowerCase() + ".png");
+        }
 
-        if (animatable.hasSweater()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/grub_sweater.png");
-        } else {
+        if (resourceLocation == null || !animatable.isSweatered()) {
             return;
         }
 

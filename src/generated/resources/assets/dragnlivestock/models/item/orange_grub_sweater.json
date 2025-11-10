@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "dragnlivestock:item/grub_sweater"
+    "layer0": "dragnlivestock:item/orange_grub_sweater"
   }
 }

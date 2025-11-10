@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:pink_wool"
+    }
+  },
+  "pattern": [
+    "BB"
+  ],
+  "result": {
+    "item": "dragnlivestock:pink_grub_sweater"
+  },
+  "show_notification": true
+}

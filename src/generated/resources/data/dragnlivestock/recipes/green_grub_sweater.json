@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:green_wool"
+    }
+  },
+  "pattern": [
+    "BB"
+  ],
+  "result": {
+    "item": "dragnlivestock:green_grub_sweater"
+  },
+  "show_notification": true
+}

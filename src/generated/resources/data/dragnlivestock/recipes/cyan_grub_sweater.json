@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:cyan_wool"
+    }
+  },
+  "pattern": [
+    "BB"
+  ],
+  "result": {
+    "item": "dragnlivestock:cyan_grub_sweater"
+  },
+  "show_notification": true
+}

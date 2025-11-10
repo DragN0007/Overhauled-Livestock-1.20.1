@@ -128,8 +128,6 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.WHITE_WOOL_DYE);
         simpleItem(LOItems.YELLOW_WOOL_DYE);
 
-        simpleItem(LOItems.GRUB_SWEATER);
-
         simpleItem(LOItems.NETHERITE_HORSESHOE);
         simpleItem(LOItems.DIAMOND_HORSESHOE);
         simpleItem(LOItems.GOLD_HORSESHOE);
@@ -387,6 +385,23 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.WINTER_MODERN_BLANKET);
         simpleItem(LOItems.WINTER_RACING_BLANKET);
         simpleItem(LOItems.WINTER_WESTERN_BLANKET);
+
+        simpleItem(LOItems.BLACK_GRUB_SWEATER);
+        simpleItem(LOItems.BLUE_GRUB_SWEATER);
+        simpleItem(LOItems.BROWN_GRUB_SWEATER);
+        simpleItem(LOItems.CYAN_GRUB_SWEATER);
+        simpleItem(LOItems.GREEN_GRUB_SWEATER);
+        simpleItem(LOItems.GREY_GRUB_SWEATER);
+        simpleItem(LOItems.LIGHT_BLUE_GRUB_SWEATER);
+        simpleItem(LOItems.LIGHT_GREY_GRUB_SWEATER);
+        simpleItem(LOItems.LIME_GRUB_SWEATER);
+        simpleItem(LOItems.MAGENTA_GRUB_SWEATER);
+        simpleItem(LOItems.ORANGE_GRUB_SWEATER);
+        simpleItem(LOItems.PINK_GRUB_SWEATER);
+        simpleItem(LOItems.PURPLE_GRUB_SWEATER);
+        simpleItem(LOItems.RED_GRUB_SWEATER);
+        simpleItem(LOItems.WHITE_GRUB_SWEATER);
+        simpleItem(LOItems.YELLOW_GRUB_SWEATER);
 
         simpleItem(LOItems.HALLOW_HEART);
     }

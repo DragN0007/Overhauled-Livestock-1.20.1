@@ -21,7 +21,6 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import net.minecraft.world.entity.animal.Sheep;
 import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;

@@ -102,9 +102,6 @@ public class LOItems {
     public static final RegistryObject<Item> MARKING_OSCILLATOR = ITEMS.register("marking_oscillator", OscillatorItem::new);
     public static final RegistryObject<Item> BREED_OSCILLATOR = ITEMS.register("breed_oscillator", OscillatorItem::new);
 
-    public static final RegistryObject<Item> GRUB_SWEATER = ITEMS.register("grub_sweater",
-            () -> new GrubSweaterItem(new Item.Properties()));
-
     public static final RegistryObject<Item> MANE_SCISSORS = ITEMS.register("mane_scissors",
             () -> new HairScissorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TAIL_SCISSORS = ITEMS.register("tail_scissors",
@@ -761,6 +758,39 @@ public class LOItems {
             () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
     public static final RegistryObject<Item> YELLOW_WESTERN_BLANKET = ITEMS.register("yellow_western_blanket",
             () -> new BlanketItem(DyeColor.YELLOW, new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_GRUB_SWEATER = ITEMS.register("black_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.BLACK, new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_GRUB_SWEATER = ITEMS.register("blue_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_GRUB_SWEATER = ITEMS.register("brown_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.BROWN, new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_GRUB_SWEATER = ITEMS.register("cyan_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.CYAN, new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_GRUB_SWEATER = ITEMS.register("green_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.GREEN, new Item.Properties()));
+    public static final RegistryObject<Item> GREY_GRUB_SWEATER = ITEMS.register("grey_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_GRUB_SWEATER = ITEMS.register("light_blue_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_GRUB_SWEATER = ITEMS.register("light_grey_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
+    public static final RegistryObject<Item> LIME_GRUB_SWEATER = ITEMS.register("lime_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.LIME, new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_GRUB_SWEATER = ITEMS.register("magenta_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.MAGENTA, new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_GRUB_SWEATER = ITEMS.register("orange_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.ORANGE, new Item.Properties()));
+    public static final RegistryObject<Item> PINK_GRUB_SWEATER = ITEMS.register("pink_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.PINK, new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_GRUB_SWEATER = ITEMS.register("purple_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.PURPLE, new Item.Properties()));
+    public static final RegistryObject<Item> RED_GRUB_SWEATER = ITEMS.register("red_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.RED, new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_GRUB_SWEATER = ITEMS.register("white_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_GRUB_SWEATER = ITEMS.register("yellow_grub_sweater",
+            () -> new GrubSweaterItem(DyeColor.YELLOW, new Item.Properties()));
 
     public static final RegistryObject<Item> HALLOW_HEART = ITEMS.register("hallow_heart", HallowHeartItem::new);
 

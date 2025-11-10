@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.compat.jade.other;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.network.chat.Component;
@@ -21,7 +20,15 @@ public class PigQualityTooltip implements IEntityComponentProvider {
         if (LivestockOverhaulCommonConfig.QUALITY.get()) {
             if (entityAccessor.getEntity() instanceof OPig animal) {
                 String quality = Integer.toString(animal.getQuality());
-                tooltip.add(Component.translatable("Quality: " + quality + "%"));
+                String rating = "(Fine)";
+                if (animal.isGreatQuality()) {
+                    rating = "(Great)";
+                } else if (animal.isFantasticQuality()) {
+                    rating = "(Fantastic)";
+                } else if (animal.isExquisiteQuality()) {
+                    rating = "(Exquisite!)";
+                }
+                tooltip.add(Component.translatable("Quality: " + quality + "% " + rating));
             }
         }
     }

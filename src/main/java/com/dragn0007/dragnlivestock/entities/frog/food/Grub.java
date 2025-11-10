@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.frog.food;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.GrubSweaterItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +23,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -57,7 +61,7 @@ public class Grub extends Animal implements GeoEntity {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 2.0D)
-				.add(Attributes.MOVEMENT_SPEED, 0.16D);
+				.add(Attributes.MOVEMENT_SPEED, 0.14D);
 	}
 
 	protected boolean hasSweater = false;
@@ -73,10 +77,39 @@ public class Grub extends Animal implements GeoEntity {
 	@Override
 	public @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
 		ItemStack itemStack = player.getItemInHand(hand);
+		Item item = itemStack.getItem();
 
-		if (itemStack.is(LOItems.GRUB_SWEATER.get()) && !hasSweater()) {
-			this.setHasSweater(true);
-			this.playSound(SoundEvents.WOOL_BREAK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+		if (itemStack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				if (this.getVariant() > 0) {
+					this.setVariant(this.getVariant() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			this.setVariant(this.getVariant() + 1);
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.SUCCESS;
+		}
+
+		if (item instanceof GrubSweaterItem && !this.isSweatered()) {
+			GrubSweaterItem dyeitem = (GrubSweaterItem) item;
+			this.setSweatered(true);
+			DyeColor dyecolor = dyeitem.getDyeColor();
+			if (dyecolor != this.getSweaterColor()) {
+				this.setSweaterColor(dyecolor);
+				if (!player.getAbilities().instabuild) {
+					itemStack.shrink(1);
+				}
+				this.playSound(SoundEvents.WOOL_BREAK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+				return InteractionResult.SUCCESS;
+			}
+			return super.mobInteract(player, hand);
+		}
+
+		if (itemStack.is(Items.SHEARS) && this.isSweatered()) {
+			this.setSweatered(false);
+			this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
@@ -165,12 +198,19 @@ public class Grub extends Animal implements GeoEntity {
 		this.entityData.set(VARIANT, variant);
 	}
 
-	public boolean getHasSweater() {
-		return this.hasSweater;
+	public static final EntityDataAccessor<Integer> DATA_SWEATER_COLOR = SynchedEntityData.defineId(Grub.class, EntityDataSerializers.INT);
+	public DyeColor getSweaterColor() {
+		return DyeColor.byId(this.entityData.get(DATA_SWEATER_COLOR));
 	}
-
-	public void setHasSweater(boolean sweater) {
-		this.hasSweater = sweater;
+	public void setSweaterColor(DyeColor color) {
+		this.entityData.set(DATA_SWEATER_COLOR, color.getId());
+	}
+	public static final EntityDataAccessor<Boolean> SWEATERED = SynchedEntityData.defineId(Grub.class, EntityDataSerializers.BOOLEAN);
+	public boolean isSweatered() {
+		return this.entityData.get(SWEATERED);
+	}
+	public void setSweatered(boolean collared) {
+		this.entityData.set(SWEATERED, collared);
 	}
 
 	@Override
@@ -181,8 +221,12 @@ public class Grub extends Animal implements GeoEntity {
 			setVariant(tag.getInt("Variant"));
 		}
 
-		if (tag.contains("HasSweater")) {
-			setHasSweater(tag.getBoolean("HasSweater"));
+		if (tag.contains("SweaterColor", 99)) {
+			this.setSweaterColor(DyeColor.byId(tag.getInt("SweaterColor")));
+		}
+
+		if(tag.contains("Sweatered")) {
+			this.setSweatered(tag.getBoolean("Sweatered"));
 		}
 	}
 
@@ -190,7 +234,8 @@ public class Grub extends Animal implements GeoEntity {
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
-		tag.putBoolean("HasSweater", getHasSweater());
+		tag.putByte("SweaterColor", (byte)this.getSweaterColor().getId());
+		tag.putBoolean("Sweatered", this.isSweatered());
 	}
 
 	@Override
@@ -209,6 +254,8 @@ public class Grub extends Animal implements GeoEntity {
 	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
+		this.entityData.define(DATA_SWEATER_COLOR, DyeColor.RED.getId());
+		this.entityData.define(SWEATERED, false);
 	}
 
 	public boolean canParent() {

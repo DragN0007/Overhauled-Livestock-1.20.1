@@ -7,10 +7,22 @@ import software.bernie.geckolib.model.GeoModel;
 public class GrubModel extends GeoModel<Grub> {
 
     public enum Variant {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/grub_black.png")),
-        GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/grub_green.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/grub_red.png")),
-        GRUB(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/grub.png"));
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/black.png")),
+        GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/green.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/red.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/cream.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/brown.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/chocolate.png")),
+        FAWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/fawn.png")),
+        GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/gold.png")),
+        LILAC(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/lilac.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/mahogany.png")),
+        SEAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/seal.png")),
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/silver.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/grub/white.png")),
+        ;
 
         //Add new entries to bottom when mod is public, else grubs will change textures during update.
 

@@ -78,8 +78,6 @@ public class LOItemGroup {
                         output.accept(LOItems.MARKING_OSCILLATOR.get());
                         output.accept(LOItems.BREED_OSCILLATOR.get());
 
-                        output.accept(LOItems.GRUB_SWEATER.get());
-
                         output.accept(LOItems.MANE_SCISSORS.get());
                         output.accept(LOItems.TAIL_SCISSORS.get());
 
@@ -378,6 +376,22 @@ public class LOItemGroup {
                         output.accept(LOItems.WINTER_RACING_BLANKET.get());
                         output.accept(LOItems.WINTER_WESTERN_BLANKET.get());
 
+                        output.accept(LOItems.BLACK_GRUB_SWEATER.get());
+                        output.accept(LOItems.BLUE_GRUB_SWEATER.get());
+                        output.accept(LOItems.BROWN_GRUB_SWEATER.get());
+                        output.accept(LOItems.CYAN_GRUB_SWEATER.get());
+                        output.accept(LOItems.GREEN_GRUB_SWEATER.get());
+                        output.accept(LOItems.GREY_GRUB_SWEATER.get());
+                        output.accept(LOItems.LIGHT_BLUE_GRUB_SWEATER.get());
+                        output.accept(LOItems.LIGHT_GREY_GRUB_SWEATER.get());
+                        output.accept(LOItems.LIME_GRUB_SWEATER.get());
+                        output.accept(LOItems.MAGENTA_GRUB_SWEATER.get());
+                        output.accept(LOItems.ORANGE_GRUB_SWEATER.get());
+                        output.accept(LOItems.PINK_GRUB_SWEATER.get());
+                        output.accept(LOItems.PURPLE_GRUB_SWEATER.get());
+                        output.accept(LOItems.RED_GRUB_SWEATER.get());
+                        output.accept(LOItems.WHITE_GRUB_SWEATER.get());
+                        output.accept(LOItems.YELLOW_GRUB_SWEATER.get());
 
                         if (ModList.get().isLoaded("medievalembroidery")) {
 

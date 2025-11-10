@@ -4909,17 +4909,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
 
-
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GRUB_SWEATER.get())
-                .requires(Items.RED_WOOL)
-                .requires(Items.RED_WOOL)
-                .requires(Items.RED_WOOL)
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.RED_WOOL)
-                        .build()))
-                .save(pFinishedRecipeConsumer);
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CARROT_SOUP.get())
                 .requires(Items.CARROT)
                 .requires(Items.CARROT)
@@ -5121,6 +5110,119 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .unlockedBy("has_egg", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.EGG)
                         .build()))
+                .save(pFinishedRecipeConsumer);
+
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_GRUB_SWEATER.get())
+                .define('B', Items.BLACK_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_GRUB_SWEATER.get())
+                .define('B', Items.BLUE_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_GRUB_SWEATER.get())
+                .define('B', Items.BROWN_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_GRUB_SWEATER.get())
+                .define('B', Items.CYAN_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_GRUB_SWEATER.get())
+                .define('B', Items.GREEN_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_GRUB_SWEATER.get())
+                .define('B', Items.GRAY_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_GRUB_SWEATER.get())
+                .define('B', Items.LIGHT_BLUE_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_GRUB_SWEATER.get())
+                .define('B', Items.LIGHT_GRAY_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_GRUB_SWEATER.get())
+                .define('B', Items.LIME_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_GRUB_SWEATER.get())
+                .define('B', Items.MAGENTA_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_GRUB_SWEATER.get())
+                .define('B', Items.ORANGE_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_GRUB_SWEATER.get())
+                .define('B', Items.PINK_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_GRUB_SWEATER.get())
+                .define('B', Items.PURPLE_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_GRUB_SWEATER.get())
+                .define('B', Items.RED_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_GRUB_SWEATER.get())
+                .define('B', Items.WHITE_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_GRUB_SWEATER.get())
+                .define('B', Items.YELLOW_WOOL)
+                .pattern("BB")
+                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL).build()))
                 .save(pFinishedRecipeConsumer);
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.BEEF_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_RIB_STEAK.get(), 0.35F, 100)
