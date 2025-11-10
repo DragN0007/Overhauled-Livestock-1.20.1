@@ -67,17 +67,11 @@
   "item.dragnlivestock.o_camel_spawn_egg": "O-Camel Spawn Egg",
   "entity.dragnlivestock.o_camel": "O-Camel",
 
-  "item.dragnlivestock.ox_spawn_egg": "Ox Spawn Egg",
-  "entity.dragnlivestock.ox": "Ox",
-
   "item.dragnlivestock.o_goat_spawn_egg": "O-Mountain Goat Spawn Egg",
   "entity.dragnlivestock.o_goat": "O-Mountain Goat",
 
   "item.dragnlivestock.farm_goat_spawn_egg": "O-Farm Goat Spawn Egg",
   "entity.dragnlivestock.farm_goat": "O-Farm Goat",
-
-  "item.dragnlivestock.o_undead_horse_spawn_egg": "O-Undead Horse Spawn Egg",
-  "entity.dragnlivestock.o_undead_horse": "O-Undead Horse",
 
   "item.dragnlivestock.o_frog_spawn_egg": "O-Frog Spawn Egg",
   "entity.dragnlivestock.o_frog": "O-Frog",
@@ -87,12 +81,6 @@
 
   "item.dragnlivestock.caribou_spawn_egg": "Caribou Spawn Egg",
   "entity.dragnlivestock.caribou": "Caribou",
-
-  "item.dragnlivestock.trader_mule_spawn_egg": "Trader Mule Spawn Egg",
-  "entity.dragnlivestock.trader_mule": "Trader Mule",
-
-  "item.dragnlivestock.livestock_trader_spawn_egg": "Livestock Trader Spawn Egg",
-  "entity.dragnlivestock.livestock_trader": "Livestock Trader",
 
   "item.dragnlivestock.wheat_moobloom_spawn_egg": "Wheat Moobloom Spawn Egg",
   "entity.dragnlivestock.wheat_moobloom": "Wheat Moobloom",

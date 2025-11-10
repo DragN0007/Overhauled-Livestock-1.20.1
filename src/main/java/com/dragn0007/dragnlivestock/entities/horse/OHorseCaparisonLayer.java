@@ -31,14 +31,11 @@ public class OHorseCaparisonLayer extends GeoRenderLayer<OHorse> {
 
         // if youre another modder looking to add new caparisons, use this pathway v
         // it'll find the name for you so long as your registry item is named the same as your texture AND it's a CaparisonItem
-        // this doesnt work unless you have Medieval Embroidery installed !!
         // instead of making a  dragnlivestock > textures > ... , youd make a  medievalembroidery > textures > ...  instead for this pathway
-        if (ModList.get().isLoaded("medievalembroidery")) {
-            if ((itemStack.getItem() instanceof CaparisonItem caparisonItem) && !itemStack.isEmpty()) {
-                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
-            } else if ((itemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !itemStack.isEmpty()) {
-                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
-            }
+        if ((itemStack.getItem() instanceof CaparisonItem caparisonItem) && !itemStack.isEmpty()) {
+            resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
+        } else if ((itemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !itemStack.isEmpty()) {
+            resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
         }
 
         if(resourceLocation != null) {

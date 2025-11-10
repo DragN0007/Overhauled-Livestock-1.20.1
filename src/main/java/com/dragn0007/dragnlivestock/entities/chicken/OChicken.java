@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -172,6 +173,18 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		return this.geoCache;
 	}
 
+	public boolean isGreatQuality() {
+		return this.getQuality() > 25 && this.getQuality() <= 50;
+	}
+
+	public boolean isFantasticQuality() {
+		return this.getQuality() > 50 && this.getQuality() <= 75;
+	}
+
+	public boolean isExquisiteQuality() {
+		return this.getQuality() > 75 && this.getQuality() <= 100;
+	}
+
 	public void aiStep() {
 		super.aiStep();
 
@@ -182,32 +195,94 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-
 				if (this.getBreed() == 0) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.EGG.get());
 				}
 
 				if (this.getBreed() == 1) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
 				}
 
 				if (this.getBreed() == 2) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
 				}
 
 				if (this.getBreed() == 3) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.MARANS_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.MARANS_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.MARANS_EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.MARANS_EGG.get());
 				}
 
 				if (this.getBreed() == 4) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
 				}
 
 				if (this.getBreed() == 5) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
 				}
 
 				if (this.getBreed() == 6) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get(), 2);
+						}
+					}
 					this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
 				}
 
@@ -215,9 +290,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 				this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 			}
 		} else if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-
 			this.spawnAtLocation(Items.EGG);
-
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 		}
@@ -383,9 +456,21 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(TAGGED, tagged);
 	}
 
+	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
+	public int getQuality() {
+		return this.entityData.get(QUALITY);
+	}
+	public void setQuality(int i) {
+		this.entityData.set(QUALITY, i);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+
+		if(tag.contains("Quality")) {
+			this.setQuality(tag.getInt("Quality"));
+		}
 
 		if (tag.contains("Variant")) {
 			setVariant(tag.getInt("Variant"));
@@ -419,6 +504,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Quality", this.getQuality());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
 		tag.putInt("Breed", getBreed());
@@ -439,6 +525,10 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		this.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
 		this.setGender(random.nextInt(OChicken.Gender.values().length));
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			this.setQuality(random.nextInt(30));
+		}
+
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
 			this.setMarkingByBreed();
@@ -448,6 +538,18 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
+	}
+
+	@Override
+	public void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(QUALITY, 0);
+		this.entityData.define(VARIANT, 0);
+		this.entityData.define(OVERLAY, 0);
+		this.entityData.define(BREED, 0);
+		this.entityData.define(GENDER, 0);
+		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
+		this.entityData.define(TAGGED, false);
 	}
 
 	public void setColorByBreed() {
@@ -606,17 +708,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setOverlayVariant(0);
 		}
 
-	}
-
-	@Override
-	public void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(VARIANT, 0);
-		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(BREED, 0);
-		this.entityData.define(GENDER, 0);
-		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
-		this.entityData.define(TAGGED, false);
 	}
 
 	public boolean canParent() {
@@ -794,6 +885,19 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 			if (this.isNormalBreed()) {
 				if (random.nextDouble() < 0.15) {
+					this.spawnAtLocation(Items.CHICKEN);
+					this.spawnAtLocation(Items.FEATHER);
+				}
+			}
+
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isExquisiteQuality()) {
+					this.spawnAtLocation(Items.CHICKEN, 3);
+					this.spawnAtLocation(Items.FEATHER, 3);
+				} else if (this.isFantasticQuality()) {
+					this.spawnAtLocation(Items.CHICKEN, 2);
+					this.spawnAtLocation(Items.FEATHER, 2);
+				} else if (this.isGreatQuality()) {
 					this.spawnAtLocation(Items.CHICKEN);
 					this.spawnAtLocation(Items.FEATHER);
 				}

@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.compat.jade.block.CheeseTooltipProvider;
 import com.dragn0007.dragnlivestock.compat.jade.block.JerkyTooltipProvider;
 import com.dragn0007.dragnlivestock.compat.jade.breed.*;
 import com.dragn0007.dragnlivestock.compat.jade.gender.*;
+import com.dragn0007.dragnlivestock.compat.jade.other.CowQualityTooltip;
 import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
@@ -50,5 +51,7 @@ public class JadePlugin implements IWailaPlugin {
 
         registration.registerBlockComponent(new CheeseTooltipProvider(), CheeseBase.class);
         registration.registerBlockComponent(new JerkyTooltipProvider(), JerkyBase.class);
+
+        registration.registerEntityComponent(new CowQualityTooltip(), OCow.class);
     }
 }

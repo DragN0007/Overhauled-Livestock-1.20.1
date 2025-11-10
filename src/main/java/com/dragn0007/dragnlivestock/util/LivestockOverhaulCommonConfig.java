@@ -62,6 +62,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
+    public static final ForgeConfigSpec.BooleanValue QUALITY;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.ConfigValue<Double> COVERED_WAGON_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> DOG_SLED_SPEED_MULT;
@@ -250,6 +251,9 @@ public class LivestockOverhaulCommonConfig {
 
         CREATIVE_SNIPPING = BUILDER.comment("Should only those in Creative Mode be able to snip (geld or spay) mounts?")
                 .define("Creative-Only Snipping", false);
+
+        QUALITY = BUILDER.comment("Should some farm animals, such as O-Cows, have a Quality rating that affects how much they drop?")
+                .define("Quality Rating", true);
 
         DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev " +
                         "or testing on your server temporarily.")

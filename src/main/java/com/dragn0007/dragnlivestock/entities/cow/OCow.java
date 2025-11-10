@@ -71,6 +71,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public OCow(EntityType<? extends OCow> type, Level level) {
 		super(type, level);
+		setMilked(false);
 	}
 
 	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
@@ -326,6 +327,22 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		});
 	}
 
+	public boolean isFineQuality() {
+        return this.getQuality() <= 25;
+	}
+
+	public boolean isGreatQuality() {
+		return this.getQuality() > 25 && this.getQuality() <= 50;
+	}
+
+	public boolean isFantasticQuality() {
+		return this.getQuality() > 50 && this.getQuality() <= 75;
+	}
+
+	public boolean isExquisiteQuality() {
+		return this.getQuality() > 75 && this.getQuality() <= 100;
+	}
+
 	public int replenishMilkCounter = 0;
 
 	public void tick() {
@@ -339,13 +356,58 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		replenishMilkCounter++;
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed()) {
-			this.setMilked(false);
+		if (!this.isDairyBreed()) {
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isFineQuality()) {
+					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+						this.setMilked(false);
+					}
+				} else if (this.isGreatQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 1.3)) {
+						this.setMilked(false);
+					}
+				} else if (this.isFantasticQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2)) {
+						this.setMilked(false);
+					}
+				} else if (this.isExquisiteQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2.5)) {
+						this.setMilked(false);
+					}
+				}
+			} else {
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+					this.setMilked(false);
+				}
+			}
 		}
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed()) {
-			this.setMilked(false);
+		if (this.isDairyBreed()) {
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isFineQuality()) {
+					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) {
+						this.setMilked(false);
+					}
+				} else if (this.isGreatQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 1.3)) {
+						this.setMilked(false);
+					}
+				} else if (this.isFantasticQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2)) {
+						this.setMilked(false);
+					}
+				} else if (this.isExquisiteQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2.5)) {
+						this.setMilked(false);
+					}
+				}
+			} else {
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) {
+					this.setMilked(false);
+				}
+			}
 		}
+
 	}
 
 	@Override
@@ -466,15 +528,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
-			if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !this.isDairyBreed()) {
-				if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
-					player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-					ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
-					player.setItemInHand(hand, itemstack1);
-					replenishMilkCounter = 0;
-					setMilked(true);
-				}
-			} else if (!wasMilked() || replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.isDairyBreed()) {
+			if (!wasMilked()) {
 					if ((!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get()) || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale())) {
 						player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
 						ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
@@ -534,7 +588,6 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 	}
-
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public String getOverlayLocation() {return BovineMarkingOverlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
@@ -603,9 +656,21 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(BELLED, belled);
 	}
 
+	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
+	public int getQuality() {
+		return this.entityData.get(QUALITY);
+	}
+	public void setQuality(int i) {
+		this.entityData.set(QUALITY, i);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+
+		if(tag.contains("Quality")) {
+			this.setQuality(tag.getInt("Quality"));
+		}
 
 		if (tag.contains("Breed")) {
 			setBreed(tag.getInt("Breed"));
@@ -653,7 +718,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-
+		tag.putInt("Quality", this.getQuality());
 		tag.putInt("Breed", getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
@@ -677,6 +742,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			this.setQuality(random.nextInt(30));
+		}
+
 		if (this.getBreed() == 10) {
 			this.setGender(1);
 		} else {
@@ -699,6 +768,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(QUALITY, 0);
 		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
@@ -816,6 +886,19 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			calf.setGender(random.nextInt(OCow.Gender.values().length));
 		}
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			int qual_avg = (this.getQuality() + partner.getQuality()) / 2;
+			if (random.nextDouble() <= 0.05) {
+				calf.setQuality(qual_avg + random.nextInt(50));
+			} else if (random.nextDouble() >= 0.05 && random.nextDouble() <= 0.25) {
+				calf.setQuality(qual_avg + random.nextInt(25));
+			} else if (random.nextDouble() >= 0.25 && random.nextDouble() <= 0.60) {
+				calf.setQuality(qual_avg + random.nextInt(10));
+			} else {
+				calf.setQuality(qual_avg + random.nextInt(5));
+			}
+		}
+
 		return calf;
 	}
 
@@ -841,6 +924,25 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 			if (this.isNormalBreed()) {
 				if (random.nextDouble() < 0.15) {
+					this.spawnAtLocation(Items.BEEF);
+					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
+					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());
+					this.spawnAtLocation(Items.LEATHER);
+				}
+			}
+
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isExquisiteQuality()) {
+					this.spawnAtLocation(Items.BEEF, 3);
+					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get(), 3);
+					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get(), 3);
+					this.spawnAtLocation(Items.LEATHER, 3);
+				} else if (this.isFantasticQuality()) {
+					this.spawnAtLocation(Items.BEEF, 2);
+					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get(), 2);
+					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get(), 2);
+					this.spawnAtLocation(Items.LEATHER, 2);
+				} else if (this.isGreatQuality()) {
 					this.spawnAtLocation(Items.BEEF);
 					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
 					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());

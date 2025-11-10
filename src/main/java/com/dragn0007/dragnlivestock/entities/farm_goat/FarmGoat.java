@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.FarmGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.ai.GoatFollowOwnerGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
@@ -90,6 +91,8 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 	public FarmGoat(EntityType<? extends FarmGoat> type, Level level) {
 		super(type, level);
+		setMilked(false);
+		setSheared(false);
 	}
 
 	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_goat");
@@ -303,23 +306,103 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public int replenishMilkCounter = 0;
 	public int regrowWoolCounter = 0;
 
+	public boolean isFineQuality() {
+		return this.getQuality() <= 25;
+	}
+
+	public boolean isGreatQuality() {
+		return this.getQuality() > 25 && this.getQuality() <= 50;
+	}
+
+	public boolean isFantasticQuality() {
+		return this.getQuality() > 50 && this.getQuality() <= 75;
+	}
+
+	public boolean isExquisiteQuality() {
+		return this.getQuality() > 75 && this.getQuality() <= 100;
+	}
+
 	public void tick() {
 		super.tick();
 
 		regrowWoolCounter++;
 
-		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
-			this.setSheared(false);
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			if (this.isFineQuality()) {
+				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
+					this.setSheared(false);
+				}
+			} else if (this.isGreatQuality()) {
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 1.3)) {
+					this.setSheared(false);
+				}
+			} else if (this.isFantasticQuality()) {
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2)) {
+					this.setSheared(false);
+				}
+			} else if (this.isExquisiteQuality()) {
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2.5)) {
+					this.setSheared(false);
+				}
+			}
+		} else {
+			if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
+				this.setSheared(false);
+			}
 		}
 
 		replenishMilkCounter++;
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() && !(this.getBreed() == 5)) {
-			this.setMilked(false);
+		if (this.getBreed() != 5) {
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isFineQuality()) {
+					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+						this.setMilked(false);
+					}
+				} else if (this.isGreatQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 1.3)) {
+						this.setMilked(false);
+					}
+				} else if (this.isFantasticQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2)) {
+						this.setMilked(false);
+					}
+				} else if (this.isExquisiteQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2.5)) {
+						this.setMilked(false);
+					}
+				}
+			} else {
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
+					this.setMilked(false);
+				}
+			}
 		}
 
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() && this.getBreed() == 5) {
-			this.setMilked(false);
+		if (this.getBreed() == 5) {
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isFineQuality()) {
+					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) {
+						this.setMilked(false);
+					}
+				} else if (this.isGreatQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 1.3)) {
+						this.setMilked(false);
+					}
+				} else if (this.isFantasticQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2)) {
+						this.setMilked(false);
+					}
+				} else if (this.isExquisiteQuality()) {
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2.5)) {
+						this.setMilked(false);
+					}
+				}
+			} else {
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) {
+					this.setMilked(false);
+				}
+			}
 		}
 	}
 
@@ -574,6 +657,14 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(MILKED, milked);
 	}
 
+	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
+	public int getQuality() {
+		return this.entityData.get(QUALITY);
+	}
+	public void setQuality(int i) {
+		this.entityData.set(QUALITY, i);
+	}
+
 	@Override
 	public void updateContainerEquipment() {
 		if(!this.level().isClientSide) {
@@ -589,6 +680,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+		if(tag.contains("Quality")) {
+			this.setQuality(tag.getInt("Quality"));
+		}
+
 		if (tag.contains("Breed")) {
 			setBreed(tag.getInt("Breed"));
 		}
@@ -649,6 +744,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Quality", this.getQuality());
 		tag.putInt("Breed", getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
@@ -669,6 +765,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(QUALITY, 0);
 		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
@@ -695,6 +792,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		this.setGender(random.nextInt(Gender.values().length));
 		this.setBreedByBiome();
+
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			this.setQuality(random.nextInt(30));
+		}
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
@@ -1065,6 +1166,25 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 						this.spawnAtLocation(Items.LEATHER);
 					}
 				}
+			}
+		}
+
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			if (this.isExquisiteQuality()) {
+				this.spawnAtLocation(LOItems.CHEVON.get(), 3);
+				this.spawnAtLocation(LOItems.CHEVON_RIB.get(), 3);
+				this.spawnAtLocation(LOItems.CHEVON_LOIN.get(), 3);
+				this.spawnAtLocation(Items.LEATHER, 3);
+			} else if (this.isFantasticQuality()) {
+				this.spawnAtLocation(LOItems.CHEVON.get(), 2);
+				this.spawnAtLocation(LOItems.CHEVON_RIB.get(), 2);
+				this.spawnAtLocation(LOItems.CHEVON_LOIN.get(), 2);
+				this.spawnAtLocation(Items.LEATHER, 2);
+			} else if (this.isGreatQuality()) {
+				this.spawnAtLocation(LOItems.CHEVON.get());
+				this.spawnAtLocation(LOItems.CHEVON_RIB.get());
+				this.spawnAtLocation(LOItems.CHEVON_LOIN.get());
+				this.spawnAtLocation(Items.LEATHER);
 			}
 		}
 

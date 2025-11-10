@@ -40,6 +40,12 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
             case 13: return "Akhal-Teke";
             case 14: return "American Soldier";
             case 15: return "Welsh Pony";
+            case 16: return "Connemara";
+            case 17: return "Haflinger";
+            case 18: return "Oldenburger";
+            case 19: return "Shetland";
+            case 20: return "Standardbred";
+            case 21: return "Trakehner";
             default: return "Unknown";
         }
     }

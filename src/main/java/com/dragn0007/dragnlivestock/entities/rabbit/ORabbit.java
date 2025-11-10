@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.rabbit;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -460,9 +461,20 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.set(DEWLAP, dewlap);
 	}
 
+	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
+	public int getQuality() {
+		return this.entityData.get(QUALITY);
+	}
+	public void setQuality(int i) {
+		this.entityData.set(QUALITY, i);
+	}
+
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
+		if(tag.contains("Quality")) {
+			this.setQuality(tag.getInt("Quality"));
+		}
 
 		if (tag.contains("Breed")) {
 			this.setBreed(tag.getInt("Breed"));
@@ -496,6 +508,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
+		tag.putInt("Quality", this.getQuality());
 		tag.putInt("Breed", this.getBreed());
 		tag.putInt("Variant", getVariant());
 		tag.putInt("Overlay", getOverlayVariant());
@@ -516,6 +529,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.setBreed(random.nextInt(RabbitBreed.Breed.values().length));
 		this.setDewlapByGender();
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			this.setQuality(random.nextInt(30));
+		}
+
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByWildStatus();
 			this.setMarkingByWildStatus();
@@ -530,6 +547,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
+		this.entityData.define(QUALITY, 0);
 		this.entityData.define(BREED, 0);
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
@@ -659,6 +677,22 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		return kit;
 	}
 
+	public boolean isFineQuality() {
+		return this.getQuality() <= 25;
+	}
+
+	public boolean isGreatQuality() {
+		return this.getQuality() > 25 && this.getQuality() <= 50;
+	}
+
+	public boolean isFantasticQuality() {
+		return this.getQuality() > 50 && this.getQuality() <= 75;
+	}
+
+	public boolean isExquisiteQuality() {
+		return this.getQuality() > 75 && this.getQuality() <= 100;
+	}
+
 	@Override
 	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
@@ -681,6 +715,19 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				if (random.nextDouble() < 0.15) {
 					this.spawnAtLocation(Items.RABBIT);
 					this.spawnAtLocation(LOItems.RABBIT_THIGH.get());
+					this.spawnAtLocation(Items.RABBIT_HIDE);
+				}
+			}
+
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isExquisiteQuality()) {
+					this.spawnAtLocation(Items.RABBIT, 3);
+					this.spawnAtLocation(Items.RABBIT_HIDE, 3);
+				} else if (this.isFantasticQuality()) {
+					this.spawnAtLocation(Items.RABBIT, 2);
+					this.spawnAtLocation(Items.RABBIT_HIDE, 2);
+				} else if (this.isGreatQuality()) {
+					this.spawnAtLocation(Items.RABBIT);
 					this.spawnAtLocation(Items.RABBIT_HIDE);
 				}
 			}

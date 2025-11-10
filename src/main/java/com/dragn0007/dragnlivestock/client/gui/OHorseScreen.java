@@ -179,6 +179,12 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 13: return "Akhal-Teke (Racer)";
             case 14: return "American Soldier (Draft)";
             case 15: return "Welsh (Pony)";
+            case 16: return "Connemara (Pony)";
+            case 17: return "Haflinger (Coldblood)";
+            case 18: return "Oldenburger (Warmblood)";
+            case 19: return "Shetland (Pony)";
+            case 20: return "Standardbred (Racer)";
+            case 21: return "Trakehner (Warmblood)";
             default: return "Unknown";
         }
     }
