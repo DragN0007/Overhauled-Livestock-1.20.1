@@ -661,6 +661,19 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 
 		kit.setDewlapByGender();
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			int qual_avg = (this.getQuality() + partner.getQuality()) / 2;
+			if (random.nextDouble() <= 0.05) {
+				kit.setQuality(qual_avg + random.nextInt(50));
+			} else if (random.nextDouble() >= 0.05 && random.nextDouble() <= 0.25) {
+				kit.setQuality(qual_avg + random.nextInt(25));
+			} else if (random.nextDouble() >= 0.25 && random.nextDouble() <= 0.60) {
+				kit.setQuality(qual_avg + random.nextInt(10));
+			} else {
+				kit.setQuality(qual_avg + random.nextInt(5));
+			}
+		}
+
 		babiesBirthed++;
 
 		if (babiesBirthed < maxBabyAmount && this.isInLove()) {

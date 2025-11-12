@@ -119,7 +119,6 @@ public class LOItems {
             () -> new HorseShoeItem(2, (new Item.Properties()).stacksTo(1)));
 
 
-
     public static final RegistryObject<Item> LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE = ITEMS.register("light_horse_armor_smithing_template",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CHAINMAIL_HORSE_ARMOR = ITEMS.register("chainmail_horse_armor",
@@ -526,6 +525,46 @@ public class LOItems {
             () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
     public static final RegistryObject<Item> WINTER_WESTERN_BLANKET = ITEMS.register("winter_western_blanket",
             () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PRIDE_MEDIEVAL_BLANKET = ITEMS.register("pride_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PRIDE_MODERN_BLANKET = ITEMS.register("pride_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PRIDE_RACING_BLANKET = ITEMS.register("pride_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> PRIDE_WESTERN_BLANKET = ITEMS.register("pride_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> LESBIAN_MEDIEVAL_BLANKET = ITEMS.register("lesbian_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> LESBIAN_MODERN_BLANKET = ITEMS.register("lesbian_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> LESBIAN_RACING_BLANKET = ITEMS.register("lesbian_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> LESBIAN_WESTERN_BLANKET = ITEMS.register("lesbian_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> BI_MEDIEVAL_BLANKET = ITEMS.register("bi_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> BI_MODERN_BLANKET = ITEMS.register("bi_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> BI_RACING_BLANKET = ITEMS.register("bi_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> BI_WESTERN_BLANKET = ITEMS.register("bi_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> NONBINARY_MEDIEVAL_BLANKET = ITEMS.register("nonbinary_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> NONBINARY_MODERN_BLANKET = ITEMS.register("nonbinary_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> NONBINARY_RACING_BLANKET = ITEMS.register("nonbinary_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> NONBINARY_WESTERN_BLANKET = ITEMS.register("nonbinary_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> TRANS_MEDIEVAL_BLANKET = ITEMS.register("trans_medieval_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> TRANS_MODERN_BLANKET = ITEMS.register("trans_modern_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> TRANS_RACING_BLANKET = ITEMS.register("trans_racing_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
+    public static final RegistryObject<Item> TRANS_WESTERN_BLANKET = ITEMS.register("trans_western_blanket",
+            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
 
     //Dyed Stuff
     public static final RegistryObject<Item> BLACK_BRAND_TAG = ITEMS.register("black_brand_tag",
@@ -791,6 +830,291 @@ public class LOItems {
             () -> new GrubSweaterItem(DyeColor.WHITE, new Item.Properties()));
     public static final RegistryObject<Item> YELLOW_GRUB_SWEATER = ITEMS.register("yellow_grub_sweater",
             () -> new GrubSweaterItem(DyeColor.YELLOW, new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("blue_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("brown_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("cyan_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("green_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("grey_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("light_blue_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("light_grey_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("lime_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("magenta_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("orange_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("pink_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("purple_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("red_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("white_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("yellow_accented_black_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_ACCENTED_BLACK_SADDLE = ITEMS.register("blue_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_BLACK_SADDLE = ITEMS.register("brown_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_BLACK_SADDLE = ITEMS.register("cyan_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_BLACK_SADDLE = ITEMS.register("green_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_BLACK_SADDLE = ITEMS.register("grey_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_BLACK_SADDLE = ITEMS.register("light_blue_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_BLACK_SADDLE = ITEMS.register("light_grey_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_BLACK_SADDLE = ITEMS.register("lime_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_BLACK_SADDLE = ITEMS.register("magenta_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_BLACK_SADDLE = ITEMS.register("orange_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_BLACK_SADDLE = ITEMS.register("pink_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_BLACK_SADDLE = ITEMS.register("purple_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_BLACK_SADDLE = ITEMS.register("red_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ACCENTED_BLACK_SADDLE = ITEMS.register("white_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_BLACK_SADDLE = ITEMS.register("yellow_accented_black_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("blue_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("brown_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("cyan_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("green_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("grey_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("light_blue_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("light_grey_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("lime_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("magenta_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("orange_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("pink_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("purple_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("red_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("white_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("yellow_accented_black_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_ACCENTED_LIGHT_SADDLE = ITEMS.register("black_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ACCENTED_LIGHT_SADDLE = ITEMS.register("blue_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_LIGHT_SADDLE = ITEMS.register("brown_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_LIGHT_SADDLE = ITEMS.register("cyan_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_LIGHT_SADDLE = ITEMS.register("green_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_LIGHT_SADDLE = ITEMS.register("grey_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_LIGHT_SADDLE = ITEMS.register("light_blue_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_LIGHT_SADDLE = ITEMS.register("light_grey_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_LIGHT_SADDLE = ITEMS.register("lime_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_LIGHT_SADDLE = ITEMS.register("magenta_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_LIGHT_SADDLE = ITEMS.register("orange_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_LIGHT_SADDLE = ITEMS.register("pink_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_LIGHT_SADDLE = ITEMS.register("purple_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_LIGHT_SADDLE = ITEMS.register("red_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ACCENTED_LIGHT_SADDLE = ITEMS.register("white_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_LIGHT_SADDLE = ITEMS.register("yellow_accented_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_ACCENTED_SADDLE = ITEMS.register("black_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ACCENTED_SADDLE = ITEMS.register("blue_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_SADDLE = ITEMS.register("brown_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_SADDLE = ITEMS.register("cyan_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_SADDLE = ITEMS.register("green_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_SADDLE = ITEMS.register("grey_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_SADDLE = ITEMS.register("light_blue_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_SADDLE = ITEMS.register("light_grey_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_SADDLE = ITEMS.register("lime_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_SADDLE = ITEMS.register("magenta_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_SADDLE = ITEMS.register("orange_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_SADDLE = ITEMS.register("pink_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_SADDLE = ITEMS.register("purple_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_SADDLE = ITEMS.register("red_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ACCENTED_SADDLE = ITEMS.register("white_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_SADDLE = ITEMS.register("yellow_accented_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_ACCENTED_HEAVY_SADDLE = ITEMS.register("black_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ACCENTED_HEAVY_SADDLE = ITEMS.register("blue_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_HEAVY_SADDLE = ITEMS.register("brown_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_HEAVY_SADDLE = ITEMS.register("cyan_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_HEAVY_SADDLE = ITEMS.register("green_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_HEAVY_SADDLE = ITEMS.register("grey_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_HEAVY_SADDLE = ITEMS.register("light_blue_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_HEAVY_SADDLE = ITEMS.register("light_grey_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_HEAVY_SADDLE = ITEMS.register("lime_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_HEAVY_SADDLE = ITEMS.register("magenta_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_HEAVY_SADDLE = ITEMS.register("orange_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_HEAVY_SADDLE = ITEMS.register("pink_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_HEAVY_SADDLE = ITEMS.register("purple_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_HEAVY_SADDLE = ITEMS.register("red_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> WHITE_ACCENTED_HEAVY_SADDLE = ITEMS.register("white_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_HEAVY_SADDLE = ITEMS.register("yellow_accented_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("black_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("blue_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("brown_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("cyan_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("green_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("grey_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("light_blue_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("light_grey_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("lime_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("magenta_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("orange_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("pink_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("purple_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("red_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("yellow_accented_white_light_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_ACCENTED_WHITE_SADDLE = ITEMS.register("black_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ACCENTED_WHITE_SADDLE = ITEMS.register("blue_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_WHITE_SADDLE = ITEMS.register("brown_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_WHITE_SADDLE = ITEMS.register("cyan_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_WHITE_SADDLE = ITEMS.register("green_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_WHITE_SADDLE = ITEMS.register("grey_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_WHITE_SADDLE = ITEMS.register("light_blue_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_WHITE_SADDLE = ITEMS.register("light_grey_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_WHITE_SADDLE = ITEMS.register("lime_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_WHITE_SADDLE = ITEMS.register("magenta_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_WHITE_SADDLE = ITEMS.register("orange_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_WHITE_SADDLE = ITEMS.register("pink_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_WHITE_SADDLE = ITEMS.register("purple_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_WHITE_SADDLE = ITEMS.register("red_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_WHITE_SADDLE = ITEMS.register("yellow_accented_white_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("black_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BLUE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("blue_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> BROWN_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("brown_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> CYAN_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("cyan_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREEN_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("green_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> GREY_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("grey_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("light_blue_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("light_grey_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> LIME_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("lime_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> MAGENTA_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("magenta_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> ORANGE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("orange_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("pink_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> PURPLE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("purple_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> RED_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("red_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
+    public static final RegistryObject<Item> YELLOW_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("yellow_accented_white_heavy_saddle",
+            () -> new SaddleItem(new Item.Properties()));
 
     public static final RegistryObject<Item> HALLOW_HEART = ITEMS.register("hallow_heart", HallowHeartItem::new);
 

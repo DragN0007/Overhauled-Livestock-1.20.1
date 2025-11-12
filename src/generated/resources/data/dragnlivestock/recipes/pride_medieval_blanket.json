@@ -1,0 +1,38 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:blanket_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:red_carpet"
+          },
+          "B": {
+            "item": "minecraft:yellow_carpet"
+          },
+          "C": {
+            "item": "minecraft:blue_carpet"
+          },
+          "D": {
+            "item": "minecraft:purple_carpet"
+          }
+        },
+        "pattern": [
+          "ABB",
+          "CDC"
+        ],
+        "result": {
+          "item": "dragnlivestock:pride_medieval_blanket"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

@@ -31,6 +31,7 @@ public class SheepBreedTooltip implements IEntityComponentProvider {
             case 4: return "Racka";
             case 5: return "California Red";
             case 6: return "Hair";
+            case 7: return "Border Leicester";
             default: return "Unknown";
         }
     }

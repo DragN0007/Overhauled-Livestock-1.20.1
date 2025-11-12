@@ -106,10 +106,8 @@ import net.minecraftforge.fml.common.Mod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
@@ -713,10 +711,14 @@ public class SpawnReplacer {
                     oChicken.setGender(random.nextInt(OChicken.Gender.values().length));
                     oChicken.setChickenJockey(vanillachicken.isChickenJockey());
 
-                    List<Entity> passengers = vanillachicken.getPassengers().stream().collect(Collectors.toList());
-                    for (Entity passenger : passengers) {
-                        passenger.startRiding(oChicken, true);
-                    }
+//                    if (vanillachicken.isChickenJockey()) {
+//                        List<Entity> passengers = vanillachicken.getPassengers().stream().collect(Collectors.toList());
+//                        if (oChicken != null && passengers != null) {
+//                            for (Entity passenger : passengers) {
+//                                passenger.startRiding(oChicken, true);
+//                            }
+//                        }
+//                    }
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {

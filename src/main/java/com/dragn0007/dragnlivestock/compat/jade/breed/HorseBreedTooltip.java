@@ -46,6 +46,7 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
             case 19: return "Shetland";
             case 20: return "Standardbred";
             case 21: return "Trakehner";
+            case 22: return "Boulonnais";
             default: return "Unknown";
         }
     }

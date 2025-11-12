@@ -177,7 +177,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
             case 13, 20:
 				baseHealth = 15.0F;
 				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-			case 14:
+			case 14, 22:
 				baseHealth = 28.0F;
 				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
         }
@@ -207,7 +207,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			case 9:
 				baseStrength = 0.55F;
 				return baseStrength + multiplier;
-            case 12, 14:
+            case 12, 14, 22:
 				baseStrength = 0.2F;
 				return baseStrength + multiplier;
 			case 19:
@@ -241,7 +241,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public boolean isDraftBreed() {
-		return this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12 || this.getBreed() == 14 || this.getBreed() == 17;
+		return this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12 || this.getBreed() == 14 || this.getBreed() == 17 || this.getBreed() == 22;
 	}
 	public boolean isPonyBreed() {
 		return this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11 || this.getBreed() == 15 || this.getBreed() == 16 || this.getBreed() == 19;
@@ -433,6 +433,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			if (getBreed() == 21) {
 				offsetY = 1.03;
+			}
+
+			if (getBreed() == 22) {
+				offsetY = 1.08;
 			}
 
 			if (month == Month.DECEMBER && (day == 24 || day == 25)) {
@@ -1214,7 +1218,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
 			if (!ModList.get().isLoaded("deadlydinos")) {
-				int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21};
+				int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22};
 				int randomIndex = new Random().nextInt(breeds.length);
 				this.setBreed(breeds[randomIndex]);
 			} else {
@@ -1827,6 +1831,19 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
+		if (this.getBreed() == 22) { //boulonnais usually just come in white or silver
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
+						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {24, 33};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setMarkingByBreed() {
@@ -2026,6 +2043,16 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
 				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 22) { //boulonnais usually come in solids or dapple
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {0, 26, 30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
 			}
 		}
 

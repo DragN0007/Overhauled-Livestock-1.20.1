@@ -766,6 +766,19 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			lamb.setHornsByBreed();
 		}
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			int qual_avg = (this.getQuality() + partner.getQuality()) / 2;
+			if (random.nextDouble() <= 0.05) {
+				lamb.setQuality(qual_avg + random.nextInt(50));
+			} else if (random.nextDouble() >= 0.05 && random.nextDouble() <= 0.25) {
+				lamb.setQuality(qual_avg + random.nextInt(25));
+			} else if (random.nextDouble() >= 0.25 && random.nextDouble() <= 0.60) {
+				lamb.setQuality(qual_avg + random.nextInt(10));
+			} else {
+				lamb.setQuality(qual_avg + random.nextInt(5));
+			}
+		}
+
 		lamb.setGender(random.nextInt(Gender.values().length));
 
 		babiesBirthed++;
@@ -1143,6 +1156,14 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 7) { //bunnies tend to come with white skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setVariant(5);
+			}
+		}
+
 	}
 
 	public void setWoolColorByBreed() {
@@ -1205,6 +1226,14 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 6) { //hair sheep dont come with wool
 			this.setWoolVariant(6);
+		}
+
+		if (this.getBreed() == 7) { //bunnies tend to come with white wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setWoolVariant(5);
+			}
 		}
 
 	}
@@ -1282,6 +1311,18 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				int[] variants = {0, 11, 12, 13, 14, 15, 16};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 7) { //bunnies don't often come with markings, and if they do, theyre small
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
 			}
 		}
 
@@ -1422,6 +1463,14 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				} else if (random.nextDouble() > 0.15) {
 					this.setHornVariant(2);
 				}
+			}
+		}
+
+		if (this.getBreed() == 7) { //bunnies dont come with horns
+			if (random.nextDouble() < 0.02) {
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.15) {
+				this.setHornVariant(0);
 			}
 		}
 

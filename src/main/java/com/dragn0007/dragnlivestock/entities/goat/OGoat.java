@@ -706,6 +706,19 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		kid.setOverlayVariant(overlay);
 
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			int qual_avg = (this.getQuality() + partner.getQuality()) / 2;
+			if (random.nextDouble() <= 0.05) {
+				kid.setQuality(qual_avg + random.nextInt(50));
+			} else if (random.nextDouble() >= 0.05 && random.nextDouble() <= 0.25) {
+				kid.setQuality(qual_avg + random.nextInt(25));
+			} else if (random.nextDouble() >= 0.25 && random.nextDouble() <= 0.60) {
+				kid.setQuality(qual_avg + random.nextInt(10));
+			} else {
+				kid.setQuality(qual_avg + random.nextInt(5));
+			}
+		}
+
 		kid.setGender(random.nextInt(Gender.values().length));
 
 		return kid;

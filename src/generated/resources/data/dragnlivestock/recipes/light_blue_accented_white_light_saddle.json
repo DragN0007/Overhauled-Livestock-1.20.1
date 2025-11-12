@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "dragnlivestock:white_light_saddle"
+    },
+    "B": {
+      "item": "minecraft:light_blue_wool"
+    }
+  },
+  "pattern": [
+    "AB"
+  ],
+  "result": {
+    "item": "dragnlivestock:light_blue_accented_white_light_saddle"
+  },
+  "show_notification": true
+}

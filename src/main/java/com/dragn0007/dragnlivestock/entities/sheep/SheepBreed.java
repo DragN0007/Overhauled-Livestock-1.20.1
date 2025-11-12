@@ -9,7 +9,8 @@ public class SheepBreed {
         JACOB,
         RACKA,
         CALIFORNIA_RED,
-        HAIR;
+        HAIR,
+        BUNNY;
 
         public static Breed breedFromOrdinal(int ordinal) {
             return Breed.values()[ordinal % Breed.values().length];

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dragnlivestock:item/red_accented_white_heavy_saddle"
+  }
+}

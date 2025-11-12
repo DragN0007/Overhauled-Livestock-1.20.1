@@ -26,6 +26,7 @@ public enum HorseBreed {
     SHETLAND(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/shetland.geo.json")),
     STANDARDBRED(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/standardbred.geo.json")),
     TRAKEHNER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/trakehner.geo.json")),
+    BOULONNAIS(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/boulonnais.geo.json")),
     ;
 
     public final ResourceLocation resourceLocation;

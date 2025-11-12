@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:saddle"
+    },
+    "B": {
+      "item": "minecraft:brown_wool"
+    }
+  },
+  "pattern": [
+    "AB"
+  ],
+  "result": {
+    "item": "dragnlivestock:brown_accented_saddle"
+  },
+  "show_notification": true
+}
