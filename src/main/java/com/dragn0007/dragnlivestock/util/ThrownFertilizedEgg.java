@@ -105,6 +105,27 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             }
          }
 
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_ORPINGTON_EGG.get())) {
+               chicken.setBreed(7);
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_POLISH_EGG.get())) {
+               chicken.setBreed(8);
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_WYANDOTTE_EGG.get())) {
+               chicken.setBreed(9);
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
          chicken.setColorByBreed();
          chicken.setMarkingByBreed();
 

@@ -285,6 +285,45 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 					this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
 				}
 
+				if (this.getBreed() == 7) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get(), 2);
+						}
+					}
+					this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
+				}
+
+				if (this.getBreed() == 8) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.POLISH_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.POLISH_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.POLISH_EGG.get(), 2);
+						}
+					}
+					this.spawnAtLocation(LOItems.POLISH_EGG.get());
+				}
+
+				if (this.getBreed() == 9) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get(), 2);
+						}
+					}
+					this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+				}
+
 				this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 				this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 			}
@@ -836,6 +875,24 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 				eggsLaid = 3;
+			}
+
+			if (this.getBreed() == 7) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_ORPINGTON_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
+
+			if (this.getBreed() == 8) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_POLISH_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
+
+			if (this.getBreed() == 9) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
 			}
 		}
 

@@ -196,6 +196,12 @@ public class LOItems {
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> FERTILIZED_AYAM_CEMANI_EGG = ITEMS.register("fertilized_ayam_cemani_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_ORPINGTON_EGG = ITEMS.register("fertilized_orpington_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_POLISH_EGG = ITEMS.register("fertilized_polish_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_WYANDOTTE_EGG = ITEMS.register("fertilized_wyandotte_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
 
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",
              () -> new Item((new Item.Properties()).stacksTo(64)));
@@ -210,6 +216,12 @@ public class LOItems {
     public static final RegistryObject<Item> SUSSEX_SILKIE_EGG = ITEMS.register("sussex_silkie_egg",
              () -> new Item((new Item.Properties()).stacksTo(64)));
     public static final RegistryObject<Item> AYAM_CEMANI_EGG = ITEMS.register("ayam_cemani_egg",
+            () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> ORPINGTON_EGG = ITEMS.register("orpington_egg",
+            () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> POLISH_EGG = ITEMS.register("polish_egg",
+            () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> WYANDOTTE_EGG = ITEMS.register("wyandotte_egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
 
 

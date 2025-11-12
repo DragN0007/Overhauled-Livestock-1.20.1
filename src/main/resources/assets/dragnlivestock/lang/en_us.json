@@ -934,5 +934,6 @@
   "config.jade.plugin_dragnlivestock.dry_time": "Display O-Jerky Dry Percent",
   "config.jade.plugin_dragnlivestock.age_time": "Display O-Cheese Age Percent",
   "key.dragnlivestock.plow_mode": "Switch Plow Mode",
-  "key.dragnlivestock.horse_walk_backwards": "Walk Backwards - Horse"
+  "key.dragnlivestock.horse_walk_backwards": "Walk Backwards - Horse",
+  "tooltip.dragnlivestock.mount_registry.tooltip": "Mount owned by"
 }
