@@ -2,6 +2,8 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.pig.OPig;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -670,6 +672,38 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setVariant(11);
 		}
 
+		if (this.getBreed() == 7) { //orpington
+			if (random.nextDouble() <= 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {3, 4, 5, 7, 8, 10};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 8) { //polish
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				this.setVariant(10);
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {4, 5, 12};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 9) { //wyandotte
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {1, 6, 9, 12};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setMarkingByBreed() {
@@ -746,6 +780,34 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setOverlayVariant(0);
 		}
 
+		if (this.getBreed() == 7) { //orpington
+			if (random.nextDouble() <= 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 8) { //polish
+			if (random.nextDouble() <= 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 9) { //wyandotte
+			if (random.nextDouble() <= 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public boolean canParent() {
@@ -794,6 +856,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 
+		OChicken partner = (OChicken) ageableMob;
+
 		if ((this.isMale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get())
 				|| !this.isInLove()
 				|| !this.isAlive()
@@ -823,6 +887,26 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	protected void dropFertilizedEgg(ServerLevel serverLevel) {
 		if (!this.isFemale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
 			return;
+		}
+
+		//TODO; Make eggs take a 60% chance for the hen's breed or a 40% chance for the rooster's
+		enum EggBreed {
+			LEGHORN(LOItems.FERTILIZED_EGG.get()),
+			AMERAUCANA(LOItems.FERTILIZED_AMERAUCANA_EGG.get()),
+			CREAM_LEGBAR(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get()),
+			MARANS(LOItems.FERTILIZED_MARANS_EGG.get()),
+			OLIVE_EGGER(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get()),
+			SUSSEX_SILKIE(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get()),
+			AYAM_CEMANI(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get()),
+			ORPINGTON(LOItems.FERTILIZED_ORPINGTON_EGG.get()),
+			POLISH(LOItems.FERTILIZED_POLISH_EGG.get()),
+			WYANDOTTE(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
+
+			public final Item item;
+
+			EggBreed(Item item) {
+				this.item = item;
+			}
 		}
 
 		int rareChickenChance = this.random.nextInt(48);

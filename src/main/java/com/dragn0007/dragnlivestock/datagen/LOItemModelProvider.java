@@ -148,6 +148,9 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.FERTILIZED_OLIVE_EGGER_EGG);
         simpleItem(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG);
         simpleItem(LOItems.FERTILIZED_AYAM_CEMANI_EGG);
+        simpleItem(LOItems.FERTILIZED_ORPINGTON_EGG);
+        simpleItem(LOItems.FERTILIZED_POLISH_EGG);
+        simpleItem(LOItems.FERTILIZED_WYANDOTTE_EGG);
 
         advancedItem(LOItems.EGG, "fertilized_egg");
         advancedItem(LOItems.AMERAUCANA_EGG, "fertilized_ameraucana_egg");
@@ -156,6 +159,9 @@ public class LOItemModelProvider extends ItemModelProvider {
         advancedItem(LOItems.OLIVE_EGGER_EGG, "fertilized_olive_egger_egg");
         advancedItem(LOItems.SUSSEX_SILKIE_EGG, "fertilized_sussex_silkie_egg");
         advancedItem(LOItems.AYAM_CEMANI_EGG, "fertilized_ayam_cemani_egg");
+        advancedItem(LOItems.ORPINGTON_EGG, "fertilized_orpington_egg");
+        advancedItem(LOItems.POLISH_EGG, "fertilized_polish_egg");
+        advancedItem(LOItems.WYANDOTTE_EGG, "fertilized_wyandotte_egg");
 
 //        simpleItem(LOItems.COVERED_WAGON);
 

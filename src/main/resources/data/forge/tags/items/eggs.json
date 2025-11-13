@@ -9,6 +9,9 @@
     "dragnlivestock:olive_egger_egg",
     "dragnlivestock:sussex_silkie_egg",
     "dragnlivestock:ayam_cemani_egg",
+    "dragnlivestock:orpington_egg",
+    "dragnlivestock:polish_egg",
+    "dragnlivestock:wyandotte_egg",
 
     "dragnlivestock:fertilized_egg",
     "dragnlivestock:fertilized_ameraucana_egg",
@@ -16,6 +19,9 @@
     "dragnlivestock:fertilized_marans_egg",
     "dragnlivestock:fertilized_olive_egger_egg",
     "dragnlivestock:fertilized_sussex_silkie_egg",
-    "dragnlivestock:fertilized_ayam_cemani_egg"
+    "dragnlivestock:fertilized_ayam_cemani_egg",
+    "dragnlivestock:fertilized_orpington_egg",
+    "dragnlivestock:fertilized_polish_egg",
+    "dragnlivestock:fertilized_wyandotte_egg"
   ]
 }
