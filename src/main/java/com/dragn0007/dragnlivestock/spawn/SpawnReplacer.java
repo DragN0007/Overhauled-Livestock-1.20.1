@@ -10,6 +10,8 @@ import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
 import com.dragn0007.dragnlivestock.entities.chicken.ChickenBreed;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
+import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.chicken.OChickenModel;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.CowBreed;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
@@ -224,11 +226,11 @@ public class SpawnReplacer {
                             int randomIndex = new Random().nextInt(breeds.length);
                             oHorse.setBreed(breeds[randomIndex]);
                         } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
-                            int[] breeds = {1, 5, 6, 8, 12};
+                            int[] breeds = {1, 5, 6, 8, 12, 15, 16, 17, 19, 21, 22};
                             int randomIndex = new Random().nextInt(breeds.length);
                             oHorse.setBreed(breeds[randomIndex]);
                         } else if (!ModList.get().isLoaded("deadlydinos")) {
-                            int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+                            int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22};
                             int randomIndex = new Random().nextInt(breeds.length);
                             oHorse.setBreed(breeds[randomIndex]);
                         } else {
@@ -758,8 +760,8 @@ public class SpawnReplacer {
                         oChicken.setColorByBreed();
                         oChicken.setMarkingByBreed();
                     } else {
-                        oChicken.setVariant(random.nextInt(OSheepModel.Variant.values().length));
-                        oChicken.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+                        oChicken.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+                        oChicken.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
                     }
 
                     if (event.getLevel().isClientSide) {
@@ -967,7 +969,7 @@ public class SpawnReplacer {
                             if (random.nextDouble() < 0.20) {
                                 oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
                             } else {
-                                int[] variants = {1, 2, 3, 4};
+                                int[] variants = {1, 2, 3, 4, 7};
                                 int randomIndex = new Random().nextInt(variants.length);
                                 oSheep.setBreed(variants[randomIndex]);
                             }

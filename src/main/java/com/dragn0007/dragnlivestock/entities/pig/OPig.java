@@ -513,6 +513,10 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (piglet.getQuality() > 100) {
+			piglet.setQuality(100);
+		}
+
 		return piglet;
 	}
 

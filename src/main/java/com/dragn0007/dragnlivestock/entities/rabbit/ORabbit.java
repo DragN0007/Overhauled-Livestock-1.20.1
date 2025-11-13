@@ -686,6 +686,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			}
 		}
 
+		if (kit.getQuality() > 100) {
+			kit.setQuality(100);
+		}
+
 		return kit;
 	}
 

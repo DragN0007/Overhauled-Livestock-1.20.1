@@ -899,6 +899,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
+		if (calf.getQuality() > 100) { //makes sure the baby doesn't go over 100%, since when it does, it loops back to "Fine" rather than "Exquisite"
+			calf.setQuality(100);
+		}
+
 		return calf;
 	}
 

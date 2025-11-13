@@ -779,6 +779,10 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (lamb.getQuality() > 100) {
+			lamb.setQuality(100);
+		}
+
 		lamb.setGender(random.nextInt(Gender.values().length));
 
 		babiesBirthed++;

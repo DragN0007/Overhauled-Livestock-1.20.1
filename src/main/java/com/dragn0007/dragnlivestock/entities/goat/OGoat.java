@@ -719,6 +719,10 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
+		if (kid.getQuality() > 100) {
+			kid.setQuality(100);
+		}
+
 		kid.setGender(random.nextInt(Gender.values().length));
 
 		return kid;

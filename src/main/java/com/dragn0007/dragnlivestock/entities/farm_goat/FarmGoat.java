@@ -943,6 +943,10 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
+		if (kid.getQuality() > 100) {
+			kid.setQuality(100);
+		}
+
 		kid.setGender(random.nextInt(FarmGoat.Gender.values().length));
 
 		return kid;
