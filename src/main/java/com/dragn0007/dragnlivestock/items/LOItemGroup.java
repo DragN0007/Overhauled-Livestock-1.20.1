@@ -65,12 +65,6 @@ public class LOItemGroup {
                         output.accept(LOItems.CARIBOU_SPAWN_EGG.get());
                         output.accept(LOItems.UNICORN_SPAWN_EGG.get());
 
-//                        output.accept(LOItems.NETHERITE_HORSESHOE.get());
-//                        output.accept(LOItems.DIAMOND_HORSESHOE.get());
-//                        output.accept(LOItems.GOLD_HORSESHOE.get());
-//                        output.accept(LOItems.IRON_HORSESHOE.get());
-//                        output.accept(LOItems.STONE_HORSESHOE.get());
-
                         output.accept(LOItems.UTILITY_KNIFE.get());
                         output.accept(LOItems.SPINDLE.get());
                         output.accept(LOItems.MOUNT_KEY.get());
