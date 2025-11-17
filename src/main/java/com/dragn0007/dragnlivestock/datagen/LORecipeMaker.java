@@ -140,13 +140,51 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
 
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOUNT_KEY.get())
                 .define('A', Items.GOLD_NUGGET)
                 .pattern(" A")
                 .pattern("A ")
                 .unlockedBy("has_gold", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(Items.GOLD_NUGGET).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPINDLE.get())
+                .define('A', Items.STICK)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("BAB")
+                .pattern(" A ")
+                .pattern(" A ")
+                .unlockedBy("has_stick", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.STICK).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RODEO_HARNESS.get())
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("A A")
+                .pattern("BAB")
+                .pattern("A A")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_HARNESS.get())
+                .define('A', Items.LEATHER)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("AAA")
+                .pattern("BAB")
+                .pattern("A A")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MARTINGALE_HARNESS.get())
+                .define('A', Items.LEATHER)
+                .pattern("A  ")
+                .pattern(" A ")
+                .pattern("A A")
+                .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.LEATHER).build()))
                 .save(pFinishedRecipeConsumer);
 
 

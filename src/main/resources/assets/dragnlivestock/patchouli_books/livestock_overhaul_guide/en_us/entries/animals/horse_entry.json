@@ -12,6 +12,14 @@
       "text": "The Mustang horse spawns naturally in the world and can be bred for a 1-in-5 chance of getting a random breed. $(br2)You can place armor or carpets on your horses, mules and donkeys. You can also customize and cut your O-Horse's mane and/or tail with Mane Scissors and Tail Scissors respectively. $(br2)To remove chests, simply shear them off with Shears."
     },
     {
+      "type": "patchouli:text",
+      "text": "The natural breed of wild O-Horses is the Mustang, regardless of biome, unless configured otherwise. $(br)Some breeds come with different chances for feathering around their hooves. These are just general chances; every breed has a very small chance of getting any feathering type. $(br2)-Stock: Generally None $(br)-Warmblood: Half or None $(br)-Draft/ Coldblood: Full or Half $(br)-Pony: Full or Half $(br)-Racer: Generally None"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Draft horses can wear Heavy Armors without being slowed down. Other breeds, however, will be over-encumbered by heavy armor, and should wear Light Armor instead. Racing breeds will be slowed by *any* armor."
+    },
+    {
       "type": "patchouli:spotlight",
       "item": {
         "item": "dragnlivestock:horse_breeds"

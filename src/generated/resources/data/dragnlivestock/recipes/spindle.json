@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:stick"
+    },
+    "B": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "BAB",
+    " A ",
+    " A "
+  ],
+  "result": {
+    "item": "dragnlivestock:spindle"
+  },
+  "show_notification": true
+}

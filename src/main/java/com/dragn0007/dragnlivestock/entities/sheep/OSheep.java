@@ -185,6 +185,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			babyCooldown = 0;
 		}
 
+		regrowWoolCounter++;
+
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			if (this.isFineQuality()) {
 				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
