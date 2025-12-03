@@ -8,7 +8,7 @@ assignees: ''
 
 ---
 
-This form is for 1.20.1 versions. LO-1.18.2 is depreciated/ outdated as of 2025.
+This form is for 1.20.1 versions. LO-1.18.2 is deprecated/ outdated as of 2025.
 
 All parts of this form are required unless stated otherwise. Your report may be marked invalid if all sections aren’t filled out.
 
