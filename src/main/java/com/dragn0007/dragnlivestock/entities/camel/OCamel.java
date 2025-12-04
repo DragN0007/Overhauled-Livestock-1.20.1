@@ -194,16 +194,16 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(2, new OCamelFollowCaravanGoal(this, (double)1.5F));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(LOTags.Entity_Types.WOLVES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame()) && !this.isBaby()
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
 				entity.getType().is(LOTags.Entity_Types.CATS) &&
-						!(entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())
+						!(entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame()) && !this.isBaby()
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, entity ->
-				entity.getType().is(LOTags.Entity_Types.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())
+				entity.getType().is(LOTags.Entity_Types.FOXES) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame()) && !this.isBaby()
 		));
 	}
 

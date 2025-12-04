@@ -90,9 +90,9 @@ public class Plow extends AbstractInventoryWagon {
     public Vec3 lastServerPos = Vec3.ZERO;
 
     public enum Mode {
+        NO(new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/nomode.png")),
         TILL(new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/tillmode.png")),
-        HARVEST(new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/harvestmode.png")),
-        NO(new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/nomode.png"));
+        HARVEST(new ResourceLocation(LivestockOverhaul.MODID, "textures/gui/harvestmode.png"));
 
         public final ResourceLocation texture;
 
@@ -245,9 +245,9 @@ public class Plow extends AbstractInventoryWagon {
             Vec3 diff = this.lastServerPos.subtract(this.position());
             this.lastServerPos = this.position();
             if(this.isVehicle() && diff.length() != 2) {
-                if(this.entityData.get(MODE) == 0) {
+                if(this.entityData.get(MODE) == 1) {
                     this.till();
-                } else if(this.entityData.get(MODE) == 1) {
+                } else if(this.entityData.get(MODE) == 2) {
                     this.harvest();
                 }
             }

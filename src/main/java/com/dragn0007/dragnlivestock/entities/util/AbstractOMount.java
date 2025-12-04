@@ -937,31 +937,55 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public void handleSpeedRequest(int speedMod) {
         AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
 
-//        if (speedMod != 1 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
+        if (speedMod == -1) {
+            if (movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
+                movementSpeed.removeModifier(SPRINT_SPEED_MOD);
+            } else if (movementSpeed.hasModifier(TROT_SPEED_MOD)) {
+                movementSpeed.removeModifier(TROT_SPEED_MOD);
+                movementSpeed.addTransientModifier(WALK_SPEED_MOD);
+            } else if (!movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !movementSpeed.hasModifier(TROT_SPEED_MOD) && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+                movementSpeed.addTransientModifier(TROT_SPEED_MOD);
+            }
+        } else if (speedMod == 1) {
+            if (movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+                movementSpeed.addTransientModifier(TROT_SPEED_MOD);
+                movementSpeed.removeModifier(WALK_SPEED_MOD);
+            } else if (movementSpeed.hasModifier(TROT_SPEED_MOD)) {
+                movementSpeed.removeModifier(TROT_SPEED_MOD);
+            } else if (!movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !movementSpeed.hasModifier(TROT_SPEED_MOD) && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+                movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
+            }
+        }
+
+//        if (speedMod != 3 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
 //            movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-//        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
+//        } else if (speedMod == 3 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
 //            movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
-//        } else if (speedMod == 0) {
+//        } else if (speedMod == 2) {
 //            movementSpeed.removeModifiers();
-//        } else if (speedMod != -1 && movementSpeed.hasModifier(TROT_SPEED_MOD)) {
+//        } else if (speedMod != 1 && movementSpeed.hasModifier(TROT_SPEED_MOD)) {
 //            movementSpeed.removeModifier(TROT_SPEED_MOD);
-//        } else if (speedMod == -1 && !movementSpeed.hasModifier(TROT_SPEED_MOD)) {
+//        } else if (speedMod == 1 && !movementSpeed.hasModifier(TROT_SPEED_MOD)) {
 //            movementSpeed.addTransientModifier(TROT_SPEED_MOD);
-//        } else if (speedMod != -2 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+//        } else if (speedMod != 0 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
 //            movementSpeed.removeModifier(WALK_SPEED_MOD);
-//        } else if (speedMod == -2 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+//        } else if (speedMod == 0 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
 //            movementSpeed.addTransientModifier(WALK_SPEED_MOD);
 //        }
+        // 3 = sprint
+        // 2 = run (no modifier)
+        // 1 = trot
+        // 0 = walk
 
-        if (speedMod == -1 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
-            movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-        } else if (speedMod == -1 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
-            movementSpeed.addTransientModifier(WALK_SPEED_MOD);
-        } else if (speedMod == 1 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
-            movementSpeed.removeModifier(WALK_SPEED_MOD);
-        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
-            movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
-        }
+//        if (speedMod == -1 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
+//            movementSpeed.removeModifier(SPRINT_SPEED_MOD);
+//        } else if (speedMod == -1 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+//            movementSpeed.addTransientModifier(WALK_SPEED_MOD);
+//        } else if (speedMod == 1 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
+//            movementSpeed.removeModifier(WALK_SPEED_MOD);
+//        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
+//            movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
+//        }
     }
 
     @Override
