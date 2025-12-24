@@ -299,149 +299,154 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			int passengers = this.getPassengers().indexOf(entity);
 
-			if (getBreed() == 0) {
-				offsetY = 1.03;
-			}
-
-			if (getBreed() == 1) {
-				switch (passengers) {
-					case 0:
-						offsetY = 1.05;
-						break;
-					case 1:
-						offsetY = 1.05;
-						offsetZ = -0.7;
-						break;
+			if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+				if (getBreed() == 0) {
+					offsetY = 1.03;
 				}
-			}
 
-			if (getBreed() == 2) {
-				offsetY = 1.2;
-			}
+				if (getBreed() == 1) {
+					switch (passengers) {
+						case 0:
+							offsetY = 1.05;
+							break;
+						case 1:
+							offsetY = 1.05;
+							offsetZ = -0.7;
+							break;
+					}
+				}
 
-			if (getBreed() == 3) {
+				if (getBreed() == 2) {
+					offsetY = 1.2;
+				}
+
+				if (getBreed() == 3) {
+					offsetY = 0.9;
+				}
+
+				if (getBreed() == 4) {
+					offsetY = 1.2;
+				}
+
+				if (getBreed() == 5) {
+					switch (passengers) {
+						case 0:
+							offsetY = 1.3;
+							break;
+						case 1:
+							offsetY = 1.25;
+							offsetZ = -0.7;
+							break;
+					}
+				}
+
+				if (getBreed() == 6) {
+					switch (passengers) {
+						case 0:
+							offsetY = 0.97;
+							break;
+						case 1:
+							offsetY = 0.97;
+							offsetZ = -0.7;
+							break;
+					}
+				}
+
+				if (getBreed() == 7) {
+					offsetY = 1.05;
+				}
+
+				if (getBreed() == 8) {
+					switch (passengers) {
+						case 0:
+							offsetY = 1.4;
+							break;
+						case 1:
+							offsetY = 1.4;
+							offsetZ = -0.7;
+							break;
+					}
+				}
+
+				if (getBreed() == 9) {
+					offsetY = 1.05;
+				}
+
+				if (getBreed() == 10) {
+					offsetY = 1.05;
+				}
+
+				if (getBreed() == 11) {
+					offsetY = 0.8;
+				}
+
+				if (getBreed() == 12) {
+					switch (passengers) {
+						case 0:
+							offsetY = 1.45;
+							break;
+						case 1:
+							offsetY = 1.45;
+							offsetZ = -0.7;
+							break;
+					}
+				}
+
+				if (getBreed() == 13) {
+					offsetY = 1.1;
+				}
+
+				if (getBreed() == 14) {
+					switch (passengers) {
+						case 0:
+							offsetY = 1.33;
+							break;
+						case 1:
+							offsetY = 1.33;
+							offsetZ = -0.7;
+							break;
+					}
+				}
+
+				if (getBreed() == 15) {
+					offsetY = 0.62;
+				}
+
+				if (getBreed() == 16) {
+					offsetY = 0.65;
+				}
+
+				if (getBreed() == 17) {
+					offsetY = 0.98;
+				}
+
+				if (getBreed() == 18) {
+					offsetY = 1.03;
+				}
+
+				if (getBreed() == 19) {
+					offsetY = 0.46;
+				}
+
+				if (getBreed() == 20) {
+					offsetY = 1.08;
+				}
+
+				if (getBreed() == 21) {
+					offsetY = 1.03;
+				}
+
+				if (getBreed() == 22) {
+					offsetY = 1.08;
+				}
+
+				if (month == Month.DECEMBER && (day == 24 || day == 25)) {
+					offsetY = 1.0;
+					offsetZ = -0.01;
+				}
+			} else {
 				offsetY = 0.9;
-			}
-
-			if (getBreed() == 4) {
-				offsetY = 1.2;
-			}
-
-			if (getBreed() == 5) {
-				switch (passengers) {
-					case 0:
-						offsetY = 1.3;
-						break;
-					case 1:
-						offsetY = 1.25;
-						offsetZ = -0.7;
-						break;
-				}
-			}
-
-			if (getBreed() == 6) {
-				switch (passengers) {
-					case 0:
-						offsetY = 0.97;
-						break;
-					case 1:
-						offsetY = 0.97;
-						offsetZ = -0.7;
-						break;
-				}
-			}
-
-			if (getBreed() == 7) {
-				offsetY = 1.05;
-			}
-
-			if (getBreed() == 8) {
-				switch (passengers) {
-					case 0:
-						offsetY = 1.4;
-						break;
-					case 1:
-						offsetY = 1.4;
-						offsetZ = -0.7;
-						break;
-				}
-			}
-
-			if (getBreed() == 9) {
-				offsetY = 1.05;
-			}
-
-			if (getBreed() == 10) {
-				offsetY = 1.05;
-			}
-
-			if (getBreed() == 11) {
-				offsetY = 0.8;
-			}
-
-			if (getBreed() == 12) {
-				switch (passengers) {
-					case 0:
-						offsetY = 1.45;
-						break;
-					case 1:
-						offsetY = 1.45;
-						offsetZ = -0.7;
-						break;
-				}
-			}
-
-			if (getBreed() == 13) {
-				offsetY = 1.1;
-			}
-
-			if (getBreed() == 14) {
-				switch (passengers) {
-					case 0:
-						offsetY = 1.33;
-						break;
-					case 1:
-						offsetY = 1.33;
-						offsetZ = -0.7;
-						break;
-				}
-			}
-
-			if (getBreed() == 15) {
-				offsetY = 0.62;
-			}
-
-			if (getBreed() == 16) {
-				offsetY = 0.65;
-			}
-
-			if (getBreed() == 17) {
-				offsetY = 0.98;
-			}
-
-			if (getBreed() == 18) {
-				offsetY = 1.03;
-			}
-
-			if (getBreed() == 19) {
-				offsetY = 0.46;
-			}
-
-			if (getBreed() == 20) {
-				offsetY = 1.08;
-			}
-
-			if (getBreed() == 21) {
-				offsetY = 1.03;
-			}
-
-			if (getBreed() == 22) {
-				offsetY = 1.08;
-			}
-
-			if (month == Month.DECEMBER && (day == 24 || day == 25)) {
-				offsetY = 1.0;
-				offsetZ = -0.01;
+				offsetZ = -0.3;
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -555,10 +560,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				}
 
 			} else {
-				if (this.isVehicle() || !LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
-					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-				} else {
+				if (this.isGroundTied() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
 					controller.setAnimation(RawAnimation.begin().then("ground_tie", Animation.LoopType.LOOP));
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 				}
 				controller.setAnimationSpeed(1.0);
 			}

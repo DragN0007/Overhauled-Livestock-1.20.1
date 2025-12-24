@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -37,6 +38,13 @@ public class OHorseArmorLayer extends GeoRenderLayer<OHorse> {
         }
 
         ResourceLocation resourceLocation = null;
+
+        String path;
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            path = "textures/entity/config_simplified/horse/armor/";
+        } else {
+            path = "textures/entity/horse/armor/";
+        }
 
         if (!armorItemStack.isEmpty()) {
             if (armorItemStack.getItem() == LOItems.OBSIDIAN_HORSE_ARMOR.get()) {

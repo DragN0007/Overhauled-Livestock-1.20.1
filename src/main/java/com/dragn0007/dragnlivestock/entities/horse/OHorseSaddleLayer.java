@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -36,7 +37,11 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
             // make sure to put your saddle in the dragnlivestock:saddle tag so you can actually put it in the slot
             // this works for all equines and caribou too, no extra steps required
             if (itemStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
+                if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
+                } else {
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/config_simplified/horse/tack/saddle.png");
+                }
 
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
@@ -54,7 +59,7 @@ public class OHorseSaddleLayer extends GeoRenderLayer<OHorse> {
                 }
             }
 
-            if (animatable.isSaddled()) {
+            if (animatable.isSaddled() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
 
                 if (resourceLocation != null) {

@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,6 +28,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
+
     public static final ResourceLocation[] CARPET_COLOR = new ResourceLocation[]{
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/white.png"),
             new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/orange.png"),
@@ -191,6 +193,10 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
 
         ResourceLocation resourceLocation = null;
 
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         if (!itemStack.isEmpty()) {
             if (!armorItemStack.isEmpty() &&
                     !(itemStack.getItem() instanceof CaparisonItem) &&
@@ -232,15 +238,25 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
             if ((armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) ||
                     (((armorItemStack.getItem() instanceof CaparisonItem) || (armorItemStack.getItem() instanceof RumpStrapItem)))) {
                 if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                    resourceLocation = CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
+                    String name = itemStack.getItem().asItem().toString();
+                    String removeCarpet = name.replaceAll("_carpet", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/" + removeCarpet + ".png");
                 } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
-                    resourceLocation = MEDIEVAL_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    String name = itemStack.getItem().asItem().toString();
+                    String removeCarpet = name.replaceAll("_carpet", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/medieval/" + removeCarpet + ".png");
                 } else if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
-                    resourceLocation = MODERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    String name = itemStack.getItem().asItem().toString();
+                    String removeCarpet = name.replaceAll("_carpet", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/modern/" + removeCarpet + ".png");
                 } else if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
-                    resourceLocation = RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    String name = itemStack.getItem().asItem().toString();
+                    String removeCarpet = name.replaceAll("_carpet", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/racing/" + removeCarpet + ".png");
                 } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                    resourceLocation = WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    String name = itemStack.getItem().asItem().toString();
+                    String removeCarpet = name.replaceAll("_carpet", "");
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/western/" + removeCarpet + ".png");
 
                     // if youre another modder looking to add new blankets, use this pathway v
                     // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
