@@ -445,7 +445,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					offsetZ = -0.01;
 				}
 			} else {
-				offsetY = 0.9;
+				offsetY = 0.75;
 				offsetZ = -0.3;
 			}
 
@@ -935,6 +935,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(VARIANT, variant);
 		this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
+
+	public static final EntityDataAccessor<Integer> SIMPLIFIED_VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return OHorseModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
+	}
+
 	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.STRING);
 	public String getTextureResource() {
 		return this.entityData.get(VARIANT_TEXTURE);
