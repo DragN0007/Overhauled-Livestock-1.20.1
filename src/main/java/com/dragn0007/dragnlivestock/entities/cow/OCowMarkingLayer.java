@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.cow;
 
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,6 +18,10 @@ public class OCowMarkingLayer extends GeoRenderLayer<OCow> {
 
     @Override
     public void render(PoseStack poseStack, OCow animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         BovineMarkingOverlay overlay = BovineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
         RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
         poseStack.pushPose();

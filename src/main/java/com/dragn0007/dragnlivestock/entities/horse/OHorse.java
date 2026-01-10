@@ -936,7 +936,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
 
-	public static final EntityDataAccessor<Integer> SIMPLIFIED_VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
 	public ResourceLocation getSimplifiedVariantTextureResource() {
 		return OHorseModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
 	}

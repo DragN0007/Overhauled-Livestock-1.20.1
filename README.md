@@ -6,19 +6,6 @@ starting the server. Since LO converts animals by default,
 starting the server before adding the custom config file
 will replace loaded animals.
 
-## Known Issues
-A list of any currently unfixed (or can't be fixed on our end) issues!
-
-```
--Animals t-posing randomly. You have to fix this on your
-end by turning off Entity Shadows on your options *and*
-on your shaders. This is a Geckolib issue; we can't fix it on our end.
-
--Player is not positioned correctly on horse 'Bow' emote. 
-
--Horse bay bug
-```
-
 ## Licensing & Copyrights
 
 You do not have permission to redistribute this mod. 

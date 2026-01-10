@@ -18,9 +18,11 @@ public class LivestockOverhaulClientConfig {
     static {
         BUILDER.push("Client");
 
-        SIMPLE_MODELS = BUILDER.comment("Should O-Animals run simplified, vanilla-styled models? This option may be good for those on lower-end computers/ those having performance issues with the complex LO models." +
-                        "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. For this reason, animal markings, visual cosmetics, and breed dimorphism cannot render on these simpler models. They are almost purely vanilla, only taking on genetic base colors." +
-                        "\nFor best results, restart your game to turn this on/ off.")
+        SIMPLE_MODELS = BUILDER.comment("Should O-Animals run simplified, vanilla-styled models? " +
+                        "This option may be good for those on lower-end computers/ those having performance issues with the complex LO models." +
+                        "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. " +
+                        "For this reason, animal markings, visual cosmetics, and breed dimorphism cannot render on these simpler models. " +
+                        "They are almost purely vanilla, only taking on genetic base colors. \nRestart your game after changing for best results.")
                 .define("Performance Models [Experimental]", false);
 
         HORSE_COAT_GUI = BUILDER.comment("Should coats, markings, speed, jump strength and health show up on certain O-Mount GUIs?")

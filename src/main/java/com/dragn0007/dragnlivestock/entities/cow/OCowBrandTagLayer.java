@@ -42,6 +42,10 @@ public class OCowBrandTagLayer extends GeoRenderLayer<OCow> {
 
     @Override
     public void render(PoseStack poseStack, OCow animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         DyeColor dyeColor = animatable.getBrandTagColor();
         ResourceLocation resourceLocation = null;
 

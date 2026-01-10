@@ -6,6 +6,8 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -587,6 +589,13 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
+	}
+
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return OCowModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
