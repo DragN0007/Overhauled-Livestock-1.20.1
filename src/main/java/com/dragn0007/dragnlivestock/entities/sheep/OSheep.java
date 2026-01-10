@@ -101,7 +101,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(3, new SheepFollowHerdLeaderGoal(this));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 2.0F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HERDING_DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
+				livingEntity.getType().is(LOTags.Entity_Types.DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 2.0F, 1.8F, livingEntity ->
@@ -281,7 +281,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			DyeColor color = tagItem.getColor();
 			if (color != this.getBrandTagColor()) {
 				this.setBrandTagColor(color);
-				itemstack.shrink(1);
 				if (!player.getAbilities().instabuild) {
 					itemstack.shrink(1);
 					return InteractionResult.sidedSuccess(this.level().isClientSide);

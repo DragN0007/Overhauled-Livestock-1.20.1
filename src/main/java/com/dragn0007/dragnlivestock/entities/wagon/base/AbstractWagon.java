@@ -100,9 +100,11 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 if(animal == null)
                     continue;
             animal.setNoAi(true);
+            animal.setMaxUpStep(1.0F);
             if(animal.isLeashed()) {
                 setAnimal(null, i);
                 animal.setNoAi(false);
+                animal.setMaxUpStep(animal.getStepHeight());
             } else if(!isAnimalInRange(i))
                 animal.setPos(rotateY(animalPositions[i], getYRot()).add(position()));
         }

@@ -246,6 +246,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	public int getBreedLocation() {
 		return PigBreed.Breed.values().length;
 	}
+
 	public int getBreed() {
 		return this.entityData.get(BREED);
 	}

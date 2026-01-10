@@ -479,6 +479,8 @@ public class LOItems {
                     new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2880, 2, true, false)
             ));
 
+    public static final RegistryObject<Item> MAGNIFYING_GLASS = ITEMS.register("magnifying_glass",
+            () -> new Item(new Item.Properties()));
 
     //Special Carpets
     public static final RegistryObject<Item> AMERICAN_MEDIEVAL_BLANKET = ITEMS.register("american_medieval_blanket",

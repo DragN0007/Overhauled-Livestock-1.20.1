@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-13T00:49:19.4783748	Item Models: dragnlivestock
+// 1.20.1	2026-01-08T21:46:06.9618493	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -306,6 +306,7 @@ ba91d95f7ec2978a7282ae9efd7cea3f2c464380 assets/dragnlivestock/models/item/magen
 a3c6f6553f173fd2dbf06603f18b5038469eee17 assets/dragnlivestock/models/item/magenta_western_blanket.json
 9347b9d186f40fde3dc433ea41d7faedbd6e42ba assets/dragnlivestock/models/item/magenta_wool_dye.json
 29fa5f07732a50868d1d0fe0c52b001c35104bfb assets/dragnlivestock/models/item/magenta_wool_staple.json
+014bfebf3158ae643947cc68214b87a0f4bc2bd9 assets/dragnlivestock/models/item/magnifying_glass.json
 42b008cc50e8584df5a0964f6a10acc822d4214a assets/dragnlivestock/models/item/male_gender_test_strip.json
 742287150d39806765e9a73af26f407fcd88a7b0 assets/dragnlivestock/models/item/mane_scissors.json
 78143501a0a5088d369c633bdc3788ec453c88fa assets/dragnlivestock/models/item/marans_egg.json

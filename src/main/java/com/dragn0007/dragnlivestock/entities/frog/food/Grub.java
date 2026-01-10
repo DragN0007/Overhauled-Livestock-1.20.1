@@ -95,7 +95,7 @@ public class Grub extends Animal implements GeoEntity {
 		if (item instanceof GrubSweaterItem && !this.isSweatered()) {
 			GrubSweaterItem dyeitem = (GrubSweaterItem) item;
 			this.setSweatered(true);
-			DyeColor dyecolor = dyeitem.getDyeColor();
+			DyeColor dyecolor  = dyeitem.getColor();
 			if (dyecolor != this.getSweaterColor()) {
 				this.setSweaterColor(dyecolor);
 				if (!player.getAbilities().instabuild) {

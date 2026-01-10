@@ -119,7 +119,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.HUNTING_DOGS))
+				livingEntity.getType().is(LOTags.Entity_Types.DOGS))
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->

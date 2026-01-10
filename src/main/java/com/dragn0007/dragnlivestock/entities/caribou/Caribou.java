@@ -137,8 +137,8 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, entity ->
-				(entity.getType().is(LOTags.Entity_Types.HUNTING_DOGS) && !this.isTamed()) ||
-						(entity.getType().is(LOTags.Entity_Types.HUNTING_DOGS) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
+				(entity.getType().is(LOTags.Entity_Types.DOGS) && !this.isTamed()) ||
+						(entity.getType().is(LOTags.Entity_Types.DOGS) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame())) && this.isTamed()
 		));
 	}
 
