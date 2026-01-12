@@ -12,7 +12,7 @@
   "tooltip.dragnlivestock.female_test.tooltip": "This animal is female!",
   "tooltip.dragnlivestock.test_strip.tooltip": "Can be used on O-Animals that have genders.",
   "tooltip.dragnlivestock.two_seater.tooltip": "Only \"Draft\" and \"Coldblood\" horse breeds can comfortably carry two players!",
-  "tooltip.dragnlivestock.brand_tag.tooltip": "Can be used on Cows, Cow Variants, Sheep, Goats, Pigs, Chickens, Caribou, and Camels.",
+  "tooltip.dragnlivestock.brand_tag.tooltip": "Can be used on various common livestock. If named with a brand, it will be appended to the end of the animal's name.",
   "tooltip.dragnlivestock.rodeo_harness.tooltip": "Can be used on horses and bulls to allow them to buck players off freely, regardless of tame status.",
   "tooltip.dragnlivestock.wool_staple.tooltip": "Can be processed into Wool Blocks.",
   "tooltip.dragnlivestock.wool_dye.tooltip": "More efficient for wool than normal dye.",

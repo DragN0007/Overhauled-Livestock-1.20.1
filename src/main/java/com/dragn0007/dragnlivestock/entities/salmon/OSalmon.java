@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.salmon;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractSchoolingOFish;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -40,14 +41,19 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 		super(type, level);
 	}
 
+	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_salmon");
 	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/salmon");
+
 	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc/tfc_o_salmon");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
+		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
+		}
 		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
 		}
-		return VANILLA_LOOT_TABLE;
+		return LOOT_TABLE;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
