@@ -1,7 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.unicorn;
 
-import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
-
 public enum UnicornSpecies {
     OVERWORLD,
     NETHER,

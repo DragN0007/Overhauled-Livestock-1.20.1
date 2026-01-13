@@ -49,6 +49,10 @@ public class OCamelBrandTagLayer extends GeoRenderLayer<OCamel> {
             resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
         }
 
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         if (resourceLocation == null) {
             return;
         }

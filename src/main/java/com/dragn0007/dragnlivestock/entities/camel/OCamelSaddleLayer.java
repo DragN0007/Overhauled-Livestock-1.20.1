@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.camel;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -25,7 +26,11 @@ public class OCamelSaddleLayer extends GeoRenderLayer<OCamel> {
         ResourceLocation resourceLocation = null;
 
         if (animatable.isSaddled()) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/tack/saddle.png");
+            if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/tack/saddle.png");
+            } else {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/config_simplified/camel/tack/saddle.png");
+            }
         } else {
             return;
         }

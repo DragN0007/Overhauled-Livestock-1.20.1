@@ -37,7 +37,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
-import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -1288,84 +1287,102 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 					if (this.getWoolVariant() == 0 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(blackWool, 2);
+							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(blackWool, 1);
+							this.spawnAtLocation(blackWool);
 						}
 
 						if (this.getOverlayVariant() == 0) {
-							this.spawnAtLocation(blackWool, 1);
+							this.spawnAtLocation(blackWool);
 						}
 					}
 
 					if (this.getWoolVariant() == 1 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(brownWool, 2);
+							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(brownWool, 1);
+							this.spawnAtLocation(brownWool);
 						}
 
 						if (this.getOverlayVariant() == 0) {
-							this.spawnAtLocation(brownWool, 1);
+							this.spawnAtLocation(brownWool);
 						}
 					}
 
 					if (this.getWoolVariant() == 2 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(greyWool);
+							this.spawnAtLocation(greyWool);
+							this.spawnAtLocation(greyWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(greyWool, 2);
+							this.spawnAtLocation(greyWool);
+							this.spawnAtLocation(greyWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(greyWool, 1);
+							this.spawnAtLocation(greyWool);
 						}
 
 						if (this.getOverlayVariant() == 0) {
-							this.spawnAtLocation(greyWool, 1);
+							this.spawnAtLocation(greyWool);
 						}
 					}
 
 					if (this.getWoolVariant() == 3 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(lightGreyWool);
+							this.spawnAtLocation(lightGreyWool);
+							this.spawnAtLocation(lightGreyWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(lightGreyWool, 2);
+							this.spawnAtLocation(lightGreyWool);
+							this.spawnAtLocation(lightGreyWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(lightGreyWool, 1);
+							this.spawnAtLocation(lightGreyWool);
 						}
 
 						if (this.getOverlayVariant() == 0) {
-							this.spawnAtLocation(lightGreyWool, 1);
+							this.spawnAtLocation(lightGreyWool);
 						}
 					}
 
 					if (this.getWoolVariant() == 4 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(brownWool, 2);
+							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(brownWool, 1);
+							this.spawnAtLocation(brownWool);
 						}
 
 						if (this.getOverlayVariant() == 0) {
-							this.spawnAtLocation(brownWool, 1);
+							this.spawnAtLocation(brownWool);
 						}
 					}
 
 					if (this.getWoolVariant() == 5 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(whiteWool, 2);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(whiteWool, 1);
+							this.spawnAtLocation(whiteWool);
 						}
 
 						if (this.getOverlayVariant() == 0) {
-							this.spawnAtLocation(whiteWool, 1);
+							this.spawnAtLocation(whiteWool);
 						}
 					}
 
@@ -1373,159 +1390,212 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 							this.getOverlayVariant() == 10 || this.getOverlayVariant() == 12 || this.getOverlayVariant() == 13 ||
 							this.getOverlayVariant() == 14 || this.getOverlayVariant() == 15) {
 						if (random.nextDouble() <= 0.20) {
-							this.spawnAtLocation(whiteWool, 2);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(whiteWool, 1);
+							this.spawnAtLocation(whiteWool);
 						}
 					}
 
 					if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6 || this.getOverlayVariant() == 6) {
 						if (random.nextDouble() <= 0.20) {
-							this.spawnAtLocation(blackWool, 2);
+							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(blackWool, 1);
+							this.spawnAtLocation(blackWool);
 						}
 					}
 
 					if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(whiteWool, 2);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(whiteWool, 1);
+							this.spawnAtLocation(whiteWool);
 						}
 
-						this.spawnAtLocation(whiteWool, 1);
+						this.spawnAtLocation(whiteWool);
 					}
 				} else {
 					if (this.getWoolDyeVariant() == 1) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(blackWool, 2);
+							this.spawnAtLocation(blackWool);
+							this.spawnAtLocation(blackWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(blackWool, 1);
+							this.spawnAtLocation(blackWool);
 						}
 					} else if (this.getWoolDyeVariant() == 2) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(blueWool);
+							this.spawnAtLocation(blueWool);
+							this.spawnAtLocation(blueWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(blueWool, 2);
+							this.spawnAtLocation(blueWool);
+							this.spawnAtLocation(blueWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(blueWool, 1);
+							this.spawnAtLocation(blueWool);
 						}
 					} else if (this.getWoolDyeVariant() == 3) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(brownWool, 2);
+							this.spawnAtLocation(brownWool);
+							this.spawnAtLocation(brownWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(brownWool, 1);
+							this.spawnAtLocation(brownWool);
 						}
 					} else if (this.getWoolDyeVariant() == 4) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(cyanWool);
+							this.spawnAtLocation(cyanWool);
+							this.spawnAtLocation(cyanWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(cyanWool, 2);
+							this.spawnAtLocation(cyanWool);
+							this.spawnAtLocation(cyanWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(cyanWool, 1);
+							this.spawnAtLocation(cyanWool);
 						}
 					} else if (this.getWoolDyeVariant() == 5) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(greenWool);
+							this.spawnAtLocation(greenWool);
+							this.spawnAtLocation(greenWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(greenWool, 2);
+							this.spawnAtLocation(greenWool);
+							this.spawnAtLocation(greenWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(greenWool, 1);
+							this.spawnAtLocation(greenWool);
 						}
 					} else if (this.getWoolDyeVariant() == 6) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(greyWool);
+							this.spawnAtLocation(greyWool);
+							this.spawnAtLocation(greyWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(greyWool, 2);
+							this.spawnAtLocation(greyWool);
+							this.spawnAtLocation(greyWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(greyWool, 1);
+							this.spawnAtLocation(greyWool);
 						}
 					} else if (this.getWoolDyeVariant() == 7) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(lightBlueWool);
+							this.spawnAtLocation(lightBlueWool);
+							this.spawnAtLocation(lightBlueWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(lightBlueWool, 2);
+							this.spawnAtLocation(lightBlueWool);
+							this.spawnAtLocation(lightBlueWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(lightBlueWool, 1);
+							this.spawnAtLocation(lightBlueWool);
 						}
 					} else if (this.getWoolDyeVariant() == 8) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(lightGreyWool);
+							this.spawnAtLocation(lightGreyWool);
+							this.spawnAtLocation(lightGreyWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(lightGreyWool, 2);
+							this.spawnAtLocation(lightGreyWool);
+							this.spawnAtLocation(lightGreyWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(lightGreyWool, 1);
+							this.spawnAtLocation(lightGreyWool);
 						}
 					} else if (this.getWoolDyeVariant() == 9) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(limeWool);
+							this.spawnAtLocation(limeWool);
+							this.spawnAtLocation(limeWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(limeWool, 2);
+							this.spawnAtLocation(limeWool);
+							this.spawnAtLocation(limeWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(limeWool, 1);
+							this.spawnAtLocation(limeWool);
 						}
 					} else if (this.getWoolDyeVariant() == 10) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(magentaWool);
+							this.spawnAtLocation(magentaWool);
+							this.spawnAtLocation(magentaWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(magentaWool, 2);
+							this.spawnAtLocation(magentaWool);
+							this.spawnAtLocation(magentaWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(magentaWool, 1);
+							this.spawnAtLocation(magentaWool);
 						}
 					} else if (this.getWoolDyeVariant() == 11) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(orangeWool);
+							this.spawnAtLocation(orangeWool);
+							this.spawnAtLocation(orangeWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(orangeWool, 2);
+							this.spawnAtLocation(orangeWool);
+							this.spawnAtLocation(orangeWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(orangeWool, 1);
+							this.spawnAtLocation(orangeWool);
 						}
 					} else if (this.getWoolDyeVariant() == 12) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(pinkWool);
+							this.spawnAtLocation(pinkWool);
+							this.spawnAtLocation(pinkWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(pinkWool, 2);
+							this.spawnAtLocation(pinkWool);
+							this.spawnAtLocation(pinkWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(pinkWool, 1);
+							this.spawnAtLocation(pinkWool);
 						}
 					} else if (this.getWoolDyeVariant() == 13) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(purpleWool);
+							this.spawnAtLocation(purpleWool);
+							this.spawnAtLocation(purpleWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(purpleWool, 2);
+							this.spawnAtLocation(purpleWool);
+							this.spawnAtLocation(purpleWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(purpleWool, 1);
+							this.spawnAtLocation(purpleWool);
 						}
 					} else if (this.getWoolDyeVariant() == 14) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(redWool);
+							this.spawnAtLocation(redWool);
+							this.spawnAtLocation(redWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(redWool, 2);
+							this.spawnAtLocation(redWool);
+							this.spawnAtLocation(redWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(redWool, 1);
+							this.spawnAtLocation(redWool);
 						}
 					} else if (this.getWoolDyeVariant() == 15) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(whiteWool, 2);
+							this.spawnAtLocation(whiteWool);
+							this.spawnAtLocation(whiteWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(whiteWool, 1);
+							this.spawnAtLocation(whiteWool);
 						}
 					} else if (this.getWoolDyeVariant() == 16) {
 						if (random.nextDouble() <= 0.20) {
 							this.spawnAtLocation(yellowWool);
+							this.spawnAtLocation(yellowWool);
+							this.spawnAtLocation(yellowWool);
 						} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-							this.spawnAtLocation(yellowWool, 2);
+							this.spawnAtLocation(yellowWool);
+							this.spawnAtLocation(yellowWool);
 						} else if (random.nextDouble() >= 0.50) {
-							this.spawnAtLocation(yellowWool, 1);
+							this.spawnAtLocation(yellowWool);
 						}
 					}
 				}

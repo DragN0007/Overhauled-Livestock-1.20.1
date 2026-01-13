@@ -49,6 +49,10 @@ public class OPigBrandTagLayer extends GeoRenderLayer<OPig> {
             resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
         }
 
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         if (resourceLocation == null) {
             return;
         }

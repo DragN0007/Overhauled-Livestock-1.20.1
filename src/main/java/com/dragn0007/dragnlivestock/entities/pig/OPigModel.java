@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import software.bernie.geckolib.constant.DataTickets;
@@ -36,17 +37,18 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
         }
     }
 
-    public enum Variant {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/blue.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/brown.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/grey.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/light_grey.png")),
-        PINK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/pink.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/red.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/pig/white.png"));
+    public static String default_path = "textures/entity/pig/";
+    public static String config_simplified_path = "textures/entity/config_simplified/pig/";
 
-        //Add new entries to bottom when mod is public, else pigs will change textures during update.
+    public enum Variant {
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "blue.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grey.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light_grey.png")),
+        PINK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "pink.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, default_path + "red.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
@@ -57,22 +59,55 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
         }
     }
 
+    public enum SVariant {
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "light_grey.png")),
+        PINK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "pink.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "red.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png"));
+
+        public final ResourceLocation resourceLocation;
+        SVariant(ResourceLocation resourceLocation) {
+            this.resourceLocation = resourceLocation;
+        }
+
+        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
+        }
+    }
+
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/pig/o_pig.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_pig.animation.json");
+    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/pig.geo.json");
+    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/pig.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OPig object) {
-        return MODEL;
+        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return MODEL;
+        } else {
+            return SIMPLIFIED_MODEL;
+        }
     }
 
     @Override
     public ResourceLocation getTextureResource(OPig object) {
-        return object.getTextureLocation();
+        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return object.getTextureLocation();
+        } else {
+            return object.getSimplifiedVariantTextureResource();
+        }
     }
 
     @Override
     public ResourceLocation getAnimationResource(OPig animatable) {
-        return ANIMATION;
+        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return ANIMATION;
+        } else {
+            return SIMPLIFIED_ANIMATION;
+        }
     }
 }
 

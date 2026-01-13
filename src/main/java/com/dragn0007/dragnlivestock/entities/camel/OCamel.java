@@ -11,6 +11,7 @@ import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -513,23 +514,28 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		int i = this.getPassengers().indexOf(entity);
-		if(getBreed() == 0) {
-			switch (i) {
-				case 0:
-					entity.setPos(this.calcOffset(0, 1.7, -0.1));
-					break;
-			}
-		}
 
-		if(getBreed() == 1) {
-			switch (i) {
-				case 0:
-					entity.setPos(this.calcOffset(0, 2.25, -0.2));
-					break;
-				case 1:
-					entity.setPos(this.calcOffset(0, 1.65, -1.0));
-					break;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			if (getBreed() == 0) {
+				switch (i) {
+					case 0:
+						entity.setPos(this.calcOffset(0, 1.7, -0.1));
+						break;
+				}
 			}
+
+			if (getBreed() == 1) {
+				switch (i) {
+					case 0:
+						entity.setPos(this.calcOffset(0, 2.25, -0.2));
+						break;
+					case 1:
+						entity.setPos(this.calcOffset(0, 1.65, -1.0));
+						break;
+				}
+			}
+		} else {
+			entity.setPos(this.calcOffset(0, 1.7, -0.1));
 		}
 	}
 
@@ -582,7 +588,6 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.set(BREED, breed);
 	}
 
-
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -597,6 +602,13 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 	public void setVariantTexture(String variant) {
 		this.entityData.set(VARIANT_TEXTURE, variant);
+	}
+
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return OCamelModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);

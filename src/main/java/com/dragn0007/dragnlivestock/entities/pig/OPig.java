@@ -265,6 +265,13 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(VARIANT, variant);
 	}
 
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return OPigModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
+	}
+
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 	public ResourceLocation getOverlayLocation() {return OPigMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public int getOverlayVariant() {
