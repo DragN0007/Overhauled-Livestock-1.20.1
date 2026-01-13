@@ -997,6 +997,14 @@ public class SpawnReplacer {
                         oSheep.setHornVariant(random.nextInt(OSheep.BreedHorns.values().length));
                     }
 
+                    if (random.nextFloat() <= 0.0164) {
+                        oSheep.setDyed(true);
+                        oSheep.setWoolDyeVariant(12);
+                    } else {
+                        oSheep.setDyed(false);
+                        oSheep.setWoolDyeVariant(0);
+                    }
+
                     event.getLevel().addFreshEntity(oSheep);
                     vanillasheep.remove(Entity.RemovalReason.DISCARDED);
 

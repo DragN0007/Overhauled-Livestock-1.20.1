@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-17T02:14:29.140613	Recipes
+// 1.20.1	2026-01-12T22:15:23.5874872	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 43b25a39d8cd493d5aedd8351340b99233fbe0de data/dragnlivestock/advancements/recipes/misc/berry_glazed_mutton_rib.json
 b9aa6a8d4052891e5a9c2e8426679bfbdd3bc1f6 data/dragnlivestock/advancements/recipes/misc/berry_glazed_pork_rib_chop.json
@@ -316,6 +316,7 @@ cd5e505a0bad3976e4d76919c16bbb6694e86ff5 data/dragnlivestock/advancements/recipe
 40c654b72ccbec2c58c7f95038634cc7390bbcec data/dragnlivestock/advancements/recipes/misc/magenta_wool_from_wool_dye_8.json
 d3712a0405a58af4d5d6bef5390e302ff693c7bc data/dragnlivestock/advancements/recipes/misc/magenta_wool_staple.json
 20e9b28adbd3170ba633bfe3406534349808525d data/dragnlivestock/advancements/recipes/misc/magenta_wool_staple_8.json
+5d46c029b70128d30b75b52cfbe7652eefbe97ba data/dragnlivestock/advancements/recipes/misc/magnifying_glass.json
 761bdc0c0ebb3a2cc9833aa2ae01905544599328 data/dragnlivestock/advancements/recipes/misc/mane_scissors.json
 d60a12bb5d5c9e99b505571916bbfc5f6d925d68 data/dragnlivestock/advancements/recipes/misc/martingale_harness.json
 7409913403ee6e559791a98c3d8bc718e2383bc6 data/dragnlivestock/advancements/recipes/misc/melon_soup.json
@@ -801,6 +802,7 @@ b43515c52a278b938a41d337564ff53fdf382376 data/dragnlivestock/recipes/magenta_woo
 3988b9b707fcacb25814bc5569fe28429a4a0d52 data/dragnlivestock/recipes/magenta_wool_from_wool_dye_8.json
 406e084a1cac026a0842e55a2f13ef5859ac3da7 data/dragnlivestock/recipes/magenta_wool_staple.json
 88d02f2d781040d47adc99f296b9780901243d58 data/dragnlivestock/recipes/magenta_wool_staple_8.json
+d943a6dccc3daa06310a7c7cbeaec3daaab9a512 data/dragnlivestock/recipes/magnifying_glass.json
 401d658b0d6f7b3fbad764cb07f9ad91a451f902 data/dragnlivestock/recipes/mane_scissors.json
 5a9b31755d5d7a513871ae49301bdf497d7f7531 data/dragnlivestock/recipes/martingale_harness.json
 9336c6a6f176161914ebaad8236f14bf603b5a22 data/dragnlivestock/recipes/melon_soup.json

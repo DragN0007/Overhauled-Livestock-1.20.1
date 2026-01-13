@@ -13,6 +13,8 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
+import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
+import com.dragn0007.dragnlivestock.entities.unicorn.UnicornSpecies;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
@@ -499,6 +501,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                     GoatBreed.Breed currentBreed = GoatBreed.Breed.values()[goat.getBreed()];
                     GoatBreed.Breed nextBreed = currentBreed.next();
                     goat.setBreed(nextBreed.ordinal());
+                }
+                if (this instanceof Unicorn) {
+                    Unicorn unicorn = (Unicorn) this;
+                    UnicornSpecies currentBreed = UnicornSpecies.values()[unicorn.getBreed()];
+                    UnicornSpecies nextBreed = currentBreed.next();
+                    unicorn.setBreed(nextBreed.ordinal());
                 }
                 this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
                 return InteractionResult.SUCCESS;

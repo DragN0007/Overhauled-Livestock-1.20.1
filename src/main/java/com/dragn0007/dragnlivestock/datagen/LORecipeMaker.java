@@ -30,6 +30,17 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     }
 
     public void buildCommonRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGNIFYING_GLASS.get())
+                .define('A', Items.GLASS)
+                .define('B', Items.STICK)
+                .pattern("  A")
+                .pattern(" B ")
+                .pattern("B  ")
+                .unlockedBy("has_glass", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.GLASS).build()))
+                .save(pFinishedRecipeConsumer);
+
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_WHEEL_FRAME.get())
                 .define('A', ItemTags.PLANKS)
                 .define('B', Items.STICK)

@@ -286,7 +286,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 
 	public static final EntityDataAccessor<Integer> SPECIES = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);
 	public int getSpeciesLocation() {
-		return UnicornSpecies.Breed.values().length;
+		return UnicornSpecies.values().length;
 	}
 	public int getSpecies() {
 		return this.entityData.get(SPECIES);
@@ -500,7 +500,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		Random random = new Random();
 
 		this.setGender(random.nextInt(Gender.values().length));
-		this.setSpecies(random.nextInt(UnicornSpecies.Breed.values().length));
+		this.setSpecies(random.nextInt(UnicornSpecies.values().length));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();

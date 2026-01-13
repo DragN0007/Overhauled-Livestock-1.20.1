@@ -18,8 +18,12 @@ public class OSheepMarkingLayer extends GeoRenderLayer<OSheep> {
 
     @Override
     public void render(PoseStack poseStack, OSheep animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        if (animatable.isDyed() && animatable.getOverlayVariant() == 3) {
+            return;
+        }
+
         if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((OSheep) animatable).getOverlayLocation());
+            RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             poseStack.pushPose();
             poseStack.scale(1.0F, 1.0F, 1.0F);
             poseStack.translate(0.0d, 0.0d, 0.0d);

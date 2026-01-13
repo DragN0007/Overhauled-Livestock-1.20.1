@@ -1,20 +1,18 @@
 package com.dragn0007.dragnlivestock.entities.unicorn;
 
-public class UnicornSpecies {
+import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 
-    public enum Breed {
-        OVERWORLD,
-        NETHER,
-        END;
+public enum UnicornSpecies {
+    OVERWORLD,
+    NETHER,
+    END;
 
-        public static UnicornSpecies.Breed breedFromOrdinal(int ordinal) {
-            return UnicornSpecies.Breed.values()[ordinal % UnicornSpecies.Breed.values().length];
-        }
+    public static UnicornSpecies breedFromOrdinal(int ordinal) {
+        return UnicornSpecies.values()[ordinal % UnicornSpecies.values().length];
+    }
 
-        public UnicornSpecies.Breed next() {
-            return UnicornSpecies.Breed.values()[(this.ordinal() + 1) % UnicornSpecies.Breed.values().length];
-        }
-
+    public UnicornSpecies next() {
+        return UnicornSpecies.values()[(this.ordinal() + 1) % UnicornSpecies.values().length];
     }
 
 }

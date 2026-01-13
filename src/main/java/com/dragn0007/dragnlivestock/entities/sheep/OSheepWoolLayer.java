@@ -31,19 +31,35 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
             return;
         }
 
-        RenderType renderMarkingType = RenderType.entityCutout(((OSheep)animatable).getWoolLocation());
-        poseStack.pushPose();
-        poseStack.scale(1.0F, 1.0F, 1.0F);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
-        getRenderer().reRender(getDefaultBakedModel(animatable),
-                poseStack,
-                bufferSource,
-                animatable,
-                renderMarkingType,
-                bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                1, 1, 1, 1);
+        if (!animatable.isDyed()) {
+            RenderType renderMarkingType = RenderType.entityCutout(animatable.getWoolLocation());
+            poseStack.pushPose();
+            poseStack.scale(1.0F, 1.0F, 1.0F);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderMarkingType,
+                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
+        } else {
+            RenderType renderMarkingType = RenderType.entityCutout(animatable.getWoolDyeLocation());
+            poseStack.pushPose();
+            poseStack.scale(1.0F, 1.0F, 1.0F);
+            poseStack.translate(0.0d, 0.0d, 0.0d);
+            poseStack.popPose();
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderMarkingType,
+                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+            super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
+        }
     }
 
     public enum Overlay {
@@ -56,14 +72,41 @@ public class OSheepWoolLayer extends GeoRenderLayer<OSheep> {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
         ;
 
-        //Add new entries to bottom when mod is public, else sheep will change textures during update.
-
         public final ResourceLocation resourceLocation;
         Overlay(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
 
         public static Overlay overlayFromOrdinal(int overlay) { return Overlay.values()[overlay % Overlay.values().length];
+        }
+    }
+
+    public enum DyeOverlay {
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/brown.png")),
+        CYAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/cyan.png")),
+        GREEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/green.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/grey.png")),
+        LIGHT_BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/light_blue.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/light_grey.png")),
+        LIME(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/lime.png")),
+        MAGENTA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/magenta.png")),
+        ORANGE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/orange.png")),
+        PINK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/pink.png")),
+        PURPLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/purple.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/red.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/white.png")),
+        YELLOW(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/wool/yellow.png")),
+        ;
+
+        public final ResourceLocation resourceLocation;
+        DyeOverlay(ResourceLocation resourceLocation) {
+            this.resourceLocation = resourceLocation;
+        }
+
+        public static DyeOverlay overlayFromOrdinal(int overlay) { return DyeOverlay.values()[overlay % DyeOverlay.values().length];
         }
     }
 

@@ -53,6 +53,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_SHEEP_DYE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_DYED_SHEARS;
     public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
     public static final ForgeConfigSpec.BooleanValue ALLOW_HORSE_TRAINING;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_TRAIN_TIME;
@@ -179,6 +181,12 @@ public class LivestockOverhaulCommonConfig {
 
         MAX_RABBIT_BABIES = BUILDER.comment("Maximum amount of kits a rabbit can have at once. Default is 3.")
                 .define("Max Rabbit Babies", 3);
+
+        ALLOW_SHEEP_DYE = BUILDER.comment("Should players be able to dye sheep?")
+                .define("Allow Direct Sheep Dyeing", true);
+
+        MAX_DYED_SHEARS = BUILDER.comment("Maximum amount of times a sheep can be sheared before dye wears off. Default is 3.")
+                .define("Max Dyed Shears", 3);
         BUILDER.pop();
 
         BUILDER.push("Herding");
