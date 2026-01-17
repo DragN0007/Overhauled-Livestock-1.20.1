@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -447,6 +448,13 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
+
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return OChickenModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
+	}
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);

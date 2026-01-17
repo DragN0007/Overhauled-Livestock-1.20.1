@@ -55,6 +55,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SHEEP_DYE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_DYED_SHEARS;
+    public static final ForgeConfigSpec.BooleanValue ROOSTERS_FEND;
     public static final ForgeConfigSpec.ConfigValue<Integer> BASE_HORSE_SPRINT_TIME;
     public static final ForgeConfigSpec.BooleanValue ALLOW_HORSE_TRAINING;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_TRAIN_TIME;
@@ -187,6 +188,9 @@ public class LivestockOverhaulCommonConfig {
 
         MAX_DYED_SHEARS = BUILDER.comment("Maximum amount of times a sheep can be sheared before dye wears off. Default is 3.")
                 .define("Max Dyed Shears", 3);
+
+        ROOSTERS_FEND = BUILDER.comment("Should roosters fend off predators like Ocelots, Cats, Foxes, and Ferrets?")
+                .define("Roosters Fend Off Predators", true);
         BUILDER.pop();
 
         BUILDER.push("Herding");

@@ -49,6 +49,10 @@ public class OChickenBrandTagLayer extends GeoRenderLayer<OChicken> {
             resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
         }
 
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         if (resourceLocation == null) {
             return;
         }

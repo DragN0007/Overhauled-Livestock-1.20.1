@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,6 +19,10 @@ public class OChickenMarkingLayer extends GeoRenderLayer<OChicken> {
 
     @Override
     public void render(PoseStack poseStack, OChicken animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return;
+        }
+
         RenderType renderMarkingType = RenderType.entityCutout(((OChicken)animatable).getOverlayLocation());
         poseStack.pushPose();
         poseStack.scale(1.0f, 1.0f, 1.0f);

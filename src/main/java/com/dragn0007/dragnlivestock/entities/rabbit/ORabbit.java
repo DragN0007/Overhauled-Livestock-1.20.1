@@ -228,7 +228,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 						this.setOrderedToSit(!this.isOrderedToSit());
 						this.jumping = false;
 						this.navigation.stop();
-						this.setTarget((LivingEntity)null);
+						this.setTarget(null);
 						return InteractionResult.SUCCESS;
 					}
 
@@ -243,7 +243,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 				if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 					this.tame(player);
 					this.navigation.stop();
-					this.setTarget((LivingEntity)null);
+					this.setTarget(null);
 					this.setOrderedToSit(true);
 					this.level().broadcastEntityEvent(this, (byte)7);
 				} else {
