@@ -209,19 +209,19 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
                         if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                             resourceLocation = LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                         } else {
-                            resourceLocation = LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                            resourceLocation = LEATHER_ARMOR_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                         }
                     } else if (armorItemStack.getItem() == LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get()) {
                         if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                             resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                         } else {
-                            resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                            resourceLocation = MINIMAL_LEATHER_ARMOR_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                         }
                     } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                         resourceLocation = ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                     } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
                             itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                        resourceLocation = ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                        resourceLocation = ARMOR_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                     } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
                         String name = blanketItem.toString();
                         String noSuffix = name.replaceAll("_.+", "");
@@ -235,29 +235,17 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
                 }
             }
 
-            if ((armorItemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) ||
-                    (((armorItemStack.getItem() instanceof CaparisonItem) || (armorItemStack.getItem() instanceof RumpStrapItem)))) {
+            if (armorItemStack.isEmpty()) {
                 if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
-                    String name = itemStack.getItem().asItem().toString();
-                    String removeCarpet = name.replaceAll("_carpet", "");
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/classic/" + removeCarpet + ".png");
+                    resourceLocation = OHorseCarpetLayer.CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
-                    String name = itemStack.getItem().asItem().toString();
-                    String removeCarpet = name.replaceAll("_carpet", "");
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/medieval/" + removeCarpet + ".png");
+                    resourceLocation = OHorseCarpetLayer.MEDIEVAL_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
-                    String name = itemStack.getItem().asItem().toString();
-                    String removeCarpet = name.replaceAll("_carpet", "");
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/modern/" + removeCarpet + ".png");
+                    resourceLocation = OHorseCarpetLayer.MODERN_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
-                    String name = itemStack.getItem().asItem().toString();
-                    String removeCarpet = name.replaceAll("_carpet", "");
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/racing/" + removeCarpet + ".png");
+                    resourceLocation = OHorseCarpetLayer.RACING_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                    String name = itemStack.getItem().asItem().toString();
-                    String removeCarpet = name.replaceAll("_carpet", "");
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/western/" + removeCarpet + ".png");
-
+                    resourceLocation = OHorseCarpetLayer.WESTERN_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                     // if youre another modder looking to add new blankets, use this pathway v
                     // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
                     // make sure to put your blanket in the dragnlivestock:special_blankets tag so you can actually put it in the slot

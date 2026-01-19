@@ -64,7 +64,7 @@ public class OCamelCarpetLayer extends GeoRenderLayer<OCamel> {
                     DyeColor dyeColor = ((DyeItem) itemStack.getItem()).getDyeColor();
                     resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
                 }
-            } else if (itemStack.is(LOTags.Items.CAMEL_ARMOR) && itemStack.getItem() instanceof HorseArmorItem horseArmorItem) {
+            } else if (itemStack.is(LOTags.Items.CAMEL_ARMOR) && itemStack.getItem() instanceof HorseArmorItem horseArmorItem && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/armor/" + horseArmorItem + ".png");
             }
 

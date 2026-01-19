@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.client.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.common.gui.OMuleMenu;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
@@ -167,6 +168,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.025;
 		double speedRunThreshold = 0.02;
+		double speedTrotThreshold = 0.015;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -187,6 +189,10 @@ public class OMule extends AbstractOMount implements GeoEntity {
 					if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+
+					} else if ((this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedTrotThreshold)) {
+						controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
 					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))
 							|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
@@ -360,30 +366,30 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 			int i = this.getPassengers().indexOf(entity);
 
-			if (getModelResource().equals(MuleBreed.STOCK.resourceLocation)) {
-				offsetY = 0.85;
-			}
-
-			if (getModelResource().equals(MuleBreed.MINI.resourceLocation)) {
-				offsetY = 0.6;
-				offsetZ = -0.1;
-			}
-
-			if (getModelResource().equals(MuleBreed.DRAFT.resourceLocation)) {
-				switch (i) {
-					case 0:
-						offsetY = 1.2;
-						break;
-					case 1:
-						offsetY = 1.2;
-						offsetZ = -0.7;
-						break;
+			if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+				if (this.getBreed() == 0) {
+					offsetY = 0.85;
 				}
-			}
 
-			if (this.isJumping()) {
-//				offsetY = 1.7;
-				offsetZ = -0.8;
+				if (this.getBreed() == 1) {
+					offsetY = 0.6;
+					offsetZ = -0.1;
+				}
+
+				if (this.getBreed() == 2) {
+					switch (i) {
+						case 0:
+							offsetY = 1.2;
+							break;
+						case 1:
+							offsetY = 1.2;
+							offsetZ = -0.7;
+							break;
+					}
+				}
+			} else {
+				offsetY = 0.60;
+				offsetZ = -0.0;
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -457,6 +463,12 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		this.entityData.set(VARIANT_TEXTURE, variant);
 	}
 
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return OMuleModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
+	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
 	public int getOverlayVariant() {

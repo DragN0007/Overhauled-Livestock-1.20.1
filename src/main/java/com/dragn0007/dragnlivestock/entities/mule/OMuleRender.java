@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.mule;
 
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -51,6 +52,10 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
             } else {
                 model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
             }
+        }
+
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && animatable.isBaby()) {
+            poseStack.scale(0.5F, 0.5F, 0.5F);
         }
 
         if (animatable.getFeathering() == 0) {

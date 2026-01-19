@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.donkey;
 
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,8 +21,6 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
 
     @Override
     public void preRender(PoseStack poseStack, ODonkey entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-
-        model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
 
         if (!animatable.isBaby()) {
             if (animatable.hasChest()) {
@@ -51,6 +50,10 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
             } else {
                 model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
             }
+        }
+
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && animatable.isBaby()) {
+            poseStack.scale(0.5F, 0.5F, 0.5F);
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

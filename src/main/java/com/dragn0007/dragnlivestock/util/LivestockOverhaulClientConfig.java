@@ -20,7 +20,8 @@ public class LivestockOverhaulClientConfig {
 
         SIMPLE_MODELS = BUILDER.comment("Should O-Animals run simplified, vanilla-styled models? " +
                         "This option may be good for those on lower-end computers/ those having performance issues with the complex LO models." +
-                        "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. " +
+                        "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. With this enabled, " +
+                        "your FPS may be able to double or even triple, especially in highly populated areas. " +
                         "For this reason, animal markings, visual cosmetics, and breed dimorphism cannot render on these simpler models. " +
                         "They are almost purely vanilla, only taking on genetic base colors. \nRestart your game after changing for best results.")
                 .define("Performance Models [Experimental]", false);

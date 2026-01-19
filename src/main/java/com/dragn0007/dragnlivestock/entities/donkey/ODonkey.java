@@ -168,6 +168,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.025;
 		double speedRunThreshold = 0.02;
+		double speedTrotThreshold = 0.015;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -188,6 +189,10 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 					if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+
+					} else if ((this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedTrotThreshold)) {
+						controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 
 					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))
 							|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
@@ -319,13 +324,17 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	@Override
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
+
 			double offsetX = 0;
 			double offsetY = 0.65;
 			double offsetZ = -0.1;
 
-			if (this.isJumping()) {
-//				offsetY = 1.7;
-				offsetZ = -0.4;
+			if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+				offsetY = 0.65;
+				offsetZ = -0.1;
+			} else {
+				offsetY = 0.49;
+				offsetZ = -0.0;
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -388,6 +397,12 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		this.entityData.set(VARIANT_TEXTURE, variant);
 	}
 
+	public ResourceLocation getSimplifiedVariantTextureResource() {
+		return ODonkeyModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
+	}
+	public int getSimplifiedVariant() {
+		return this.entityData.get(VARIANT);
+	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);
 	public int getOverlayVariant() {
@@ -444,15 +459,13 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			this.setOverlayVariant(tag.getInt("Overlay"));
 		}
 
-//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-//			if (tag.contains("Variant_Texture")) {
-//				this.setVariantTexture(tag.getString("Variant_Texture"));
-//			}
-//
-//			if (tag.contains("Overlay_Texture")) {
-//				this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-//			}
-//		}
+		if (tag.contains("Variant_Texture")) {
+			this.setVariantTexture(tag.getString("Variant_Texture"));
+		}
+
+		if (tag.contains("Overlay_Texture")) {
+			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
+		}
 
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
@@ -481,10 +494,8 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", this.getVariant());
 		tag.putInt("Overlay", this.getOverlayVariant());
-//		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCES.get()) {
-//			tag.putString("Variant_Texture", this.getTextureResource().toString());
-//			tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
-//		}
+		tag.putString("Variant_Texture", this.getTextureResource().toString());
+		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("Eyes", this.getEyeVariant());
 		tag.putInt("SprintTime", this.sprintTick);

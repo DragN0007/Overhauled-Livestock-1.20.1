@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.mule;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,6 +16,8 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
 public class OMuleSaddleLayer extends GeoRenderLayer<OMule> {
     public OMuleSaddleLayer(GeoRenderer<OMule> entityRendererIn) {
@@ -24,11 +27,17 @@ public class OMuleSaddleLayer extends GeoRenderLayer<OMule> {
     @Override
     public void render(PoseStack poseStack, OMule animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemStack itemStack = animatable.getSaddleItem();
+        List<ItemStack> armorSlots = (List<ItemStack>) animatable.getArmorSlots();
+        ItemStack armorItemStack = armorSlots.get(2);
         if(!itemStack.isEmpty()) {
             ResourceLocation resourceLocation = null;
 
             if (itemStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
+                if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
+                } else {
+                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/config_simplified/horse/tack/saddle.png");
+                }
 
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
@@ -46,7 +55,7 @@ public class OMuleSaddleLayer extends GeoRenderLayer<OMule> {
                 }
             }
 
-            if (animatable.isSaddled()) {
+            if (animatable.isSaddled() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
 
                 if (resourceLocation != null) {

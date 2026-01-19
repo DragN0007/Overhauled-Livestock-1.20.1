@@ -53,19 +53,19 @@ public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
                         if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                             resourceLocation = OHorseCarpetLayer.LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                         } else {
-                            resourceLocation = OHorseCarpetLayer.LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                            resourceLocation = OHorseCarpetLayer.LEATHER_ARMOR_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                         }
                     } else if (armorItemStack.getItem() == LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get()) {
                         if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                             resourceLocation = OHorseCarpetLayer.MINIMAL_LEATHER_ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                         } else {
-                            resourceLocation = OHorseCarpetLayer.MINIMAL_LEATHER_ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                            resourceLocation = OHorseCarpetLayer.MINIMAL_LEATHER_ARMOR_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                         }
                     } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                         resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                     } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || itemStack.is(LOTags.Items.MODERN_BLANKETS) ||
                             itemStack.is(LOTags.Items.RACING_BLANKETS) || itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                        resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                        resourceLocation = OHorseCarpetLayer.ARMOR_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                     } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
                         String name = blanketItem.toString();
                         String noSuffix = name.replaceAll("_.+", "");
@@ -79,13 +79,13 @@ public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
                 if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                     resourceLocation = OHorseCarpetLayer.CARPET_COLOR[((WoolCarpetBlock) Block.byItem(itemStack.getItem())).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.MEDIEVAL_BLANKETS)) {
-                    resourceLocation = OHorseCarpetLayer.MEDIEVAL_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    resourceLocation = OHorseCarpetLayer.MEDIEVAL_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.MODERN_BLANKETS)) {
-                    resourceLocation = OHorseCarpetLayer.MODERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    resourceLocation = OHorseCarpetLayer.MODERN_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.RACING_BLANKETS)) {
-                    resourceLocation = OHorseCarpetLayer.RACING_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    resourceLocation = OHorseCarpetLayer.RACING_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
-                    resourceLocation = OHorseCarpetLayer.WESTERN_COLOR[((DyeItem) itemStack.getItem()).getDyeColor().getId()];
+                    resourceLocation = OHorseCarpetLayer.WESTERN_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
                 } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
                 }
