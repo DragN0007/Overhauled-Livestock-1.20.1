@@ -1,8 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
-import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
