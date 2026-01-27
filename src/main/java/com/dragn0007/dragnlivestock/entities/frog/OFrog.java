@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.frog;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.FrogSitOnBlockGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -215,6 +216,15 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	public void setBaby(boolean p_218500_) {
+	}
+
+	@Override
+	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
+		if (pAnimal instanceof OFrog partner) {
+			this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+			partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+		}
 	}
 
 	// Generates the base texture

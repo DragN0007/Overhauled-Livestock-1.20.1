@@ -66,6 +66,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
     public static final ForgeConfigSpec.BooleanValue QUALITY;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MALE_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> FEMALE_COOLDOWN;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.ConfigValue<Double> COVERED_WAGON_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> DOG_SLED_SPEED_MULT;
@@ -269,6 +271,12 @@ public class LivestockOverhaulCommonConfig {
 
         QUALITY = BUILDER.comment("Should some farm animals, such as O-Cows, have a Quality rating that affects how much they drop?")
                 .define("Quality Rating", true);
+
+        MALE_COOLDOWN = BUILDER.comment("How long, in ticks, a Male O-Animal's breeding cooldown takes. If Genders Affect Breeding is disabled, this does nothing. Default is 1200 (1 minute). Vanilla is 6000 (5 minutes).")
+                .define("Male Breeding Cooldown", 1200);
+
+        FEMALE_COOLDOWN = BUILDER.comment("How long, in ticks, a Female O-Animal's breeding cooldown takes. If Genders Affect Breeding is disabled, this applies to all O-Animals. Default is 6000 (5 minutes).")
+                .define("Female/ Neutral Breeding Cooldown", 6000);
 
         DEBUG_LOGS = BUILDER.comment("Should debug logs run? This will spam the console with logs, so it's best turned off unless you're a dev " +
                         "or testing on your server temporarily.")

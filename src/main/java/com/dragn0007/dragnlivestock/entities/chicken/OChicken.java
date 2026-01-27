@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -834,6 +835,28 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 	public void setGender(int gender) {
 		this.entityData.set(GENDER, gender);
+	}
+
+	@Override
+	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
+		if (pAnimal instanceof OChicken partner) {
+			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				if (this.isMale()) {
+					this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+				} else {
+					this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+				}
+				if (partner.isMale()) {
+					partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+				} else {
+					partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+				}
+			} else {
+				this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+				partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+			}
+		}
 	}
 
 	public boolean canMate(Animal animal) {

@@ -1,9 +1,11 @@
 package com.dragn0007.dragnlivestock.entities.frog.food;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.GrubSweaterItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -184,6 +186,15 @@ public class Grub extends Animal implements GeoEntity {
 
 	public boolean isFood(ItemStack p_28271_) {
 		return FOOD_ITEMS.test(p_28271_);
+	}
+
+	@Override
+	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
+		if (pAnimal instanceof Grub partner) {
+			this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+			partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+		}
 	}
 
 	// Generates the base texture

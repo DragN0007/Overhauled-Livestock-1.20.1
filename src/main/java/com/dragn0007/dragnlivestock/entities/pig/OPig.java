@@ -33,6 +33,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -408,6 +410,28 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 	public boolean canParent() {
 		return !this.isBaby() && this.isInLove();
+	}
+
+	@Override
+	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
+		if (pAnimal instanceof OPig partner) {
+			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+				if (this.isMale()) {
+					this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+				} else {
+					this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+				}
+				if (partner.isMale()) {
+					partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+				} else {
+					partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+				}
+			} else {
+				this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+				partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+			}
+		}
 	}
 
 	public boolean canMate(Animal animal) {

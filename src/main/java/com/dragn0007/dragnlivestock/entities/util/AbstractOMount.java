@@ -13,6 +13,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
+import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornSpecies;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
@@ -29,6 +30,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -37,13 +39,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -718,6 +718,28 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
+    public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+        super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
+        if (pAnimal instanceof AbstractOMount partner) {
+            if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+                if (this.isMale()) {
+                    this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+                } else {
+                    this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+                }
+                if (partner.isMale()) {
+                    partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+                } else {
+                    partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+                }
+            } else {
+                this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+                partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+            }
+        }
+    }
+
+    @Override
     public boolean canWearArmor() {
         return true;
     }
@@ -964,36 +986,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
             }
         }
-
-//        if (speedMod != 3 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
-//            movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-//        } else if (speedMod == 3 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
-//            movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
-//        } else if (speedMod == 2) {
-//            movementSpeed.removeModifiers();
-//        } else if (speedMod != 1 && movementSpeed.hasModifier(TROT_SPEED_MOD)) {
-//            movementSpeed.removeModifier(TROT_SPEED_MOD);
-//        } else if (speedMod == 1 && !movementSpeed.hasModifier(TROT_SPEED_MOD)) {
-//            movementSpeed.addTransientModifier(TROT_SPEED_MOD);
-//        } else if (speedMod != 0 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
-//            movementSpeed.removeModifier(WALK_SPEED_MOD);
-//        } else if (speedMod == 0 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
-//            movementSpeed.addTransientModifier(WALK_SPEED_MOD);
-//        }
-        // 3 = sprint
-        // 2 = run (no modifier)
-        // 1 = trot
-        // 0 = walk
-
-//        if (speedMod == -1 && movementSpeed.hasModifier(SPRINT_SPEED_MOD)) {
-//            movementSpeed.removeModifier(SPRINT_SPEED_MOD);
-//        } else if (speedMod == -1 && !movementSpeed.hasModifier(WALK_SPEED_MOD)) {
-//            movementSpeed.addTransientModifier(WALK_SPEED_MOD);
-//        } else if (speedMod == 1 && movementSpeed.hasModifier(WALK_SPEED_MOD)) {
-//            movementSpeed.removeModifier(WALK_SPEED_MOD);
-//        } else if (speedMod == 1 && !movementSpeed.hasModifier(SPRINT_SPEED_MOD) && !this.isOx(this)) {
-//            movementSpeed.addTransientModifier(SPRINT_SPEED_MOD);
-//        }
     }
 
     @Override

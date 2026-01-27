@@ -1,7 +1,9 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -89,6 +92,15 @@ public class OBee extends Bee implements GeoEntity {
 
 	public ResourceLocation getTextureResource() {
 		return OBeeModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+	}
+
+	@Override
+	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
+		if (pAnimal instanceof OBee partner) {
+			this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+			partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+		}
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OBee.class, EntityDataSerializers.INT);
