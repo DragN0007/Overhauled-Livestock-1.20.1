@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.util;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.entities.wagon.Mower;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -145,6 +146,9 @@ public class LONetwork {
             if(player != null) {
                 if(player.level().getEntity(msg.id) instanceof Plow plow) {
                     plow.cycleMode();
+                }
+                if(player.level().getEntity(msg.id) instanceof Mower mower) {
+                    mower.cycleMode();
                 }
             }
         }

@@ -146,6 +146,12 @@
   "entity.dragnlivestock.transport_cart": "Transport Cart",
   "item.dragnlivestock.plow": "Plow",
   "entity.dragnlivestock.plow": "Plow",
+  "item.dragnlivestock.mower": "Mower",
+  "entity.dragnlivestock.mower": "Mower",
+  "item.dragnlivestock.coupe": "Coupé",
+  "entity.dragnlivestock.coupe": "Coupé",
+  "item.dragnlivestock.cabriolet": "Cabriolet",
+  "entity.dragnlivestock.cabriolet": "Cabriolet",
 
 
   "item.dragnlivestock.utility_knife": "Utility Knife",
@@ -942,7 +948,7 @@
   "tooltip.dragnlivestock.jade.male.tooltip": "Male",
   "config.jade.plugin_dragnlivestock.dry_time": "Display O-Jerky Dry Percent",
   "config.jade.plugin_dragnlivestock.age_time": "Display O-Cheese Age Percent",
-  "key.dragnlivestock.plow_mode": "Switch Plow Mode",
+  "key.dragnlivestock.plow_mode": "Switch Plow/ Mower Mode",
   "key.dragnlivestock.horse_walk_backwards": "Walk Backwards - Horse",
   "tooltip.dragnlivestock.mount_registry.tooltip": "Mount owned by"
 }

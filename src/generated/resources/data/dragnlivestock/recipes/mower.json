@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_shovel"
+    },
+    "A": {
+      "item": "dragnlivestock:wagon_body"
+    },
+    "B": {
+      "item": "dragnlivestock:wagon_axel"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#A#",
+    " B "
+  ],
+  "result": {
+    "item": "dragnlivestock:mower"
+  },
+  "show_notification": true
+}

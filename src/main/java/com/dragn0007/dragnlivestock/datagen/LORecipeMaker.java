@@ -150,6 +150,17 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOWER.get())
+                .define('#', Items.IRON_SHOVEL)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .pattern(" # ")
+                .pattern("#A#")
+                .pattern(" B ")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOUNT_KEY.get())
                 .define('A', Items.GOLD_NUGGET)

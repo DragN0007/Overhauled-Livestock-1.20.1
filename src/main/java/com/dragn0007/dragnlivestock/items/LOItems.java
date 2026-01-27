@@ -1174,6 +1174,12 @@ public class LOItems {
             () -> new WagonItem(EntityTypes.TRANSPORT_CART::get, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> PLOW = ITEMS.register("plow",
             () -> new WagonItem(EntityTypes.PLOW::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> MOWER = ITEMS.register("mower",
+            () -> new WagonItem(EntityTypes.MOWER::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> COUPE = ITEMS.register("coupe",
+            () -> new WagonItem(EntityTypes.COUPE::get, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CABRIOLET = ITEMS.register("cabriolet",
+            () -> new WagonItem(EntityTypes.CABRIOLET::get, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WAGON_WHEEL_FRAME = ITEMS.register("wagon_wheel_frame",
             () -> new Item(new Item.Properties()));

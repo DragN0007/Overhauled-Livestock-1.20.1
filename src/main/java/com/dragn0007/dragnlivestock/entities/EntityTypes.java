@@ -287,5 +287,20 @@ public class EntityTypes {
                             MobCategory.MISC)
                     .sized(1.5F, 2.0F)
                     .build(new ResourceLocation(MODID, "plow").toString()));
+    public static final RegistryObject<EntityType<Mower>> MOWER = ENTITY_TYPES.register("mower",
+            () -> EntityType.Builder.of(Mower::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 2.0F)
+                    .build(new ResourceLocation(MODID, "mower").toString()));
+    public static final RegistryObject<EntityType<Coupe>> COUPE = ENTITY_TYPES.register("coupe",
+            () -> EntityType.Builder.of(Coupe::new,
+                            MobCategory.MISC)
+                    .sized(3.0F, 4.0F)
+                    .build(new ResourceLocation(MODID, "coupe").toString()));
+    public static final RegistryObject<EntityType<Cabriolet>> CABRIOLET = ENTITY_TYPES.register("cabriolet",
+            () -> EntityType.Builder.of(Cabriolet::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 1.5F)
+                    .build(new ResourceLocation(MODID, "cabriolet").toString()));
 }
 

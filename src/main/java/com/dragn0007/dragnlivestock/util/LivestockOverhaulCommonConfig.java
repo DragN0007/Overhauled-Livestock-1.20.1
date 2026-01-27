@@ -75,6 +75,9 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> MINING_CART_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> TRANSPORT_CART_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> PLOW_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> MOWER_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> COUPE_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> CABRIOLET_SPEED_MULT;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -301,6 +304,9 @@ public class LivestockOverhaulCommonConfig {
         MINING_CART_SPEED_MULT = BUILDER.define("Mining Cart Speed Multiplier", 0.12);
         TRANSPORT_CART_SPEED_MULT = BUILDER.define("Transport Cart Speed Multiplier", 0.3);
         PLOW_SPEED_MULT = BUILDER.define("Plow Speed Multiplier", 0.1);
+        MOWER_SPEED_MULT = BUILDER.define("Mower Speed Multiplier", 0.1);
+        COUPE_SPEED_MULT = BUILDER.define("Coupé Speed Multiplier", 0.25);
+        CABRIOLET_SPEED_MULT = BUILDER.define("Cabriolet Speed Multiplier", 0.25);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

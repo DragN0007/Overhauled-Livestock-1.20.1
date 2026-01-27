@@ -17,25 +17,31 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class TransportCart extends AbstractInventoryWagon {
+public class Coupe extends AbstractInventoryWagon {
 
     public static final Vec3[] RIDERS = new Vec3[] {
-            new Vec3(0, 1.2D, 0.1D)
+            new Vec3(0.5D, 1.9D, 1D),
+            new Vec3(-0.5D, 1.9D, 1D),
+            new Vec3(0.4D, 1.2D, -2D),
+            new Vec3(-0.4D, 1.2D, -2D),
+            new Vec3(0.8D, 0.7D, -2.6D),
+            new Vec3(-0.8D, 0.7D, -2.6D)
     };
 
     public static final Vec3[] ANIMALS = new Vec3[] {
-            new Vec3(0.0D, 0, 2.0D)
+            new Vec3(-0.7D, 0, 4.75D),
+            new Vec3(0.7D, 0, 4.75D)
     };
 
-    public TransportCart(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, LivestockOverhaulCommonConfig.TRANSPORT_CART_SPEED_MULT.get(), 2.0D, 2.0F, 80, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
+    public Coupe(EntityType<? extends AbstractWagon> type, Level level) {
+        super(type, level, LivestockOverhaulCommonConfig.COUPE_SPEED_MULT.get(), 2.0D, 2.0F, 80, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override
     protected boolean tryHitching(Player player) {
         final Mob animal = level().getEntitiesOfClass(Mob.class, new AABB(
                                 player.getX()-7, player.getY()-7, player.getZ()-7, player.getX()+7, player.getY()+7, player.getZ()+7),
-                        h -> h.getLeashHolder() == player && h.getType().is(LOTags.Entity_Types.SMALL_DRAUGHT_ANIMALS)).stream()
+                        h -> h.getLeashHolder() == player && h.getType().is(LOTags.Entity_Types.MEDIUM_PLUS_DRAUGHT_ANIMALS)).stream()
                 .findFirst()
                 .orElse(null);
 
@@ -62,7 +68,7 @@ public class TransportCart extends AbstractInventoryWagon {
     }
 
     public ItemStack getPickResult() {
-        return LOItems.TRANSPORT_CART.get().getDefaultInstance();
+        return LOItems.COUPE.get().getDefaultInstance();
     }
 
 }
