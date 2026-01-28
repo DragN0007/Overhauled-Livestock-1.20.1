@@ -277,6 +277,8 @@
   "item.dragnlivestock.fertilized_polish_egg": "Fertilized Polish Chicken Egg",
   "item.dragnlivestock.fertilized_wyandotte_egg": "Fertilized Wyandotte Chicken Egg",
 
+  "item.dragnlivestock.rabbit_poop": "Rabbit Poop",
+
   "item.dragnlivestock.sheep_milk_bucket": "Sheep Milk Bucket",
   "item.dragnlivestock.llama_milk_bucket": "Llama Milk Bucket",
   "item.dragnlivestock.goat_milk_bucket": "Goat Milk Bucket",
@@ -950,5 +952,6 @@
   "config.jade.plugin_dragnlivestock.age_time": "Display O-Cheese Age Percent",
   "key.dragnlivestock.plow_mode": "Switch Plow/ Mower Mode",
   "key.dragnlivestock.horse_walk_backwards": "Walk Backwards - Horse",
-  "tooltip.dragnlivestock.mount_registry.tooltip": "Mount owned by"
+  "tooltip.dragnlivestock.mount_registry.tooltip": "Mount owned by",
+  "tooltip.dragnlivestock.rabbit_poop.tooltip": "Acts like bonemeal, but more potent."
 }

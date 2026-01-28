@@ -208,7 +208,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.EGG.get(), 2);
+							this.spawnAtLocation(LOItems.EGG.get());
+							this.spawnAtLocation(LOItems.EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.EGG.get());
@@ -221,7 +222,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
+							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
@@ -234,7 +236,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
+							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
@@ -247,7 +250,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.MARANS_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.MARANS_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.MARANS_EGG.get());
+							this.spawnAtLocation(LOItems.MARANS_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.MARANS_EGG.get());
@@ -260,7 +264,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
+							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
@@ -273,7 +278,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
+							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
@@ -286,7 +292,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
+							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
@@ -299,7 +306,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
+							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
@@ -312,7 +320,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.POLISH_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.POLISH_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.POLISH_EGG.get());
+							this.spawnAtLocation(LOItems.POLISH_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.POLISH_EGG.get());
@@ -325,7 +334,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
 							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
 						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get(), 2);
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
 						}
 					}
 					this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());

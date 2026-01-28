@@ -142,6 +142,8 @@ public class LOItemGroup {
                         output.accept(LOItems.FERTILIZED_ORPINGTON_EGG.get());
                         output.accept(LOItems.FERTILIZED_POLISH_EGG.get());
 
+                        output.accept(LOItems.RABBIT_POOP.get());
+
                         output.accept(LOItems.GENDER_TEST_STRIP.get());
 
                         output.accept(LOItems.OVERWORLD_UNICORN_HORN.get());

@@ -1,7 +1,9 @@
 package com.dragn0007.dragnlivestock.common.gui;
 
 import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
+import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -43,7 +45,8 @@ public class CaribouMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, caribouSlots++, 8, 36) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem) {
+                if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem ||
+                        itemStack.getItem() instanceof CaparisonItem || itemStack.getItem() instanceof RumpStrapItem) {
                     return !this.hasItem() && CaribouMenu.this.caribou.canWearArmor();
                 }
                 if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
@@ -61,7 +64,8 @@ public class CaribouMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(this.container, caribouSlots++, 8, 54) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
-                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS) || itemStack.getItem() instanceof CaparisonItem ||
+                        itemStack.getItem() instanceof RumpStrapItem) {
                     return !this.hasItem() && CaribouMenu.this.caribou.canWearArmor();
                 }
                 return false;

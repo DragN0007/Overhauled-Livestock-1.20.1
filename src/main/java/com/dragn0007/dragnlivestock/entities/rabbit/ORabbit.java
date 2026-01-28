@@ -60,6 +60,8 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		super(type, level);
 	}
 
+	public int poopTime = this.random.nextInt(LivestockOverhaulCommonConfig.RABBIT_POOP_TIME.get()) + 6000;
+
 	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_rabbit");
 	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/rabbit");
 	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/rabbit");
@@ -150,6 +152,28 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			}
 			return super.canUse();
 		}
+	}
+
+	public void aiStep() {
+		super.aiStep();
+
+		//todo: fix poop time
+		if (!this.level().isClientSide && LivestockOverhaulCommonConfig.RABBITS_POOP.get() && this.isAlive() && !this.isBaby() && --this.poopTime <= 0) {
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isGreatQuality() && random.nextDouble() <= 15) {
+					this.spawnAtLocation(LOItems.RABBIT_POOP.get());
+				} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+					this.spawnAtLocation(LOItems.RABBIT_POOP.get());
+				} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+					this.spawnAtLocation(LOItems.RABBIT_POOP.get());
+					this.spawnAtLocation(LOItems.RABBIT_POOP.get());
+				}
+			}
+			this.spawnAtLocation(LOItems.RABBIT_POOP.get());
+			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+			this.poopTime = this.random.nextInt(LivestockOverhaulCommonConfig.RABBIT_POOP_TIME.get()) + 6000;
+		}
+
 	}
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -447,11 +471,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.set(OVERLAY_TEXTURE, variant);
 	}
 
-	public enum Dewlap {
-		NONE,
-		HALF,
-		FULL
-	}
 	public static final EntityDataAccessor<Integer> DEWLAP = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
 	public int getDewlap() {
 		return this.entityData.get(DEWLAP);
@@ -502,6 +521,10 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (tag.contains("Gender")) {
 			this.setGender(tag.getInt("Gender"));
 		}
+
+		if (tag.contains("PoopTime")) {
+			this.poopTime = tag.getInt("PoopTime");
+		}
 	}
 
 	@Override
@@ -515,6 +538,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		tag.putString("Overlay_Texture", this.getOverlayLocation().toString());
 		tag.putInt("Dewlap", this.getDewlap());
 		tag.putInt("Gender", this.getGender());
+		tag.putInt("PoopTime", this.poopTime);
 	}
 
 	@Override

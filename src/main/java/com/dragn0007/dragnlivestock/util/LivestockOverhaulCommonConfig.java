@@ -43,6 +43,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> SHEEP_WOOL_REGROWTH_TIME;
     public static final ForgeConfigSpec.BooleanValue HORSE_HAIR_GROWTH;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HAIR_GROWTH_TIME;
+    public static final ForgeConfigSpec.BooleanValue RABBITS_POOP;
+    public static final ForgeConfigSpec.ConfigValue<Integer> RABBIT_POOP_TIME;
     public static final ForgeConfigSpec.BooleanValue SPAWN_BY_BREED;
     public static final ForgeConfigSpec.BooleanValue EYES_BY_COLOR;
     public static final ForgeConfigSpec.BooleanValue OLD_HORSE_TURNING;
@@ -242,6 +244,13 @@ public class LivestockOverhaulCommonConfig {
         HORSE_HAIR_GROWTH_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a horse's mane or tail to grow to the next stage. " +
                         "Default is 72000 (3 ingame days).")
                 .define("Horse Hair Growth Time", 72000);
+
+        RABBITS_POOP = BUILDER.comment("Should rabbits produce Rabbit Poop at a certain interval?")
+                .define("Allow Rabbit Poop", true);
+
+        RABBIT_POOP_TIME = BUILDER.comment("Amount of time, in ticks, it takes for a rabbit to poop. " +
+                        "Default is 24000 (1 ingame day).")
+                .define("Rabbit Poop Time", 24000);
 
         SPAWN_BY_BREED = BUILDER.comment("Should O-Animals' colors, markings, and other genetic attributes depend on their breed and gender, " +
                         "along with their breed depending on the biome?")

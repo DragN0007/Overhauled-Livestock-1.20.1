@@ -139,6 +139,8 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.TAIL_SCISSORS);
         simpleItem(LOItems.MANE_SCISSORS);
 
+        simpleItem(LOItems.RABBIT_POOP);
+
         simpleItem(LOItems.GENDER_TEST_STRIP);
         simpleItem(LOItems.MALE_GENDER_TEST_STRIP);
         simpleItem(LOItems.FEMALE_GENDER_TEST_STRIP);

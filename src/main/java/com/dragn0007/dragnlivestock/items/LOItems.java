@@ -224,6 +224,9 @@ public class LOItems {
     public static final RegistryObject<Item> WYANDOTTE_EGG = ITEMS.register("wyandotte_egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
 
+    public static final RegistryObject<Item> RABBIT_POOP = ITEMS.register("rabbit_poop",
+            () -> new RabbitPoopItem((new Item.Properties())));
+
 
     //Food/ Items
     public static final RegistryObject<Item> SHEEP_MILK_BUCKET = ITEMS.register("sheep_milk_bucket",

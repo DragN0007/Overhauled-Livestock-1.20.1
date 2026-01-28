@@ -2,7 +2,10 @@ package com.dragn0007.dragnlivestock.entities.caribou;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
+import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -49,6 +52,10 @@ public class CaribouArmorLayer extends GeoRenderLayer<Caribou> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/" + horseArmorItem + ".png");
             } else if (armorItemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/" + horseArmorItem + ".png");
+            } else if ((armorItemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !armorItemStack.isEmpty()) {
+                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
+            } else if ((armorItemStack.getItem() instanceof CaparisonItem caparisonItem) && !armorItemStack.isEmpty()) {
+                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
             } else {
                 return;
             }

@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-08T21:46:06.9618493	Item Models: dragnlivestock
+// 1.20.1	2026-01-28T02:57:53.8101039	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -407,6 +407,7 @@ db69e4547ffc47464da3b3c23d4c6aa2f05f4e81 assets/dragnlivestock/models/item/purpl
 ef16cb115ed2450e8575ac20246f80117d59710f assets/dragnlivestock/models/item/purple_wool_dye.json
 4de28e17d15ea90d94965ecc32b240647562c182 assets/dragnlivestock/models/item/purple_wool_staple.json
 9d5ef58acb73f1ded1331c464db266fc57000b69 assets/dragnlivestock/models/item/quartz_horse_armor.json
+0a929d858e48a67ad42cd16638112e3da693d86e assets/dragnlivestock/models/item/rabbit_poop.json
 feae65ba521db68548af83c15ec55a01ea6fc77a assets/dragnlivestock/models/item/rabbit_thigh.json
 791fddd5ac6d2d9855dc8ffbc7b794ab0cfc8741 assets/dragnlivestock/models/item/raw_cheese.json
 9ff096927b5a4082b354cc0e1f4ef02e42848c41 assets/dragnlivestock/models/item/raw_goat_cheese.json
