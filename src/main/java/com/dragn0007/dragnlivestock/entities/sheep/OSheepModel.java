@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.sheep;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import software.bernie.geckolib.constant.DataTickets;
@@ -37,32 +38,37 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
             head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
         }
 
-        if (animatable.getBreed() == 7) {
-            left_ear.setRotZ(-0);
-            right_ear.setRotZ(0);
-            left_ear.setScaleY(1.5F);
-            right_ear.setScaleY(1.5F);
-        } else {
-            left_ear.setRotZ(7.5F);
-            right_ear.setRotZ(-7.5F);
-            left_ear.setScaleY(1);
-            right_ear.setScaleY(1);
+        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            if (animatable.getBreed() == 7) {
+                left_ear.setRotZ(-0);
+                right_ear.setRotZ(0);
+                left_ear.setScaleY(1.5F);
+                right_ear.setScaleY(1.5F);
+            } else {
+                left_ear.setRotZ(7.5F);
+                right_ear.setRotZ(-7.5F);
+                left_ear.setScaleY(1);
+                right_ear.setScaleY(1);
+            }
         }
     }
 
+    public static String default_path = "textures/entity/sheep/";
+    public static String config_simplified_path = "textures/entity/config_simplified/sheep/";
+
     public enum Variant {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/black.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/blue.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/brown.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/red.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/white.png")),
-        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/chocolate.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/cream.png")),
-        DOBERMAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/doberman.png")),
-        LIGHT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/light.png")),
-        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/mahogany.png")),
-        DARK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/dark.png")),
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, default_path + "red.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, default_path + "cream.png")),
+        DOBERMAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "doberman.png")),
+        LIGHT(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "mahogany.png")),
+        DARK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "dark.png")),
         ;
 
         public final ResourceLocation resourceLocation;
@@ -74,12 +80,42 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
         }
     }
 
+    public enum SVariant {
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
+        BLUE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
+        RED(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "red.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cream.png")),
+        DOBERMAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "doberman.png")),
+        LIGHT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "light.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "mahogany.png")),
+        DARK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "dark.png")),
+        ;
+
+        public final ResourceLocation resourceLocation;
+        SVariant(ResourceLocation resourceLocation) {
+            this.resourceLocation = resourceLocation;
+        }
+
+        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
+        }
+    }
+
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/sheep/o_sheep.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_sheep.animation.json");
+    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/sheep.geo.json");
+    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/sheep.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OSheep object) {
-        return MODEL;
+        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return MODEL;
+        } else {
+            return SIMPLIFIED_MODEL;
+        }
     }
 
     public ResourceLocation getTextureResource(OSheep object) {
@@ -88,7 +124,11 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
 
     @Override
     public ResourceLocation getAnimationResource(OSheep animatable) {
-        return ANIMATION;
+        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return ANIMATION;
+        } else {
+            return SIMPLIFIED_ANIMATION;
+        }
     }
 }
 

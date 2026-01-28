@@ -94,11 +94,7 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
 
     @Override
     public ResourceLocation getTextureResource(OPig object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return object.getTextureLocation();
-        } else {
-            return object.getSimplifiedVariantTextureResource();
-        }
+        return object.getTextureLocation();
     }
 
     @Override

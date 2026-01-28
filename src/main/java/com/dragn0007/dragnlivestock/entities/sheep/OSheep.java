@@ -4,11 +4,11 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
-import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -373,7 +373,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (itemstack.is(LOTags.Items.DYES) && LivestockOverhaulCommonConfig.ALLOW_SHEEP_DYE.get()) {
 			this.setDyed(true);
-			dyeDissipateCounter = LivestockOverhaulCommonConfig.MAX_DYED_SHEARS.get();
+			dyeDissipateCounter = 0;
 
 			if (itemstack.is(Items.BLACK_DYE) || itemstack.is(LOItems.BLACK_WOOL_DYE.get())) {
 				this.setWoolDyeVariant(1);
@@ -489,7 +489,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
-		return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		} else {
+			return OSheepModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
+		}
 	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -510,7 +514,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> WOOL_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getWoolLocation() {
-		return OSheepWoolLayer.Overlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			return OSheepWoolLayer.Overlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
+		} else {
+			return OSheepWoolLayer.SOverlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
+		}
 	}
 	public int getWoolVariant() {
 		return this.entityData.get(WOOL_COLOR);
@@ -521,7 +529,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> WOOL_DYE_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getWoolDyeLocation() {
-		return OSheepWoolLayer.DyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			return OSheepWoolLayer.DyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
+		} else {
+			return OSheepWoolLayer.SDyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
+		}
 	}
 	public int getWoolDyeVariant() {
 		return this.entityData.get(WOOL_DYE_COLOR);

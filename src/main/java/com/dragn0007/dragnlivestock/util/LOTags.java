@@ -101,9 +101,7 @@ public class LOTags {
         public static final TagKey<EntityType<?>> WOLVES = forgeTag("wolves");
         public static final TagKey<EntityType<?>> FOXES = forgeTag("foxes");
         public static final TagKey<EntityType<?>> CATS = forgeTag("cats");
-        public static final TagKey<EntityType<?>> HERDING_DOGS = forgeTag("herding_dogs");
         public static final TagKey<EntityType<?>> DOGS = forgeTag("dogs");
-        public static final TagKey<EntityType<?>> HUNTING_DOGS = forgeTag("hunting_dogs");
         public static final TagKey<EntityType<?>> DRAUGHT_ANIMALS = tag("draught_animals");
         public static final TagKey<EntityType<?>> LARGE_DRAUGHT_ANIMALS = tag("large_draught_animals");
         public static final TagKey<EntityType<?>> MEDIUM_DRAUGHT_ANIMALS = tag("medium_draught_animals");

@@ -148,11 +148,7 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
 
     @Override
     public ResourceLocation getTextureResource(OCow object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return object.getTextureLocation();
-        } else {
-            return object.getSimplifiedVariantTextureResource();
-        }
+        return object.getTextureLocation();
     }
 
     @Override

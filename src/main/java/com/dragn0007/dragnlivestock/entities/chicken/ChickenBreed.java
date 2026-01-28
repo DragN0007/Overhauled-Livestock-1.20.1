@@ -27,6 +27,10 @@ public class ChickenBreed {
         public static Breed breedFromOrdinal(int ordinal) {
             return Breed.values()[ordinal % Breed.values().length];
         }
+
+        public ChickenBreed.Breed next() {
+            return ChickenBreed.Breed.values()[(this.ordinal() + 1) % ChickenBreed.Breed.values().length];
+        }
     }
 
 }

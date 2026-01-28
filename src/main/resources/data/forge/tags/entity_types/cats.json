@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "minecraft:cat",
+    "minecraft:ocelot",
 
     {
       "id": "dragnpets:o_cat",

@@ -107,14 +107,10 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
 
     @Override
     public ResourceLocation getTextureResource(OChicken object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if(object.isBaby()) {
-                return BABY_TEXTURE;
-            } else {
-                return object.getTextureResource();
-            }
+        if(object.isBaby() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            return BABY_TEXTURE;
         } else {
-            return object.getSimplifiedVariantTextureResource();
+            return object.getTextureResource();
         }
     }
 

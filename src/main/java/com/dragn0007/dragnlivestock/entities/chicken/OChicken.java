@@ -1,11 +1,11 @@
 package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +26,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -95,7 +96,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 4.0D)
-				.add(Attributes.MOVEMENT_SPEED, 0.16F);
+				.add(Attributes.MOVEMENT_SPEED, 0.16F)
+				.add(Attributes.ATTACK_DAMAGE, 0.5D);
 	}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_CHICKEN_EATS);
@@ -109,22 +111,27 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true));
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.WOLVES))
 		);
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.CATS))
+				livingEntity.getType().is(LOTags.Entity_Types.CATS) && (this.isFemale() || this.isBaby()))
 		);
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.DOGS))
+				livingEntity.getType().is(LOTags.Entity_Types.DOGS) && (this.isFemale() || this.isBaby()))
 		);
 
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 1.8F, 1.8F, livingEntity ->
-				livingEntity.getType().is(LOTags.Entity_Types.FOXES))
+				livingEntity.getType().is(LOTags.Entity_Types.FOXES) && (this.isFemale() || this.isBaby()))
 		);
+
+		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, false, false, entity ->
+				entity.getType().is(LOTags.Entity_Types.ROOSTERS_FEND) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame()) && this.isMale() && !this.isBaby()
+		));
 	}
 
 	@Override
@@ -375,6 +382,19 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setOverlayVariant(this.getOverlayVariant() + 1);
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else if (itemstack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+			if (player.isShiftKeyDown()) {
+				if (this.getBreed() > 0) {
+					this.setBreed(this.getBreed() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			ChickenBreed.Breed currentBreed = ChickenBreed.Breed.values()[this.getBreed()];
+			ChickenBreed.Breed nextBreed = currentBreed.next();
+			this.setBreed(nextBreed.ordinal());
+			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+			return InteractionResult.SUCCESS;
 		}
 
 		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
@@ -433,7 +453,11 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 	// Generates the base texture
 	public ResourceLocation getTextureResource() {
-		return OChickenModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			return OChickenModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		} else {
+			return OChickenModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
+		}
 	}
 
 	public ResourceLocation getOverlayLocation() {
@@ -447,13 +471,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
-
-	public ResourceLocation getSimplifiedVariantTextureResource() {
-		return OChickenModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
-	}
-	public int getSimplifiedVariant() {
-		return this.entityData.get(VARIANT);
-	}
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);

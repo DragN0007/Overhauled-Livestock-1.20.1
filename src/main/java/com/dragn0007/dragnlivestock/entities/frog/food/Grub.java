@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.frog.food;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
-import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.GrubSweaterItem;
 import com.dragn0007.dragnlivestock.util.LOTags;

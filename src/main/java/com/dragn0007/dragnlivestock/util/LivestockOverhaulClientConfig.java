@@ -23,7 +23,7 @@ public class LivestockOverhaulClientConfig {
                         "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. With this enabled, " +
                         "your FPS may be able to double or even triple, especially in highly populated areas. " +
                         "For this reason, animal markings, visual cosmetics, and breed dimorphism cannot render on these simpler models. " +
-                        "They are almost purely vanilla, only taking on genetic base colors. \nRestart your game after changing for best results.")
+                        "They are almost purely vanilla, only taking on genetic base colors. \nRestart your game after changing for best results. Some animals may not yet be included.")
                 .define("Performance Models [Experimental]", false);
 
         HORSE_COAT_GUI = BUILDER.comment("Should coats, markings, speed, jump strength and health show up on certain O-Mount GUIs?")

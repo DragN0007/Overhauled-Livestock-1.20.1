@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -33,8 +34,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -258,20 +257,17 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
-		return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		} else {
+			return OPigModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
+		}
 	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
-	}
-
-	public ResourceLocation getSimplifiedVariantTextureResource() {
-		return OPigModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
-	}
-	public int getSimplifiedVariant() {
-		return this.entityData.get(VARIANT);
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);

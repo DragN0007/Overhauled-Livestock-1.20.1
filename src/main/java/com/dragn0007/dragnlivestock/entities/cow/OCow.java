@@ -13,6 +13,7 @@ import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOve
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -580,20 +581,17 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
-		return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+			return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
+		} else {
+			return OCowModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
+		}
 	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
-	}
-
-	public ResourceLocation getSimplifiedVariantTextureResource() {
-		return OCowModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
-	}
-	public int getSimplifiedVariant() {
-		return this.entityData.get(VARIANT);
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);

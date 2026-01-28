@@ -501,7 +501,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double speedRunThreshold = 0.02;
 		double speedTrotThreshold = 0.015;
 
-		double wagonSpeedRunThreshold = 0.8;
+		double wagonSpeedRunThreshold = 0.65;
 		double wagonSpeedTrotThreshold = 0.06;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
@@ -521,7 +521,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (isMoving) {
 				if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
 					if (this.isNoAi() && !this.isVehicle()) { //for wagons
-						//todo: find perfect thresh for run anim
 						if (currentSpeed < wagonSpeedTrotThreshold) {
 							controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 							controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
