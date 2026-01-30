@@ -33,6 +33,7 @@ public class RabbitBreedTooltip implements IEntityComponentProvider {
             case 6: return "Checkered Giant";
             case 7: return "Lionhead";
             case 8: return "Giant";
+            case 9: return "Jackelope";
             default: return "Unknown";
         }
     }

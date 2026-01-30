@@ -1,8 +1,11 @@
 package com.dragn0007.dragnlivestock.entities.rabbit;
 
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class ORabbitRender extends GeoEntityRenderer<ORabbit> {
@@ -13,16 +16,40 @@ public class ORabbitRender extends GeoEntityRenderer<ORabbit> {
     }
 
     @Override
-    public void render(ORabbit entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void preRender(PoseStack poseStack, ORabbit animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
-        if(entity.isBaby()) {
+        if(animatable.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
+            if (animatable.getBreed() == 9) {
+                model.getBone("right_antler").ifPresent(b -> b.setHidden(true));
+                model.getBone("left_antler").ifPresent(b -> b.setHidden(true));
+            }
         } else {
             poseStack.scale(1F, 1F, 1F);
 
-            if (entity.getDewlap() == 0) {
+            if (animatable.getBreed() == 9) {
+                model.getBone("right_antler").ifPresent(b -> b.setHidden(false));
+                model.getBone("left_antler").ifPresent(b -> b.setHidden(false));
+                if (animatable.isFemale()) {
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleX(0.8F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleY(0.8F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleZ(0.8F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleX(0.8F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleY(0.8F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleZ(0.8F));
+                } else if (animatable.isMale()) {
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleX(1.0F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleY(1.0F));
+                    model.getBone("right_antler").ifPresent(b -> b.setScaleZ(1.0F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleX(1.0F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleY(1.0F));
+                    model.getBone("left_antler").ifPresent(b -> b.setScaleZ(1.0F));
+                }
+            }
+
+            if (animatable.getDewlap() == 0) {
                 model.getBone("dewlap").ifPresent(b -> b.setHidden(true));
-            } else if (entity.getDewlap() == 1) {
+            } else if (animatable.getDewlap() == 1) {
                 model.getBone("dewlap").ifPresent(b -> b.setScaleX(0.8F));
                 model.getBone("dewlap").ifPresent(b -> b.setScaleY(0.8F));
                 model.getBone("dewlap").ifPresent(b -> b.setScaleZ(0.8F));
@@ -35,7 +62,7 @@ public class ORabbitRender extends GeoEntityRenderer<ORabbit> {
             }
         }
 
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        super.preRender(poseStack, this.animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
 }

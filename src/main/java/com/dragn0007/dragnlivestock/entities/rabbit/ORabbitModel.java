@@ -53,7 +53,7 @@ public class ORabbitModel extends DefaultedEntityGeoModel<ORabbit> {
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/white.png")),
         CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/clover_brown.png")),
-        JACKRABBIT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/jackrabbit.png")),
+        JACKIE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/jackie.png")),
         CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/cream.png"));
 
         //Add new entries to bottom when mod is public, else rabbits will change textures during update.

@@ -15,6 +15,7 @@ public class RabbitBreed {
         CHECKERED_GIANT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/checkered_giant.geo.json")),
         LIONHEAD(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/lionhead.geo.json")),
         GIANT(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/giant.geo.json")),
+        JACKELOPE(new ResourceLocation(LivestockOverhaul.MODID, "geo/rabbit/jackelope.geo.json")),
         ;
 
         public final ResourceLocation resourceLocation;

@@ -157,7 +157,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	public void aiStep() {
 		super.aiStep();
 
-		//todo: fix poop time
 		if (!this.level().isClientSide && LivestockOverhaulCommonConfig.RABBITS_POOP.get() && this.isAlive() && !this.isBaby() && --this.poopTime <= 0) {
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isGreatQuality() && random.nextDouble() <= 15) {
