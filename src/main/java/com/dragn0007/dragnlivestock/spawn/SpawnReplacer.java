@@ -897,7 +897,7 @@ public class SpawnReplacer {
 
                 if (oRabbit != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                        oRabbit.setBreed(0);
+                        oRabbit.setBreedByWildStatus();
                         oRabbit.setMarkingByWildStatus();
                         if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                             int[] variants = {4, 7, 10, 14};
