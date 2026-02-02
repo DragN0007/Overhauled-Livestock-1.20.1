@@ -141,6 +141,7 @@ public class LOItemGroup {
                         output.accept(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
                         output.accept(LOItems.FERTILIZED_ORPINGTON_EGG.get());
                         output.accept(LOItems.FERTILIZED_POLISH_EGG.get());
+                        output.accept(LOItems.FERTILIZED_BRAHMA_EGG.get());
 
                         output.accept(LOItems.RABBIT_POOP.get());
 
@@ -825,6 +826,7 @@ public class LOItemGroup {
                         output.accept(LOItems.WYANDOTTE_EGG.get());
                         output.accept(LOItems.ORPINGTON_EGG.get());
                         output.accept(LOItems.POLISH_EGG.get());
+                        output.accept(LOItems.BRAHMA_EGG.get());
 
                         output.accept(LOItems.EGG_SALAD.get());
                         output.accept(LOItems.OMELETTE.get());

@@ -54,9 +54,23 @@ public class ORabbitModel extends DefaultedEntityGeoModel<ORabbit> {
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/white.png")),
         CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/clover_brown.png")),
         JACKIE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/jackie.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/cream.png"));
-
-        //Add new entries to bottom when mod is public, else rabbits will change textures during update.
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/cream.png")),
+        BLUE_TORTISHELL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/blue_tortishell.png")),
+        CHESTNUT_AGOUTI(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/chestnut_agouti.png")),
+        CHOCOLATE_AGOUTI(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/chocolate_agouti.png")),
+        CHOCOLATE_TORTISHELL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/chocolate_tortishell.png")),
+        DARK_CHIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/dark_chin.png")),
+        FAWN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/fawn.png")),
+        GOLD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/gold.png")),
+        GOLDEN_STEEL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/golden_steel.png")),
+        LIGHT_CHIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/light_chin.png")),
+        LYNX(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/lynx.png")),
+        SABLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/sable.png")),
+        SALLANDER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/sallander.png")),
+        SMOKE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/smoke.png")),
+        STEEL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/steel.png")),
+        TORTISHELL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/tortishell.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {

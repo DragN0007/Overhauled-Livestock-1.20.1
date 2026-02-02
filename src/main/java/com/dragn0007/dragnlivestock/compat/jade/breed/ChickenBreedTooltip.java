@@ -34,6 +34,7 @@ public class ChickenBreedTooltip implements IEntityComponentProvider {
             case 7: return "Orpington";
             case 8: return "Polish";
             case 9: return "Wyandotte";
+            case 10: return "Brahma";
             default: return "Unknown";
         }
     }

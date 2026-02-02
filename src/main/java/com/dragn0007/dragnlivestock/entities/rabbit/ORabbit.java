@@ -58,6 +58,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 
 	public ORabbit(EntityType<? extends ORabbit> type, Level level) {
 		super(type, level);
+		setSheared(false);
 	}
 
 	public int poopTime = this.random.nextInt(LivestockOverhaulCommonConfig.RABBIT_POOP_TIME.get()) + 6000;
@@ -228,6 +229,20 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			this.setBreed(nextBreed.ordinal());
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
 			return InteractionResult.SUCCESS;
+		}
+
+		if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() &&
+				(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && this.canBeSheared()) {
+			player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
+			this.setSheared(true);
+			if (random.nextDouble() <= 0.20) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get());
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get());
+			} else if (random.nextDouble() > 0.20) {
+				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get());
+			}
+			regrowWoolCounter = 0;
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 
 		if (this.level().isClientSide) {
@@ -436,7 +451,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.set(BREED, breed);
 	}
 
-
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -452,7 +466,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	public void setVariantTexture(String variant) {
 		this.entityData.set(VARIANT_TEXTURE, variant);
 	}
-
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
 	public int getOverlayVariant() {
@@ -476,6 +489,17 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	}
 	public void setDewlap(int dewlap) {
 		this.entityData.set(DEWLAP, dewlap);
+	}
+
+	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.BOOLEAN);
+	public boolean isSheared() {
+		return this.entityData.get(SHEARED);
+	}
+	public void setSheared(boolean sheared) {
+		this.entityData.set(SHEARED, sheared);
+	}
+	public boolean canBeSheared() {
+		return this.getBreed() == 4 && !this.isBaby() && !this.isSheared();
 	}
 
 	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(ORabbit.class, EntityDataSerializers.INT);
@@ -524,6 +548,14 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (tag.contains("PoopTime")) {
 			this.poopTime = tag.getInt("PoopTime");
 		}
+
+		if (tag.contains("Sheared")) {
+			this.setSheared(tag.getBoolean("Sheared"));
+		}
+
+		if (tag.contains("ShearedTime")) {
+			this.regrowWoolCounter = tag.getInt("ShearedTime");
+		}
 	}
 
 	@Override
@@ -538,6 +570,8 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		tag.putInt("Dewlap", this.getDewlap());
 		tag.putInt("Gender", this.getGender());
 		tag.putInt("PoopTime", this.poopTime);
+		tag.putBoolean("Sheared", this.isSheared());
+		tag.putInt("ShearedTime", this.regrowWoolCounter);
 	}
 
 	@Override
@@ -548,7 +582,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		}
 		Random random = new Random();
 		this.setGender(random.nextInt(ORabbit.Gender.values().length));
-		this.setBreed(random.nextInt(RabbitBreed.Breed.values().length));
 		this.setDewlapByGender();
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
@@ -561,6 +594,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		} else {
 			this.setVariant(random.nextInt(ORabbitModel.Variant.values().length));
 			this.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
+			this.setBreed(random.nextInt(RabbitBreed.Breed.values().length));
 		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -577,6 +611,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		this.entityData.define(OVERLAY_TEXTURE, ORabbitMarkingLayer.Overlay.NONE.resourceLocation.toString());
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(DEWLAP, 0);
+		this.entityData.define(SHEARED, false);
 	}
 
 	public enum Gender {
@@ -644,6 +679,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	public int maxBabyAmount = LivestockOverhaulCommonConfig.MAX_RABBIT_BABIES.get();
 	public int babiesBirthed = 0;
 	public int babyCooldown = 0;
+	public int regrowWoolCounter = 0;
 
 	public void tick() {
 		super.tick();
@@ -660,6 +696,34 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (babyCooldown >= 20) {
 			babyCooldown = 0;
 		}
+
+		if (this.getBreed() == 4 && !this.isBaby()) {
+			regrowWoolCounter++;
+		}
+
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+			if (this.isFineQuality()) {
+				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
+					this.setSheared(false);
+				}
+			} else if (this.isGreatQuality()) {
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 1.3)) {
+					this.setSheared(false);
+				}
+			} else if (this.isFantasticQuality()) {
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2)) {
+					this.setSheared(false);
+				}
+			} else if (this.isExquisiteQuality()) {
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2.5)) {
+					this.setSheared(false);
+				}
+			}
+		} else {
+			if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
+				this.setSheared(false);
+			}
+		}
 	}
 
 	@Override
@@ -671,7 +735,9 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		int breedChance = this.random.nextInt(5);
 		int breed;
 		if (breedChance == 0) {
-			breed = this.random.nextInt(RabbitBreed.Breed.values().length);
+			int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+			int randomIndex = new Random().nextInt(breeds.length);
+			breed = (breeds[randomIndex]);
 		} else {
 			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
 		}
@@ -819,23 +885,53 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			}
 		}
 
+		if (this.getBreed() == 7) {
+			if (random.nextDouble() < 0.15) {
+				this.setDewlap(0);
+			} else if (random.nextDouble() > 0.15 && random.nextDouble() < 0.50) {
+				this.setDewlap(1);
+			} else if (random.nextDouble() > 0.50) {
+				this.setDewlap(2);
+			}
+		}
+
 	}
 
 	public void setColorByWildStatus() {
-		if (random.nextDouble() < 0.05) {
-			this.setVariant(random.nextInt(ORabbitModel.Variant.values().length));
-		} else if (random.nextDouble() > 0.05) {
-			int[] variants = {0, 2, 3, 8, 10, 11, 12};
-			int randomIndex = new Random().nextInt(variants.length);
-			this.setVariant(variants[randomIndex]);
+		if (getBreed() != 4) {
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(ORabbitModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 2, 3, 8, 10, 11, 12};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		} else if (getBreed() == 4) {
+			this.setVariant(11);
 		}
 	}
 
 	public void setMarkingByWildStatus() {
-		if (random.nextDouble() < 0.10) {
-			this.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
-		} else if (random.nextDouble() > 0.10) {
-			this.setOverlayVariant(0);
+		if (getBreed() != 4) {
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10) {
+				this.setOverlayVariant(0);
+			}
+		} else if (getBreed() == 4) {
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(ORabbitMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				this.setOverlayVariant(0);
+			}
+		}
+	}
+
+	public void setBreedByWildStatus() {
+		if (random.nextDouble() < 0.01) {
+			this.setBreed(9);
+		} else if (random.nextDouble() > 0.01) {
+			this.setBreed(0);
 		}
 	}
 

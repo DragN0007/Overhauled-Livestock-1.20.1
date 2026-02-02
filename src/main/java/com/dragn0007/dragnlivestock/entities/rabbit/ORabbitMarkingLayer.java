@@ -89,9 +89,37 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
         WHITE_STRIPED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/white_striped.png")),
         WHITE_TIPPED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/white_tipped.png")),
         PURE_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/pure_white.png")),
-        CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/clover.png"));
-
-        //Add new entries to bottom when mod is public, else rabbits will change textures during update.
+        CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/clover.png")),
+        BLACK_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/black_harlequin.png")),
+        BLUE_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/blue_harlequin.png")),
+        BOOTS(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/boots.png")),
+        BRINDLE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/brindle.png")),
+        CHOCOLATE_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/chocolate_harlequin.png")),
+        CREAM_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/cream_harlequin.png")),
+        DOVE_LUTINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/dove_lutino.png")),
+        DUTCH(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/dutch.png")),
+        DUTCH_VIENNA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/dutch_vienna.png")),
+        ENGLISH_SPOT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/english_spot.png")),
+        EXTREME_BROKEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/extreme_broken.png")),
+        GOLD_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/gold_harlequin.png")),
+        HEAVY_BROKEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/heavy_broken.png")),
+        HIMALAYAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/himalayan.png")),
+        LILAC_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/lilac_harlequin.png")),
+        LUTINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/lutino.png")),
+        MINIMAL_BROKEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/minimal_broken.png")),
+        MODERATE_BROKEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/moderate_broken.png")),
+        OTTER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/otter.png")),
+        PINK_REW(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/pink_rew.png")),
+        POINTED_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/pointed_white.png")),
+        RED_HARLEQUIN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/red_harlequin.png")),
+        REVERSE_EAR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/reverse_ear.png")),
+        SILVER_MARTEN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/silver_marten.png")),
+        SOLID_VIENNA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/solid_vienna.png")),
+        TAN_BELLY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/tan_belly.png")),
+        TRICOLOR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/tricolor.png")),
+        VIENNA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/vienna.png")),
+        WHITE_EAR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/white_ear.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         Overlay(ResourceLocation resourceLocation) {

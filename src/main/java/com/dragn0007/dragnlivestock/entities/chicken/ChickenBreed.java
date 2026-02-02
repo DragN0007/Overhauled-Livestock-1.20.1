@@ -16,6 +16,7 @@ public class ChickenBreed {
         ORPINGTON(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/orpington.geo.json")),
         POLISH(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/polish.geo.json")),
         WYANDOTTE(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/wyandotte.geo.json")),
+        BRAHMA(new ResourceLocation(LivestockOverhaul.MODID, "geo/chicken/brahma.geo.json")),
         ;
 
         public final ResourceLocation resourceLocation;

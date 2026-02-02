@@ -268,7 +268,11 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		double x = this.getX() - this.xo;
 		double z = this.getZ() - this.zo;
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
-		double speedThreshold = 0.015;
+		double speedThreshold = 0.025;
+		double speedRunThreshold = 0.02;
+		double speedTrotThreshold = 0.015;
+		double wagonSpeedRunThreshold = 0.09;
+		double wagonSpeedTrotThreshold = 0.06;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -286,7 +290,22 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		} else {
 			if (isMoving) {
 				if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
-				if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
+					if (this.isNoAi() && !this.isVehicle()) { //for wagons
+						if (currentSpeed < wagonSpeedTrotThreshold) {
+							controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
+						} else if (currentSpeed > wagonSpeedTrotThreshold && currentSpeed < wagonSpeedRunThreshold) {
+							controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						} else if (currentSpeed > wagonSpeedRunThreshold) {
+							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						} else {
+							controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+						}
+
+					} else if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 					if (this.isOnSand()) {
 						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
@@ -296,7 +315,18 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 					}
 
-				} else if (this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) {
+				} else if ((this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedTrotThreshold)) {
+					controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+					if (this.isOnSand()) {
+						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
+					} else if (this.isOnSnow()) {
+						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+					} else {
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					}
+
+				} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD))
+						|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
 					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
 					if (this.isOnSand()) {
 						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));

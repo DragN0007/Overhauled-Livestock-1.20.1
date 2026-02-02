@@ -724,18 +724,18 @@ public class SpawnReplacer {
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
-                            if (random.nextDouble() < 0.20) {
-                                int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9};
+                            if (random.nextDouble() < 0.15) {
+                                int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 10};
                                 int randomIndex = new Random().nextInt(variants.length);
                                 oChicken.setBreed(variants[randomIndex]);
                             } else {
-                                int[] variants = {2, 4};
+                                int[] variants = {2, 4, 10};
                                 int randomIndex = new Random().nextInt(variants.length);
                                 oChicken.setBreed(variants[randomIndex]);
                             }
                         } else if (event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
-                            if (random.nextDouble() < 0.20) {
-                                int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9};
+                            if (random.nextDouble() < 0.15) {
+                                int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 10};
                                 int randomIndex = new Random().nextInt(variants.length);
                                 oChicken.setBreed(variants[randomIndex]);
                             } else {
@@ -744,9 +744,15 @@ public class SpawnReplacer {
                                 oChicken.setBreed(variants[randomIndex]);
                             }
                         } else {
-                            int[] variants = {0, 1, 5, 8};
-                            int randomIndex = new Random().nextInt(variants.length);
-                            oChicken.setBreed(variants[randomIndex]);
+                            if (random.nextDouble() < 0.15) {
+                                int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 10};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oChicken.setBreed(variants[randomIndex]);
+                            } else {
+                                int[] variants = {0, 1, 5, 8};
+                                int randomIndex = new Random().nextInt(variants.length);
+                                oChicken.setBreed(variants[randomIndex]);
+                            }
                         }
                     } else {
                         oChicken.setBreed(random.nextInt(ChickenBreed.Breed.values().length));

@@ -126,6 +126,13 @@ public class ThrownFertilizedEgg extends ThrowableItemProjectile {
             }
          }
 
+         for (int j = 0; j < i; ++j) {
+            if (getItem().is(LOItems.FERTILIZED_BRAHMA_EGG.get())) {
+               chicken.setBreed(10);
+               this.level().addFreshEntity(chicken);
+            }
+         }
+
          chicken.setColorByBreed();
          chicken.setMarkingByBreed();
 

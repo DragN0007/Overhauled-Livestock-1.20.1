@@ -169,6 +169,8 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		double speedThreshold = 0.025;
 		double speedRunThreshold = 0.02;
 		double speedTrotThreshold = 0.015;
+		double wagonSpeedRunThreshold = 0.09;
+		double wagonSpeedTrotThreshold = 0.06;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
 
@@ -186,7 +188,22 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 		} else {
 			if (isMoving) {
 				if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
-					if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
+					if (this.isNoAi() && !this.isVehicle()) { //for wagons
+						if (currentSpeed < wagonSpeedTrotThreshold) {
+							controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
+						} else if (currentSpeed > wagonSpeedTrotThreshold && currentSpeed < wagonSpeedRunThreshold) {
+							controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						} else if (currentSpeed > wagonSpeedRunThreshold) {
+							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						} else {
+							controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
+							controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+						}
+
+					} else if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
 						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 

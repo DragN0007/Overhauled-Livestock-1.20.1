@@ -500,8 +500,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double speedThreshold = 0.025;
 		double speedRunThreshold = 0.02;
 		double speedTrotThreshold = 0.015;
-
-		double wagonSpeedRunThreshold = 0.65;
+		double wagonSpeedRunThreshold = 0.09;
 		double wagonSpeedTrotThreshold = 0.06;
 
 		boolean isMoving = (x * x + z * z) > 0.0001;
@@ -1887,7 +1886,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1951,7 +1950,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.02) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1987,7 +1986,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.07) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.07) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2005,7 +2004,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2015,7 +2014,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -2025,7 +2024,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2035,7 +2034,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2045,7 +2044,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -2055,7 +2054,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}

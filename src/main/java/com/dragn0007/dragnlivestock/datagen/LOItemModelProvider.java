@@ -155,6 +155,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.FERTILIZED_ORPINGTON_EGG);
         simpleItem(LOItems.FERTILIZED_POLISH_EGG);
         simpleItem(LOItems.FERTILIZED_WYANDOTTE_EGG);
+        simpleItem(LOItems.FERTILIZED_BRAHMA_EGG);
 
         advancedItem(LOItems.EGG, "fertilized_egg");
         advancedItem(LOItems.AMERAUCANA_EGG, "fertilized_ameraucana_egg");
@@ -166,6 +167,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         advancedItem(LOItems.ORPINGTON_EGG, "fertilized_orpington_egg");
         advancedItem(LOItems.POLISH_EGG, "fertilized_polish_egg");
         advancedItem(LOItems.WYANDOTTE_EGG, "fertilized_wyandotte_egg");
+        advancedItem(LOItems.BRAHMA_EGG, "fertilized_brahma_egg");
 
 //        simpleItem(LOItems.COVERED_WAGON);
 

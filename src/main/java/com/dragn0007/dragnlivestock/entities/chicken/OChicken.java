@@ -82,11 +82,11 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	public boolean isMeatBreed() {
-		return this.getBreed() == 1 || this.getBreed() == 3;
+		return this.getBreed() == 1 || this.getBreed() == 3 || this.getBreed() == 7 || this.getBreed() == 9;
 	}
 
 	public boolean isNormalBreed() {
-		return this.getBreed() == 3 || this.getBreed() == 5;
+		return this.getBreed() == 3 || this.getBreed() == 5 || this.getBreed() == 6 || this.getBreed() == 8 || this.getBreed() == 10;
 	}
 
 	public boolean isMiniBreed() {
@@ -328,6 +328,20 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 				}
 
 				if (this.getBreed() == 9) {
+					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+						if (this.isGreatQuality() && random.nextDouble() <= 15) {
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+						}
+					}
+					this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
+				}
+
+				if (this.getBreed() == 10) {
 					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 						if (this.isGreatQuality() && random.nextDouble() <= 15) {
 							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
@@ -736,6 +750,20 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 10) { //brahma
+			if (random.nextDouble() < 0.10) {
+				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.15) {
+				int[] variants = {0, 2, 5, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.15) {
+				int[] variants = {1, 6, 9};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setMarkingByBreed() {
@@ -835,6 +863,18 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 10) { //brahma
+			if (random.nextDouble() < 0.10) {
+				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
+				this.setOverlayVariant(0);
+			} else if (random.nextDouble() > 0.25) {
+				int[] variants = {33, 34, 35, 36};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -954,7 +994,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			AYAM_CEMANI(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get()),
 			ORPINGTON(LOItems.FERTILIZED_ORPINGTON_EGG.get()),
 			POLISH(LOItems.FERTILIZED_POLISH_EGG.get()),
-			WYANDOTTE(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
+			WYANDOTTE(LOItems.FERTILIZED_WYANDOTTE_EGG.get()),
+			BRAHMA(LOItems.FERTILIZED_BRAHMA_EGG.get()),
+			;
 
 			public final Item item;
 
@@ -1029,6 +1071,12 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 			if (this.getBreed() == 9) {
 				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
+				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+				serverLevel.addFreshEntity(eggEntity);
+			}
+
+			if (this.getBreed() == 10) {
+				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_BRAHMA_EGG.get());
 				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 				serverLevel.addFreshEntity(eggEntity);
 			}

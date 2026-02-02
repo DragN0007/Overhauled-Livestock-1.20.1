@@ -120,12 +120,19 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
         Vec3 move = collide(velocity);
 
+//        for(int i = 0; i < animals.length; i++) { // Get the smallest distance in case there's blocking
+//            Mob animal = getAnimal(i);
+//            if(animal != null) {
+//                Vec3 m = animal.collide(velocity);
+//                if(m.horizontalDistanceSqr() < move.horizontalDistanceSqr())
+//                    move = m;
+//            }
+//        }
+
         for(int i = 0; i < animals.length; i++) { // Get the smallest distance in case there's blocking
             Mob animal = getAnimal(i);
             if(animal != null) {
-                Vec3 m = animal.collide(velocity);
-                if(m.horizontalDistanceSqr() < move.horizontalDistanceSqr())
-                    move = m;
+                move = animal.collide(move);
             }
         }
 
@@ -174,10 +181,17 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
         Vec3[] displacements = new Vec3[animals.length];
 
-        for(int i = 0; i < animals.length; i++) {
-            displacements[i] = collideSteering(i, steer);
-            if(displacements[i].equals(Vec3.ZERO))
-                return;
+//        for(int i = 0; i < animals.length; i++) {
+//            displacements[i] = collideSteering(i, steer);
+//            if(displacements[i].equals(Vec3.ZERO))
+//                return;
+//        }
+
+        for (int i = 0; i < animals.length; i++) {
+            Vec3 d = collideSteering(i, steer);
+            displacements[i] = d.equals(Vec3.ZERO)
+                    ? Vec3.ZERO
+                    : d;
         }
 
         setYRot(Mth.wrapDegrees(getYRot() + steer));

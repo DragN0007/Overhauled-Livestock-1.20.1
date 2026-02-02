@@ -12,6 +12,7 @@
     "dragnlivestock:orpington_egg",
     "dragnlivestock:polish_egg",
     "dragnlivestock:wyandotte_egg",
+    "dragnlivestock:brahma_egg",
 
     "dragnlivestock:fertilized_egg",
     "dragnlivestock:fertilized_ameraucana_egg",
@@ -22,6 +23,7 @@
     "dragnlivestock:fertilized_ayam_cemani_egg",
     "dragnlivestock:fertilized_orpington_egg",
     "dragnlivestock:fertilized_polish_egg",
-    "dragnlivestock:fertilized_wyandotte_egg"
+    "dragnlivestock:fertilized_wyandotte_egg",
+    "dragnlivestock:fertilized_brahma_egg"
   ]
 }

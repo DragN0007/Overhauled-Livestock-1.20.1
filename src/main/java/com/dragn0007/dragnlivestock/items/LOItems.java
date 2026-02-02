@@ -202,6 +202,8 @@ public class LOItems {
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> FERTILIZED_WYANDOTTE_EGG = ITEMS.register("fertilized_wyandotte_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> FERTILIZED_BRAHMA_EGG = ITEMS.register("fertilized_brahma_egg",
+            () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));
 
     public static final RegistryObject<Item> EGG = ITEMS.register("egg",
              () -> new Item((new Item.Properties()).stacksTo(64)));
@@ -222,6 +224,8 @@ public class LOItems {
     public static final RegistryObject<Item> POLISH_EGG = ITEMS.register("polish_egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
     public static final RegistryObject<Item> WYANDOTTE_EGG = ITEMS.register("wyandotte_egg",
+            () -> new Item((new Item.Properties()).stacksTo(64)));
+    public static final RegistryObject<Item> BRAHMA_EGG = ITEMS.register("brahma_egg",
             () -> new Item((new Item.Properties()).stacksTo(64)));
 
     public static final RegistryObject<Item> RABBIT_POOP = ITEMS.register("rabbit_poop",

@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-28T02:57:53.8101039	Item Models: dragnlivestock
+// 1.20.1	2026-02-01T23:14:00.3327841	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -53,6 +53,7 @@ f7a90938daefcae50e8e401fb86324a2064fe3a6 assets/dragnlivestock/models/item/blue_
 cc560d763e3a0523702849d362fe5601e60ca508 assets/dragnlivestock/models/item/blue_western_blanket.json
 f2b652dac87d3e0259070ef80c844f2261c7377a assets/dragnlivestock/models/item/blue_wool_dye.json
 d6ff19547c7221c64093cd0bea2aaaef0ff2e9a0 assets/dragnlivestock/models/item/blue_wool_staple.json
+bd9063d619b47761c40543a3abb2cbc374e19bb8 assets/dragnlivestock/models/item/brahma_egg.json
 f29d965ab05f539f1ccf12061680793b196ce537 assets/dragnlivestock/models/item/breed_oscillator.json
 cfb75b37f5f6116fc7fcfae31a6d861410669bad assets/dragnlivestock/models/item/brown_accented_black_heavy_saddle.json
 6657c418bfcbaee0688c38aaf177203c0ef16983 assets/dragnlivestock/models/item/brown_accented_black_light_saddle.json
@@ -155,6 +156,7 @@ a3622b2d8e791773ca5a4e0c83fe2b9ab16ad225 assets/dragnlivestock/models/item/emera
 a061e12d0f7bd522c3ed8e36a293920e9b114ac4 assets/dragnlivestock/models/item/female_gender_test_strip.json
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/fertilized_ameraucana_egg.json
 8110dbd2ae71c3e53b1df0eea1d1fa7db2c7aa50 assets/dragnlivestock/models/item/fertilized_ayam_cemani_egg.json
+bd9063d619b47761c40543a3abb2cbc374e19bb8 assets/dragnlivestock/models/item/fertilized_brahma_egg.json
 22006df7ab3f345486b46019cad624525c15153c assets/dragnlivestock/models/item/fertilized_cream_legbar_egg.json
 e79cd9f4d463e22d730991bd1ab271974b08f9f6 assets/dragnlivestock/models/item/fertilized_egg.json
 78143501a0a5088d369c633bdc3788ec453c88fa assets/dragnlivestock/models/item/fertilized_marans_egg.json

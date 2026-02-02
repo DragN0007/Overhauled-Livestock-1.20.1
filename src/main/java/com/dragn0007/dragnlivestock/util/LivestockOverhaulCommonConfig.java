@@ -323,7 +323,7 @@ public class LivestockOverhaulCommonConfig {
         PLOW_SPEED_MULT = BUILDER.define("Plow Speed Multiplier", 0.1);
         MOWER_SPEED_MULT = BUILDER.define("Mower Speed Multiplier", 0.1);
         COUPE_SPEED_MULT = BUILDER.define("Coupé Speed Multiplier", 0.25);
-        CABRIOLET_SPEED_MULT = BUILDER.define("Cabriolet Speed Multiplier", 0.25);
+        CABRIOLET_SPEED_MULT = BUILDER.define("Cabriolet Speed Multiplier", 0.3);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

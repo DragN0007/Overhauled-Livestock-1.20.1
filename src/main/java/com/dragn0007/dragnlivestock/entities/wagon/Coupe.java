@@ -20,12 +20,12 @@ import net.minecraft.world.phys.Vec3;
 public class Coupe extends AbstractInventoryWagon {
 
     public static final Vec3[] RIDERS = new Vec3[] {
-            new Vec3(0.5D, 1.9D, 1D),
-            new Vec3(-0.5D, 1.9D, 1D),
-            new Vec3(0.4D, 1.2D, -2D),
-            new Vec3(-0.4D, 1.2D, -2D),
-            new Vec3(0.8D, 0.7D, -2.6D),
-            new Vec3(-0.8D, 0.7D, -2.6D)
+            new Vec3(0.5D, 2.05D, 1D),
+            new Vec3(-0.5D, 2.05D, 1D),
+            new Vec3(0.4D, 1.5D, -1.9D),
+            new Vec3(-0.4D, 1.5D, -1.9D),
+            new Vec3(0.8D, 1.0D, -2.6D),
+            new Vec3(-0.8D, 1.0D, -2.6D)
     };
 
     public static final Vec3[] ANIMALS = new Vec3[] {

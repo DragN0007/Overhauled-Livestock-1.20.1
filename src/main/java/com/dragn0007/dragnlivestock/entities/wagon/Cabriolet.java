@@ -20,17 +20,16 @@ import net.minecraft.world.phys.Vec3;
 public class Cabriolet extends AbstractInventoryWagon {
 
     public static final Vec3[] RIDERS = new Vec3[] {
-            new Vec3(0.3, 1.2D, 0.1D),
-            new Vec3(0.3, 1.2D, 0.1D)
+            new Vec3(0.3, 1.1D, -0.4D),
+            new Vec3(0.3, 1.1D, -0.4D)
     };
 
     public static final Vec3[] ANIMALS = new Vec3[] {
             new Vec3(0.0D, 0, 2.0D)
     };
 
-    //todo: turn radius(?) bug
     public Cabriolet(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, LivestockOverhaulCommonConfig.TRANSPORT_CART_SPEED_MULT.get(), 2.0D, 2.0F, 80, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.CABRIOLET_SPEED_MULT.get(), 2.0D, 2.0F, 80, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override

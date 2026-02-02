@@ -27,6 +27,12 @@ public class ORabbitRender extends GeoEntityRenderer<ORabbit> {
         } else {
             poseStack.scale(1F, 1F, 1F);
 
+            if (!animatable.isBaby() && animatable.isSheared() && animatable.getBreed() == 4) {
+                model.getBone("wool").ifPresent(b -> b.setHidden(true));
+            } else {
+                model.getBone("wool").ifPresent(b -> b.setHidden(false));
+            }
+
             if (animatable.getBreed() == 9) {
                 model.getBone("right_antler").ifPresent(b -> b.setHidden(false));
                 model.getBone("left_antler").ifPresent(b -> b.setHidden(false));
