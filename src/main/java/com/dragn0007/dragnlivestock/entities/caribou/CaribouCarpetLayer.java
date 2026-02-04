@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorseCarpetLayer;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
+import com.dragn0007.dragnlivestock.items.custom.CosmeticsItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -39,7 +40,7 @@ public class CaribouCarpetLayer extends GeoRenderLayer<Caribou> {
 
         ResourceLocation resourceLocation = null;
 
-        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem)) {
+        if (!armorItemStack.isEmpty() && !itemStack.isEmpty() && !(itemStack.getItem() instanceof CaparisonItem) && !(itemStack.getItem() instanceof CosmeticsItem)) {
             if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !(armorItemStack.getItem() == LOItems.RODEO_HARNESS.get())) {
 
                 if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {

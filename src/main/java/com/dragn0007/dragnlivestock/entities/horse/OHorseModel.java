@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import software.bernie.geckolib.constant.DataTickets;
@@ -185,7 +186,7 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
             if (object.isBaby()) {
                 return BABY_MODEL;
-            } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25)) {
+            } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
                 return REINDEER_MODEL;
             }
             return HorseBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
@@ -200,7 +201,7 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
     public ResourceLocation getTextureResource(OHorse object) {
         if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
             if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
-                if (month == Month.DECEMBER && (day == 24 || day == 25)) {
+                if (month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
                     return object.getReindeerTextureResource();
                 }
                 return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);

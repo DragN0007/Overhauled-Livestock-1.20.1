@@ -120,7 +120,17 @@
   "entity.dragnlivestock.unicorn": "Unicorn",
 
   "entity.dragnlivestock.headless_horseman": "The Headless Horseman",
+
   "item.dragnlivestock.hallow_heart": "Hallow Heart",
+  "item.dragnlivestock.holiday_wagon_harness": "Holiday Wagon Harness",
+  "item.dragnlivestock.holiday_saddle": "Holiday Saddle",
+  "item.dragnlivestock.holiday_light_saddle": "Holiday Light Saddle",
+  "item.dragnlivestock.holiday_heavy_saddle": "Holiday Heavy Saddle",
+  "item.dragnlivestock.rainbow_string_lights": "Rainbow String Lights",
+  "item.dragnlivestock.blue_string_lights": "Blue String Lights",
+  "item.dragnlivestock.red_string_lights": "Red String Lights",
+  "item.dragnlivestock.yellow_string_lights": "Yellow String Lights",
+  "item.dragnlivestock.red_nose": "Red Nose",
 
   "item.dragnlivestock.wagon_wheel_frame": "Wagon Wheel Frame",
   "item.dragnlivestock.wagon_wheel": "Wagon Wheel",
@@ -152,6 +162,8 @@
   "entity.dragnlivestock.coupe": "Coupé",
   "item.dragnlivestock.cabriolet": "Cabriolet",
   "entity.dragnlivestock.cabriolet": "Cabriolet",
+  "item.dragnlivestock.sleigh": "Sleigh",
+  "entity.dragnlivestock.sleigh": "Sleigh",
 
 
   "item.dragnlivestock.utility_knife": "Utility Knife",

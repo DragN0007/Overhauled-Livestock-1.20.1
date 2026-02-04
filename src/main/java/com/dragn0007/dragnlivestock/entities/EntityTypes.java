@@ -302,5 +302,10 @@ public class EntityTypes {
                             MobCategory.MISC)
                     .sized(1.5F, 1.5F)
                     .build(new ResourceLocation(MODID, "cabriolet").toString()));
+    public static final RegistryObject<EntityType<Sleigh>> SLEIGH = ENTITY_TYPES.register("sleigh",
+            () -> EntityType.Builder.of(Sleigh::new,
+                            MobCategory.MISC)
+                    .sized(1.5F, 1.5F)
+                    .build(new ResourceLocation(MODID, "sleigh").toString()));
 }
 

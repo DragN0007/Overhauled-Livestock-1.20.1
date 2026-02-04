@@ -27,7 +27,7 @@ public class CaribouSaddleLayer extends GeoRenderLayer<Caribou> {
         if(!itemStack.isEmpty()) {
             ResourceLocation resourceLocation = null;
 
-            if (itemStack.getItem() instanceof SaddleItem saddleItem) {
+            if (itemStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
             }
 

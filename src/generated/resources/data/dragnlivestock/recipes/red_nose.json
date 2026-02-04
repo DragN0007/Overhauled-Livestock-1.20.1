@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:holiday_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "minecraft:red_dye"
+          },
+          {
+            "item": "minecraft:red_dye"
+          },
+          {
+            "item": "minecraft:red_dye"
+          },
+          {
+            "item": "minecraft:red_dye"
+          }
+        ],
+        "result": {
+          "item": "dragnlivestock:red_nose"
+        }
+      }
+    }
+  ]
+}

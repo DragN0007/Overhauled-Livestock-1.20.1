@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:holiday_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:string"
+          },
+          "B": {
+            "item": "minecraft:yellow_dye"
+          }
+        },
+        "pattern": [
+          "B B",
+          " A ",
+          "B B"
+        ],
+        "result": {
+          "item": "dragnlivestock:yellow_string_lights"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

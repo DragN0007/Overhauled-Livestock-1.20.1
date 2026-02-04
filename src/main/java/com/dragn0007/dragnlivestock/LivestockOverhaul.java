@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.common.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.common.network.LOPackets;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
+import com.dragn0007.dragnlivestock.datagen.conditions.HolidayConfigCondition;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.LOItemGroup;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -49,6 +50,7 @@ public class LivestockOverhaul {
         MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent warn) -> warn(warn.getEntity()));
 
         CraftingHelper.register(new BlanketConfigCondition.Serializer(new ResourceLocation(MODID, "blanket_config_condition")));
+        CraftingHelper.register(new HolidayConfigCondition.Serializer(new ResourceLocation(MODID, "holiday_config_condition")));
 
         if (ModList.get().isLoaded("medievalembroidery")) {
             MECompatItems.register(eventBus);

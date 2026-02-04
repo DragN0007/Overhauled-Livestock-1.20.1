@@ -168,7 +168,7 @@ public class SpawnReplacer {
                 Month month = date.getMonth();
                 int day = date.getDayOfMonth();
 
-                if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2))) {
+                if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
                     if (event.getLevel().isNight() && event.getLevel().getRandom().nextDouble() <= 0.12) {
                         HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(event.getLevel());
 

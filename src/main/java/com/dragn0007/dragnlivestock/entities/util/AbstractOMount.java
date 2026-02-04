@@ -111,7 +111,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public boolean isWearingPullingHarness() {
-        return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.WAGON_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
+        return (this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.WAGON_HARNESS.get()) ||
+                this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.HOLIDAY_WAGON_HARNESS.get())) &&
+                !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
     public boolean isWearingMartingale() {

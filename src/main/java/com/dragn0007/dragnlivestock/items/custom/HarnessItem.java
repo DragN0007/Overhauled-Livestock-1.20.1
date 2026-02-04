@@ -14,6 +14,7 @@ public class HarnessItem extends Item {
 
    public HarnessItem(Properties properties) {
       super(properties);
+      properties.stacksTo(1);
    }
 
    @Override

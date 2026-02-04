@@ -65,6 +65,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue COW_BELL_SOUND;
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_HOLIDAY_EVENTS;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
     public static final ForgeConfigSpec.BooleanValue QUALITY;
@@ -82,6 +83,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> MOWER_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> COUPE_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> CABRIOLET_SPEED_MULT;
+    public static final ForgeConfigSpec.ConfigValue<Double> SLEIGH_SPEED_MULT;
     public static final ForgeConfigSpec.BooleanValue FAILSAFE_REPLACER;
 
     static {
@@ -310,6 +312,10 @@ public class LivestockOverhaulCommonConfig {
         ALLOW_SPECIAL_BLANKET_CRAFTING = BUILDER.comment("Should players be able to craft special event blankets? " +
                         "If this is false, servers can give out blankets as free event rewards instead (cannot be a real currency payment).")
                 .define("Allow Special Event Blanket Crafting", true);
+
+        ALLOW_HOLIDAY_EVENTS = BUILDER.comment("Should holiday events take place, and should holiday items be available? " +
+                        "If this is false, all holiday events are disabled and holiday items will not be available to craft.")
+                .define("Allow Holiday Events & Items", true);
         BUILDER.pop();
 
         BUILDER.push("Wagons");
@@ -324,6 +330,7 @@ public class LivestockOverhaulCommonConfig {
         MOWER_SPEED_MULT = BUILDER.define("Mower Speed Multiplier", 0.1);
         COUPE_SPEED_MULT = BUILDER.define("Coupé Speed Multiplier", 0.25);
         CABRIOLET_SPEED_MULT = BUILDER.define("Cabriolet Speed Multiplier", 0.3);
+        SLEIGH_SPEED_MULT = BUILDER.define("Sleigh Speed Multiplier", 0.35);
         BUILDER.pop();
 
         BUILDER.push("Uninstalling");

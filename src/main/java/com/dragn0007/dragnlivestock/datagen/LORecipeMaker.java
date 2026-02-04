@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.datagen;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
+import com.dragn0007.dragnlivestock.datagen.conditions.HolidayConfigCondition;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -30,6 +31,129 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     }
 
     public void buildCommonRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_WAGON_HARNESS.get())
+                                .requires(LOItems.WAGON_HARNESS.get())
+                                .requires(Items.RED_DYE)
+                                .requires(Items.GOLD_INGOT)
+                                .unlockedBy("has_harness", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(LOItems.WAGON_HARNESS.get()).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.HOLIDAY_WAGON_HARNESS.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_SADDLE.get())
+                                .requires(Items.SADDLE)
+                                .requires(Items.RED_DYE)
+                                .requires(Items.GOLD_INGOT)
+                                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.SADDLE).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.HOLIDAY_SADDLE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_LIGHT_SADDLE.get())
+                                .requires(LOItems.LIGHT_SADDLE.get())
+                                .requires(Items.RED_DYE)
+                                .requires(Items.GOLD_INGOT)
+                                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.SADDLE).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.HOLIDAY_LIGHT_SADDLE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_HEAVY_SADDLE.get())
+                                .requires(LOItems.HEAVY_SADDLE.get())
+                                .requires(Items.RED_DYE)
+                                .requires(Items.GOLD_INGOT)
+                                .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.SADDLE).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.HOLIDAY_HEAVY_SADDLE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RED_NOSE.get())
+                                .requires(Items.RED_DYE)
+                                .requires(Items.RED_DYE)
+                                .requires(Items.RED_DYE)
+                                .requires(Items.RED_DYE)
+                                .unlockedBy("has_red_dye", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.RED_DYE).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.RED_NOSE.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RAINBOW_STRING_LIGHTS.get())
+                                .define('A', Items.STRING)
+                                .define('B', Items.RED_DYE)
+                                .define('C', Items.YELLOW_DYE)
+                                .define('D', Items.BLUE_DYE)
+                                .pattern("B D")
+                                .pattern(" A ")
+                                .pattern("D C")
+                                .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.STRING).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.RAINBOW_STRING_LIGHTS.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_STRING_LIGHTS.get())
+                                .define('A', Items.STRING)
+                                .define('B', Items.YELLOW_DYE)
+                                .pattern("B B")
+                                .pattern(" A ")
+                                .pattern("B B")
+                                .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.STRING).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.YELLOW_STRING_LIGHTS.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_STRING_LIGHTS.get())
+                                .define('A', Items.STRING)
+                                .define('B', Items.RED_DYE)
+                                .pattern("B B")
+                                .pattern(" A ")
+                                .pattern("B B")
+                                .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.STRING).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.RED_STRING_LIGHTS.get().toString()));
+
+        ConditionalRecipe.builder()
+                .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
+                .addRecipe(
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_STRING_LIGHTS.get())
+                                .define('A', Items.STRING)
+                                .define('B', Items.BLUE_DYE)
+                                .pattern("B B")
+                                .pattern(" A ")
+                                .pattern("B B")
+                                .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
+                                        .of(Items.STRING).build()))
+                                ::save).build
+                        (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.BLUE_STRING_LIGHTS.get().toString()));
+
+
+
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGNIFYING_GLASS.get())
                 .define('A', Items.GLASS)
                 .define('B', Items.STICK)

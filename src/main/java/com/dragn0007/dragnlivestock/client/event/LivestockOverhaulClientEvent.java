@@ -101,6 +101,7 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.MOWER.get(), c -> new WagonRenderer<>(c, "mower"));
         EntityRenderers.register(EntityTypes.COUPE.get(), c -> new WagonRenderer<>(c, "coupe"));
         EntityRenderers.register(EntityTypes.CABRIOLET.get(), c -> new WagonRenderer<>(c, "cabriolet"));
+        EntityRenderers.register(EntityTypes.SLEIGH.get(), c -> new WagonRenderer<>(c, "sleigh"));
 
         MenuScreens.register(LOMenuTypes.O_HORSE_MENU.get(), OHorseScreen::new);
         MenuScreens.register(LOMenuTypes.OX_MENU.get(), OxScreen::new);

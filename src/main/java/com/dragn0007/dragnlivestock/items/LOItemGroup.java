@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.entities.wagon.base.AbstractWagon.Type;
 import com.dragn0007.dragnlivestock.items.custom.WagonItem;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -71,6 +72,7 @@ public class LOItemGroup {
                         output.accept(LOItems.COAT_OSCILLATOR.get());
                         output.accept(LOItems.MARKING_OSCILLATOR.get());
                         output.accept(LOItems.BREED_OSCILLATOR.get());
+                        output.accept(LOItems.MAGNIFYING_GLASS.get());
 
                         output.accept(LOItems.MANE_SCISSORS.get());
                         output.accept(LOItems.TAIL_SCISSORS.get());
@@ -257,6 +259,16 @@ public class LOItemGroup {
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.CABRIOLET.get()), Type.MANGROVE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.CABRIOLET.get()), Type.SPRUCE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.CABRIOLET.get()), Type.WARPED));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.ACACIA));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.BIRCH));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.CHERRY));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.CRIMSON));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.DARK_OAK));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.JUNGLE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.MANGROVE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.SPRUCE));
+                        output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.WARPED));
 
                         output.accept(LOItems.BLACK_WOOL_STAPLE.get());
                         output.accept(LOItems.BLUE_WOOL_STAPLE.get());
@@ -789,6 +801,19 @@ public class LOItemGroup {
                             output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_FULL.get());
                             output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_HALF.get());
                             output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_SHOULDER.get());
+                        }
+
+                        if (LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
+                            output.accept(LOItems.HOLIDAY_SADDLE.get());
+                            output.accept(LOItems.HOLIDAY_LIGHT_SADDLE.get());
+                            output.accept(LOItems.HOLIDAY_HEAVY_SADDLE.get());
+                            output.accept(LOItems.HOLIDAY_WAGON_HARNESS.get());
+                            output.accept(LOItems.RAINBOW_STRING_LIGHTS.get());
+                            output.accept(LOItems.BLUE_STRING_LIGHTS.get());
+                            output.accept(LOItems.RED_STRING_LIGHTS.get());
+                            output.accept(LOItems.YELLOW_STRING_LIGHTS.get());
+                            output.accept(LOItems.RED_NOSE.get());
+                            output.accept(LOItems.HALLOW_HEART.get());
                         }
                     }).build());
 

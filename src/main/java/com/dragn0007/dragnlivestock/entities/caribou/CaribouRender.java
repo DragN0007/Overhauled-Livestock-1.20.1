@@ -23,8 +23,6 @@ public class CaribouRender extends GeoEntityRenderer<Caribou> {
     @Override
     public void preRender(PoseStack poseStack, Caribou entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 
-        model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
-
         if (!animatable.isBaby()) {
             if (animatable.hasChest()) {
                 model.getBone("saddlebags").ifPresent(b -> b.setHidden(false));
@@ -38,6 +36,12 @@ public class CaribouRender extends GeoEntityRenderer<Caribou> {
             } else {
                 model.getBone("saddle").ifPresent(b -> b.setHidden(true));
                 model.getBone("saddle2").ifPresent(b -> b.setHidden(true));
+            }
+
+            if (animatable.isWearingPullingHarness()) {
+                model.getBone("wagon_harness").ifPresent(b -> b.setHidden(false));
+            } else {
+                model.getBone("wagon_harness").ifPresent(b -> b.setHidden(true));
             }
 
             if (!entity.isBaby()) {

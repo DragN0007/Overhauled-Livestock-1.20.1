@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorseCarpetLayer;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
+import com.dragn0007.dragnlivestock.items.custom.CosmeticsItem;
 import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -45,7 +46,7 @@ public class UnicornCarpetLayer extends GeoRenderLayer<Unicorn> {
                     !(itemStack.getItem() instanceof CaparisonItem) &&
                     !(itemStack.getItem() instanceof RumpStrapItem) &&
                     !(armorItemStack.getItem() instanceof CaparisonItem) &&
-                    !(armorItemStack.getItem() instanceof RumpStrapItem)) {
+                    !(armorItemStack.getItem() instanceof RumpStrapItem) && !(itemStack.getItem() instanceof CosmeticsItem)) {
                 if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
 
                     if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {

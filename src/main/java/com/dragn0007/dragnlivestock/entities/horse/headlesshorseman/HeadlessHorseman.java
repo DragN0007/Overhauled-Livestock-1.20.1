@@ -286,7 +286,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 		Month month = date.getMonth();
 		int day = date.getDayOfMonth();
 
-		if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2))) {
+		if ((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
 			this.spawnAtLocation(LOItems.HALLOW_HEART.get());
 		}
 

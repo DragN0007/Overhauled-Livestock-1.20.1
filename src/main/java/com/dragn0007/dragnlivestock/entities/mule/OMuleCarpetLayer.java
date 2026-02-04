@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseCarpetLayer;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BlanketItem;
+import com.dragn0007.dragnlivestock.items.custom.CosmeticsItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -45,7 +46,7 @@ public class OMuleCarpetLayer extends GeoRenderLayer<OMule> {
 
         if (!itemStack.isEmpty()) {
             if (!armorItemStack.isEmpty()) {
-                if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
+                if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness() && !(itemStack.getItem() instanceof CosmeticsItem)) {
 
                     if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
                         if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {

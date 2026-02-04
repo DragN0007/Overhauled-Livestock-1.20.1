@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.entities.caribou;
 
-import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;

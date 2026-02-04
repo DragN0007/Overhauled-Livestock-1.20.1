@@ -13,7 +13,8 @@ public class CowBreed {
         JERSEY,
         HEREFORD,
         HIGHLAND,
-        OX;
+        OX,
+        SPANISH_FIGHTING;
 
         public static CowBreed.Breed breedFromOrdinal(int ordinal) {
             return CowBreed.Breed.values()[ordinal % CowBreed.Breed.values().length];

@@ -82,6 +82,7 @@ public class LOTags {
         public static final TagKey<Item> WESTERN_BLANKETS = tag("western_blankets");
         public static final TagKey<Item> CAPARISONS = tag("caparisons");
         public static final TagKey<Item> HAIR_FLOWERS = tag("hair_flowers");
+        public static final TagKey<Item> COSMETICS = tag("cosmetics");
         public static final TagKey<Item> DYES = tag("dyes");
 
         public static final TagKey<Item> LO_ARMORS = tag("lo_armor_do_not_change");

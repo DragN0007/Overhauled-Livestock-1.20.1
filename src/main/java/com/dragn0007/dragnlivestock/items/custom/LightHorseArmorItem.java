@@ -8,8 +8,9 @@ public class LightHorseArmorItem extends Item {
    private final int protection;
    private final ResourceLocation texture;
 
-   public LightHorseArmorItem(int prot, String p_41365_, Item.Properties p_41366_) {
-      this(prot, new ResourceLocation("textures/entity/horse/armor/horse_armor_" + p_41365_ + ".png"), p_41366_);
+   public LightHorseArmorItem(int prot, String p_41365_, Item.Properties properties) {
+      this(prot, new ResourceLocation("textures/entity/horse/armor/horse_armor_" + p_41365_ + ".png"), properties);
+      properties.stacksTo(1);
    }
 
    public LightHorseArmorItem(int prot, ResourceLocation p_41365_, Item.Properties p_41366_) {

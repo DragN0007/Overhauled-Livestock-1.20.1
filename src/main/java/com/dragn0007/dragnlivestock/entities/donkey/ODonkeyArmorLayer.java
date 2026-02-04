@@ -2,9 +2,7 @@ package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
-import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
-import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
-import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
+import com.dragn0007.dragnlivestock.items.custom.*;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -53,10 +51,6 @@ public class ODonkeyArmorLayer extends GeoRenderLayer<ODonkey> {
                 resourceLocation = new ResourceLocation("medievalembroidery", armorpath + "minimal_obsidian_horse_armor.png");
             } else if (armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                 resourceLocation = new ResourceLocation("deadlydinos", "textures/entity/horse/armor/riot_horse_armor.png");
-            } else if (armorItemStack.getItem() == LOItems.RODEO_HARNESS.get() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/rodeo_harness.png");
-            } else if (armorItemStack.getItem() == LOItems.WAGON_HARNESS.get() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/wagon_harness.png");
             } else if (armorItemStack.getItem() instanceof HorseArmorItem horseArmorItem) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, armorpath + horseArmorItem + ".png");
             } else if (armorItemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
@@ -65,6 +59,10 @@ public class ODonkeyArmorLayer extends GeoRenderLayer<ODonkey> {
                 resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
             } else if ((armorItemStack.getItem() instanceof CaparisonItem caparisonItem) && !armorItemStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                 resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
+            } else if (armorItemStack.getItem() instanceof CosmeticsItem item) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + item + ".png");
+            } else if (armorItemStack.getItem() instanceof HarnessItem item) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + item + ".png");
             } else {
                 return;
             }

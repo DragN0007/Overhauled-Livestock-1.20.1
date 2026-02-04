@@ -16,6 +16,7 @@ public class HorseShoeItem extends Item {
    public HorseShoeItem(int i, Properties properties) {
       super(properties);
       this.protection = i;
+      properties.stacksTo(1);
    }
 
    public int getProtection() {

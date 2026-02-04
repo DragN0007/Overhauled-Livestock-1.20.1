@@ -34,7 +34,7 @@ public class Coupe extends AbstractInventoryWagon {
     };
 
     public Coupe(EntityType<? extends AbstractWagon> type, Level level) {
-        super(type, level, LivestockOverhaulCommonConfig.COUPE_SPEED_MULT.get(), 2.0D, 2.0F, 80, 36, ANIMALS, 1.25D, 1.25D, RIDERS);
+        super(type, level, LivestockOverhaulCommonConfig.COUPE_SPEED_MULT.get(), 2.0D, 2.0F, 80, 18, ANIMALS, 1.25D, 1.25D, RIDERS);
     }
 
     @Override

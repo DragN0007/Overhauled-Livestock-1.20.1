@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:holiday_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "dragnlivestock:light_saddle"
+          },
+          {
+            "item": "minecraft:red_dye"
+          },
+          {
+            "item": "minecraft:gold_ingot"
+          }
+        ],
+        "result": {
+          "item": "dragnlivestock:holiday_light_saddle"
+        }
+      }
+    }
+  ]
+}

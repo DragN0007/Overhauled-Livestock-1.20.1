@@ -49,7 +49,7 @@ public class OHorseMenu extends AbstractContainerMenu {
                         itemStack.getItem() instanceof CaparisonItem || itemStack.getItem() instanceof RumpStrapItem) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
-                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS) || itemStack.is(LOTags.Items.COSMETICS)) {
                     return !this.hasItem() && OHorseMenu.this.oHorse.canWearArmor();
                 }
                 return false;

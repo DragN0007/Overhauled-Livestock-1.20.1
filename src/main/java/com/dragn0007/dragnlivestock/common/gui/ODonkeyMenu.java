@@ -46,7 +46,7 @@ public class ODonkeyMenu extends AbstractContainerMenu {
                 if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem) {
                     return !this.hasItem() && ODonkeyMenu.this.oDonkey.canWearArmor();
                 }
-                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS) || itemStack.is(LOTags.Items.COSMETICS)) {
                     return !this.hasItem() && ODonkeyMenu.this.oDonkey.canWearArmor();
                 }
                 return false;

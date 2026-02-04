@@ -576,6 +576,15 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.RED_ACCENTED_WHITE_HEAVY_SADDLE);
         simpleItem(LOItems.YELLOW_ACCENTED_WHITE_HEAVY_SADDLE);
 
+        simpleItem(LOItems.HOLIDAY_SADDLE);
+        simpleItem(LOItems.HOLIDAY_LIGHT_SADDLE);
+        simpleItem(LOItems.HOLIDAY_HEAVY_SADDLE);
+        simpleItem(LOItems.HOLIDAY_WAGON_HARNESS);
+        simpleItem(LOItems.RAINBOW_STRING_LIGHTS);
+        simpleItem(LOItems.BLUE_STRING_LIGHTS);
+        simpleItem(LOItems.RED_STRING_LIGHTS);
+        simpleItem(LOItems.YELLOW_STRING_LIGHTS);
+        simpleItem(LOItems.RED_NOSE);
         simpleItem(LOItems.HALLOW_HEART);
     }
 

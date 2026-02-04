@@ -49,7 +49,7 @@ public class CaribouMenu extends AbstractContainerMenu {
                         itemStack.getItem() instanceof CaparisonItem || itemStack.getItem() instanceof RumpStrapItem) {
                     return !this.hasItem() && CaribouMenu.this.caribou.canWearArmor();
                 }
-                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS)) {
+                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS) || itemStack.is(LOTags.Items.COSMETICS)) {
                     return !this.hasItem() && CaribouMenu.this.caribou.canWearArmor();
                 }
                 return false;
