@@ -18,6 +18,10 @@
     {
       "type": "patchouli:text",
       "text": "Angus, Brahman, Watusi and Hereford cattle are meat cows, which means they generally drop more meat and are bigger. Holstein and Jersey, on the other hand, are dairy cattle, so they can give milk much faster than other cows. $(br2) Oxen are larger breeds of cattle that can only be male. They can carry chests and be saddled and ridden. They're are much bigger than other cattle breeds, so they're hard to miss!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "If you manage to get yourself a Spanish Fighting Bull, you can fight it if you so choose. Or maybe it'll choose to fight *you* first. To fight a Spanish Fighting Bull, bring out a sword of your choosing and it will attack you automatically. This breed specifically gains a massive attack boost when born with high Quality stats."
     }
   ]
 }

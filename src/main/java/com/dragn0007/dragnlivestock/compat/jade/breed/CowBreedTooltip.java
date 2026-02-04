@@ -35,6 +35,7 @@ public class CowBreedTooltip implements IEntityComponentProvider {
             case 8: return "Hereford";
             case 9: return "Highland";
             case 10: return "Ox";
+            case 11: return "Spanish Fighting";
             default: return "Unknown";
         }
     }

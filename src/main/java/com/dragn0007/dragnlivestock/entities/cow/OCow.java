@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.ai.PauseMeleeAttackGoal;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -26,6 +27,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,6 +39,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
@@ -93,7 +96,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public boolean isMeatBreed() {
-		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 8 || this.getBreed() == 10;
+		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 8 || this.getBreed() == 10 || this.getBreed() == 11;
 	}
 
 	public boolean isNormalBreed() {
@@ -138,10 +141,12 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void registerGoals() {
+		//Todo: Fix fighting
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.4, true));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 2.3D));
+//		this.goalSelector.addGoal(1, new PauseMeleeAttackGoal(this, 1.6, true));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.6, true));
+//		this.goalSelector.addGoal(2, new PanicGoal(this, 2.3D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -149,7 +154,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(3, new CattleFollowHerdLeaderGoal(this, 16.0F));
-		this.goalSelector.addGoal(1, new BullAroundLikeCrazyGoal(this, 1.7F));
+		this.goalSelector.addGoal(2, new BullAroundLikeCrazyGoal(this, 1.7F));
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 2.0F, 2.3D, livingEntity ->
 			livingEntity.getType().is(LOTags.Entity_Types.DOGS) && (livingEntity instanceof TamableAnimal && ((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
@@ -161,6 +166,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 2.0F, 2.3D, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
+		));
+
+		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, entity ->
+				entity instanceof Player && this.getBreed() == 11 && !this.isBaby() && this.isMale()
 		));
 	}
 
@@ -186,13 +195,22 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		} else {
 			if (isMoving) {
 				if (currentSpeed > speedThreshold) {
-					controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-					controller.setAnimationSpeed(1.1);
+					if (this.isAggressive()) {
+						controller.setAnimation(RawAnimation.begin().then("charge", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(1.1);
+					} else {
+						controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(1.1);
+					}
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				}
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				if (this.isDoneWaiting()) {
+					controller.setAnimation(RawAnimation.begin().then("posture", Animation.LoopType.LOOP));
+				} else {
+					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				}
 			}
 		}
 
@@ -342,6 +360,22 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public boolean isExquisiteQuality() {
 		return this.getQuality() > 75 && this.getQuality() <= 100;
+	}
+
+	public void setAttackDamage() {
+		if (this.getBreed() == 11) {
+			if (this.isGreatQuality()) {
+				this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(2F);
+			} else if (this.isFantasticQuality()) {
+				this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5F);
+			} else if (this.isExquisiteQuality()) {
+				this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5F);
+			} else {
+				this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5F);
+			}
+		} else {
+			this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5F);
+		}
 	}
 
 	public int replenishMilkCounter = 0;
@@ -567,6 +601,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
+	//mostly for Spanish Fighting Bulls, cow postures before attacking
+	public boolean doneWaiting = false;
+	public boolean isDoneWaiting() {
+		return this.doneWaiting;
+	}
+	public void setDoneWaiting(boolean doneWaiting) {
+		this.doneWaiting = doneWaiting;
+	}
+
 	// Generates the base texture
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public int getBreedLocation() {
@@ -767,6 +810,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
 		}
 
+		this.setAttackDamage();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -908,6 +952,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			calf.setQuality(100);
 		}
 
+		calf.setAttackDamage();
 		return calf;
 	}
 
@@ -1060,6 +1105,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 11) {
+			if (random.nextDouble() < 0.15) { //spanish fighting
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				this.setVariant(0);
+			}
+		}
+
 	}
 
 	public void setMarkingByBreed() {
@@ -1151,6 +1204,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (this.getBreed() == 10) { //ox
+			if (random.nextDouble() < 0.15) {
+				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.15) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 11) { //spanish fighting
 			if (random.nextDouble() < 0.15) {
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.15) {
@@ -1261,6 +1322,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 				int[] variants = {1, 3, 7, 8, 10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 11) {
+			if (random.nextDouble() < 0.25) { //spanish fighting
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.25) {
+				this.setHornVariant(8);
 			}
 		}
 

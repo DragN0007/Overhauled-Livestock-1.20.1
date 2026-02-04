@@ -56,6 +56,12 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
                 model.getBone("right_ear").ifPresent(b -> b.setScaleY(1.0F));
             }
 
+            if (entity.getBreed() == 11) {
+                model.getBone("crest").ifPresent(b -> b.setScaleY(1.5F));
+            } else {
+                model.getBone("crest").ifPresent(b -> b.setScaleY(1.0F));
+            }
+
             if (entity.isBaby()) {
                 model.getBone("utters").ifPresent(b -> b.setHidden(true));
                 model.getBone("horns_1").ifPresent(b -> b.setHidden(true));
