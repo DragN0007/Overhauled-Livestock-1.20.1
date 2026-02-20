@@ -22,14 +22,17 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
     @Override
     public void setCustomAnimations(OCamel animatable, long instanceId, AnimationState<OCamel> animationState) {
 
-        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
 
-        if (neck != null && animatable.onGround()) {
-            neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
-            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
-            neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+        float targetYaw = entityData.netHeadYaw();
+
+        if (neck != null) {
+            if (!animatable.onGround() || animatable.isJumping()) {
+                targetYaw = Mth.clamp(targetYaw, -25.0f, 25.0f);
+            }
+            neck.setRotY(targetYaw * Mth.DEG_TO_RAD);
+            neck.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
         }
 
     }

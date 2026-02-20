@@ -285,6 +285,41 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SLEIGH.get())
+                .define('#', Items.IRON_INGOT)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('C', Items.CHEST)
+                .pattern("#  ")
+                .pattern("#AC")
+                .pattern("###")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.COUPE.get())
+                .define('#', ItemTags.PLANKS)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .define('C', LOItems.WAGON_COVER.get())
+                .pattern("#C#")
+                .pattern("#A#")
+                .pattern("B B")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CABRIOLET.get())
+                .define('#', ItemTags.PLANKS)
+                .define('A', LOItems.WAGON_BODY.get())
+                .define('B', LOItems.WAGON_AXEL.get())
+                .define('C', LOItems.WAGON_COVER.get())
+                .pattern(" C ")
+                .pattern("#A#")
+                .pattern(" B ")
+                .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.PLANKS).build()))
+                .save(pFinishedRecipeConsumer);
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOUNT_KEY.get())
                 .define('A', Items.GOLD_NUGGET)

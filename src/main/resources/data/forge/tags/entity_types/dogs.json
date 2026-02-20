@@ -1,31 +1,9 @@
 {
   "replace": false,
   "values": [
-
     {
-      "id": "dragnpets:doberman",
-      "required": false
-    },
-
-    {
-      "id": "dragnpets:border_collie",
-      "required": false
-    },
-
-    {
-      "id": "dragnpets:great_pyrenees",
-      "required": false
-    },
-
-    {
-      "id": "dragnpets:husky",
-      "required": false
-    },
-
-    {
-      "id": "dragnpets:bernese",
+      "id": "dragnpets:o_dog",
       "required": false
     }
-
   ]
 }

@@ -80,6 +80,38 @@
       "title": "Dog Sled"
     },
     {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:mower"
+      },
+      "text": "-Capacity: None $(br2)-Speed: x0.1 $(br2)-Health: 20 $(br2)-Seats: 1 $(br2)-Pullers: 2 $(br2)-Medium+ Pullers $(br2)*Press Space while riding to switch to pathing and mowing modes.",
+      "title": "Mower"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:coupe"
+      },
+      "text": "-Capacity: 18 $(br2)-Speed: x0.25 $(br2)-Health: 80 $(br2)-Seats: 6 $(br2)-Pullers: 2 $(br2)-Medium+ Pullers",
+      "title": "Coupe"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:cabriolet"
+      },
+      "text": "-Capacity: 9 $(br2)-Speed: x0.3 $(br2)-Health: 80 $(br2)-Seats: 2 $(br2)-Pullers: 1 $(br2)-Medium+ Pullers",
+      "title": "Cabriolet"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "dragnlivestock:sleigh"
+      },
+      "text": "-Capacity: 18 $(br2)-Speed: x0.35 $(br2)-Health: 80 $(br2)-Seats: 5 $(br2)-Pullers: 4 $(br2)-Medium+ Pullers",
+      "title": "Sleigh"
+    },
+    {
       "type": "patchouli:text",
       "text": "$(l)Pull Types$()$(br2)Large: Horses, Mules, Oxen, Camels, Caribou, Unicorns $(br2)Medium: Donkeys, Mules, Caribou $(br2)Small: Donkeys, Mountain Goats, Dogs, Wolves"
     }

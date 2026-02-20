@@ -44,6 +44,8 @@ public class PauseMeleeAttackGoal extends Goal {
             return false;
          } else if (!livingentity.isAlive()) {
             return false;
+         } else if (!mob.isMale()) {
+            return false;
          } else {
            if (canPenalize) {
                if (--this.ticksUntilNextPathRecalculation <= 0) {
@@ -89,7 +91,7 @@ public class PauseMeleeAttackGoal extends Goal {
    public void stop() {
       LivingEntity livingentity = this.mob.getTarget();
       if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity)) {
-         this.mob.setTarget((LivingEntity)null);
+         this.mob.setTarget(null);
       }
 
       this.mob.setAggressive(false);
@@ -157,7 +159,7 @@ public class PauseMeleeAttackGoal extends Goal {
          this.mob.swing(InteractionHand.MAIN_HAND);
          this.mob.doHurtTarget(targetEntity);
          this.mob.setDoneWaiting(true);
-         stalkTimer = 30;
+         stalkTimer = 60;
       }
 
    }
@@ -167,6 +169,6 @@ public class PauseMeleeAttackGoal extends Goal {
    }
 
    public double getAttackReachSqr(LivingEntity p_25556_) {
-      return (double)(this.mob.getBbWidth() * 2.0F * this.mob.getBbWidth() * 2.0F + p_25556_.getBbWidth());
+      return this.mob.getBbWidth() * 3.0F * this.mob.getBbWidth() * 3.0F + p_25556_.getBbWidth();
    }
 }

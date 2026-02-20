@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "dragnlivestock:wagon_body"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "#AC",
+    "###"
+  ],
+  "result": {
+    "item": "dragnlivestock:sleigh"
+  },
+  "show_notification": true
+}

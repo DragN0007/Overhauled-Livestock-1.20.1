@@ -141,12 +141,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void registerGoals() {
-		//Todo: Fix fighting
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new HurtByTargetGoal(this));
-//		this.goalSelector.addGoal(1, new PauseMeleeAttackGoal(this, 1.6, true));
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.6, true));
-//		this.goalSelector.addGoal(2, new PanicGoal(this, 2.3D));
+		this.goalSelector.addGoal(1, new PauseMeleeAttackGoal(this, 2.3D, true));
+		this.goalSelector.addGoal(1, new CowPanicGoal(2.3D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -169,7 +167,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, entity ->
-				entity instanceof Player && this.getBreed() == 11 && !this.isBaby() && this.isMale()
+				entity instanceof Player && this.getBreed() == 11 && !this.isBaby() && this.isMale() && entity.getMainHandItem().is(ItemTags.SWORDS)
 		));
 	}
 
@@ -206,7 +204,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
 				}
 			} else {
-				if (this.isDoneWaiting()) {
+				if (this.isAggressive()) {
 					controller.setAnimation(RawAnimation.begin().then("posture", Animation.LoopType.LOOP));
 				} else {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
@@ -1390,5 +1388,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public boolean canJump() {
 		return false;
+	}
+
+	public class CowPanicGoal extends PanicGoal {
+		public CowPanicGoal(double v) {
+			super(OCow.this, v);
+		}
+
+		public boolean shouldPanic() {
+			return this.mob.isFreezing() || this.mob.isOnFire() || this.mob.getHealth() < this.mob.getMaxHealth() / 3 && this.mob.isAlive();
+		}
 	}
 }

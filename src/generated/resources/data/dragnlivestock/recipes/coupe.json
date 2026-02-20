@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "A": {
+      "item": "dragnlivestock:wagon_body"
+    },
+    "B": {
+      "item": "dragnlivestock:wagon_axel"
+    },
+    "C": {
+      "item": "dragnlivestock:wagon_cover"
+    }
+  },
+  "pattern": [
+    "#C#",
+    "#A#",
+    "B B"
+  ],
+  "result": {
+    "item": "dragnlivestock:coupe"
+  },
+  "show_notification": true
+}

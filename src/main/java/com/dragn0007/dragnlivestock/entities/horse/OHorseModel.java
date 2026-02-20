@@ -30,23 +30,18 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         CoreGeoBone reins = getAnimationProcessor().getBone("reins");
 
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+        float targetYaw = entityData.netHeadYaw();
 
-        if (animatable.isWearingMartingale() && animatable.isSaddled()) {
-            neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD - 0.2f));
-            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
-            neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
-        } else if (animatable.onGround()) {
-            neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
-            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
-            neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
-        }
-
-        if (animatable.isWearingMartingale() && animatable.isSaddled()) {
-            head.setRotX(head.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD - 0.2f));
-            float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
-            head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
-
-            reins.setRotX(Mth.DEG_TO_RAD + 0.6f);
+        if (neck != null) {
+            if (!animatable.onGround() || animatable.isJumping()) {
+                targetYaw = Mth.clamp(targetYaw, -25.0f, 25.0f);
+            }
+            neck.setRotY(targetYaw * Mth.DEG_TO_RAD);
+            neck.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
+            if (animatable.isWearingMartingale() && animatable.isSaddled()) {
+                head.setRotX(targetYaw * Mth.DEG_TO_RAD - 0.2f);
+                reins.setRotX(Mth.DEG_TO_RAD + 0.6f);
+            }
         }
     }
 

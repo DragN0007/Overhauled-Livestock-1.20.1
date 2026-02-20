@@ -910,6 +910,24 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
        }
     }
 
+    private boolean falling = false;
+    public boolean isFalling() {
+        return this.falling;
+    }
+    public void setFalling(boolean fall) {
+        this.falling = fall;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.getDeltaMovement().y < -0.5) { //about 1.5 blocks
+            System.out.println(this.getDeltaMovement().y);
+            this.setFalling(true);
+        }
+    }
+
     public int saddleSlot() {
         return 0;
     }
