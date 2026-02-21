@@ -116,10 +116,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
-    public boolean isWearingMartingale() {
-        return this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.MARTINGALE_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
-    }
-
     public void tickRidden(Player player, Vec3 vec3) {
         Vec2 vec2 = this.getRiddenRotation(player);
 
@@ -299,7 +295,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     @Override
     public boolean isArmor(ItemStack itemStack) {
-        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS) || itemStack.getItem() instanceof LightHorseArmorItem;
+        return itemStack.getItem() instanceof HorseArmorItem || itemStack.is(LOTags.Items.ARMOR_SLOT_OTHER) || itemStack.getItem() instanceof LightHorseArmorItem;
     }
 
     @Override

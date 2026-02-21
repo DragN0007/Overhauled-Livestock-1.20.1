@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "dragnlivestock:rodeo_harness",
+    "dragnlivestock:wagon_harness",
     "dragnlivestock:holiday_wagon_harness",
     "dragnlivestock:rainbow_string_lights",
     "dragnlivestock:yellow_string_lights",

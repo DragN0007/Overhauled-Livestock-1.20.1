@@ -43,6 +43,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -61,18 +62,18 @@ public class Unicorn extends OHorse implements GeoEntity {
 	protected static final ResourceLocation N_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/nether_unicorn");
 	protected static final ResourceLocation E_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/end_unicorn");
 	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
+
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
-		}
-		if (this.getSpecies() == 0) {
+		} else if (ModList.get().isLoaded("tfc")) {
+			return TFC_LOOT_TABLE;
+		} else if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getSpecies() == 0) {
 			return O_LOOT_TABLE;
-		}
-		if (this.getSpecies() == 1) {
+		} else if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getSpecies() == 1) {
 			return N_LOOT_TABLE;
-		}
-		if (this.getSpecies() == 2) {
+		} else if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getSpecies() == 2) {
 			return E_LOOT_TABLE;
 		} else {
 			return VANILLA_LOOT_TABLE;

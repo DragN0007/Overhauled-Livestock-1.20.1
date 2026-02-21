@@ -74,7 +74,7 @@ public class LOTags {
 
         public static final TagKey<Item> SADDLE = tag("saddle");
         public static final TagKey<Item> DECOR_FOR_O_MOUNTS = tag("decor_for_o_mounts");
-        public static final TagKey<Item> ARMOR_FOR_O_MOUNTS = tag("armor_for_o_mounts");
+        public static final TagKey<Item> ARMOR_SLOT_OTHER = tag("armor_slot_other");
         public static final TagKey<Item> CARPET_BLANKETS = tag("carpet_blankets");
         public static final TagKey<Item> MEDIEVAL_BLANKETS = tag("medieval_blankets");
         public static final TagKey<Item> MODERN_BLANKETS = tag("modern_blankets");
@@ -110,6 +110,7 @@ public class LOTags {
         public static final TagKey<EntityType<?>> SMALL_DRAUGHT_ANIMALS = tag("small_draught_animals");
         public static final TagKey<EntityType<?>> CANNOT_MOUNT_WAGON = tag("cannot_mount_wagon");
         public static final TagKey<EntityType<?>> ROOSTERS_FEND = forgeTag("roosters_fend");
+        public static final TagKey<EntityType<?>> HUNTING_DOGS = forgeTag("hunting_dogs");
 
         public static final TagKey<EntityType<?>> LUMBER_WAGON = tag("lumber_wagon");
         public static final TagKey<EntityType<?>> MINING_CART = tag("mining_cart");

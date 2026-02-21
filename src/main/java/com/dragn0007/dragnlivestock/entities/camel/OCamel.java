@@ -77,11 +77,11 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			return VANILLA_LOOT_TABLE;
-		}
-		if (ModList.get().isLoaded("tfc")) {
+		} else if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
+		} else {
+			return LOOT_TABLE;
 		}
-		return LOOT_TABLE;
 	}
 
 	@Override

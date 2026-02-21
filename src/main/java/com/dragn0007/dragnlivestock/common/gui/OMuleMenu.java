@@ -46,7 +46,7 @@ public class OMuleMenu extends AbstractContainerMenu {
                 if (itemStack.getItem() instanceof HorseArmorItem || itemStack.getItem() instanceof LightHorseArmorItem) {
                     return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
                 }
-                if (itemStack.is(LOTags.Items.ARMOR_FOR_O_MOUNTS) || itemStack.is(LOTags.Items.COSMETICS)) {
+                if (itemStack.is(LOTags.Items.ARMOR_SLOT_OTHER) || itemStack.is(LOTags.Items.COSMETICS)) {
                     return !this.hasItem() && OMuleMenu.this.oMule.canWearArmor();
                 }
                 return false;

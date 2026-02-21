@@ -15,13 +15,6 @@
       "text": "Blankets can be placed in the decor slot of an O-Equine. They are simply cosmetic and offer no protection. Medieval, Modern, Racer and Western blankets are their own items, but normal vanilla carpets can be used too."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": {
-        "item": "dragnlivestock:martingale_harness"
-      },
-      "text": "The Martingale Harness is mainly utilitarian. When applied to your horse's armor slot, and paired with a saddle, it'll keep your O-Horse's head and neck lower, offering you a better view of the ground in front of you."
-    },
-    {
       "type": "patchouli:text",
       "text": "Caparisons come with Medieval Embroidery compatibility. They can be placed in the decor slot of an O-Horse and can be worn alongside armor. They are simply cosmetic and offer no protection."
     },

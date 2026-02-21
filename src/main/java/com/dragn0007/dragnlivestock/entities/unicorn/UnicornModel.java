@@ -23,21 +23,21 @@ public class UnicornModel extends DefaultedEntityGeoModel<Unicorn> {
     public void setCustomAnimations(Unicorn animatable, long instanceId, AnimationState<Unicorn> animationState) {
 
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
-        CoreGeoBone head = getAnimationProcessor().getBone("head");
-        CoreGeoBone reins = getAnimationProcessor().getBone("reins");
 
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
         float targetYaw = entityData.netHeadYaw();
 
         if (neck != null) {
-            if (!animatable.onGround() || animatable.isJumping()) {
-                targetYaw = Mth.clamp(targetYaw, -25.0f, 25.0f);
-            }
-            neck.setRotY(targetYaw * Mth.DEG_TO_RAD);
-            neck.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
-            if (animatable.isWearingMartingale() && animatable.isSaddled()) {
-                head.setRotX(targetYaw * Mth.DEG_TO_RAD - 0.2f);
-                reins.setRotX(Mth.DEG_TO_RAD + 0.6f);
+            if (animatable.isVehicle()) {
+                if (!animatable.onGround() || animatable.isJumping()) {
+                    targetYaw = Mth.clamp(targetYaw, -25.0f, 25.0f);
+                }
+                neck.setRotY(targetYaw * Mth.DEG_TO_RAD);
+                neck.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
+            } else {
+                neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
+                float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
+                neck.setRotY(neck.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
             }
         }
     }

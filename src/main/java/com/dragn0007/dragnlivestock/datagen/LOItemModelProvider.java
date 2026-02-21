@@ -64,7 +64,6 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.WHITE_HEAVY_SADDLE);
         simpleItem(LOItems.RODEO_HARNESS);
         simpleItem(LOItems.WAGON_HARNESS);
-        simpleItem(LOItems.MARTINGALE_HARNESS);
 
         simpleItem(LOItems.UTILITY_KNIFE);
         simpleItem(LOItems.SPINDLE);
