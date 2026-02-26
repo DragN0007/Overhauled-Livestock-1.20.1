@@ -1476,7 +1476,7 @@ public class SpawnReplacer {
         Unicorn unicorn = EntityTypes.UNICORN_ENTITY.get().create(event.getLevel());
         if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.SPAWN_UNICORNS.get()) {
 
-            if (event.getEntity().getClass() == Rabbit.class && random.nextDouble() < 0.008 && event.getLevel().isDay() && event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
+            if (event.getEntity().getClass() == Rabbit.class && random.nextDouble() < 0.0012 && event.getLevel().isDay() && event.getLevel().getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
                 Rabbit rabbit = (Rabbit) event.getEntity();
 
                 if (event.getLevel().isClientSide) {
@@ -1518,7 +1518,7 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getEntity().getClass() == PiglinBrute.class && random.nextDouble() < 0.01) {
+            if (event.getEntity().getClass() == PiglinBrute.class && random.nextDouble() < 0.007) {
                 PiglinBrute brute = (PiglinBrute) event.getEntity();
 
                 if (event.getLevel().isClientSide) {

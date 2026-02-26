@@ -17,19 +17,55 @@ import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.List;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvent {
 
     @SubscribeEvent
-    public static void onTryCureEntity(PlayerInteractEvent.EntityInteract event) {
+    public static void leashHandler(PlayerInteractEvent.EntityInteract event) {
+        Player player = event.getEntity();
+        ItemStack stack = event.getItemStack();
+
+        if (event.getTarget() instanceof Mob mob) {
+            if (stack.is(Items.LEAD) && player.isShiftKeyDown()) {
+                List<Mob> currentlyLeading = mob.level().getEntitiesOfClass(Mob.class,
+                        player.getBoundingBox().inflate(10.0D),
+                        (animal) -> animal.getLeashHolder() == player
+                );
+
+                if (!currentlyLeading.isEmpty()) {
+                    for (Mob sourceMob : currentlyLeading) {
+                        mob.setLeashedTo(sourceMob, true);
+                    }
+                } else {
+                    mob.setLeashedTo(player, true);
+                }
+            }
+
+            if (mob.isLeashed() && !(mob.getLeashHolder() instanceof Player)) {
+                if (stack.is(Items.SHEARS)) {
+                    mob.dropLeash(true, !player.isCreative());
+                    mob.setLeashedTo(null, true);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onUseMagnifyingGlass(PlayerInteractEvent.EntityInteract event) {
 
         if (event.getTarget() instanceof LivingEntity entity) {
             Player player = event.getEntity();
