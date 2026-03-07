@@ -1041,6 +1041,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
         if (!fertilizedEgg.isEmpty()) {
             CompoundTag childNBT = new CompoundTag();
             child.save(childNBT);
+            childNBT.remove("UUID");
             fertilizedEgg.setTag(childNBT);
 
             ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
