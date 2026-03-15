@@ -914,7 +914,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
             int eggCount = LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get();
             boolean ayamMutate = false;
             if (this.random.nextInt(48) <= 1) {
-                // todo: are orpington, polish, wyandotte, and brahma not supposed to have this chance?
                 eggCount = 1;
                 ayamMutate = true;
             }
@@ -926,8 +925,8 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
                 if (cancelled) {
                     this.setAge(6000);
                     father.setAge(6000);
-                    this.resetLove();
-                    father.resetLove();
+					this.resetLove();
+					father.resetLove();
                     return;
                 }
                 if (child != null) {
@@ -975,11 +974,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
                     this.finalizeSpawnChildFromBreeding(pLevel, father, child);
                     dropFertilizedEgg(pLevel, child);
 
-
                     if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
                         this.setAge(this.isMale() ? LivestockOverhaulCommonConfig.MALE_COOLDOWN.get() : LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
                         father.setAge(father.isMale() ? LivestockOverhaulCommonConfig.MALE_COOLDOWN.get() : LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-
                     } else {
                         this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
                         father.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());

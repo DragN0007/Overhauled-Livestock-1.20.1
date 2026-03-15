@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -433,19 +434,14 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
 			return false;
-		} else if (!(animal instanceof OPig)) {
+		} else if (!(animal instanceof OPig partner)) {
 			return false;
 		} else {
-			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((OPig) animal).canParent();
-			} else {
-				OPig partner = (OPig) animal;
-				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return isFemale();
-				}
+			if (this.canParent() && partner.canParent()) {
+				return !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() || this.getGender() != partner.getGender();
 			}
+			return false;
 		}
-		return false;
 	}
 
 	public int maxBabyAmount = LivestockOverhaulCommonConfig.MAX_PIG_BABIES.get();

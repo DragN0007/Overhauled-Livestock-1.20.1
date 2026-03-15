@@ -21,6 +21,7 @@ public class OChickenRender extends GeoEntityRenderer<OChicken> {
 
         if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
             if (!entity.isBaby()) {
+                poseStack.scale(1F, 1F, 1F);
                 if (entity.isMale()) {
                     model.getBone("tail2").ifPresent(b -> b.setHidden(false));
                     model.getBone("comb").ifPresent(b -> b.setHidden(false));
@@ -40,6 +41,7 @@ public class OChickenRender extends GeoEntityRenderer<OChicken> {
                 model.getBone("gizzard").ifPresent(b -> b.setScaleX(0.2F));
                 model.getBone("gizzard").ifPresent(b -> b.setScaleY(0.2F));
                 model.getBone("gizzard").ifPresent(b -> b.setScaleZ(0.2F));
+                poseStack.scale(0.5F, 0.5F, 0.5F);
             }
 
             if (entity.isTagged()) {
