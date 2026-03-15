@@ -1,12 +1,14 @@
 package com.dragn0007.dragnlivestock.entities.chicken;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -17,6 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -32,21 +35,25 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.Random;
 
 public class OChicken extends Animal implements GeoEntity, Taggable {
@@ -526,7 +533,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		return this.isAlive() && !this.isBaby();
 	}
 	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+	public void equipTag(@Nullable SoundSource soundSource) {
 		if(soundSource != null) {
 			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 		}
@@ -606,7 +613,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 		this.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
-		this.setGender(random.nextInt(OChicken.Gender.values().length));
+		this.setGender(random.nextInt(Gender.values().length));
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			this.setQuality(random.nextInt(30));
@@ -879,9 +886,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 	}
 
-	public boolean canParent() {
-		return !this.isBaby() && this.isInLove();
-	}
+    public boolean canParent() {
+        return !this.isBaby() && this.isInLove();
+    }
 
 	public enum Gender {
 		FEMALE,
@@ -901,193 +908,154 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(GENDER, gender);
 	}
 
-	@Override
-	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
-		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
-		if (pAnimal instanceof OChicken partner) {
-			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				if (this.isMale()) {
-					this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
-				} else {
-					this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-				}
-				if (partner.isMale()) {
-					partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
-				} else {
-					partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-				}
-			} else {
-				this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-				partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-			}
-		}
-	}
+    @Override
+    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
+        if (pMate instanceof OChicken father && (father.isMale() || !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get())) {
+            int eggCount = LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get();
+            boolean ayamMutate = false;
+            if (this.random.nextInt(48) <= 1) {
+                // todo: are orpington, polish, wyandotte, and brahma not supposed to have this chance?
+                eggCount = 1;
+                ayamMutate = true;
+            }
+            for (int i = 0; i < eggCount; i++) {
+                OChicken child = (OChicken) this.getBreedOffspring(pLevel, father);
+                final BabyEntitySpawnEvent event = new BabyEntitySpawnEvent(this, father, child);
+                final boolean cancelled = MinecraftForge.EVENT_BUS.post(event);
+                child = (OChicken) event.getChild();
+                if (cancelled) {
+                    this.setAge(6000);
+                    father.setAge(6000);
+                    this.resetLove();
+                    father.resetLove();
+                    return;
+                }
+                if (child != null) {
+                    child.setBaby(true);
+                    child.setGender(random.nextInt(OChicken.Gender.values().length));
 
-	public boolean canMate(Animal animal) {
-		if (animal == this) {
-			return false;
-		} else if (!(animal instanceof OChicken)) {
-			return false;
-		} else {
-			if (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				return this.canParent() && ((OChicken) animal).canParent();
-			} else {
-				OChicken partner = (OChicken) animal;
-				if (this.canParent() && partner.canParent() && this.getGender() != partner.getGender()) {
-					return isFemale();
-				}
-			}
-		}
-		return false;
-	}
+                    // child takes a 60% chance for the hen's breed or a 40% chance for the rooster's
+                    int breed = random.nextDouble() <= 0.6 ? this.getBreed() : father.getBreed();
+                    int[] breedsExclAyam = {0, 1, 2, 3, 4, 5, /*6,*/ 7, 8, 9, 10};
+                    boolean breedChance = random.nextInt(5) == 0;
+                    if (breedChance) breed = breedsExclAyam[random.nextInt(breedsExclAyam.length)];
+                    if (ayamMutate) breed = 6;
+                    child.setBreed(breed);
 
-	public int eggsLaid = 0;
-	public int eggLayCooldown = 0;
+                    if (!breedChance && !ayamMutate) {
+                        int variant = random.nextDouble() <= 0.6 ? this.getVariant() : father.getVariant();
+                        if (random.nextDouble() < 0.2) variant = random.nextInt(OChickenModel.Variant.values().length);
+                        child.setVariant(variant);
+                        int overlay = random.nextDouble() <= 0.6 ? this.getOverlayVariant() : father.getOverlayVariant();
+                        if (random.nextDouble() < 0.2)
+                            overlay = random.nextInt(OChickenMarkingLayer.Overlay.values().length);
+                        child.setOverlayVariant(overlay);
+                    } else {
+                        if (random.nextDouble() < 0.5 || ayamMutate) child.setColorByBreed();
+                        if (random.nextDouble() < 0.5 || ayamMutate) child.setMarkingByBreed();
+                    }
 
-	@Override
-	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+                    if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+                        double chance = random.nextDouble();
+                        int childQuality = (this.getQuality() + father.getQuality()) / 2;
+                        if (chance <= 0.05) {
+                            childQuality += random.nextInt(50);
+                        } else if (chance > 0.05 && chance <= 0.25) {
+                            childQuality += random.nextInt(25);
+                        } else if (chance > 0.25 && chance <= 0.60) {
+                            childQuality += random.nextInt(10);
+                        } else {
+                            childQuality += random.nextInt(5);
+                        }
 
-		OChicken partner = (OChicken) ageableMob;
+                        child.setQuality(Mth.clamp(childQuality, 0, 100));
+                        //makes sure the baby doesn't go over 100%, since when it does, it loops back to "Fine" rather than "Exquisite"
+                    }
 
-		if ((this.isMale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get())
-				|| !this.isInLove()
-				|| !this.isAlive()
-				|| eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
-			return null;
-		}
+                    this.finalizeSpawnChildFromBreeding(pLevel, father, child);
+                    dropFertilizedEgg(pLevel, child);
 
-		eggsLaid++;
-		dropFertilizedEgg(serverLevel);
-		return null;
-	}
 
-	public void tick() {
-		super.tick();
+                    if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
+                        this.setAge(this.isMale() ? LivestockOverhaulCommonConfig.MALE_COOLDOWN.get() : LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+                        father.setAge(father.isMale() ? LivestockOverhaulCommonConfig.MALE_COOLDOWN.get() : LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
 
-		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
-			if (this.isFemale() && eggLayCooldown >= 6000) {
-				this.resetLove();
-				eggsLaid = 0;
-				eggLayCooldown = 0;
-			} else if (this.isMale() && eggLayCooldown >= 0) {
-				this.resetLove();
-			}
-		}
-	}
+                    } else {
+                        this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+                        father.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+                    }
+                    this.resetLove();
+                    father.resetLove();
+                    pLevel.broadcastEntityEvent(this, (byte) 18);
+                    if (pLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+                        pLevel.addFreshEntity(new ExperienceOrb(pLevel, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
+                    }
+                }
+            }
+        }
+    }
 
-	protected void dropFertilizedEgg(ServerLevel serverLevel) {
-		if (!this.isFemale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-			return;
-		}
+    @Override
+    public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
+        Optional.ofNullable(this.getLoveCause()).or(() -> Optional.ofNullable(pAnimal.getLoveCause())).ifPresent((awarded) -> {
+            awarded.awardStat(Stats.ANIMALS_BRED);
+            CriteriaTriggers.BRED_ANIMALS.trigger(awarded, this, pAnimal, pBaby);
+        });
+    }
 
-		//TODO; Make eggs take a 60% chance for the hen's breed or a 40% chance for the rooster's
-		enum EggBreed {
-			LEGHORN(LOItems.FERTILIZED_EGG.get()),
-			AMERAUCANA(LOItems.FERTILIZED_AMERAUCANA_EGG.get()),
-			CREAM_LEGBAR(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get()),
-			MARANS(LOItems.FERTILIZED_MARANS_EGG.get()),
-			OLIVE_EGGER(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get()),
-			SUSSEX_SILKIE(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get()),
-			AYAM_CEMANI(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get()),
-			ORPINGTON(LOItems.FERTILIZED_ORPINGTON_EGG.get()),
-			POLISH(LOItems.FERTILIZED_POLISH_EGG.get()),
-			WYANDOTTE(LOItems.FERTILIZED_WYANDOTTE_EGG.get()),
-			BRAHMA(LOItems.FERTILIZED_BRAHMA_EGG.get()),
-			;
+    @Override
+    public boolean canMate(Animal animal) {
+        if (animal == this) {
+            return false;
+        } else if (!(animal instanceof OChicken partner)) {
+            return false;
+        } else {
+            if (this.canParent() && partner.canParent()) {
+                return !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get() || this.getGender() != partner.getGender();
+            }
+            return false;
+        }
+    }
 
-			public final Item item;
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+        return EntityTypes.O_CHICKEN_ENTITY.get().create(serverLevel);
+    }
 
-			EggBreed(Item item) {
-				this.item = item;
-			}
-		}
+    protected void dropFertilizedEgg(ServerLevel serverLevel, OChicken child) {
+        ItemStack fertilizedEgg = ItemStack.EMPTY;
+        switch (child.getBreed()) {
+            case 0 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
+            case 1 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
+            case 2 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
+            case 3 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_MARANS_EGG.get());
+            case 4 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
+            case 5 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
+            case 6 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
+            case 7 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_ORPINGTON_EGG.get());
+            case 8 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_POLISH_EGG.get());
+            case 9 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
+            case 10 -> fertilizedEgg = new ItemStack(LOItems.FERTILIZED_BRAHMA_EGG.get());
+        }
 
-		int rareChickenChance = this.random.nextInt(48);
+        if (!fertilizedEgg.isEmpty()) {
+            CompoundTag childNBT = new CompoundTag();
+            child.save(childNBT);
+            childNBT.remove("UUID");
+            fertilizedEgg.setTag(childNBT);
 
-		if ((this.isFemale() && LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) || !LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-			if (this.getBreed() == 0) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 1) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AMERAUCANA_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 2) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_CREAM_LEGBAR_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 3) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_MARANS_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 4) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_OLIVE_EGGER_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 5) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_SUSSEX_SILKIE_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 6) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (rareChickenChance <= 1) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_AYAM_CEMANI_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-				eggsLaid = 3;
-			}
-
-			if (this.getBreed() == 7) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_ORPINGTON_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 8) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_POLISH_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 9) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_WYANDOTTE_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-
-			if (this.getBreed() == 10) {
-				ItemStack fertilizedEgg = new ItemStack(LOItems.FERTILIZED_BRAHMA_EGG.get());
-				ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
-				serverLevel.addFreshEntity(eggEntity);
-			}
-		}
-
-		serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 1.0F, 1.0F);
-	}
+            ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
+            serverLevel.addFreshEntity(eggEntity);
+            serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        }
+    }
 
 
 	public boolean removeWhenFarAway(double p_28266_) {
 		return this.isChickenJockey();
 	}
 
-	public void positionRider(Entity p_289537_, Entity.MoveFunction p_289541_) {
+	public void positionRider(Entity p_289537_, MoveFunction p_289541_) {
 		super.positionRider(p_289537_, p_289541_);
 		float f = Mth.sin(this.yBodyRot * ((float)Math.PI / 180F));
 		float f1 = Mth.cos(this.yBodyRot * ((float)Math.PI / 180F));
