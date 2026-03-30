@@ -82,7 +82,10 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, default_path + "cinnamon.png")),
         STRAWBERRY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "strawberry_roan.png")),
         GOLD(new ResourceLocation(LivestockOverhaul.MODID, default_path + "gold.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png"));
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png")),
+        GRULLO_DUN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grullo_dun.png")),
+        STEEL_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "steel_grey.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
@@ -127,7 +130,10 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cinnamon.png")),
         STRAWBERRY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "strawberry_roan.png")),
         GOLD(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "gold.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "silver.png"));
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "silver.png")),
+        GRULLO_DUN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grullo_dun.png")),
+        STEEL_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "steel_grey.png")),
+        ;
 
         public final ResourceLocation resourceLocation;
         SVariant(ResourceLocation resourceLocation) {

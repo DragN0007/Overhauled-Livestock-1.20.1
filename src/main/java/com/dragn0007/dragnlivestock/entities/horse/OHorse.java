@@ -510,6 +510,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
+		//update LO: Scraps if this gets changed!
 		if ((!this.isTamed() || this.isWearingRodeoHarness()) && this.isVehicle() && !this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
 			controller.setAnimationSpeed(1.3);
@@ -658,6 +659,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (this.isFollower() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied())) {
 			this.getNavigation().moveTo(this.leader, 1.0D);
 		}
+	}
+
+	@Override
+	public float getStepHeight() {
+		return 1.0F;
 	}
 
 	public void addFollowers(Stream<? extends OHorse> stream) {

@@ -737,6 +737,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
+    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
+        super.spawnChildFromBreeding(pLevel, pMate);
+    }
+
+    @Override
     public boolean canWearArmor() {
         return true;
     }
