@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-18T12:59:27.1674804	Recipes
+// 1.20.1	2026-04-14T15:17:26.5638579	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 43b25a39d8cd493d5aedd8351340b99233fbe0de data/dragnlivestock/advancements/recipes/misc/berry_glazed_mutton_rib.json
 b9aa6a8d4052891e5a9c2e8426679bfbdd3bc1f6 data/dragnlivestock/advancements/recipes/misc/berry_glazed_pork_rib_chop.json
@@ -320,7 +320,6 @@ d3712a0405a58af4d5d6bef5390e302ff693c7bc data/dragnlivestock/advancements/recipe
 20e9b28adbd3170ba633bfe3406534349808525d data/dragnlivestock/advancements/recipes/misc/magenta_wool_staple_8.json
 5d46c029b70128d30b75b52cfbe7652eefbe97ba data/dragnlivestock/advancements/recipes/misc/magnifying_glass.json
 761bdc0c0ebb3a2cc9833aa2ae01905544599328 data/dragnlivestock/advancements/recipes/misc/mane_scissors.json
-d60a12bb5d5c9e99b505571916bbfc5f6d925d68 data/dragnlivestock/advancements/recipes/misc/martingale_harness.json
 7409913403ee6e559791a98c3d8bc718e2383bc6 data/dragnlivestock/advancements/recipes/misc/melon_soup.json
 a778bb5a5386468ca79b84bd956ad15ddd754ee8 data/dragnlivestock/advancements/recipes/misc/mining_cart.json
 1b2e2b976ed74511406a5f7ce145c6f36af47cf0 data/dragnlivestock/advancements/recipes/misc/mount_key.json
@@ -815,7 +814,6 @@ b43515c52a278b938a41d337564ff53fdf382376 data/dragnlivestock/recipes/magenta_woo
 88d02f2d781040d47adc99f296b9780901243d58 data/dragnlivestock/recipes/magenta_wool_staple_8.json
 d943a6dccc3daa06310a7c7cbeaec3daaab9a512 data/dragnlivestock/recipes/magnifying_glass.json
 401d658b0d6f7b3fbad764cb07f9ad91a451f902 data/dragnlivestock/recipes/mane_scissors.json
-5a9b31755d5d7a513871ae49301bdf497d7f7531 data/dragnlivestock/recipes/martingale_harness.json
 9336c6a6f176161914ebaad8236f14bf603b5a22 data/dragnlivestock/recipes/melon_soup.json
 50fd7c2c6f13e740962fa3f8d5b2fb6ad4c9cf12 data/dragnlivestock/recipes/mining_cart.json
 75576a1e61b735ad6896e2d001d2a76feadfecba data/dragnlivestock/recipes/mount_key.json

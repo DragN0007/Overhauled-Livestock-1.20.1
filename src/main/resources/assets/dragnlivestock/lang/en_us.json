@@ -169,6 +169,7 @@
   "item.dragnlivestock.utility_knife": "Utility Knife",
   "item.dragnlivestock.spindle": "Spindle",
   "item.dragnlivestock.mount_key": "Mount Key",
+  "item.dragnlivestock.mount_registry": "Mount Registry",
   "item.dragnlivestock.magnifying_glass": "Magnifying Glass",
   "item.dragnlivestock.coat_oscillator": "Coat Oscillator",
   "item.dragnlivestock.marking_oscillator": "Marking Oscillator",
@@ -967,5 +968,7 @@
   "key.dragnlivestock.plow_mode": "Switch Plow/ Mower Mode",
   "key.dragnlivestock.horse_walk_backwards": "Walk Backwards - Horse",
   "tooltip.dragnlivestock.mount_registry.tooltip": "Mount owned by",
-  "tooltip.dragnlivestock.rabbit_poop.tooltip": "Acts like bonemeal, but more potent."
+  "tooltip.dragnlivestock.rabbit_poop.tooltip": "Acts like bonemeal, but more potent.",
+  "tooltip.dragnlivestock.mount_name.tooltip": "Mount Name: ",
+  "tooltip.dragnlivestock.owner_name.tooltip": "Owner :"
 }

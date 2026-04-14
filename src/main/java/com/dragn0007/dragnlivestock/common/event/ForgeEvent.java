@@ -14,21 +14,24 @@ import com.dragn0007.dragnlivestock.entities.pig.OPig;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
+import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.MountRegistryItem;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -59,6 +62,38 @@ public class ForgeEvent {
                 if (stack.is(Items.SHEARS)) {
                     mob.dropLeash(true, !player.isCreative());
                     mob.setLeashedTo(null, true);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onUseMountRegistry(PlayerInteractEvent.EntityInteract event) {
+        if (event.getTarget() instanceof AbstractOMount entity) {
+            Player player = event.getEntity();
+            ItemStack stack = event.getItemStack();
+            Item item = stack.getItem();
+            CompoundTag tag = stack.getOrCreateTag();
+
+            if (item instanceof MountRegistryItem) {
+                if (entity.getOwnerUUID() != player.getUUID()) {
+                    String ownerUUID = stack.getTag().getString("ownerUUID");
+                    if (!ownerUUID.isEmpty()) {
+                        String name = stack.getTag().getString("mount_name");
+                        tag.putString("mount_name", entity.getName().getString());
+                        tag.putBoolean("has_mount", true);
+                        tag.putString("ownerUUID", player.getUUID().toString());
+                        tag.putString("owner_name", player.getName().getString());
+                        entity.setOwnerUUID(player.getUUID());
+                        player.displayClientMessage(Component.translatable(name + " has been transferred to you!").withStyle(ChatFormatting.GOLD), true);
+                        if (entity.getOwner() instanceof Player ownerPlayer)
+                        ownerPlayer.displayClientMessage(Component.translatable(name + " has been transferred!").withStyle(ChatFormatting.GOLD), true);
+                    }
+                } else {
+                    tag.putString("mount_name", entity.getName().getString());
+                    tag.putBoolean("has_mount", true);
+                    tag.putString("ownerUUID", player.getUUID().toString());
+                    tag.putString("owner_name", player.getName().getString());
                 }
             }
         }

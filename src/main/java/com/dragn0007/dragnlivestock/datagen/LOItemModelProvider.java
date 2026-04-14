@@ -68,6 +68,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.UTILITY_KNIFE);
         simpleItem(LOItems.SPINDLE);
         simpleItem(LOItems.MOUNT_KEY);
+        simpleItem(LOItems.MOUNT_REGISTRY);
         simpleItem(LOItems.COAT_OSCILLATOR);
         simpleItem(LOItems.MARKING_OSCILLATOR);
         simpleItem(LOItems.BREED_OSCILLATOR);
