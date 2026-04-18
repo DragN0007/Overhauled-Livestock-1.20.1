@@ -172,12 +172,6 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof ODonkey animal) {
-                    String breed = animal.getModelResource().toString();
-                    String noFillerTextBreed = breed.replaceAll(".+donkey/", "");
-                    String noUnderscoresTextBreed = noFillerTextBreed.replaceAll("_", " ");
-                    String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
-                    String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
-
                     String coat = animal.getTextureResource().toString();
                     String noFillerTextCoat = coat.replaceAll(".+donkey/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
@@ -190,17 +184,17 @@ public class ForgeEvent {
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
                     String markingText = "Marking: " + noPNGTextMarking.toUpperCase();
 
-                    player.displayClientMessage(Component.translatable(breedText + " | " + coatText + " | " + markingText).withStyle(ChatFormatting.GOLD), true);
+                    player.displayClientMessage(Component.translatable(coatText + " | " + markingText).withStyle(ChatFormatting.GOLD), true);
                 }
 
                 if (entity instanceof FarmGoat animal) {
-                    String breed = animal.getModelResource().toString();
+                    String breed = String.valueOf(animal.getBreed());
                     String noFillerTextBreed = breed.replaceAll(".+farm_goat/", "");
                     String noUnderscoresTextBreed = noFillerTextBreed.replaceAll("_", " ");
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
                     String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
 
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+farm_goat/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
@@ -226,7 +220,7 @@ public class ForgeEvent {
                     String noFillerTextCoat = coat.replaceAll(".+frog/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
-                    String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
+                    String coatText = "Morph Color: " + noPNGTextCoat.toUpperCase();
 
                     String marking = animal.getOverlayLocation().toString();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");

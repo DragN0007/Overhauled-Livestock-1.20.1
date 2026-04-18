@@ -1072,7 +1072,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
-        this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
+//        this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
     }
     public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.STRING);
     public String getTextureResource() {
@@ -1088,7 +1088,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
     public void setOverlayVariant(int variant) {
         this.entityData.set(OVERLAY, variant);
-        this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation.toString());
     }
     public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.STRING);
     public String getOverlayLocation() {
@@ -1099,9 +1098,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-    public ResourceLocation getModelResource() {
-        return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
-    }
+//    public ResourceLocation getModelResource() {
+//        return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
+//    }
     public int getBreed() {
         return this.entityData.get(BREED);
     }
