@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
@@ -72,9 +73,11 @@ public class OBee extends Bee implements GeoEntity {
 
 		if (itemStack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
 			if (player.isShiftKeyDown()) {
-				this.setVariant(this.getVariant() - 1);
-				this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
-				return InteractionResult.sidedSuccess(this.level().isClientSide);
+				if (this.getVariant() > 0) {
+					this.setVariant(this.getVariant() - 1);
+					this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
+					return InteractionResult.SUCCESS;
+				}
 			}
 			this.setVariant(this.getVariant() + 1);
 			this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
