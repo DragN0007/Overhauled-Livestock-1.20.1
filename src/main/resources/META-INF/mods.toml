@@ -36,6 +36,13 @@ versionRange = "[1.20.1-84,)"
 ordering="NONE"
 side="BOTH"
 
+
+[[dependencies.dragnlivestock]]
+modId="dragnpets"
+mandatory=false
+versionRange = "[2.1,)"
+ordering="NONE"
+side="BOTH"
 [[dependencies.dragnlivestock]]
 modId="medievalembroidery"
 mandatory=false
