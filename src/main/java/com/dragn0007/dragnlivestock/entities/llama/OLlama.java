@@ -5,7 +5,6 @@ import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.LlamaFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OLlamaFollowCaravanGoal;
-import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;

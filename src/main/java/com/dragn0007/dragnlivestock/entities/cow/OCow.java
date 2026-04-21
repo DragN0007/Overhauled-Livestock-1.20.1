@@ -7,7 +7,6 @@ import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.PauseMeleeAttackGoal;
-import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;

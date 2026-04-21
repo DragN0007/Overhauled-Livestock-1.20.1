@@ -8,7 +8,6 @@ import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
-import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
