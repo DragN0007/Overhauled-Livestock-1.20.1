@@ -501,9 +501,9 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 }
                 if (this instanceof Unicorn) {
                     Unicorn unicorn = (Unicorn) this;
-                    UnicornSpecies currentBreed = UnicornSpecies.values()[unicorn.getBreed()];
+                    UnicornSpecies currentBreed = UnicornSpecies.values()[unicorn.getSpecies()];
                     UnicornSpecies nextBreed = currentBreed.next();
-                    unicorn.setBreed(nextBreed.ordinal());
+                    unicorn.setSpecies(nextBreed.ordinal());
                 }
                 this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
                 return InteractionResult.SUCCESS;
