@@ -43,7 +43,7 @@ public class OCamelMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack itemStack) {
                 if (itemStack.is(LOTags.Items.CAMEL_ARMOR)) {
                     return !this.hasItem() && OCamelMenu.this.oCamel.canWearArmor();
-                } else if (itemStack.is(LOTags.Items.DECOR_FOR_O_MOUNTS)) {
+                } else if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
                     return !this.hasItem() && OCamelMenu.this.oCamel.canWearArmor();
                 }
                 return false;
