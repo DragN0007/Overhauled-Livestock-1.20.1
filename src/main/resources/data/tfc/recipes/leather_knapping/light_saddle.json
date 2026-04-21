@@ -1,0 +1,14 @@
+{
+  "type": "tfc:knapping",
+  "knapping_type": "tfc:leather",
+  "pattern": [
+    "     ",
+    "  X  ",
+    "XXXXX",
+    "XXXXX",
+    "  X  "
+  ],
+  "result": {
+    "item": "dragnlivestock:light_saddle"
+  }
+}
