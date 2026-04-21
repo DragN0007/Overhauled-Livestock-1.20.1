@@ -162,7 +162,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemstack.is(Items.SHEARS)) {
+		if (itemstack.is(LOTags.Items.SHEARS)) {
 			if (player.isShiftKeyDown()) {
 				if (this.isTagged()) {
 					this.setTagged(false);
@@ -183,7 +183,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
-			} else if (itemstack.is(Items.SHEARS) && this.getBreed() == 4 && !player.isShiftKeyDown() && !this.isBaby() &&
+			} else if (itemstack.is(LOTags.Items.SHEARS) && this.getBreed() == 4 && !player.isShiftKeyDown() && !this.isBaby() &&
 					(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get())) {
 				player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 				this.setSheared(true);

@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.cow.OCow;
 import com.dragn0007.dragnlivestock.entities.cow.moobloom.AbstractMoobloom;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
@@ -58,7 +59,7 @@ public class PeachMoobloom extends AbstractMoobloom implements GeoEntity {
             }
         }
 
-        if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+        if (itemStack.is(LOTags.Items.SHEARS) && player.isShiftKeyDown()) {
             if (this.isTagged()) {
                 this.setTagged(false);
                 this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
@@ -67,7 +68,7 @@ public class PeachMoobloom extends AbstractMoobloom implements GeoEntity {
         }
 
         try {
-            if (ModList.get().isLoaded("thatsjustpeachy") && itemStack.is(Items.SHEARS) && (!isSheared() || regrowPlantsCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && !player.isShiftKeyDown()) {
+            if (ModList.get().isLoaded("thatsjustpeachy") && itemStack.is(LOTags.Items.SHEARS) && (!isSheared() || regrowPlantsCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && !player.isShiftKeyDown()) {
                 this.setSheared(true);
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 

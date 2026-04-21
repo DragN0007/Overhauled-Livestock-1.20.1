@@ -108,7 +108,7 @@ public class Grub extends Animal implements GeoEntity {
 			return super.mobInteract(player, hand);
 		}
 
-		if (itemStack.is(Items.SHEARS) && this.isSweatered()) {
+		if (itemStack.is(LOTags.Items.SHEARS) && this.isSweatered()) {
 			this.setSweatered(false);
 			this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);
 			return InteractionResult.sidedSuccess(this.level().isClientSide);

@@ -48,7 +48,8 @@ public enum EquineMarkingOverlay {
         PINK_NOSE_SPOTTED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_spotted.png")),
         REVERSE_HALF_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/reverse_half_silver.png")),
         REVERSE_FULL_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/reverse_full_silver.png")),
-        MINIMAL_SABINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/minimal_sabino.png"));
+        MINIMAL_SABINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/minimal_sabino.png")),
+        LIGHT_MARKER_OVERO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/light_marker_overo.png"));
 
         public final ResourceLocation resourceLocation;
         EquineMarkingOverlay(ResourceLocation resourceLocation) {

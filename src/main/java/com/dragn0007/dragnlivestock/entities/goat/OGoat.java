@@ -162,7 +162,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemstack.is(Items.SHEARS)) {
+		if (itemstack.is(LOTags.Items.SHEARS)) {
 			if (player.isShiftKeyDown()) {
 				if (this.isTagged()) {
 					this.setTagged(false);
@@ -178,7 +178,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
-			} else if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() && !isSheared()) {
+			} else if (itemstack.is(LOTags.Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() && !isSheared()) {
 				player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 				this.setSheared(true);
 				this.dropWoolByColorAndMarking();

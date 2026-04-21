@@ -324,7 +324,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 
-		if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() &&
+		if (itemstack.is(LOTags.Items.SHEARS) && !player.isShiftKeyDown() && !this.isBaby() &&
 				(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && this.getWooly() == 1) {
 			player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 			this.setSheared(true);

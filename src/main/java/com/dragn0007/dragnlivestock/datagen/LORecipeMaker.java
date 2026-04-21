@@ -4,8 +4,12 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.datagen.conditions.HolidayConfigCondition;
+import com.dragn0007.dragnlivestock.datagen.conditions.TFCCondition;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -31,7 +35,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     }
 
     public void buildCommonRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-
         ConditionalRecipe.builder()
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(

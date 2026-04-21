@@ -228,7 +228,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			return InteractionResult.SUCCESS;
 		}
 
-		if (itemstack.is(Items.SHEARS) && !player.isShiftKeyDown() &&
+		if (itemstack.is(LOTags.Items.SHEARS) && !player.isShiftKeyDown() &&
 				(!isSheared() || regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) && this.canBeSheared()) {
 			player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 			this.setSheared(true);

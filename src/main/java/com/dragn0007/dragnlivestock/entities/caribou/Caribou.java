@@ -434,7 +434,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemstack.is(Items.SHEARS) && player.isShiftKeyDown()) {
+		if (itemstack.is(LOTags.Items.SHEARS) && player.isShiftKeyDown()) {
 			if (this.isTagged()) {
 				this.setTagged(false);
 				this.playSound(SoundEvents.SHEEP_SHEAR, 0.5f, 1f);

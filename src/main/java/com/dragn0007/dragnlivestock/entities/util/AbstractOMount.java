@@ -54,6 +54,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -335,7 +336,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
-        if (itemStack.is(Items.SHEARS) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
+        if (itemStack.is(LOTags.Items.SHEARS) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
             if (this.isEquine(this)) {
                 AbstractOMount equine = this;
                 equine.setFlowerType(0);
@@ -650,7 +651,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            if (!this.hasChest() && itemStack.is(Blocks.CHEST.asItem())) {
+            if (!this.hasChest() && itemStack.is(Tags.Items.CHESTS)) {
                 this.setChest(true);
                 this.playChestEquipsSound();
                 if (!player.getAbilities().instabuild) {

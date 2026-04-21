@@ -491,7 +491,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			}
 		}
 
-		if (itemStack.is(Items.SHEARS)) {
+		if (itemStack.is(LOTags.Items.SHEARS)) {
 			if (this.isTagged() || this.isHarnessed() || this.isBelled()) {
 				if (this.isTagged()) {
 					this.setTagged(false);
