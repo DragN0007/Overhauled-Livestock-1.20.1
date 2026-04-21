@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "minecraft:cooked_chicken",
-    "dragnlivestock:cooked_chicken_thigh"
+    {
+      "id": "dragnloextras:cooked_chicken_thigh",
+      "required": false
+    }
   ]
 }

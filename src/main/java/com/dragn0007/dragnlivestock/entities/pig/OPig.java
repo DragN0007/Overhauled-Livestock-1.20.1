@@ -691,43 +691,31 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
 			if (this.isMeatBreed()) {
 				if (random.nextDouble() < 0.40) {
-					this.spawnAtLocation(Items.PORKCHOP, 2);
-					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get(), 2);
-					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get(), 2);
-					this.spawnAtLocation(Items.LEATHER, 2);
+					this.spawnAtLocation(new ItemStack(Items.PORKCHOP, 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				} else if (random.nextDouble() > 0.40) {
-					this.spawnAtLocation(Items.PORKCHOP);
-					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get());
-					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.PORKCHOP, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 
 			if (this.isNormalBreed()) {
 				if (random.nextDouble() < 0.15) {
-					this.spawnAtLocation(Items.PORKCHOP);
-					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get());
-					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.PORKCHOP, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isExquisiteQuality()) {
-					this.spawnAtLocation(Items.PORKCHOP, 3);
-					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get(), 3);
-					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get(), 3);
-					this.spawnAtLocation(Items.LEATHER, 3);
+					this.spawnAtLocation(new ItemStack(Items.PORKCHOP, 3), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
 				} else if (this.isFantasticQuality()) {
-					this.spawnAtLocation(Items.PORKCHOP, 2);
-					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get(), 2);
-					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get(), 2);
-					this.spawnAtLocation(Items.LEATHER, 2);
+					this.spawnAtLocation(new ItemStack(Items.PORKCHOP, 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				} else if (this.isGreatQuality()) {
-					this.spawnAtLocation(Items.PORKCHOP);
-					this.spawnAtLocation(LOItems.PORK_RIB_CHOP.get());
-					this.spawnAtLocation(LOItems.PORK_TENDERLOIN.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.PORKCHOP, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 

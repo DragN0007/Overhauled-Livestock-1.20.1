@@ -2103,33 +2103,25 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
 			if (this.isDraftBreed()) {
 				if (random.nextDouble() < 0.40) {
-					this.spawnAtLocation(LOItems.HORSE.get(), 2);
-					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get(), 2);
-					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get(), 2);
-					this.spawnAtLocation(Items.LEATHER, 2);
+					this.spawnAtLocation(new ItemStack(LOItems.HORSE.get(), 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				} else if (random.nextDouble() > 0.40) {
-					this.spawnAtLocation(LOItems.HORSE.get());
-					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get());
-					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(LOItems.HORSE.get(), 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 
 			if (this.isWarmbloodedBreed()) {
 				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.HORSE.get());
-					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get());
-					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(LOItems.HORSE.get(), 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 
 			if (this.isStockBreed()) {
 				if (random.nextDouble() < 0.10) {
-					this.spawnAtLocation(LOItems.HORSE.get());
-					this.spawnAtLocation(LOItems.HORSE_RIB_STEAK.get());
-					this.spawnAtLocation(LOItems.HORSE_SIRLOIN_STEAK.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(LOItems.HORSE.get(), 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 

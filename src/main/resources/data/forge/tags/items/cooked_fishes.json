@@ -2,8 +2,13 @@
   "replace": false,
   "values": [
     "minecraft:cooked_cod",
-    "dragnlivestock:cooked_cod_fillet",
     "minecraft:cooked_salmon",
-    "dragnlivestock:cooked_salmon_fillet"
+    {
+      "id": "dragnloextras:cooked_cod_fillet",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_salmon_fillet",
+      "required": false
+    }
   ]
 }

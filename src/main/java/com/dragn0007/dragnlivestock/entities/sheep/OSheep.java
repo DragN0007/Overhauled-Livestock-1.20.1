@@ -926,31 +926,25 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			if (this.isExquisiteQuality()) {
-				this.spawnAtLocation(Items.MUTTON, 3);
-				this.spawnAtLocation(LOItems.MUTTON_RIB.get(), 3);
-				this.spawnAtLocation(LOItems.MUTTON_LOIN.get(), 3);
+				this.spawnAtLocation(new ItemStack(Items.MUTTON, 3), 0F);
 				if (!this.isSheared() || this.getBreed() == 6) {
 					this.dropWoolByColorAndMarking();
 				} else {
-					this.spawnAtLocation(Items.LEATHER, 3);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
 				}
 			} else if (this.isFantasticQuality()) {
-				this.spawnAtLocation(Items.MUTTON, 2);
-				this.spawnAtLocation(LOItems.MUTTON_RIB.get(), 2);
-				this.spawnAtLocation(LOItems.MUTTON_LOIN.get(), 2);
+				this.spawnAtLocation(new ItemStack(Items.MUTTON, 2), 0F);
 				if (!this.isSheared() || this.getBreed() == 6) {
 					this.dropWoolByColorAndMarking();
 				} else {
-					this.spawnAtLocation(Items.LEATHER, 2);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				}
 			} else if (this.isGreatQuality()) {
-				this.spawnAtLocation(Items.MUTTON);
-				this.spawnAtLocation(LOItems.MUTTON_RIB.get());
-				this.spawnAtLocation(LOItems.MUTTON_LOIN.get());
+				this.spawnAtLocation(new ItemStack(Items.MUTTON, 1), 0F);
 				if (!this.isSheared() || this.getBreed() == 6) {
 					this.dropWoolByColorAndMarking();
 				} else {
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 		}

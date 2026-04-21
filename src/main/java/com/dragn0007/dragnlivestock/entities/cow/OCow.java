@@ -957,43 +957,31 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
 			if (this.isMeatBreed()) {
 				if (random.nextDouble() < 0.40) {
-					this.spawnAtLocation(Items.BEEF, 2);
-					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get(), 2);
-					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get(), 2);
-					this.spawnAtLocation(Items.LEATHER, 2);
+					this.spawnAtLocation(new ItemStack(Items.BEEF, 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				} else if (random.nextDouble() > 0.40) {
-					this.spawnAtLocation(Items.BEEF);
-					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
-					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.BEEF, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 
 			if (this.isNormalBreed()) {
 				if (random.nextDouble() < 0.15) {
-					this.spawnAtLocation(Items.BEEF);
-					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
-					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.BEEF, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isExquisiteQuality()) {
-					this.spawnAtLocation(Items.BEEF, 3);
-					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get(), 3);
-					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get(), 3);
-					this.spawnAtLocation(Items.LEATHER, 3);
+					this.spawnAtLocation(new ItemStack(Items.BEEF, 3), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
 				} else if (this.isFantasticQuality()) {
-					this.spawnAtLocation(Items.BEEF, 2);
-					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get(), 2);
-					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get(), 2);
-					this.spawnAtLocation(Items.LEATHER, 2);
+					this.spawnAtLocation(new ItemStack(Items.BEEF, 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				} else if (this.isGreatQuality()) {
-					this.spawnAtLocation(Items.BEEF);
-					this.spawnAtLocation(LOItems.BEEF_RIB_STEAK.get());
-					this.spawnAtLocation(LOItems.BEEF_SIRLOIN_STEAK.get());
-					this.spawnAtLocation(Items.LEATHER);
+					this.spawnAtLocation(new ItemStack(Items.BEEF, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 

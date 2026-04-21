@@ -2,14 +2,28 @@
   "replace": false,
   "values": [
     "minecraft:mutton",
-    "dragnlivestock:mutton_loin",
-    "dragnlivestock:mutton_rib",
     "dragnlivestock:llama",
-    "dragnlivestock:llama_loin",
-    "dragnlivestock:llama_rib",
     "dragnlivestock:chevon",
-    "dragnlivestock:chevon_loin",
-    "dragnlivestock:chevon_rib",
+
+    {
+      "id": "dragnloextras:cooked_mutton_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_mutton_rib",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_llama_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_llama_rib",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_chevon_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_chevon_rib",
+      "required": false
+    },
 
     {
       "id": "tfc:food/mutton",

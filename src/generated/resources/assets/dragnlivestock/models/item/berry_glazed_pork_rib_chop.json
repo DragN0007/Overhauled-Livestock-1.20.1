@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "dragnlivestock:item/berry_glazed_pork_rib_chop"
-  }
-}

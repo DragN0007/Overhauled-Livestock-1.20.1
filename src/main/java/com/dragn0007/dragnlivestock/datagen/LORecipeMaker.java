@@ -1405,22 +1405,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(LOTags.Items.MILK).build()))
                 .save(pFinishedRecipeConsumer);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BERRY_GLAZED_PORK_RIB_CHOP.get(), 1)
-                .requires(LOItems.COOKED_PORK_RIB_CHOP.get())
-                .requires(Items.SWEET_BERRIES)
-                .unlockedBy("has_berries", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.SWEET_BERRIES)
-                        .build()))
-                .save(pFinishedRecipeConsumer);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BERRY_GLAZED_MUTTON_RIB.get(), 1)
-                .requires(LOItems.COOKED_MUTTON_RIB.get())
-                .requires(Items.SWEET_BERRIES)
-                .unlockedBy("has_berries", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.SWEET_BERRIES)
-                        .build()))
-                .save(pFinishedRecipeConsumer);
-
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CARROT_SOUP.get())
                 .requires(Items.CARROT)
@@ -1533,20 +1517,6 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.SALMON_FILLET.get(), 2)
-                .requires(Items.SALMON)
-                .unlockedBy("has_fish", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.SALMON)
-                        .build()))
-                .save(pFinishedRecipeConsumer);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.COD_FILLET.get(), 2)
-                .requires(Items.COD)
-                .unlockedBy("has_fish", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.COD)
-                        .build()))
-                .save(pFinishedRecipeConsumer);
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.EGG)
                 .requires(LOTags.Items.EGG)
                 .unlockedBy("has_egg", inventoryTrigger(ItemPredicate.Builder.item()
@@ -1625,47 +1595,12 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .build()))
                 .save(pFinishedRecipeConsumer);
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.BEEF_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_RIB_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_beef_rib_steak", has(LOItems.BEEF_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_beef_rib_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.BEEF_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_RIB_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_beef_rib_steak", has(LOItems.BEEF_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_beef_rib_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.BEEF_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_RIB_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_beef_rib_steak", has(LOItems.BEEF_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_beef_rib_steak_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.BEEF_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_SIRLOIN_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_beef_sirloin_steak", has(LOItems.BEEF_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_beef_sirloin_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.BEEF_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_SIRLOIN_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_beef_sirloin_steak", has(LOItems.BEEF_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_beef_sirloin_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.BEEF_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_BEEF_SIRLOIN_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_beef_sirloin_steak", has(LOItems.BEEF_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_beef_sirloin_steak_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHICKEN_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_CHICKEN_THIGH.get(), 0.35F, 100)
-                .unlockedBy("has_chicken_thigh", has(LOItems.CHICKEN_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chicken_thigh_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHICKEN_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_CHICKEN_THIGH.get(), 0.35F, 200)
-                .unlockedBy("has_chicken_thigh", has(LOItems.CHICKEN_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chicken_thigh_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHICKEN_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_CHICKEN_THIGH.get(), 0.35F, 600)
-                .unlockedBy("has_chicken_thigh", has(LOItems.CHICKEN_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chicken_thigh_campfire_cooking"));
-
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.HORSE.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE.get(), 0.35F, 100)
                 .unlockedBy("has_horse", has(LOItems.HORSE.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.HORSE.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE.get(), 0.35F, 200)
                 .unlockedBy("has_horse", has(LOItems.HORSE.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_smelting"));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.HORSE.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE.get(), 0.35F, 600)
                 .unlockedBy("has_horse", has(LOItems.HORSE.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.HORSE_RIB_STEAK.get()),RecipeCategory.MISC,  LOItems.COOKED_HORSE_RIB_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_horse_rib_steak", has(LOItems.HORSE_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_rib_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.HORSE_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE_RIB_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_horse_rib_steak", has(LOItems.HORSE_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_rib_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.HORSE_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE_RIB_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_horse_rib_steak", has(LOItems.HORSE_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_rib_steak_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.HORSE_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE_SIRLOIN_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_horse_sirloin_steak", has(LOItems.HORSE_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_sirloin_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.HORSE_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE_SIRLOIN_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_horse_sirloin_steak", has(LOItems.HORSE_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_sirloin_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.HORSE_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_HORSE_SIRLOIN_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_horse_sirloin_steak", has(LOItems.HORSE_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_horse_sirloin_steak_campfire_cooking"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.LLAMA.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA.get(), 0.35F, 100)
                 .unlockedBy("has_llama", has(LOItems.LLAMA.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_smoking"));
@@ -1674,54 +1609,12 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.LLAMA.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA.get(), 0.35F, 600)
                 .unlockedBy("has_llama", has(LOItems.LLAMA.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_campfire_cooking"));
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.LLAMA_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA_RIB.get(), 0.35F, 100)
-                .unlockedBy("has_llama_rib", has(LOItems.LLAMA_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_rib_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.LLAMA_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA_RIB.get(), 0.35F, 200)
-                .unlockedBy("has_llama_rib", has(LOItems.LLAMA_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_rib_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.LLAMA_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA_RIB.get(), 0.35F, 600)
-                .unlockedBy("has_llama_rib", has(LOItems.LLAMA_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_rib_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.LLAMA_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA_LOIN.get(), 0.35F, 100)
-                .unlockedBy("has_llama_loin", has(LOItems.LLAMA_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_loin_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.LLAMA_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA_LOIN.get(), 0.35F, 200)
-                .unlockedBy("has_llama_loin", has(LOItems.LLAMA_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_loin_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.LLAMA_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_LLAMA_LOIN.get(), 0.35F, 600)
-                .unlockedBy("has_llama_loin", has(LOItems.LLAMA_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_llama_loin_campfire_cooking"));
-
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.UNICORN.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN.get(), 0.35F, 100)
                 .unlockedBy("has_unicorn", has(LOItems.UNICORN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.UNICORN.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN.get(), 0.35F, 200)
                 .unlockedBy("has_unicorn", has(LOItems.UNICORN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_smelting"));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.UNICORN.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN.get(), 0.35F, 600)
                 .unlockedBy("has_unicorn", has(LOItems.UNICORN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.UNICORN_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN_RIB_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_unicorn_rib_steak", has(LOItems.UNICORN_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_rib_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.UNICORN_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN_RIB_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_unicorn_rib_steak", has(LOItems.UNICORN_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_rib_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.UNICORN_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN_RIB_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_unicorn_rib_steak", has(LOItems.UNICORN_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_rib_steak_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.UNICORN_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN_SIRLOIN_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_unicorn_sirloin_steak", has(LOItems.UNICORN_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_sirloin_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.UNICORN_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN_SIRLOIN_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_unicorn_sirloin_steak", has(LOItems.UNICORN_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_sirloin_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.UNICORN_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_UNICORN_SIRLOIN_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_unicorn_sirloin_steak", has(LOItems.UNICORN_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_unicorn_sirloin_steak_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.MUTTON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_RIB.get(), 0.35F, 100)
-                .unlockedBy("has_mutton_rib", has(LOItems.MUTTON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_rib_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.MUTTON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_RIB.get(), 0.35F, 200)
-                .unlockedBy("has_mutton_rib", has(LOItems.MUTTON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_rib_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.MUTTON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_RIB.get(), 0.35F, 600)
-                .unlockedBy("has_mutton_rib", has(LOItems.MUTTON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_rib_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.MUTTON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_LOIN.get(), 0.35F, 100)
-                .unlockedBy("has_mutton_loin", has(LOItems.MUTTON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_loin_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.MUTTON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_LOIN.get(), 0.35F, 200)
-                .unlockedBy("has_mutton_loin", has(LOItems.MUTTON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_loin_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.MUTTON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_MUTTON_LOIN.get(), 0.35F, 600)
-                .unlockedBy("has_mutton_loin", has(LOItems.MUTTON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_mutton_loin_campfire_cooking"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CAMEL.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL.get(), 0.35F, 100)
                 .unlockedBy("has_camel", has(LOItems.CAMEL.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_smoking"));
@@ -1730,47 +1623,12 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL.get(), 0.35F, 600)
                 .unlockedBy("has_camel", has(LOItems.CAMEL.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_campfire_cooking"));
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CAMEL_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_RIB.get(), 0.35F, 100)
-                .unlockedBy("has_camel_rib", has(LOItems.CAMEL_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_rib_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CAMEL_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_RIB.get(), 0.35F, 200)
-                .unlockedBy("has_camel_rib", has(LOItems.CAMEL_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_rib_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_RIB.get(), 0.35F, 600)
-                .unlockedBy("has_camel_rib", has(LOItems.CAMEL_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_rib_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 100)
-                .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 200)
-                .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CAMEL_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CAMEL_LOIN.get(), 0.35F, 600)
-                .unlockedBy("has_camel_loin", has(LOItems.CAMEL_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_camel_loin_campfire_cooking"));
-
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHEVON.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON.get(), 0.35F, 100)
                 .unlockedBy("has_chevon", has(LOItems.CHEVON.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHEVON.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON.get(), 0.35F, 200)
                 .unlockedBy("has_chevon", has(LOItems.CHEVON.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_smelting"));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHEVON.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON.get(), 0.35F, 600)
                 .unlockedBy("has_chevon", has(LOItems.CHEVON.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHEVON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_RIB.get(), 0.35F, 100)
-                .unlockedBy("has_chevon_rib", has(LOItems.CHEVON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_rib_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHEVON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_RIB.get(), 0.35F, 200)
-                .unlockedBy("has_chevon_rib", has(LOItems.CHEVON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_rib_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHEVON_RIB.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_RIB.get(), 0.35F, 600)
-                .unlockedBy("has_chevon_rib", has(LOItems.CHEVON_RIB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_rib_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CHEVON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_LOIN.get(), 0.35F, 100)
-                .unlockedBy("has_chevon_loin", has(LOItems.CHEVON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_loin_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CHEVON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_LOIN.get(), 0.35F, 200)
-                .unlockedBy("has_chevon_loin", has(LOItems.CHEVON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_loin_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CHEVON_LOIN.get()), RecipeCategory.MISC, LOItems.COOKED_CHEVON_LOIN.get(), 0.35F, 600)
-                .unlockedBy("has_chevon_loin", has(LOItems.CHEVON_LOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_chevon_loin_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 100)
-                .unlockedBy("has_rabbit_thigh", has(LOItems.RABBIT_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_rabbit_thigh_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 200)
-                .unlockedBy("has_rabbit_thigh", has(LOItems.RABBIT_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_rabbit_thigh_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.RABBIT_THIGH.get()), RecipeCategory.MISC, LOItems.COOKED_RABBIT_THIGH.get(), 0.35F, 600)
-                .unlockedBy("has_rabbit_thigh", has(LOItems.RABBIT_THIGH.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_rabbit_thigh_campfire_cooking"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.FROG.get()), RecipeCategory.MISC, LOItems.COOKED_FROG.get(), 0.35F, 100)
                 .unlockedBy("has_frog", has(LOItems.FROG.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_frog_smoking"));
@@ -1786,56 +1644,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.GRUB.get()), RecipeCategory.MISC, LOItems.COOKED_GRUB.get(), 0.35F, 600)
                 .unlockedBy("has_grub", has(LOItems.GRUB.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_grub_campfire_cooking"));
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.PORK_RIB_CHOP.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_RIB_CHOP.get(), 0.35F, 100)
-                .unlockedBy("has_pork_rib_chop", has(LOItems.PORK_RIB_CHOP.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_rib_chop_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.PORK_RIB_CHOP.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_RIB_CHOP.get(), 0.35F, 200)
-                .unlockedBy("has_pork_rib_chop", has(LOItems.PORK_RIB_CHOP.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_rib_chop_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.PORK_RIB_CHOP.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_RIB_CHOP.get(), 0.35F, 600)
-                .unlockedBy("has_pork_rib_chop", has(LOItems.PORK_RIB_CHOP.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_rib_chop_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.PORK_TENDERLOIN.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_TENDERLOIN.get(), 0.35F, 100)
-                .unlockedBy("has_pork_tenderloin", has(LOItems.PORK_TENDERLOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_tenderloin_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.PORK_TENDERLOIN.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_TENDERLOIN.get(), 0.35F, 200)
-                .unlockedBy("has_pork_tenderloin", has(LOItems.PORK_TENDERLOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_tenderloin_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.PORK_TENDERLOIN.get()), RecipeCategory.MISC, LOItems.COOKED_PORK_TENDERLOIN.get(), 0.35F, 600)
-                .unlockedBy("has_pork_tenderloin", has(LOItems.PORK_TENDERLOIN.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_pork_tenderloin_campfire_cooking"));
-
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CARIBOU.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU.get(), 0.35F, 100)
                 .unlockedBy("has_caribou", has(LOItems.CARIBOU.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_smoking"));
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CARIBOU.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU.get(), 0.35F, 200)
                 .unlockedBy("has_caribou", has(LOItems.CARIBOU.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_smelting"));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CARIBOU.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU.get(), 0.35F, 600)
                 .unlockedBy("has_caribou", has(LOItems.CARIBOU.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CARIBOU_RIB_STEAK.get()),RecipeCategory.MISC,  LOItems.COOKED_CARIBOU_RIB_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_caribou_rib_steak", has(LOItems.CARIBOU_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_rib_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CARIBOU_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_RIB_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_caribou_rib_steak", has(LOItems.CARIBOU_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_rib_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CARIBOU_RIB_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_RIB_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_caribou_rib_steak", has(LOItems.CARIBOU_RIB_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_rib_steak_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.CARIBOU_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get(), 0.35F, 100)
-                .unlockedBy("has_caribou_sirloin_steak", has(LOItems.CARIBOU_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_sirloin_steak_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.CARIBOU_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get(), 0.35F, 200)
-                .unlockedBy("has_caribou_sirloin_steak", has(LOItems.CARIBOU_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_sirloin_steak_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.CARIBOU_SIRLOIN_STEAK.get()), RecipeCategory.MISC, LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get(), 0.35F, 600)
-                .unlockedBy("has_caribou_sirloin_steak", has(LOItems.CARIBOU_SIRLOIN_STEAK.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_caribou_sirloin_steak_campfire_cooking"));
-
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 100)
-                .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 200)
-                .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.SALMON_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_SALMON_FILLET.get(), 0.35F, 600)
-                .unlockedBy("has_salmon_fillet", has(LOItems.SALMON_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_salmon_fillet_campfire_cooking"));
-
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(LOItems.COD_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_COD_FILLET.get(), 0.35F, 100)
-                .unlockedBy("has_cod_fillet", has(LOItems.COD_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_cod_fillet_smoking"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(LOItems.COD_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_COD_FILLET.get(), 0.35F, 200)
-                .unlockedBy("has_cod_fillet", has(LOItems.COD_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_cod_fillet_smelting"));
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(LOItems.COD_FILLET.get()), RecipeCategory.MISC, LOItems.COOKED_COD_FILLET.get(), 0.35F, 600)
-                .unlockedBy("has_cod_fillet", has(LOItems.COD_FILLET.get())).save(pFinishedRecipeConsumer, new ResourceLocation("dragnlivestock", "cooked_cod_fillet_campfire_cooking"));
-    }
+        }
 
     public void buildDyeRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         ConditionalRecipe.builder()

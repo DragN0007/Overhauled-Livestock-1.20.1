@@ -856,8 +856,6 @@ public class LOItemGroup {
                         output.accept(LOItems.EGG_SALAD.get());
                         output.accept(LOItems.OMELETTE.get());
                         output.accept(LOItems.CHEESECAKE.get());
-                        output.accept(LOItems.BERRY_GLAZED_PORK_RIB_CHOP.get());
-                        output.accept(LOItems.BERRY_GLAZED_MUTTON_RIB.get());
 
                         output.accept(LOItems.GRAIN_SOUP.get());
                         output.accept(LOItems.POTATO_SOUP.get());
@@ -867,83 +865,25 @@ public class LOItemGroup {
                         output.accept(LOItems.MELON_SOUP.get());
                         output.accept(LOItems.SWEET_BERRY_SOUP.get());
 
-                        output.accept(LOItems.BEEF_RIB_STEAK.get());
-                        output.accept(LOItems.BEEF_SIRLOIN_STEAK.get());
-                        output.accept(LOItems.COOKED_BEEF_RIB_STEAK.get());
-                        output.accept(LOItems.COOKED_BEEF_SIRLOIN_STEAK.get());
-
                         output.accept(LOItems.HORSE.get());
-                        output.accept(LOItems.HORSE_RIB_STEAK.get());
-                        output.accept(LOItems.HORSE_SIRLOIN_STEAK.get());
                         output.accept(LOItems.COOKED_HORSE.get());
-                        output.accept(LOItems.COOKED_HORSE_RIB_STEAK.get());
-                        output.accept(LOItems.COOKED_HORSE_SIRLOIN_STEAK.get());
-
                         output.accept(LOItems.LLAMA.get());
-                        output.accept(LOItems.LLAMA_RIB.get());
-                        output.accept(LOItems.LLAMA_LOIN.get());
                         output.accept(LOItems.COOKED_LLAMA.get());
-                        output.accept(LOItems.COOKED_LLAMA_RIB.get());
-                        output.accept(LOItems.COOKED_LLAMA_LOIN.get());
-
-                        output.accept(LOItems.MUTTON_LOIN.get());
-                        output.accept(LOItems.MUTTON_RIB.get());
-                        output.accept(LOItems.COOKED_MUTTON_LOIN.get());
-                        output.accept(LOItems.COOKED_MUTTON_RIB.get());
-
-                        output.accept(LOItems.PORK_TENDERLOIN.get());
-                        output.accept(LOItems.PORK_RIB_CHOP.get());
-                        output.accept(LOItems.COOKED_PORK_TENDERLOIN.get());
-                        output.accept(LOItems.COOKED_PORK_RIB_CHOP.get());
-
                         output.accept(LOItems.CAMEL.get());
-                        output.accept(LOItems.CAMEL_RIB.get());
-                        output.accept(LOItems.CAMEL_LOIN.get());
                         output.accept(LOItems.COOKED_CAMEL.get());
-                        output.accept(LOItems.COOKED_CAMEL_RIB.get());
-                        output.accept(LOItems.COOKED_CAMEL_LOIN.get());
-
                         output.accept(LOItems.CHEVON.get());
-                        output.accept(LOItems.CHEVON_RIB.get());
-                        output.accept(LOItems.CHEVON_LOIN.get());
                         output.accept(LOItems.COOKED_CHEVON.get());
-                        output.accept(LOItems.COOKED_CHEVON_RIB.get());
-                        output.accept(LOItems.COOKED_CHEVON_LOIN.get());
-
-                        output.accept(LOItems.CHICKEN_THIGH.get());
-                        output.accept(LOItems.COOKED_CHICKEN_THIGH.get());
-
-                        output.accept(LOItems.RABBIT_THIGH.get());
-                        output.accept(LOItems.COOKED_RABBIT_THIGH.get());
-
                         output.accept(LOItems.FROG.get());
                         output.accept(LOItems.COOKED_FROG.get());
-
                         output.accept(LOItems.GRUB.get());
                         output.accept(LOItems.COOKED_GRUB.get());
-
                         output.accept(LOItems.FISH_OIL.get());
                         output.accept(LOItems.ROE.get());
                         output.accept(LOItems.COD_ROE.get());
-
-                        output.accept(LOItems.SALMON_FILLET.get());
-                        output.accept(LOItems.COD_FILLET.get());
-                        output.accept(LOItems.COOKED_SALMON_FILLET.get());
-                        output.accept(LOItems.COOKED_COD_FILLET.get());
-
                         output.accept(LOItems.CARIBOU.get());
-                        output.accept(LOItems.CARIBOU_RIB_STEAK.get());
-                        output.accept(LOItems.CARIBOU_SIRLOIN_STEAK.get());
                         output.accept(LOItems.COOKED_CARIBOU.get());
-                        output.accept(LOItems.COOKED_CARIBOU_RIB_STEAK.get());
-                        output.accept(LOItems.COOKED_CARIBOU_SIRLOIN_STEAK.get());
-
                         output.accept(LOItems.UNICORN.get());
-                        output.accept(LOItems.UNICORN_RIB_STEAK.get());
-                        output.accept(LOItems.UNICORN_SIRLOIN_STEAK.get());
                         output.accept(LOItems.COOKED_UNICORN.get());
-                        output.accept(LOItems.COOKED_UNICORN_RIB_STEAK.get());
-                        output.accept(LOItems.COOKED_UNICORN_SIRLOIN_STEAK.get());
 
                         output.accept(LOItems.BEEF_STRIPS.get());
                         output.accept(LOItems.BEEF_JERKY.get());

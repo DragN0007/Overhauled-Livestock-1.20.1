@@ -815,20 +815,14 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			if (this.isExquisiteQuality()) {
-				this.spawnAtLocation(LOItems.CHEVON.get(), 3);
-				this.spawnAtLocation(LOItems.CHEVON_RIB.get(), 3);
-				this.spawnAtLocation(LOItems.CHEVON_LOIN.get(), 3);
-				this.spawnAtLocation(Items.LEATHER, 3);
+				this.spawnAtLocation(new ItemStack(LOItems.CHEVON.get(), 3), 0F);
+				this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
 			} else if (this.isFantasticQuality()) {
-				this.spawnAtLocation(LOItems.CHEVON.get(), 2);
-				this.spawnAtLocation(LOItems.CHEVON_RIB.get(), 2);
-				this.spawnAtLocation(LOItems.CHEVON_LOIN.get(), 2);
-				this.spawnAtLocation(Items.LEATHER, 2);
+				this.spawnAtLocation(new ItemStack(LOItems.CHEVON.get(), 2), 0F);
+				this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 			} else if (this.isGreatQuality()) {
-				this.spawnAtLocation(LOItems.CHEVON.get());
-				this.spawnAtLocation(LOItems.CHEVON_RIB.get());
-				this.spawnAtLocation(LOItems.CHEVON_LOIN.get());
-				this.spawnAtLocation(Items.LEATHER);
+				this.spawnAtLocation(new ItemStack(LOItems.CHEVON.get(), 1), 0F);
+				this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 			}
 		}
 

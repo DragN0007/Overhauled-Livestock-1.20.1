@@ -2,7 +2,12 @@
   "replace": false,
   "values": [
     "dragnlivestock:llama",
-    "dragnlivestock:llama_loin",
-    "dragnlivestock:llama_rib"
+    {
+      "id": "dragnloextras:llama_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:llama_rib",
+      "required": false
+    }
   ]
 }

@@ -823,34 +823,31 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
 			if (this.isMeatBreed()) {
 				if (random.nextDouble() < 0.40) {
-					this.spawnAtLocation(Items.RABBIT, 2);
-					this.spawnAtLocation(LOItems.RABBIT_THIGH.get(), 2);
-					this.spawnAtLocation(Items.RABBIT_HIDE, 2);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT, 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT_HIDE, 2), 0F);
 				} else if (random.nextDouble() > 0.40) {
-					this.spawnAtLocation(Items.RABBIT);
-					this.spawnAtLocation(LOItems.RABBIT_THIGH.get());
-					this.spawnAtLocation(Items.RABBIT_HIDE);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT_HIDE, 1), 0F);
 				}
 			}
 
 			if (this.isNormalBreed()) {
 				if (random.nextDouble() < 0.15) {
-					this.spawnAtLocation(Items.RABBIT);
-					this.spawnAtLocation(LOItems.RABBIT_THIGH.get());
-					this.spawnAtLocation(Items.RABBIT_HIDE);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT_HIDE, 1), 0F);
 				}
 			}
 
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isExquisiteQuality()) {
-					this.spawnAtLocation(Items.RABBIT, 3);
-					this.spawnAtLocation(Items.RABBIT_HIDE, 3);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT, 3), 0F);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT_HIDE, 3), 0F);
 				} else if (this.isFantasticQuality()) {
-					this.spawnAtLocation(Items.RABBIT, 2);
-					this.spawnAtLocation(Items.RABBIT_HIDE, 2);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT, 2), 0F);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT_HIDE, 2), 0F);
 				} else if (this.isGreatQuality()) {
-					this.spawnAtLocation(Items.RABBIT);
-					this.spawnAtLocation(Items.RABBIT_HIDE);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT, 1), 0F);
+					this.spawnAtLocation(new ItemStack(Items.RABBIT_HIDE, 1), 0F);
 				}
 			}
 

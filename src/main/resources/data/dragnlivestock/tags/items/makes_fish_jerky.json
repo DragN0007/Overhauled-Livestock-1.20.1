@@ -2,9 +2,15 @@
   "replace": false,
   "values": [
     "minecraft:salmon",
-    "dragnlivestock:salmon_fillet",
     "minecraft:cod",
-    "dragnlivestock:cod_fillet",
+
+    {
+      "id": "dragnloextras:cod_fillet",
+      "required": false
+    },{
+      "id": "dragnloextras:salmon_fillet",
+      "required": false
+    },
 
     {
       "id": "tfc:food/salmon",

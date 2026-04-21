@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "minecraft:rabbit",
-    "dragnlivestock:rabbit_thigh"
+    {
+      "id": "dragnloextras:rabbit_thigh",
+      "required": false
+    }
   ]
 }

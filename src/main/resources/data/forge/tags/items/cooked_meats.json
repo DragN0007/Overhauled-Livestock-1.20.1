@@ -2,36 +2,78 @@
   "replace": false,
   "values": [
     "minecraft:cooked_beef",
-    "dragnlivestock:cooked_beef_sirloin_steak",
-    "dragnlivestock:cooked_beef_rib_steak",
     "minecraft:cooked_chicken",
-    "dragnlivestock:cooked_chicken_thigh",
     "dragnlivestock:cooked_horse",
-    "dragnlivestock:cooked_horse_sirloin_steak",
-    "dragnlivestock:cooked_horse_rib_steak",
     "minecraft:cooked_mutton",
-    "dragnlivestock:cooked_mutton_loin",
-    "dragnlivestock:cooked_mutton_rib",
     "dragnlivestock:cooked_llama",
-    "dragnlivestock:cooked_llama_loin",
-    "dragnlivestock:cooked_llama_rib",
     "minecraft:cooked_porkchop",
-    "dragnlivestock:cooked_pork_tenderloin",
-    "dragnlivestock:cooked_pork_rib_chop",
     "minecraft:cooked_rabbit",
-    "dragnlivestock:cooked_rabbit_thigh",
     "dragnlivestock:cooked_unicorn",
-    "dragnlivestock:cooked_unicorn_sirloin_steak",
-    "dragnlivestock:cooked_unicorn_rib_steak",
     "dragnlivestock:cooked_camel",
-    "dragnlivestock:cooked_camel_loin",
-    "dragnlivestock:cooked_camel_rib",
     "dragnlivestock:cooked_chevon",
-    "dragnlivestock:cooked_chevon_loin",
-    "dragnlivestock:cooked_chevon_rib",
     "dragnlivestock:cooked_frog",
     "dragnlivestock:cooked_caribou",
-    "dragnlivestock:cooked_caribou_sirloin_steak",
-    "dragnlivestock:cooked_caribou_rib_steak"
+
+    {
+      "id": "dragnloextras:cooked_caribou_sirloin_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_caribou_rib_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_chevon_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_chevon_rib",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_camel_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_camel_rib",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_rabbit_thigh",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_pork_tenderloin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_pork_rib_chop",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_chicken_thigh",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_mutton_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_mutton_rib",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_llama_loin",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_llama_rib",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_beef_sirloin_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_beef_rib_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_horse_sirloin_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_horse_rib_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_unicorn_sirloin_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_unicorn_rib_steak",
+      "required": false
+    }
   ]
 }

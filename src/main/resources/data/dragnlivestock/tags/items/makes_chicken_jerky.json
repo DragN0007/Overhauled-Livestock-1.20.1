@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "minecraft:chicken",
-    "dragnlivestock:chicken_thigh",
+    {
+      "id": "dragnloextras:chicken_thigh",
+      "required": false
+    },
 
     {
       "id": "tfc:food/chicken",

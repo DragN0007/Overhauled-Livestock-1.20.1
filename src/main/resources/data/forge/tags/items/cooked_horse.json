@@ -2,7 +2,12 @@
   "replace": false,
   "values": [
     "dragnlivestock:cooked_horse",
-    "dragnlivestock:cooked_horse_sirloin_steak",
-    "dragnlivestock:cooked_horse_rib_steak"
+    {
+      "id": "dragnloextras:cooked_horse_sirloin_steak",
+      "required": false
+    },{
+      "id": "dragnloextras:cooked_horse_rib_steak",
+      "required": false
+    }
   ]
 }
