@@ -804,46 +804,45 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		Caribou partner = (Caribou) ageableMob;
 		calf = EntityTypes.CARIBOU_ENTITY.get().create(serverLevel);
 
-		int variantChance = this.random.nextInt(14);
+		int variantChance = this.random.nextInt(100);
 		int variant;
-		if (variantChance < 6) {
+		if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 			variant = this.getVariant();
-		} else if (variantChance < 12) {
+		} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 			variant = partner.getVariant();
 		} else {
 			variant = this.random.nextInt(CaribouModel.Variant.values().length);
 		}
-		((Caribou) calf).setVariant(variant);
+		calf.setVariant(variant);
 		
-		int overlayChance = this.random.nextInt(10);
+		int overlayChance = this.random.nextInt(100);
 		int overlay;
-		if (overlayChance < 4) {
+		if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 			overlay = this.getOverlayVariant();
-		} else if (overlayChance < 8) {
+		} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 			overlay = partner.getOverlayVariant();
 		} else {
 			overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 		}
-		((Caribou) calf).setOverlayVariant(overlay);
+		calf.setOverlayVariant(overlay);
 
-		int eyeColorChance = this.random.nextInt(11);
+		int eyeColorChance = this.random.nextInt(100);
 		int eyes;
-		if (eyeColorChance < 5) {
+		if (eyeColorChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 			eyes = this.getEyeVariant();
-		} else if (eyeColorChance < 10) {
+		} else if (eyeColorChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 			eyes = partner.getEyeVariant();
 		} else {
 			eyes = this.random.nextInt(EquineEyeColorOverlay.values().length);
 		}
-		((Caribou) calf).setEyeVariant(eyes);
+		calf.setEyeVariant(eyes);
 
 		calf.setGender(random.nextInt(Gender.values().length));
-
-		((Caribou) calf).setFeatheringByChance();
+		calf.setFeatheringByChance();
 
 
 		if (this.random.nextInt(3) >= 1) {
-			((Caribou) calf).generateRandomJumpStrength();
+			calf.generateRandomJumpStrength();
 
 			int betterSpeed = (int) Math.max(partner.getSpeed(), this.random.nextInt(10) + 20);
 			calf.setSpeed(betterSpeed);

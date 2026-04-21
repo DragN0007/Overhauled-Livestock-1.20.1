@@ -470,21 +470,28 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		OPig partner = (OPig) ageableMob;
 		piglet = EntityTypes.O_PIG_ENTITY.get().create(serverLevel);
 
-		int breedChance = this.random.nextInt(5);
+		int breedChance = this.random.nextInt(100);
 		int breed;
-		if (breedChance == 0) {
-			breed = this.random.nextInt(PigBreed.Breed.values().length);
+		if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+			breed = this.getBreed();
+		} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			breed = partner.getBreed();
 		} else {
-			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+			breed = this.random.nextInt(PigBreed.Breed.values().length);
 		}
 		piglet.setBreed(breed);
 
-		if (!(breedChance == 0)) {
-			int variantChance = this.random.nextInt(14);
+		//if the random chance is set to 20, out of 100
+		//you minus 20 from 100 and take this number (80) for the "dad"
+		//and them divide 80 by 2 (40) for the "mom"
+		//this gives an equal chance to both parents and is not hardcoded to one random chance number
+		//sorry im terrible at math and had to write this shit down to perform it
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int variantChance = this.random.nextInt(100);
 			int variant;
-			if (variantChance < 6) {
+			if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (variantChance < 12) {
+			} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(OPigModel.Variant.values().length);
@@ -494,12 +501,12 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			piglet.setColorByBreed();
 		}
 
-		if (!(breedChance == 0)) {
-			int overlayChance = this.random.nextInt(10);
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);

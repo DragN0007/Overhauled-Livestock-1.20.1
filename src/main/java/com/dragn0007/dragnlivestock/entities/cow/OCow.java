@@ -7,6 +7,7 @@ import com.dragn0007.dragnlivestock.entities.ai.BullAroundLikeCrazyGoal;
 import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.PauseMeleeAttackGoal;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -866,21 +867,23 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		OCow partner = (OCow) ageableMob;
 		calf = EntityTypes.O_COW_ENTITY.get().create(serverLevel);
 
-		int breedChance = this.random.nextInt(5);
+		int breedChance = this.random.nextInt(100);
 		int breed;
-		if (breedChance == 0) {
-			breed = this.random.nextInt(CowBreed.Breed.values().length);
+		if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+			breed = this.getBreed();
+		} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			breed = partner.getBreed();
 		} else {
-			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+			breed = this.random.nextInt(CowBreed.Breed.values().length);
 		}
 		calf.setBreed(breed);
 
-		if (!(breedChance == 0)) {
-			int variantChance = this.random.nextInt(14);
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int variantChance = this.random.nextInt(100);
 			int variant;
-			if (variantChance < 6) {
+			if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (variantChance < 12) {
+			} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(OCowModel.Variant.values().length);
@@ -890,12 +893,12 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			calf.setColorByBreed();
 		}
 
-		if (!(breedChance == 0)) {
-			int overlayChance = this.random.nextInt(10);
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
@@ -905,12 +908,12 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			calf.setMarkingByBreed();
 		}
 
-		if (!(breedChance == 0)) {
-			int hornsChance = this.random.nextInt(10);
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int hornsChance = this.random.nextInt(100);
 			int hornType;
-			if (hornsChance < 4) {
+			if (hornsChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 				hornType = this.getHornVariant();
-			} else if (hornsChance < 8) {
+			} else if (hornsChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				hornType = partner.getHornVariant();
 			} else {
 				hornType = this.random.nextInt(OCow.BreedHorns.values().length);

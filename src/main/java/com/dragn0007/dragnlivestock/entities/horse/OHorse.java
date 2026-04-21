@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
@@ -1344,17 +1345,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			foal = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
-			int overlayChance = this.random.nextInt(10);
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partnerDonkey.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
-			foal.setVariant(overlay);
-
 			foal.setOverlayVariant(overlay);
 			foal.setVariant(random.nextInt(OMuleModel.Variant.values().length));
 
@@ -1374,9 +1373,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			OHorse partner = (OHorse) ageableMob;
 			foal = EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
 
-			int breedChance = this.random.nextInt(5);
+			int breedChance = this.random.nextInt(100);
 			int breed;
-			if (breedChance == 0) {
+			if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+				breed = this.getBreed();
+			} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+				breed = partner.getBreed();
+			} else {
 				if (!ModList.get().isLoaded("deadlydinos")) {
 					int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21};
 					int randomIndex = new Random().nextInt(breeds.length);
@@ -1384,46 +1387,44 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				} else {
 					breed = this.random.nextInt(HorseBreed.values().length);
 				}
-			} else {
-				breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
 			}
 			foal.setBreed(breed);
 
-			if (!(breedChance == 0)) {
-				int variantChance = this.random.nextInt(14);
+			if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+				int variantChance = this.random.nextInt(100);
 				int variant;
-				if (variantChance < 6) {
+				if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 					variant = this.getVariant();
-				} else if (variantChance < 12) {
+				} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 					variant = partner.getVariant();
 				} else {
 					variant = this.random.nextInt(OHorseModel.Variant.values().length);
 				}
 				foal.setVariant(variant);
-			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			} else if (breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get() && random.nextDouble() < 0.5) {
 				((OHorse) foal).setColorByBreed();
 			}
 
-			if (!(breedChance == 0)) {
-				int overlayChance = this.random.nextInt(10);
+			if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+				int overlayChance = this.random.nextInt(100);
 				int overlay;
-				if (overlayChance < 4) {
+				if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 					overlay = this.getOverlayVariant();
-				} else if (overlayChance < 8) {
+				} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 					overlay = partner.getOverlayVariant();
 				} else {
 					overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 				}
 				foal.setOverlayVariant(overlay);
-			} else if (breedChance == 0 && random.nextDouble() < 0.5) {
+			} else if (breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get() && random.nextDouble() < 0.5) {
 				((OHorse) foal).setMarkingByBreed();
 			}
 
-			int eyeColorChance = this.random.nextInt(11);
+			int eyeColorChance = this.random.nextInt(100);
 			int eyes;
-			if (eyeColorChance < 5) {
+			if (eyeColorChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 				eyes = this.getEyeVariant();
-			} else if (eyeColorChance < 10) {
+			} else if (eyeColorChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				eyes = partner.getEyeVariant();
 			} else {
 				eyes = this.random.nextInt(EquineEyeColorOverlay.values().length);
@@ -1445,7 +1446,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				foal.setHealth(betterHealth);
 
 			//generate random stats of the breed standard of the baby if the breed is random
-			} else if (breedChance == 0) {
+			} else if (breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get()) {
 				((OHorse) foal).randomizeOHorseAttributes();
 			}
 		}

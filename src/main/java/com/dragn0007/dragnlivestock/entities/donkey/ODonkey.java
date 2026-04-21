@@ -599,16 +599,15 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 
 			foal = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
-			int overlayChance = this.random.nextInt(10);
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partnerHorse.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
-			foal.setVariant(overlay);
 
 			foal.setOverlayVariant(overlay);
 			foal.setVariant(random.nextInt(OMuleModel.Variant.values().length));
@@ -629,33 +628,33 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			ODonkey partner = (ODonkey) ageableMob;
 			foal = EntityTypes.O_DONKEY_ENTITY.get().create(serverLevel);
 
-			int variantChance = this.random.nextInt(14);
+			int variantChance = this.random.nextInt(100);
 			int variant;
-			if (variantChance < 6) {
+			if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (variantChance < 12) {
+			} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(OHorseModel.Variant.values().length);
 			}
-			((ODonkey) foal).setVariant(variant);
+			foal.setVariant(variant);
 
-			int overlayChance = this.random.nextInt(10);
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
-			((ODonkey) foal).setOverlayVariant(overlay);
+			foal.setOverlayVariant(overlay);
 
-			int eyeColorChance = this.random.nextInt(11);
+			int eyeColorChance = this.random.nextInt(100);
 			int eyes;
-			if (eyeColorChance < 5) {
+			if (eyeColorChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 				eyes = this.getEyeVariant();
-			} else if (eyeColorChance < 10) {
+			} else if (eyeColorChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				eyes = partner.getEyeVariant();
 			} else {
 				eyes = this.random.nextInt(EquineEyeColorOverlay.values().length);

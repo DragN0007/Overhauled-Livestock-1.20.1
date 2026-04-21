@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.Chestable;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.LlamaFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OLlamaFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -608,22 +609,33 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			OLlama oLlama1 = (OLlama) ageableMob;
 			oLlama = EntityTypes.O_LLAMA_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
+			int breedChance = this.random.nextInt(100);
+			int breed;
+			if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+				breed = this.getWooly();
+			} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+				breed = oLlama1.getWooly();
+			} else {
+				breed = this.random.nextInt(Wooly.values().length);
+			}
+			oLlama.setWooly(breed);
+
+			int i = this.random.nextInt(100);
 			int variant;
-			if (i < 4) {
+			if (i < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (i < 8) {
+			} else if (i < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = oLlama1.getVariant();
 			} else {
 				int variantCount = OLlamaModel.Variant.values().length;
 				variant = variantCount > 0 ? this.random.nextInt(variantCount) : 0;
 			}
 
-			int j = this.random.nextInt(5);
+			int j = this.random.nextInt(100);
 			int overlay;
-			if (j < 2) {
+			if (j < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
+			} else if (j < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = oLlama1.getOverlayVariant();
 			} else {
 				int overlayCount = OLlamaMarkingLayer.Overlay.values().length;

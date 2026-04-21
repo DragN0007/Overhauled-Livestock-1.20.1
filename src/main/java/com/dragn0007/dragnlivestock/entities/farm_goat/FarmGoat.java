@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.FarmGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.ai.GoatFollowOwnerGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
@@ -878,21 +879,23 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		FarmGoat partner = (FarmGoat) ageableMob;
 		kid = EntityTypes.FARM_GOAT_ENTITY.get().create(serverLevel);
 
-		int breedChance = this.random.nextInt(5);
+		int breedChance = this.random.nextInt(100);
 		int breed;
-		if (breedChance == 0) {
-			breed = this.random.nextInt(GoatBreed.Breed.values().length);
+		if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+			breed = this.getBreed();
+		} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			breed = partner.getBreed();
 		} else {
-			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+			breed = this.random.nextInt(GoatBreed.Breed.values().length);
 		}
 		kid.setBreed(breed);
 
-		if (!(breedChance == 0)) {
-			int variantChance = this.random.nextInt(14);
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int variantChance = this.random.nextInt(100);
 			int variant;
-			if (variantChance < 6) {
+			if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (variantChance < 12) {
+			} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(FarmGoatModel.Variant.values().length);
@@ -902,12 +905,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			kid.setColorByBreed();
 		}
 
-		if (!(breedChance == 0)) {
-			int overlayChance = this.random.nextInt(10);
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
@@ -917,12 +920,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			kid.setMarkingByBreed();
 		}
 
-		if (!(breedChance == 0)) {
+		if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
 			int hornsChance = this.random.nextInt(10);
 			int hornType;
-			if (hornsChance < 4) {
+			if (hornsChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 				hornType = this.getHornVariant();
-			} else if (hornsChance < 8) {
+			} else if (hornsChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				hornType = partner.getHornVariant();
 			} else {
 				hornType = this.random.nextInt(FarmGoat.BreedHorns.values().length);

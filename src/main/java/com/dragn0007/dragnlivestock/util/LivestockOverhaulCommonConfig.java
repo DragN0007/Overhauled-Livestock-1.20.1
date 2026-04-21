@@ -71,6 +71,10 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue QUALITY;
     public static final ForgeConfigSpec.ConfigValue<Integer> MALE_COOLDOWN;
     public static final ForgeConfigSpec.ConfigValue<Integer> FEMALE_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> BREED_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> COAT_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MARKING_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> OTHER_CHANCE;
     public static final ForgeConfigSpec.BooleanValue DEBUG_LOGS;
     public static final ForgeConfigSpec.ConfigValue<Double> COVERED_WAGON_SPEED_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> DOG_SLED_SPEED_MULT;
@@ -106,55 +110,38 @@ public class LivestockOverhaulCommonConfig {
 
         REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
                 .define("Replace Horses", true);
-
         REPLACE_MULES = BUILDER.comment("Should mules be replaced by O-Mules?")
                 .define("Replace Mules", true);
-
         REPLACE_DONKEYS = BUILDER.comment("Should donkeys be replaced by O-Donkeys?")
                 .define("Replace Donkeys", true);
-
         REPLACE_COWS = BUILDER.comment("Should cows be replaced by O-Cows?")
                 .define("Replace Cows", true);
-
         REPLACE_CHICKENS = BUILDER.comment("Should chickens be replaced by O-Chickens?")
                 .define("Replace Chickens", true);
-
         REPLACE_SHEEP = BUILDER.comment("Should sheep be replaced by O-Sheep?")
                 .define("Replace Sheep", true);
-
         REPLACE_PIGS = BUILDER.comment("Should pigs be replaced by O-Pigs?")
                 .define("Replace Pigs", true);
-
         REPLACE_LLAMAS = BUILDER.comment("Should llamas be replaced by O-Llamas?")
                 .define("Replace Llamas", true);
-
         REPLACE_RABBITS = BUILDER.comment("Should rabbits be replaced by O-Rabbits?")
                 .define("Replace Rabbits", true);
-
         REPLACE_SALMON = BUILDER.comment("Should  be replaced by O-Salmon?")
                 .define("Replace Salmon", true);
-
         REPLACE_COD = BUILDER.comment("Should cod be replaced by O-Cod?")
                 .define("Replace Cod", true);
-
         REPLACE_BEES = BUILDER.comment("Should bees be replaced by O-Bees?")
                 .define("Replace Bees", true);
-
         REPLACE_CAMELS = BUILDER.comment("Should camels be replaced by O-Camels?")
                 .define("Replace Camels", true);
-
         REPLACE_GOATS = BUILDER.comment("Should goats be replaced by O-Goats?")
                 .define("Replace Goats", true);
-
         REPLACE_FROGS = BUILDER.comment("Should frogs be replaced by O-Frogs?")
                 .define("Replace Frogs", true);
-
         REPLACE_UNDEAD_HORSES = BUILDER.comment("Should undead horses be replaced by O-Undead Horses?")
                 .define("Replace Undead Horses", true);
-
         SPAWN_MOOBLOOMS = BUILDER.comment("Should Mooblooms have a chance to spawn alongside O-Cows?")
                 .define("Spawn Mooblooms", true);
-
         SPAWN_UNICORNS = BUILDER.comment("Should Unicorns have a chance to spawn in unique situations?")
                 .define("Spawn Unicorns", true);
 
@@ -163,22 +150,18 @@ public class LivestockOverhaulCommonConfig {
         BUILDER.push("Husbandry");
         GENDERS_AFFECT_BIPRODUCTS = BUILDER.comment("Should an animal's gender affect the ability to get byproducts from it?")
                 .define("Genders Affect Byproducts", true);
-
         GENDERS_AFFECT_BREEDING = BUILDER.comment("Should an animal's gender affect how it breeds?")
                 .define("Genders Affect Breeding", true);
 
         CHICKEN_EGG_LAY_TIME = BUILDER.comment("Minimum amount of time, in ticks, that an O-Chicken can lay an unfertilized egg. " +
                         "Default is 12000 ticks, or 10 minutes. Vanilla is 6000 ticks, or 5 minutes.")
                 .define("Chicken Egg Lay Cooldown", 12000);
-
         MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a non-dairy-breed animal. " +
                         "Default is 48000 ticks, or 40 minutes.")
                 .define("Average Milking Cooldown", 48000);
-
         DAIRY_MILKING_COOLDOWN = BUILDER.comment("Amount of time, in ticks, that you must wait to milk a dairy-breed animal. " +
                         "Default is 12000 ticks, or 10 minutes.")
                 .define("Dairy Breed Milking Cooldown", 12000);
-
         SHEEP_WOOL_REGROWTH_TIME = BUILDER.comment("Amount of time, in ticks, that you must wait to shear an O-Sheep, Goat or Llama. " +
                         "Default is 24000 ticks, or 20 minutes.")
                 .define("Wool Regrowth Time", 24000);
@@ -188,33 +171,36 @@ public class LivestockOverhaulCommonConfig {
 
         MAX_PIG_BABIES = BUILDER.comment("Maximum amount of piglets a pig can have at once. Default is 3.")
                 .define("Max Pig Babies", 3);
-
         MAX_RABBIT_BABIES = BUILDER.comment("Maximum amount of kits a rabbit can have at once. Default is 3.")
                 .define("Max Rabbit Babies", 3);
 
         ALLOW_SHEEP_DYE = BUILDER.comment("Should players be able to dye sheep?")
                 .define("Allow Direct Sheep Dyeing", true);
-
         MAX_DYED_SHEARS = BUILDER.comment("Maximum amount of times a sheep can be sheared before dye wears off. Default is 3.")
                 .define("Max Dyed Shears", 3);
 
         ROOSTERS_FEND = BUILDER.comment("Should roosters fend off predators like Ocelots, Cats, Foxes, and Ferrets?")
                 .define("Roosters Fend Off Predators", true);
+
+        BREED_CHANCE = BUILDER.comment("The chance at which you can get a random genetic Breed out of breeding two animals, out of 100. Default is 10. Range is 0-100.")
+                .define("Random Breed Chance Percentage", 10);
+        COAT_CHANCE = BUILDER.comment("The chance at which you can get a random genetic Coat out of breeding two animals, out of 100. Default is 10. Range is 0-100.")
+                .define("Random Coat Chance Percentage", 10);
+        MARKING_CHANCE = BUILDER.comment("The chance at which you can get random genetic Markings out of breeding two animals, out of 100. Default is 10. Range is 0-100.")
+                .define("Random Marking Chance Percentage", 10);
+        OTHER_CHANCE = BUILDER.comment("The chance at which you can get random genetic Horns, Eye Colors, etc out of breeding two animals, out of 10. Default is 20. Range is 0-100.")
+                .define("Random Other Chance Percentage", 10);
         BUILDER.pop();
 
         BUILDER.push("Herding");
         ANIMALS_HERDING_ENABLED = BUILDER.comment("Should animals, like cows, herd together?")
                 .define("Animals Herd Together", true);
-
         COW_HERD_MAX = BUILDER.comment("Maximum amount of O-Cows that can herd together. Default is 8.")
                 .define("Cow Herd Maximum", 8);
-
         HORSE_HERD_MAX = BUILDER.comment("Maximum amount of O-Horses that can herd together. Default is 3.")
                 .define("Horse Herd Maximum", 3);
-
         SHEEP_HERD_MAX = BUILDER.comment("Maximum amount of O-Sheep that can herd together. Default is 8.")
                 .define("Sheep Herd Maximum", 8);
-
         LLAMA_HERD_MAX = BUILDER.comment("Maximum amount of O-Llamas that can herd together. Default is 3.")
                 .define("Llama Herd Maximum", 3);
         BUILDER.pop();
@@ -276,7 +262,6 @@ public class LivestockOverhaulCommonConfig {
 
         CREATIVE_BRANDING = BUILDER.comment("Should only those in Creative Mode be able to 'Mustang Brand' horses?")
                 .define("Creative-Only Mustang Branding", false);
-
         CREATIVE_SNIPPING = BUILDER.comment("Should only those in Creative Mode be able to snip (geld or spay) mounts?")
                 .define("Creative-Only Snipping", false);
 
@@ -285,7 +270,6 @@ public class LivestockOverhaulCommonConfig {
 
         MALE_COOLDOWN = BUILDER.comment("How long, in ticks, a Male O-Animal's breeding cooldown takes. If Genders Affect Breeding is disabled, this does nothing. Default is 1200 (1 minute). Vanilla is 6000 (5 minutes).")
                 .define("Male Breeding Cooldown", 1200);
-
         FEMALE_COOLDOWN = BUILDER.comment("How long, in ticks, a Female O-Animal's breeding cooldown takes. If Genders Affect Breeding is disabled, this applies to all O-Animals. Default is 6000 (5 minutes).")
                 .define("Female/ Neutral Breeding Cooldown", 6000);
 
@@ -301,10 +285,8 @@ public class LivestockOverhaulCommonConfig {
 
         UNDEAD_HORSE_DEATH = BUILDER.comment("Should O-Horses have a small chance to turn Undead upon death?")
                 .define("Occasional Horse Turns Undead", true);
-
         UNDEAD_HORSE_CHANCE = BUILDER.comment("Chance of an O-Horse turning undead after dying to a natural cause. Default is 0.03 (3%).")
                 .define("Undead Horse Chance", 0.03);
-
         DECOMPISITION_STAGE_TIME = BUILDER.comment("Amount of time, in ticks, it takes for an Undead Horse to decompose to the next stage. " +
                         "Default is 72000 (3 ingame days).")
                 .define("Undead Decomp Stage Time", 72000);

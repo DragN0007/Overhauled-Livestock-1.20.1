@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.rabbit;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -729,45 +730,42 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 		ORabbit partner = (ORabbit) ageableMob;
 		kit = EntityTypes.O_RABBIT_ENTITY.get().create(serverLevel);
 
-		int breedChance = this.random.nextInt(5);
+		int breedChance = this.random.nextInt(100);
 		int breed;
-		if (breedChance == 0) {
+		if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+			breed = this.getBreed();
+		} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+			breed = partner.getBreed();
+		} else {
 			int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 			int randomIndex = new Random().nextInt(breeds.length);
 			breed = (breeds[randomIndex]);
-		} else {
-			breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
 		}
 		kit.setBreed(breed);
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
-			int variantChance = this.random.nextInt(14);
-			int variant;
-			if (variantChance < 6) {
-				variant = this.getVariant();
-			} else if (variantChance < 12) {
-				variant = partner.getVariant();
-			} else {
-				variant = this.random.nextInt(ORabbitModel.Variant.values().length);
-			}
-			kit.setVariant(variant);
+		int variantChance = this.random.nextInt(100);
+		int variant;
+		if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
+			variant = this.getVariant();
+		} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
+			variant = partner.getVariant();
+		} else {
+			variant = this.random.nextInt(ORabbitModel.Variant.values().length);
 		}
+		kit.setVariant(variant);
 
-		if (!(breedChance == 0) && random.nextDouble() > 0.5) {
-			int overlayChance = this.random.nextInt(10);
-			int overlay;
-			if (overlayChance < 4) {
-				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
-				overlay = partner.getOverlayVariant();
-			} else {
-				overlay = this.random.nextInt(ORabbitMarkingLayer.Overlay.values().length);
-			}
-			kit.setOverlayVariant(overlay);
+		int overlayChance = this.random.nextInt(100);
+		int overlay;
+		if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
+			overlay = this.getOverlayVariant();
+		} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
+			overlay = partner.getOverlayVariant();
+		} else {
+			overlay = this.random.nextInt(ORabbitMarkingLayer.Overlay.values().length);
 		}
+		kit.setOverlayVariant(overlay);
 
 		kit.setGender(random.nextInt(Gender.values().length));
-
 		kit.setDewlapByGender();
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {

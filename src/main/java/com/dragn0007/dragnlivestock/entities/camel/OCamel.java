@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.common.gui.OCamelMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OCamelFollowCaravanGoal;
+import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
@@ -813,35 +814,36 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 			OCamel partnerCamel = (OCamel) ageableMob;
 			calf = EntityTypes.O_CAMEL_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
+			int i = this.random.nextInt(100);
 			int variant;
-			if (i < 4) {
+			if (i < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (i < 8) {
+			} else if (i < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = partnerCamel.getVariant();
 			} else {
 				variant = this.random.nextInt(OCamelModel.Variant.values().length);
 			}
 
-			int j = this.random.nextInt(5);
+			int j = this.random.nextInt(100);
 			int overlay;
-			if (j < 2) {
+			if (j < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (j < 4) {
+			} else if (j < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partnerCamel.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(OCamelMarkingLayer.Overlay.values().length);
 			}
 
-			int k = this.random.nextInt(5);
+			int breedChance = this.random.nextInt(100);
 			int breed;
-			if (k < 2) {
+			if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
 				breed = this.getBreed();
-			} else if (k < 4) {
+			} else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
 				breed = partnerCamel.getBreed();
 			} else {
 				breed = this.random.nextInt(CamelBreed.Breed.values().length);
 			}
+			partnerCamel.setBreed(breed);
 
 			calf.setVariant(variant);
 			calf.setOverlayVariant(overlay);

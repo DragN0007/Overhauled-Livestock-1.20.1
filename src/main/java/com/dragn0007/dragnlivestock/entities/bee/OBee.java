@@ -153,11 +153,11 @@ public class OBee extends Bee implements GeoEntity {
 			OBee mob = (OBee) ageableMob;
 			oBee = EntityTypes.O_BEE_ENTITY.get().create(serverLevel);
 
-			int i = this.random.nextInt(9);
+			int i = this.random.nextInt(100);
 			int variant;
-			if (i < 4) {
+			if (i < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (i < 8) {
+			} else if (i < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = mob.getVariant();
 			} else {
 				variant = this.random.nextInt(OBeeModel.Variant.values().length);

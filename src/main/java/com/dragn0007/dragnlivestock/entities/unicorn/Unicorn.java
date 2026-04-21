@@ -595,11 +595,11 @@ public class Unicorn extends OHorse implements GeoEntity {
 				foal = EntityTypes.UNICORN_ENTITY.get().create(serverLevel);
 			}
 
-			int overlayChance = this.random.nextInt(10);
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				overlay = partnerHorse.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(UnicornMarkingLayer.Overlay.values().length);
@@ -619,45 +619,44 @@ public class Unicorn extends OHorse implements GeoEntity {
 			breed = (this.random.nextInt(2) == 0) ? this.getSpecies() : partner.getSpecies();
 			((Unicorn) foal).setSpecies(breed);
 
-
-			int variantChance = this.random.nextInt(14);
+			int variantChance = this.random.nextInt(100);
 			int variant;
-			if (variantChance < 6) {
+			if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
 				variant = this.getVariant();
-			} else if (variantChance < 12) {
+			} else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				variant = partner.getVariant();
 			} else {
 				variant = this.random.nextInt(UnicornModel.Variant.values().length);
 			}
 			(foal).setVariant(variant);
 
-			int overlayChance = this.random.nextInt(10);
+			int overlayChance = this.random.nextInt(100);
 			int overlay;
-			if (overlayChance < 4) {
+			if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
 				overlay = this.getOverlayVariant();
-			} else if (overlayChance < 8) {
+			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
 				overlay = this.random.nextInt(UnicornMarkingLayer.Overlay.values().length);
 			}
 			(foal).setOverlayVariant(overlay);
 
-			int eyeColorChance = this.random.nextInt(11);
+			int eyeColorChance = this.random.nextInt(100);
 			int eyes;
-			if (eyeColorChance < 5) {
+			if (eyeColorChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 				eyes = this.getEyeVariant();
-			} else if (eyeColorChance < 10) {
+			} else if (eyeColorChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				eyes = partner.getEyeVariant();
 			} else {
 				eyes = this.random.nextInt(EquineEyeColorOverlay.values().length);
 			}
 			((Unicorn) foal).setEyeVariant(eyes);
 
-			int hornColorChance = this.random.nextInt(11);
+			int hornColorChance = this.random.nextInt(100);
 			int horn;
-			if (hornColorChance < 5) {
+			if (hornColorChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
 				horn = this.getHornVariant();
-			} else if (hornColorChance < 10) {
+			} else if (hornColorChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				horn = partner.getHornVariant();
 			} else {
 				horn = this.random.nextInt(EquineEyeColorOverlay.values().length);

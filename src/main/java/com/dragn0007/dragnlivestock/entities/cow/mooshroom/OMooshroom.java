@@ -320,32 +320,34 @@ public class OMooshroom extends OCow implements GeoEntity {
         OMooshroom partner = (OMooshroom) ageableMob;
         calf = EntityTypes.O_MOOSHROOM_ENTITY.get().create(serverLevel);
 
-        int breedChance = this.random.nextInt(5);
+        int breedChance = this.random.nextInt(100);
         int breed;
-        if (breedChance == 0) {
-            breed = this.random.nextInt(CowBreed.Breed.values().length);
+        if (breedChance < ((100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get()) / 2)) {
+            breed = this.getBreed();
+        } else if (breedChance < (100 - LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+            breed = partner.getBreed();
         } else {
-            breed = (this.random.nextInt(2) == 0) ? this.getBreed() : partner.getBreed();
+            breed = this.random.nextInt(CowBreed.Breed.values().length);
         }
         calf.setBreed(breed);
 
-        int variantChance = this.random.nextInt(14);
+        int variantChance = this.random.nextInt(100);
         int variant;
-        if (variantChance < 6) {
+        if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
             variant = this.getVariant();
-        } else if (variantChance < 12) {
+        } else if (variantChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
             variant = partner.getVariant();
         } else {
             variant = this.random.nextInt(OMooshroomModel.Variant.values().length);
         }
         calf.setVariant(variant);
 
-        if (!(breedChance == 0)) {
-            int overlayChance = this.random.nextInt(10);
+        if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+            int overlayChance = this.random.nextInt(100);
             int overlay;
-            if (overlayChance < 4) {
+            if (overlayChance < ((100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get()) / 2)) {
                 overlay = this.getOverlayVariant();
-            } else if (overlayChance < 8) {
+            } else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
                 overlay = partner.getOverlayVariant();
             } else {
                 overlay = this.random.nextInt(BovineMarkingOverlay.values().length);
@@ -355,23 +357,23 @@ public class OMooshroom extends OCow implements GeoEntity {
             calf.setMarkingByBreed();
         }
 
-        int mushroomChance = this.random.nextInt(10);
+        int mushroomChance = this.random.nextInt(100);
         int mushrooms;
-        if (mushroomChance < 4) {
+        if (mushroomChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
             mushrooms = this.getMushroomVariant();
-        } else if (mushroomChance < 8) {
+        } else if (mushroomChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
             mushrooms = partner.getMushroomVariant();
         } else {
             mushrooms = this.random.nextInt(OMooshroomMushroomLayer.MushroomOverlay.values().length);
         }
         calf.setMushroomVariant(mushrooms);
 
-        if (!(breedChance == 0)) {
-            int hornsChance = this.random.nextInt(10);
+        if (!(breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get())) {
+            int hornsChance = this.random.nextInt(100);
             int hornType;
-            if (hornsChance < 4) {
+            if (hornsChance < ((100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get()) / 2)) {
                 hornType = this.getHornVariant();
-            } else if (hornsChance < 8) {
+            } else if (hornsChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
                 hornType = partner.getHornVariant();
             } else {
                 hornType = this.random.nextInt(OCow.BreedHorns.values().length);
@@ -381,9 +383,7 @@ public class OMooshroom extends OCow implements GeoEntity {
             calf.setHornsByBreed();
         }
 
-        int gender;
-        gender = this.random.nextInt(OCow.Gender.values().length);
-        calf.setGender(gender);
+        calf.setGender(this.random.nextInt(OCow.Gender.values().length));
 
         return calf;
     }
