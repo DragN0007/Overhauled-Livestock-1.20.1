@@ -4876,7 +4876,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BLACK_WOOL, 2)
                 .requires(LOItems.BLACK_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4884,7 +4884,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BLUE_WOOL, 2)
                 .requires(LOItems.BLUE_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4892,7 +4892,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BROWN_WOOL, 2)
                 .requires(LOItems.BROWN_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4900,7 +4900,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.CYAN_WOOL, 2)
                 .requires(LOItems.CYAN_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4908,7 +4908,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GREEN_WOOL, 2)
                 .requires(LOItems.GREEN_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4916,7 +4916,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GRAY_WOOL, 2)
                 .requires(LOItems.GREY_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4924,7 +4924,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_BLUE_WOOL, 2)
                 .requires(LOItems.LIGHT_BLUE_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4932,7 +4932,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_GRAY_WOOL, 2)
                 .requires(LOItems.LIGHT_GREY_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4940,7 +4940,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIME_WOOL, 2)
                 .requires(LOItems.LIME_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4948,7 +4948,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.MAGENTA_WOOL, 2)
                 .requires(LOItems.MAGENTA_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4956,7 +4956,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.ORANGE_WOOL, 2)
                 .requires(LOItems.ORANGE_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4964,7 +4964,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PINK_WOOL, 2)
                 .requires(LOItems.PINK_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4972,7 +4972,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_WOOL, 2)
                 .requires(LOItems.PURPLE_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4980,7 +4980,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.RED_WOOL, 2)
                 .requires(LOItems.RED_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4988,7 +4988,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_WOOL, 2)
                 .requires(LOItems.WHITE_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))
@@ -4996,7 +4996,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.YELLOW_WOOL, 2)
                 .requires(LOItems.YELLOW_WOOL_STAPLE.get())
-                .requires(LOItems.SPINDLE.get())
+                .requires(LOTags.Items.SPINDLE)
                 .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(LOTags.Items.WOOL_STAPLES)
                         .build()))

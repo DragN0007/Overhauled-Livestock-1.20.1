@@ -88,6 +88,7 @@ public class LOTags {
         public static final TagKey<Item> CAMEL_ARMOR = tag("camel_armor");
 
         public static final TagKey<Item> SHEARS = forgeTag("shears");
+        public static final TagKey<Item> SPINDLE = forgeTag("spindle");
 
         public static TagKey<Item> forgeTag (String name) {
             return ItemTags.create(new ResourceLocation("forge", name));

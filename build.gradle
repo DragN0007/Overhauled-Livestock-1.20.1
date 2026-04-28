@@ -123,7 +123,7 @@ dependencies {
 //    implementation fg.deobf("curse.maven:leawind-third-person-930880:5961735")
 //    implementation fg.deobf("curse.maven:minecraft-comes-alive-reborn-535291:6254999")
     implementation fg.deobf("curse.maven:patchouli-306770:4966125")
-//    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
+    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
 }
 
 tasks.named('processResources', ProcessResources).configure {

@@ -6,7 +6,7 @@
       "item": "dragnlivestock:green_wool_staple"
     },
     {
-      "item": "dragnlivestock:spindle"
+      "tag": "forge:spindle"
     }
   ],
   "result": {
