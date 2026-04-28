@@ -1,0 +1,14 @@
+{
+  "type": "tfc:knapping",
+  "knapping_type": "tfc:leather",
+  "pattern": [
+    "X    ",
+    "XXXXX",
+    "XX  X",
+    "XXXXX",
+    "     "
+  ],
+  "result": {
+    "item": "dragnlivestock:wagon_harness"
+  }
+}
