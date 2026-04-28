@@ -8,31 +8,31 @@
     "dragnlivestock:frog",
 
     {
-      "id": "dragnloextras:cooked_caribou_sirloin_steak",
+      "id": "dragnloextras:caribou_sirloin_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_caribou_rib_steak",
+      "id": "dragnloextras:caribou_rib_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_camel_loin",
+      "id": "dragnloextras:camel_loin",
       "required": false
     },{
-      "id": "dragnloextras:cooked_camel_rib",
+      "id": "dragnloextras:camel_rib",
       "required": false
     },{
-      "id": "dragnloextras:cooked_rabbit_thigh",
+      "id": "dragnloextras:rabbit_thigh",
       "required": false
     },{
-      "id": "dragnloextras:cooked_horse_sirloin_steak",
+      "id": "dragnloextras:horse_sirloin_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_horse_rib_steak",
+      "id": "dragnloextras:horse_rib_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_unicorn_sirloin_steak",
+      "id": "dragnloextras:unicorn_sirloin_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_unicorn_rib_steak",
+      "id": "dragnloextras:unicorn_rib_steak",
       "required": false
     },
 

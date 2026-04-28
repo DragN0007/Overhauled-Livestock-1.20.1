@@ -3,10 +3,10 @@
   "values": [
     "minecraft:porkchop",
     {
-      "id": "dragnloextras:cooked_pork_tenderloin",
+      "id": "dragnloextras:pork_tenderloin",
       "required": false
     },{
-      "id": "dragnloextras:cooked_pork_rib_chop",
+      "id": "dragnloextras:pork_rib_chop",
       "required": false
     },
 

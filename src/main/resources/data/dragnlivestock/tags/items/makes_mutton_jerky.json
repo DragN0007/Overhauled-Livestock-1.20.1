@@ -6,22 +6,22 @@
     "dragnlivestock:chevon",
 
     {
-      "id": "dragnloextras:cooked_mutton_loin",
+      "id": "dragnloextras:mutton_loin",
       "required": false
     },{
-      "id": "dragnloextras:cooked_mutton_rib",
+      "id": "dragnloextras:mutton_rib",
       "required": false
     },{
-      "id": "dragnloextras:cooked_llama_loin",
+      "id": "dragnloextras:llama_loin",
       "required": false
     },{
-      "id": "dragnloextras:cooked_llama_rib",
+      "id": "dragnloextras:llama_rib",
       "required": false
     },{
-      "id": "dragnloextras:cooked_chevon_loin",
+      "id": "dragnloextras:chevon_loin",
       "required": false
     },{
-      "id": "dragnloextras:cooked_chevon_rib",
+      "id": "dragnloextras:chevon_rib",
       "required": false
     },
 

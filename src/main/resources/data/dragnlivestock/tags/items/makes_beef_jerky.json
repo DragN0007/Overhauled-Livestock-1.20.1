@@ -3,10 +3,10 @@
   "values": [
     "minecraft:beef",
     {
-      "id": "dragnloextras:cooked_beef_sirloin_steak",
+      "id": "dragnloextras:beef_sirloin_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_beef_rib_steak",
+      "id": "dragnloextras:beef_rib_steak",
       "required": false
     },
 

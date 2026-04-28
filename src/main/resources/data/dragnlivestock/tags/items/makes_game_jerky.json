@@ -3,10 +3,10 @@
   "values": [
     "dragnlivestock:caribou",
     {
-      "id": "dragnloextras:cooked_caribou_sirloin_steak",
+      "id": "dragnloextras:caribou_sirloin_steak",
       "required": false
     },{
-      "id": "dragnloextras:cooked_caribou_rib_steak",
+      "id": "dragnloextras:caribou_rib_steak",
       "required": false
     },
 
