@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:iron_ingot"
+      "tag": "forge:crafting_metals"
     },
     "A": {
       "item": "dragnlivestock:wagon_body"

@@ -18,7 +18,7 @@
             "item": "minecraft:red_dye"
           },
           {
-            "item": "minecraft:gold_ingot"
+            "tag": "forge:gold_metals"
           }
         ],
         "result": {

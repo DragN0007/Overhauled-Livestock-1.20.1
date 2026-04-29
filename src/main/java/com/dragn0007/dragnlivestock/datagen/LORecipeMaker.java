@@ -37,7 +37,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_WAGON_HARNESS.get())
                                 .requires(LOItems.WAGON_HARNESS.get())
                                 .requires(Items.RED_DYE)
-                                .requires(Items.GOLD_INGOT)
+                                .requires(LOTags.Items.GOLD_METALS)
                                 .unlockedBy("has_harness", inventoryTrigger(ItemPredicate.Builder.item()
                                         .of(LOItems.WAGON_HARNESS.get()).build()))
                                 ::save).build
@@ -49,7 +49,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_SADDLE.get())
                                 .requires(Items.SADDLE)
                                 .requires(Items.RED_DYE)
-                                .requires(Items.GOLD_INGOT)
+                                .requires(LOTags.Items.GOLD_METALS)
                                 .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
                                         .of(Items.SADDLE).build()))
                                 ::save).build
@@ -61,7 +61,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_LIGHT_SADDLE.get())
                                 .requires(LOItems.LIGHT_SADDLE.get())
                                 .requires(Items.RED_DYE)
-                                .requires(Items.GOLD_INGOT)
+                                .requires(LOTags.Items.GOLD_METALS)
                                 .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
                                         .of(Items.SADDLE).build()))
                                 ::save).build
@@ -73,7 +73,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.HOLIDAY_HEAVY_SADDLE.get())
                                 .requires(LOItems.HEAVY_SADDLE.get())
                                 .requires(Items.RED_DYE)
-                                .requires(Items.GOLD_INGOT)
+                                .requires(LOTags.Items.GOLD_METALS)
                                 .unlockedBy("has_saddle", inventoryTrigger(ItemPredicate.Builder.item()
                                         .of(Items.SADDLE).build()))
                                 ::save).build
@@ -321,11 +321,11 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOUNT_KEY.get())
-                .define('A', Items.GOLD_NUGGET)
+                .define('A', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern(" A")
                 .pattern("A ")
                 .unlockedBy("has_gold", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.GOLD_NUGGET).build()))
+                        .of(LOTags.Items.GOLD_METAL_NUGGETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPINDLE.get())
@@ -367,7 +367,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .define('A', Items.BLUE_CARPET)
                                 .define('B', Items.RED_CARPET)
                                 .define('C', Items.WHITE_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("ABB")
                                 .pattern("CDC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -421,7 +421,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .define('A', Items.PURPLE_CARPET)
                                 .define('B', Items.ORANGE_CARPET)
                                 .define('C', Items.BROWN_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("ABB")
                                 .pattern("CDC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -473,7 +473,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_MEDIEVAL_BLANKET.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("DAD")
                                 .pattern("DDD")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -485,7 +485,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_MODERN_BLANKET.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('C', Items.GOLD_NUGGET)
+                                .define('C', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AAA")
                                 .pattern("CC ")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -497,7 +497,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_RACING_BLANKET.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('C', Items.GOLD_NUGGET)
+                                .define('C', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AAA")
                                 .pattern("C  ")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -509,7 +509,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ELDERBERRY_WESTERN_BLANKET.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('C', Items.GOLD_NUGGET)
+                                .define('C', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AAA")
                                 .pattern("CCC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -524,7 +524,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .define('A', Items.PINK_CARPET)
                                 .define('B', Items.RED_CARPET)
                                 .define('C', Items.WHITE_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("ABB")
                                 .pattern("CDC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -578,7 +578,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .define('A', Items.PINK_CARPET)
                                 .define('B', Items.LIGHT_BLUE_CARPET)
                                 .define('C', Items.YELLOW_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("ABB")
                                 .pattern("CDC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -632,7 +632,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .define('A', Items.ORANGE_CARPET)
                                 .define('B', Items.RED_CARPET)
                                 .define('C', Items.YELLOW_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("ABB")
                                 .pattern("CDC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -686,7 +686,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .define('A', Items.LIGHT_BLUE_CARPET)
                                 .define('B', Items.WHITE_CARPET)
                                 .define('C', Items.BROWN_CARPET)
-                                .define('D', Items.GOLD_NUGGET)
+                                .define('D', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("ABB")
                                 .pattern("CDC")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1331,7 +1331,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.GOLDEN_HORSE_ARMOR)
                 .define('A', Items.LEATHER)
                 .define('B', ItemTags.WOOL_CARPETS)
-                .define('C', Items.GOLD_INGOT)
+                .define('C', LOTags.Items.GOLD_METALS)
                 .pattern("  C")
                 .pattern("CCC")
                 .pattern("ABA")
@@ -1692,7 +1692,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_CAPE.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1704,7 +1704,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_HALF.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1716,7 +1716,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_FULL.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -1729,7 +1729,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -1743,7 +1743,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_CAPE.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -1756,7 +1756,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_HALF.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -1769,7 +1769,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_FULL.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -1783,7 +1783,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLACK_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BLACK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -1799,7 +1799,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_CAPE.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1811,7 +1811,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_HALF.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1823,7 +1823,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_FULL.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -1836,7 +1836,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLUE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -1850,7 +1850,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_CAPE.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -1863,7 +1863,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_HALF.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -1876,7 +1876,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_FULL.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -1890,7 +1890,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BLUE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -1905,7 +1905,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_CAPE.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -1918,7 +1918,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_HALF.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -1931,7 +1931,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_FULL.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -1945,7 +1945,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BLUE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -1961,7 +1961,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_CAPE.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1973,7 +1973,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_HALF.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -1985,7 +1985,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_FULL.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -1998,7 +1998,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BROWN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2012,7 +2012,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_CAPE.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2025,7 +2025,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_HALF.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2038,7 +2038,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_FULL.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2052,7 +2052,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_BROWN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2067,7 +2067,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_CAPE.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2080,7 +2080,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_HALF.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2093,7 +2093,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_FULL.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2107,7 +2107,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_BROWN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.BROWN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2123,7 +2123,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_CAPE.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2135,7 +2135,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_HALF.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2147,7 +2147,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_FULL.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -2160,7 +2160,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.CYAN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2174,7 +2174,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_CAPE.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2187,7 +2187,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_HALF.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2200,7 +2200,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_FULL.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2214,7 +2214,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CYAN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2229,7 +2229,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_CAPE.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2242,7 +2242,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_HALF.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2255,7 +2255,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_FULL.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2269,7 +2269,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CYAN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.CYAN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2285,7 +2285,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_CAPE.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2297,7 +2297,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_HALF.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2309,7 +2309,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_FULL.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -2322,7 +2322,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREEN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2336,7 +2336,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_CAPE.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2349,7 +2349,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_HALF.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2362,7 +2362,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_FULL.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2376,7 +2376,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREEN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2391,7 +2391,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_CAPE.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2404,7 +2404,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_HALF.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2417,7 +2417,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_FULL.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2431,7 +2431,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREEN_CAPARISON_SHOULDER.get())
                                 .define('A', Items.GREEN_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2447,7 +2447,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_CAPE.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2459,7 +2459,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_HALF.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2471,7 +2471,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_FULL.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -2484,7 +2484,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.GREY_CAPARISON_SHOULDER.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2498,7 +2498,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_CAPE.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2511,7 +2511,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_HALF.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2524,7 +2524,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_FULL.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2538,7 +2538,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_GREY_CAPARISON_SHOULDER.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2553,7 +2553,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_CAPE.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2566,7 +2566,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_HALF.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2579,7 +2579,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_FULL.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2593,7 +2593,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_GREY_CAPARISON_SHOULDER.get())
                                 .define('A', Items.GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2609,7 +2609,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_CAPE.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2621,7 +2621,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_HALF.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2633,7 +2633,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_FULL.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -2646,7 +2646,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_BLUE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2660,7 +2660,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_CAPE.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2673,7 +2673,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_HALF.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2686,7 +2686,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_FULL.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2700,7 +2700,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2715,7 +2715,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_CAPE.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2728,7 +2728,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_HALF.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2741,7 +2741,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_FULL.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2755,7 +2755,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIGHT_BLUE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2771,7 +2771,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_CAPE.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2783,7 +2783,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_HALF.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2795,7 +2795,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_FULL.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -2808,7 +2808,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIGHT_GREY_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2822,7 +2822,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_CAPE.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2835,7 +2835,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_HALF.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2848,7 +2848,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_FULL.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2862,7 +2862,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIGHT_GREY_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2877,7 +2877,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_CAPE.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2890,7 +2890,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_HALF.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -2903,7 +2903,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_FULL.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -2917,7 +2917,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIGHT_GREY_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIGHT_GRAY_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -2933,7 +2933,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_CAPE.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2945,7 +2945,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_HALF.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -2957,7 +2957,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_FULL.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -2970,7 +2970,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LIME_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -2984,7 +2984,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_CAPE.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -2997,7 +2997,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_HALF.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3010,7 +3010,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_FULL.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3024,7 +3024,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_LIME_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3039,7 +3039,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_CAPE.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3052,7 +3052,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_HALF.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3065,7 +3065,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_FULL.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3079,7 +3079,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_LIME_CAPARISON_SHOULDER.get())
                                 .define('A', Items.LIME_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3094,7 +3094,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_CAPE.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3106,7 +3106,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_HALF.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3118,7 +3118,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_FULL.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -3131,7 +3131,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.MAGENTA_CAPARISON_SHOULDER.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -3145,7 +3145,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_CAPE.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3158,7 +3158,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_HALF.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3171,7 +3171,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_FULL.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3185,7 +3185,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_MAGENTA_CAPARISON_SHOULDER.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3200,7 +3200,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_CAPE.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3213,7 +3213,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_HALF.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3226,7 +3226,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_FULL.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3240,7 +3240,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_MAGENTA_CAPARISON_SHOULDER.get())
                                 .define('A', Items.MAGENTA_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3256,7 +3256,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_CAPE.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3268,7 +3268,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_HALF.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3280,7 +3280,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_FULL.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -3293,7 +3293,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.ORANGE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -3307,7 +3307,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_CAPE.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3320,7 +3320,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_HALF.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3333,7 +3333,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_FULL.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3347,7 +3347,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_ORANGE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3362,7 +3362,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_CAPE.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3375,7 +3375,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_HALF.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3388,7 +3388,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_FULL.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3402,7 +3402,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_ORANGE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.ORANGE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3418,7 +3418,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_CAPE.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3430,7 +3430,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_HALF.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3442,7 +3442,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_FULL.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -3455,7 +3455,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PINK_CAPARISON_SHOULDER.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -3469,7 +3469,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_CAPE.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3482,7 +3482,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_HALF.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3495,7 +3495,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_FULL.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3509,7 +3509,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PINK_CAPARISON_SHOULDER.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3524,7 +3524,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_CAPE.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3537,7 +3537,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_HALF.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3550,7 +3550,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_FULL.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3564,7 +3564,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PINK_CAPARISON_SHOULDER.get())
                                 .define('A', Items.PINK_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3580,7 +3580,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_CAPE.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3592,7 +3592,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_HALF.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3604,7 +3604,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_FULL.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -3617,7 +3617,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.PURPLE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -3631,7 +3631,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_CAPE.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3644,7 +3644,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_HALF.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3657,7 +3657,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_FULL.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3671,7 +3671,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_PURPLE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3686,7 +3686,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_CAPE.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3699,7 +3699,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_HALF.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3712,7 +3712,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_FULL.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3726,7 +3726,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_PURPLE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.PURPLE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3742,7 +3742,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_CAPE.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3754,7 +3754,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_HALF.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3766,7 +3766,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_FULL.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -3779,7 +3779,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.RED_CAPARISON_SHOULDER.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -3793,7 +3793,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_CAPE.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3806,7 +3806,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_HALF.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3819,7 +3819,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_FULL.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3833,7 +3833,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_RED_CAPARISON_SHOULDER.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3848,7 +3848,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_CAPE.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3861,7 +3861,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_HALF.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3874,7 +3874,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_FULL.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3888,7 +3888,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_RED_CAPARISON_SHOULDER.get())
                                 .define('A', Items.RED_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -3904,7 +3904,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_CAPE.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3916,7 +3916,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_HALF.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -3928,7 +3928,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_FULL.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -3941,7 +3941,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -3955,7 +3955,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_CAPE.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -3968,7 +3968,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_HALF.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -3981,7 +3981,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_FULL.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -3995,7 +3995,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_WHITE_CAPARISON_SHOULDER.get())
                                 .define('A', Items.WHITE_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -4011,7 +4011,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_CAPE.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA")
                                 .pattern("BA")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -4023,7 +4023,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_HALF.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("AA ")
                                 .pattern("BAB")
                                 .unlockedBy("has_carpet", has(ItemTags.WOOL_CARPETS))
@@ -4035,7 +4035,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_FULL.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern("  A")
                                 .pattern("AAA")
                                 .pattern("BAB")
@@ -4048,7 +4048,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.YELLOW_CAPARISON_SHOULDER.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .pattern(" A")
                                 .pattern("AA")
                                 .pattern("AB")
@@ -4062,7 +4062,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_CAPE.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -4075,7 +4075,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_HALF.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -4088,7 +4088,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_FULL.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -4102,7 +4102,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_YELLOW_CAPARISON_SHOULDER.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.BLACK_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -4117,7 +4117,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_CAPE.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("CA")
                                 .pattern("BA")
@@ -4130,7 +4130,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_HALF.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("AC ")
                                 .pattern("BAB")
@@ -4143,7 +4143,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_FULL.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern("  C")
                                 .pattern("ACA")
@@ -4157,7 +4157,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_YELLOW_CAPARISON_SHOULDER.get())
                                 .define('A', Items.YELLOW_CARPET)
-                                .define('B', Items.GOLD_NUGGET)
+                                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                 .define('C', Items.WHITE_CARPET)
                                 .pattern(" C")
                                 .pattern("CA")
@@ -4194,7 +4194,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_MEDIEVAL_BLANKET.get())
                 .define('A', Items.BLACK_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4227,7 +4227,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_MEDIEVAL_BLANKET.get())
                 .define('A', Items.BLUE_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4260,7 +4260,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_MEDIEVAL_BLANKET.get())
                 .define('A', Items.BROWN_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4293,7 +4293,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_MEDIEVAL_BLANKET.get())
                 .define('A', Items.CYAN_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4326,7 +4326,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_MEDIEVAL_BLANKET.get())
                 .define('A', Items.GREEN_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4359,7 +4359,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_MEDIEVAL_BLANKET.get())
                 .define('A', Items.GRAY_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4392,7 +4392,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_MEDIEVAL_BLANKET.get())
                 .define('A', Items.LIGHT_BLUE_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4425,7 +4425,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_MEDIEVAL_BLANKET.get())
                 .define('A', Items.LIGHT_GRAY_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4458,7 +4458,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_MEDIEVAL_BLANKET.get())
                 .define('A', Items.LIME_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4491,7 +4491,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_MEDIEVAL_BLANKET.get())
                 .define('A', Items.MAGENTA_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4524,7 +4524,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_MEDIEVAL_BLANKET.get())
                 .define('A', Items.ORANGE_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4557,7 +4557,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_MEDIEVAL_BLANKET.get())
                 .define('A', Items.PINK_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4590,7 +4590,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_MEDIEVAL_BLANKET.get())
                 .define('A', Items.PURPLE_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4623,7 +4623,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_MEDIEVAL_BLANKET.get())
                 .define('A', Items.RED_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4656,7 +4656,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_MEDIEVAL_BLANKET.get())
                 .define('A', Items.WHITE_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -4689,7 +4689,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_MEDIEVAL_BLANKET.get())
                 .define('A', Items.YELLOW_CARPET)
-                .define('B', Items.GOLD_NUGGET)
+                .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()

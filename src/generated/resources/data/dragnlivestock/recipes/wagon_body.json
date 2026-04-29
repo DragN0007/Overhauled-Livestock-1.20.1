@@ -9,7 +9,7 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "item": "minecraft:iron_ingot"
+      "tag": "forge:crafting_metals"
     }
   },
   "pattern": [

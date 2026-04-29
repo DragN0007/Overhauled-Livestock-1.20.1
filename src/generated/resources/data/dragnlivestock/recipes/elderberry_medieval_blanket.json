@@ -15,7 +15,7 @@
             "item": "minecraft:blue_carpet"
           },
           "D": {
-            "item": "minecraft:gold_nugget"
+            "tag": "forge:gold_metal_nuggets"
           }
         },
         "pattern": [

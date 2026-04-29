@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:gold_nugget"
-            ]
+            "tag": "forge:gold_metal_nuggets"
           }
         ]
       },

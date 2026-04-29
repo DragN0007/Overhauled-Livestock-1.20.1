@@ -6,7 +6,7 @@
       "item": "minecraft:purple_carpet"
     },
     "B": {
-      "item": "minecraft:gold_nugget"
+      "tag": "forge:gold_metal_nuggets"
     }
   },
   "pattern": [

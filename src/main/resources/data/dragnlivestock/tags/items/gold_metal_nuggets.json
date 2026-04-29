@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:gold_nugget",
+    {
+      "id": "tfcorewashing:pellet_gold",
+      "required": false
+    }
+  ]
+}

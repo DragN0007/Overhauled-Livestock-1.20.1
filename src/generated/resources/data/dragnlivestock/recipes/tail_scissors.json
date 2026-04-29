@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "minecraft:iron_ingot"
+      "tag": "forge:crafting_metals"
     },
     "B": {
-      "item": "minecraft:iron_nugget"
+      "tag": "forge:crafting_metal_nuggets"
     }
   },
   "pattern": [
