@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:iron_nugget",
+    {
+      "id": "tfcorewashing:pellet_copper",
+      "required": false
+    },
+    {
+      "id": "tfcorewashing:pellet_tin",
+      "required": false
+    },
+    {
+      "id": "tfcorewashing:pellet_zinc",
+      "required": false
+    },
+    {
+      "id": "tfcorewashing:pellet_silver",
+      "required": false
+    },
+    {
+      "id": "tfcorewashing:pellet_wrought_iron",
+      "required": false
+    }
+  ]
+}

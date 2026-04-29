@@ -177,7 +177,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_BODY.get())
                 .define('A', ItemTags.PLANKS)
                 .define('B', Items.STICK)
-                .define('C', Items.IRON_INGOT)
+                .define('C', LOTags.Items.CRAFTING_METALS)
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("BCB")
@@ -285,7 +285,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SLEIGH.get())
-                .define('#', Items.IRON_INGOT)
+                .define('#', LOTags.Items.CRAFTING_METALS)
                 .define('A', LOItems.WAGON_BODY.get())
                 .define('C', Items.CHEST)
                 .pattern("#  ")
@@ -330,7 +330,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPINDLE.get())
                 .define('A', Items.STICK)
-                .define('B', Items.IRON_NUGGET)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("BAB")
                 .pattern(" A ")
                 .pattern(" A ")
@@ -340,7 +340,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RODEO_HARNESS.get())
                 .define('A', Items.LEATHER)
-                .define('B', Items.IRON_NUGGET)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("A A")
                 .pattern("BAB")
                 .pattern("A A")
@@ -350,7 +350,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WAGON_HARNESS.get())
                 .define('A', Items.LEATHER)
-                .define('B', Items.IRON_NUGGET)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("BAB")
                 .pattern("A A")
@@ -1120,7 +1120,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
                 .define('A', Items.LEATHER)
-                .define('B', Items.IRON_NUGGET)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("A A")
                 .pattern("B B")
@@ -1146,7 +1146,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_SADDLE.get())
                 .define('A', Items.LEATHER)
-                .define('B', Items.IRON_NUGGET)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("B B")
                 .unlockedBy("has_leather", inventoryTrigger(ItemPredicate.Builder.item()
@@ -1171,7 +1171,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.HEAVY_SADDLE.get())
                 .define('A', Items.LEATHER)
-                .define('B', Items.IRON_NUGGET)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("B B")
@@ -1497,23 +1497,23 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MANE_SCISSORS.get())
-                .define('A', Items.IRON_INGOT)
-                .define('B', Items.IRON_NUGGET)
+                .define('A', LOTags.Items.CRAFTING_METALS)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("A A")
                 .pattern("A A")
                 .pattern("BAB")
                 .unlockedBy("has_iron", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.IRON_INGOT).build()))
+                        .of(LOTags.Items.CRAFTING_METALS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.TAIL_SCISSORS.get())
-                .define('A', Items.IRON_INGOT)
-                .define('B', Items.IRON_NUGGET)
+                .define('A', LOTags.Items.CRAFTING_METALS)
+                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                 .pattern("A A")
                 .pattern("A A")
                 .pattern("ABA")
                 .unlockedBy("has_iron", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(Items.IRON_INGOT).build()))
+                        .of(LOTags.Items.CRAFTING_METALS).build()))
                 .save(pFinishedRecipeConsumer);
 
 
@@ -1658,11 +1658,11 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.LEATHER_RUMP_STRAPS.get())
                                 .define('A', Items.LEATHER)
-                                .define('B', Items.IRON_NUGGET)
+                                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
                                 .pattern("BAB")
                                 .pattern("A A")
                                 .pattern("A A")
-                                .unlockedBy("has_iron", has(Items.IRON_NUGGET))
+                                .unlockedBy("has_iron", has(LOTags.Items.CRAFTING_METAL_NUGGETS))
                                 ::save).build
                         (pFinishedRecipeConsumer, new ResourceLocation("medievalembroidery", MECompatItems.LEATHER_RUMP_STRAPS.get().toString()));
 
@@ -4702,7 +4702,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE.get(), 3)
                 .define('A', Items.LEATHER)
                 .define('B', Items.PAPER)
-                .define('C', Items.IRON_INGOT)
+                .define('C', LOTags.Items.CRAFTING_METALS)
                 .pattern("BAB")
                 .pattern("ACA")
                 .pattern("CBC")

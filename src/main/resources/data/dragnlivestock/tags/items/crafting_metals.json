@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:iron_ingot",
+    {
+      "id": "tfc:metal/ingot/copper",
+      "required": false
+    },
+    {
+      "id": "tfc:metal/ingot/tin",
+      "required": false
+    },
+    {
+      "id": "tfc:metal/ingot/zinc",
+      "required": false
+    },
+    {
+      "id": "tfc:metal/ingot/silver",
+      "required": false
+    },
+    {
+      "id": "tfc:metal/ingot/wrought_iron",
+      "required": false
+    }
+  ]
+}
