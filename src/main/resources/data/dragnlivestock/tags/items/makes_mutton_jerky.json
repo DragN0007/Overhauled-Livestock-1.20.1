@@ -6,26 +6,6 @@
     "dragnlivestock:chevon",
 
     {
-      "id": "dragnloextras:mutton_loin",
-      "required": false
-    },{
-      "id": "dragnloextras:mutton_rib",
-      "required": false
-    },{
-      "id": "dragnloextras:llama_loin",
-      "required": false
-    },{
-      "id": "dragnloextras:llama_rib",
-      "required": false
-    },{
-      "id": "dragnloextras:chevon_loin",
-      "required": false
-    },{
-      "id": "dragnloextras:chevon_rib",
-      "required": false
-    },
-
-    {
       "id": "tfc:food/mutton",
       "required": false
     },

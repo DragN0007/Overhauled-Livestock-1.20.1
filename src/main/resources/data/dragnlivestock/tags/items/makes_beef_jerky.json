@@ -2,13 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:beef",
-    {
-      "id": "dragnloextras:beef_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:beef_rib_steak",
-      "required": false
-    },
 
     {
       "id": "tfc:food/beef",

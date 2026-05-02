@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.items.custom.CosmeticsItem;
 import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
+import com.dragn0007_evangelix.medievalembroidery.util.METags;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -250,7 +251,8 @@ public class OHorseCarpetLayer extends GeoRenderLayer<OHorse> {
                     // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
                     // make sure to put your blanket in the dragnlivestock:special_blankets tag so you can actually put it in the slot
                     // this works for all equines and caribou too, no extra steps required
-                } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+                } else if (itemStack.is(LOTags.Items.SPECIAL_BLANKETS)) {
+                    String blanketItem = itemStack.getItem().toString();
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
                 }
             }

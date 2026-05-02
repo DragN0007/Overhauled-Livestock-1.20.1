@@ -2,13 +2,6 @@
   "replace": false,
   "values": [
     "dragnlivestock:caribou",
-    {
-      "id": "dragnloextras:caribou_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:caribou_rib_steak",
-      "required": false
-    },
 
     {
       "id": "tfc:food/caribou",

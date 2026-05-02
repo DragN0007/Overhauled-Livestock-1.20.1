@@ -8,35 +8,6 @@
     "dragnlivestock:frog",
 
     {
-      "id": "dragnloextras:caribou_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:caribou_rib_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:camel_loin",
-      "required": false
-    },{
-      "id": "dragnloextras:camel_rib",
-      "required": false
-    },{
-      "id": "dragnloextras:rabbit_thigh",
-      "required": false
-    },{
-      "id": "dragnloextras:horse_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:horse_rib_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:unicorn_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:unicorn_rib_steak",
-      "required": false
-    },
-
-    {
       "id": "tfc:food/horse_meat",
       "required": false
     },

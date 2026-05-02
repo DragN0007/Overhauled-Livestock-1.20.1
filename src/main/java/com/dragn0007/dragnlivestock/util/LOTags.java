@@ -80,6 +80,7 @@ public class LOTags {
         public static final TagKey<Item> RACING_BLANKETS = tag("racing_blankets");
         public static final TagKey<Item> WESTERN_BLANKETS = tag("western_blankets");
         public static final TagKey<Item> CAPARISONS = tag("caparisons");
+        public static final TagKey<Item> SPECIAL_BLANKETS = tag("special_blankets");
         public static final TagKey<Item> HAIR_FLOWERS = tag("hair_flowers");
         public static final TagKey<Item> COSMETICS = tag("cosmetics");
         public static final TagKey<Item> DYES = tag("dyes");

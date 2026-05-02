@@ -79,7 +79,8 @@ public class CaribouCarpetLayer extends GeoRenderLayer<Caribou> {
                 resourceLocation = OHorseCarpetLayer.RACING_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
             } else if (itemStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                 resourceLocation = OHorseCarpetLayer.WESTERN_COLOR[((BlanketItem) itemStack.getItem()).getColor().getId()];
-            } else if (itemStack.getItem() instanceof BlanketItem blanketItem) {
+            } else if (itemStack.is(LOTags.Items.SPECIAL_BLANKETS)) {
+                String blanketItem = armorItemStack.getItem().toString();
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
             }
         }
