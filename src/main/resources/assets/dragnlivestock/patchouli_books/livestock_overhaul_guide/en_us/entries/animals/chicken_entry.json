@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O-Chickens drop meat, feathers, and bones. They also come in many different variants, and lay eggs like usual. $(br2)Chickens come in 6 different breeds and lay 3 eggs when bred. $(br)Leghorn (White Eggs), Ameraucana (Teal Eggs), Cream Legbar (Blue Eggs), Marans (Chocolate Brown Eggs), Olive Egger (Olive Eggs), Sussex Silkie (Cream Eggs)"
+      "text": "O-Chickens drop meat, feathers, and bones. They also come in many different variants, and lay eggs like usual. $(br2)Chickens come in 11 different breeds and lay 3 eggs when bred. $(br)Leghorn (White Eggs), Ameraucana (Teal Eggs), Cream Legbar (Blue Eggs), Marans (Chocolate Brown Eggs), Olive Egger (Olive Eggs), Sussex Silkie (Cream Eggs), Ayam Cemani (Black Eggs), Orpington (Cream Eggs), Polish (White Eggs), Wyandotte (Brown Eggs), Brahma (Brown Eggs)"
     },
     {
       "type": "patchouli:text",

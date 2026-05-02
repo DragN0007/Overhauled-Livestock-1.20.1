@@ -8,7 +8,7 @@ will replace loaded animals.
 
 ## Licensing & Copyrights
 
-You do not have permission to redistribute this mod. 
+You do not have permission to modify, port, take assets from, or otherwise redistribute this mod.
 
 **Code** licensing goes under **GNU**; which means you may use it under their standards (as seen in CODE_LICENSE.txt).
 Please credit the original (this) source code!
