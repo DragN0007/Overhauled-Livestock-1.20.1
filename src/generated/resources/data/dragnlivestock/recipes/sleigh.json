@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "forge:crafting_metals"
+      "tag": "dragnlivestock:crafting_metals"
     },
     "A": {
       "item": "dragnlivestock:wagon_body"

@@ -38,14 +38,13 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -69,9 +68,9 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		setDyed(false);
 	}
 
-	protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_sheep");
-	protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/sheep");
-	protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/sheep");
+	public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_sheep");
+	public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/sheep");
+	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_sheep_tfc");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
@@ -425,7 +424,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
 		double speedThreshold = 0.01;
 
@@ -579,7 +578,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.entityData.set(TAGGED, tagged);
 	}
 	@Override
-	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
+	public void equipTag(@Nullable SoundSource soundSource) {
 		if(soundSource != null) {
 			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 		}
@@ -718,7 +717,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		Random random = new Random();
 
 		this.setBreed(random.nextInt(SheepBreed.Breed.values().length));
-		this.setGender(random.nextInt(OSheep.Gender.values().length));
+		this.setGender(random.nextInt(Gender.values().length));
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			this.setQuality(random.nextInt(30));
@@ -875,7 +874,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			} else if (hornsChance < (100 - LivestockOverhaulCommonConfig.OTHER_CHANCE.get())) {
 				hornType = partner.getHornVariant();
 			} else {
-				hornType = this.random.nextInt(OSheep.BreedHorns.values().length);
+				hornType = this.random.nextInt(BreedHorns.values().length);
 			}
 			lamb.setHornVariant(hornType);
 		} else if (random.nextDouble() < 0.5) {
@@ -920,37 +919,49 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
 		Random random = new Random();
 
+		Item hide = null;
 		if (!this.isSheared() || this.getBreed() == 6) {
 			this.dropWoolByColorAndMarking();
-		}
 
-		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-			if (this.isExquisiteQuality()) {
-				this.spawnAtLocation(new ItemStack(Items.MUTTON, 3), 0F);
-				if (!this.isSheared() || this.getBreed() == 6) {
-					this.dropWoolByColorAndMarking();
+			if (ModList.get().isLoaded("tfc")) {
+				if (this.isExquisiteQuality()) {
+					hide = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tfc", "large_sheepskin_hide"));
+				} else if (this.isFantasticQuality()) {
+					hide = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tfc", "medium_sheepskin_hide"));
+				} else if (this.isGreatQuality()) {
+					hide = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tfc", "medium_sheepskin_hide"));
 				} else {
-					this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
+					hide = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tfc", "small_sheepskin_hide"));
 				}
-			} else if (this.isFantasticQuality()) {
-				this.spawnAtLocation(new ItemStack(Items.MUTTON, 2), 0F);
-				if (!this.isSheared() || this.getBreed() == 6) {
-					this.dropWoolByColorAndMarking();
-				} else {
-					this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
-				}
-			} else if (this.isGreatQuality()) {
-				this.spawnAtLocation(new ItemStack(Items.MUTTON, 1), 0F);
-				if (!this.isSheared() || this.getBreed() == 6) {
-					this.dropWoolByColorAndMarking();
-				} else {
-					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
-				}
+				this.spawnAtLocation(new ItemStack(hide, 1), 0F);
 			}
 		}
 
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
-
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && !ModList.get().isLoaded("tfc")) {
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+				if (this.isExquisiteQuality()) {
+					this.spawnAtLocation(new ItemStack(Items.MUTTON, 3), 0F);
+					if (!this.isSheared() || this.getBreed() == 6) {
+						this.dropWoolByColorAndMarking();
+					} else {
+						this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
+					}
+				} else if (this.isFantasticQuality()) {
+					this.spawnAtLocation(new ItemStack(Items.MUTTON, 2), 0F);
+					if (!this.isSheared() || this.getBreed() == 6) {
+						this.dropWoolByColorAndMarking();
+					} else {
+						this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
+					}
+				} else if (this.isGreatQuality()) {
+					this.spawnAtLocation(new ItemStack(Items.MUTTON, 1), 0F);
+					if (!this.isSheared() || this.getBreed() == 6) {
+						this.dropWoolByColorAndMarking();
+					} else {
+						this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
+					}
+				}
+			}
 		}
 
 	}

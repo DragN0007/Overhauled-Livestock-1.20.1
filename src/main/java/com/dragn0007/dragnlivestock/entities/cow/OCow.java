@@ -954,7 +954,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
 		Random random = new Random();
 
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() || !ModList.get().isLoaded("tfc")) {
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && !ModList.get().isLoaded("tfc")) {
 			if (this.isMeatBreed()) {
 				if (random.nextDouble() < 0.40) {
 					this.spawnAtLocation(new ItemStack(Items.BEEF, 2), 0F);
@@ -984,7 +984,6 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 					this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
-
 		}
 	}
 

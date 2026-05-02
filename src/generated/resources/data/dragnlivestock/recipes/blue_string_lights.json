@@ -12,7 +12,7 @@
         "category": "misc",
         "key": {
           "A": {
-            "item": "minecraft:string"
+            "tag": "forge:string"
           },
           "B": {
             "item": "minecraft:blue_dye"

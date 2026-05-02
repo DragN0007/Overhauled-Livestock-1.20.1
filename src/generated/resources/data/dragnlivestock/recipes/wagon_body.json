@@ -9,7 +9,7 @@
       "item": "minecraft:stick"
     },
     "C": {
-      "tag": "forge:crafting_metals"
+      "tag": "dragnlivestock:crafting_metals"
     }
   },
   "pattern": [

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "dragnlivestock:mount_key"
+    }
+  ],
+  "result": {
+    "item": "dragnlivestock:mount_registry"
+  }
+}

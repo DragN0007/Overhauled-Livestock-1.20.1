@@ -18,7 +18,7 @@
             "item": "minecraft:red_dye"
           },
           {
-            "tag": "forge:gold_metals"
+            "tag": "dragnlivestock:gold_metals"
           }
         ],
         "result": {

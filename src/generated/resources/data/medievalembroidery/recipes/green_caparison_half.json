@@ -16,7 +16,7 @@
             "item": "minecraft:green_carpet"
           },
           "B": {
-            "tag": "forge:gold_metal_nuggets"
+            "tag": "dragnlivestock:gold_metal_nuggets"
           }
         },
         "pattern": [

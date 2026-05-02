@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:iron_shovel"
+      "tag": "minecraft:shovels"
     },
     "A": {
       "item": "dragnlivestock:wagon_body"

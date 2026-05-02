@@ -39,9 +39,9 @@ public class AbstractMoobloom extends OCow implements GeoEntity {
         super(type, level);
     }
 
-    protected static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
-    protected static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
-    protected static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
+    public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
+    public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
+    public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
     @Override
     public @NotNull ResourceLocation getDefaultLootTable() {
         if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {

@@ -31,6 +31,14 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     }
 
     public void buildCommonRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MOUNT_REGISTRY.get())
+                .requires(Items.BOOK)
+                .requires(LOItems.MOUNT_KEY.get())
+                .unlockedBy("has_book", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.BOOK).build()))
+                .save(pFinishedRecipeConsumer);
+
+
         ConditionalRecipe.builder()
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(
@@ -96,7 +104,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RAINBOW_STRING_LIGHTS.get())
-                                .define('A', Items.STRING)
+                                .define('A', LOTags.Items.STRING)
                                 .define('B', Items.RED_DYE)
                                 .define('C', Items.YELLOW_DYE)
                                 .define('D', Items.BLUE_DYE)
@@ -104,7 +112,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                                 .pattern(" A ")
                                 .pattern("D C")
                                 .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
-                                        .of(Items.STRING).build()))
+                                        .of(LOTags.Items.STRING).build()))
                                 ::save).build
                         (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.RAINBOW_STRING_LIGHTS.get().toString()));
 
@@ -112,13 +120,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_STRING_LIGHTS.get())
-                                .define('A', Items.STRING)
+                                .define('A', LOTags.Items.STRING)
                                 .define('B', Items.YELLOW_DYE)
                                 .pattern("B B")
                                 .pattern(" A ")
                                 .pattern("B B")
                                 .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
-                                        .of(Items.STRING).build()))
+                                        .of(LOTags.Items.STRING).build()))
                                 ::save).build
                         (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.YELLOW_STRING_LIGHTS.get().toString()));
 
@@ -126,13 +134,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_STRING_LIGHTS.get())
-                                .define('A', Items.STRING)
+                                .define('A', LOTags.Items.STRING)
                                 .define('B', Items.RED_DYE)
                                 .pattern("B B")
                                 .pattern(" A ")
                                 .pattern("B B")
                                 .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
-                                        .of(Items.STRING).build()))
+                                        .of(LOTags.Items.STRING).build()))
                                 ::save).build
                         (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.RED_STRING_LIGHTS.get().toString()));
 
@@ -140,13 +148,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(
                         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_STRING_LIGHTS.get())
-                                .define('A', Items.STRING)
+                                .define('A', LOTags.Items.STRING)
                                 .define('B', Items.BLUE_DYE)
                                 .pattern("B B")
                                 .pattern(" A ")
                                 .pattern("B B")
                                 .unlockedBy("has_string", inventoryTrigger(ItemPredicate.Builder.item()
-                                        .of(Items.STRING).build()))
+                                        .of(LOTags.Items.STRING).build()))
                                 ::save).build
                         (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, LOItems.BLUE_STRING_LIGHTS.get().toString()));
 
@@ -263,7 +271,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PLOW.get())
-                .define('#', Items.IRON_HOE)
+                .define('#', ItemTags.HOES)
                 .define('A', LOItems.WAGON_BODY.get())
                 .define('B', LOItems.WAGON_AXEL.get())
                 .pattern(" # ")
@@ -274,7 +282,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MOWER.get())
-                .define('#', Items.IRON_SHOVEL)
+                .define('#', ItemTags.SHOVELS)
                 .define('A', LOItems.WAGON_BODY.get())
                 .define('B', LOItems.WAGON_AXEL.get())
                 .pattern(" # ")
@@ -5426,7 +5434,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.BLACK_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5435,7 +5443,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLUE_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.BLUE_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5444,7 +5452,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BROWN_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.BROWN_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5453,7 +5461,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.CYAN_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.CYAN_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5462,7 +5470,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GREEN_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.GREEN_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5471,7 +5479,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.GREY_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.GRAY_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5480,7 +5488,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIGHT_BLUE_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.LIGHT_BLUE_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5489,7 +5497,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIGHT_GREY_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.LIGHT_GRAY_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5498,7 +5506,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.LIME_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.LIME_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5507,7 +5515,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MAGENTA_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.MAGENTA_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5516,7 +5524,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.ORANGE_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.ORANGE_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5525,7 +5533,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PINK_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.PINK_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5534,7 +5542,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.PURPLE_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.PURPLE_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5543,7 +5551,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.RED_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.RED_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5552,7 +5560,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WHITE_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.WHITE_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()
@@ -5561,7 +5569,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.YELLOW_BRAND_TAG.get(), 12)
-                .requires(Items.STRING)
+                .requires(LOTags.Items.STRING)
                 .requires(Items.PAPER)
                 .requires(Items.YELLOW_DYE)
                 .unlockedBy("has_paper", inventoryTrigger(ItemPredicate.Builder.item()

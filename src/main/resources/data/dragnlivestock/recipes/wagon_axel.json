@@ -10,6 +10,6 @@
     "item": "dragnlivestock:wagon_axel"
   },
   "template": {
-    "item": "minecraft:iron_ingot"
+    "tag": "dragnlivestock:crafting_metals"
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "minecraft:iron_ingot"
+    "tag": "dragnlivestock:crafting_metals"
   },
   "base": {
     "item": "dragnlivestock:wagon_wheel_frame"

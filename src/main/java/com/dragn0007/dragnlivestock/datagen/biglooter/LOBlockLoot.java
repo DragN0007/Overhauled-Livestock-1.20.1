@@ -16,18 +16,6 @@ public class LOBlockLoot extends BlockLootSubProvider {
 
     @Override
     public void generate() {
-        dropSelf(LOBlocks.ACACIA_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.BAMBOO_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.BIRCH_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.CHERRY_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.CRIMSON_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.DARK_OAK_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.JUNGLE_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.MANGROVE_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.OAK_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.SPRUCE_RABBIT_HUTCH.get());
-        dropSelf(LOBlocks.WARPED_RABBIT_HUTCH.get());
-
         dropOther(LOBlocks.RAW_BEEF_JERKY_HANGING.get(), LOItems.BEEF_STRIPS.get());
         dropOther(LOBlocks.BEEF_JERKY_HANGING.get(), LOItems.BEEF_JERKY.get());
         dropOther(LOBlocks.RAW_CHICKEN_JERKY_HANGING.get(), LOItems.CHICKEN_STRIPS.get());

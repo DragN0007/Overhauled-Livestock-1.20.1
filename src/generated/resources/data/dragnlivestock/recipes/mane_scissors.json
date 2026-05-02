@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "A": {
-      "tag": "forge:crafting_metals"
+      "tag": "dragnlivestock:crafting_metals"
     },
     "B": {
-      "tag": "forge:crafting_metal_nuggets"
+      "tag": "dragnlivestock:crafting_metal_nuggets"
     }
   },
   "pattern": [
