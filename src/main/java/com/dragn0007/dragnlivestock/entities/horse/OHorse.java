@@ -685,7 +685,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
 		Entity entity = damageSource.getEntity();
-		if (entity != null && !(entity instanceof Player)) {
+		if (!(entity instanceof Player)) {
 			if (!this.isUndead() && random.nextDouble() <= LivestockOverhaulCommonConfig.UNDEAD_HORSE_CHANCE.get() &&
 					LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
 				if (this.getHealth() <= 4) {
