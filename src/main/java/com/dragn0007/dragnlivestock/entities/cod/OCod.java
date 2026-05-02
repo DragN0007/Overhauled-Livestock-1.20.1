@@ -42,10 +42,10 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc_o_cod");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else if (ModList.get().isLoaded("tfc")) {
+		if (ModList.get().isLoaded("tfc")) {
 			return TFC_LOOT_TABLE;
+		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			return VANILLA_LOOT_TABLE;
 		} else {
 			return LOOT_TABLE;
 		}
