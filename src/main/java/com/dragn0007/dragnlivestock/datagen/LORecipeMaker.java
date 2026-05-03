@@ -5579,115 +5579,115 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLACK_GRUB_SWEATER.get())
-                .define('B', Items.BLACK_WOOL)
+                .define('B', Items.BLACK_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BLUE_GRUB_SWEATER.get())
-                .define('B', Items.BLUE_WOOL)
+                .define('B', Items.BLUE_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.BROWN_GRUB_SWEATER.get())
-                .define('B', Items.BROWN_WOOL)
+                .define('B', Items.BROWN_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.CYAN_GRUB_SWEATER.get())
-                .define('B', Items.CYAN_WOOL)
+                .define('B', Items.CYAN_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREEN_GRUB_SWEATER.get())
-                .define('B', Items.GREEN_WOOL)
+                .define('B', Items.GREEN_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GREY_GRUB_SWEATER.get())
-                .define('B', Items.GRAY_WOOL)
+                .define('B', Items.GRAY_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_BLUE_GRUB_SWEATER.get())
-                .define('B', Items.LIGHT_BLUE_WOOL)
+                .define('B', Items.LIGHT_BLUE_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIGHT_GREY_GRUB_SWEATER.get())
-                .define('B', Items.LIGHT_GRAY_WOOL)
+                .define('B', Items.LIGHT_GRAY_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.LIME_GRUB_SWEATER.get())
-                .define('B', Items.LIME_WOOL)
+                .define('B', Items.LIME_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MAGENTA_GRUB_SWEATER.get())
-                .define('B', Items.MAGENTA_WOOL)
+                .define('B', Items.MAGENTA_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ORANGE_GRUB_SWEATER.get())
-                .define('B', Items.ORANGE_WOOL)
+                .define('B', Items.ORANGE_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PINK_GRUB_SWEATER.get())
-                .define('B', Items.PINK_WOOL)
+                .define('B', Items.PINK_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.PURPLE_GRUB_SWEATER.get())
-                .define('B', Items.PURPLE_WOOL)
+                .define('B', Items.PURPLE_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RED_GRUB_SWEATER.get())
-                .define('B', Items.RED_WOOL)
+                .define('B', Items.RED_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WHITE_GRUB_SWEATER.get())
-                .define('B', Items.WHITE_WOOL)
+                .define('B', Items.WHITE_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.YELLOW_GRUB_SWEATER.get())
-                .define('B', Items.YELLOW_WOOL)
+                .define('B', Items.YELLOW_CARPET)
                 .pattern("BB")
-                .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                        .of(ItemTags.WOOL).build()))
+                .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemTags.WOOL_CARPETS).build()))
                 .save(pFinishedRecipeConsumer);
 
 
