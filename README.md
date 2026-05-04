@@ -1,11 +1,3 @@
-## Servers Who Do Not Want O-Animal Conversions
-For servers who don't want automatic o-animal conversions,
-download the 'livestock-overhaul-common.toml' config file
-and put it into your server config folder *before*
-starting the server. Since LO converts animals by default,
-starting the server before adding the custom config file
-will replace loaded animals.
-
 ## Licensing & Copyrights
 
 You do not have permission to modify, port, take assets from, or otherwise redistribute this mod.
@@ -23,7 +15,6 @@ shops' or websites for real money.
 
 Texture Packs and Livestock Overhaul-Dependent Addons are okay, and encouraged, provided they're free and for the public to use!
 
-
 ## Livestock Overhaul: Credits
 
 EvangeliX - Code, Bug Fix Help (Thank you!)
@@ -33,6 +24,14 @@ Buu - Animations (Thank you!)
 FrostedWyvern - Animations (Thank you!)
 
 DragN0007 - Producer, Assets, Code
+
+## Servers Who Do Not Want O-Animal Conversions
+For servers who don't want automatic o-animal conversions,
+download the 'livestock-overhaul-common.toml' config file
+and put it into your server config folder *before*
+starting the server. Since LO converts animals by default,
+starting the server before adding the custom config file
+will replace loaded animals.
 
 ## Livestock Overhaul Custom Resources
 Livestock Overhaul comes with a built-in custom texture option for its animals.
