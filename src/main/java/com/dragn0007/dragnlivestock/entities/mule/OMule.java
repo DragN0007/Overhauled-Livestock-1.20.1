@@ -92,6 +92,11 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		}
 	}
 
+	@Override
+	public boolean hurt(DamageSource pSource, float pAmount) {
+		return super.hurt(pSource, pAmount);
+	}
+
 	public int getInventorySize() {
 		if (this.hasChest()) {
 			return 18;

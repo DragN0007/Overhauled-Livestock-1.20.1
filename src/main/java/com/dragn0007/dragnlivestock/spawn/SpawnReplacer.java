@@ -156,7 +156,7 @@ public class SpawnReplacer {
         Random random = new Random();
 
         //Horse
-        if (!ModList.get().isLoaded("dragnloextras")) {
+//        if (!ModList.get().isLoaded("dragnloextras")) {
             if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof Horse vanillaHorse) {
 
                 if (event.getEntity().getClass() == Horse.class && (((!(vanillaHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
@@ -286,7 +286,7 @@ public class SpawnReplacer {
                     }
                 }
             }
-        }
+//        }
 
         //Donkey
         if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && event.getEntity() instanceof Donkey vanillaDonkey) {

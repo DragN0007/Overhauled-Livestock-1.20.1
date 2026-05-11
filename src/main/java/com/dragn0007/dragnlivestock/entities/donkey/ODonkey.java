@@ -77,6 +77,11 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public boolean hurt(DamageSource pSource, float pAmount) {
+		return super.hurt(pSource, pAmount);
+	}
+
+	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
 			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
