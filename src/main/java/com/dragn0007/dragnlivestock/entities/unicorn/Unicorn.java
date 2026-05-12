@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -35,6 +36,7 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -45,6 +47,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 
@@ -58,25 +61,16 @@ public class Unicorn extends OHorse implements GeoEntity {
 		this.xpReward = 50;
 	}
 
-	public static final ResourceLocation O_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/overworld_unicorn");
-	public static final ResourceLocation N_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/nether_unicorn");
-	public static final ResourceLocation E_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/end_unicorn");
-	public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
+	public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/unicorn");
 
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
 		if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
+			return OHorse.VANILLA_LOOT_TABLE;
 		} else if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getSpecies() == 0) {
-			return O_LOOT_TABLE;
-		} else if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getSpecies() == 1) {
-			return N_LOOT_TABLE;
-		} else if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && this.getSpecies() == 2) {
-			return E_LOOT_TABLE;
+			return OHorse.TFC_LOOT_TABLE;
 		} else {
-			return VANILLA_LOOT_TABLE;
+			return LOOT_TABLE;
 		}
 	}
 
@@ -869,6 +863,22 @@ public class Unicorn extends OHorse implements GeoEntity {
 			}
 		}
 
+	}
+
+	@Override
+	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
+		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
+		Random random = new Random();
+
+		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && !ModList.get().isLoaded("tfc")) {
+			if (this.getSpecies() == 0) {
+				this.spawnAtLocation(LOItems.OVERWORLD_UNICORN_HORN.get());
+			} else if (this.getSpecies() == 1) {
+				this.spawnAtLocation(LOItems.NETHER_UNICORN_HORN.get());
+			} else if (this.getSpecies() == 2) {
+				this.spawnAtLocation(LOItems.END_UNICORN_HORN.get());
+			}
+		}
 	}
 
 

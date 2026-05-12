@@ -1066,7 +1066,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public boolean isChickenJockey() {
 		return this.isChickenJockey;
 	}
-
 	public void setChickenJockey(boolean p_28274_) {
 		this.isChickenJockey = p_28274_;
 	}
