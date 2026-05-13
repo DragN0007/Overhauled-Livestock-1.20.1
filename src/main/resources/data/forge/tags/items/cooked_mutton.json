@@ -2,19 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:cooked_mutton",
-    "dragnlivestock:cooked_llama",
-    {
-      "id": "dragnloextras:cooked_mutton_loin",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_mutton_rib",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_llama_loin",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_llama_rib",
-      "required": false
-    }
+    "dragnlivestock:cooked_llama"
   ]
 }

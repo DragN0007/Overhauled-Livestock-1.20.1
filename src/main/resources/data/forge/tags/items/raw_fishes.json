@@ -2,13 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:cod",
-    "minecraft:salmon",
-    {
-      "id": "dragnloextras:cod_fillet",
-      "required": false
-    },{
-      "id": "dragnloextras:salmon_fillet",
-      "required": false
-    }
+    "minecraft:salmon"
   ]
 }

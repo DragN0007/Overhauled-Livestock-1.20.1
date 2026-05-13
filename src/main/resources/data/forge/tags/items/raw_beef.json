@@ -3,25 +3,6 @@
   "values": [
     "minecraft:beef",
     "dragnlivestock:horse",
-    "dragnlivestock:unicorn",
-    {
-      "id": "dragnloextras:beef_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:beef_rib_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:horse_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:horse_rib_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:unicorn_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:unicorn_rib_steak",
-      "required": false
-    }
+    "dragnlivestock:unicorn"
   ]
 }

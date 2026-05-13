@@ -3,25 +3,6 @@
   "values": [
     "minecraft:cooked_beef",
     "dragnlivestock:cooked_horse",
-    "dragnlivestock:cooked_unicorn",
-    {
-      "id": "dragnloextras:cooked_beef_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_beef_rib_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_horse_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_horse_rib_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_unicorn_sirloin_steak",
-      "required": false
-    },{
-      "id": "dragnloextras:cooked_unicorn_rib_steak",
-      "required": false
-    }
+    "dragnlivestock:cooked_unicorn"
   ]
 }

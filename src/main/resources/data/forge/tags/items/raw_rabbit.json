@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:rabbit",
-    {
-      "id": "dragnloextras:rabbit_thigh",
-      "required": false
-    }
+    "minecraft:rabbit"
   ]
 }

@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:cooked_rabbit",
-    {
-      "id": "dragnloextras:cooked_rabbit_thigh",
-      "required": false
-    }
+    "minecraft:cooked_rabbit"
   ]
 }
