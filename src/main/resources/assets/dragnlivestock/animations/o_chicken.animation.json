@@ -835,7 +835,39 @@
 					}
 				}
 			}
+		},
+		"sleep": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": {
+						"vector": [0, -2.6, 0]
+					}
+				},
+				"left_leg": {
+					"scale": {
+						"vector": [1, 0.1, 1]
+					}
+				},
+				"right_leg": {
+					"scale": {
+						"vector": [1, 0.1, 1]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": [-15, 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [32.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.3]
+					}
+				}
+			}
 		}
-	},
-	"geckolib_format_version": 2
+	}
 }
