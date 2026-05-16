@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dragnlivestock:item/o_horse_spawn_egg"
+  }
+}
