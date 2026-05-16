@@ -736,6 +736,19 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void tick() {
 		super.tick();
 
+		if (babiesBirthed > 0) {
+			babyCooldown++;
+		}
+
+		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
+			babiesBirthed = 0;
+			babyCooldown = 0;
+		}
+
+		if (babyCooldown >= 20) {
+			babyCooldown = 0;
+		}
+
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
 			List<? extends OHorse> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
 			if (list.size() <= 1) {
@@ -1337,6 +1350,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return false;
 	}
 
+	public int maxBabyAmount = 2;
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
+
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		AbstractOMount foal;
@@ -1447,6 +1464,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			//generate random stats of the breed standard of the baby if the breed is random
 			} else if (breedChance <= LivestockOverhaulCommonConfig.BREED_CHANCE.get()) {
 				((OHorse) foal).randomizeOHorseAttributes();
+			}
+
+			babiesBirthed++;
+			if (babiesBirthed < maxBabyAmount && this.isInLove()) {
+				if (random.nextDouble() <= 0.015) {
+					spawnChildFromBreeding(serverLevel, partner);
+					babiesBirthed++;
+				}
 			}
 		}
 

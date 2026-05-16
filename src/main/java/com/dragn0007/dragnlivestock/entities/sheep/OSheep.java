@@ -903,7 +903,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		lamb.setWoolDyeVariant(0);
 
 		babiesBirthed++;
-
 		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
 			if (random.nextDouble() <= 0.30) {
 				spawnChildFromBreeding(serverLevel, partner);

@@ -373,6 +373,20 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public void tick() {
 		super.tick();
+
+		if (babiesBirthed > 0) {
+			babyCooldown++;
+		}
+
+		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
+			babiesBirthed = 0;
+			babyCooldown = 0;
+		}
+
+		if (babyCooldown >= 20) {
+			babyCooldown = 0;
+		}
+
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
 			List<? extends OCow> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(20.0D, 20.0D, 20.0D));
 			if (list.size() <= 1) {
@@ -860,6 +874,10 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		return false;
 	}
 
+	public int maxBabyAmount = 2;
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
+
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OCow calf;
@@ -943,6 +961,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (calf.getQuality() > 100) { //makes sure the baby doesn't go over 100%, since when it does, it loops back to "Fine" rather than "Exquisite"
 			calf.setQuality(100);
+		}
+
+		babiesBirthed++;
+		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
+			if (random.nextDouble() <= 0.05) {
+				spawnChildFromBreeding(serverLevel, partner);
+				babiesBirthed++;
+			}
 		}
 
 		calf.setAttackDamage();

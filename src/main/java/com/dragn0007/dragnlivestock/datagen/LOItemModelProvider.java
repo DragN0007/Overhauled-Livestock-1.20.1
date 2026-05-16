@@ -20,7 +20,38 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.LIVESTOCK_OVERHAUL);
         simpleItem(LOItems.LIVESTOCK_OVERHAUL_FOOD);
 
+        simpleItem(LOItems.O_HORSE_SPAWN_EGG);
+        simpleItem(LOItems.O_MULE_SPAWN_EGG);
+        simpleItem(LOItems.O_DONKEY_SPAWN_EGG);
+        simpleItem(LOItems.O_CAMEL_SPAWN_EGG);
+        simpleItem(LOItems.O_PIG_SPAWN_EGG);
+        simpleItem(LOItems.O_COW_SPAWN_EGG);
+        simpleItem(LOItems.O_CHICKEN_SPAWN_EGG);
+        simpleItem(LOItems.O_SHEEP_SPAWN_EGG);
+        simpleItem(LOItems.O_LLAMA_SPAWN_EGG);
+        simpleItem(LOItems.O_GOAT_SPAWN_EGG);
+        simpleItem(LOItems.O_RABBIT_SPAWN_EGG);
+        simpleItem(LOItems.O_FROG_SPAWN_EGG);
+        simpleItem(LOItems.O_MOOSHROOM_SPAWN_EGG);
+        simpleItem(LOItems.O_SALMON_SPAWN_EGG);
+        simpleItem(LOItems.O_COD_SPAWN_EGG);
+        simpleItem(LOItems.O_BEE_SPAWN_EGG);
+        simpleItem(LOItems.AZALEA_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.BEETROOT_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.CARROT_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.FLOWERING_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.GLOW_BERRY_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.MELON_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.PEACH_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.POTATO_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.PUMPKIN_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.SWEET_BERRY_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.WHEAT_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.GRUB_SPAWN_EGG);
+        simpleItem(LOItems.FARM_GOAT_SPAWN_EGG);
+        simpleItem(LOItems.CARIBOU_SPAWN_EGG);
         simpleItem(LOItems.UNICORN_SPAWN_EGG);
+
         simpleItem(LOItems.MAGNIFYING_GLASS);
         simpleItem(LOItems.LIGHT_HORSE_ARMOR_SMITHING_TEMPLATE);
 
