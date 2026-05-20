@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -64,6 +65,15 @@ public class OBee extends Bee implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.bee");
+		} else {
+			return super.getName();
+		}
 	}
 
 	@Override

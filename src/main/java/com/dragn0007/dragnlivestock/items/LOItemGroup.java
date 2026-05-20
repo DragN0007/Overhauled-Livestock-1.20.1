@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -258,124 +259,50 @@ public class LOItemGroup {
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.SPRUCE));
                         output.accept(WagonItem.setupNbt(new ItemStack(LOItems.SLEIGH.get()), Type.WARPED));
 
-                        output.accept(LOItems.BLACK_WOOL_STAPLE.get());
-                        output.accept(LOItems.BLUE_WOOL_STAPLE.get());
-                        output.accept(LOItems.BROWN_WOOL_STAPLE.get());
-                        output.accept(LOItems.CYAN_WOOL_STAPLE.get());
-                        output.accept(LOItems.GREEN_WOOL_STAPLE.get());
-                        output.accept(LOItems.GREY_WOOL_STAPLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_WOOL_STAPLE.get());
-                        output.accept(LOItems.LIGHT_GREY_WOOL_STAPLE.get());
-                        output.accept(LOItems.LIME_WOOL_STAPLE.get());
-                        output.accept(LOItems.MAGENTA_WOOL_STAPLE.get());
-                        output.accept(LOItems.ORANGE_WOOL_STAPLE.get());
-                        output.accept(LOItems.PINK_WOOL_STAPLE.get());
-                        output.accept(LOItems.PURPLE_WOOL_STAPLE.get());
-                        output.accept(LOItems.RED_WOOL_STAPLE.get());
-                        output.accept(LOItems.WHITE_WOOL_STAPLE.get());
-                        output.accept(LOItems.YELLOW_WOOL_STAPLE.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            output.accept(LOItems.BRAND_TAGS.get(color).get());
+                        }
 
-                        output.accept(LOItems.BLACK_WOOL_DYE.get());
-                        output.accept(LOItems.BLUE_WOOL_DYE.get());
-                        output.accept(LOItems.BROWN_WOOL_DYE.get());
-                        output.accept(LOItems.CYAN_WOOL_DYE.get());
-                        output.accept(LOItems.GREEN_WOOL_DYE.get());
-                        output.accept(LOItems.GREY_WOOL_DYE.get());
-                        output.accept(LOItems.LIGHT_BLUE_WOOL_DYE.get());
-                        output.accept(LOItems.LIGHT_GREY_WOOL_DYE.get());
-                        output.accept(LOItems.LIME_WOOL_DYE.get());
-                        output.accept(LOItems.MAGENTA_WOOL_DYE.get());
-                        output.accept(LOItems.ORANGE_WOOL_DYE.get());
-                        output.accept(LOItems.PINK_WOOL_DYE.get());
-                        output.accept(LOItems.PURPLE_WOOL_DYE.get());
-                        output.accept(LOItems.RED_WOOL_DYE.get());
-                        output.accept(LOItems.WHITE_WOOL_DYE.get());
-                        output.accept(LOItems.YELLOW_WOOL_DYE.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            output.accept(LOItems.WOOL_STAPLES.get(color).get());
+                        }
 
-                        output.accept(LOItems.BLACK_BRAND_TAG.get());
-                        output.accept(LOItems.BLUE_BRAND_TAG.get());
-                        output.accept(LOItems.BROWN_BRAND_TAG.get());
-                        output.accept(LOItems.CYAN_BRAND_TAG.get());
-                        output.accept(LOItems.GREEN_BRAND_TAG.get());
-                        output.accept(LOItems.GREY_BRAND_TAG.get());
-                        output.accept(LOItems.LIGHT_BLUE_BRAND_TAG.get());
-                        output.accept(LOItems.LIGHT_GREY_BRAND_TAG.get());
-                        output.accept(LOItems.LIME_BRAND_TAG.get());
-                        output.accept(LOItems.MAGENTA_BRAND_TAG.get());
-                        output.accept(LOItems.ORANGE_BRAND_TAG.get());
-                        output.accept(LOItems.PINK_BRAND_TAG.get());
-                        output.accept(LOItems.PURPLE_BRAND_TAG.get());
-                        output.accept(LOItems.RED_BRAND_TAG.get());
-                        output.accept(LOItems.WHITE_BRAND_TAG.get());
-                        output.accept(LOItems.YELLOW_BRAND_TAG.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            output.accept(LOItems.WOOL_DYE.get(color).get());
+                        }
 
-                        output.accept(LOItems.BLACK_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.BLUE_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.BROWN_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.CYAN_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.GREEN_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.GREY_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.LIGHT_BLUE_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.LIGHT_GREY_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.LIME_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.MAGENTA_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.ORANGE_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.PINK_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.PURPLE_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.RED_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.WHITE_MEDIEVAL_BLANKET.get());
-                        output.accept(LOItems.YELLOW_MEDIEVAL_BLANKET.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            output.accept(LOItems.MEDIEVAL_BLANKETS.get(color).get());
+                            output.accept(LOItems.MODERN_BLANKETS.get(color).get());
+                            output.accept(LOItems.RACING_BLANKETS.get(color).get());
+                            output.accept(LOItems.WESTERN_BLANKETS.get(color).get());
+                        }
 
-                        output.accept(LOItems.BLACK_MODERN_BLANKET.get());
-                        output.accept(LOItems.BLUE_MODERN_BLANKET.get());
-                        output.accept(LOItems.BROWN_MODERN_BLANKET.get());
-                        output.accept(LOItems.CYAN_MODERN_BLANKET.get());
-                        output.accept(LOItems.GREEN_MODERN_BLANKET.get());
-                        output.accept(LOItems.GREY_MODERN_BLANKET.get());
-                        output.accept(LOItems.LIGHT_BLUE_MODERN_BLANKET.get());
-                        output.accept(LOItems.LIGHT_GREY_MODERN_BLANKET.get());
-                        output.accept(LOItems.LIME_MODERN_BLANKET.get());
-                        output.accept(LOItems.MAGENTA_MODERN_BLANKET.get());
-                        output.accept(LOItems.ORANGE_MODERN_BLANKET.get());
-                        output.accept(LOItems.PINK_MODERN_BLANKET.get());
-                        output.accept(LOItems.PURPLE_MODERN_BLANKET.get());
-                        output.accept(LOItems.RED_MODERN_BLANKET.get());
-                        output.accept(LOItems.WHITE_MODERN_BLANKET.get());
-                        output.accept(LOItems.YELLOW_MODERN_BLANKET.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            output.accept(LOItems.GRUB_SWEATERS.get(color).get());
+                        }
 
-                        output.accept(LOItems.BLACK_RACING_BLANKET.get());
-                        output.accept(LOItems.BLUE_RACING_BLANKET.get());
-                        output.accept(LOItems.BROWN_RACING_BLANKET.get());
-                        output.accept(LOItems.CYAN_RACING_BLANKET.get());
-                        output.accept(LOItems.GREEN_RACING_BLANKET.get());
-                        output.accept(LOItems.GREY_RACING_BLANKET.get());
-                        output.accept(LOItems.LIGHT_BLUE_RACING_BLANKET.get());
-                        output.accept(LOItems.LIGHT_GREY_RACING_BLANKET.get());
-                        output.accept(LOItems.LIME_RACING_BLANKET.get());
-                        output.accept(LOItems.MAGENTA_RACING_BLANKET.get());
-                        output.accept(LOItems.ORANGE_RACING_BLANKET.get());
-                        output.accept(LOItems.PINK_RACING_BLANKET.get());
-                        output.accept(LOItems.PURPLE_RACING_BLANKET.get());
-                        output.accept(LOItems.RED_RACING_BLANKET.get());
-                        output.accept(LOItems.WHITE_RACING_BLANKET.get());
-                        output.accept(LOItems.YELLOW_RACING_BLANKET.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            output.accept(LOItems.ACCENTED_SADDLES.get(color).get());
+                            output.accept(LOItems.ACCENTED_LIGHT_SADDLES.get(color).get());
+                            output.accept(LOItems.ACCENTED_HEAVY_SADDLES.get(color).get());
+                        }
 
-                        output.accept(LOItems.BLACK_WESTERN_BLANKET.get());
-                        output.accept(LOItems.BLUE_WESTERN_BLANKET.get());
-                        output.accept(LOItems.BROWN_WESTERN_BLANKET.get());
-                        output.accept(LOItems.CYAN_WESTERN_BLANKET.get());
-                        output.accept(LOItems.GREEN_WESTERN_BLANKET.get());
-                        output.accept(LOItems.GREY_WESTERN_BLANKET.get());
-                        output.accept(LOItems.LIGHT_BLUE_WESTERN_BLANKET.get());
-                        output.accept(LOItems.LIGHT_GREY_WESTERN_BLANKET.get());
-                        output.accept(LOItems.LIME_WESTERN_BLANKET.get());
-                        output.accept(LOItems.MAGENTA_WESTERN_BLANKET.get());
-                        output.accept(LOItems.ORANGE_WESTERN_BLANKET.get());
-                        output.accept(LOItems.PINK_WESTERN_BLANKET.get());
-                        output.accept(LOItems.PURPLE_WESTERN_BLANKET.get());
-                        output.accept(LOItems.RED_WESTERN_BLANKET.get());
-                        output.accept(LOItems.WHITE_WESTERN_BLANKET.get());
-                        output.accept(LOItems.YELLOW_WESTERN_BLANKET.get());
+                        for (DyeColor color : DyeColor.values()) {
+                            if (color == DyeColor.BLACK)
+                                continue;
+                            output.accept(LOItems.ACCENTED_BLACK_SADDLES.get(color).get());
+                            output.accept(LOItems.ACCENTED_BLACK_LIGHT_SADDLES.get(color).get());
+                            output.accept(LOItems.ACCENTED_BLACK_HEAVY_SADDLES.get(color).get());
+                        }
+
+                        for (DyeColor color : DyeColor.values()) {
+                            if (color == DyeColor.WHITE)
+                                continue;
+                            output.accept(LOItems.ACCENTED_WHITE_SADDLES.get(color).get());
+                            output.accept(LOItems.ACCENTED_WHITE_LIGHT_SADDLES.get(color).get());
+                            output.accept(LOItems.ACCENTED_WHITE_HEAVY_SADDLES.get(color).get());
+                        }
 
                         output.accept(LOItems.AMERICAN_MEDIEVAL_BLANKET.get());
                         output.accept(LOItems.AMERICAN_MODERN_BLANKET.get());
@@ -426,369 +353,36 @@ public class LOItemGroup {
                         output.accept(LOItems.TRANS_RACING_BLANKET.get());
                         output.accept(LOItems.TRANS_WESTERN_BLANKET.get());
 
-                        output.accept(LOItems.BLACK_GRUB_SWEATER.get());
-                        output.accept(LOItems.BLUE_GRUB_SWEATER.get());
-                        output.accept(LOItems.BROWN_GRUB_SWEATER.get());
-                        output.accept(LOItems.CYAN_GRUB_SWEATER.get());
-                        output.accept(LOItems.GREEN_GRUB_SWEATER.get());
-                        output.accept(LOItems.GREY_GRUB_SWEATER.get());
-                        output.accept(LOItems.LIGHT_BLUE_GRUB_SWEATER.get());
-                        output.accept(LOItems.LIGHT_GREY_GRUB_SWEATER.get());
-                        output.accept(LOItems.LIME_GRUB_SWEATER.get());
-                        output.accept(LOItems.MAGENTA_GRUB_SWEATER.get());
-                        output.accept(LOItems.ORANGE_GRUB_SWEATER.get());
-                        output.accept(LOItems.PINK_GRUB_SWEATER.get());
-                        output.accept(LOItems.PURPLE_GRUB_SWEATER.get());
-                        output.accept(LOItems.RED_GRUB_SWEATER.get());
-                        output.accept(LOItems.WHITE_GRUB_SWEATER.get());
-                        output.accept(LOItems.YELLOW_GRUB_SWEATER.get());
-
-                        output.accept(LOItems.BLACK_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.WHITE_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_SADDLE.get());
-                        output.accept(LOItems.BLACK_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.WHITE_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BLACK_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.WHITE_ACCENTED_HEAVY_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_HEAVY_SADDLE.get());
-
-                        output.accept(LOItems.BLUE_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.WHITE_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_BLACK_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.WHITE_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_BLACK_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.WHITE_ACCENTED_BLACK_HEAVY_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_BLACK_HEAVY_SADDLE.get());
-
-                        output.accept(LOItems.BLACK_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_WHITE_SADDLE.get());
-                        output.accept(LOItems.BLACK_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_WHITE_LIGHT_SADDLE.get());
-                        output.accept(LOItems.BLACK_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.BLUE_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.BROWN_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.CYAN_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.GREEN_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.GREY_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIGHT_BLUE_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIGHT_GREY_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.LIME_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.MAGENTA_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.ORANGE_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.PINK_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.PURPLE_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.RED_ACCENTED_WHITE_HEAVY_SADDLE.get());
-                        output.accept(LOItems.YELLOW_ACCENTED_WHITE_HEAVY_SADDLE.get());
-
                         if (ModList.get().isLoaded("medievalembroidery")) {
 
                             output.accept(MECompatItems.LEATHER_RUMP_STRAPS.get());
                             output.accept(MECompatItems.BLACK_RUMP_STRAPS.get());
                             output.accept(MECompatItems.WHITE_RUMP_STRAPS.get());
 
-                            output.accept(MECompatItems.BLACK_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_BLACK_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_BLACK_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_BLACK_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_BLACK_CAPARISON_SHOULDER.get());
+                            for (DyeColor color : DyeColor.values()) {
+                                output.accept(MECompatItems.SOLID_CAPARISON_CAPES.get(color).get());
+                                output.accept(MECompatItems.SOLID_CAPARISON_FULLS.get(color).get());
+                                output.accept(MECompatItems.SOLID_CAPARISON_HALFS.get(color).get());
+                                output.accept(MECompatItems.SOLID_CAPARISON_SHOULDERS.get(color).get());
+                            }
 
-                            output.accept(MECompatItems.BLACK_BLUE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_BLUE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_BLUE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_BLUE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.BLUE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLUE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLUE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLUE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_BLUE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_BLUE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_BLUE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_BLUE_CAPARISON_SHOULDER.get());
+                            for (DyeColor color : DyeColor.values()) {
+                                if (color == DyeColor.BLACK)
+                                    continue;
+                                output.accept(MECompatItems.BLACK_CHECKER_CAPARISON_CAPES.get(color).get());
+                                output.accept(MECompatItems.BLACK_CHECKER_CAPARISON_FULLS.get(color).get());
+                                output.accept(MECompatItems.BLACK_CHECKER_CAPARISON_HALFS.get(color).get());
+                                output.accept(MECompatItems.BLACK_CHECKER_CAPARISON_SHOULDERS.get(color).get());
+                            }
 
-                            output.accept(MECompatItems.BLACK_BROWN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_BROWN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_BROWN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_BROWN_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.BROWN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BROWN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BROWN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BROWN_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_BROWN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_BROWN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_BROWN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_BROWN_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_CYAN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_CYAN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_CYAN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_CYAN_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.CYAN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.CYAN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.CYAN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.CYAN_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_CYAN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_CYAN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_CYAN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_CYAN_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_GREEN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_GREEN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_GREEN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_GREEN_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.GREEN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.GREEN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.GREEN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.GREEN_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_GREEN_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_GREEN_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_GREEN_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_GREEN_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_GREY_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_GREY_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_GREY_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_GREY_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.GREY_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.GREY_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.GREY_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.GREY_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_GREY_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_GREY_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_GREY_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_GREY_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_LIGHT_BLUE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.LIGHT_BLUE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.LIGHT_BLUE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.LIGHT_BLUE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.LIGHT_BLUE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_BLUE_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_LIGHT_GREY_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_LIGHT_GREY_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_LIGHT_GREY_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_LIGHT_GREY_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.LIGHT_GREY_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.LIGHT_GREY_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.LIGHT_GREY_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.LIGHT_GREY_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_GREY_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_GREY_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_GREY_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_LIGHT_GREY_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_LIME_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_LIME_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_LIME_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_LIME_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.LIME_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.LIME_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.LIME_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.LIME_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_LIME_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_LIME_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_LIME_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_LIME_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_MAGENTA_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_MAGENTA_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_MAGENTA_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_MAGENTA_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.MAGENTA_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.MAGENTA_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.MAGENTA_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.MAGENTA_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_MAGENTA_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_MAGENTA_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_MAGENTA_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_MAGENTA_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_ORANGE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_ORANGE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_ORANGE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_ORANGE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.ORANGE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.ORANGE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.ORANGE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.ORANGE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_ORANGE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_ORANGE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_ORANGE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_ORANGE_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_PINK_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_PINK_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_PINK_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_PINK_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.PINK_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.PINK_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.PINK_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.PINK_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_PINK_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_PINK_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_PINK_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_PINK_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_PURPLE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_PURPLE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_PURPLE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_PURPLE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.PURPLE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.PURPLE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.PURPLE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.PURPLE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_PURPLE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_PURPLE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_PURPLE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_PURPLE_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_RED_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_RED_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_RED_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_RED_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.RED_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.RED_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.RED_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.RED_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_RED_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_RED_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_RED_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_RED_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_WHITE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_WHITE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_WHITE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_WHITE_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_CAPARISON_SHOULDER.get());
-
-                            output.accept(MECompatItems.BLACK_YELLOW_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.BLACK_YELLOW_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.BLACK_YELLOW_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.BLACK_YELLOW_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.YELLOW_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.YELLOW_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.YELLOW_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.YELLOW_CAPARISON_SHOULDER.get());
-                            output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_CAPE.get());
-                            output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_FULL.get());
-                            output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_HALF.get());
-                            output.accept(MECompatItems.WHITE_YELLOW_CAPARISON_SHOULDER.get());
+                            for (DyeColor color : DyeColor.values()) {
+                                if (color == DyeColor.WHITE)
+                                    continue;
+                                output.accept(MECompatItems.WHITE_CHECKER_CAPARISON_CAPES.get(color).get());
+                                output.accept(MECompatItems.WHITE_CHECKER_CAPARISON_FULLS.get(color).get());
+                                output.accept(MECompatItems.WHITE_CHECKER_CAPARISON_HALFS.get(color).get());
+                                output.accept(MECompatItems.WHITE_CHECKER_CAPARISON_SHOULDERS.get(color).get());
+                            }
                         }
 
                         if (LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {

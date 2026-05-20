@@ -9,6 +9,7 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -74,6 +75,15 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			return VANILLA_LOOT_TABLE;
 		} else {
 			return LOOT_TABLE;
+		}
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.rabbit");
+		} else {
+			return super.getName();
 		}
 	}
 
@@ -233,10 +243,9 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			player.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, 1.0F);
 			this.setSheared(true);
 			if (random.nextDouble() <= 0.20) {
-				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get());
-				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get());
+				this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 2), 0F);
 			} else if (random.nextDouble() > 0.20) {
-				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get());
+				this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 1), 0F);
 			}
 			regrowWoolCounter = 0;
 			return InteractionResult.sidedSuccess(this.level().isClientSide);

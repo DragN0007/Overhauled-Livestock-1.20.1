@@ -81,6 +81,15 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.mule");
+		} else {
+			return super.getName();
+		}
+	}
+
+	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
 			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {

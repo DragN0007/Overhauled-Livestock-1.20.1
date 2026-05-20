@@ -1201,95 +1201,46 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void dropWoolByColorAndMarking() {
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
+			DyeColor color = null;
 			if (this.getVariant() == 3 && !(this.getOverlayVariant() == 38)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
-				}
+				color = DyeColor.BLACK;
 			} else if ((this.getVariant() == 0 || this.getVariant() == 1 ||
 					this.getVariant() == 2 || this.getVariant() == 4 ||
 					this.getVariant() == 6 || this.getVariant() == 7 ||
 					this.getVariant() == 10 || this.getVariant() == 11 ||
 					this.getVariant() == 14 || this.getVariant() == 15 || this.getVariant() == 18)
 					&& !(this.getOverlayVariant() == 38)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
-				}
+				color = DyeColor.BROWN;
 			} else if ((this.getVariant() == 16 || this.getVariant() == 17) && !(this.getOverlayVariant() == 38)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
-				}
+				color = DyeColor.GRAY;
 			} else if (this.getVariant() == 12 || this.getVariant() == 13 && !(this.getOverlayVariant() == 38)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
-				}
+				color = DyeColor.LIGHT_GRAY;
 			} else if ((this.getVariant() == 20) && !(this.getOverlayVariant() == 38)) {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
-				}
+				color = DyeColor.WHITE;
 			} else {
-				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 3);
-				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
-				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
-				}
-
-				if (this.getOverlayVariant() == 0) {
-					this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
-				}
+				color = DyeColor.GRAY;
 			}
 
 			if (this.getOverlayVariant() == 38) { //pure white, only drop white wool
 				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 3);
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 3), 0F);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 2), 0F);
 				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 1), 0F);
+				}
+			} else {
+				if (random.nextDouble() < 0.20) {
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 3), 0F);
+				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 2), 0F);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 1), 0F);
 				}
 
-				this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
+				if (this.getOverlayVariant() == 0) {
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 1), 0F);
+				}
 			}
 
 

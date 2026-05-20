@@ -79,6 +79,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
 
+    mavenLocal()
+
     maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -101,6 +103,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:1.20.1-47.3.0" // 47.2.0 is Recommended
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
+//    implementation fg.deobf('com.dragn0007.coinpile:Coin_Pile_Lib:1.20.1-1.0')
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")

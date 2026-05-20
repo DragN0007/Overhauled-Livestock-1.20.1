@@ -8,6 +8,7 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -67,6 +68,15 @@ public class OFrog extends Animal implements GeoEntity {
 			return VANILLA_LOOT_TABLE;
 		} else {
 			return LOOT_TABLE;
+		}
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.frog");
+		} else {
+			return super.getName();
 		}
 	}
 

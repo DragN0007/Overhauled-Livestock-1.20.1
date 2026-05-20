@@ -18,6 +18,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -106,6 +107,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public boolean isDairyBreed() {
 		return this.getBreed() == 6 || this.getBreed() == 7;
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.cow");
+		} else {
+			return super.getName();
+		}
 	}
 
 	@Override

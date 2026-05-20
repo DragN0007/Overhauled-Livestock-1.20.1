@@ -11,6 +11,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -136,6 +137,15 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, false, false, entity ->
 				entity.getType().is(LOTags.Entity_Types.ROOSTERS_FEND) && (entity instanceof TamableAnimal && !((TamableAnimal) entity).isTame()) && this.isMale() && !this.isBaby()
 		));
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.chicken");
+		} else {
+			return super.getName();
+		}
 	}
 
 	@Override

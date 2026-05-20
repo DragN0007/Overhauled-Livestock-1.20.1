@@ -34,6 +34,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> COW_HERD_MAX;
     public static final ForgeConfigSpec.ConfigValue<Integer> LLAMA_HERD_MAX;
     public static final ForgeConfigSpec.ConfigValue<Integer> HORSE_HERD_MAX;
+    public static final ForgeConfigSpec.BooleanValue VANILLA_NAMES;
     public static final ForgeConfigSpec.BooleanValue USE_VANILLA_LOOT;
     public static final ForgeConfigSpec.BooleanValue NATURAL_HORSE_BREEDS;
     public static final ForgeConfigSpec.ConfigValue<Integer> CHICKEN_EGG_LAY_TIME;
@@ -206,6 +207,9 @@ public class LivestockOverhaulCommonConfig {
         BUILDER.pop();
 
         BUILDER.push("QoL");
+        VANILLA_NAMES = BUILDER.comment("Should O-Animals use vanilla names instead of those with the \"O-\" prefix?")
+                .define("Use Vanilla Animal Names", false);
+
         USE_VANILLA_LOOT = BUILDER.comment("Should O-Animals use vanilla loot instead of the loot included in the mod?")
                 .define("Use Vanilla Animal Loot", false);
 

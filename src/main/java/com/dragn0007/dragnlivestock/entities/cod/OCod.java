@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractSchoolingOFish;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -67,21 +68,26 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 	public ItemStack getBucketItemStack() {
 		return new ItemStack(Items.COD_BUCKET);
 	}
-
 	public SoundEvent getAmbientSound() {
 		return SoundEvents.COD_AMBIENT;
 	}
-
 	public SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
-
 	public SoundEvent getHurtSound(DamageSource p_29795_) {
 		return SoundEvents.COD_HURT;
 	}
-
 	public SoundEvent getFlopSound() {
 		return SoundEvents.COD_FLOP;
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.cod");
+		} else {
+			return super.getName();
+		}
 	}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);

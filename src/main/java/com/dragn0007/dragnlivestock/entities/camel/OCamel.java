@@ -15,6 +15,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -313,6 +314,15 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public AnimatableInstanceCache getAnimatableInstanceCache() {
 		return this.geoCache;
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.camel");
+		} else {
+			return super.getName();
+		}
 	}
 
 	public int filledHumpsTime = this.random.nextInt(6000) + 6000;

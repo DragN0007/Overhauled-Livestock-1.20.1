@@ -9,6 +9,7 @@ import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -56,6 +57,15 @@ public class OMooshroom extends OCow implements GeoEntity {
     }
     public float getWalkTargetValue(BlockPos p_28933_, LevelReader p_28934_) {
         return p_28934_.getBlockState(p_28933_.below()).is(Blocks.MYCELIUM) ? 10.0F : p_28934_.getPathfindingCostFromLightLevels(p_28933_);
+    }
+
+    @Override
+    public Component getName() {
+        if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+            return Component.translatable("entity.minecraft.mooshroom");
+        } else {
+            return super.getName();
+        }
     }
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {

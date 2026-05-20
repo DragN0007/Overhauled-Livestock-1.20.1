@@ -14,6 +14,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class LOItems {
 
     public static final DeferredRegister<Item> ITEMS =
@@ -468,554 +471,187 @@ public class LOItems {
             () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
 
     //Dyed Stuff
-    public static final RegistryObject<Item> BLACK_BRAND_TAG = ITEMS.register("black_brand_tag",
-            () -> new BrandTagItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_BRAND_TAG = ITEMS.register("blue_brand_tag",
-            () -> new BrandTagItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_BRAND_TAG = ITEMS.register("brown_brand_tag",
-            () -> new BrandTagItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_BRAND_TAG = ITEMS.register("cyan_brand_tag",
-            () -> new BrandTagItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_BRAND_TAG = ITEMS.register("green_brand_tag",
-            () -> new BrandTagItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_BRAND_TAG = ITEMS.register("grey_brand_tag",
-            () -> new BrandTagItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_BRAND_TAG = ITEMS.register("light_blue_brand_tag",
-            () -> new BrandTagItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_BRAND_TAG = ITEMS.register("light_grey_brand_tag",
-            () -> new BrandTagItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_BRAND_TAG = ITEMS.register("lime_brand_tag",
-            () -> new BrandTagItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_BRAND_TAG = ITEMS.register("magenta_brand_tag",
-            () -> new BrandTagItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_BRAND_TAG = ITEMS.register("orange_brand_tag",
-            () -> new BrandTagItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_BRAND_TAG = ITEMS.register("pink_brand_tag",
-            () -> new BrandTagItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_BRAND_TAG = ITEMS.register("purple_brand_tag",
-            () -> new BrandTagItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_BRAND_TAG = ITEMS.register("red_brand_tag",
-            () -> new BrandTagItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_BRAND_TAG = ITEMS.register("white_brand_tag",
-            () -> new BrandTagItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_BRAND_TAG = ITEMS.register("yellow_brand_tag",
-            () -> new BrandTagItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> BRAND_TAGS = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_brand_tag";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new BrandTagItem(color, new Item.Properties()));
+            BRAND_TAGS.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_WOOL_DYE = ITEMS.register("black_wool_dye",
-            () -> new WoolDyeItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_WOOL_DYE = ITEMS.register("blue_wool_dye",
-            () -> new WoolDyeItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_WOOL_DYE = ITEMS.register("brown_wool_dye",
-            () -> new WoolDyeItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_WOOL_DYE = ITEMS.register("cyan_wool_dye",
-            () -> new WoolDyeItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_WOOL_DYE = ITEMS.register("green_wool_dye",
-            () -> new WoolDyeItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_WOOL_DYE = ITEMS.register("grey_wool_dye",
-            () -> new WoolDyeItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_WOOL_DYE = ITEMS.register("light_blue_wool_dye",
-            () -> new WoolDyeItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_WOOL_DYE = ITEMS.register("light_grey_wool_dye",
-            () -> new WoolDyeItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_WOOL_DYE = ITEMS.register("lime_wool_dye",
-            () -> new WoolDyeItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_WOOL_DYE = ITEMS.register("magenta_wool_dye",
-            () -> new WoolDyeItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_WOOL_DYE = ITEMS.register("orange_wool_dye",
-            () -> new WoolDyeItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_WOOL_DYE = ITEMS.register("pink_wool_dye",
-            () -> new WoolDyeItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_WOOL_DYE = ITEMS.register("purple_wool_dye",
-            () -> new WoolDyeItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_WOOL_DYE = ITEMS.register("red_wool_dye",
-            () -> new WoolDyeItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_WOOL_DYE = ITEMS.register("white_wool_dye",
-            () -> new WoolDyeItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_WOOL_DYE = ITEMS.register("yellow_wool_dye",
-            () -> new WoolDyeItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> WOOL_DYE = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_wool_dye";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new WoolDyeItem(color, new Item.Properties()));
+            WOOL_DYE.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_WOOL_STAPLE = ITEMS.register("black_wool_staple",
-            () -> new WoolStapleItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_WOOL_STAPLE = ITEMS.register("blue_wool_staple",
-            () -> new WoolStapleItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_WOOL_STAPLE = ITEMS.register("brown_wool_staple",
-            () -> new WoolStapleItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_WOOL_STAPLE = ITEMS.register("cyan_wool_staple",
-            () -> new WoolStapleItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_WOOL_STAPLE = ITEMS.register("green_wool_staple",
-            () -> new WoolStapleItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_WOOL_STAPLE = ITEMS.register("grey_wool_staple",
-            () -> new WoolStapleItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_WOOL_STAPLE = ITEMS.register("light_blue_wool_staple",
-            () -> new WoolStapleItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_WOOL_STAPLE = ITEMS.register("light_grey_wool_staple",
-            () -> new WoolStapleItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_WOOL_STAPLE = ITEMS.register("lime_wool_staple",
-            () -> new WoolStapleItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_WOOL_STAPLE = ITEMS.register("magenta_wool_staple",
-            () -> new WoolStapleItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_WOOL_STAPLE = ITEMS.register("orange_wool_staple",
-            () -> new WoolStapleItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_WOOL_STAPLE = ITEMS.register("pink_wool_staple",
-            () -> new WoolStapleItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_WOOL_STAPLE = ITEMS.register("purple_wool_staple",
-            () -> new WoolStapleItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_WOOL_STAPLE = ITEMS.register("red_wool_staple",
-            () -> new WoolStapleItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_WOOL_STAPLE = ITEMS.register("white_wool_staple",
-            () -> new WoolStapleItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_WOOL_STAPLE = ITEMS.register("yellow_wool_staple",
-            () -> new WoolStapleItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> WOOL_STAPLES = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_wool_staple";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new WoolStapleItem(color, new Item.Properties()));
+            WOOL_STAPLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_MEDIEVAL_BLANKET = ITEMS.register("black_medieval_blanket",
-            () -> new BlanketItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_MEDIEVAL_BLANKET = ITEMS.register("blue_medieval_blanket",
-            () -> new BlanketItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_MEDIEVAL_BLANKET = ITEMS.register("brown_medieval_blanket",
-            () -> new BlanketItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_MEDIEVAL_BLANKET = ITEMS.register("cyan_medieval_blanket",
-            () -> new BlanketItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_MEDIEVAL_BLANKET = ITEMS.register("green_medieval_blanket",
-            () -> new BlanketItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_MEDIEVAL_BLANKET = ITEMS.register("grey_medieval_blanket",
-            () -> new BlanketItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_MEDIEVAL_BLANKET = ITEMS.register("light_blue_medieval_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_MEDIEVAL_BLANKET = ITEMS.register("light_grey_medieval_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_MEDIEVAL_BLANKET = ITEMS.register("lime_medieval_blanket",
-            () -> new BlanketItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_MEDIEVAL_BLANKET = ITEMS.register("magenta_medieval_blanket",
-            () -> new BlanketItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_MEDIEVAL_BLANKET = ITEMS.register("orange_medieval_blanket",
-            () -> new BlanketItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_MEDIEVAL_BLANKET = ITEMS.register("pink_medieval_blanket",
-            () -> new BlanketItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_MEDIEVAL_BLANKET = ITEMS.register("purple_medieval_blanket",
-            () -> new BlanketItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_MEDIEVAL_BLANKET = ITEMS.register("red_medieval_blanket",
-            () -> new BlanketItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_MEDIEVAL_BLANKET = ITEMS.register("white_medieval_blanket",
-            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_MEDIEVAL_BLANKET = ITEMS.register("yellow_medieval_blanket",
-            () -> new BlanketItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> MEDIEVAL_BLANKETS = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_medieval_blanket";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new BlanketItem(color, new Item.Properties()));
+            MEDIEVAL_BLANKETS.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_MODERN_BLANKET = ITEMS.register("black_modern_blanket",
-            () -> new BlanketItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_MODERN_BLANKET = ITEMS.register("blue_modern_blanket",
-            () -> new BlanketItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_MODERN_BLANKET = ITEMS.register("brown_modern_blanket",
-            () -> new BlanketItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_MODERN_BLANKET = ITEMS.register("cyan_modern_blanket",
-            () -> new BlanketItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_MODERN_BLANKET = ITEMS.register("green_modern_blanket",
-            () -> new BlanketItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_MODERN_BLANKET = ITEMS.register("grey_modern_blanket",
-            () -> new BlanketItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_MODERN_BLANKET = ITEMS.register("light_blue_modern_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_MODERN_BLANKET = ITEMS.register("light_grey_modern_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_MODERN_BLANKET = ITEMS.register("lime_modern_blanket",
-            () -> new BlanketItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_MODERN_BLANKET = ITEMS.register("magenta_modern_blanket",
-            () -> new BlanketItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_MODERN_BLANKET = ITEMS.register("orange_modern_blanket",
-            () -> new BlanketItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_MODERN_BLANKET = ITEMS.register("pink_modern_blanket",
-            () -> new BlanketItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_MODERN_BLANKET = ITEMS.register("purple_modern_blanket",
-            () -> new BlanketItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_MODERN_BLANKET = ITEMS.register("red_modern_blanket",
-            () -> new BlanketItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_MODERN_BLANKET = ITEMS.register("white_modern_blanket",
-            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_MODERN_BLANKET = ITEMS.register("yellow_modern_blanket",
-            () -> new BlanketItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> MODERN_BLANKETS  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_modern_blanket";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new BlanketItem(color, new Item.Properties()));
+            MODERN_BLANKETS.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_RACING_BLANKET = ITEMS.register("black_racing_blanket",
-            () -> new BlanketItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_RACING_BLANKET = ITEMS.register("blue_racing_blanket",
-            () -> new BlanketItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_RACING_BLANKET = ITEMS.register("brown_racing_blanket",
-            () -> new BlanketItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_RACING_BLANKET = ITEMS.register("cyan_racing_blanket",
-            () -> new BlanketItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_RACING_BLANKET = ITEMS.register("green_racing_blanket",
-            () -> new BlanketItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_RACING_BLANKET = ITEMS.register("grey_racing_blanket",
-            () -> new BlanketItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_RACING_BLANKET = ITEMS.register("light_blue_racing_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_RACING_BLANKET = ITEMS.register("light_grey_racing_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_RACING_BLANKET = ITEMS.register("lime_racing_blanket",
-            () -> new BlanketItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_RACING_BLANKET = ITEMS.register("magenta_racing_blanket",
-            () -> new BlanketItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_RACING_BLANKET = ITEMS.register("orange_racing_blanket",
-            () -> new BlanketItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_RACING_BLANKET = ITEMS.register("pink_racing_blanket",
-            () -> new BlanketItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_RACING_BLANKET = ITEMS.register("purple_racing_blanket",
-            () -> new BlanketItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_RACING_BLANKET = ITEMS.register("red_racing_blanket",
-            () -> new BlanketItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_RACING_BLANKET = ITEMS.register("white_racing_blanket",
-            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_RACING_BLANKET = ITEMS.register("yellow_racing_blanket",
-            () -> new BlanketItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> RACING_BLANKETS  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_racing_blanket";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new BlanketItem(color, new Item.Properties()));
+            RACING_BLANKETS.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_WESTERN_BLANKET = ITEMS.register("black_western_blanket",
-            () -> new BlanketItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_WESTERN_BLANKET = ITEMS.register("blue_western_blanket",
-            () -> new BlanketItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_WESTERN_BLANKET = ITEMS.register("brown_western_blanket",
-            () -> new BlanketItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_WESTERN_BLANKET = ITEMS.register("cyan_western_blanket",
-            () -> new BlanketItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_WESTERN_BLANKET = ITEMS.register("green_western_blanket",
-            () -> new BlanketItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_WESTERN_BLANKET = ITEMS.register("grey_western_blanket",
-            () -> new BlanketItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_WESTERN_BLANKET = ITEMS.register("light_blue_western_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_WESTERN_BLANKET = ITEMS.register("light_grey_western_blanket",
-            () -> new BlanketItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_WESTERN_BLANKET = ITEMS.register("lime_western_blanket",
-            () -> new BlanketItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_WESTERN_BLANKET = ITEMS.register("magenta_western_blanket",
-            () -> new BlanketItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_WESTERN_BLANKET = ITEMS.register("orange_western_blanket",
-            () -> new BlanketItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_WESTERN_BLANKET = ITEMS.register("pink_western_blanket",
-            () -> new BlanketItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_WESTERN_BLANKET = ITEMS.register("purple_western_blanket",
-            () -> new BlanketItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_WESTERN_BLANKET = ITEMS.register("red_western_blanket",
-            () -> new BlanketItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_WESTERN_BLANKET = ITEMS.register("white_western_blanket",
-            () -> new BlanketItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_WESTERN_BLANKET = ITEMS.register("yellow_western_blanket",
-            () -> new BlanketItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> WESTERN_BLANKETS  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_western_blanket";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new BlanketItem(color, new Item.Properties()));
+            WESTERN_BLANKETS.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_GRUB_SWEATER = ITEMS.register("black_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.BLACK, new Item.Properties()));
-    public static final RegistryObject<Item> BLUE_GRUB_SWEATER = ITEMS.register("blue_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> BROWN_GRUB_SWEATER = ITEMS.register("brown_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.BROWN, new Item.Properties()));
-    public static final RegistryObject<Item> CYAN_GRUB_SWEATER = ITEMS.register("cyan_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.CYAN, new Item.Properties()));
-    public static final RegistryObject<Item> GREEN_GRUB_SWEATER = ITEMS.register("green_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.GREEN, new Item.Properties()));
-    public static final RegistryObject<Item> GREY_GRUB_SWEATER = ITEMS.register("grey_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_BLUE_GRUB_SWEATER = ITEMS.register("light_blue_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.LIGHT_BLUE, new Item.Properties()));
-    public static final RegistryObject<Item> LIGHT_GREY_GRUB_SWEATER = ITEMS.register("light_grey_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.LIGHT_GRAY, new Item.Properties()));
-    public static final RegistryObject<Item> LIME_GRUB_SWEATER = ITEMS.register("lime_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.LIME, new Item.Properties()));
-    public static final RegistryObject<Item> MAGENTA_GRUB_SWEATER = ITEMS.register("magenta_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.MAGENTA, new Item.Properties()));
-    public static final RegistryObject<Item> ORANGE_GRUB_SWEATER = ITEMS.register("orange_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.ORANGE, new Item.Properties()));
-    public static final RegistryObject<Item> PINK_GRUB_SWEATER = ITEMS.register("pink_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.PINK, new Item.Properties()));
-    public static final RegistryObject<Item> PURPLE_GRUB_SWEATER = ITEMS.register("purple_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.PURPLE, new Item.Properties()));
-    public static final RegistryObject<Item> RED_GRUB_SWEATER = ITEMS.register("red_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.RED, new Item.Properties()));
-    public static final RegistryObject<Item> WHITE_GRUB_SWEATER = ITEMS.register("white_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.WHITE, new Item.Properties()));
-    public static final RegistryObject<Item> YELLOW_GRUB_SWEATER = ITEMS.register("yellow_grub_sweater",
-            () -> new GrubSweaterItem(DyeColor.YELLOW, new Item.Properties()));
+    public static final Map<DyeColor, RegistryObject<Item>> GRUB_SWEATERS  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_grub_sweater";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new GrubSweaterItem(color, new Item.Properties()));
+            GRUB_SWEATERS.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLUE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("blue_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("brown_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("cyan_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("green_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("grey_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("light_blue_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("light_grey_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("lime_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("magenta_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("orange_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("pink_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("purple_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("red_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("white_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_BLACK_LIGHT_SADDLE = ITEMS.register("yellow_accented_black_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_BLACK_LIGHT_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            if (color == DyeColor.BLACK)
+                continue;
+            String name = color.getName() + "_accented_black_light_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_BLACK_LIGHT_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLUE_ACCENTED_BLACK_SADDLE = ITEMS.register("blue_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_BLACK_SADDLE = ITEMS.register("brown_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_BLACK_SADDLE = ITEMS.register("cyan_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_BLACK_SADDLE = ITEMS.register("green_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_BLACK_SADDLE = ITEMS.register("grey_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_BLACK_SADDLE = ITEMS.register("light_blue_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_BLACK_SADDLE = ITEMS.register("light_grey_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_BLACK_SADDLE = ITEMS.register("lime_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_BLACK_SADDLE = ITEMS.register("magenta_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_BLACK_SADDLE = ITEMS.register("orange_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_BLACK_SADDLE = ITEMS.register("pink_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_BLACK_SADDLE = ITEMS.register("purple_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_BLACK_SADDLE = ITEMS.register("red_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_ACCENTED_BLACK_SADDLE = ITEMS.register("white_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_BLACK_SADDLE = ITEMS.register("yellow_accented_black_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_BLACK_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            if (color == DyeColor.BLACK)
+                continue;
+            String name = color.getName() + "_accented_black_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_BLACK_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLUE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("blue_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("brown_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("cyan_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("green_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("grey_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("light_blue_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("light_grey_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("lime_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("magenta_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("orange_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("pink_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("purple_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("red_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("white_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_BLACK_HEAVY_SADDLE = ITEMS.register("yellow_accented_black_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_BLACK_HEAVY_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            if (color == DyeColor.BLACK)
+                continue;
+            String name = color.getName() + "_accented_black_heavy_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_BLACK_HEAVY_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_ACCENTED_LIGHT_SADDLE = ITEMS.register("black_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLUE_ACCENTED_LIGHT_SADDLE = ITEMS.register("blue_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_LIGHT_SADDLE = ITEMS.register("brown_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_LIGHT_SADDLE = ITEMS.register("cyan_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_LIGHT_SADDLE = ITEMS.register("green_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_LIGHT_SADDLE = ITEMS.register("grey_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_LIGHT_SADDLE = ITEMS.register("light_blue_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_LIGHT_SADDLE = ITEMS.register("light_grey_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_LIGHT_SADDLE = ITEMS.register("lime_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_LIGHT_SADDLE = ITEMS.register("magenta_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_LIGHT_SADDLE = ITEMS.register("orange_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_LIGHT_SADDLE = ITEMS.register("pink_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_LIGHT_SADDLE = ITEMS.register("purple_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_LIGHT_SADDLE = ITEMS.register("red_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_ACCENTED_LIGHT_SADDLE = ITEMS.register("white_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_LIGHT_SADDLE = ITEMS.register("yellow_accented_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_LIGHT_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_accented_light_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_LIGHT_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_ACCENTED_SADDLE = ITEMS.register("black_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLUE_ACCENTED_SADDLE = ITEMS.register("blue_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_SADDLE = ITEMS.register("brown_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_SADDLE = ITEMS.register("cyan_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_SADDLE = ITEMS.register("green_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_SADDLE = ITEMS.register("grey_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_SADDLE = ITEMS.register("light_blue_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_SADDLE = ITEMS.register("light_grey_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_SADDLE = ITEMS.register("lime_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_SADDLE = ITEMS.register("magenta_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_SADDLE = ITEMS.register("orange_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_SADDLE = ITEMS.register("pink_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_SADDLE = ITEMS.register("purple_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_SADDLE = ITEMS.register("red_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_ACCENTED_SADDLE = ITEMS.register("white_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_SADDLE = ITEMS.register("yellow_accented_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_accented_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_ACCENTED_HEAVY_SADDLE = ITEMS.register("black_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLUE_ACCENTED_HEAVY_SADDLE = ITEMS.register("blue_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_HEAVY_SADDLE = ITEMS.register("brown_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_HEAVY_SADDLE = ITEMS.register("cyan_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_HEAVY_SADDLE = ITEMS.register("green_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_HEAVY_SADDLE = ITEMS.register("grey_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_HEAVY_SADDLE = ITEMS.register("light_blue_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_HEAVY_SADDLE = ITEMS.register("light_grey_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_HEAVY_SADDLE = ITEMS.register("lime_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_HEAVY_SADDLE = ITEMS.register("magenta_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_HEAVY_SADDLE = ITEMS.register("orange_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_HEAVY_SADDLE = ITEMS.register("pink_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_HEAVY_SADDLE = ITEMS.register("purple_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_HEAVY_SADDLE = ITEMS.register("red_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> WHITE_ACCENTED_HEAVY_SADDLE = ITEMS.register("white_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_HEAVY_SADDLE = ITEMS.register("yellow_accented_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_HEAVY_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            String name = color.getName() + "_accented_heavy_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_HEAVY_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("black_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLUE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("blue_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("brown_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("cyan_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("green_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("grey_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("light_blue_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("light_grey_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("lime_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("magenta_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("orange_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("pink_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("purple_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("red_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_WHITE_LIGHT_SADDLE = ITEMS.register("yellow_accented_white_light_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_WHITE_LIGHT_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            if (color == DyeColor.WHITE)
+                continue;
+            String name = color.getName() + "_accented_white_light_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_WHITE_LIGHT_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_ACCENTED_WHITE_SADDLE = ITEMS.register("black_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLUE_ACCENTED_WHITE_SADDLE = ITEMS.register("blue_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_WHITE_SADDLE = ITEMS.register("brown_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_WHITE_SADDLE = ITEMS.register("cyan_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_WHITE_SADDLE = ITEMS.register("green_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_WHITE_SADDLE = ITEMS.register("grey_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_WHITE_SADDLE = ITEMS.register("light_blue_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_WHITE_SADDLE = ITEMS.register("light_grey_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_WHITE_SADDLE = ITEMS.register("lime_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_WHITE_SADDLE = ITEMS.register("magenta_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_WHITE_SADDLE = ITEMS.register("orange_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_WHITE_SADDLE = ITEMS.register("pink_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_WHITE_SADDLE = ITEMS.register("purple_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_WHITE_SADDLE = ITEMS.register("red_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_WHITE_SADDLE = ITEMS.register("yellow_accented_white_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_WHITE_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            if (color == DyeColor.WHITE)
+                continue;
+            String name = color.getName() + "_accented_white_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_WHITE_SADDLES.put(color, item);
+        }
+    }
 
-    public static final RegistryObject<Item> BLACK_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("black_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BLUE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("blue_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BROWN_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("brown_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> CYAN_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("cyan_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREEN_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("green_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> GREY_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("grey_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_BLUE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("light_blue_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIGHT_GREY_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("light_grey_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> LIME_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("lime_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MAGENTA_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("magenta_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> ORANGE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("orange_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PINK_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("pink_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> PURPLE_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("purple_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> RED_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("red_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> YELLOW_ACCENTED_WHITE_HEAVY_SADDLE = ITEMS.register("yellow_accented_white_heavy_saddle",
-            () -> new SaddleItem(new Item.Properties().stacksTo(1)));
+    public static final Map<DyeColor, RegistryObject<Item>> ACCENTED_WHITE_HEAVY_SADDLES  = new EnumMap<>(DyeColor.class);
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            if (color == DyeColor.WHITE)
+                continue;
+            String name = color.getName() + "_accented_white_heavy_saddle";
+            RegistryObject<Item> item = ITEMS.register(name,
+                    () -> new SaddleItem(new Item.Properties()));
+            ACCENTED_WHITE_HEAVY_SADDLES.put(color, item);
+        }
+    }
 
     public static final RegistryObject<Item> HOLIDAY_SADDLE = ITEMS.register("holiday_saddle",
             () -> new SaddleItem(new Item.Properties().stacksTo(1)));

@@ -10,6 +10,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -66,6 +67,15 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			return VANILLA_LOOT_TABLE;
 		} else {
 			return LOOT_TABLE;
+		}
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.pig");
+		} else {
+			return super.getName();
 		}
 	}
 

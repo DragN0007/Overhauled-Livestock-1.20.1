@@ -94,6 +94,15 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.donkey");
+		} else {
+			return super.getName();
+		}
+	}
+
+	@Override
 	public Vec3 getLeashOffset() {
 		return new Vec3(0D, (double)this.getEyeHeight() * 0.6F, (double)(this.getBbWidth() * 1F));
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset

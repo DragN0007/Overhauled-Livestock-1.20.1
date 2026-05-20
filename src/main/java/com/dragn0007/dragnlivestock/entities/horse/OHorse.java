@@ -101,6 +101,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.horse");
+		} else {
+			return super.getName();
+		}
+	}
+
+	@Override
 	public Vec3 getLeashOffset() {
 		return new Vec3(0D, (double) this.getEyeHeight() * 0.8F, (double) (this.getBbWidth() * 1.2F));
 		//              ^ Side offset                      ^ Height offset                   ^ Length offset

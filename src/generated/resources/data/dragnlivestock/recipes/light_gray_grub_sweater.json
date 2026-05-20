@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:light_gray_carpet"
+    }
+  },
+  "pattern": [
+    "BB"
+  ],
+  "result": {
+    "item": "dragnlivestock:light_gray_grub_sweater"
+  },
+  "show_notification": true
+}

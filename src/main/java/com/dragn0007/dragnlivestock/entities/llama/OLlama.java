@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -96,6 +97,15 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			return VANILLA_LOOT_TABLE;
 		} else {
 			return LOOT_TABLE;
+		}
+	}
+
+	@Override
+	public Component getName() {
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
+			return Component.translatable("entity.minecraft.llama");
+		} else {
+			return super.getName();
 		}
 	}
 
@@ -671,46 +681,32 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	public void dropWoolByColorAndMarking() {
-
 		if (this.getWooly() == 1) {
 			if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-				if (this.getVariant() == 0) {
-					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-						this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 2);
-					} else if (random.nextDouble() > 0.50) {
-						this.spawnAtLocation(LOItems.BLACK_WOOL_STAPLE.get(), 1);
-					}
-				}
-				if (this.getVariant() == 1 || this.getVariant() == 3) {
-					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-						this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 2);
-					} else if (random.nextDouble() > 0.50) {
-						this.spawnAtLocation(LOItems.GREY_WOOL_STAPLE.get(), 1);
-					}
-				}
-				if (this.getVariant() == 2 || this.getVariant() == 6 || this.getVariant() == 7) {
-					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-						this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 2);
-					} else if (random.nextDouble() > 0.50) {
-						this.spawnAtLocation(LOItems.BROWN_WOOL_STAPLE.get(), 1);
-					}
-				}
-				if (this.getVariant() == 4) {
-					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-						this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 2);
-					} else if (random.nextDouble() > 0.50) {
-						this.spawnAtLocation(LOItems.LIGHT_GREY_WOOL_STAPLE.get(), 1);
-					}
-				}
-				if (this.getVariant() == 6 || this.getVariant() == 8) {
-					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-						this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 2);
-					} else if (random.nextDouble() > 0.50) {
-						this.spawnAtLocation(LOItems.WHITE_WOOL_STAPLE.get(), 1);
-					}
-				}
-				//if vanilla loot
-			} else {
+			DyeColor color = null;
+			if (this.getVariant() == 0) {
+				color = DyeColor.BLACK;
+			}
+			if (this.getVariant() == 1 || this.getVariant() == 3) {
+				color = DyeColor.GRAY;
+			}
+			if (this.getVariant() == 2 || this.getVariant() == 6 || this.getVariant() == 7) {
+				color = DyeColor.BROWN;
+			}
+			if (this.getVariant() == 4) {
+				color = DyeColor.LIGHT_GRAY;
+			}
+			if (this.getVariant() == 6 || this.getVariant() == 8) {
+				color = DyeColor.WHITE;
+			}
+
+			if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+				this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(color).get(), 2), 0F);
+			} else if (random.nextDouble() > 0.50) {
+				this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(color).get(), 1), 0F);
+			}
+			//if vanilla loot
+		} else {
 				if (this.getVariant() == 0) {
 					if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
 						this.spawnAtLocation(Items.BLACK_WOOL, 2);
@@ -747,10 +743,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 					}
 				}
 			}
-
-
 		}
-
 	}
 
 	@Override
