@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "medievalembroidery"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "minecraft:light_gray_carpet"
+          },
+          "B": {
+            "tag": "dragnlivestock:gold_metal_nuggets"
+          },
+          "C": {
+            "item": "minecraft:white_carpet"
+          }
+        },
+        "pattern": [
+          "AC ",
+          "BAB"
+        ],
+        "result": {
+          "item": "medievalembroidery:white_light_gray_caparison_half"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
