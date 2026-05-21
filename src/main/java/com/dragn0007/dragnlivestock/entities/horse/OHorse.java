@@ -645,6 +645,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public void removeFollower() {
+		if (this.leader != null)
 		this.herdSize--;
 	}
 

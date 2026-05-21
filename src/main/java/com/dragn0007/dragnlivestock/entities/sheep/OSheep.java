@@ -147,6 +147,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		++this.herdSize;
 	}
 	public void removeFollower() {
+		if (this.leader != null)
 		--this.herdSize;
 	}
 	public boolean canBeFollowed() {

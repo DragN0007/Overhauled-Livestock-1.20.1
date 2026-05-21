@@ -313,6 +313,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void removeFollower() {
+		if (this.leader != null)
 		--this.herdSize;
 	}
 
