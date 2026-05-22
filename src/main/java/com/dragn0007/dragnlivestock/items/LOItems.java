@@ -169,6 +169,8 @@ public class LOItems {
             () -> new HarnessItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> WAGON_HARNESS = ITEMS.register("wagon_harness",
             () -> new HarnessItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BLACK_WAGON_HARNESS = ITEMS.register("black_wagon_harness",
+            () -> new HarnessItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> FERTILIZED_EGG = ITEMS.register("fertilized_egg",
             () -> new FertilizedEggItem((new Item.Properties()).stacksTo(1)));

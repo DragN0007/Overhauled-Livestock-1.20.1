@@ -121,6 +121,7 @@ public class LOItemGroup {
 
                         output.accept(LOItems.RODEO_HARNESS.get());
                         output.accept(LOItems.WAGON_HARNESS.get());
+                        output.accept(LOItems.BLACK_WAGON_HARNESS.get());
 
                         output.accept(LOItems.FERTILIZED_EGG.get());
                         output.accept(LOItems.FERTILIZED_AMERAUCANA_EGG.get());

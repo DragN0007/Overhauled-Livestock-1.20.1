@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-20T01:06:33.5312094	Recipes
+// 1.20.1	2026-05-22T00:32:52.7331466	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 3cc6b7da964f544de96bc8af30774332b59395e3 data/dragnlivestock/advancements/recipes/misc/black_accented_heavy_saddle.json
 0984543178a56357ae9cfd0267cdf27d47368a74 data/dragnlivestock/advancements/recipes/misc/black_accented_light_saddle.json
@@ -14,6 +14,7 @@ e1ef00dcacc63652c3a677eb540910713e758b9a data/dragnlivestock/advancements/recipe
 68b7200dab725f38917b1b656d2dffd93c7108f2 data/dragnlivestock/advancements/recipes/misc/black_modern_blanket.json
 81d4414af0379f43eebab1d93c925bfe226def67 data/dragnlivestock/advancements/recipes/misc/black_racing_blanket.json
 41963d08b23cfc549387c8d4eb6e36e43463ce41 data/dragnlivestock/advancements/recipes/misc/black_saddle.json
+c440ba4684767e02facd71125d9dc195341cce1c data/dragnlivestock/advancements/recipes/misc/black_wagon_harness.json
 fd33cf39d3de9259fc7cd4af5768e8b65f347baf data/dragnlivestock/advancements/recipes/misc/black_western_blanket.json
 3f0eeb45c882c7a06c69459cd2346a3a13826820 data/dragnlivestock/advancements/recipes/misc/black_wool_dye.json
 35956e74ded830d04d8f76d9b0b4da6f2bc71450 data/dragnlivestock/advancements/recipes/misc/black_wool_from_staple.json
@@ -426,6 +427,7 @@ a0d7e6ce8079bad1c734e8a2a21967c53c58bac0 data/dragnlivestock/recipes/black_accen
 00995d65d800f6b38c9c2526d0256ee1f686d3f2 data/dragnlivestock/recipes/black_modern_blanket.json
 e5c2d4e2aba52eaadbee1c25f8dc6bf662e9826e data/dragnlivestock/recipes/black_racing_blanket.json
 e971241bf91b4219fbd1fd432efd2f3c197cc4c9 data/dragnlivestock/recipes/black_saddle.json
+287c5e42ac5f7cf37b87ecce1bff9d4ec8362745 data/dragnlivestock/recipes/black_wagon_harness.json
 321670eeab3f3231684779b0fcff3395a192d793 data/dragnlivestock/recipes/black_western_blanket.json
 e67811653b4d4f2a364d5a97d9826f283681eed3 data/dragnlivestock/recipes/black_wool_dye.json
 887414eb27ba76a5ad24bfca95fb39370566cb47 data/dragnlivestock/recipes/black_wool_from_staple.json

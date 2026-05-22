@@ -53,6 +53,14 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .save(pFinishedRecipeConsumer);
 
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.BLACK_WAGON_HARNESS.get())
+                .requires(LOItems.WAGON_HARNESS.get())
+                .requires(Items.BLACK_DYE)
+                .unlockedBy("has_harness", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(LOItems.WAGON_HARNESS.get()).build()))
+                .save(pFinishedRecipeConsumer);
+
+
         ConditionalRecipe.builder()
                 .addCondition(new HolidayConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "holiday_config_condition")))
                 .addRecipe(

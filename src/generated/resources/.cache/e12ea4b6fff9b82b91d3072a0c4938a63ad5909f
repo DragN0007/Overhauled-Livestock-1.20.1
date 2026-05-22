@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-20T00:32:00.1521079	Item Models: dragnlivestock
+// 1.20.1	2026-05-22T00:32:52.7291577	Item Models: dragnlivestock
 c43315689b0aa768ddd93faefd5154d5e4cfcee5 assets/dragnlivestock/models/item/ameraucana_egg.json
 240c870ba6d46af0a13aafbffb4be997650b946e assets/dragnlivestock/models/item/american_medieval_blanket.json
 41506200d527beb0bc2568b505b5fb0df352c04f assets/dragnlivestock/models/item/american_modern_blanket.json
@@ -31,6 +31,7 @@ bd8a535fa4413a9bdd0ff429989067dcb84ec128 assets/dragnlivestock/models/item/black
 9883a8f3af28a4b7320f50db3f295781947dbafa assets/dragnlivestock/models/item/black_modern_blanket.json
 3e2c89ddc7ba990a60e14b1ef15a6ea20a63a5b3 assets/dragnlivestock/models/item/black_racing_blanket.json
 dbc605209afb689e17fbe51da775948f1d53b5d7 assets/dragnlivestock/models/item/black_saddle.json
+7c6fab2a601b3c065edc4c238f72da4fd14ecc1a assets/dragnlivestock/models/item/black_wagon_harness.json
 421024c01065d34efdda45f16ad875ab3379161c assets/dragnlivestock/models/item/black_western_blanket.json
 45488e1bf2994b9b2e960b757fa31f6d9d5e9985 assets/dragnlivestock/models/item/black_wool_dye.json
 e9e73891d42e15f62cef31e358ce1475d12284eb assets/dragnlivestock/models/item/black_wool_staple.json
