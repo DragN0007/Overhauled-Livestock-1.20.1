@@ -133,11 +133,18 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof OChicken animal) {
+                    String breedText;
                     String breed = animal.getModelResource().toString();
                     String noFillerTextBreed = breed.replaceAll(".+chicken/", "");
                     String noUnderscoresTextBreed = noFillerTextBreed.replaceAll("_", " ");
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
-                    String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
+                    if (animal.getBreed() == 0) {
+                        breedText = "Breed: LEGHORN";
+                    } else if (animal.getBreed() == 6) {
+                        breedText = "Breed: AYAM CEMANI";
+                    } else {
+                        breedText = "Breed: " + noPNGTextBreed.toUpperCase();
+                    }
 
                     String coat = animal.getTextureResource().toString();
                     String noFillerTextCoat = coat.replaceAll(".+chicken/", "");
@@ -191,11 +198,7 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof FarmGoat animal) {
-                    String breed = String.valueOf(animal.getBreed());
-                    String noFillerTextBreed = breed.replaceAll(".+farm_goat/", "");
-                    String noUnderscoresTextBreed = noFillerTextBreed.replaceAll("_", " ");
-                    String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
-                    String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
+                    String breedText = getGoatBreeds(animal.getBreed()).toUpperCase();
 
                     String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+farm_goat/", "");
@@ -215,7 +218,7 @@ public class ForgeEvent {
                     String noPNGTextFaceMarking = noUnderscoresFaceTextMarking.replace(".png", "");
                     String facemarkingText = "Face Marking: " + noPNGTextFaceMarking.toUpperCase();
 
-                    player.displayClientMessage(Component.translatable(breedText + " | " + coatText + " | " + facemarkingText + " | " + markingText).withStyle(ChatFormatting.GOLD), true);
+                    player.displayClientMessage(Component.translatable("Breed: " + breedText + " | " + coatText + " | " + facemarkingText + " | " + markingText).withStyle(ChatFormatting.GOLD), true);
                 }
 
                 if (entity instanceof OFrog animal) {
@@ -455,6 +458,18 @@ public class ForgeEvent {
         switch (breed) {
             case 0: return "Flocculent";
             case 1: return "Woolly";
+            default: return "Unknown";
+        }
+    }
+
+    private static String getGoatBreeds(int breed) {
+        switch (breed) {
+            case 0: return "Classic";
+            case 1: return "Meat";
+            case 2: return "Nubian";
+            case 3: return "Warm";
+            case 4: return "Fibrous";
+            case 5: return "Dairy";
             default: return "Unknown";
         }
     }

@@ -40,7 +40,7 @@ side="BOTH"
 [[dependencies.dragnlivestock]]
 modId="dragnpets"
 mandatory=false
-versionRange = "[2.0,)"
+versionRange = "[2.1,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.dragnlivestock]]
@@ -52,7 +52,7 @@ side="BOTH"
 [[dependencies.dragnlivestock]]
 modId="deadlydinos"
 mandatory=false
-versionRange = "[0.1,)"
+versionRange = "[1.0.2,)"
 ordering="NONE"
 side="BOTH"
 

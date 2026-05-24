@@ -36,7 +36,7 @@ public class FarmGoatFaceMarkingLayer extends GeoRenderLayer<FarmGoat> {
     }
 
     public enum Overlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
+        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/none.png")),
         BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/bald.png")),
         BIG_BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/big_blaze.png")),
         BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/face_overlay/blaze.png")),
