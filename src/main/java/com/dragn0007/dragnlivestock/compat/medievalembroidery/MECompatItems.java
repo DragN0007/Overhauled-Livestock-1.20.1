@@ -1,6 +1,5 @@
 package com.dragn0007.dragnlivestock.compat.medievalembroidery;
 
-import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
 import com.dragn0007.dragnlivestock.items.custom.CaparisonItem;
 import com.dragn0007.dragnlivestock.items.custom.RumpStrapItem;
 import net.minecraft.world.item.DyeColor;

@@ -61,43 +61,38 @@ public class ForgeEvent {
                 }
             }
 
-            if (mob.isLeashed() && !(mob.getLeashHolder() instanceof Player)) {
-                if (stack.is(Items.SHEARS)) {
-                    mob.dropLeash(true, !player.isCreative());
-                    mob.setLeashedTo(null, true);
-                }
+            if (mob.isLeashed() && !(mob.getLeashHolder() instanceof Player) && stack.is(Items.SHEARS)) {
+                mob.dropLeash(true, !player.isCreative());
+                mob.setLeashedTo(null, true);
             }
         }
     }
 
     @SubscribeEvent
     public static void onUseMountRegistry(PlayerInteractEvent.EntityInteract event) {
-        if (event.getTarget() instanceof AbstractOMount entity) {
+        ItemStack stack = event.getItemStack();
+        Item item = stack.getItem();
+        if (item instanceof MountRegistryItem && event.getTarget() instanceof AbstractOMount entity) {
             Player player = event.getEntity();
-            ItemStack stack = event.getItemStack();
-            Item item = stack.getItem();
             CompoundTag tag = stack.getOrCreateTag();
-
-            if (item instanceof MountRegistryItem) {
-                if (entity.getOwnerUUID() != player.getUUID()) {
-                    String ownerUUID = stack.getTag().getString("ownerUUID");
-                    if (!ownerUUID.isEmpty()) {
-                        String name = stack.getTag().getString("mount_name");
-                        tag.putString("mount_name", entity.getName().getString());
-                        tag.putBoolean("has_mount", true);
-                        tag.putString("ownerUUID", player.getUUID().toString());
-                        tag.putString("owner_name", player.getName().getString());
-                        entity.setOwnerUUID(player.getUUID());
-                        player.displayClientMessage(Component.translatable(name + " has been transferred to you!").withStyle(ChatFormatting.GOLD), true);
-                        if (entity.getOwner() instanceof Player ownerPlayer)
-                        ownerPlayer.displayClientMessage(Component.translatable(name + " has been transferred!").withStyle(ChatFormatting.GOLD), true);
-                    }
-                } else {
+            if (entity.getOwnerUUID() != player.getUUID()) {
+                String ownerUUID = stack.getTag().getString("ownerUUID");
+                if (!ownerUUID.isEmpty()) {
+                    String name = stack.getTag().getString("mount_name");
                     tag.putString("mount_name", entity.getName().getString());
                     tag.putBoolean("has_mount", true);
                     tag.putString("ownerUUID", player.getUUID().toString());
                     tag.putString("owner_name", player.getName().getString());
+                    entity.setOwnerUUID(player.getUUID());
+                    player.displayClientMessage(Component.translatable(name + " has been transferred to you!").withStyle(ChatFormatting.GOLD), true);
+                    if (entity.getOwner() instanceof Player ownerPlayer)
+                    ownerPlayer.displayClientMessage(Component.translatable(name + " has been transferred!").withStyle(ChatFormatting.GOLD), true);
                 }
+            } else {
+                tag.putString("mount_name", entity.getName().getString());
+                tag.putBoolean("has_mount", true);
+                tag.putString("ownerUUID", player.getUUID().toString());
+                tag.putString("owner_name", player.getName().getString());
             }
         }
     }

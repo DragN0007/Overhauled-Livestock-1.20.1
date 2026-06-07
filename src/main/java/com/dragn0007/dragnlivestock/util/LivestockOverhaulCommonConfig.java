@@ -56,6 +56,11 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_GOAT_BABIES;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_TWINS;
+    public static final ForgeConfigSpec.ConfigValue<Double> HORSE_TWIN_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> COW_TWIN_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> SHEEP_TWIN_CHANCE;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SHEEP_DYE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_DYED_SHEARS;
     public static final ForgeConfigSpec.BooleanValue ROOSTERS_FEND;
@@ -174,6 +179,16 @@ public class LivestockOverhaulCommonConfig {
                 .define("Max Pig Babies", 3);
         MAX_RABBIT_BABIES = BUILDER.comment("Maximum amount of kits a rabbit can have at once. Default is 3.")
                 .define("Max Rabbit Babies", 3);
+        MAX_GOAT_BABIES = BUILDER.comment("Maximum amount of kids a goat can have at once. Default is 3.")
+                .define("Max Goat Babies", 3);
+        ALLOW_TWINS = BUILDER.comment("Should some animals be able to have twins?")
+                .define("Allow Twins", true);
+        HORSE_TWIN_CHANCE = BUILDER.comment("The chance of a horse having twins. Default is Default is 0.01 (1%)")
+                .define("Horse Twins Chance", 0.01);
+        COW_TWIN_CHANCE = BUILDER.comment("The chance of a cow having twins. Default is Default is 0.05 (5%)")
+                .define("Cow Twins Chance", 0.05);
+        SHEEP_TWIN_CHANCE = BUILDER.comment("The chance of a sheep having twins. Default is Default is 0.15 (30%)")
+                .define("Sheep Twins Chance", 0.30);
 
         ALLOW_SHEEP_DYE = BUILDER.comment("Should players be able to dye sheep?")
                 .define("Allow Direct Sheep Dyeing", true);

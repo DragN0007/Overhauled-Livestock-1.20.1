@@ -52,7 +52,7 @@ side="BOTH"
 [[dependencies.dragnlivestock]]
 modId="deadlydinos"
 mandatory=false
-versionRange = "[1.0.2,)"
+versionRange = "[1.0,)"
 ordering="NONE"
 side="BOTH"
 

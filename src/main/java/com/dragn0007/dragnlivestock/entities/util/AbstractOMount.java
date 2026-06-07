@@ -925,7 +925,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         super.tick();
 
         if (this.getDeltaMovement().y < -0.5) { //about 1.5 blocks
-            System.out.println(this.getDeltaMovement().y);
             this.setFalling(true);
         }
     }

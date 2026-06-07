@@ -741,6 +741,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public int tailGrowthTick;
 	public int decompTick;
 	public int trainStatsTick;
+	public int maxBabyAmount = 2;
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
 
 	@Override
 	public void tick() {
@@ -750,7 +753,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			babyCooldown++;
 		}
 
-		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
+		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20 && LivestockOverhaulCommonConfig.ALLOW_TWINS.get()) {
 			babiesBirthed = 0;
 			babyCooldown = 0;
 		}
@@ -1360,10 +1363,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return false;
 	}
 
-	public int maxBabyAmount = 2;
-	public int babiesBirthed = 0;
-	public int babyCooldown = 0;
-
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		AbstractOMount foal;
@@ -1478,7 +1477,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 			babiesBirthed++;
 			if (babiesBirthed < maxBabyAmount && this.isInLove()) {
-				if (random.nextDouble() <= 0.015) {
+				if (random.nextDouble() <= LivestockOverhaulCommonConfig.HORSE_TWIN_CHANCE.get()) {
 					spawnChildFromBreeding(serverLevel, partner);
 					babiesBirthed++;
 				}

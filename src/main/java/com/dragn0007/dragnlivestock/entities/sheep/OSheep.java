@@ -915,7 +915,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		babiesBirthed++;
 		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
-			if (random.nextDouble() <= 0.30) {
+			if (random.nextDouble() <= LivestockOverhaulCommonConfig.SHEEP_TWIN_CHANCE.get()) {
 				spawnChildFromBreeding(serverLevel, partner);
 				babiesBirthed++;
 			}
@@ -987,40 +987,26 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				if (!this.isDyed()) {
 					if (this.getWoolVariant() == 0 && !(this.getOverlayVariant() == 3)) {
 						color = DyeColor.BLACK;
-					}
-
-					if (this.getWoolVariant() == 1 && !(this.getOverlayVariant() == 3)) {
+					} else if (this.getWoolVariant() == 1 && !(this.getOverlayVariant() == 3)) {
 						color = DyeColor.BROWN;
-					}
-
-					if (this.getWoolVariant() == 2 && !(this.getOverlayVariant() == 3)) {
+					} else if (this.getWoolVariant() == 2 && !(this.getOverlayVariant() == 3)) {
 						color = DyeColor.GRAY;
-					}
-
-					if (this.getWoolVariant() == 3 && !(this.getOverlayVariant() == 3)) {
+					} else if (this.getWoolVariant() == 3 && !(this.getOverlayVariant() == 3)) {
 						color = DyeColor.LIGHT_GRAY;
-					}
-
-					if (this.getWoolVariant() == 4 && !(this.getOverlayVariant() == 3)) {
+					} else if (this.getWoolVariant() == 4 && !(this.getOverlayVariant() == 3)) {
 						color = DyeColor.BROWN;
-					}
-
-					if (this.getWoolVariant() == 5 && !(this.getOverlayVariant() == 3)) {
+					} else if (this.getWoolVariant() == 5 && !(this.getOverlayVariant() == 3)) {
 						color = DyeColor.WHITE;
-					}
-
-					if (this.getOverlayVariant() == 1 || this.getOverlayVariant() == 7 || this.getOverlayVariant() == 9 ||
+					} else if (this.getOverlayVariant() == 1 || this.getOverlayVariant() == 7 || this.getOverlayVariant() == 9 ||
 							this.getOverlayVariant() == 10 || this.getOverlayVariant() == 12 || this.getOverlayVariant() == 13 ||
 							this.getOverlayVariant() == 14 || this.getOverlayVariant() == 15) {
 						color = DyeColor.WHITE;
-					}
-
-					if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6 || this.getOverlayVariant() == 6) {
+					} else if (this.getOverlayVariant() == 4 || this.getOverlayVariant() == 5 || this.getOverlayVariant() == 6 || this.getOverlayVariant() == 6) {
 						color = DyeColor.BLACK;
 						this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 1), 0F);
-					}
-
-					if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
+					} else if (this.getOverlayVariant() == 3) { //pure white, only drop white wool
+						color = DyeColor.WHITE;
+					} else {
 						color = DyeColor.WHITE;
 					}
 
@@ -1066,6 +1052,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 						color = DyeColor.WHITE;
 					} else if (this.getWoolDyeVariant() == 16) {
 						color = DyeColor.YELLOW;
+					} else {
+						color = DyeColor.WHITE;
 					}
 				}
 
@@ -1413,7 +1401,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void setWoolColorByBreed() {
-
+		do {
 		if (this.getBreed() == 0) { //gulf coast tend to come with white wool
 			if (random.nextDouble() < 0.05) {
 				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
@@ -1482,6 +1470,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		} while (getWoolVariant() == 6 && this.getBreed() != 6);
 	}
 
 	public void setMarkingByBreed() {

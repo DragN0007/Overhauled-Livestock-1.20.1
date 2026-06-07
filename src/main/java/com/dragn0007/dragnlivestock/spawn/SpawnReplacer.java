@@ -1053,10 +1053,11 @@ public class SpawnReplacer {
                     Entity leashHolder = vanillallama.getLeashHolder();
                     if (leashHolder != null) {
                         oLlama.setLeashedTo(leashHolder, true);
+                        oLlama.setDelayedLeashHolderId(leashHolder.getId());
                     }
 
                     if (vanillallama instanceof TraderLlama) {
-                        oLlama.setChest(true);
+                        oLlama.setChested(true);
                     }
 
                     oLlama.setWooly(random.nextInt(OLlama.Wooly.values().length));
@@ -1071,11 +1072,13 @@ public class SpawnReplacer {
                     event.getLevel().addFreshEntity(oLlama);
                     vanillallama.remove(Entity.RemovalReason.DISCARDED);
 
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oLlama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
-                        if (event.getLevel().isClientSide) {
+                    if (!(vanillallama instanceof TraderLlama)) {
+                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oLlama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                            if (event.getLevel().isClientSide) {
+                                oLlama.remove(Entity.RemovalReason.DISCARDED);
+                            }
                             oLlama.remove(Entity.RemovalReason.DISCARDED);
                         }
-                        oLlama.remove(Entity.RemovalReason.DISCARDED);
                     }
 
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {

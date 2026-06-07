@@ -117,6 +117,11 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	@Override
+	public boolean removeWhenFarAway(double p_27598_) {
+		return !this.isTamed() && this.tickCount > 2400;
+	}
+
+	@Override
 	public boolean canPerformRearing() {
 		return false;
 	}
@@ -683,28 +688,26 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public void dropWoolByColorAndMarking() {
 		if (this.getWooly() == 1) {
 			if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			DyeColor color = null;
-			if (this.getVariant() == 0) {
-				color = DyeColor.BLACK;
-			}
-			if (this.getVariant() == 1 || this.getVariant() == 3) {
-				color = DyeColor.GRAY;
-			}
-			if (this.getVariant() == 2 || this.getVariant() == 6 || this.getVariant() == 7) {
-				color = DyeColor.BROWN;
-			}
-			if (this.getVariant() == 4) {
-				color = DyeColor.LIGHT_GRAY;
-			}
-			if (this.getVariant() == 6 || this.getVariant() == 8) {
-				color = DyeColor.WHITE;
-			}
+				DyeColor color;
+				if (this.getVariant() == 0) {
+					color = DyeColor.BLACK;
+				} else if (this.getVariant() == 1 || this.getVariant() == 3) {
+					color = DyeColor.GRAY;
+				} else if (this.getVariant() == 2 || this.getVariant() == 5 || this.getVariant() == 6 || this.getVariant() == 7) {
+					color = DyeColor.BROWN;
+				} else if (this.getVariant() == 4) {
+					color = DyeColor.LIGHT_GRAY;
+				} else if (this.getVariant() == 6 || this.getVariant() == 8) {
+					color = DyeColor.WHITE;
+				} else {
+					color = DyeColor.WHITE;
+				}
 
-			if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-				this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(color).get(), 2), 0F);
-			} else if (random.nextDouble() > 0.50) {
-				this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(color).get(), 1), 0F);
-			}
+				if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 2), 0F);
+				} else if (random.nextDouble() > 0.50) {
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 1), 0F);
+				}
 			//if vanilla loot
 		} else {
 				if (this.getVariant() == 0) {

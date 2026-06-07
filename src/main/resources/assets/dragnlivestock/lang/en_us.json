@@ -340,12 +340,8 @@
   "item.dragnlivestock.cooked_chevon_loin": "Cooked Chevon Loin",
   "item.dragnlivestock.cooked_chevon_rib": "Cooked Chevon Rib",
 
-  "item.dragnlivestock.caribou": "Raw Caribou",
-  "item.dragnlivestock.caribou_sirloin_steak": "Raw Caribou Sirloin Steak",
-  "item.dragnlivestock.caribou_rib_steak": "Raw Caribou Rib Steak",
-  "item.dragnlivestock.cooked_caribou": "Cooked Caribou",
-  "item.dragnlivestock.cooked_caribou_sirloin_steak": "Cooked Sirloin Steak",
-  "item.dragnlivestock.cooked_caribou_rib_steak": "Cooked Caribou Rib Steak",
+  "item.dragnlivestock.caribou": "Raw Venison",
+  "item.dragnlivestock.cooked_caribou": "Cooked Venison",
 
   "item.dragnlivestock.fish_oil": "Fish Oil",
   "item.dragnlivestock.roe": "Salmon Roe",

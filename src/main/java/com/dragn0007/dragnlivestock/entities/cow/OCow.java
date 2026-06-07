@@ -381,6 +381,9 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public int replenishMilkCounter = 0;
+	public int maxBabyAmount = 2;
+	public int babiesBirthed = 0;
+	public int babyCooldown = 0;
 
 	public void tick() {
 		super.tick();
@@ -885,10 +888,6 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		return false;
 	}
 
-	public int maxBabyAmount = 2;
-	public int babiesBirthed = 0;
-	public int babyCooldown = 0;
-
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		OCow calf;
@@ -976,7 +975,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 		babiesBirthed++;
 		if (babiesBirthed < maxBabyAmount && this.isInLove()) {
-			if (random.nextDouble() <= 0.05) {
+			if (random.nextDouble() <= LivestockOverhaulCommonConfig.COW_TWIN_CHANCE.get()) {
 				spawnChildFromBreeding(serverLevel, partner);
 				babiesBirthed++;
 			}

@@ -1201,7 +1201,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void dropWoolByColorAndMarking() {
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			DyeColor color = null;
+			DyeColor color;
 			if (this.getVariant() == 3 && !(this.getOverlayVariant() == 38)) {
 				color = DyeColor.BLACK;
 			} else if ((this.getVariant() == 0 || this.getVariant() == 1 ||
@@ -1223,11 +1223,11 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 			if (this.getOverlayVariant() == 38) { //pure white, only drop white wool
 				if (random.nextDouble() < 0.20) {
-					this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 3), 0F);
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(DyeColor.WHITE).get(), 3), 0F);
 				} else if (random.nextDouble() > 0.20 && random.nextDouble() < 0.50) {
-					this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 2), 0F);
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(DyeColor.WHITE).get(), 2), 0F);
 				} else if (random.nextDouble() > 0.50) {
-					this.spawnAtLocation(new ItemStack(LOItems.WOOL_DYE.get(DyeColor.WHITE).get(), 1), 0F);
+					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(DyeColor.WHITE).get(), 1), 0F);
 				}
 			} else {
 				if (random.nextDouble() < 0.20) {
