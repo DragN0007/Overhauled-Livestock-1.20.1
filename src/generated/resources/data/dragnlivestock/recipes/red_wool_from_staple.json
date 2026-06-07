@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "dragnlivestock:wool_staples"
+      "item": "dragnlivestock:red_wool_staple"
     },
     {
       "tag": "forge:spindle"

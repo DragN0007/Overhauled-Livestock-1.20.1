@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
@@ -1718,8 +1719,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
 
         for (DyeColor color : DyeColor.values()) {
+            Item woolItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool"));
+            Item carpetItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet"));
+            Item woolStapleItem =  LOItems.WOOL_STAPLES.get(color).get();
+            Item woolDyeItem = LOItems.WOOL_DYE.get(color).get();
+
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MODERN_BLANKETS.get(color).get())
-                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                    .define('A', carpetItem)
                     .pattern("AAA")
                     .pattern("AA ")
                     .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -1727,7 +1733,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_modern_blanket"));
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.RACING_BLANKETS.get(color).get())
-                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                    .define('A', carpetItem)
                     .pattern("AAA")
                     .pattern("A  ")
                     .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -1735,7 +1741,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_racing_blanket"));
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WESTERN_BLANKETS.get(color).get())
-                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                    .define('A', carpetItem)
                     .pattern("AAA")
                     .pattern("AAA")
                     .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
@@ -1743,7 +1749,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_western_blanket"));
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.MEDIEVAL_BLANKETS.get(color).get())
-                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                    .define('A', carpetItem)
                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                     .pattern("AAA")
                     .pattern("BAB")
@@ -1751,8 +1757,8 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                             .of(ItemTags.WOOL_CARPETS).build()))
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_medieval_blanket"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")), 8)
-                    .define('A', LOItems.WOOL_DYE.get(color).get())
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, woolItem, 8)
+                    .define('A', woolDyeItem)
                     .define('B', ItemTags.WOOL)
                     .pattern("BBB")
                     .pattern("BAB")
@@ -1761,8 +1767,8 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                             .of(ItemTags.WOOL).build()))
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_wool_from_wool_dye_8"));
 
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")), 2)
-                    .requires(LOTags.Items.WOOL_STAPLES)
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, woolItem, 2)
+                    .requires(woolStapleItem)
                     .requires(LOTags.Items.SPINDLE)
                     .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(LOTags.Items.WOOL_STAPLES)
@@ -1771,14 +1777,14 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.WOOL_STAPLES.get(color).get())
                     .requires(LOTags.Items.WOOL_STAPLES)
-                    .requires(LOItems.WOOL_DYE.get(color).get())
+                    .requires(woolDyeItem)
                     .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(LOTags.Items.WOOL_STAPLES)
                             .build()))
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_wool_staple"));
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.WOOL_STAPLES.get(color).get(), 8)
-                    .define('A', LOItems.WOOL_DYE.get(color).get())
+                    .define('A', woolDyeItem)
                     .define('B', LOTags.Items.WOOL_STAPLES)
                     .pattern("BBB")
                     .pattern("BAB")
@@ -1805,7 +1811,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_brand_tag"));
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.GRUB_SWEATERS.get(color).get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                    .define('B', carpetItem)
                     .pattern("BB")
                     .unlockedBy("has_carpet", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL_CARPETS).build()))
@@ -1813,7 +1819,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_SADDLES.get(color).get())
                     .define('A', Items.SADDLE)
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1821,7 +1827,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_LIGHT_SADDLES.get(color).get())
                     .define('A', LOItems.LIGHT_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1829,7 +1835,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_HEAVY_SADDLES.get(color).get())
                     .define('A', LOItems.HEAVY_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1840,7 +1846,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.SOLID_CAPARISON_CAPES.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .pattern("AA")
                                     .pattern("BA")
@@ -1851,7 +1857,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.SOLID_CAPARISON_FULLS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .pattern("  A")
                                     .pattern("AAA")
@@ -1863,7 +1869,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.SOLID_CAPARISON_HALFS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .pattern("AA ")
                                     .pattern("BAB")
@@ -1874,7 +1880,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.SOLID_CAPARISON_SHOULDERS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .pattern(" A")
                                     .pattern("AA")
@@ -1884,11 +1890,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         }
 
         for (DyeColor color : DyeColor.values()) {
+            Item woolItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool"));
+            Item carpetItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet"));
             if (color == DyeColor.BLACK)
                 continue;
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_SADDLES.get(color).get())
                     .define('A', LOItems.BLACK_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1896,7 +1904,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_LIGHT_SADDLES.get(color).get())
                     .define('A', LOItems.BLACK_LIGHT_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1904,7 +1912,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_HEAVY_SADDLES.get(color).get())
                     .define('A', LOItems.BLACK_HEAVY_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1915,7 +1923,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CHECKER_CAPARISON_CAPES.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.BLACK_CARPET)
                                     .pattern("CA")
@@ -1927,7 +1935,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CHECKER_CAPARISON_FULLS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.BLACK_CARPET)
                                     .pattern("  C")
@@ -1940,7 +1948,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CHECKER_CAPARISON_HALFS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.BLACK_CARPET)
                                     .pattern("AC ")
@@ -1952,7 +1960,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.BLACK_CHECKER_CAPARISON_SHOULDERS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.BLACK_CARPET)
                                     .pattern(" C")
@@ -1963,11 +1971,13 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
         }
 
         for (DyeColor color : DyeColor.values()) {
+            Item woolItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool"));
+            Item carpetItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet"));
             if (color == DyeColor.WHITE)
                 continue;
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_SADDLES.get(color).get())
                     .define('A', LOItems.WHITE_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1975,7 +1985,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_LIGHT_SADDLES.get(color).get())
                     .define('A', LOItems.WHITE_LIGHT_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1983,7 +1993,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_HEAVY_SADDLES.get(color).get())
                     .define('A', LOItems.WHITE_HEAVY_SADDLE.get())
-                    .define('B', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_wool")))
+                    .define('B', woolItem)
                     .pattern("AB")
                     .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(ItemTags.WOOL).build()))
@@ -1994,7 +2004,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CHECKER_CAPARISON_CAPES.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.WHITE_CARPET)
                                     .pattern("CA")
@@ -2006,7 +2016,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CHECKER_CAPARISON_FULLS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.WHITE_CARPET)
                                     .pattern("  C")
@@ -2019,7 +2029,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CHECKER_CAPARISON_HALFS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.WHITE_CARPET)
                                     .pattern("AC ")
@@ -2031,7 +2041,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                     .addCondition(new ModLoadedCondition("medievalembroidery"))
                     .addRecipe(
                             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, MECompatItems.WHITE_CHECKER_CAPARISON_SHOULDERS.get(color).get())
-                                    .define('A', BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet")))
+                                    .define('A', carpetItem)
                                     .define('B', LOTags.Items.GOLD_METAL_NUGGETS)
                                     .define('C', Items.WHITE_CARPET)
                                     .pattern(" C")
