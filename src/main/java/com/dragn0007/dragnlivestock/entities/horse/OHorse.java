@@ -101,11 +101,11 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.horse");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 
@@ -1928,7 +1928,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			} else if (random.nextDouble() > 0.20) {
 				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
 				int randomIndex = new Random().nextInt(variants.length);
-				this.setVariant(variants[randomIndex]);
+				this.setOverlayVariant(variants[randomIndex]);
 			}
 		}
 

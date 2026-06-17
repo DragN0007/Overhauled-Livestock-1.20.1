@@ -72,11 +72,11 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.frog");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 

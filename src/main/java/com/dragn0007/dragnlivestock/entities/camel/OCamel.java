@@ -317,11 +317,11 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.camel");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 

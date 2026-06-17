@@ -13,6 +13,7 @@ import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -70,6 +71,11 @@ public class Unicorn extends OHorse implements GeoEntity {
 		} else {
 			return LOOT_TABLE;
 		}
+	}
+
+	@Override
+	public Component getTypeName() {
+		return Component.translatable("entity.dragnlivestock.unicorn");
 	}
 
 	@Override

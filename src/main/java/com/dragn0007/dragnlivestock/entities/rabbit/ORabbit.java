@@ -79,11 +79,11 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	}
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.rabbit");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 

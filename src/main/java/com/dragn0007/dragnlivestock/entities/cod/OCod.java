@@ -82,11 +82,11 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 	}
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.cod");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 

@@ -81,11 +81,11 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.mule");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 

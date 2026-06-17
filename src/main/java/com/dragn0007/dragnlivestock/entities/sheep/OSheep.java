@@ -92,11 +92,11 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_SHEEP_EATS);
 
 	@Override
-	public Component getName() {
+	public Component getTypeName() {
 		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
 			return Component.translatable("entity.minecraft.sheep");
 		} else {
-			return super.getName();
+			return super.getTypeName();
 		}
 	}
 
