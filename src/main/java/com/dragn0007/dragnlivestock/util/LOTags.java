@@ -131,7 +131,14 @@ public class LOTags {
     }
 
     public static class Blocks {
-
+        public static final TagKey<Block> GRASS_BLOCKS = forgeTag("grass_blocks");
+        public static final TagKey<Block> FOLIAGE = forgeTag("foliage");
+        public static final TagKey<Block> TWIGS = forgeTag("twigs");
+        public static final TagKey<Block> LOOSE_ROCKS = forgeTag("loose_rocks");
+        public static final TagKey<Block> LOAM = forgeTag("loam");
+        public static final TagKey<Block> SILT = forgeTag("silt");
+        public static final TagKey<Block> SILTY_LOAM = forgeTag("silty_loam");
+        public static final TagKey<Block> SANDY_LOAM = forgeTag("sandy_loam");
         public static final TagKey<Block> SAND = forgeTag("sand");
         public static final TagKey<Block> DIRT = forgeTag("dirt");
         public static final TagKey<Block> RABBIT_HUTCHES = forgeTag("rabbit_hutches");

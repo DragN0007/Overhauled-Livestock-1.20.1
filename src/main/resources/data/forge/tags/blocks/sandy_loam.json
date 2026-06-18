@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+   {
+      "id": "tfc:dirt/sandy_loam",
+      "required": false
+   },{
+      "id": "tfc:grass/sandy_loam",
+      "required": false
+    }
+  ]
+}

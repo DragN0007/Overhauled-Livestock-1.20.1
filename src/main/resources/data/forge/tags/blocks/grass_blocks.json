@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass_block",
+
+    {
+      "id": "#tfc:grass",
+      "required": false
+    },{
+      "id": "#forge:grass",
+      "required": false
+    }
+  ]
+}

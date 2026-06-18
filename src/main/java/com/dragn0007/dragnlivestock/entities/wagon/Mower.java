@@ -114,16 +114,15 @@ public class Mower extends AbstractWagon {
     protected void tillNewPath(BlockPos pos) {
         pos = pos.below();
         BlockState blockState = this.level().getBlockState(pos);
-        if (blockState.is(Blocks.DIRT) || blockState.is(Blocks.MYCELIUM) || blockState.is(Blocks.GRASS_BLOCK) || blockState.is(Blocks.PODZOL)) {
+        if (blockState.is(LOTags.Blocks.GRASS_BLOCKS) || blockState.is(BlockTags.DIRT)) {
             this.level().setBlockAndUpdate(pos, Blocks.DIRT_PATH.defaultBlockState());
         }
     }
 
     protected void destroyFoliage(BlockPos pos) {
         BlockState blockState = this.level().getBlockState(pos);
-        if (blockState.is(Blocks.GRASS) || blockState.is(Blocks.TALL_GRASS) ||
-                blockState.is(Blocks.DEAD_BUSH) || blockState.is(Blocks.FERN) || blockState.is(Blocks.LARGE_FERN)
-                || blockState.is(BlockTags.FLOWERS) || blockState.is(BlockTags.SNOW)) {
+        if (blockState.is(LOTags.Blocks.FOLIAGE) || blockState.is(LOTags.Blocks.TWIGS) || blockState.is(LOTags.Blocks.LOOSE_ROCKS)
+                || blockState.is(BlockTags.SNOW)) {
             blockState.getBlock().getDrops(blockState, (ServerLevel) level(), pos, null).forEach
                     (stack -> level().addFreshEntity(new ItemEntity(level(),
                             pos.getX() + 0.5,

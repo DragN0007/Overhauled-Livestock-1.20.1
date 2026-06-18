@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 
@@ -167,8 +168,10 @@ public class Plow extends AbstractInventoryWagon {
     protected void tillNewFarmland(BlockPos pos) {
         pos = pos.below();
         BlockState blockState = this.level().getBlockState(pos);
-        if (blockState.is(Blocks.DIRT) || blockState.is(Blocks.MYCELIUM) || blockState.is(Blocks.GRASS_BLOCK) || blockState.is(Blocks.PODZOL)) {
-            this.level().setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
+        if (!ModList.get().isLoaded("tfc")) {
+            if (blockState.is(LOTags.Blocks.GRASS_BLOCKS) || blockState.is(BlockTags.DIRT)) {
+                this.level().setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
+            }
         }
     }
 

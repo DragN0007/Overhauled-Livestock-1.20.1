@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#tfc:loose_rocks",
+      "required": false
+    }
+  ]
+}
