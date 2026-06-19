@@ -23,17 +23,17 @@
     },
 
     {
-      "id": "#tfc:grains",
+      "id": "#tfc:foods/grains",
       "required": false
     },
 
     {
-      "id": "#tfc:fruits",
+      "id": "#tfc:foods/fruits",
       "required": false
     },
 
     {
-      "id": "#tfc:vegetables",
+      "id": "#tfc:foods/vegetables",
       "required": false
     }
   ]
