@@ -6,7 +6,7 @@
       "item": "minecraft:stick"
     },
     "B": {
-      "tag": "dragnlivestock:crafting_metal_nuggets"
+      "item": "minecraft:iron_nugget"
     }
   },
   "pattern": [

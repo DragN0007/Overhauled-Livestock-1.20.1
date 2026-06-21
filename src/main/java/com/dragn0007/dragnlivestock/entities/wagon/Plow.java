@@ -8,10 +8,6 @@ import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.soil.SoilBlockType;
-import net.dries007.tfc.common.items.TFCItems;
-import net.dries007.tfc.util.Metal;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -181,9 +177,8 @@ public class Plow extends AbstractInventoryWagon {
 
     protected void destroyFoliage(BlockPos pos) {
         BlockState blockState = this.level().getBlockState(pos);
-        if (blockState.is(Blocks.GRASS) || blockState.is(Blocks.TALL_GRASS) ||
-                blockState.is(Blocks.DEAD_BUSH) || blockState.is(Blocks.FERN) || blockState.is(Blocks.LARGE_FERN)
-                || blockState.is(BlockTags.FLOWERS) || blockState.is(BlockTags.SNOW)) {
+        if (blockState.is(LOTags.Blocks.FOLIAGE) || blockState.is(LOTags.Blocks.TWIGS) ||
+                blockState.is(LOTags.Blocks.LOOSE_ROCKS) || blockState.is(BlockTags.SNOW)) {
             blockState.getBlock().getDrops(blockState, (ServerLevel) level(), pos, null).forEach
                     (stack -> level().addFreshEntity(new ItemEntity(level(),
                             pos.getX() + 0.5,

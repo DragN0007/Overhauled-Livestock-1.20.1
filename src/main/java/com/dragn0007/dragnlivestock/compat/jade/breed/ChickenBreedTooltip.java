@@ -23,20 +23,20 @@ public class ChickenBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Leghorn";
-            case 1: return "Ameraucana";
-            case 2: return "Cream Legbar";
-            case 3: return "Marans";
-            case 4: return "Olive Egger";
-            case 5: return "Sussex Silkie";
-            case 6: return "Ayam Cemani";
-            case 7: return "Orpington";
-            case 8: return "Polish";
-            case 9: return "Wyandotte";
-            case 10: return "Brahma";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Leghorn";
+            case 1 -> "Ameraucana";
+            case 2 -> "Cream Legbar";
+            case 3 -> "Marans";
+            case 4 -> "Olive Egger";
+            case 5 -> "Sussex Silkie";
+            case 6 -> "Ayam Cemani";
+            case 7 -> "Orpington";
+            case 8 -> "Polish";
+            case 9 -> "Wyandotte";
+            case 10 -> "Brahma";
+            default -> "Unknown";
+        };
     }
 
     @Override

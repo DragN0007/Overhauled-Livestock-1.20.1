@@ -23,11 +23,11 @@ public class CamelBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Bactrian";
-            case 1: return "Dromedary";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Bactrian";
+            case 1 -> "Dromedary";
+            default -> "Unknown";
+        };
     }
 
     @Override

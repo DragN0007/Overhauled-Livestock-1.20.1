@@ -23,6 +23,8 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
         CoreGeoBone head = getAnimationProcessor().getBone("head");
         CoreGeoBone left_ear = getAnimationProcessor().getBone("left_ear");
         CoreGeoBone right_ear = getAnimationProcessor().getBone("right_ear");
+        CoreGeoBone tail = getAnimationProcessor().getBone("tail");
+        CoreGeoBone tail2 = getAnimationProcessor().getBone("tail2");
 
         if (neck != null) {
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
@@ -36,6 +38,14 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
             head.setRotX(head.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
             float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
             head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
+        }
+
+        if (animatable.getBreed() == 8) {
+            tail.setRotZ(-1);
+            tail2.setRotZ(1);
+        } else {
+            tail.setRotZ(0);
+            tail2.setRotZ(0);
         }
 
         if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {

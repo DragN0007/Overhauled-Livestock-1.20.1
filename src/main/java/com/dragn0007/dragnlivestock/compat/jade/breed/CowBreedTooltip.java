@@ -23,21 +23,21 @@ public class CowBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Angus";
-            case 1: return "Longhorn";
-            case 2: return "Brahman";
-            case 3: return "Mini";
-            case 4: return "Watusi";
-            case 5: return "Corriente";
-            case 6: return "Holstein";
-            case 7: return "Jersey";
-            case 8: return "Hereford";
-            case 9: return "Highland";
-            case 10: return "Ox";
-            case 11: return "Spanish Fighting";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Angus";
+            case 1 -> "Longhorn";
+            case 2 -> "Brahman";
+            case 3 -> "Mini";
+            case 4 -> "Watusi";
+            case 5 -> "Corriente";
+            case 6 -> "Holstein";
+            case 7 -> "Jersey";
+            case 8 -> "Hereford";
+            case 9 -> "Highland";
+            case 10 -> "Ox";
+            case 11 -> "Spanish Fighting";
+            default -> "Unknown";
+        };
     }
 
     @Override

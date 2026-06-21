@@ -361,7 +361,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.SPINDLE.get())
                 .define('A', Items.STICK)
-                .define('B', LOTags.Items.CRAFTING_METAL_NUGGETS)
+                .define('B', Items.IRON_NUGGET)
                 .pattern("BAB")
                 .pattern(" A ")
                 .pattern(" A ")
@@ -1769,7 +1769,7 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, woolItem, 2)
                     .requires(woolStapleItem)
-                    .requires(LOTags.Items.SPINDLE)
+                    .requires(LOItems.SPINDLE.get())
                     .unlockedBy("has_staple", inventoryTrigger(ItemPredicate.Builder.item()
                             .of(LOTags.Items.WOOL_STAPLES)
                             .build()))

@@ -969,7 +969,7 @@ public class SpawnReplacer {
                             if (random.nextDouble() < 0.20) {
                                 oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
                             } else {
-                                int[] variants = {0, 5, 6};
+                                int[] variants = {0, 5, 6, 8};
                                 int randomIndex = new Random().nextInt(variants.length);
                                 oSheep.setBreed(variants[randomIndex]);
                             }

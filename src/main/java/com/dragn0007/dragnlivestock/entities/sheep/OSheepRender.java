@@ -35,6 +35,12 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
             model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
         }
 
+        if (entity.getBreed() == 8) {
+            model.getBone("tail2").ifPresent(b -> b.setHidden(false));
+        } else {
+            model.getBone("tail2").ifPresent(b -> b.setHidden(true));
+        }
+
         if (entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
             model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));

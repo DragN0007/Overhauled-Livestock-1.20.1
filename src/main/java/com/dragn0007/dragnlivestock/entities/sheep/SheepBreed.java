@@ -10,7 +10,8 @@ public class SheepBreed {
         RACKA,
         CALIFORNIA_RED,
         HAIR,
-        BUNNY;
+        BUNNY,
+        FAT_TAILED;
 
         public static Breed breedFromOrdinal(int ordinal) {
             return Breed.values()[ordinal % Breed.values().length];

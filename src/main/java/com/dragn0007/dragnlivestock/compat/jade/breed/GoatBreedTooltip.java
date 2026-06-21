@@ -23,15 +23,15 @@ public class GoatBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Classic";
-            case 1: return "Meat";
-            case 2: return "Nubian";
-            case 3: return "Warm";
-            case 4: return "Fibrous";
-            case 5: return "Dairy";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Classic";
+            case 1 -> "Meat";
+            case 2 -> "Nubian";
+            case 3 -> "Warm";
+            case 4 -> "Fibrous";
+            case 5 -> "Dairy";
+            default -> "Unknown";
+        };
     }
 
     @Override

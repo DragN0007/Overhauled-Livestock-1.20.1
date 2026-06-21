@@ -23,12 +23,12 @@ public class UnicornSpeciesTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Overworld";
-            case 1: return "Nether";
-            case 2: return "End";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Overworld";
+            case 1 -> "Nether";
+            case 2 -> "End";
+            default -> "Unknown";
+        };
     }
 
     @Override

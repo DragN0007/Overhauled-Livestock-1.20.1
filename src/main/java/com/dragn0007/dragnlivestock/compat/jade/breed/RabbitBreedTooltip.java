@@ -23,19 +23,19 @@ public class RabbitBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Hare";
-            case 1: return "Meat";
-            case 2: return "Dwarf";
-            case 3: return "Lop";
-            case 4: return "Angora";
-            case 5: return "Arch";
-            case 6: return "Checkered Giant";
-            case 7: return "Lionhead";
-            case 8: return "Giant";
-            case 9: return "Jackalope";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Hare";
+            case 1 -> "Meat";
+            case 2 -> "Dwarf";
+            case 3 -> "Lop";
+            case 4 -> "Angora";
+            case 5 -> "Arch";
+            case 6 -> "Checkered Giant";
+            case 7 -> "Lionhead";
+            case 8 -> "Giant";
+            case 9 -> "Jackalope";
+            default -> "Unknown";
+        };
     }
 
     @Override

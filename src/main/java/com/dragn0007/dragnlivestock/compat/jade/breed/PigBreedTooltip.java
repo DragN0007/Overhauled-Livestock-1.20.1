@@ -23,15 +23,15 @@ public class PigBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Yorkshire";
-            case 1: return "Pot-Belly";
-            case 2: return "Guinea Hog";
-            case 3: return "Kunekune";
-            case 4: return "Poland-China";
-            case 5: return "Berkshire";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Yorkshire";
+            case 1 -> "Pot-Belly";
+            case 2 -> "Guinea Hog";
+            case 3 -> "Kunekune";
+            case 4 -> "Poland-China";
+            case 5 -> "Berkshire";
+            default -> "Unknown";
+        };
     }
 
     @Override

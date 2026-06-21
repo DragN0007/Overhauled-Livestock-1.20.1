@@ -15,7 +15,7 @@ public class GroundTieGoal extends Goal {
    }
 
    public boolean canContinueToUse() {
-      return this.mob.isSaddled() && !this.mob.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.mob.isLeashed();
+      return this.mob.isSaddled() && !this.mob.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get();
    }
 
    public boolean canUse() {
@@ -25,7 +25,7 @@ public class GroundTieGoal extends Goal {
          return false;
       } else if (!this.mob.onGround()) {
          return false;
-      } else if (this.mob.isSaddled() && !this.mob.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get() || this.mob.isLeashed()) {
+      } else if (this.mob.isSaddled() && !this.mob.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
          return true;
       } else {
          return false;

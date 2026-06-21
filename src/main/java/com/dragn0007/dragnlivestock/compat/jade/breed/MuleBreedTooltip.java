@@ -23,12 +23,12 @@ public class MuleBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Stock";
-            case 1: return "Mini";
-            case 2: return "Draft";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Stock";
+            case 1 -> "Mini";
+            case 2 -> "Draft";
+            default -> "Unknown";
+        };
     }
 
     @Override

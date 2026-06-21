@@ -23,32 +23,32 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Mustang";
-            case 1: return "Ardennes";
-            case 2: return "Kladruber";
-            case 3: return "Fjord";
-            case 4: return "Thoroughbred";
-            case 5: return "Friesian";
-            case 6: return "Irish Cob";
-            case 7: return "American Quarter";
-            case 8: return "Percheron";
-            case 9: return "Selle Francais";
-            case 10: return "Marwari";
-            case 11: return "Mongolian";
-            case 12: return "Shire";
-            case 13: return "Akhal-Teke";
-            case 14: return "American Soldier";
-            case 15: return "Welsh Pony";
-            case 16: return "Connemara";
-            case 17: return "Haflinger";
-            case 18: return "Oldenburger";
-            case 19: return "Shetland";
-            case 20: return "Standardbred";
-            case 21: return "Trakehner";
-            case 22: return "Boulonnais";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Mustang";
+            case 1 -> "Ardennes";
+            case 2 -> "Kladruber";
+            case 3 -> "Fjord";
+            case 4 -> "Thoroughbred";
+            case 5 -> "Friesian";
+            case 6 -> "Irish Cob";
+            case 7 -> "American Quarter";
+            case 8 -> "Percheron";
+            case 9 -> "Selle Francais";
+            case 10 -> "Marwari";
+            case 11 -> "Mongolian";
+            case 12 -> "Shire";
+            case 13 -> "Akhal-Teke";
+            case 14 -> "American Soldier";
+            case 15 -> "Welsh Pony";
+            case 16 -> "Connemara";
+            case 17 -> "Haflinger";
+            case 18 -> "Oldenburger";
+            case 19 -> "Shetland";
+            case 20 -> "Standardbred";
+            case 21 -> "Trakehner";
+            case 22 -> "Boulonnais";
+            default -> "Unknown";
+        };
     }
 
     @Override

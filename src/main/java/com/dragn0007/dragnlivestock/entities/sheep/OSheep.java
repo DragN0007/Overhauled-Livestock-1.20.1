@@ -1398,6 +1398,16 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
+		if (this.getBreed() == 8) { //fat-tailed tend to come with black, tan or white skin
+			if (random.nextDouble() < 0.05) {
+				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {0, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
 	}
 
 	public void setWoolColorByBreed() {
@@ -1467,6 +1477,16 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				this.setWoolVariant(5);
+			}
+		}
+
+		if (this.getBreed() == 8) { //fat-tailed tend to come with white, tan or brown wool
+			if (random.nextDouble() < 0.05) {
+				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05) {
+				int[] variants = {1, 4, 5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setWoolVariant(variants[randomIndex]);
 			}
 		}
 
@@ -1550,6 +1570,18 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 
 		if (this.getBreed() == 7) { //bunnies don't often come with markings, and if they do, theyre small
+			if (random.nextDouble() < 0.05) {
+				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
+				int[] variants = {2, 8};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.20) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 8) { //fat-tailed don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
@@ -1705,6 +1737,14 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.02) {
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.02 && random.nextDouble() < 0.15) {
+				this.setHornVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 5) { //fat-tailed dont often come with horns
+			if (random.nextDouble() < 0.07) {
+				this.setHornVariant(random.nextInt(BreedHorns.values().length));
+			} else if (random.nextDouble() > 0.07 && random.nextDouble() < 0.15) {
 				this.setHornVariant(0);
 			}
 		}

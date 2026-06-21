@@ -23,11 +23,11 @@ public class LlamaBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Flocculent";
-            case 1: return "Woolly";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Flocculent";
+            case 1 -> "Woolly";
+            default -> "Unknown";
+        };
     }
 
     @Override

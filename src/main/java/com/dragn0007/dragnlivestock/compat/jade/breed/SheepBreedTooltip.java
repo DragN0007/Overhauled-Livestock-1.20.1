@@ -23,17 +23,18 @@ public class SheepBreedTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Gulf Coast";
-            case 1: return "Norfolk";
-            case 2: return "Dorset";
-            case 3: return "Jacob";
-            case 4: return "Racka";
-            case 5: return "California Red";
-            case 6: return "Hair";
-            case 7: return "Border Leicester";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Gulf Coast";
+            case 1 -> "Norfolk";
+            case 2 -> "Dorset";
+            case 3 -> "Jacob";
+            case 4 -> "Racka";
+            case 5 -> "California Red";
+            case 6 -> "Hair";
+            case 7 -> "Border Leicester";
+            case 8 -> "Fat-Tailed";
+            default -> "Unknown";
+        };
     }
 
     @Override

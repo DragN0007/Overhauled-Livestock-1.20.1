@@ -117,6 +117,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         ) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty();
     }
 
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+    }
+
     public void tickRidden(Player player, Vec3 vec3) {
         Vec2 vec2 = this.getRiddenRotation(player);
 

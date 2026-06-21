@@ -23,17 +23,17 @@ public class BeeSpeciesTooltip implements IEntityComponentProvider {
     }
 
     private String getBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Bumble Bee";
-            case 1: return "Ashy Mining Bee";
-            case 2: return "Garden Bee";
-            case 3: return "Honey Bee";
-            case 4: return "Red Mason Bee";
-            case 5: return "Red-Tailed Bee";
-            case 6: return "Tawny Mining Bee";
-            case 7: return "Tree Bumble Bee";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Bumble Bee";
+            case 1 -> "Ashy Mining Bee";
+            case 2 -> "Garden Bee";
+            case 3 -> "Honey Bee";
+            case 4 -> "Red Mason Bee";
+            case 5 -> "Red-Tailed Bee";
+            case 6 -> "Tawny Mining Bee";
+            case 7 -> "Tree Bumble Bee";
+            default -> "Unknown";
+        };
     }
 
     @Override

@@ -394,67 +394,68 @@ public class ForgeEvent {
     }
 
     private static String getCowBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Angus";
-            case 1: return "Longhorn";
-            case 2: return "Brahman";
-            case 3: return "Mini";
-            case 4: return "Watusi";
-            case 5: return "Corriente";
-            case 6: return "Holstein";
-            case 7: return "Jersey";
-            case 8: return "Hereford";
-            case 9: return "Highland";
-            case 10: return "Ox";
-            case 11: return "Spanish Fighting";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Angus";
+            case 1 -> "Longhorn";
+            case 2 -> "Brahman";
+            case 3 -> "Mini";
+            case 4 -> "Watusi";
+            case 5 -> "Corriente";
+            case 6 -> "Holstein";
+            case 7 -> "Jersey";
+            case 8 -> "Hereford";
+            case 9 -> "Highland";
+            case 10 -> "Ox";
+            case 11 -> "Spanish Fighting";
+            default -> "Unknown";
+        };
     }
 
     private static String getCowHorns(int horns) {
-        switch (horns) {
-            case 0: return "Polled";
-            case 1, 8: return "Medium";
-            case 2, 4, 3: return "Long";
-            case 5, 6: return "Thick";
-            case 7, 10: return "Small";
-            case 9: return "Zebu";
-            default: return "Unknown";
-        }
+        return switch (horns) {
+            case 0 -> "Polled";
+            case 1, 8 -> "Medium";
+            case 2, 4, 3 -> "Long";
+            case 5, 6 -> "Thick";
+            case 7, 10 -> "Small";
+            case 9 -> "Zebu";
+            default -> "Unknown";
+        };
     }
 
     private static String getPigBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Yorkshire";
-            case 1: return "Pot-Belly";
-            case 2: return "Guinea Hog";
-            case 3: return "Kunekune";
-            case 4: return "Poland-China";
-            case 5: return "Berkshire";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Yorkshire";
+            case 1 -> "Pot-Belly";
+            case 2 -> "Guinea Hog";
+            case 3 -> "Kunekune";
+            case 4 -> "Poland-China";
+            case 5 -> "Berkshire";
+            default -> "Unknown";
+        };
     }
 
     private static String getSheepBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Gulf Coast";
-            case 1: return "Norfolk";
-            case 2: return "Dorset";
-            case 3: return "Jacob";
-            case 4: return "Racka";
-            case 5: return "California Red";
-            case 6: return "Hair";
-            case 7: return "Border Leicester";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Gulf Coast";
+            case 1 -> "Norfolk";
+            case 2 -> "Dorset";
+            case 3 -> "Jacob";
+            case 4 -> "Racka";
+            case 5 -> "California Red";
+            case 6 -> "Hair";
+            case 7 -> "Border Leicester";
+            case 8 -> "Fat-Tailed";
+            default -> "Unknown";
+        };
     }
 
     private static String getLlamaBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Flocculent";
-            case 1: return "Woolly";
-            default: return "Unknown";
-        }
+        return switch (breed) {
+            case 0 -> "Flocculent";
+            case 1 -> "Woolly";
+            default -> "Unknown";
+        };
     }
 
     private static String getGoatBreeds(int breed) {
