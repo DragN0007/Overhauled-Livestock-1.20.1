@@ -1,4 +1,5 @@
 DragN's Livestock Overhaul!
+if (DragN0007().wasHere) { continue };
 Watch out, the Headless Horseman might be lurking...
 Mooblooms... so colorful!
 Did you know?: Horses can't throw up due to the way their esophagus is made!

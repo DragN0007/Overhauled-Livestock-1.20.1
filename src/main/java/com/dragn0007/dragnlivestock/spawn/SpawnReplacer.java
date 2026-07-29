@@ -52,7 +52,7 @@ import com.dragn0007.dragnlivestock.entities.goat.OGoatMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseDecompLayer;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseBodyLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
@@ -70,7 +70,10 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitModel;
 import com.dragn0007.dragnlivestock.entities.rabbit.RabbitBreed;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmon;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonModel;
-import com.dragn0007.dragnlivestock.entities.sheep.*;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
+import com.dragn0007.dragnlivestock.entities.sheep.OSheepRenderLayer;
+import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornHornLayer;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornModel;
@@ -1000,8 +1003,8 @@ public class SpawnReplacer {
                         oSheep.setHornsByBreed();
                     } else {
                         oSheep.setVariant(random.nextInt(OSheepModel.Variant.values().length));
-                        oSheep.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
-                        oSheep.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+                        oSheep.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
+                        oSheep.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
                         oSheep.setHornVariant(random.nextInt(OSheep.BreedHorns.values().length));
                     }
 
@@ -1334,7 +1337,7 @@ public class SpawnReplacer {
                         oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
-                        oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
+                        oHorse.setDecompVariant(random.nextInt(OHorseBodyLayer.UndeadStage.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
@@ -1416,7 +1419,7 @@ public class SpawnReplacer {
                         oHorse.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         oHorse.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         oHorse.setFeathering(random.nextInt(OHorse.Feathering.values().length));
-                        oHorse.setDecompVariant(random.nextInt(OHorseDecompLayer.UndeadStage.values().length));
+                        oHorse.setDecompVariant(random.nextInt(OHorseBodyLayer.UndeadStage.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {

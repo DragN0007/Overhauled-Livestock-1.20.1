@@ -11,9 +11,7 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
     public OSheepRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OSheepModel());
-        this.addRenderLayer(new OSheepBrandTagLayer(this));
-        this.addRenderLayer(new OSheepWoolLayer(this));
-        this.addRenderLayer(new OSheepMarkingLayer(this));
+        this.addRenderLayer(new OSheepRenderLayer(this));
     }
 
     @Override

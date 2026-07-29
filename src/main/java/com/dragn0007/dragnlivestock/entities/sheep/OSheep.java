@@ -513,7 +513,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public ResourceLocation getOverlayLocation() {return OSheepMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public ResourceLocation getOverlayLocation() {return OSheepRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
@@ -524,9 +524,9 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public static final EntityDataAccessor<Integer> WOOL_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getWoolLocation() {
 		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-			return OSheepWoolLayer.Overlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
+			return OSheepRenderLayer.WoolColor.overlayFromOrdinal(getWoolVariant()).resourceLocation;
 		} else {
-			return OSheepWoolLayer.SOverlay.overlayFromOrdinal(getWoolVariant()).resourceLocation;
+			return OSheepRenderLayer.SWoolColor.overlayFromOrdinal(getWoolVariant()).resourceLocation;
 		}
 	}
 	public int getWoolVariant() {
@@ -539,9 +539,9 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public static final EntityDataAccessor<Integer> WOOL_DYE_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getWoolDyeLocation() {
 		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-			return OSheepWoolLayer.DyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
+			return OSheepRenderLayer.DyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
 		} else {
-			return OSheepWoolLayer.SDyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
+			return OSheepRenderLayer.SDyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
 		}
 	}
 	public int getWoolDyeVariant() {
@@ -741,8 +741,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			this.setHornsByBreed();
 		} else {
 			this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
-			this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
+			this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			this.setHornVariant(random.nextInt(BreedHorns.values().length));
 		}
 
@@ -855,7 +855,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
-				overlay = this.random.nextInt(OSheepMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(OSheepRenderLayer.Marking.values().length);
 			}
 			lamb.setOverlayVariant(overlay);
 		} else if (random.nextDouble() < 0.5) {
@@ -870,7 +870,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			} else if (woolColorChance < (100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get())) {
 				woolColor = partner.getWoolVariant();
 			} else {
-				woolColor = this.random.nextInt(OSheepWoolLayer.Overlay.values().length);
+				woolColor = this.random.nextInt(OSheepRenderLayer.WoolColor.values().length);
 			}
 			lamb.setWoolVariant(woolColor);
 		} else if (random.nextDouble() < 0.5) {
@@ -1414,7 +1414,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		do {
 		if (this.getBreed() == 0) { //gulf coast tend to come with white wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				this.setWoolVariant(5);
 			}
@@ -1422,7 +1422,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 1) { //norfolk tend to come with white wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				this.setWoolVariant(5);
 			}
@@ -1430,7 +1430,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 2) { //dorset tend to come with white, tan or brown wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {1, 4, 5};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1440,7 +1440,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 3) { //jacob tend to come with black, white, tan or brown wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {0, 1, 4, 5};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1450,7 +1450,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 4) { //racka tend to come with black, white, or tan wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {0, 4, 5};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1460,7 +1460,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 5) { //california red tend to come with brown, white, or tan wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {1, 4, 5};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1474,7 +1474,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 7) { //bunnies tend to come with white wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				this.setWoolVariant(5);
 			}
@@ -1482,7 +1482,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 8) { //fat-tailed tend to come with white, tan or brown wool
 			if (random.nextDouble() < 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepWoolLayer.Overlay.values().length));
+				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {1, 4, 5};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1497,7 +1497,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 0) { //gulf coast don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1509,7 +1509,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 1) { //norfolk don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1521,7 +1521,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 2) { //dorset don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1532,12 +1532,12 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 
 		if (this.getBreed() == 3) { //jacob come with all sorts of different patterns
-			this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 		}
 
 		if (this.getBreed() == 4) { //racka don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1549,7 +1549,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 5) { //california red don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1561,7 +1561,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 6) { //hair come in the fancy markings and roan
 			if (random.nextDouble() < 0.15) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.15) {
 				int[] variants = {0, 11, 12, 13, 14, 15, 16};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1571,7 +1571,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 7) { //bunnies don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1583,7 +1583,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 8) { //fat-tailed don't often come with markings, and if they do, theyre small
 			if (random.nextDouble() < 0.05) {
-				this.setOverlayVariant(random.nextInt(OSheepMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OSheepRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
 				int[] variants = {2, 8};
 				int randomIndex = new Random().nextInt(variants.length);

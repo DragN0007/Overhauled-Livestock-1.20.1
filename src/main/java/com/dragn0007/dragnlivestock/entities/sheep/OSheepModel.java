@@ -40,12 +40,14 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
             head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
         }
 
-        if (animatable.getBreed() == 8) {
-            tail.setRotZ(-1);
-            tail2.setRotZ(1);
-        } else {
-            tail.setRotZ(0);
-            tail2.setRotZ(0);
+        if (tail != null && tail2 != null) {
+            if (animatable.getBreed() == 8) {
+                tail.setRotZ(-1);
+                tail2.setRotZ(1);
+            } else {
+                tail.setRotZ(0);
+                tail2.setRotZ(0);
+            }
         }
 
         if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {

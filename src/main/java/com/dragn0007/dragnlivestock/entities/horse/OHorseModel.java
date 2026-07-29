@@ -207,11 +207,11 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
                 }
                 return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
             } else if (object.getDecompVariant() == 4) {
-                return OHorseDecompLayer.UndeadStage.SKELETAL.resourceLocation;
+                return OHorseBodyLayer.UndeadStage.SKELETAL.resourceLocation;
             } else if (object.getDecompVariant() == 5) {
-                return OHorseDecompLayer.UndeadStage.WITHER.resourceLocation;
+                return OHorseBodyLayer.UndeadStage.WITHER.resourceLocation;
             } else if (object.getDecompVariant() == 6) {
-                return OHorseDecompLayer.UndeadStage.STRAY.resourceLocation;
+                return OHorseBodyLayer.UndeadStage.STRAY.resourceLocation;
             }
             return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
         } else {
