@@ -61,7 +61,7 @@ import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
-import com.dragn0007.dragnlivestock.entities.pig.OPigMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.pig.OPigRenderLayer;
 import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
 import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
@@ -1114,7 +1114,7 @@ public class SpawnReplacer {
                         oPig.setMarkingByBreed();
                     } else {
                         oPig.setVariant(random.nextInt(OPigModel.Variant.values().length));
-                        oPig.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+                        oPig.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
                     }
 
                     oPig.setBreed(random.nextInt(PigBreed.Breed.values().length));

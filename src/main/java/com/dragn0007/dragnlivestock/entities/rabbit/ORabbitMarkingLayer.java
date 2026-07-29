@@ -26,16 +26,11 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
 
     @Override
     public void render(PoseStack poseStack, ORabbit animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        if (animatable.getOverlayVariant() == 0 || animatable.isBaby()) return;
         if (animatable.getBreed() == 9) {
-            ResourceLocation resourceLocation = null;
-
+            ResourceLocation resourceLocation;
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/antlers.png");
-
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            poseStack.pushPose();
-            poseStack.scale(1.0f, 1.0f, 1.0f);
-            poseStack.translate(0.0d, 0.0d, 0.0d);
-            poseStack.popPose();
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
                     bufferSource,
@@ -45,20 +40,14 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
                     1, 1, 1, 1);
         }
 
-        if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
-            poseStack.pushPose();
-            poseStack.scale(1.0f, 1.0f, 1.0f);
-            poseStack.translate(0.0d, 0.0d, 0.0d);
-            poseStack.popPose();
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderMarkingType,
-                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
-        }
+        RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
+        getRenderer().reRender(getDefaultBakedModel(animatable),
+                poseStack,
+                bufferSource,
+                animatable,
+                renderMarkingType,
+                bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                1, 1, 1, 1);
     }
 
     public enum Overlay {

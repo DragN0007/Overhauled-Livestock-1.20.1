@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
@@ -14,9 +15,17 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
     public OHorseBodyLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
+    }
+
+    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
+    public ResourceLocation getTexture(OHorse animatable) {
+        return TEXTURE_CACHE.computeIfAbsent(animatable.getOverlayLocation(), ResourceLocation::tryParse);
     }
 
     @Override
@@ -34,6 +43,15 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
                         animatable,
                         renderMarkingType,
                         bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1, 1, 1, 1);
+
+                RenderType renderMarkingTypeDynamic = RenderType.entityCutout(this.getTexture(animatable));
+                getRenderer().reRender(getDefaultBakedModel(animatable),
+                        poseStack,
+                        bufferSource,
+                        animatable,
+                        renderMarkingTypeDynamic,
+                        bufferSource.getBuffer(renderMarkingTypeDynamic), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                         1, 1, 1, 1);
             }
 

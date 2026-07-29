@@ -9,8 +9,7 @@ public class OPigRender extends GeoEntityRenderer<OPig> {
 
     public OPigRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OPigModel());
-        this.addRenderLayer(new OPigMarkingLayer(this));
-        this.addRenderLayer(new OPigBrandTagLayer(this));
+        this.addRenderLayer(new OPigRenderLayer(this));
     }
 
     @Override

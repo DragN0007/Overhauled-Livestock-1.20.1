@@ -281,7 +281,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
-	public ResourceLocation getOverlayLocation() {return OPigMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public ResourceLocation getOverlayLocation() {return OPigRenderLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
@@ -367,7 +367,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 		setVariant(random.nextInt(OPigModel.Variant.values().length));
-		setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+		setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 		setBreed(random.nextInt(PigBreed.Breed.values().length));
 		setGender(random.nextInt(Gender.values().length));
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
@@ -519,7 +519,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 			} else if (overlayChance < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partner.getOverlayVariant();
 			} else {
-				overlay = this.random.nextInt(OPigMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(OPigRenderLayer.Overlay.values().length);
 			}
 			piglet.setOverlayVariant(overlay);
 		} else if (random.nextDouble() < 0.5) {
@@ -625,7 +625,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 0) { //yorkshires dont usually come in markings but can
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				this.setOverlayVariant(0);
 			}
@@ -633,7 +633,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 1) { //norfolk can come in all sorts of markings
 			if (random.nextDouble() < 0.50) {
-				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.50) {
 				this.setOverlayVariant(0);
 			}
@@ -641,7 +641,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 2) { //guinea hogs dont usually come in markings but can
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				this.setOverlayVariant(0);
 			}
@@ -649,7 +649,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 3) { //kunekunes have spots or splotches
 			if (random.nextDouble() < 0.15) {
-				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.15) {
 				int[] variants = {5, 6, 7, 8, 9, 10, 11, 12};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -659,7 +659,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 4) { //poland chinas have socks or stripes
 			if (random.nextDouble() < 0.15) {
-				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.15) {
 				int[] variants = {0, 1, 2, 3, 4, 15};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -669,7 +669,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 5) { //berkshires can come in all sorts of markings
 			if (random.nextDouble() < 0.50) {
-				this.setOverlayVariant(random.nextInt(OPigMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OPigRenderLayer.Overlay.values().length));
 			} else if (random.nextDouble() > 0.50) {
 				this.setOverlayVariant(0);
 			}

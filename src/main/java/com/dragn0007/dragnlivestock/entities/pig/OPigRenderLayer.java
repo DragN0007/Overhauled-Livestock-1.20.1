@@ -8,23 +8,24 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-public class OPigMarkingLayer extends GeoRenderLayer<OPig> {
-    public OPigMarkingLayer(GeoRenderer entityRendererIn) {
+public class OPigRenderLayer extends GeoRenderLayer<OPig> {
+    public OPigRenderLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
     public void render(PoseStack poseStack, OPig animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isBaby()) {
             return;
         }
 
-        if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((OPig) animatable).getOverlayLocation());
+        if (animatable.getOverlayVariant() != 0) {
+            RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             poseStack.pushPose();
             poseStack.scale(1.0f, 1.0f, 1.0f);
             poseStack.translate(0.0d, 0.0d, 0.0d);
@@ -35,6 +36,23 @@ public class OPigMarkingLayer extends GeoRenderLayer<OPig> {
                     animatable,
                     renderMarkingType,
                     bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
+        }
+
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get()) return;
+        if (animatable.isTagged()) {
+            DyeColor dyeColor = animatable.getBrandTagColor();
+            ResourceLocation resourceLocation = null;
+            if (dyeColor != null) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/tag/" + dyeColor + ".png");
+            }
+            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType1,
+                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                     1, 1, 1, 1);
         }
     }
