@@ -4,10 +4,12 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
@@ -20,8 +22,14 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
 
     @Override
     public void render(PoseStack poseStack, OSheep animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+        Player player = Minecraft.getInstance().player;
+        double distanceSq = animatable.distanceToSqr(player);
+        boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
+        if (atCullDistance) return;
+
         if (!animatable.isDyed()) {
-            if (!animatable.isBaby() && animatable.isSheared() || animatable.getBreed() == 6 || animatable.isBaby()) return;
+            if (!animatable.isBaby() && animatable.isSheared() || animatable.getBreed() == 6 || animatable.isBaby())
+                return;
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getWoolLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
@@ -43,10 +51,11 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (animatable.getOverlayVariant() == 0) {
-            return;
-        } else {
-            if ((animatable.isDyed() && animatable.getOverlayVariant() == 3) || LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || animatable.isBaby()) return;
+        if (animatable.getOverlayVariant() == 0 && !animatable.isTagged()) return;
+
+        if (animatable.getOverlayVariant() != 0) {
+            if ((animatable.isDyed() && animatable.getOverlayVariant() == 3) || LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || animatable.isBaby())
+                return;
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
@@ -58,7 +67,8 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get()) return;
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+            return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();
             ResourceLocation resourceLocation = null;

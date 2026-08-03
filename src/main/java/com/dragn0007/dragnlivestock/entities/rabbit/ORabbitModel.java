@@ -20,7 +20,6 @@ public class ORabbitModel extends DefaultedEntityGeoModel<ORabbit> {
 
     @Override
     public void setCustomAnimations(ORabbit animatable, long instanceId, AnimationState<ORabbit> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
 

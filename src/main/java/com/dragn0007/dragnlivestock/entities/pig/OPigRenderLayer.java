@@ -4,10 +4,12 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
@@ -20,9 +22,11 @@ public class OPigRenderLayer extends GeoRenderLayer<OPig> {
 
     @Override
     public void render(PoseStack poseStack, OPig animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isBaby()) {
-            return;
-        }
+        Player player = Minecraft.getInstance().player;
+        double distanceSq = animatable.distanceToSqr(player);
+        boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
+        if (atCullDistance) return;
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isBaby() || (animatable.getOverlayVariant() == 0 && !animatable.isTagged())) return;
 
         if (animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());

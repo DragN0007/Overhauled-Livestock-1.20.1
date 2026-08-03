@@ -1,11 +1,17 @@
 package com.dragn0007.dragnlivestock.entities.sheep;
 
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.entity.player.Player;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+
+import java.util.Optional;
 
 public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
@@ -16,122 +22,146 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
     @Override
     public void preRender(PoseStack poseStack, OSheep entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        Optional<GeoBone> wool_body = this.getGeoModel().getBone("wool_body");
+        Optional<GeoBone> wool_neck = this.getGeoModel().getBone("wool_neck");
+        Optional<GeoBone> wool_rt = this.getGeoModel().getBone("right_thigh_wool");
+        Optional<GeoBone> wool_lt = this.getGeoModel().getBone("left_thigh_wool");
+        Optional<GeoBone> horns = this.getGeoModel().getBone("horns");
+        Optional<GeoBone> gulf_coast_horns = this.getGeoModel().getBone("gulf_coast_horns");
+        Optional<GeoBone> norfolk_horns = this.getGeoModel().getBone("norfolk_horns");
+        Optional<GeoBone> dorset_horns = this.getGeoModel().getBone("dorset_horns");
+        Optional<GeoBone> jacob_horns = this.getGeoModel().getBone("jacob_horns");
+        Optional<GeoBone> racka_horns = this.getGeoModel().getBone("racka_horns");
+        Optional<GeoBone> mane = this.getGeoModel().getBone("mane");
+        Optional<GeoBone> tail = this.getGeoModel().getBone("tail");
+        Optional<GeoBone> tail_double = this.getGeoModel().getBone("tail2");
 
+        //culls unnecessary bones at a certain distance to improve performance
+        Player player = Minecraft.getInstance().player;
+        double distanceSq = animatable.distanceToSqr(player);
+        boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_CUBES_DISTANCE.get();
+        if (player != null) {
+            if (wool_neck.isPresent()) {wool_neck.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (wool_rt.isPresent()) {wool_rt.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (wool_lt.isPresent()) {wool_lt.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (horns.isPresent()) {horns.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (mane.isPresent()) {mane.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (tail.isPresent()) {tail.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (tail_double.isPresent()) {tail_double.ifPresent(b -> b.setHidden(atCullDistance));}
+        }
+        if (atCullDistance) return;
+        
         if (entity.getBreed() == 6) {
             if (entity.isFemale()) {
-                model.getBone("mane").ifPresent(b -> b.setHidden(true));
+                mane.ifPresent(b -> b.setHidden(true));
             } else if (entity.isMale() && !entity.isBaby()) {
-                model.getBone("mane").ifPresent(b -> b.setHidden(false));
+                mane.ifPresent(b -> b.setHidden(false));
             }
-            model.getBone("tail").ifPresent(b -> b.setScaleY(2F));
-            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            tail.ifPresent(b -> b.setScaleY(2F));
+            tail.ifPresent(b -> b.setScaleX(1.0F));
+            tail.ifPresent(b -> b.setScaleZ(1.0F));
         } else {
-            model.getBone("mane").ifPresent(b -> b.setHidden(true));
-            model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
-            model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+            mane.ifPresent(b -> b.setHidden(true));
+            tail.ifPresent(b -> b.setScaleY(1.0F));
+            tail.ifPresent(b -> b.setScaleX(1.0F));
+            tail.ifPresent(b -> b.setScaleZ(1.0F));
         }
 
         if (entity.getBreed() == 8) {
-            model.getBone("tail2").ifPresent(b -> b.setHidden(false));
+            tail_double.ifPresent(b -> b.setHidden(false));
         } else {
-            model.getBone("tail2").ifPresent(b -> b.setHidden(true));
+            tail_double.ifPresent(b -> b.setHidden(true));
         }
 
         if (entity.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
-            model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
-            model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
-            model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
-            model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
-            model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+            gulf_coast_horns.ifPresent(b -> b.setHidden(true));
+            norfolk_horns.ifPresent(b -> b.setHidden(true));
+            dorset_horns.ifPresent(b -> b.setHidden(true));
+            jacob_horns.ifPresent(b -> b.setHidden(true));
+            racka_horns.ifPresent(b -> b.setHidden(true));
 
         } else {
             poseStack.scale(1.0F, 1.0F, 1.0F);
 
             if (!entity.isBaby() && entity.isSheared()) {
-                model.getBone("wool_body").ifPresent(b -> b.setHidden(true));
-                model.getBone("wool_neck").ifPresent(b -> b.setHidden(true));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setHidden(true));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setHidden(true));
+                wool_body.ifPresent(b -> b.setHidden(true));
+                wool_neck.ifPresent(b -> b.setHidden(true));
+                wool_rt.ifPresent(b -> b.setHidden(true));
+                wool_lt.ifPresent(b -> b.setHidden(true));
             } else {
-                model.getBone("wool_body").ifPresent(b -> b.setHidden(false));
-                model.getBone("wool_neck").ifPresent(b -> b.setHidden(false));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setHidden(false));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setHidden(false));
+                wool_body.ifPresent(b -> b.setHidden(false));
+                wool_neck.ifPresent(b -> b.setHidden(false));
+                wool_rt.ifPresent(b -> b.setHidden(false));
+                wool_lt.ifPresent(b -> b.setHidden(false));
             }
 
             if (entity.getHornVariant() == 0) {
-                model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+                horns.ifPresent(b -> b.setHidden(true));
             } else if (entity.getHornVariant() == 1) {
-                model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(false));
-                model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+                gulf_coast_horns.ifPresent(b -> b.setHidden(false));
+                norfolk_horns.ifPresent(b -> b.setHidden(true));
+                dorset_horns.ifPresent(b -> b.setHidden(true));
+                jacob_horns.ifPresent(b -> b.setHidden(true));
+                racka_horns.ifPresent(b -> b.setHidden(true));
             } else if (entity.getHornVariant() == 2) {
-                model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(false));
-                model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+                gulf_coast_horns.ifPresent(b -> b.setHidden(true));
+                norfolk_horns.ifPresent(b -> b.setHidden(false));
+                dorset_horns.ifPresent(b -> b.setHidden(true));
+                jacob_horns.ifPresent(b -> b.setHidden(true));
+                racka_horns.ifPresent(b -> b.setHidden(true));
             } else if (entity.getHornVariant() == 3) {
-                model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("dorset_horns").ifPresent(b -> b.setHidden(false));
-                model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+                gulf_coast_horns.ifPresent(b -> b.setHidden(true));
+                norfolk_horns.ifPresent(b -> b.setHidden(true));
+                dorset_horns.ifPresent(b -> b.setHidden(false));
+                jacob_horns.ifPresent(b -> b.setHidden(true));
+                racka_horns.ifPresent(b -> b.setHidden(true));
             } else if (entity.getHornVariant() == 4) {
-                model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("jacob_horns").ifPresent(b -> b.setHidden(false));
-                model.getBone("racka_horns").ifPresent(b -> b.setHidden(true));
+                gulf_coast_horns.ifPresent(b -> b.setHidden(true));
+                norfolk_horns.ifPresent(b -> b.setHidden(true));
+                dorset_horns.ifPresent(b -> b.setHidden(true));
+                jacob_horns.ifPresent(b -> b.setHidden(false));
+                racka_horns.ifPresent(b -> b.setHidden(true));
             } else if (entity.getHornVariant() == 5) {
-                model.getBone("gulf_coast_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("norfolk_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("dorset_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("jacob_horns").ifPresent(b -> b.setHidden(true));
-                model.getBone("racka_horns").ifPresent(b -> b.setHidden(false));
+                gulf_coast_horns.ifPresent(b -> b.setHidden(true));
+                norfolk_horns.ifPresent(b -> b.setHidden(true));
+                dorset_horns.ifPresent(b -> b.setHidden(true));
+                jacob_horns.ifPresent(b -> b.setHidden(true));
+                racka_horns.ifPresent(b -> b.setHidden(false));
             }
 
             if (entity.getBreed() == 2 || entity.getBreed() == 4) {
-                model.getBone("wool_body").ifPresent(b -> b.setScaleY(1.1F));
-                model.getBone("wool_body").ifPresent(b -> b.setScaleX(1.1F));
-                model.getBone("wool_body").ifPresent(b -> b.setScaleZ(1.1F));
-                model.getBone("wool_neck").ifPresent(b -> b.setScaleY(1.1F));
-                model.getBone("wool_neck").ifPresent(b -> b.setScaleX(1.1F));
-                model.getBone("wool_neck").ifPresent(b -> b.setScaleZ(1.1F));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setScaleY(1.1F));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setScaleX(1.1F));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setScaleZ(1.1F));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setScaleY(1.1F));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setScaleX(1.1F));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setScaleZ(1.1F));
-                model.getBone("tail").ifPresent(b -> b.setScaleY(1.1F));
-                model.getBone("tail").ifPresent(b -> b.setScaleX(1.1F));
-                model.getBone("tail").ifPresent(b -> b.setScaleZ(1.1F));
+                wool_body.ifPresent(b -> b.setScaleY(1.1F));
+                wool_body.ifPresent(b -> b.setScaleX(1.1F));
+                wool_body.ifPresent(b -> b.setScaleZ(1.1F));
+                wool_neck.ifPresent(b -> b.setScaleY(1.1F));
+                wool_neck.ifPresent(b -> b.setScaleX(1.1F));
+                wool_neck.ifPresent(b -> b.setScaleZ(1.1F));
+                wool_rt.ifPresent(b -> b.setScaleY(1.1F));
+                wool_rt.ifPresent(b -> b.setScaleX(1.1F));
+                wool_rt.ifPresent(b -> b.setScaleZ(1.1F));
+                wool_lt.ifPresent(b -> b.setScaleY(1.1F));
+                wool_lt.ifPresent(b -> b.setScaleX(1.1F));
+                wool_lt.ifPresent(b -> b.setScaleZ(1.1F));
+                tail.ifPresent(b -> b.setScaleY(1.1F));
+                tail.ifPresent(b -> b.setScaleX(1.1F));
+                tail.ifPresent(b -> b.setScaleZ(1.1F));
             } else if (!(entity.getBreed() == 6)) {
-                model.getBone("wool_body").ifPresent(b -> b.setScaleY(1.0F));
-                model.getBone("wool_body").ifPresent(b -> b.setScaleX(1.0F));
-                model.getBone("wool_body").ifPresent(b -> b.setScaleZ(1.0F));
-                model.getBone("wool_neck").ifPresent(b -> b.setScaleY(1.0F));
-                model.getBone("wool_neck").ifPresent(b -> b.setScaleX(1.0F));
-                model.getBone("wool_neck").ifPresent(b -> b.setScaleZ(1.0F));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setScaleY(1.0F));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setScaleX(1.0F));
-                model.getBone("right_thigh_wool").ifPresent(b -> b.setScaleZ(1.0F));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setScaleY(1.0F));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setScaleX(1.0F));
-                model.getBone("left_thigh_wool").ifPresent(b -> b.setScaleZ(1.0F));
-                model.getBone("tail").ifPresent(b -> b.setScaleY(1.0F));
-                model.getBone("tail").ifPresent(b -> b.setScaleX(1.0F));
-                model.getBone("tail").ifPresent(b -> b.setScaleZ(1.0F));
+                wool_body.ifPresent(b -> b.setScaleY(1.0F));
+                wool_body.ifPresent(b -> b.setScaleX(1.0F));
+                wool_body.ifPresent(b -> b.setScaleZ(1.0F));
+                wool_neck.ifPresent(b -> b.setScaleY(1.0F));
+                wool_neck.ifPresent(b -> b.setScaleX(1.0F));
+                wool_neck.ifPresent(b -> b.setScaleZ(1.0F));
+                wool_rt.ifPresent(b -> b.setScaleY(1.0F));
+                wool_rt.ifPresent(b -> b.setScaleX(1.0F));
+                wool_rt.ifPresent(b -> b.setScaleZ(1.0F));
+                wool_lt.ifPresent(b -> b.setScaleY(1.0F));
+                wool_lt.ifPresent(b -> b.setScaleX(1.0F));
+                wool_lt.ifPresent(b -> b.setScaleZ(1.0F));
+                tail.ifPresent(b -> b.setScaleY(1.0F));
+                tail.ifPresent(b -> b.setScaleX(1.0F));
+                tail.ifPresent(b -> b.setScaleZ(1.0F));
             }
 
         }
