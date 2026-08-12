@@ -24,10 +24,7 @@ public class OChickenMarkingLayer extends GeoRenderLayer<OChicken> {
         }
 
         RenderType renderMarkingType = RenderType.entityCutout(((OChicken)animatable).getOverlayLocation());
-        poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
+        
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
                 bufferSource,

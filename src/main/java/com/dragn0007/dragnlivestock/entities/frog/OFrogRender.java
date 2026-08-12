@@ -9,13 +9,11 @@ public class OFrogRender extends GeoEntityRenderer<OFrog> {
 
     public OFrogRender(EntityRendererProvider.Context renderManager) {
         super(renderManager, new OFrogModel());
-        this.addRenderLayer(new OFrogMarkingLayer(this));
-        this.addRenderLayer(new OFrogEyeLayer(this));
+        this.addRenderLayer(new OFrogRenderLayer(this));
     }
 
     @Override
     public void render(OFrog entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

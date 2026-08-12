@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.horse;
+package com.dragn0007.dragnlivestock.entities.donkey;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -28,13 +28,13 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
-    public OHorseTackLayer(GeoRenderer<OHorse> entityRendererIn) {
+public class ODonkeyTackLayer extends GeoRenderLayer<ODonkey> {
+    public ODonkeyTackLayer(GeoRenderer<ODonkey> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, OHorse animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, ODonkey animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         Player player = Minecraft.getInstance().player;
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
@@ -49,10 +49,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
         if (saddleStack.isEmpty() && armorItemStack.isEmpty() && decorStack.isEmpty() && animatable.getFlowerItem() == null && !animatable.isBranded()) return;
 
         if(!saddleStack.isEmpty()) {
-            // if youre another modder looking to add new saddles, use this pathway v
-            // it'll find the name for you so long as your registry item is named the same as your texture AND it's a SaddleItem
-            // make sure to put your saddle in the dragnlivestock:saddle tag so you can actually put it in the slot
-            // this works for all equines and caribou too, no extra steps required
             if (saddleStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
                 if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
@@ -61,7 +57,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                 }
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-                    
                     getRenderer().reRender(getDefaultBakedModel(animatable),
                             poseStack,
                             bufferSource,
@@ -86,28 +81,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
             }
         }
 
-        if (!decorStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            // if youre another modder looking to add new caparisons, use this pathway v
-            // it'll find the name for you so long as your registry item is named the same as your texture AND it's a CaparisonItem
-            // instead of making a  dragnlivestock > textures > ... , youd make a  medievalembroidery > textures > ...  instead for this pathway
-            if ((decorStack.getItem() instanceof CaparisonItem caparisonItem)) {
-                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
-            } else if ((decorStack.getItem() instanceof RumpStrapItem rumpStrapItem)) {
-                resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
-            }
-
-            if(resourceLocation != null) {
-                RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-                getRenderer().reRender(getDefaultBakedModel(animatable),
-                        poseStack,
-                        bufferSource,
-                        animatable,
-                        renderType1,
-                        bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                        1, 1, 1, 1);
-            }
-        }
-
         if (!armorItemStack.isEmpty()) {
             String armorpath;
             if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
@@ -122,10 +95,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                     resourceLocation = new ResourceLocation("medievalembroidery", armorpath + "minimal_obsidian_horse_armor.png");
                 } else if (armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                     resourceLocation = new ResourceLocation("deadlydinos", "textures/entity/horse/armor/riot_horse_armor.png");
-
-                    // if youre another modder looking to add new armor, use this pathway v
-                    // it'll find the name for you so long as your registry item is named the same as your texture AND it's a HorseAmorItem or LightHorseArmorItem
-                    // this works for all equines and caribou too, no extra steps required
                 } else if (armorItemStack.getItem() instanceof HorseArmorItem horseArmorItem) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, armorpath + horseArmorItem + ".png");
                 } else if (armorItemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
@@ -179,11 +148,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                         } else if (decorStack.getItem() instanceof BlanketItem blanketItem) {
                             String name = blanketItem.toString();
                             String noSuffix = name.replaceAll("_.+", "");
-                            // ^ if youre another modder adding new blankets, make sure your blanket name is just one word
-                            // (i.e american_western_blanket.png)
-                            // in this case, "american" is your one word. if you do multiple words, the code will snip out any past the first one and
-                            // the armor variant of your carpet may not work. To get your armor variant for your carpet, just copy what
-                            // ive done in textures/entity/horse/armor/carpet/special
                             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/special/" + noSuffix + "_armor_blanket.png");
                         }
                     }
@@ -201,10 +165,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                         resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/racing/" + color + ".png");
                     } else if (decorStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                         resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/western/" + color + ".png");
-                        // if youre another modder looking to add new blankets, use this pathway v
-                        // it'll find the name for you so long as your registry item is named the same as your texture AND it's a BlanketItem
-                        // make sure to put your blanket in the dragnlivestock:special_blankets tag so you can actually put it in the slot
-                        // this works for all equines and caribou too, no extra steps required
                     } else if (decorStack.is(LOTags.Items.SPECIAL_BLANKETS)) {
                         String blanketItem = decorStack.getItem().toString();
                         resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/carpet/special/" + blanketItem + ".png");
@@ -222,70 +182,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                             1, 1, 1, 1);
                 }
             }
-        }
-
-        if (animatable.getFlowerItem() == null && !animatable.isBranded()) return;
-        if (animatable.getFlowerItem() != null &&!(animatable.getDecompVariant() == 4) && !(animatable.getDecompVariant() == 5) && !(animatable.getDecompVariant() == 6)) {
-            if (animatable.getFlowerItem().is(LOTags.Items.HAIR_FLOWERS)) {
-                if (animatable.getFlowerType() == 0) {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_mane.png");
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-                    getRenderer().reRender(getDefaultBakedModel(animatable),
-                            poseStack,
-                            bufferSource,
-                            animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                            1, 1, 1, 1);
-                }
-
-                if (animatable.getFlowerType() == 1) {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_tail.png");
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-                    getRenderer().reRender(getDefaultBakedModel(animatable),
-                            poseStack,
-                            bufferSource,
-                            animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                            1, 1, 1, 1);
-                }
-
-                if (animatable.getFlowerType() == 2) {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_tail.png");
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-                    getRenderer().reRender(getDefaultBakedModel(animatable),
-                            poseStack,
-                            bufferSource,
-                            animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                            1, 1, 1, 1);
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_mane.png");
-                    RenderType renderType2 = RenderType.entityCutout(resourceLocation);
-                    poseStack.pushPose();
-                    getRenderer().reRender(getDefaultBakedModel(animatable),
-                            poseStack,
-                            bufferSource,
-                            animatable,
-                            renderType2,
-                            bufferSource.getBuffer(renderType2), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                            1, 1, 1, 1);
-                }
-            }
-        }
-
-        if (!animatable.isBranded()) return;
-        if (animatable.isBranded() && !(animatable.getDecompVariant() == 4) && !(animatable.getDecompVariant() == 5) && !(animatable.getDecompVariant() == 6)) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/mustang_brand.png");
-            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderType1,
-                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
         }
     }
 }

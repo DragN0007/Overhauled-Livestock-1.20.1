@@ -505,7 +505,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OGoat.class, EntityDataSerializers.INT);
-	public String getOverlayLocation() {return OGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
+	public String getOverlayLocation() {return OGoatBodyLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
@@ -667,7 +667,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 			this.setMarking();
 		} else {
 			this.setVariant(random.nextInt(OGoatModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(OGoatBodyLayer.Overlay.values().length));
 		}
 
 		RandomSource randomsource = serverLevelAccessor.getRandom();
@@ -779,7 +779,7 @@ public class OGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setMarking() {
 
 		if (random.nextDouble() < 0.10) {
-			this.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(OGoatBodyLayer.Overlay.values().length));
 		} else if (random.nextDouble() > 0.10) {
 			this.setOverlayVariant(0);
 		}

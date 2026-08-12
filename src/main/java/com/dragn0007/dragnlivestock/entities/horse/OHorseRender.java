@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.player.Player;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
-import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import java.util.Optional;
@@ -53,6 +52,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
         if (player != null) {
             if (saddle.isPresent()) {saddle.ifPresent(b -> b.setHidden(atCullDistance));}
             if (reins.isPresent()) {reins.ifPresent(b -> b.setHidden(atCullDistance));}
+            if (saddlebags.isPresent()) {saddlebags.ifPresent(b -> b.setHidden(atCullDistance));}
             if (wagon_harness.isPresent()) {wagon_harness.ifPresent(b -> b.setHidden(atCullDistance));}
             if (body_armor.isPresent()) {body_armor.ifPresent(b -> b.setHidden(atCullDistance));}
             if (neck_armor.isPresent()) {neck_armor.ifPresent(b -> b.setHidden(atCullDistance));}
@@ -105,6 +105,13 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
                 body_armor.ifPresent(b -> b.setHidden(true));
                 neck_armor.ifPresent(b -> b.setHidden(true));
             }
+        } else {
+            saddlebags.ifPresent(b -> b.setHidden(true));
+            saddle.ifPresent(b -> b.setHidden(true));
+            reins.ifPresent(b -> b.setHidden(true));
+            wagon_harness.ifPresent(b -> b.setHidden(true));
+            body_armor.ifPresent(b -> b.setHidden(true));
+            neck_armor.ifPresent(b -> b.setHidden(true));
         }
 
         if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && animatable.isBaby()) {

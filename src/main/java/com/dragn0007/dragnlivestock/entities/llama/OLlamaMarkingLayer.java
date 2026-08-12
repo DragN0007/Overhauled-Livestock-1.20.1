@@ -1,12 +1,15 @@
 package com.dragn0007.dragnlivestock.entities.llama;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
@@ -18,12 +21,14 @@ public class OLlamaMarkingLayer extends GeoRenderLayer<OLlama> {
 
     @Override
     public void render(PoseStack poseStack, OLlama animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        if (!animatable.isBaby()) {
-            RenderType renderMarkingType = RenderType.entityCutout(((OLlama) animatable).getOverlayLocation());
-            poseStack.pushPose();
-            poseStack.scale(1.0f, 1.0f, 1.0f);
-            poseStack.translate(0.0d, 0.0d, 0.0d);
-            poseStack.popPose();
+        Player player = Minecraft.getInstance().player;
+        double distanceSq = animatable.distanceToSqr(player);
+        boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
+        if (atCullDistance) return;
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
+
+        if (!animatable.isBaby() && animatable.getOverlayVariant() != 0) {
+            RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
                     bufferSource,

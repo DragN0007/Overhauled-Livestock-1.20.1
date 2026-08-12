@@ -17,7 +17,6 @@ public class OLlamaModel extends DefaultedEntityGeoModel<OLlama> {
 
     @Override
     public void setCustomAnimations(OLlama animatable, long instanceId, AnimationState<OLlama> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
 

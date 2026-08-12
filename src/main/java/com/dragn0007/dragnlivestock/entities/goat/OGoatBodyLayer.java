@@ -1,12 +1,14 @@
 package com.dragn0007.dragnlivestock.entities.goat;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
@@ -14,8 +16,8 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OGoatMarkingLayer extends GeoRenderLayer<OGoat> {
-    public OGoatMarkingLayer(GeoRenderer entityRendererIn) {
+public class OGoatBodyLayer extends GeoRenderLayer<OGoat> {
+    public OGoatBodyLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
@@ -26,12 +28,8 @@ public class OGoatMarkingLayer extends GeoRenderLayer<OGoat> {
 
     @Override
     public void render(PoseStack poseStack, OGoat animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        if (!animatable.isBaby()) {
+        if (!animatable.isBaby() && animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
-            poseStack.pushPose();
-            poseStack.scale(1.0F, 1.0F, 1.0F);
-            poseStack.translate(0.0d, 0.0d, 0.0d);
-            poseStack.popPose();
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
                     bufferSource,
@@ -40,6 +38,24 @@ public class OGoatMarkingLayer extends GeoRenderLayer<OGoat> {
                     bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                     1, 1, 1, 1);
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
+        }
+
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+            return;
+        if (animatable.isTagged()) {
+            DyeColor dyeColor = animatable.getBrandTagColor();
+            ResourceLocation resourceLocation = null;
+            if (dyeColor != null) {
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/tag/" + dyeColor + ".png");
+            }
+            RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+            getRenderer().reRender(getDefaultBakedModel(animatable),
+                    poseStack,
+                    bufferSource,
+                    animatable,
+                    renderType1,
+                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1, 1, 1, 1);
         }
     }
 

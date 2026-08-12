@@ -45,10 +45,10 @@ import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogEyeLayer;
-import com.dragn0007.dragnlivestock.entities.frog.OFrogMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.frog.OFrogRenderLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
-import com.dragn0007.dragnlivestock.entities.goat.OGoatMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.goat.OGoatBodyLayer;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
@@ -1266,7 +1266,7 @@ public class SpawnReplacer {
                         oGoat.setMarking();
                     } else {
                         oGoat.setVariant(random.nextInt(OGoatModel.Variant.values().length));
-                        oGoat.setOverlayVariant(random.nextInt(OGoatMarkingLayer.Overlay.values().length));
+                        oGoat.setOverlayVariant(random.nextInt(OGoatBodyLayer.Overlay.values().length));
                     }
 
                     if (event.getLevel().isClientSide) {
@@ -1461,8 +1461,8 @@ public class SpawnReplacer {
                     oFrog.setAge(frog.getAge());
 
                     oFrog.setVariant(random.nextInt(OFrogModel.Variant.values().length));
-                    oFrog.setOverlayVariant(random.nextInt(OFrogMarkingLayer.Overlay.values().length));
-                    oFrog.setEyesVariant(random.nextInt(OFrogEyeLayer.Overlay.values().length));
+                    oFrog.setOverlayVariant(random.nextInt(OFrogRenderLayer.Marking.values().length));
+                    oFrog.setEyesVariant(random.nextInt(OFrogEyeLayer.EyeColor.values().length));
 
                     if (event.getLevel().isClientSide) {
                         frog.remove(Entity.RemovalReason.DISCARDED);

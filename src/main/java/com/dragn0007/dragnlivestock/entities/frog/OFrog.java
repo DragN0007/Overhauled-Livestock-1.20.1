@@ -242,11 +242,11 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	public ResourceLocation getOverlayLocation() {
-		return OFrogMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+		return OFrogRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
 
 	public ResourceLocation getEyesLocation() {
-		return OFrogEyeLayer.Overlay.overlayFromOrdinal(getEyesVariant()).resourceLocation;
+		return OFrogEyeLayer.EyeColor.overlayFromOrdinal(getEyesVariant()).resourceLocation;
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OFrog.class, EntityDataSerializers.INT);
@@ -308,8 +308,8 @@ public class OFrog extends Animal implements GeoEntity {
 		}
 		Random random = new Random();
 		setVariant(random.nextInt(OFrogModel.Variant.values().length));
-		setOverlayVariant(random.nextInt(OFrogMarkingLayer.Overlay.values().length));
-		setEyesVariant(random.nextInt(OFrogEyeLayer.Overlay.values().length));
+		setOverlayVariant(random.nextInt(OFrogRenderLayer.Marking.values().length));
+		setEyesVariant(random.nextInt(OFrogEyeLayer.EyeColor.values().length));
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}

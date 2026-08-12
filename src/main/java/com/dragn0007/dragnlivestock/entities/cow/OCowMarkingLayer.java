@@ -24,10 +24,6 @@ public class OCowMarkingLayer extends GeoRenderLayer<OCow> {
 
         BovineMarkingOverlay overlay = BovineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
         RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
-        poseStack.pushPose();
-        poseStack.scale(1.0F, 1.0F, 1.0F);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
                 bufferSource,

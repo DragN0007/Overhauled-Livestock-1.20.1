@@ -53,10 +53,7 @@ public class FarmGoatCollarLayer extends GeoRenderLayer<FarmGoat> {
         }
 
         RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-        poseStack.pushPose();
-        poseStack.scale(1.0f, 1.0f, 1.0f);
-        poseStack.translate(0.0d, 0.0d, 0.0d);
-        poseStack.popPose();
+        
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
                 bufferSource,

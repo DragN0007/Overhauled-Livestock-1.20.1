@@ -14,7 +14,6 @@ public class OBeeRenderer extends GeoEntityRenderer<OBee> {
 
     @Override
     public void render(OBee animatable, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-
         if (animatable.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         } else {
@@ -22,7 +21,6 @@ public class OBeeRenderer extends GeoEntityRenderer<OBee> {
         }
 
         if(!animatable.isBaby()) {
-
             if (animatable.getVariant() == 0) {
                 poseStack.scale(1F, 1F, 1F);
             }
