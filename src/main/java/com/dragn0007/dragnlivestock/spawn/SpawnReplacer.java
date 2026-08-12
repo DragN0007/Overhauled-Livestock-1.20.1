@@ -75,6 +75,7 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepModel;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRenderLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
+import com.dragn0007.dragnlivestock.entities.unicorn.UnicornBodyLayer;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornHornLayer;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
@@ -1462,7 +1463,7 @@ public class SpawnReplacer {
 
                     oFrog.setVariant(random.nextInt(OFrogModel.Variant.values().length));
                     oFrog.setOverlayVariant(random.nextInt(OFrogRenderLayer.Marking.values().length));
-                    oFrog.setEyesVariant(random.nextInt(OFrogEyeLayer.EyeColor.values().length));
+                    oFrog.setEyesVariant(random.nextInt(OFrogRenderLayer.EyeColor.values().length));
 
                     if (event.getLevel().isClientSide) {
                         frog.remove(Entity.RemovalReason.DISCARDED);
@@ -1504,7 +1505,7 @@ public class SpawnReplacer {
                     } else {
                         unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
                         unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
-                        unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+                        unicorn.setHornVariant(random.nextInt(UnicornBodyLayer.HornType.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
@@ -1546,7 +1547,7 @@ public class SpawnReplacer {
                     } else {
                         unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
                         unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
-                        unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+                        unicorn.setHornVariant(random.nextInt(UnicornBodyLayer.HornType.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
@@ -1588,7 +1589,7 @@ public class SpawnReplacer {
                     } else {
                         unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
                         unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
-                        unicorn.setHornVariant(random.nextInt(UnicornHornLayer.Overlay.values().length));
+                        unicorn.setHornVariant(random.nextInt(UnicornBodyLayer.HornType.values().length));
                     }
 
                     if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
