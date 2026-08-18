@@ -17,7 +17,6 @@ public class WheatMoobloomModel extends DefaultedEntityGeoModel<WheatMoobloom> {
 
     @Override
     public void setCustomAnimations(WheatMoobloom animatable, long instanceId, AnimationState<WheatMoobloom> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
         CoreGeoBone left_ear = getAnimationProcessor().getBone("left_ear");

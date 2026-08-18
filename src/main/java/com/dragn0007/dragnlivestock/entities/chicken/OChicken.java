@@ -499,7 +499,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	public ResourceLocation getOverlayLocation() {
-		return OChickenMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
+		return OChickenRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
 	}
 
 	public ResourceLocation getModelResource() {
@@ -634,7 +634,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setMarkingByBreed();
 		} else {
 			this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 		}
 
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -784,7 +784,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 0) { //leghorn
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
 				this.setOverlayVariant(0);
 			} else if (random.nextDouble() > 0.25) {
@@ -794,7 +794,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 1) { //ameraucana
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
 				this.setOverlayVariant(0);
 			} else if (random.nextDouble() > 0.25) {
@@ -806,7 +806,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 2) { //cream legbar
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
 				this.setOverlayVariant(0);
 			} else if (random.nextDouble() > 0.25) {
@@ -818,7 +818,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 3) { //marans
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -828,7 +828,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 4) { //olive egger
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
 				int[] variants = {34, 35, 36};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -840,7 +840,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 5) { //sussex silkie
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
 				int[] variants = {2, 4};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -856,7 +856,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 7) { //orpington
 			if (random.nextDouble() <= 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				this.setOverlayVariant(0);
 			}
@@ -864,7 +864,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 8) { //polish
 			if (random.nextDouble() <= 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -874,7 +874,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 9) { //wyandotte
 			if (random.nextDouble() <= 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				int[] variants = {9, 13, 14, 15, 21, 25, 29, 30, 31, 32, 33};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -884,7 +884,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 10) { //brahma
 			if (random.nextDouble() < 0.10) {
-				this.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.25) {
 				this.setOverlayVariant(0);
 			} else if (random.nextDouble() > 0.25) {
@@ -957,7 +957,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
                         child.setVariant(variant);
                         int overlay = random.nextDouble() <= 0.6 ? this.getOverlayVariant() : father.getOverlayVariant();
                         if (random.nextDouble() < 0.2)
-                            overlay = random.nextInt(OChickenMarkingLayer.Overlay.values().length);
+                            overlay = random.nextInt(OChickenRenderLayer.Marking.values().length);
                         child.setOverlayVariant(overlay);
                     } else {
                         if (random.nextDouble() < 0.5 || ayamMutate) child.setColorByBreed();

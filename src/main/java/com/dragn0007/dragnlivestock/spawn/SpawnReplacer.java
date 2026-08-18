@@ -6,12 +6,12 @@ import com.dragn0007.dragnlivestock.entities.bee.OBee;
 import com.dragn0007.dragnlivestock.entities.bee.OBeeModel;
 import com.dragn0007.dragnlivestock.entities.camel.CamelBreed;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
-import com.dragn0007.dragnlivestock.entities.camel.OCamelMarkingLayer;
+import com.dragn0007.dragnlivestock.entities.camel.OCamelBodyLayer;
 import com.dragn0007.dragnlivestock.entities.camel.OCamelModel;
 import com.dragn0007.dragnlivestock.entities.chicken.ChickenBreed;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
-import com.dragn0007.dragnlivestock.entities.chicken.OChickenMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenModel;
+import com.dragn0007.dragnlivestock.entities.chicken.OChickenRenderLayer;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.CowBreed;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
@@ -44,9 +44,8 @@ import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomMushroomLay
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyModel;
 import com.dragn0007.dragnlivestock.entities.frog.OFrog;
-import com.dragn0007.dragnlivestock.entities.frog.OFrogEyeLayer;
-import com.dragn0007.dragnlivestock.entities.frog.OFrogRenderLayer;
 import com.dragn0007.dragnlivestock.entities.frog.OFrogModel;
+import com.dragn0007.dragnlivestock.entities.frog.OFrogRenderLayer;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatBodyLayer;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
@@ -61,8 +60,8 @@ import com.dragn0007.dragnlivestock.entities.llama.OLlamaModel;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.pig.OPig;
-import com.dragn0007.dragnlivestock.entities.pig.OPigRenderLayer;
 import com.dragn0007.dragnlivestock.entities.pig.OPigModel;
+import com.dragn0007.dragnlivestock.entities.pig.OPigRenderLayer;
 import com.dragn0007.dragnlivestock.entities.pig.PigBreed;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbit;
 import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitMarkingLayer;
@@ -76,7 +75,6 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheepRenderLayer;
 import com.dragn0007.dragnlivestock.entities.sheep.SheepBreed;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornBodyLayer;
-import com.dragn0007.dragnlivestock.entities.unicorn.UnicornHornLayer;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
@@ -773,7 +771,7 @@ public class SpawnReplacer {
                         oChicken.setMarkingByBreed();
                     } else {
                         oChicken.setVariant(random.nextInt(OChickenModel.Variant.values().length));
-                        oChicken.setOverlayVariant(random.nextInt(OChickenMarkingLayer.Overlay.values().length));
+                        oChicken.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
                     }
 
                     if (event.getLevel().isClientSide) {
@@ -1220,7 +1218,7 @@ public class SpawnReplacer {
                     oCamel.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oCamel.generateRandomSpeed());
 
                     oCamel.setVariant(random.nextInt(OCamelModel.Variant.values().length));
-                    oCamel.setOverlayVariant(random.nextInt(OCamelMarkingLayer.Overlay.values().length));
+                    oCamel.setOverlayVariant(random.nextInt(OCamelBodyLayer.Marking.values().length));
                     oCamel.setBreed(random.nextInt(CamelBreed.Breed.values().length));
                     oCamel.setGender(random.nextInt(AbstractOMount.Gender.values().length));
 

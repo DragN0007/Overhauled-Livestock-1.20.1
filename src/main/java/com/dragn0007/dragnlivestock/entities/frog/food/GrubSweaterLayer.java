@@ -38,9 +38,7 @@ public class GrubSweaterLayer extends GeoRenderLayer<Grub> {
             resourceLocation =  new ResourceLocation(LivestockOverhaul.MODID,"textures/entity/grub/sweater/" + animatable.getSweaterColor().toString().toLowerCase() + ".png");
         }
 
-        if (resourceLocation == null || !animatable.isSweatered()) {
-            return;
-        }
+        if (resourceLocation == null || !animatable.isSweatered()) return;
 
         RenderType renderType1 = RenderType.entityCutout(resourceLocation);
         

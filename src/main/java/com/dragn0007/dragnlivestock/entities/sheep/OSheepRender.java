@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.sheep;
 
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,6 +23,7 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
 
     @Override
     public void preRender(PoseStack poseStack, OSheep entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        Optional<GeoBone> body = this.getGeoModel().getBone("body");
         Optional<GeoBone> wool_body = this.getGeoModel().getBone("wool_body");
         Optional<GeoBone> wool_neck = this.getGeoModel().getBone("wool_neck");
         Optional<GeoBone> wool_rt = this.getGeoModel().getBone("right_thigh_wool");
@@ -41,6 +43,8 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_CUBES_DISTANCE.get();
         if (player != null) {
+            if (LivestockOverhaulClientConfig.CULL_HIDDEN.get())
+                if (body.isPresent()) {body.ifPresent(b -> b.setHidden(LOUtils.entityIsHidden(animatable)));}
             if (wool_neck.isPresent()) {wool_neck.ifPresent(b -> b.setHidden(atCullDistance));}
             if (wool_rt.isPresent()) {wool_rt.ifPresent(b -> b.setHidden(atCullDistance));}
             if (wool_lt.isPresent()) {wool_lt.ifPresent(b -> b.setHidden(atCullDistance));}

@@ -19,24 +19,6 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
 public class OLlamaTackLayer extends GeoRenderLayer<OLlama> {
-    public static final ResourceLocation[] TEXTURE_LOCATION = new ResourceLocation[]{
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/white.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/orange.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/magenta.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/light_blue.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/yellow.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/lime.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/pink.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/grey.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/light_grey.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/cyan.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/purple.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/blue.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/brown.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/green.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/red.png"),
-            new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/black.png")
-    };
 
     public OLlamaTackLayer(GeoRenderer<OLlama> entityRendererIn) {
         super(entityRendererIn);
@@ -51,18 +33,15 @@ public class OLlamaTackLayer extends GeoRenderLayer<OLlama> {
 
         DyeColor dyeColor = animatable.getSwag();
         ResourceLocation resourceLocation = null;
-
         if (dyeColor != null) {
-            resourceLocation = TEXTURE_LOCATION[dyeColor.getId()];
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "\"textures/entity/llama/carpet/" + dyeColor + ".png");
         }
 
         if (animatable.hasChest()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/tack/saddlebags.png");
         }
 
-        if (resourceLocation == null) {
-            return;
-        }
+        if (resourceLocation == null) return;
         RenderType renderType1 = RenderType.entityCutout(resourceLocation);
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,

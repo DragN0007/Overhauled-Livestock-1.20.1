@@ -1,9 +1,16 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
+import com.dragn0007.dragnlivestock.util.LOUtils;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.entity.player.Player;
+import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+
+import java.util.Optional;
 
 public class OBeeRenderer extends GeoEntityRenderer<OBee> {
 
@@ -14,6 +21,17 @@ public class OBeeRenderer extends GeoEntityRenderer<OBee> {
 
     @Override
     public void render(OBee animatable, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        Optional<GeoBone> body = this.getGeoModel().getBone("body");
+
+        Player player = Minecraft.getInstance().player;
+        double distanceSq = animatable.distanceToSqr(player);
+        boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_CUBES_DISTANCE.get();
+        if (player != null) {
+            if (LivestockOverhaulClientConfig.CULL_HIDDEN.get())
+                if (body.isPresent()) {body.ifPresent(b -> b.setHidden(LOUtils.entityIsHidden(animatable)));}
+        }
+        if (atCullDistance) return;
+
         if (animatable.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         } else {

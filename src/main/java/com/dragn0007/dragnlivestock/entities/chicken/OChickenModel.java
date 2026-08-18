@@ -18,7 +18,6 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
 
     @Override
     public void setCustomAnimations(OChicken animatable, long instanceId, AnimationState<OChicken> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
 

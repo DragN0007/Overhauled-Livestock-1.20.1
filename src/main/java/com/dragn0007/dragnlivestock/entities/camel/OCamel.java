@@ -627,7 +627,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
-		this.entityData.set(OVERLAY_TEXTURE, OCamelMarkingLayer.Overlay.overlayFromOrdinal(variant).resourceLocation.toString());
+		this.entityData.set(OVERLAY_TEXTURE, OCamelBodyLayer.Marking.overlayFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.STRING);
 	public String getOverlayLocation() {
@@ -765,7 +765,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		}
 		Random random = new Random();
 		this.setVariant(random.nextInt(OCamelModel.Variant.values().length));
-		this.setOverlayVariant(random.nextInt(OCamelMarkingLayer.Overlay.values().length));
+		this.setOverlayVariant(random.nextInt(OCamelBodyLayer.Marking.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
 		this.setBreed(random.nextInt(CamelBreed.Breed.values().length));
 
@@ -789,7 +789,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
 		this.entityData.define(VARIANT_TEXTURE, OCamelModel.Variant.DESERT.resourceLocation.toString());
-		this.entityData.define(OVERLAY_TEXTURE, OCamelMarkingLayer.Overlay.NONE.resourceLocation.toString());
+		this.entityData.define(OVERLAY_TEXTURE, OCamelBodyLayer.Marking.NONE.resourceLocation.toString());
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(MANE, 0);
 		this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
@@ -840,7 +840,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 			} else if (j < (100 - LivestockOverhaulCommonConfig.MARKING_CHANCE.get())) {
 				overlay = partnerCamel.getOverlayVariant();
 			} else {
-				overlay = this.random.nextInt(OCamelMarkingLayer.Overlay.values().length);
+				overlay = this.random.nextInt(OCamelBodyLayer.Marking.values().length);
 			}
 
 			int breedChance = this.random.nextInt(100);

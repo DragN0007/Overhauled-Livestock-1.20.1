@@ -8,6 +8,7 @@ public class LivestockOverhaulClientConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Double> CULL_CUBES_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Double> CULL_LAYERS_DISTANCE;
+    public static final ForgeConfigSpec.BooleanValue CULL_HIDDEN;
     public static final ForgeConfigSpec.BooleanValue SIMPLE_MODELS;
     public static final ForgeConfigSpec.BooleanValue HORSE_COAT_GUI;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_TIMER;
@@ -23,6 +24,8 @@ public class LivestockOverhaulClientConfig {
                 .define("Unnecessary Bone Cull Distance", 1024.0);
         CULL_LAYERS_DISTANCE = BUILDER.comment("The distance at which unnecessary layers are un-rendered from O-Animals to improve performance.")
                 .define("Unnecessary Layer Cull Distance", 2048.0);
+        CULL_HIDDEN = BUILDER.comment("Should animal rendering/ cubes be hidden when they're behind solid walls/ unseen? Does not affect actual mechanics/ entity loading.")
+                .define("Cull Bodies When Hidden", true);
         SIMPLE_MODELS = BUILDER.comment("Should O-Animals run simplified, vanilla-styled models? " +
                         "This option may be good for those on lower-end computers/ those having performance issues with the complex LO models." +
                         "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. With this enabled, " +

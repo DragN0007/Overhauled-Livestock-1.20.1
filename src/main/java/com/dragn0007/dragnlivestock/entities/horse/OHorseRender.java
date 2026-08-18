@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -21,8 +22,11 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
         this.addRenderLayer(new OHorseTackLayer(this));
     }
 
+
+
     @Override
     public void preRender(PoseStack poseStack, OHorse animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        Optional<GeoBone> body = this.getGeoModel().getBone("body");
         Optional<GeoBone> body_armor = this.getGeoModel().getBone("body_armor");
         Optional<GeoBone> neck_armor = this.getGeoModel().getBone("neck_armor");
         Optional<GeoBone> wagon_harness = this.getGeoModel().getBone("wagon_harness");
@@ -50,6 +54,8 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_CUBES_DISTANCE.get();
         if (player != null) {
+            if (LivestockOverhaulClientConfig.CULL_HIDDEN.get())
+                if (body.isPresent()) {body.ifPresent(b -> b.setHidden(LOUtils.entityIsHidden(animatable)));}
             if (saddle.isPresent()) {saddle.ifPresent(b -> b.setHidden(atCullDistance));}
             if (reins.isPresent()) {reins.ifPresent(b -> b.setHidden(atCullDistance));}
             if (saddlebags.isPresent()) {saddlebags.ifPresent(b -> b.setHidden(atCullDistance));}
@@ -118,28 +124,21 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         }
 
+        mane_roached.ifPresent(b -> b.setHidden(true));
+        mane_short.ifPresent(b -> b.setHidden(true));
+        mane_buttons.ifPresent(b -> b.setHidden(true));
+        mane_long.ifPresent(b -> b.setHidden(true));
+
         if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
             if (animatable.getManeType() == 0) {
-                mane_roached.ifPresent(b -> b.setHidden(true));
-                mane_short.ifPresent(b -> b.setHidden(true));
                 mane_buttons.ifPresent(b -> b.setHidden(false));
-                mane_long.ifPresent(b -> b.setHidden(true));
             } else if (animatable.getManeType() == 1) {
-                mane_roached.ifPresent(b -> b.setHidden(true));
-                mane_short.ifPresent(b -> b.setHidden(true));
-                mane_buttons.ifPresent(b -> b.setHidden(true));
                 mane_long.ifPresent(b -> b.setHidden(false));
             } else if (animatable.getManeType() == 2) {
                 mane_roached.ifPresent(b -> b.setHidden(false));
-                mane_short.ifPresent(b -> b.setHidden(true));
-                mane_buttons.ifPresent(b -> b.setHidden(true));
-                mane_long.ifPresent(b -> b.setHidden(true));
                 mane.ifPresent(b -> b.setScaleY(1.0F));
             } else if (animatable.getManeType() == 3) {
-                mane_roached.ifPresent(b -> b.setHidden(true));
                 mane_short.ifPresent(b -> b.setHidden(false));
-                mane_buttons.ifPresent(b -> b.setHidden(true));
-                mane_long.ifPresent(b -> b.setHidden(true));
             } else if (animatable.getManeType() == 4) {
                 mane.ifPresent(b -> b.setHidden(true));
             }
@@ -171,12 +170,12 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
                 tail_end.ifPresent(b -> b.setHidden(true));
             }
 
-            if (animatable.getFeathering() == 0) {
-                feathering_fr.ifPresent(b -> b.setHidden(true));
-                feathering_fl.ifPresent(b -> b.setHidden(true));
-                feathering_br.ifPresent(b -> b.setHidden(true));
-                feathering_bl.ifPresent(b -> b.setHidden(true));
-            } else if (animatable.getFeathering() == 1) {
+            feathering_fr.ifPresent(b -> b.setHidden(true));
+            feathering_fl.ifPresent(b -> b.setHidden(true));
+            feathering_br.ifPresent(b -> b.setHidden(true));
+            feathering_bl.ifPresent(b -> b.setHidden(true));
+
+           if (animatable.getFeathering() == 1) {
                 feathering_fr.ifPresent(b -> b.setHidden(false));
                 feathering_fl.ifPresent(b -> b.setHidden(false));
                 feathering_br.ifPresent(b -> b.setHidden(false));

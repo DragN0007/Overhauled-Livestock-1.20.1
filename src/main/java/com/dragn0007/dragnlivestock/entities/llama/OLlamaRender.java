@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.llama;
 
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -21,6 +22,7 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
 
     @Override
     public void render(OLlama entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        Optional<GeoBone> body = this.getGeoModel().getBone("body");
         Optional<GeoBone> saddlebags = this.getGeoModel().getBone("saddlebags");
         Optional<GeoBone> wool_body = this.getGeoModel().getBone("wool_body");
         Optional<GeoBone> blanket = this.getGeoModel().getBone("blanket");
@@ -30,6 +32,8 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
         double distanceSq = this.animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_CUBES_DISTANCE.get();
         if (player != null) {
+            if (LivestockOverhaulClientConfig.CULL_HIDDEN.get())
+                if (body.isPresent()) {body.ifPresent(b -> b.setHidden(LOUtils.entityIsHidden(animatable)));}
             if (saddlebags.isPresent()) {saddlebags.ifPresent(b -> b.setHidden(atCullDistance));}
             if (wool_body.isPresent()) {wool_body.ifPresent(b -> b.setHidden(atCullDistance));}
             if (blanket.isPresent()) {blanket.ifPresent(b -> b.setHidden(atCullDistance));}

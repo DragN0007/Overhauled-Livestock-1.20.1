@@ -580,7 +580,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public String getOverlayLocation() {return FarmGoatMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
+	public String getOverlayLocation() {return FarmGoatBodyLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
 	public int getOverlayVariant() {
 		return this.entityData.get(OVERLAY);
 	}
@@ -589,7 +589,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public static final EntityDataAccessor<Integer> FACE_OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public ResourceLocation getFaceOverlayLocation() {return FarmGoatFaceMarkingLayer.Overlay.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
+	public ResourceLocation getFaceOverlayLocation() {return FarmGoatBodyLayer.Face_Marking.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
 	public int getFaceOverlayVariant() {
 		return this.entityData.get(FACE_OVERLAY);
 	}
@@ -598,7 +598,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public ResourceLocation getEyeLocation() {return FarmGoatFaceMarkingLayer.Overlay.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
+	public ResourceLocation getEyeLocation() {return FarmGoatBodyLayer.Face_Marking.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
 	public int getEyeVariant() {
 		return this.entityData.get(EYES);
 	}
@@ -801,12 +801,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			this.setMarkingByBreed();
 			this.setFaceMarkingByBreed();
 			this.setHornVariant(random.nextInt(BreedHorns.values().length));
-			this.setEyeVariant(random.nextInt(FarmGoatEyeLayer.Overlay.values().length));
+			this.setEyeVariant(random.nextInt(FarmGoatBodyLayer.EyeColor.values().length));
 		} else {
 			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
-			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
-			this.setEyeVariant(random.nextInt(FarmGoatEyeLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
+			this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
+			this.setEyeVariant(random.nextInt(FarmGoatBodyLayer.EyeColor.values().length));
 			this.setHornVariant(random.nextInt(BreedHorns.values().length));
 		}
 
@@ -1003,12 +1003,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setMarkingByBreed() {
 
 		if (this.getBreed() == 0) { //classic
-			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 		}
 
 		if (this.getBreed() == 1) { //meat
 			if (random.nextDouble() <= 0.10) {
-				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.40) {
 				int[] variants = {22, 23, 24, 25};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1020,7 +1020,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 2) { //nubian
 			if (random.nextDouble() <= 0.10) {
-				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.10) {
 				int[] variants = {29, 30, 31, 32};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1029,12 +1029,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (this.getBreed() == 3) { //warm
-			this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+			this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 		}
 
 		if (this.getBreed() == 4) { //fibrous
 			if (random.nextDouble() <= 0.02) {
-				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.02) {
 				this.setOverlayVariant(0);
 			}
@@ -1042,7 +1042,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 5) { //dairy
 			if (random.nextDouble() <= 0.15) {
-				this.setOverlayVariant(random.nextInt(FarmGoatMarkingLayer.Overlay.values().length));
+				this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 			} else if (random.nextDouble() > 0.15) {
 				this.setOverlayVariant(0);
 			}
@@ -1053,12 +1053,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public void setFaceMarkingByBreed() {
 
 		if (this.getBreed() == 0) { //classic
-			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 		}
 
 		if (this.getBreed() == 1) { //meat
 			if (random.nextDouble() <= 0.05) {
-				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.40) {
 				int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 11};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1072,7 +1072,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 2) { //nubian
 			if (random.nextDouble() <= 0.05) {
-				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {6, 10};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1081,12 +1081,12 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		}
 
 		if (this.getBreed() == 3) { //warm
-			this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+			this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 		}
 
 		if (this.getBreed() == 4) { //fibrous
 			if (random.nextDouble() <= 0.02) {
-				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 			} else if (random.nextDouble() > 0.02) {
 				this.setFaceOverlayVariant(0);
 			}
@@ -1094,7 +1094,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 5) { //dairy
 			if (random.nextDouble() <= 0.15) {
-				this.setFaceOverlayVariant(random.nextInt(FarmGoatFaceMarkingLayer.Overlay.values().length));
+				this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 			} else if (random.nextDouble() > 0.15) {
 				this.setFaceOverlayVariant(0);
 			}
