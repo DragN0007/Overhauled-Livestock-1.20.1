@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-20T22:19:33.8913291	Recipes
+// 1.20.1	2026-08-18T18:09:42.964322	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 3cc6b7da964f544de96bc8af30774332b59395e3 data/dragnlivestock/advancements/recipes/misc/black_accented_heavy_saddle.json
 0984543178a56357ae9cfd0267cdf27d47368a74 data/dragnlivestock/advancements/recipes/misc/black_accented_light_saddle.json
@@ -356,6 +356,7 @@ da42d280904b78933ae699df742fb1e4ac53940b data/dragnlivestock/advancements/recipe
 8ca6470809d42f710b91cf8abc14db6945613ef7 data/dragnlivestock/advancements/recipes/misc/tail_scissors.json
 da5cc8e9cc90b09b8a2b93bb1835c0ee298a462b data/dragnlivestock/advancements/recipes/misc/transport_cart.json
 ffbda0cce31ffbbd293855611499c91042345962 data/dragnlivestock/advancements/recipes/misc/utility_knife.json
+c6036ee07d2fdb2b4589269fd196533a803bda82 data/dragnlivestock/advancements/recipes/misc/vara.json
 c06c53263b6027e9728c62f7b5c92fb4afcd43e1 data/dragnlivestock/advancements/recipes/misc/wagon_body.json
 a971aaaa542333fe7729892ed2ca286073862dbf data/dragnlivestock/advancements/recipes/misc/wagon_cover.json
 1800cd42d98af8cb63154ffa9083ac75a3f2e254 data/dragnlivestock/advancements/recipes/misc/wagon_harness.json
@@ -809,6 +810,7 @@ a9d6b9077e4a21fee4bfadfb495d0b1da436d3d3 data/dragnlivestock/recipes/trans_medie
 88ec4b8adcf1206ad31bdfde2971587a8c232740 data/dragnlivestock/recipes/trans_racing_blanket.json
 e242d456bbf6ed3c8f6ca052420a25ecd07d8a91 data/dragnlivestock/recipes/trans_western_blanket.json
 5b1962d8b33da953ded8667163576a2ef203fa9e data/dragnlivestock/recipes/utility_knife.json
+ee4bc4ef90d93a9fdec53dc8858a0e97ebc23236 data/dragnlivestock/recipes/vara.json
 073547a49a884aa50b64fd0a4502dfab20c1cbdd data/dragnlivestock/recipes/wagon_body.json
 1f93c04f95321c187e1ad32538f9f63e1e549583 data/dragnlivestock/recipes/wagon_cover.json
 6aa611dee11bb9f8924ea0811b8c2b59ff74391e data/dragnlivestock/recipes/wagon_harness.json

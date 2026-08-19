@@ -6,7 +6,6 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-
     public static final ForgeConfigSpec.BooleanValue REPLACE_SPAWN_EGG_ANIMALS;
     public static final ForgeConfigSpec.ConfigValue<Double> SPAWN_PREVENTION_PERCENT;
     public static final ForgeConfigSpec.BooleanValue REPLACE_HORSES;
@@ -53,6 +52,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue UNDEAD_HORSE_DEATH;
     public static final ForgeConfigSpec.ConfigValue<Double> UNDEAD_HORSE_CHANCE;
     public static final ForgeConfigSpec.ConfigValue<Integer> DECOMPISITION_STAGE_TIME;
+    public static final ForgeConfigSpec.BooleanValue AGGRESSIVE_FIGHTING_BULLS;
     public static final ForgeConfigSpec.BooleanValue GROUND_TIE;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_PIG_BABIES;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_RABBIT_BABIES;
@@ -275,6 +275,9 @@ public class LivestockOverhaulCommonConfig {
 
         HORSE_HERD_ANIMALS = BUILDER.comment("Should O-Cows, O-Sheep, and wild O-Horses herd/ run away from mounted horses?")
                 .define("Horses Scare Herd Animals", true);
+
+        AGGRESSIVE_FIGHTING_BULLS = BUILDER.comment("Should Spanish Fighting Bulls attack on sight, instead of requiring the player to hold a sword?")
+                .define("Hyper-Aggressive Spanish Fighting Bulls", false);
 
         GROUND_TIE = BUILDER.comment("Should O-Mounts \"ground tie\", or stop moving around, when saddled & dismounted?")
                 .define("Ground Tie When Dismounted", true);

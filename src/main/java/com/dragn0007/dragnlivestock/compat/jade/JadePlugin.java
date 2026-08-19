@@ -60,5 +60,16 @@ public class JadePlugin implements IWailaPlugin {
         registration.registerEntityComponent(new PigQualityTooltip(), OPig.class);
         registration.registerEntityComponent(new RabbitQualityTooltip(), ORabbit.class);
         registration.registerEntityComponent(new SheepQualityTooltip(), OSheep.class);
+
+        registration.registerEntityComponent(new CowMilkableTooltip(), OCow.class);
+        registration.registerEntityComponent(new RabbitShearTooltip(), ORabbit.class);
+        registration.registerEntityComponent(new FarmGoatMilkableTooltip(), FarmGoat.class);
+        registration.registerEntityComponent(new FarmGoatShearTooltip(), FarmGoat.class);
+        registration.registerEntityComponent(new GoatMilkableTooltip(), OGoat.class);
+        registration.registerEntityComponent(new GoatShearTooltip(), OGoat.class);
+        registration.registerEntityComponent(new SheepMilkableTooltip(), OSheep.class);
+        registration.registerEntityComponent(new SheepShearTooltip(), OSheep.class);
+        registration.registerEntityComponent(new LlamaMilkableTooltip(), OLlama.class);
+        registration.registerEntityComponent(new LlamaShearTooltip(), OLlama.class);
     }
 }

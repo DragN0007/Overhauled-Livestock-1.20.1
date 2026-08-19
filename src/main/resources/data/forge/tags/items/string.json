@@ -2,13 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:string",
-    {
-      "id": "tfc:jute_fiber",
-      "required": false
-    },
-    {
-      "id": "htm:plant_string",
-      "required": false
-    }
+    {"id": "tfc:jute_fiber", "required": false},
+    {"id": "htm:plant_string", "required": false}
   ]
 }

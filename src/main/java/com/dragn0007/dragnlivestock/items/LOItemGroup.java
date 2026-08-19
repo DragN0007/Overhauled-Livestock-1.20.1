@@ -75,6 +75,7 @@ public class LOItemGroup {
                         output.accept(LOItems.MARKING_OSCILLATOR.get());
                         output.accept(LOItems.BREED_OSCILLATOR.get());
                         output.accept(LOItems.MAGNIFYING_GLASS.get());
+                        output.accept(LOItems.VARA.get());
 
                         output.accept(LOItems.MANE_SCISSORS.get());
                         output.accept(LOItems.TAIL_SCISSORS.get());

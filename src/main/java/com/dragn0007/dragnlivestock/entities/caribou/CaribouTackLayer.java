@@ -46,7 +46,7 @@ public class CaribouTackLayer extends GeoRenderLayer<Caribou> {
         ItemStack armorItemStack = armorSlots.get(2);
 
         ResourceLocation resourceLocation = null;
-        if (saddleStack.isEmpty() && armorItemStack.isEmpty() && decorStack.isEmpty() && animatable.getFlowerItem() == null && !animatable.isBranded()) return;
+        if (saddleStack.isEmpty() && armorItemStack.isEmpty() && decorStack.isEmpty()) return;
 
         if(!saddleStack.isEmpty()) {
             if (saddleStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {

@@ -166,11 +166,15 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		);
 
 		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 2.0F, 2.3D, livingEntity ->
+				livingEntity instanceof Player && livingEntity.getMainHandItem().is(LOItems.VARA.get()))
+		);
+
+		this.goalSelector.addGoal(1, new OAvoidEntityGoal<>(this, LivingEntity.class, 15.0F, 2.0F, 2.3D, livingEntity ->
 				livingEntity.getType().is(LOTags.Entity_Types.WOLVES) && (livingEntity instanceof TamableAnimal && !((TamableAnimal) livingEntity).isTame() && !this.isLeashed())
 		));
 
 		this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, entity ->
-				entity instanceof Player && this.getBreed() == 11 && !this.isBaby() && this.isMale() && entity.getMainHandItem().is(ItemTags.SWORDS)
+				entity instanceof Player && this.getBreed() == 11 && !this.isBaby() && this.isMale() && (entity.getMainHandItem().is(ItemTags.SWORDS) || LivestockOverhaulCommonConfig.AGGRESSIVE_FIGHTING_BULLS.get())
 		));
 	}
 

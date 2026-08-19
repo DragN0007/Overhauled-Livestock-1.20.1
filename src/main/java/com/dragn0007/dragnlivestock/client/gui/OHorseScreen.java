@@ -186,6 +186,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             case 20: return "Standardbred (Racer)";
             case 21: return "Trakehner (Warmblood)";
             case 22: return "Boulonnais (Draft)";
+            case 23: return "Lusitano (Warmblood)";
             default: return "Unknown";
         }
     }

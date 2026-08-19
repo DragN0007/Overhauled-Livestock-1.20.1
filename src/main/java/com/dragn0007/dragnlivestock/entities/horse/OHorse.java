@@ -250,19 +250,38 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public boolean isDraftBreed() {
-		return this.getBreed() == 1 || this.getBreed() == 5 || this.getBreed() == 8 || this.getBreed() == 12 || this.getBreed() == 14 || this.getBreed() == 17 || this.getBreed() == 22;
+		return switch (this.getBreed()) {
+			case 1,5,8,12,14,17,22 -> true;
+			default -> false;
+		};
 	}
+
 	public boolean isPonyBreed() {
-		return this.getBreed() == 3 || this.getBreed() == 6 || this.getBreed() == 11 || this.getBreed() == 15 || this.getBreed() == 16 || this.getBreed() == 19;
+		return switch (this.getBreed()) {
+			case 3,6,11,15,16,19 -> true;
+			default -> false;
+		};
 	}
+
 	public boolean isStockBreed() {
-		return this.getBreed() == 0 || this.getBreed() == 7;
+		return switch (this.getBreed()) {
+			case 0,7 -> true;
+			default -> false;
+		};
 	}
+
 	public boolean isWarmbloodedBreed() {
-		return this.getBreed() == 2 || this.getBreed() == 9 || this.getBreed() == 10 || this.getBreed() == 18 || this.getBreed() == 21;
+		return switch (this.getBreed()) {
+			case 2,9,10,18,21,23 -> true;
+			default -> false;
+		};
 	}
+
 	public boolean isRacingBreed() {
-		return this.getBreed() == 4 || this.getBreed() == 13 || this.getBreed() == 20;
+		return switch (this.getBreed()) {
+			case 4,13,20 -> true;
+			default -> false;
+		};
 	}
 
 	@Override
@@ -309,9 +328,24 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			int passengers = this.getPassengers().indexOf(entity);
 
 			if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-				if (getBreed() == 0) {
-					offsetY = 1.03;
-				}
+				if (getBreed() == 0) offsetY = 1.03;
+				if (getBreed() == 2) offsetY = 1.2;
+				if (getBreed() == 3) offsetY = 0.9;
+				if (getBreed() == 4) offsetY = 1.2;
+				if (getBreed() == 7) offsetY = 1.05;
+				if (getBreed() == 9) offsetY = 1.05;
+				if (getBreed() == 10) offsetY = 1.05;
+				if (getBreed() == 11) offsetY = 0.8;
+				if (getBreed() == 13) offsetY = 1.1;
+				if (getBreed() == 15) offsetY = 0.62;
+				if (getBreed() == 16) offsetY = 0.65;
+				if (getBreed() == 17) offsetY = 0.98;
+				if (getBreed() == 18) offsetY = 1.03;
+				if (getBreed() == 19) offsetY = 0.46;
+				if (getBreed() == 20) offsetY = 1.08;
+				if (getBreed() == 21) offsetY = 1.03;
+				if (getBreed() == 22) offsetY = 1.08;
+				if (getBreed() == 23) offsetY = 1.08;
 
 				if (getBreed() == 1) {
 					switch (passengers) {
@@ -323,18 +357,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 							offsetZ = -0.7;
 							break;
 					}
-				}
-
-				if (getBreed() == 2) {
-					offsetY = 1.2;
-				}
-
-				if (getBreed() == 3) {
-					offsetY = 0.9;
-				}
-
-				if (getBreed() == 4) {
-					offsetY = 1.2;
 				}
 
 				if (getBreed() == 5) {
@@ -361,10 +383,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					}
 				}
 
-				if (getBreed() == 7) {
-					offsetY = 1.05;
-				}
-
 				if (getBreed() == 8) {
 					switch (passengers) {
 						case 0:
@@ -375,18 +393,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 							offsetZ = -0.7;
 							break;
 					}
-				}
-
-				if (getBreed() == 9) {
-					offsetY = 1.05;
-				}
-
-				if (getBreed() == 10) {
-					offsetY = 1.05;
-				}
-
-				if (getBreed() == 11) {
-					offsetY = 0.8;
 				}
 
 				if (getBreed() == 12) {
@@ -401,10 +407,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					}
 				}
 
-				if (getBreed() == 13) {
-					offsetY = 1.1;
-				}
-
 				if (getBreed() == 14) {
 					switch (passengers) {
 						case 0:
@@ -415,38 +417,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 							offsetZ = -0.7;
 							break;
 					}
-				}
-
-				if (getBreed() == 15) {
-					offsetY = 0.62;
-				}
-
-				if (getBreed() == 16) {
-					offsetY = 0.65;
-				}
-
-				if (getBreed() == 17) {
-					offsetY = 0.98;
-				}
-
-				if (getBreed() == 18) {
-					offsetY = 1.03;
-				}
-
-				if (getBreed() == 19) {
-					offsetY = 0.46;
-				}
-
-				if (getBreed() == 20) {
-					offsetY = 1.08;
-				}
-
-				if (getBreed() == 21) {
-					offsetY = 1.03;
-				}
-
-				if (getBreed() == 22) {
-					offsetY = 1.08;
 				}
 
 				if (month == Month.DECEMBER && (day == 24 || day == 25)) {
@@ -1636,23 +1606,23 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void setColorByBreed() {
 
 		if (this.getBreed() == 0) { //mustangs can come in any color naturally, aside from fjord coloring
-			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+			int[] variants = {12,3,4,5,6,7,8,9,10,11,12,13,15,
+					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 1) { //ardennes tend to come in browns, roans and greys
 			if (random.nextDouble() < 0.05) {
-				int[] variants = {4, 5, 8, 11, 19, 25, 26, 27, 28, 29, 30, 32};
+				int[] variants = {4,5,8,11,19,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
-				int[] variants = {1, 2, 3, 7, 9, 16, 17, 18, 20, 21};
+				int[] variants = {1,2,3,7,9,16,17,18,20,21};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 6, 10, 12, 13, 15, 22, 23, 24, 31, 33};
+				int[] variants = {0,6,10,12,13,15,22,23,24,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1660,15 +1630,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 2) { //kladrubers tend to come in blacks and greys
 			if (random.nextDouble() < 0.02) {
-				int[] variants = {8, 11, 25, 31, 32};
+				int[] variants = {8,11,25,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.20 && random.nextDouble() > 0.02) {
-				int[] variants = {0, 1, 3, 6, 7, 10, 12, 13, 16, 17, 18, 19, 20, 21, 26, 27, 28, 29, 30};
+				int[] variants = {0,1,3,6,7,10,12,13,16,17,18,19,20,21,26,27,28,29,30};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {2, 4, 5, 9, 15, 22, 23, 24, 33};
+				int[] variants = {2,4,5,9,15,22,23,24,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1686,12 +1656,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 4) { //thoroughbreds can come in any color naturally, aside from fjord coloring. they usually come in bays
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
-				int[] variants = {0, 1, 2, 3, 6, 10, 12, 13, 17, 20, 21, 22, 26};
+				int[] variants = {0,1,2,3,6,10,12,13,17,20,21,22,26};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1699,8 +1669,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 5) { //friesians usually just come in black
 			if (random.nextDouble() < 0.02) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.02) {
@@ -1709,27 +1679,27 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		if (this.getBreed() == 6) { //irish cobs can come in any color naturally, aside from fjord coloring
-			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 7) { //american quarters can come in any color naturally, aside from fjord coloring
-			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 8) { //percherons usually just come in blacks and greys
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
-				int[] variants = {2, 4, 5, 9, 15, 22, 23, 24, 29, 33};
+				int[] variants = {2,4,5,9,15,22,23,24,29,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1737,32 +1707,32 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 9) { //selle francais can come in any color naturally, aside from fjord coloring. they usually come in bays
 			if (random.nextDouble() < 0.20) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 1, 2, 3, 6, 10, 12, 13, 17, 20, 21, 22, 26, 31};
+				int[] variants = {0,1,2,3,6,10,12,13,17,20,21,22,26,31};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
 		}
 
 		if (this.getBreed() == 10) { //marwaris can come in any color naturally, aside from fjord coloring
-			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 11) { //mongolian ponies can come in any color naturally, aside from fjord coloring. they usually come in duns or bays
 			if (random.nextDouble() < 0.20) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 25, 26, 27, 28, 29, 30};
+				int[] variants = {0,1,2,3,6,7,8,9,10,11,12,13,17,25,26,27,28,29,30};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1770,12 +1740,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 12) { //shires usually come in greys or browns
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
-				int[] variants = {0, 2, 4, 6, 10, 12, 13, 15, 17, 21, 22, 23, 24, 33};
+				int[] variants = {0,2,4,6,10,12,13,15,17,21,22,23,24,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1783,12 +1753,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 13) { //ahkal tekes usually come in creams or other light colors
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
-				int[] variants = {7, 8, 11, 15, 16, 18, 19, 23, 24, 25, 26, 27, 19, 30, 32};
+				int[] variants = {7,8,11,15,16,18,19,23,24,25,26,27,19,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1796,12 +1766,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 14) { //american soliders usually come in blacks or greys but can be other colors as well
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
-				int[] variants = {2, 4, 5, 9, 15, 22, 23, 24, 29, 31, 33};
+				int[] variants = {2,4,5,9,15,22,23,24,29,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1809,15 +1779,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 15) { //welsh ponies tend to come in browns, roans and greys
 			if (random.nextDouble() < 0.05) {
-				int[] variants = {4, 5, 8, 11, 19, 25, 26, 27, 28, 29, 30, 32};
+				int[] variants = {4,5,8,11,19,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
-				int[] variants = {1, 2, 3, 7, 9, 16, 17, 18, 20, 21};
+				int[] variants = {1,2,3,7,9,16,17,18,20,21};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 6, 10, 12, 13, 15, 22, 23, 24, 31, 33};
+				int[] variants = {0,6,10,12,13,15,22,23,24,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1825,12 +1795,12 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 16) { //connemaras usually come in blacks or greys but can be other colors as well
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
-				int[] variants = {2, 4, 5, 9, 15, 22, 23, 24, 29, 31, 33};
+				int[] variants = {2,4,5,9,15,22,23,24,29,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1838,48 +1808,48 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 17) { //haflingers can come in any color naturally, aside from fjord coloring. they usually come in duns or bays
 			if (random.nextDouble() < 0.20) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 25, 26, 27, 28, 29, 30};
+				int[] variants = {0,1,2,3,6,7,8,9,10,11,12,13,17,25,26,27,28,29,30};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
 		}
 
-		if (this.getBreed() == 18) { //oldenburgers tend to come in browns, roans and greys
+		if (this.getBreed() == 18) { //oldenburgers tend to come in browns,roans and greys
 			if (random.nextDouble() < 0.05) {
-				int[] variants = {4, 5, 8, 11, 19, 25, 26, 27, 28, 29, 30, 32};
+				int[] variants = {4,5,8,11,19,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
-				int[] variants = {1, 2, 3, 7, 9, 16, 17, 18, 20, 21};
+				int[] variants = {1,2,3,7,9,16,17,18,20,21};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 6, 10, 12, 13, 15, 22, 23, 24, 31, 33};
+				int[] variants = {0,6,10,12,13,15,22,23,24,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
 		}
 
 		if (this.getBreed() == 19) { //shetland ponies can come in any color naturally, aside from fjord coloring
-			int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-					16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 20) { //standardbreds can come in any color naturally, aside from fjord coloring. they usually come in bays
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
-				int[] variants = {0, 1, 2, 3, 6, 10, 12, 13, 17, 20, 21, 22, 26};
+				int[] variants = {0,1,2,3,6,10,12,13,17,20,21,22,26};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1887,15 +1857,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 21) { //trakehners tend to come in browns, roans and greys
 			if (random.nextDouble() < 0.05) {
-				int[] variants = {4, 5, 8, 11, 19, 25, 26, 27, 28, 29, 30, 32};
+				int[] variants = {4,5,8,11,19,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
-				int[] variants = {1, 2, 3, 7, 9, 16, 17, 18, 20, 21};
+				int[] variants = {1,2,3,7,9,16,17,18,20,21};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 6, 10, 12, 13, 15, 22, 23, 24, 31, 33};
+				int[] variants = {0,6,10,12,13,15,22,23,24,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1903,12 +1873,25 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 22) { //boulonnais usually just come in white or silver
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15,
-						16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
-				int[] variants = {24, 33};
+				int[] variants = {24,33};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 22) { //lusitanos usually just come in greys
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
+						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {0,15,24,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1926,7 +1909,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1936,7 +1919,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.10) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
-				int[] variants = {0, 4, 14, 19, 21, 22, 23, 29, 33, 35, 38, 41, 42};
+				int[] variants = {0,4,14,19,21,22,23,29,33,35,38,41,42};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
@@ -1948,7 +1931,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
-				int[] variants = {0, 4, 14, 19, 21, 22, 23, 29, 33, 35, 39, 42, 43};
+				int[] variants = {0,4,14,19,21,22,23,29,33,35,39,42,43};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
@@ -1976,7 +1959,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.02) {
-				int[] variants = {1, 3, 6, 8, 9, 10, 12, 15, 16, 17, 20, 24, 25, 27, 28, 30, 31, 34, 36, 37, 40};
+				int[] variants = {1,3,6,8,9,10,12,15,16,17,20,24,25,27,28,30,31,34,36,37,40};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1990,7 +1973,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.02) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2000,7 +1983,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 14, 19, 21, 22, 23, 29, 32, 33, 42, 43};
+				int[] variants = {0,4,6,7,14,19,21,22,23,29,32,33,42,43};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2026,7 +2009,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.07) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.07) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2044,7 +2027,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2054,7 +2037,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -2064,7 +2047,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2074,7 +2057,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2084,7 +2067,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -2094,7 +2077,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43, 44};
+				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -2120,7 +2103,17 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0, 26, 30};
+				int[] variants = {0,26,30};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 22) { //lusitanos can have small markings or dapples
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,26,29,30,32,33,35,39,41,42,43,44};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}

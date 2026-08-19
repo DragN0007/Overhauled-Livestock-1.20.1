@@ -35,6 +35,16 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
     }
 
     public void buildCommonRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.VARA.get())
+                .define('A', Items.STICK)
+                .define('B', Items.IRON_NUGGET)
+                .pattern("  B")
+                .pattern(" A ")
+                .pattern("A  ")
+                .unlockedBy("has_stick", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.STICK).build()))
+                .save(pFinishedRecipeConsumer);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, LOItems.MOUNT_REGISTRY.get())
                 .requires(Items.BOOK)
                 .requires(LOItems.MOUNT_KEY.get())

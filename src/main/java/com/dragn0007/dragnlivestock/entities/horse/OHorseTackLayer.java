@@ -71,6 +71,7 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                             1, 1, 1, 1);
                 }
             }
+
             if (animatable.isSaddled() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
                 if (resourceLocation != null) {

@@ -2,9 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:shears",
-    {
-      "id": "#tfc:shears",
-      "required": false
-    }
+    {"id": "#tfc:shears", "required": false}
   ]
 }
