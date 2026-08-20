@@ -140,8 +140,10 @@ public class ODonkeyTackLayer extends GeoRenderLayer<ODonkey> {
                         !(decorStack.getItem() instanceof CosmeticsItem)) {
                     if (!(armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) && !animatable.isWearingHarness()) {
                         if (armorItemStack.getItem() == Items.LEATHER_HORSE_ARMOR) {
+                            if (decorStack.getItem() instanceof BlanketItem || decorStack.is(LOTags.Items.CARPET_BLANKETS))
                             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/" + color + ".png");
                         } else if (armorItemStack.getItem() == LOItems.MINIMAL_LEATHER_HORSE_ARMOR.get()) {
+                            if (decorStack.getItem() instanceof BlanketItem || decorStack.is(LOTags.Items.CARPET_BLANKETS))
                             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/leather/" + color + "_minimal.png");
                         } else if (decorStack.is(LOTags.Items.CARPET_BLANKETS) || decorStack.is(LOTags.Items.MEDIEVAL_BLANKETS) || decorStack.is(LOTags.Items.MODERN_BLANKETS) || decorStack.is(LOTags.Items.RACING_BLANKETS) || decorStack.is(LOTags.Items.WESTERN_BLANKETS)) {
                             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/armor/carpet/" + color + ".png");

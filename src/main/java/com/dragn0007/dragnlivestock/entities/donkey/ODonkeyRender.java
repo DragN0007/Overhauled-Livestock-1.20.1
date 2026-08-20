@@ -31,10 +31,6 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
         Optional<GeoBone> saddlebags = this.getGeoModel().getBone("saddlebags");
         Optional<GeoBone> saddle = this.getGeoModel().getBone("saddle");
         Optional<GeoBone> reins = this.getGeoModel().getBone("saddle2");
-        Optional<GeoBone> shoe_fr = this.getGeoModel().getBone("front_right_shoe");
-        Optional<GeoBone> shoe_fl = this.getGeoModel().getBone("front_left_shoe");
-        Optional<GeoBone> shoe_br = this.getGeoModel().getBone("back_right_shoe");
-        Optional<GeoBone> shoe_bl = this.getGeoModel().getBone("back_left_shoe");
         Optional<GeoBone> mane = this.getGeoModel().getBone("mane");
         Optional<GeoBone> tail = this.getGeoModel().getBone("tail");
 
@@ -53,10 +49,6 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
             if (neck_armor.isPresent()) {neck_armor.ifPresent(b -> b.setHidden(atCullDistance));}
             if (mane.isPresent()) {mane.ifPresent(b -> b.setHidden(atCullDistance));}
             if (tail.isPresent()) {tail.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (shoe_fr.isPresent()) {shoe_fr.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (shoe_fl.isPresent()) {shoe_fl.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (shoe_br.isPresent()) {shoe_br.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (shoe_bl.isPresent()) {shoe_bl.ifPresent(b -> b.setHidden(atCullDistance));}
         }
         if (atCullDistance) return;
 
@@ -70,17 +62,9 @@ public class ODonkeyRender extends GeoEntityRenderer<ODonkey> {
             if (animatable.isSaddled()) {
                 saddle.ifPresent(b -> b.setHidden(false));
                 reins.ifPresent(b -> b.setHidden(false));
-                shoe_fr.ifPresent(b -> b.setHidden(false));
-                shoe_fl.ifPresent(b -> b.setHidden(false));
-                shoe_br.ifPresent(b -> b.setHidden(false));
-                shoe_bl.ifPresent(b -> b.setHidden(false));
             } else {
                 saddle.ifPresent(b -> b.setHidden(true));
                 reins.ifPresent(b -> b.setHidden(true));
-                shoe_fr.ifPresent(b -> b.setHidden(true));
-                shoe_fl.ifPresent(b -> b.setHidden(true));
-                shoe_br.ifPresent(b -> b.setHidden(true));
-                shoe_bl.ifPresent(b -> b.setHidden(true));
             }
 
             if (animatable.isWearingPullingHarness()) {
