@@ -51,8 +51,6 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (animatable.getOverlayVariant() == 0 && !animatable.isTagged()) return;
-
         if (animatable.getOverlayVariant() != 0) {
             if ((animatable.isDyed() && animatable.getOverlayVariant() == 3) || LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || animatable.isBaby())
                 return;

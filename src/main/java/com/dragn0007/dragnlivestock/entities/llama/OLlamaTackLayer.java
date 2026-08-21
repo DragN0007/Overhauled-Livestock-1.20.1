@@ -34,7 +34,7 @@ public class OLlamaTackLayer extends GeoRenderLayer<OLlama> {
         DyeColor dyeColor = animatable.getSwag();
         ResourceLocation resourceLocation = null;
         if (dyeColor != null) {
-            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "\"textures/entity/llama/carpet/" + dyeColor + ".png");
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/carpet/" + dyeColor + ".png");
         }
 
         if (animatable.hasChest()) {
