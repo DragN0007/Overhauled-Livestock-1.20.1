@@ -34,7 +34,6 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
 
-        if (animatable.getOverlayVariant() == 0 || animatable.isBaby()) return;
         if (animatable.getBreed() == 9) {
             ResourceLocation resourceLocation;
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/overlay/antlers.png");
@@ -48,6 +47,7 @@ public class ORabbitMarkingLayer extends GeoRenderLayer<ORabbit> {
                     1, 1, 1, 1);
         }
 
+        if (animatable.getOverlayVariant() == 0 || animatable.isBaby()) return;
         RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
