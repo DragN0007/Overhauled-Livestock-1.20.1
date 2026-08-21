@@ -26,7 +26,7 @@ public class OPigRenderLayer extends GeoRenderLayer<OPig> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isBaby() || (animatable.getOverlayVariant() == 0 && !animatable.isTagged())) return;
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || animatable.isBaby() || (animatable.getOverlayVariant() == 0 && !animatable.isTagged())) return;
 
         if (animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
