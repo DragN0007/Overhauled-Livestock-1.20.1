@@ -70,9 +70,9 @@ public class Grub extends Animal implements GeoEntity {
 		return this.hasSweater;
 	}
 
-	public boolean removeWhenFarAway(double v) {
-		return !this.hasSweater();
-	}
+//	public boolean removeWhenFarAway(double v) {
+//		return !this.hasSweater();
+//	}
 
 	@Override
 	public @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
