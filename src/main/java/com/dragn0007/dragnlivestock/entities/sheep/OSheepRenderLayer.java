@@ -51,9 +51,7 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (animatable.getOverlayVariant() != 0) {
-            if ((animatable.isDyed() && animatable.getOverlayVariant() == 3) || LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || animatable.isBaby())
-                return;
+        if (animatable.getOverlayVariant() != 0 && ((!animatable.isDyed() && animatable.getOverlayVariant() != 3) && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && !animatable.isBaby())) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
@@ -65,7 +63,7 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
             return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();
