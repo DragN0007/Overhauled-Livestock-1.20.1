@@ -196,11 +196,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public boolean isGreatQuality() {
 		return this.getQuality() > 25 && this.getQuality() <= 50;
 	}
-
 	public boolean isFantasticQuality() {
 		return this.getQuality() > 50 && this.getQuality() <= 75;
 	}
-
 	public boolean isExquisiteQuality() {
 		return this.getQuality() > 75 && this.getQuality() <= 100;
 	}
@@ -215,160 +213,30 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0 && (!LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() || (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BIPRODUCTS.get() && this.isFemale()))) {
-				if (this.getBreed() == 0) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.EGG.get());
-							this.spawnAtLocation(LOItems.EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.EGG.get());
+				Item fertilizedEgg = LOItems.EGG.get();
+				switch (this.getBreed()) {
+					case 0 -> fertilizedEgg = LOItems.EGG.get();
+					case 1 -> fertilizedEgg = LOItems.AMERAUCANA_EGG.get();
+					case 2 -> fertilizedEgg = LOItems.CREAM_LEGBAR_EGG.get();
+					case 3 -> fertilizedEgg = LOItems.MARANS_EGG.get();
+					case 4 -> fertilizedEgg = LOItems.OLIVE_EGGER_EGG.get();
+					case 5 -> fertilizedEgg = LOItems.SUSSEX_SILKIE_EGG.get();
+					case 6 -> fertilizedEgg = LOItems.AYAM_CEMANI_EGG.get();
+					case 7 -> fertilizedEgg = LOItems.ORPINGTON_EGG.get();
+					case 8 -> fertilizedEgg = LOItems.POLISH_EGG.get();
+					case 9 -> fertilizedEgg = LOItems.WYANDOTTE_EGG.get();
+					case 10 -> fertilizedEgg = LOItems.BRAHMA_EGG.get();
 				}
 
-				if (this.getBreed() == 1) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
-							this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
-						}
+				if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+					if (this.isGreatQuality() || this.isFantasticQuality()) {
+						this.spawnAtLocation(new ItemStack(fertilizedEgg, random.nextInt(1)));
+					} else if (this.isExquisiteQuality()) {
+						this.spawnAtLocation(new ItemStack(fertilizedEgg, random.nextInt(2)));
 					}
-					this.spawnAtLocation(LOItems.AMERAUCANA_EGG.get());
 				}
 
-				if (this.getBreed() == 2) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
-							this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.CREAM_LEGBAR_EGG.get());
-				}
-
-				if (this.getBreed() == 3) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.MARANS_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.MARANS_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.MARANS_EGG.get());
-							this.spawnAtLocation(LOItems.MARANS_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.MARANS_EGG.get());
-				}
-
-				if (this.getBreed() == 4) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
-							this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.OLIVE_EGGER_EGG.get());
-				}
-
-				if (this.getBreed() == 5) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
-							this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.SUSSEX_SILKIE_EGG.get());
-				}
-
-				if (this.getBreed() == 6) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
-							this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.AYAM_CEMANI_EGG.get());
-				}
-
-				if (this.getBreed() == 7) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
-							this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.ORPINGTON_EGG.get());
-				}
-
-				if (this.getBreed() == 8) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.POLISH_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.POLISH_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.POLISH_EGG.get());
-							this.spawnAtLocation(LOItems.POLISH_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.POLISH_EGG.get());
-				}
-
-				if (this.getBreed() == 9) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-				}
-
-				if (this.getBreed() == 10) {
-					if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-						if (this.isGreatQuality() && random.nextDouble() <= 15) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-						} else if (this.isFantasticQuality() && random.nextDouble() <= 20) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-						} else if (this.isExquisiteQuality() && random.nextDouble() <= 25) {
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-							this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-						}
-					}
-					this.spawnAtLocation(LOItems.WYANDOTTE_EGG.get());
-				}
-
+				this.spawnAtLocation(fertilizedEgg);
 				this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 				this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 			}

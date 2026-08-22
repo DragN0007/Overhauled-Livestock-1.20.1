@@ -30,17 +30,18 @@ public class OPigRenderLayer extends GeoRenderLayer<OPig> {
 
         if (animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
-            poseStack.pushPose();
-            poseStack.scale(1.0f, 1.0f, 1.0f);
-            poseStack.translate(0.0d, 0.0d, 0.0d);
-            poseStack.popPose();
-            getRenderer().reRender(getDefaultBakedModel(animatable),
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable),
                     poseStack,
                     bufferSource,
                     animatable,
                     renderMarkingType,
-                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+                    bufferSource.getBuffer(renderMarkingType),
+                    partialTick,
+                    packedLight,
+                    OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
 
         if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get()) return;

@@ -11,10 +11,13 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+@OnlyIn(Dist.CLIENT)
 public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
     public OSheepRenderLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);

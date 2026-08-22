@@ -227,52 +227,51 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
             }
         }
 
-        if (animatable.getFlowerItem() == null && !animatable.isBranded()) return;
-        if (animatable.getFlowerItem() != null &&!(animatable.getDecompVariant() == 4) && !(animatable.getDecompVariant() == 5) && !(animatable.getDecompVariant() == 6)) {
+        if (animatable.getFlowerItem() != null && !(animatable.getDecompVariant() == 4) && !(animatable.getDecompVariant() == 5) && !(animatable.getDecompVariant() == 6)) {
             if (animatable.getFlowerItem().is(LOTags.Items.HAIR_FLOWERS)) {
                 if (animatable.getFlowerType() == 0) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_mane.png");
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                    RenderType renderFlowerDecor = RenderType.entityCutout(resourceLocation);
                     getRenderer().reRender(getDefaultBakedModel(animatable),
                             poseStack,
                             bufferSource,
                             animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                            renderFlowerDecor,
+                            bufferSource.getBuffer(renderFlowerDecor), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                             1, 1, 1, 1);
                 }
 
                 if (animatable.getFlowerType() == 1) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_tail.png");
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                    RenderType renderFlowerDecor = RenderType.entityCutout(resourceLocation);
                     getRenderer().reRender(getDefaultBakedModel(animatable),
                             poseStack,
                             bufferSource,
                             animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                            renderFlowerDecor,
+                            bufferSource.getBuffer(renderFlowerDecor), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                             1, 1, 1, 1);
                 }
 
                 if (animatable.getFlowerType() == 2) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_tail.png");
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
+                    RenderType renderFlowerDecor = RenderType.entityCutout(resourceLocation);
                     getRenderer().reRender(getDefaultBakedModel(animatable),
                             poseStack,
                             bufferSource,
                             animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                            renderFlowerDecor,
+                            bufferSource.getBuffer(renderFlowerDecor), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                             1, 1, 1, 1);
+
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/decor/" + animatable.getFlowerItem().getItem() + "_mane.png");
-                    RenderType renderType2 = RenderType.entityCutout(resourceLocation);
-                    poseStack.pushPose();
+                    RenderType renderFlowerManeDecor = RenderType.entityCutout(resourceLocation);
                     getRenderer().reRender(getDefaultBakedModel(animatable),
                             poseStack,
                             bufferSource,
                             animatable,
-                            renderType2,
-                            bufferSource.getBuffer(renderType2), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                            renderFlowerManeDecor,
+                            bufferSource.getBuffer(renderFlowerManeDecor), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                             1, 1, 1, 1);
                 }
             }

@@ -33,6 +33,7 @@ public class LOUtils {
                     hitState.getBlock() instanceof FenceGateBlock ||
                     hitState.getBlock() instanceof IronBarsBlock ||
                     hitState.getBlock() instanceof HalfTransparentBlock ||
+                    hitState.getBlock() instanceof LeavesBlock ||
                     hitState.getBlock() instanceof StainedGlassBlock) {
                 return false;
             }

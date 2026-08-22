@@ -51,19 +51,21 @@ public class OPigRender extends GeoEntityRenderer<OPig> {
                 model.getBone("tusks").ifPresent(b -> b.setHidden(true));
             }
 
-            if (animatable.getBreed() == 0) {
-                poseStack.scale(1.1F, 1.1F, 1.1F);
-            } else if (animatable.getBreed() == 1) {
-                poseStack.scale(0.9F, 0.9F, 0.9F);
-                model.getBone("belly").ifPresent(b -> b.setScaleY(2F));
-            } else if (animatable.getBreed() == 2) {
-                poseStack.scale(0.9F, 0.9F, 0.9F);
-            } else if (animatable.getBreed() == 3) {
-                poseStack.scale(1.0F, 1.0F, 1.0F);
-            } else if (animatable.getBreed() == 4) {
-                poseStack.scale(1.2F, 1.2F, 1.2F);
-            } else if (animatable.getBreed() == 5) {
-                poseStack.scale(1.0F, 1.0F, 1.0F);
+            if (!isReRender) {
+                if (animatable.getBreed() == 0) {
+                    poseStack.scale(1.1F, 1.1F, 1.1F);
+                } else if (animatable.getBreed() == 1) {
+                    poseStack.scale(0.9F, 0.9F, 0.9F);
+                    model.getBone("belly").ifPresent(b -> b.setScaleY(2F));
+                } else if (animatable.getBreed() == 2) {
+                    poseStack.scale(0.9F, 0.9F, 0.9F);
+                } else if (animatable.getBreed() == 3) {
+                    poseStack.scale(1.0F, 1.0F, 1.0F);
+                } else if (animatable.getBreed() == 4) {
+                    poseStack.scale(1.2F, 1.2F, 1.2F);
+                } else if (animatable.getBreed() == 5) {
+                    poseStack.scale(1.0F, 1.0F, 1.0F);
+                }
             }
         }
 

@@ -22,8 +22,6 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
         this.addRenderLayer(new OHorseTackLayer(this));
     }
 
-
-
     @Override
     public void preRender(PoseStack poseStack, OHorse animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Optional<GeoBone> body = this.getGeoModel().getBone("body");
