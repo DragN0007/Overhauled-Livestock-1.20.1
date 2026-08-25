@@ -20,7 +20,7 @@ public class SheepShearTooltip implements IEntityComponentProvider {
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (LivestockOverhaulCommonConfig.QUALITY.get()) {
             if (entityAccessor.getEntity() instanceof OSheep animal) {
-                if (!animal.isSheared()) {
+                if (!animal.isSheared() && !animal.isBaby()) {
                     tooltip.add(Component.translatable("Wool Ready!").withStyle(ChatFormatting.GREEN));
                 }
             }

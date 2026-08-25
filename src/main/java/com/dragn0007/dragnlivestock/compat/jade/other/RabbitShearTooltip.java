@@ -20,7 +20,7 @@ public class RabbitShearTooltip implements IEntityComponentProvider {
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (LivestockOverhaulCommonConfig.QUALITY.get()) {
             if (entityAccessor.getEntity() instanceof FarmGoat animal) {
-                if (!animal.isSheared() && animal.getBreed() == 4) {
+                if (!animal.isSheared() && animal.getBreed() == 4 && !animal.isBaby()) {
                     tooltip.add(Component.translatable("Wool Ready!").withStyle(ChatFormatting.GREEN));
                 }
             }

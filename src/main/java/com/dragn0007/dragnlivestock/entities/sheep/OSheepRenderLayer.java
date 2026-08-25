@@ -11,13 +11,10 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
-@OnlyIn(Dist.CLIENT)
 public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
     public OSheepRenderLayer(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
@@ -25,11 +22,6 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
 
     @Override
     public void render(PoseStack poseStack, OSheep animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        Player player = Minecraft.getInstance().player;
-        double distanceSq = animatable.distanceToSqr(player);
-        boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
-        if (atCullDistance) return;
-
         if (!animatable.isDyed()) {
             if (!animatable.isBaby() && animatable.isSheared() || animatable.getBreed() == 6 || animatable.isBaby())
                 return;
@@ -43,6 +35,7 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
                     1, 1, 1, 1);
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         } else {
+            if (animatable.getBreed() == 6) return;
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getWoolDyeLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
@@ -120,13 +113,12 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
     public static String config_simplified_path = "textures/entity/config_simplified/sheep/wool/";
 
     public enum WoolColor {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grey.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light_grey.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "tan.png")),
+//        BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
+//        BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
+//        GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grey.png")),
+//        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light_grey.png")),
+//        TAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png")),
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
         ;
 
         public final ResourceLocation resourceLocation;
@@ -138,6 +130,7 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
         }
     }
 
+
     public enum SWoolColor {
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
         BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
@@ -145,7 +138,6 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
         LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "light_grey.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png")),
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
         ;
 
         public final ResourceLocation resourceLocation;

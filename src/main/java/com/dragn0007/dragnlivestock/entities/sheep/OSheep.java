@@ -4,6 +4,8 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.pig.OPigRenderLayer;
+import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitMarkingLayer;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -626,62 +628,20 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		if(tag.contains("Quality")) {
-			this.setQuality(tag.getInt("Quality"));
-		}
-
-		if (tag.contains("Breed")) {
-			setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Wool")) {
-			setWoolVariant(tag.getInt("Wool"));
-		}
-
-		if (tag.contains("HornType")) {
-			setHornVariant(tag.getInt("HornType"));
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if (tag.contains("Milked")) {
-			this.setMilked(tag.getBoolean("Milked"));
-		}
-
-		if (tag.contains("MilkedTime")) {
-			this.replenishMilkCounter = tag.getInt("MilkedTime");
-		}
-
-		if (tag.contains("Sheared")) {
-			this.setSheared(tag.getBoolean("Sheared"));
-		}
-
-		if (tag.contains("ShearedTime")) {
-			this.regrowWoolCounter = tag.getInt("ShearedTime");
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
-		if (tag.contains("DyeColor")) {
-			setWoolDyeVariant(tag.getInt("DyeColor"));
-		}
-
-		if(tag.contains("Dyed")) {
-			this.setDyed(tag.getBoolean("Dyed"));
-		}
-
+		if(tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
+		if (tag.contains("Breed")) {setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Wool")) {setWoolVariant(tag.getInt("Wool"));}
+		if (tag.contains("HornType")) {setHornVariant(tag.getInt("HornType"));}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if (tag.contains("Milked")) {this.setMilked(tag.getBoolean("Milked"));}
+		if (tag.contains("MilkedTime")) {this.replenishMilkCounter = tag.getInt("MilkedTime");}
+		if (tag.contains("Sheared")) {this.setSheared(tag.getBoolean("Sheared"));}
+		if (tag.contains("ShearedTime")) {this.regrowWoolCounter = tag.getInt("ShearedTime");}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
+		if (tag.contains("DyeColor")) {setWoolDyeVariant(tag.getInt("DyeColor"));}
+		if(tag.contains("Dyed")) {this.setDyed(tag.getBoolean("Dyed"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
@@ -1329,7 +1289,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void setColorByBreed() {
-
 		if (this.getBreed() == 0) { //gulf coast tend to come with white or tan skin
 			if (random.nextDouble() < 0.05) {
 				this.setVariant(random.nextInt(OSheepModel.Variant.values().length));
@@ -1415,7 +1374,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void setWoolColorByBreed() {
-		do {
 		if (this.getBreed() == 0) { //gulf coast tend to come with white wool
 			if (random.nextDouble() <= 0.05) {
 				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
@@ -1486,15 +1444,15 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (this.getBreed() == 8) { //fat-tailed tend to come with white, tan or brown wool
 			if (random.nextDouble() <= 0.05) {
-				this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
+				do {
+					this.setWoolVariant(random.nextInt(OSheepRenderLayer.WoolColor.values().length));
+				} while (this.getWoolVariant() == 6);
 			} else if (random.nextDouble() > 0.05) {
 				int[] variants = {1, 4, 5};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setWoolVariant(variants[randomIndex]);
 			}
 		}
-
-		} while (getWoolVariant() == 6 && this.getBreed() != 6);
 	}
 
 	public void setMarkingByBreed() {

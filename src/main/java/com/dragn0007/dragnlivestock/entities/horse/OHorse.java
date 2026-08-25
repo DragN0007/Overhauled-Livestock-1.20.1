@@ -1104,107 +1104,32 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Variant")) {
-			this.setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			this.setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Variant_Texture")) {
-			this.setVariantTexture(tag.getString("Variant_Texture"));
-		}
-
-		if (tag.contains("Overlay_Texture")) {
-			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-		}
-
-		if (tag.contains("Reindeer_Variant")) {
-			this.setReindeerVariant(tag.getInt("Reindeer_Variant"));
-		}
-
-		if (tag.contains("Decomp_Stage")) {
-			this.setDecompVariant(tag.getInt("Decomp_Stage"));
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if (tag.contains("Mane")) {
-			this.setManeType(tag.getInt("Mane"));
-		}
-
-		if (tag.contains("Tail")) {
-			this.setTailType(tag.getInt("Tail"));
-		}
-
-		if (tag.contains("Feathering")) {
-			this.setFeathering(tag.getInt("Feathering"));
-		}
-
-		if (tag.contains("Eyes")) {
-			this.setEyeVariant(tag.getInt("Eyes"));
-		}
-
-		if (tag.contains("SprintTime")) {
-			this.sprintTick = tag.getInt("SprintTime");
-		}
-
-		if (tag.contains("ManeGrowthTime")) {
-			this.maneGrowthTick = tag.getInt("ManeGrowthTime");
-		}
-
-		if (tag.contains("TailGrowthTime")) {
-			this.tailGrowthTick = tag.getInt("TailGrowthTime");
-		}
-
-		if (tag.contains("Undead")) {
-			this.setUndead(tag.getBoolean("Undead"));
-		}
-
-		if (tag.contains("CanDecompose")) {
-			this.setCanDecompose(tag.getBoolean("CanDecompose"));
-		}
-
-		if (tag.contains("Flower_Type")) {
-			this.setFlowerType(tag.getInt("Flower_Type"));
-		}
-
-		if(tag.contains("FlowerItem")) {
-			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
-			this.setFlowerItem(decorItem);
-		}
-
-		if (tag.contains("IsBranded")) {
-			this.setIsBranded(tag.getBoolean("IsBranded"));
-		}
-
-		if (tag.contains("TrainingTime")) {
-			this.trainStatsTick = tag.getInt("TrainingTime");
-		}
-
-		if (tag.contains("SpeedTrained")) {
-			this.setSpeedTrained(tag.getInt("SpeedTrained"));
-		}
-
-		if (tag.contains("JumpTrained")) {
-			this.setJumpTrained(tag.getInt("JumpTrained"));
-		}
-
-		if (tag.contains("HealthTrained")) {
-			this.setHealthTrained(tag.getInt("HealthTrained"));
-		}
-
-		if (tag.contains("IsHallow")) {
-			this.setHallow(tag.getBoolean("IsHallow"));
-		}
+		if (tag.contains("Breed")) {this.setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Variant")) {this.setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {this.setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Variant_Texture")) {this.setVariantTexture(tag.getString("Variant_Texture"));}
+		if (tag.contains("Overlay_Texture")) {this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));}
+		if (tag.contains("Reindeer_Variant")) {this.setReindeerVariant(tag.getInt("Reindeer_Variant"));}
+		if (tag.contains("Decomp_Stage")) {this.setDecompVariant(tag.getInt("Decomp_Stage"));}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if (tag.contains("Mane")) {this.setManeType(tag.getInt("Mane"));}
+		if (tag.contains("Tail")) {this.setTailType(tag.getInt("Tail"));}
+		if (tag.contains("Feathering")) {this.setFeathering(tag.getInt("Feathering"));}
+		if (tag.contains("Eyes")) {this.setEyeVariant(tag.getInt("Eyes"));}
+		if (tag.contains("SprintTime")) {this.sprintTick = tag.getInt("SprintTime");}
+		if (tag.contains("ManeGrowthTime")) {this.maneGrowthTick = tag.getInt("ManeGrowthTime");}
+		if (tag.contains("TailGrowthTime")) {this.tailGrowthTick = tag.getInt("TailGrowthTime");}
+		if (tag.contains("Undead")) {this.setUndead(tag.getBoolean("Undead"));}
+		if (tag.contains("CanDecompose")) {this.setCanDecompose(tag.getBoolean("CanDecompose"));}
+		if (tag.contains("Flower_Type")) {this.setFlowerType(tag.getInt("Flower_Type"));}
+		if(tag.contains("FlowerItem")) {ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
+			this.setFlowerItem(decorItem);}
+		if (tag.contains("IsBranded")) {this.setIsBranded(tag.getBoolean("IsBranded"));}
+		if (tag.contains("TrainingTime")) {this.trainStatsTick = tag.getInt("TrainingTime");}
+		if (tag.contains("SpeedTrained")) {this.setSpeedTrained(tag.getInt("SpeedTrained"));}
+		if (tag.contains("JumpTrained")) {this.setJumpTrained(tag.getInt("JumpTrained"));}
+		if (tag.contains("HealthTrained")) {this.setHealthTrained(tag.getInt("HealthTrained"));}
+		if (tag.contains("IsHallow")) {this.setHallow(tag.getBoolean("IsHallow"));}
 	}
 
 	@Override

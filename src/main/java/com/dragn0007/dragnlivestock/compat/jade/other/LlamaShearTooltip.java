@@ -20,7 +20,7 @@ public class LlamaShearTooltip implements IEntityComponentProvider {
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (LivestockOverhaulCommonConfig.QUALITY.get()) {
             if (entityAccessor.getEntity() instanceof OLlama animal) {
-                if (!animal.isSheared() && animal.getWooly() == 1) {
+                if (!animal.isSheared() && animal.getWooly() == 1 && !animal.isBaby()) {
                     tooltip.add(Component.translatable("Wool Ready!").withStyle(ChatFormatting.GREEN));
                 }
             }

@@ -20,7 +20,7 @@ public class GoatMilkableTooltip implements IEntityComponentProvider {
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (LivestockOverhaulCommonConfig.QUALITY.get()) {
             if (entityAccessor.getEntity() instanceof OGoat animal) {
-                if (!animal.wasMilked() && !animal.isMale()) {
+                if (!animal.wasMilked() && !animal.isMale() && !animal.isBaby()) {
                     tooltip.add(Component.translatable("Milk Ready!").withStyle(ChatFormatting.GREEN));
                 }
             }
