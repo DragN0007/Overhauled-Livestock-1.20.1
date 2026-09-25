@@ -30,7 +30,6 @@ public class MelonMoobloomTackLayer extends GeoRenderLayer<MelonMoobloom> {
         if (atCullDistance) return;
 
         if (!animatable.isHarnessed() && !animatable.isBelled() && !animatable.isSaddled() && !animatable.hasChest()) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
         ResourceLocation resourceLocation;
 
         if (animatable.isHarnessed()) {

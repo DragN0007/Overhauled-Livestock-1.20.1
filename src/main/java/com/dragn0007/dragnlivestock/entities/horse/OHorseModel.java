@@ -46,7 +46,6 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
     }
 
     public static String default_path = "textures/entity/horse/";
-    public static String config_simplified_path = "textures/entity/config_simplified/horse/";
 
     public enum Variant {
         BAY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "bay.png")),
@@ -96,54 +95,6 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         }
     }
 
-    public enum SVariant {
-        BAY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "bay.png")),
-        BAY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "bay_roan.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        BLOOD_BAY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blood_bay.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue.png")),
-        BLUE_ROAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue_roan.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
-        BUCKSKIN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "buckskin.png")),
-        CHAMPAGNE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "champagne.png")),
-        CHOCOLATE_ROAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chocolate_roan.png")),
-        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chestnut.png")),
-        CREAMY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "creamy.png")),
-        DARK_BAY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "dark_bay.png")),
-        DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "dark_brown.png")),
-        FJORD(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "fjord.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
-        IVORY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "ivory.png")),
-        LIVER_CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "liver_chestnut.png")),
-        PALAMINO(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "palamino.png")),
-        PALAMINO_ORANGE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "palamino_orange.png")),
-        SEAL_BAY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "seal_bay.png")),
-        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "strawberry.png")),
-        WARM_BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "warm_black.png")),
-        WARM_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "warm_grey.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cream.png")),
-        RED_DUN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "red_dun.png")),
-        BAY_DUN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "bay_dun.png")),
-        GRULLA(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grulla.png")),
-        BLUE_DUN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue_dun.png")),
-        CINNAMON(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cinnamon.png")),
-        STRAWBERRY_ROAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "strawberry_roan.png")),
-        GOLD(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "gold.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "silver.png")),
-        GRULLO_DUN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grullo_dun.png")),
-        STEEL_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "steel_grey.png")),
-        ;
-
-        public final ResourceLocation resourceLocation;
-        SVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
-        }
-    }
-
     public enum ReindeerVariant {
         BAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/bay.png")),
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/black.png")),
@@ -175,8 +126,6 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/baby_o_horse.geo.json");
     public static final ResourceLocation REINDEER_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/caribou.geo.json");
-    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/horse.geo.json");
-    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/horse.animation.json");
 
     LocalDate date = LocalDate.now();
     Month month = date.getMonth();
@@ -184,48 +133,36 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
 
     @Override
     public ResourceLocation getModelResource(OHorse object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (object.isBaby()) {
-                return BABY_MODEL;
-            } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
-                return REINDEER_MODEL;
-            }
-            return HorseBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
-        } else {
-            return SIMPLIFIED_MODEL;
+        if (object.isBaby()) {
+            return BABY_MODEL;
+        } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
+            return REINDEER_MODEL;
         }
+        return HorseBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
     public ResourceLocation getTextureResource(OHorse object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
-                if (month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
-                    return object.getReindeerTextureResource();
-                }
-                return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-            } else if (object.getDecompVariant() == 4) {
-                return OHorseBodyLayer.UndeadStage.SKELETAL.resourceLocation;
-            } else if (object.getDecompVariant() == 5) {
-                return OHorseBodyLayer.UndeadStage.WITHER.resourceLocation;
-            } else if (object.getDecompVariant() == 6) {
-                return OHorseBodyLayer.UndeadStage.STRAY.resourceLocation;
+        if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
+            if (month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
+                return object.getReindeerTextureResource();
             }
             return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-        } else {
-            return object.getSimplifiedVariantTextureResource();
+        } else if (object.getDecompVariant() == 4) {
+            return OHorseBodyLayer.UndeadStage.SKELETAL.resourceLocation;
+        } else if (object.getDecompVariant() == 5) {
+            return OHorseBodyLayer.UndeadStage.WITHER.resourceLocation;
+        } else if (object.getDecompVariant() == 6) {
+            return OHorseBodyLayer.UndeadStage.STRAY.resourceLocation;
         }
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override
     public ResourceLocation getAnimationResource(OHorse animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

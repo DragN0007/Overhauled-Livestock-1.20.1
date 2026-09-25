@@ -54,11 +54,7 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
             // make sure to put your saddle in the dragnlivestock:saddle tag so you can actually put it in the slot
             // this works for all equines and caribou too, no extra steps required
             if (saddleStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
-                if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
-                } else {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/config_simplified/horse/tack/saddle.png");
-                }
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
                     
@@ -72,7 +68,7 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                 }
             }
 
-            if (animatable.isSaddled() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            if (animatable.isSaddled()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
@@ -87,7 +83,7 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
             }
         }
 
-        if (!decorStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+        if (!decorStack.isEmpty()) {
             // if youre another modder looking to add new caparisons, use this pathway v
             // it'll find the name for you so long as your registry item is named the same as your texture AND it's a CaparisonItem
             // instead of making a  dragnlivestock > textures > ... , youd make a  medievalembroidery > textures > ...  instead for this pathway
@@ -111,17 +107,13 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
 
         if (!armorItemStack.isEmpty()) {
             String armorpath;
-            if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                armorpath = "textures/entity/config_simplified/horse/armor/";
-            } else {
-                armorpath = "textures/entity/horse/armor/";
-            }
+            armorpath = "textures/entity/horse/armor/";
             if (!armorItemStack.isEmpty()) {
                 if (armorItemStack.getItem() == LOItems.OBSIDIAN_HORSE_ARMOR.get()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", armorpath + "obsidian_horse_armor.png");
                 } else if (armorItemStack.getItem() == LOItems.MINIMAL_OBSIDIAN_HORSE_ARMOR.get()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", armorpath + "minimal_obsidian_horse_armor.png");
-                } else if (armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                } else if (armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) {
                     resourceLocation = new ResourceLocation("deadlydinos", "textures/entity/horse/armor/riot_horse_armor.png");
 
                     // if youre another modder looking to add new armor, use this pathway v
@@ -131,9 +123,9 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, armorpath + horseArmorItem + ".png");
                 } else if (armorItemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, armorpath + horseArmorItem + ".png");
-                } else if ((armorItemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !armorItemStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                } else if ((armorItemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !armorItemStack.isEmpty()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
-                } else if ((armorItemStack.getItem() instanceof CaparisonItem caparisonItem) && !armorItemStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                } else if ((armorItemStack.getItem() instanceof CaparisonItem caparisonItem) && !armorItemStack.isEmpty()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
                 } else if (armorItemStack.is(LOTags.Items.COSMETICS)) {
                     String item = armorItemStack.getItem().toString();
@@ -153,9 +145,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                     bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                     1, 1, 1, 1);
         }
-
-        //anything below this point is not included in simple models
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
 
         if (!decorStack.isEmpty() && !(decorStack.getItem() instanceof CaparisonItem)) {
             String color = "";

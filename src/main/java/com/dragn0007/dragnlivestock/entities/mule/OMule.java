@@ -396,30 +396,25 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 			int i = this.getPassengers().indexOf(entity);
 
-			if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-				if (this.getBreed() == 0) {
-					offsetY = 0.85;
-				}
+			if (this.getBreed() == 0) {
+				offsetY = 0.85;
+			}
 
-				if (this.getBreed() == 1) {
-					offsetY = 0.6;
-					offsetZ = -0.1;
-				}
+			if (this.getBreed() == 1) {
+				offsetY = 0.6;
+				offsetZ = -0.1;
+			}
 
-				if (this.getBreed() == 2) {
-					switch (i) {
-						case 0:
-							offsetY = 1.2;
-							break;
-						case 1:
-							offsetY = 1.2;
-							offsetZ = -0.7;
-							break;
-					}
+			if (this.getBreed() == 2) {
+				switch (i) {
+					case 0:
+						offsetY = 1.2;
+						break;
+					case 1:
+						offsetY = 1.2;
+						offsetZ = -0.7;
+						break;
 				}
-			} else {
-				offsetY = 0.60;
-				offsetZ = -0.0;
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
@@ -557,47 +552,16 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Variant")) {
-			this.setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			this.setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Variant_Texture")) {
-			this.setVariantTexture(tag.getString("Variant_Texture"));
-		}
-
-		if (tag.contains("Overlay_Texture")) {
-			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Feathering")) {
-			this.setFeathering(tag.getInt("Feathering"));
-		}
-
-		if (tag.contains("Eyes")) {
-			this.setEyeVariant(tag.getInt("Eyes"));
-		}
-
-		if (tag.contains("SprintTime")) {
-			this.sprintTick = tag.getInt("SprintTime");
-		}
-
-		if (tag.contains("Flower_Type")) {
-			this.setFlowerType(tag.getInt("Flower_Type"));
-		}
-
+		if (tag.contains("Variant")) {this.setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {this.setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Variant_Texture")) {this.setVariantTexture(tag.getString("Variant_Texture"));}
+		if (tag.contains("Overlay_Texture")) {this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if (tag.contains("Breed")) {this.setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Feathering")) {this.setFeathering(tag.getInt("Feathering"));}
+		if (tag.contains("Eyes")) {this.setEyeVariant(tag.getInt("Eyes"));}
+		if (tag.contains("SprintTime")) {this.sprintTick = tag.getInt("SprintTime");}
+		if (tag.contains("Flower_Type")) {this.setFlowerType(tag.getInt("Flower_Type"));}
 		if(tag.contains("FlowerItem")) {
 			ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
 			this.setFlowerItem(decorItem);

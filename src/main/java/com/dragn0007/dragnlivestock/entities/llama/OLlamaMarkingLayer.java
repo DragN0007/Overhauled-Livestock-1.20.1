@@ -25,8 +25,6 @@ public class OLlamaMarkingLayer extends GeoRenderLayer<OLlama> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
-
         if (!animatable.isBaby() && animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),

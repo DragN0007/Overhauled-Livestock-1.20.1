@@ -76,65 +76,72 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             if (wagon_harness.isPresent()) {wagon_harness.ifPresent(b -> b.setHidden(atCullDistance));}
         }
         if (atCullDistance) return;
-        
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (this.animatable.isBaby()) {
-                poseStack.scale(0.5F, 0.5F, 0.5F);
-            } else {
-                poseStack.scale(1F, 1F, 1F);
-                if (this.animatable.isFemale()) {
-                    udders.ifPresent(b -> b.setHidden(false));
-                } else {
-                    udders.ifPresent(b -> b.setHidden(true));
-                }
-            }
+
+        if (animatable.getBreed() == 9) {
+            body_fluff.ifPresent(b -> b.setHidden(false));
+            neck_fluff.ifPresent(b -> b.setHidden(false));
+            head_fluff.ifPresent(b -> b.setHidden(false));
+        } else {
+            body_fluff.ifPresent(b -> b.setHidden(true));
+            neck_fluff.ifPresent(b -> b.setHidden(true));
+            head_fluff.ifPresent(b -> b.setHidden(true));
         }
 
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (animatable.getBreed() == 9) {
-                body_fluff.ifPresent(b -> b.setHidden(false));
-                neck_fluff.ifPresent(b -> b.setHidden(false));
-                head_fluff.ifPresent(b -> b.setHidden(false));
+        if (animatable.getBreed() == 2) {
+            crest.ifPresent(b -> b.setHidden(true));
+            hump.ifPresent(b -> b.setHidden(false));
+            left_ear.ifPresent(b -> b.setScaleY(2.0F));
+            right_ear.ifPresent(b -> b.setScaleY(2.0F));
+        } else {
+            crest.ifPresent(b -> b.setHidden(false));
+            hump.ifPresent(b -> b.setHidden(true));
+            left_ear.ifPresent(b -> b.setScaleY(1.0F));
+            right_ear.ifPresent(b -> b.setScaleY(1.0F));
+        }
+
+        if (animatable.getBreed() == 11) {
+            crest.ifPresent(b -> b.setScaleY(1.5F));
+        } else {
+            crest.ifPresent(b -> b.setScaleY(1.0F));
+        }
+
+        horns_1.ifPresent(b -> b.setHidden(true));
+        horns_2.ifPresent(b -> b.setHidden(true));
+        horns_3.ifPresent(b -> b.setHidden(true));
+        horns_4.ifPresent(b -> b.setHidden(true));
+        horns_5.ifPresent(b -> b.setHidden(true));
+        horns_6.ifPresent(b -> b.setHidden(true));
+        horns_7.ifPresent(b -> b.setHidden(true));
+        horns_8.ifPresent(b -> b.setHidden(true));
+        horns_9.ifPresent(b -> b.setHidden(true));
+        horns_10.ifPresent(b -> b.setHidden(true));
+
+        if (animatable.isBaby()) {
+            udders.ifPresent(b -> b.setHidden(true));
+            horn_connection.ifPresent(b -> b.setHidden(true));
+        } else {
+
+            if (animatable.isDairyBreed()) {
+                udders.ifPresent(b -> b.setScaleY(1.5F));
+                udders.ifPresent(b -> b.setScaleX(1.5F));
+                udders.ifPresent(b -> b.setScaleZ(1.5F));
             } else {
-                body_fluff.ifPresent(b -> b.setHidden(true));
-                neck_fluff.ifPresent(b -> b.setHidden(true));
-                head_fluff.ifPresent(b -> b.setHidden(true));
+                udders.ifPresent(b -> b.setScaleY(1.0F));
+                udders.ifPresent(b -> b.setScaleX(1.0F));
+                udders.ifPresent(b -> b.setScaleZ(1.0F));
             }
 
-            if (animatable.getBreed() == 2) {
-                crest.ifPresent(b -> b.setHidden(true));
-                hump.ifPresent(b -> b.setHidden(false));
-                left_ear.ifPresent(b -> b.setScaleY(2.0F));
-                right_ear.ifPresent(b -> b.setScaleY(2.0F));
-            } else {
-                crest.ifPresent(b -> b.setHidden(false));
-                hump.ifPresent(b -> b.setHidden(true));
-                left_ear.ifPresent(b -> b.setScaleY(1.0F));
-                right_ear.ifPresent(b -> b.setScaleY(1.0F));
-            }
-
-            if (animatable.getBreed() == 11) {
-                crest.ifPresent(b -> b.setScaleY(1.5F));
-            } else {
-                crest.ifPresent(b -> b.setScaleY(1.0F));
-            }
-
-            horns_1.ifPresent(b -> b.setHidden(true));
-            horns_2.ifPresent(b -> b.setHidden(true));
-            horns_3.ifPresent(b -> b.setHidden(true));
-            horns_4.ifPresent(b -> b.setHidden(true));
-            horns_5.ifPresent(b -> b.setHidden(true));
-            horns_6.ifPresent(b -> b.setHidden(true));
-            horns_7.ifPresent(b -> b.setHidden(true));
-            horns_8.ifPresent(b -> b.setHidden(true));
-            horns_9.ifPresent(b -> b.setHidden(true));
-            horns_10.ifPresent(b -> b.setHidden(true));
-
-            if (animatable.isBaby()) {
-                udders.ifPresent(b -> b.setHidden(true));
-                horn_connection.ifPresent(b -> b.setHidden(true));
-            } else {
-
+            if (animatable.wasMilked()) {
+                if (animatable.isDairyBreed()) {
+                    udders.ifPresent(b -> b.setScaleY(1.2F));
+                    udders.ifPresent(b -> b.setScaleX(1.2F));
+                    udders.ifPresent(b -> b.setScaleZ(1.2F));
+                } else {
+                    udders.ifPresent(b -> b.setScaleY(0.8F));
+                    udders.ifPresent(b -> b.setScaleX(0.8F));
+                    udders.ifPresent(b -> b.setScaleZ(0.8F));
+                }
+            } else if (!animatable.wasMilked()) {
                 if (animatable.isDairyBreed()) {
                     udders.ifPresent(b -> b.setScaleY(1.5F));
                     udders.ifPresent(b -> b.setScaleX(1.5F));
@@ -144,58 +151,36 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
                     udders.ifPresent(b -> b.setScaleX(1.0F));
                     udders.ifPresent(b -> b.setScaleZ(1.0F));
                 }
+            }
 
-                if (animatable.wasMilked()) {
-                    if (animatable.isDairyBreed()) {
-                        udders.ifPresent(b -> b.setScaleY(1.2F));
-                        udders.ifPresent(b -> b.setScaleX(1.2F));
-                        udders.ifPresent(b -> b.setScaleZ(1.2F));
-                    } else {
-                        udders.ifPresent(b -> b.setScaleY(0.8F));
-                        udders.ifPresent(b -> b.setScaleX(0.8F));
-                        udders.ifPresent(b -> b.setScaleZ(0.8F));
-                    }
-                } else if (!animatable.wasMilked()) {
-                    if (animatable.isDairyBreed()) {
-                        udders.ifPresent(b -> b.setScaleY(1.5F));
-                        udders.ifPresent(b -> b.setScaleX(1.5F));
-                        udders.ifPresent(b -> b.setScaleZ(1.5F));
-                    } else {
-                        udders.ifPresent(b -> b.setScaleY(1.0F));
-                        udders.ifPresent(b -> b.setScaleX(1.0F));
-                        udders.ifPresent(b -> b.setScaleZ(1.0F));
-                    }
-                }
+            if (!(animatable.getHornVariant() == 0)) {
+                horn_connection.ifPresent(b -> b.setScaleY(2.3F));
+            } else {
+                horn_connection.ifPresent(b -> b.setScaleY(1.0F));
+            }
 
-                if (!(animatable.getHornVariant() == 0)) {
-                    horn_connection.ifPresent(b -> b.setScaleY(2.3F));
-                } else {
-                    horn_connection.ifPresent(b -> b.setScaleY(1.0F));
-                }
-
-                if (animatable.getHornVariant() == 1) {
-                    horns_1.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 2) {
-                    horns_2.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 3) {
-                    horns_3.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 4) {
-                    horns_4.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 5) {
-                    horns_5.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 6) {
-                    horns_6.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 7) {
-                    horns_7.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 8) {
-                    horns_8.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 9) {
-                    horns_9.ifPresent(b -> b.setHidden(false));
-                } else if (animatable.getHornVariant() == 10) {
+            if (animatable.getHornVariant() == 1) {
+                horns_1.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 2) {
+                horns_2.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 3) {
+                horns_3.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 4) {
+                horns_4.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 5) {
+                horns_5.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 6) {
+                horns_6.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 7) {
+                horns_7.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 8) {
+                horns_8.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 9) {
+                horns_9.ifPresent(b -> b.setHidden(false));
+            } else if (animatable.getHornVariant() == 10) {
                     horns_10.ifPresent(b -> b.setHidden(false));
                 }
             }
-        }
 
         super.preRender(poseStack, this.animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }

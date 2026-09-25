@@ -36,7 +36,6 @@ public class CaribouBodyLayer extends GeoRenderLayer<Caribou> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
 
         if (animatable.getOverlayVariant() != 0) {
             EquineMarkingOverlay overlay = EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
@@ -69,7 +68,7 @@ public class CaribouBodyLayer extends GeoRenderLayer<Caribou> {
                 bufferSource.getBuffer(renderEyeType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                 1, 1, 1, 1);
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+        if (!animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
             return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();

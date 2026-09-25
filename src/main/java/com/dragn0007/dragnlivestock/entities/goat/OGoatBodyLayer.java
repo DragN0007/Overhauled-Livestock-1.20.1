@@ -40,7 +40,7 @@ public class OGoatBodyLayer extends GeoRenderLayer<OGoat> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+        if (!animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
             return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();

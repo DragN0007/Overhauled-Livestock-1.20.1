@@ -43,7 +43,6 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
     }
 
     public static String default_path = "textures/entity/donkey/";
-    public static String config_simplified_path = "textures/entity/config_simplified/donkey/";
 
     public enum Variant {
         BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
@@ -62,59 +61,28 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
         }
     }
 
-    public enum SVariant {
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cream.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
-        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "strawberry.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png"));
-
-        public final ResourceLocation resourceLocation;
-        SVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
-        }
-    }
-
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_donkey.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_donkey.geo.json");
-    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/donkey.geo.json");
-    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/horse.animation.json");
 
     @Override
     public ResourceLocation getModelResource(ODonkey object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (object.isBaby()) {
-                return BABY_MODEL;
-            }
-            return MODEL;
-        } else {
-            return SIMPLIFIED_MODEL;
+        if (object.isBaby()) {
+            return BABY_MODEL;
         }
+        return MODEL;
     }
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
     public ResourceLocation getTextureResource(ODonkey object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-        } else {
-            return object.getSimplifiedVariantTextureResource();
-        }
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override
     public ResourceLocation getAnimationResource(ODonkey animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

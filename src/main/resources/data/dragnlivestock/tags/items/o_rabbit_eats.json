@@ -17,10 +17,7 @@
       "required": false
     },
 
-    {
-      "id": "#tfc:foods/grains",
-      "required": false
-    },
+    {"id": "#tfc:foods/grains", "required": false},
 
     {
       "id": "#tfc:foods/vegetables",

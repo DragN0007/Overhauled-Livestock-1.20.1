@@ -50,11 +50,7 @@ public class UnicornTackLayer extends GeoRenderLayer<Unicorn> {
 
         if(!saddleStack.isEmpty()) {
             if (saddleStack.getItem() instanceof SaddleItem saddleItem && !animatable.isWearingHarness()) {
-                if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
-                } else {
-                    resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/config_simplified/horse/tack/saddle.png");
-                }
+                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
                     
@@ -67,7 +63,7 @@ public class UnicornTackLayer extends GeoRenderLayer<Unicorn> {
                             1, 1, 1, 1);
                 }
             }
-            if (animatable.isSaddled() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            if (animatable.isSaddled()) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
@@ -82,7 +78,7 @@ public class UnicornTackLayer extends GeoRenderLayer<Unicorn> {
             }
         }
 
-        if (!decorStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+        if (!decorStack.isEmpty()) {
             if ((decorStack.getItem() instanceof CaparisonItem caparisonItem)) {
                 resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
             } else if ((decorStack.getItem() instanceof RumpStrapItem rumpStrapItem)) {
@@ -103,25 +99,21 @@ public class UnicornTackLayer extends GeoRenderLayer<Unicorn> {
 
         if (!armorItemStack.isEmpty()) {
             String armorpath;
-            if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                armorpath = "textures/entity/config_simplified/horse/armor/";
-            } else {
-                armorpath = "textures/entity/horse/armor/";
-            }
+            armorpath = "textures/entity/horse/armor/";
             if (!armorItemStack.isEmpty()) {
                 if (armorItemStack.getItem() == LOItems.OBSIDIAN_HORSE_ARMOR.get()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", armorpath + "obsidian_horse_armor.png");
                 } else if (armorItemStack.getItem() == LOItems.MINIMAL_OBSIDIAN_HORSE_ARMOR.get()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", armorpath + "minimal_obsidian_horse_armor.png");
-                } else if (armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                } else if (armorItemStack.getItem() == LOItems.RIOT_HORSE_ARMOR.get()) {
                     resourceLocation = new ResourceLocation("deadlydinos", "textures/entity/horse/armor/riot_horse_armor.png");
                 } else if (armorItemStack.getItem() instanceof HorseArmorItem horseArmorItem) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, armorpath + horseArmorItem + ".png");
                 } else if (armorItemStack.getItem() instanceof LightHorseArmorItem horseArmorItem) {
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, armorpath + horseArmorItem + ".png");
-                } else if ((armorItemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !armorItemStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                } else if ((armorItemStack.getItem() instanceof RumpStrapItem rumpStrapItem) && !armorItemStack.isEmpty()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + rumpStrapItem + ".png");
-                } else if ((armorItemStack.getItem() instanceof CaparisonItem caparisonItem) && !armorItemStack.isEmpty() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+                } else if ((armorItemStack.getItem() instanceof CaparisonItem caparisonItem) && !armorItemStack.isEmpty()) {
                     resourceLocation = new ResourceLocation("medievalembroidery", "textures/entity/horse/caparison/" + caparisonItem + ".png");
                 } else if (armorItemStack.is(LOTags.Items.COSMETICS)) {
                     String item = armorItemStack.getItem().toString();
@@ -141,8 +133,6 @@ public class UnicornTackLayer extends GeoRenderLayer<Unicorn> {
                     bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                     1, 1, 1, 1);
         }
-
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
 
         if (!decorStack.isEmpty() && !(decorStack.getItem() instanceof CaparisonItem)) {
             String color = "";

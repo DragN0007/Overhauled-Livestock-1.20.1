@@ -43,7 +43,6 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
     }
 
     public static String default_path = "textures/entity/camel/";
-    public static String config_simplified_path = "textures/entity/config_simplified/camel/";
 
     public enum Variant {
         ASH(new ResourceLocation(LivestockOverhaul.MODID, default_path + "ash.png")),
@@ -69,61 +68,23 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
         }
     }
 
-    public enum SVariant {
-        ASH(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "ash.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chestnut.png")),
-        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chocolate.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cream.png")),
-        DESERT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "desert.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "light_grey.png")),
-        LIVER_CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "liver_chestnut.png")),
-        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "mahogany.png")),
-        SANDY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "sandy.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png"));
-
-        public final ResourceLocation resourceLocation;
-        SVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
-        }
-    }
-
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_camel.animation.json");
-    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/camel.geo.json");
-    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/camel.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OCamel object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
-        } else {
-            return SIMPLIFIED_MODEL;
-        }
+        return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
     public ResourceLocation getTextureResource(OCamel object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-        } else {
-            return object.getSimplifiedVariantTextureResource();
-        }
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override
     public ResourceLocation getAnimationResource(OCamel animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

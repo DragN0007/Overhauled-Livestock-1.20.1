@@ -97,41 +97,35 @@ public class OMuleRender extends GeoEntityRenderer<OMule> {
             neck_armor.ifPresent(b -> b.setHidden(true));
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && animatable.isBaby()) {
-            poseStack.scale(0.5F, 0.5F, 0.5F);
-        }
-
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (animatable.getFeathering() == 0) {
-                feathering_fr.ifPresent(b -> b.setHidden(true));
-                feathering_fl.ifPresent(b -> b.setHidden(true));
-                feathering_br.ifPresent(b -> b.setHidden(true));
-                feathering_bl.ifPresent(b -> b.setHidden(true));
-            } else if (animatable.getFeathering() == 1) {
-                feathering_fr.ifPresent(b -> b.setHidden(false));
-                feathering_fl.ifPresent(b -> b.setHidden(false));
-                feathering_br.ifPresent(b -> b.setHidden(false));
-                feathering_bl.ifPresent(b -> b.setHidden(false));
-                feathering_fr.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_fl.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_br.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_bl.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_fr.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_fl.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_br.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_bl.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_fr.ifPresent(b -> b.setPosZ(-0.8F));
-                feathering_fl.ifPresent(b -> b.setPosZ(-0.8F));
-            } else if (animatable.getFeathering() == 2) {
-                feathering_fr.ifPresent(b -> b.setHidden(false));
-                feathering_fl.ifPresent(b -> b.setHidden(false));
-                feathering_br.ifPresent(b -> b.setHidden(false));
-                feathering_bl.ifPresent(b -> b.setHidden(false));
-                feathering_fr.ifPresent(b -> b.setScaleY(1F));
-                feathering_fl.ifPresent(b -> b.setScaleY(1F));
-                feathering_br.ifPresent(b -> b.setScaleY(1F));
-                feathering_bl.ifPresent(b -> b.setScaleY(1F));
-            }
+        if (animatable.getFeathering() == 0) {
+            feathering_fr.ifPresent(b -> b.setHidden(true));
+            feathering_fl.ifPresent(b -> b.setHidden(true));
+            feathering_br.ifPresent(b -> b.setHidden(true));
+            feathering_bl.ifPresent(b -> b.setHidden(true));
+        } else if (animatable.getFeathering() == 1) {
+            feathering_fr.ifPresent(b -> b.setHidden(false));
+            feathering_fl.ifPresent(b -> b.setHidden(false));
+            feathering_br.ifPresent(b -> b.setHidden(false));
+            feathering_bl.ifPresent(b -> b.setHidden(false));
+            feathering_fr.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_fl.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_br.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_bl.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_fr.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_fl.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_br.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_bl.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_fr.ifPresent(b -> b.setPosZ(-0.8F));
+            feathering_fl.ifPresent(b -> b.setPosZ(-0.8F));
+        } else if (animatable.getFeathering() == 2) {
+            feathering_fr.ifPresent(b -> b.setHidden(false));
+            feathering_fl.ifPresent(b -> b.setHidden(false));
+            feathering_br.ifPresent(b -> b.setHidden(false));
+            feathering_bl.ifPresent(b -> b.setHidden(false));
+            feathering_fr.ifPresent(b -> b.setScaleY(1F));
+            feathering_fl.ifPresent(b -> b.setScaleY(1F));
+            feathering_br.ifPresent(b -> b.setScaleY(1F));
+            feathering_bl.ifPresent(b -> b.setScaleY(1F));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

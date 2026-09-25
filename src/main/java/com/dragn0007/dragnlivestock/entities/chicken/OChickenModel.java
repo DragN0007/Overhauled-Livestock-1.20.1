@@ -37,7 +37,6 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
     }
 
     public static String default_path = "textures/entity/chicken/";
-    public static String config_simplified_path = "textures/entity/config_simplified/chicken/";
 
     public enum Variant {
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
@@ -64,49 +63,18 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
         }
     }
 
-    public enum SVariant {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
-        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chocolate.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cream.png")),
-        GOLD(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "gold.png")),
-        LILAC(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "lilac.png")),
-        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "mahogany.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "red.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "silver.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "tan.png")),
-        VOID(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "void.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png")),
-        ;
-
-        public final ResourceLocation resourceLocation;
-        SVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
-        }
-    }
-
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_chicken.animation.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_chicken.geo.json");
     public static final ResourceLocation BABY_TEXTURE = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/cream.png");
-    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/chicken.geo.json");
-    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/chicken.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OChicken object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ChickenBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
-        } else {
-            return SIMPLIFIED_MODEL;
-        }
+        return ChickenBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     @Override
     public ResourceLocation getTextureResource(OChicken object) {
-        if(object.isBaby() && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+        if(object.isBaby()) {
             return BABY_TEXTURE;
         } else {
             return object.getTextureResource();
@@ -115,11 +83,7 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
 
     @Override
     public ResourceLocation getAnimationResource(OChicken animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

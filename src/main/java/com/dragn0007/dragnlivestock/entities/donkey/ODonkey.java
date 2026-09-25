@@ -360,14 +360,6 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			double offsetY = 0.65;
 			double offsetZ = -0.1;
 
-			if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-				offsetY = 0.65;
-				offsetZ = -0.1;
-			} else {
-				offsetY = 0.49;
-				offsetZ = -0.0;
-			}
-
 			double radYaw = Math.toRadians(this.getYRot());
 
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
@@ -426,13 +418,6 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	}
 	public void setVariantTexture(String variant) {
 		this.entityData.set(VARIANT_TEXTURE, variant);
-	}
-
-	public ResourceLocation getSimplifiedVariantTextureResource() {
-		return ODonkeyModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
-	}
-	public int getSimplifiedVariant() {
-		return this.entityData.get(VARIANT);
 	}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(ODonkey.class, EntityDataSerializers.INT);

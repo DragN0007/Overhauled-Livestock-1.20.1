@@ -37,19 +37,16 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
             head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
         }
 
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (animatable.getBreed() == 2) {
-                left_ear.setRotZ(-10);
-                right_ear.setRotZ(10);
-            } else {
-                left_ear.setRotZ(-5);
-                right_ear.setRotZ(5);
-            }
+        if (animatable.getBreed() == 2) {
+            left_ear.setRotZ(-10);
+            right_ear.setRotZ(10);
+        } else {
+            left_ear.setRotZ(-5);
+            right_ear.setRotZ(5);
         }
     }
 
     public static String default_path = "textures/entity/cow/";
-    public static String config_simplified_path = "textures/entity/config_simplified/cow/";
 
     public enum Variant {
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
@@ -77,32 +74,6 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
         }
     }
 
-    public enum SVariant {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
-        CHESTNUT(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chestnut.png")),
-        CREAM(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "cream.png")),
-        DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "dark_brown.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
-        STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "strawberry.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png")),
-        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "chocolate.png")),
-        GOLD(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "gold.png")),
-        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "mahogany.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "silver.png"))
-        ;
-
-        public final ResourceLocation resourceLocation;
-        SVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
-        }
-    }
-
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_cow.geo.json");
     public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_bull.geo.json");
     public static final ResourceLocation OX = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/ox.geo.json");
@@ -112,37 +83,31 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
     public static final ResourceLocation MINI_MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/mini_bull.geo.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/baby_o_cow.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
-    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/cow.geo.json");
-    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/cow.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OCow object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (object.isBaby()) {
-                return BABY_MODEL;
-            } else if (object.getBreed() == 10) {
-                return OX;
-            } else if (object.isMeatBreed()) {
-                if (object.isMale()) {
-                    return MEAT_MALE;
-                } else {
-                    return MEAT_FEMALE;
-                }
-            } else if (object.isMiniBreed()) {
-                if (object.isMale()) {
-                    return MINI_MALE;
-                } else {
-                    return MINI_FEMALE;
-                }
+        if (object.isBaby()) {
+            return BABY_MODEL;
+        } else if (object.getBreed() == 10) {
+            return OX;
+        } else if (object.isMeatBreed()) {
+            if (object.isMale()) {
+                return MEAT_MALE;
             } else {
-                if (object.isMale()) {
-                    return MALE;
-                } else {
-                    return FEMALE;
-                }
+                return MEAT_FEMALE;
+            }
+        } else if (object.isMiniBreed()) {
+            if (object.isMale()) {
+                return MINI_MALE;
+            } else {
+                return MINI_FEMALE;
             }
         } else {
-            return SIMPLIFIED_MODEL;
+            if (object.isMale()) {
+                return MALE;
+            } else {
+                return FEMALE;
+            }
         }
     }
 
@@ -153,11 +118,7 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
 
     @Override
     public ResourceLocation getAnimationResource(OCow animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

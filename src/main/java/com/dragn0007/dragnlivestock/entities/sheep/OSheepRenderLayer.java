@@ -4,12 +4,10 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
@@ -47,7 +45,7 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (animatable.getOverlayVariant() != 0 && ((!animatable.isDyed() && animatable.getOverlayVariant() != 3) && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && !animatable.isBaby())) {
+        if (animatable.getOverlayVariant() != 0 && ((!animatable.isDyed() && animatable.getOverlayVariant() != 3) && !animatable.isBaby())) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
@@ -59,7 +57,7 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
             super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+        if (!LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
             return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();

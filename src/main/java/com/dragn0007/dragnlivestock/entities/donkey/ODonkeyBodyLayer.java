@@ -34,8 +34,6 @@ public class ODonkeyBodyLayer extends GeoRenderLayer<ODonkey> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
-
         if (animatable.getOverlayVariant() != 0) {
             EquineMarkingOverlay overlay = EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
             RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);

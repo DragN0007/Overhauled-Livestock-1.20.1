@@ -9,7 +9,6 @@ public class LivestockOverhaulClientConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> CULL_CUBES_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Double> CULL_LAYERS_DISTANCE;
     public static final ForgeConfigSpec.BooleanValue CULL_HIDDEN;
-    public static final ForgeConfigSpec.BooleanValue SIMPLE_MODELS;
     public static final ForgeConfigSpec.BooleanValue HORSE_COAT_GUI;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_TIMER;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_HUD;
@@ -20,19 +19,13 @@ public class LivestockOverhaulClientConfig {
 
     static {
         BUILDER.push("Performance");
+        BUILDER.comment("Looking for the Simple/ Performance Models Config? This config was removed in 4.0, and is now replaced by an official resource pack. You can find it under the name \"Livestock Overhaul: Performance Pack\" by DragN0007.");
         CULL_CUBES_DISTANCE = BUILDER.comment("The distance at which unnecessary bones are un-rendered from O-Animals to improve performance.")
                 .define("Unnecessary Bone Cull Distance", 1024.0);
         CULL_LAYERS_DISTANCE = BUILDER.comment("The distance at which unnecessary layers are un-rendered from O-Animals to improve performance.")
                 .define("Unnecessary Layer Cull Distance", 2048.0);
         CULL_HIDDEN = BUILDER.comment("Should animal rendering/ cubes be hidden when they're behind solid walls/ unseen? Does not affect actual mechanics/ entity loading.")
                 .define("Cull Bodies When Hidden", true);
-        SIMPLE_MODELS = BUILDER.comment("Should O-Animals run simplified, vanilla-styled models? " +
-                        "This option may be good for those on lower-end computers/ those having performance issues with the complex LO models." +
-                        "\nThis option significantly \"dumbs down\" LO animal models to allow for better performance. With this enabled, " +
-                        "your FPS may be able to double or even triple, especially in highly populated areas. " +
-                        "For this reason, animal markings, visual cosmetics, and breed dimorphism cannot render on these simpler models. " +
-                        "They are almost purely vanilla, only taking on genetic base colors. \nRestart your game after changing for best results. Some animals may not yet be included.")
-                .define("Performance Models [Experimental]", false);
         BUILDER.pop();
 
         BUILDER.push("GUI");

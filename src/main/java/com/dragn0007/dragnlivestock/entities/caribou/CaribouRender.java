@@ -119,10 +119,6 @@ public class CaribouRender extends GeoEntityRenderer<Caribou> {
             neck_armor.ifPresent(b -> b.setHidden(true));
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && animatable.isBaby()) {
-            poseStack.scale(0.5F, 0.5F, 0.5F);
-        }
-
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

@@ -33,11 +33,7 @@ public class OCamelTackLayer extends GeoRenderLayer<OCamel> {
         ItemStack itemStack = animatable.getDecorItem();
 
         if (animatable.isSaddled()) {
-            if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/tack/saddle.png");
-            } else {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/config_simplified/camel/tack/saddle.png");
-            }
+            resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/tack/saddle.png");
 
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
             getRenderer().reRender(getDefaultBakedModel(animatable),
@@ -61,8 +57,6 @@ public class OCamelTackLayer extends GeoRenderLayer<OCamel> {
                     1, 1, 1, 1);
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
-
         if(!itemStack.isEmpty()) {
             if (!itemStack.is(LOTags.Items.CAMEL_ARMOR) && !(itemStack.getItem() instanceof HorseArmorItem)) {
                 if (itemStack.is(LOTags.Items.CARPET_BLANKETS)) {
@@ -72,7 +66,7 @@ public class OCamelTackLayer extends GeoRenderLayer<OCamel> {
                     DyeColor color = ((DyeItem) itemStack.getItem()).getDyeColor();
                     resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/carpet/" + color + ".png");
                 }
-            } else if (itemStack.is(LOTags.Items.CAMEL_ARMOR) && itemStack.getItem() instanceof HorseArmorItem horseArmorItem && !LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
+            } else if (itemStack.is(LOTags.Items.CAMEL_ARMOR) && itemStack.getItem() instanceof HorseArmorItem horseArmorItem) {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/camel/armor/" + horseArmorItem + ".png");
             }
 

@@ -102,93 +102,87 @@ public class UnicornRender extends GeoEntityRenderer<Unicorn> {
             neck_armor.ifPresent(b -> b.setHidden(true));
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() && animatable.isBaby()) {
-            poseStack.scale(0.5F, 0.5F, 0.5F);
+        if (animatable.getManeType() == 0) {
+            mane_roached.ifPresent(b -> b.setHidden(true));
+            mane_short.ifPresent(b -> b.setHidden(true));
+            mane_buttons.ifPresent(b -> b.setHidden(false));
+            mane_long.ifPresent(b -> b.setHidden(true));
+        } else if (animatable.getManeType() == 1) {
+            mane_roached.ifPresent(b -> b.setHidden(true));
+            mane_short.ifPresent(b -> b.setHidden(true));
+            mane_buttons.ifPresent(b -> b.setHidden(true));
+            mane_long.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getManeType() == 2) {
+            mane_roached.ifPresent(b -> b.setHidden(false));
+            mane_short.ifPresent(b -> b.setHidden(true));
+            mane_buttons.ifPresent(b -> b.setHidden(true));
+            mane_long.ifPresent(b -> b.setHidden(true));
+            mane.ifPresent(b -> b.setScaleY(1.0F));
+        } else if (animatable.getManeType() == 3) {
+            mane_roached.ifPresent(b -> b.setHidden(true));
+            mane_short.ifPresent(b -> b.setHidden(false));
+            mane_buttons.ifPresent(b -> b.setHidden(true));
+            mane_long.ifPresent(b -> b.setHidden(true));
+        } else if (animatable.getManeType() == 4) {
+            mane.ifPresent(b -> b.setHidden(true));
         }
 
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (animatable.getManeType() == 0) {
-                mane_roached.ifPresent(b -> b.setHidden(true));
-                mane_short.ifPresent(b -> b.setHidden(true));
-                mane_buttons.ifPresent(b -> b.setHidden(false));
-                mane_long.ifPresent(b -> b.setHidden(true));
-            } else if (animatable.getManeType() == 1) {
-                mane_roached.ifPresent(b -> b.setHidden(true));
-                mane_short.ifPresent(b -> b.setHidden(true));
-                mane_buttons.ifPresent(b -> b.setHidden(true));
-                mane_long.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getManeType() == 2) {
-                mane_roached.ifPresent(b -> b.setHidden(false));
-                mane_short.ifPresent(b -> b.setHidden(true));
-                mane_buttons.ifPresent(b -> b.setHidden(true));
-                mane_long.ifPresent(b -> b.setHidden(true));
-                mane.ifPresent(b -> b.setScaleY(1.0F));
-            } else if (animatable.getManeType() == 3) {
-                mane_roached.ifPresent(b -> b.setHidden(true));
-                mane_short.ifPresent(b -> b.setHidden(false));
-                mane_buttons.ifPresent(b -> b.setHidden(true));
-                mane_long.ifPresent(b -> b.setHidden(true));
-            } else if (animatable.getManeType() == 4) {
-                mane.ifPresent(b -> b.setHidden(true));
-            }
+        if (animatable.getTailType() == 0) {
+            tail.ifPresent(b -> b.setScaleY(0.9F));
+            tail.ifPresent(b -> b.setScaleX(0.7F));
+            tail.ifPresent(b -> b.setScaleZ(0.7F));
+            tail_end.ifPresent(b -> b.setHidden(true));
+        } else if (animatable.getTailType() == 1) {
+            tail.ifPresent(b -> b.setScaleX(1.0F));
+            tail.ifPresent(b -> b.setScaleY(1.3F));
+            tail.ifPresent(b -> b.setScaleZ(1.0F));
+            tail_end.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getTailType() == 2) {
+            tail.ifPresent(b -> b.setScaleX(1.0F));
+            tail.ifPresent(b -> b.setScaleY(1.0F));
+            tail.ifPresent(b -> b.setScaleZ(1.0F));
+            tail_end.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getTailType() == 3) {
+            tail.ifPresent(b -> b.setScaleX(1.0F));
+            tail.ifPresent(b -> b.setScaleY(0.6F));
+            tail.ifPresent(b -> b.setScaleZ(1.0F));
+            tail_end.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getTailType() == 4) {
+            tail.ifPresent(b -> b.setScaleY(0.7F));
+            tail.ifPresent(b -> b.setScaleX(1.1F));
+            tail.ifPresent(b -> b.setScaleZ(1.0F));
+            tail_end.ifPresent(b -> b.setHidden(true));
+        }
 
-            if (animatable.getTailType() == 0) {
-                tail.ifPresent(b -> b.setScaleY(0.9F));
-                tail.ifPresent(b -> b.setScaleX(0.7F));
-                tail.ifPresent(b -> b.setScaleZ(0.7F));
-                tail_end.ifPresent(b -> b.setHidden(true));
-            } else if (animatable.getTailType() == 1) {
-                tail.ifPresent(b -> b.setScaleX(1.0F));
-                tail.ifPresent(b -> b.setScaleY(1.3F));
-                tail.ifPresent(b -> b.setScaleZ(1.0F));
-                tail_end.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getTailType() == 2) {
-                tail.ifPresent(b -> b.setScaleX(1.0F));
-                tail.ifPresent(b -> b.setScaleY(1.0F));
-                tail.ifPresent(b -> b.setScaleZ(1.0F));
-                tail_end.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getTailType() == 3) {
-                tail.ifPresent(b -> b.setScaleX(1.0F));
-                tail.ifPresent(b -> b.setScaleY(0.6F));
-                tail.ifPresent(b -> b.setScaleZ(1.0F));
-                tail_end.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getTailType() == 4) {
-                tail.ifPresent(b -> b.setScaleY(0.7F));
-                tail.ifPresent(b -> b.setScaleX(1.1F));
-                tail.ifPresent(b -> b.setScaleZ(1.0F));
-                tail_end.ifPresent(b -> b.setHidden(true));
-            }
-
-            if (animatable.getFeathering() == 0) {
-                feathering_fr.ifPresent(b -> b.setHidden(true));
-                feathering_fl.ifPresent(b -> b.setHidden(true));
-                feathering_br.ifPresent(b -> b.setHidden(true));
-                feathering_bl.ifPresent(b -> b.setHidden(true));
-            } else if (animatable.getFeathering() == 1) {
-                feathering_fr.ifPresent(b -> b.setHidden(false));
-                feathering_fl.ifPresent(b -> b.setHidden(false));
-                feathering_br.ifPresent(b -> b.setHidden(false));
-                feathering_bl.ifPresent(b -> b.setHidden(false));
-                feathering_fr.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_fl.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_br.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_bl.ifPresent(b -> b.setScaleY(0.6F));
-                feathering_fr.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_fl.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_br.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_bl.ifPresent(b -> b.setPosY(-3.5F));
-                feathering_fr.ifPresent(b -> b.setPosZ(-0.8F));
-                feathering_fl.ifPresent(b -> b.setPosZ(-0.8F));
-            } else if (animatable.getFeathering() == 2) {
-                feathering_fr.ifPresent(b -> b.setHidden(false));
-                feathering_fl.ifPresent(b -> b.setHidden(false));
-                feathering_br.ifPresent(b -> b.setHidden(false));
-                feathering_bl.ifPresent(b -> b.setHidden(false));
-                feathering_fr.ifPresent(b -> b.setScaleY(1F));
-                feathering_fl.ifPresent(b -> b.setScaleY(1F));
-                feathering_br.ifPresent(b -> b.setScaleY(1F));
-                feathering_bl.ifPresent(b -> b.setScaleY(1F));
-            }
+        if (animatable.getFeathering() == 0) {
+            feathering_fr.ifPresent(b -> b.setHidden(true));
+            feathering_fl.ifPresent(b -> b.setHidden(true));
+            feathering_br.ifPresent(b -> b.setHidden(true));
+            feathering_bl.ifPresent(b -> b.setHidden(true));
+        } else if (animatable.getFeathering() == 1) {
+            feathering_fr.ifPresent(b -> b.setHidden(false));
+            feathering_fl.ifPresent(b -> b.setHidden(false));
+            feathering_br.ifPresent(b -> b.setHidden(false));
+            feathering_bl.ifPresent(b -> b.setHidden(false));
+            feathering_fr.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_fl.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_br.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_bl.ifPresent(b -> b.setScaleY(0.6F));
+            feathering_fr.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_fl.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_br.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_bl.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_fr.ifPresent(b -> b.setPosZ(-0.8F));
+            feathering_fl.ifPresent(b -> b.setPosZ(-0.8F));
+        } else if (animatable.getFeathering() == 2) {
+            feathering_fr.ifPresent(b -> b.setHidden(false));
+            feathering_fl.ifPresent(b -> b.setHidden(false));
+            feathering_br.ifPresent(b -> b.setHidden(false));
+            feathering_bl.ifPresent(b -> b.setHidden(false));
+            feathering_fr.ifPresent(b -> b.setScaleY(1F));
+            feathering_fl.ifPresent(b -> b.setScaleY(1F));
+            feathering_br.ifPresent(b -> b.setScaleY(1F));
+            feathering_bl.ifPresent(b -> b.setScaleY(1F));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

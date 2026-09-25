@@ -44,42 +44,34 @@ public class OChickenRender extends GeoEntityRenderer<OChicken> {
         }
         if (atCullDistance) return;
 
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (!entity.isBaby()) {
-                poseStack.scale(1F, 1F, 1F);
-                if (entity.isMale()) {
-                    tail2.ifPresent(b -> b.setHidden(false));
-                    comb.ifPresent(b -> b.setHidden(false));
-                    gizzard.ifPresent(b -> b.setScaleX(1.0F));
-                    gizzard.ifPresent(b -> b.setScaleY(1.0F));
-                    gizzard.ifPresent(b -> b.setScaleZ(1.0F));
-                } else {
-                    tail2.ifPresent(b -> b.setHidden(true));
-                    comb.ifPresent(b -> b.setHidden(true));
-                    gizzard.ifPresent(b -> b.setScaleX(0.6F));
-                    gizzard.ifPresent(b -> b.setScaleY(0.6F));
-                    gizzard.ifPresent(b -> b.setScaleZ(0.6F));
-                }
-            } else if (entity.isBaby()) {
+        if (!entity.isBaby()) {
+            poseStack.scale(1F, 1F, 1F);
+            if (entity.isMale()) {
+                tail2.ifPresent(b -> b.setHidden(false));
+                comb.ifPresent(b -> b.setHidden(false));
+                gizzard.ifPresent(b -> b.setScaleX(1.0F));
+                gizzard.ifPresent(b -> b.setScaleY(1.0F));
+                gizzard.ifPresent(b -> b.setScaleZ(1.0F));
+            } else {
                 tail2.ifPresent(b -> b.setHidden(true));
                 comb.ifPresent(b -> b.setHidden(true));
-                gizzard.ifPresent(b -> b.setScaleX(0.2F));
-                gizzard.ifPresent(b -> b.setScaleY(0.2F));
-                gizzard.ifPresent(b -> b.setScaleZ(0.2F));
-                poseStack.scale(0.5F, 0.5F, 0.5F);
+                gizzard.ifPresent(b -> b.setScaleX(0.6F));
+                gizzard.ifPresent(b -> b.setScaleY(0.6F));
+                gizzard.ifPresent(b -> b.setScaleZ(0.6F));
             }
+        } else if (entity.isBaby()) {
+            tail2.ifPresent(b -> b.setHidden(true));
+            comb.ifPresent(b -> b.setHidden(true));
+            gizzard.ifPresent(b -> b.setScaleX(0.2F));
+            gizzard.ifPresent(b -> b.setScaleY(0.2F));
+            gizzard.ifPresent(b -> b.setScaleZ(0.2F));
+            poseStack.scale(0.5F, 0.5F, 0.5F);
+        }
 
-            if (entity.isTagged()) {
-                neck_tag.ifPresent(b -> b.setHidden(false));
-            } else {
-                neck_tag.ifPresent(b -> b.setHidden(true));
-            }
+        if (entity.isTagged()) {
+            neck_tag.ifPresent(b -> b.setHidden(false));
         } else {
-            if (entity.isBaby()) {
-                poseStack.scale(0.5F, 0.5F, 0.5F);
-            } else {
-                poseStack.scale(1F, 1F, 1F);
-            }
+            neck_tag.ifPresent(b -> b.setHidden(true));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);

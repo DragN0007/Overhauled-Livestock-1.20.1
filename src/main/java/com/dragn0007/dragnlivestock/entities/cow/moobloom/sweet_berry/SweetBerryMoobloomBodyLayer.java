@@ -23,8 +23,6 @@ public class SweetBerryMoobloomBodyLayer extends GeoRenderLayer<SweetBerryMooblo
 
     @Override
     public void render(PoseStack poseStack, SweetBerryMoobloom animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
-
         Player player = Minecraft.getInstance().player;
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
@@ -42,7 +40,7 @@ public class SweetBerryMoobloomBodyLayer extends GeoRenderLayer<SweetBerryMooblo
                     1, 1, 1, 1);
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
+        if (!animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
             return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();

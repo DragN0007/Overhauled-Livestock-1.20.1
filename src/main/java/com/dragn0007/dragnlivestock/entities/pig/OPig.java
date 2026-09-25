@@ -267,11 +267,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
-		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-			return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-		} else {
-			return OPigModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
-		}
+		return OPigModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -320,30 +316,12 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		if(tag.contains("Quality")) {
-			this.setQuality(tag.getInt("Quality"));
-		}
-
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Gender")) {
-			setGender(tag.getInt("Gender"));
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
+		if(tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
+		if (tag.contains("Breed")) {this.setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Gender")) {setGender(tag.getInt("Gender"));}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 

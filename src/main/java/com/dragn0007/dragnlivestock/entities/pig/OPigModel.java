@@ -38,7 +38,6 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
     }
 
     public static String default_path = "textures/entity/pig/";
-    public static String config_simplified_path = "textures/entity/config_simplified/pig/";
 
     public enum Variant {
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
@@ -59,37 +58,12 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
         }
     }
 
-    public enum SVariant {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "blue.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "light_grey.png")),
-        PINK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "pink.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "red.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png"));
-
-        public final ResourceLocation resourceLocation;
-        SVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SVariant variantFromOrdinal(int variant) { return SVariant.values()[variant % SVariant.values().length];
-        }
-    }
-
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/pig/o_pig.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_pig.animation.json");
-    public static final ResourceLocation SIMPLIFIED_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/config_simplified/pig.geo.json");
-    public static final ResourceLocation SIMPLIFIED_ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/config_simplified/pig.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OPig object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return MODEL;
-        } else {
-            return SIMPLIFIED_MODEL;
-        }
+        return MODEL;
     }
 
     @Override
@@ -99,11 +73,7 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
 
     @Override
     public ResourceLocation getAnimationResource(OPig animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

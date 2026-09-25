@@ -34,8 +34,6 @@ public class UnicornBodyLayer extends GeoRenderLayer<Unicorn> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
-
         if (animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
             getRenderer().reRender(getDefaultBakedModel(animatable),

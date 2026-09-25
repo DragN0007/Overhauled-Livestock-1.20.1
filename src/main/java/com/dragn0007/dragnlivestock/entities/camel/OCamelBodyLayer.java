@@ -29,8 +29,6 @@ public class OCamelBodyLayer extends GeoRenderLayer<OCamel> {
 
     @Override
     public void render(PoseStack poseStack, OCamel animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
-
         if (!animatable.isBaby() && animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(this.getTexture(animatable));
             getRenderer().reRender(getDefaultBakedModel(animatable),

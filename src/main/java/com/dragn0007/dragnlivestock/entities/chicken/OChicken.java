@@ -359,11 +359,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 	// Generates the base texture
 	public ResourceLocation getTextureResource() {
-		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-			return OChickenModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-		} else {
-			return OChickenModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
-		}
+		return OChickenModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 
 	public ResourceLocation getOverlayLocation() {

@@ -109,34 +109,22 @@ public class OMuleModel extends DefaultedEntityGeoModel<OMule> {
 
     @Override
     public ResourceLocation getModelResource(OMule object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            if (object.isBaby()) {
-                return BABY_MODEL;
-            }
-            return MuleBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
-        } else {
-            return SIMPLIFIED_MODEL;
+        if (object.isBaby()) {
+            return BABY_MODEL;
         }
+        return MuleBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
     public ResourceLocation getTextureResource(OMule object) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-        } else {
-            return object.getSimplifiedVariantTextureResource();
-        }
+        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override
     public ResourceLocation getAnimationResource(OMule animatable) {
-        if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-            return ANIMATION;
-        } else {
-            return SIMPLIFIED_ANIMATION;
-        }
+        return ANIMATION;
     }
 }
 

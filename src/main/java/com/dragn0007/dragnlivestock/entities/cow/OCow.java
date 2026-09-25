@@ -647,11 +647,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public ResourceLocation getTextureLocation() {
-		if (!LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) {
-			return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-		} else {
-			return OCowModel.SVariant.variantFromOrdinal(getVariant()).resourceLocation;
-		}
+		return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
 	}
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -738,52 +734,18 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if(tag.contains("Quality")) {
-			this.setQuality(tag.getInt("Quality"));
-		}
-
-		if (tag.contains("Breed")) {
-			setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("HornType")) {
-			setHornVariant(tag.getInt("HornType"));
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if (tag.contains("MilkedTime")) {
-			this.replenishMilkCounter = tag.getInt("MilkedTime");
-		}
-
-		if (tag.contains("Milked")) {
-			setMilked(tag.getBoolean("Milked"));
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
+		if(tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
+		if (tag.contains("Breed")) {setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("HornType")) {setHornVariant(tag.getInt("HornType"));}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if (tag.contains("MilkedTime")) {this.replenishMilkCounter = tag.getInt("MilkedTime");}
+		if (tag.contains("Milked")) {setMilked(tag.getBoolean("Milked"));}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
-
-		if(tag.contains("Harnessed")) {
-			this.setHarnessed(tag.getBoolean("Harnessed"));
-		}
-
-		if(tag.contains("Belled")) {
-			this.setBelled(tag.getBoolean("Belled"));
-		}
+		if(tag.contains("Harnessed")) {this.setHarnessed(tag.getBoolean("Harnessed"));}
+		if(tag.contains("Belled")) {this.setBelled(tag.getBoolean("Belled"));}
 	}
 
 	@Override

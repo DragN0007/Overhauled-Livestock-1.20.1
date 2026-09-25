@@ -464,49 +464,17 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Chested")) {
-			this.setChested(tag.getBoolean("Chested"));
-		}
-
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Chested")) {this.setChested(tag.getBoolean("Chested"));}
 		this.setStrength(tag.getInt("Strength"));
-
-		if (tag.contains("DecorItem", 10)) {
-			this.inventory.setItem(1, ItemStack.of(tag.getCompound("DecorItem")));
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if (tag.contains("Wooly")) {
-			this.setWooly(tag.getInt("Wooly"));
-		}
-
-		if (tag.contains("Milked")) {
-			this.setMilked(tag.getBoolean("Milked"));
-		}
-
-		if (tag.contains("MilkedTime")) {
-			this.replenishMilkCounter = tag.getInt("MilkedTime");
-		}
-
-		if (tag.contains("Sheared")) {
-			this.setSheared(tag.getBoolean("Sheared"));
-		}
-
-		if (tag.contains("ShearedTime")) {
-			this.regrowWoolCounter = tag.getInt("ShearedTime");
-		}
-
+		if (tag.contains("DecorItem", 10)) {this.inventory.setItem(1, ItemStack.of(tag.getCompound("DecorItem")));}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if (tag.contains("Wooly")) {this.setWooly(tag.getInt("Wooly"));}
+		if (tag.contains("Milked")) {this.setMilked(tag.getBoolean("Milked"));}
+		if (tag.contains("MilkedTime")) {this.replenishMilkCounter = tag.getInt("MilkedTime");}
+		if (tag.contains("Sheared")) {this.setSheared(tag.getBoolean("Sheared"));}
+		if (tag.contains("ShearedTime")) {this.regrowWoolCounter = tag.getInt("ShearedTime");}
 		this.updateContainerEquipment();
 		this.updateInventory();
 		super.readAdditionalSaveData(tag);

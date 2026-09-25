@@ -35,7 +35,6 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get()) return;
 
         if (animatable.getDecompVariant() != 4 && animatable.getDecompVariant() != 5 && animatable.getDecompVariant() != 6) {
             if (animatable.getOverlayVariant() == 0) return;

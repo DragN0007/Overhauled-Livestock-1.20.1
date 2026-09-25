@@ -32,7 +32,7 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
                     targetYaw = Mth.clamp(targetYaw, -25.0f, 25.0f);
                 }
                 neck.setRotY(targetYaw * Mth.DEG_TO_RAD);
-                neck.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
+                neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
             } else {
                 neck.setRotX(neck.getRotX() + (entityData.headPitch() * Mth.DEG_TO_RAD));
                 float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);

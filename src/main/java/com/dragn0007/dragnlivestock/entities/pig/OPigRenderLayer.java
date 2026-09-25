@@ -26,7 +26,7 @@ public class OPigRenderLayer extends GeoRenderLayer<OPig> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || animatable.isBaby() || (animatable.getOverlayVariant() == 0 && !animatable.isTagged())) return;
+        if (animatable.isBaby() || (animatable.getOverlayVariant() == 0 && !animatable.isTagged())) return;
 
         if (animatable.getOverlayVariant() != 0) {
             RenderType renderMarkingType = RenderType.entityCutout(animatable.getOverlayLocation());
@@ -44,7 +44,7 @@ public class OPigRenderLayer extends GeoRenderLayer<OPig> {
             );
         }
 
-        if (LivestockOverhaulClientConfig.SIMPLE_MODELS.get() || !animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get()) return;
+        if (!animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get()) return;
         if (animatable.isTagged()) {
             DyeColor dyeColor = animatable.getBrandTagColor();
             ResourceLocation resourceLocation = null;

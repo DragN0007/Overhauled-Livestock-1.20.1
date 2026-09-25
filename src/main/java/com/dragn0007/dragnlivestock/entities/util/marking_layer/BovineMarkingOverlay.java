@@ -47,3 +47,5 @@ public enum BovineMarkingOverlay {
         public static BovineMarkingOverlay overlayFromOrdinal(int overlay) { return BovineMarkingOverlay.values()[overlay % BovineMarkingOverlay.values().length];
         }
 }
+
+
