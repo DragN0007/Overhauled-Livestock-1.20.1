@@ -38,7 +38,7 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
         Player player = Minecraft.getInstance().player;
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
-        if (atCullDistance && !animatable.isVehicle()) return;
+        if ((atCullDistance && !animatable.isVehicle()) || LivestockOverhaulClientConfig.DISABLE_TACK.get()) return;
 
         ItemStack saddleStack = animatable.getSaddleItem();
         ItemStack decorStack = animatable.getDecorItem();

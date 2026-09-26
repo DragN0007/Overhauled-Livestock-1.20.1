@@ -9,6 +9,8 @@ public class LivestockOverhaulClientConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> CULL_CUBES_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Double> CULL_LAYERS_DISTANCE;
     public static final ForgeConfigSpec.BooleanValue CULL_HIDDEN;
+    public static final ForgeConfigSpec.BooleanValue DISABLE_MARKINGS;
+    public static final ForgeConfigSpec.BooleanValue DISABLE_TACK;
     public static final ForgeConfigSpec.BooleanValue HORSE_COAT_GUI;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_TIMER;
     public static final ForgeConfigSpec.BooleanValue HORSE_SPRINT_HUD;
@@ -26,6 +28,11 @@ public class LivestockOverhaulClientConfig {
                 .define("Unnecessary Layer Cull Distance", 2048.0);
         CULL_HIDDEN = BUILDER.comment("Should animal rendering/ cubes be hidden when they're behind solid walls/ unseen? Does not affect actual mechanics/ entity loading.")
                 .define("Cull Bodies When Hidden", true);
+        BUILDER.comment("If you're having a lot of trouble running O-Animals, even after trying the \"Livestock Overhaul: Performance Pack\", you can use these layer disabler configs as a last resort to gain more FPS.");
+        DISABLE_MARKINGS = BUILDER.comment("Disable animal marking/ body layers?")
+                .define("Disable Marking Layers", false);
+        DISABLE_TACK = BUILDER.comment("Disable animal tack, cosmetic & armor layers?")
+                .define("Disable Tack & Cosmetic Layers", false);
         BUILDER.pop();
 
         BUILDER.push("GUI");
