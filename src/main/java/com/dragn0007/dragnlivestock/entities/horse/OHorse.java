@@ -484,7 +484,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		AnimationController<T> controller = tAnimationState.getController();
 
-		//update LO: Scraps if this gets changed!
 		if ((!this.isTamed() || this.isWearingRodeoHarness()) && this.isVehicle() && !this.isJumping()) {
 			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
 			controller.setAnimationSpeed(1.3);

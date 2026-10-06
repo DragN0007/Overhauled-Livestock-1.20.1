@@ -1501,7 +1501,7 @@ public class SpawnReplacer {
                         unicorn.setMarkingByBreed();
                         unicorn.setHornByBreed();
                     } else {
-                        unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+                        unicorn.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         unicorn.setHornVariant(random.nextInt(UnicornBodyLayer.HornType.values().length));
                     }
@@ -1543,7 +1543,7 @@ public class SpawnReplacer {
                         unicorn.setMarkingByBreed();
                         unicorn.setHornByBreed();
                     } else {
-                        unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+                        unicorn.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         unicorn.setHornVariant(random.nextInt(UnicornBodyLayer.HornType.values().length));
                     }
@@ -1585,7 +1585,7 @@ public class SpawnReplacer {
                         unicorn.setMarkingByBreed();
                         unicorn.setHornByBreed();
                     } else {
-                        unicorn.setVariant(random.nextInt(UnicornModel.Variant.values().length));
+                        unicorn.setVariant(random.nextInt(OHorseModel.Variant.values().length));
                         unicorn.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
                         unicorn.setHornVariant(random.nextInt(UnicornBodyLayer.HornType.values().length));
                     }

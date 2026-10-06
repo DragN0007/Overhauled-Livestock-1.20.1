@@ -47,6 +47,7 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
             case 20 -> "Standardbred";
             case 21 -> "Trakehner";
             case 22 -> "Boulonnais";
+            case 23 -> "Lusitano";
             default -> "Unknown";
         };
     }

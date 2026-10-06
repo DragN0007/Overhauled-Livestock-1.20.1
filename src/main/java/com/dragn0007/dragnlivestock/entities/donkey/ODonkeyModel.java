@@ -49,7 +49,10 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
         CREAM(new ResourceLocation(LivestockOverhaul.MODID, default_path + "cream.png")),
         GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grey.png")),
         STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "strawberry.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png"));
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png")),
+        BAY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "bay.png")),
+        DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "dark_brown.png")),
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png"));
 
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
