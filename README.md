@@ -57,8 +57,8 @@ my_wondrous_texture_pack > assets & mcmeta > horse_textures > my_horsie.png
 
 ## Tester Template For Beginners
 
-There's a 'readme_custom_textures_template.zip' texture pack added to this repository. You can use it to make your own
-resource pack with ease. It comes with a pre-made "test_horsie.png" texture that you can spawn in to make sure it works.
+There's a 'readme_custom_textures_template.zip' texture pack you can download at the old repo: https://github.com/DragN0007/Overhauled-Livestock/blob/master/readme_custom_textures_template.zip. 
+You can use it to make your own resource pack with ease. It comes with a pre-made "test_horsie.png" texture that you can spawn in to make sure it works.
 If you do not want test_horsie (as beautiful as his big-red-self is), simply delete him. 
 
 Examples for the Template Texture Pack:
