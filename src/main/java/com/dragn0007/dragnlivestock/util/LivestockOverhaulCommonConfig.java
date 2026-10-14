@@ -72,6 +72,7 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue HORSE_HERD_ANIMALS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue ALLOW_HOLIDAY_EVENTS;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_ACCENTED_SADDLES;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
     public static final ForgeConfigSpec.BooleanValue QUALITY;
@@ -320,6 +321,10 @@ public class LivestockOverhaulCommonConfig {
         ALLOW_HOLIDAY_EVENTS = BUILDER.comment("Should holiday events take place, and should holiday items be available? " +
                         "If this is false, all holiday events are disabled and holiday items will not be available to craft.")
                 .define("Allow Holiday Events & Items", true);
+
+        ALLOW_ACCENTED_SADDLES = BUILDER.comment("Should players be able to craft accented saddles with LO: Mount Additions installed?" +
+                        "By default, this is set to false, since the base accented saddles are incompatible with the LO:MA tack system.")
+                .define("Allow Accented Saddles w/ Mount Additions", false);
         BUILDER.pop();
 
         BUILDER.push("Wagons");

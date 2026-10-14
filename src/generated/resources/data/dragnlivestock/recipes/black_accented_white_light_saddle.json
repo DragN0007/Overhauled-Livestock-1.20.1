@@ -1,19 +1,31 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "item": "dragnlivestock:white_light_saddle"
-    },
-    "B": {
-      "item": "minecraft:black_wool"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "dragnlivestock:mount_additions_config_condition"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "dragnlivestock:white_light_saddle"
+          },
+          "B": {
+            "item": "minecraft:black_wool"
+          }
+        },
+        "pattern": [
+          "AB"
+        ],
+        "result": {
+          "item": "dragnlivestock:black_accented_white_light_saddle"
+        },
+        "show_notification": true
+      }
     }
-  },
-  "pattern": [
-    "AB"
-  ],
-  "result": {
-    "item": "dragnlivestock:black_accented_white_light_saddle"
-  },
-  "show_notification": true
+  ]
 }

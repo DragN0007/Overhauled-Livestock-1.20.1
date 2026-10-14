@@ -284,26 +284,29 @@ public class LOItemGroup {
                             output.accept(LOItems.GRUB_SWEATERS.get(color).get());
                         }
 
-                        for (DyeColor color : DyeColor.values()) {
-                            output.accept(LOItems.ACCENTED_SADDLES.get(color).get());
-                            output.accept(LOItems.ACCENTED_LIGHT_SADDLES.get(color).get());
-                            output.accept(LOItems.ACCENTED_HEAVY_SADDLES.get(color).get());
-                        }
+                        if (!ModList.get().isLoaded("dragnloequestrian")
+                                || (LivestockOverhaulCommonConfig.ALLOW_ACCENTED_SADDLES.get() && ModList.get().isLoaded("dragnloequestrian"))) {
+                            for (DyeColor color : DyeColor.values()) {
+                                output.accept(LOItems.ACCENTED_SADDLES.get(color).get());
+                                output.accept(LOItems.ACCENTED_LIGHT_SADDLES.get(color).get());
+                                output.accept(LOItems.ACCENTED_HEAVY_SADDLES.get(color).get());
+                            }
 
-                        for (DyeColor color : DyeColor.values()) {
-                            if (color == DyeColor.BLACK)
-                                continue;
-                            output.accept(LOItems.ACCENTED_BLACK_SADDLES.get(color).get());
-                            output.accept(LOItems.ACCENTED_BLACK_LIGHT_SADDLES.get(color).get());
-                            output.accept(LOItems.ACCENTED_BLACK_HEAVY_SADDLES.get(color).get());
-                        }
+                            for (DyeColor color : DyeColor.values()) {
+                                if (color == DyeColor.BLACK)
+                                    continue;
+                                output.accept(LOItems.ACCENTED_BLACK_SADDLES.get(color).get());
+                                output.accept(LOItems.ACCENTED_BLACK_LIGHT_SADDLES.get(color).get());
+                                output.accept(LOItems.ACCENTED_BLACK_HEAVY_SADDLES.get(color).get());
+                            }
 
-                        for (DyeColor color : DyeColor.values()) {
-                            if (color == DyeColor.WHITE)
-                                continue;
-                            output.accept(LOItems.ACCENTED_WHITE_SADDLES.get(color).get());
-                            output.accept(LOItems.ACCENTED_WHITE_LIGHT_SADDLES.get(color).get());
-                            output.accept(LOItems.ACCENTED_WHITE_HEAVY_SADDLES.get(color).get());
+                            for (DyeColor color : DyeColor.values()) {
+                                if (color == DyeColor.WHITE)
+                                    continue;
+                                output.accept(LOItems.ACCENTED_WHITE_SADDLES.get(color).get());
+                                output.accept(LOItems.ACCENTED_WHITE_LIGHT_SADDLES.get(color).get());
+                                output.accept(LOItems.ACCENTED_WHITE_HEAVY_SADDLES.get(color).get());
+                            }
                         }
 
                         output.accept(LOItems.AMERICAN_MEDIEVAL_BLANKET.get());

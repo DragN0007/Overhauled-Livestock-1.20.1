@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.compat.medievalembroidery.MECompatItems;
 import com.dragn0007.dragnlivestock.datagen.conditions.BlanketConfigCondition;
 import com.dragn0007.dragnlivestock.datagen.conditions.HolidayConfigCondition;
+import com.dragn0007.dragnlivestock.datagen.conditions.LOMAConfigCondition;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -1827,29 +1828,41 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                             .of(ItemTags.WOOL_CARPETS).build()))
                     .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_grub_sweater"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_SADDLES.get(color).get())
-                    .define('A', Items.SADDLE)
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_SADDLES.get(color).get())
+                                    .define('A', Items.SADDLE)
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_saddle"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_LIGHT_SADDLES.get(color).get())
-                    .define('A', LOItems.LIGHT_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_light_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_LIGHT_SADDLES.get(color).get())
+                                    .define('A', LOItems.LIGHT_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_light_saddle"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_HEAVY_SADDLES.get(color).get())
-                    .define('A', LOItems.HEAVY_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_heavy_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_HEAVY_SADDLES.get(color).get())
+                                    .define('A', LOItems.HEAVY_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_heavy_saddle"));
 
 
             ConditionalRecipe.builder()
@@ -1904,29 +1917,42 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
             Item carpetItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet"));
             if (color == DyeColor.BLACK)
                 continue;
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_SADDLES.get(color).get())
-                    .define('A', LOItems.BLACK_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_black_saddle"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_LIGHT_SADDLES.get(color).get())
-                    .define('A', LOItems.BLACK_LIGHT_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_black_light_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_SADDLES.get(color).get())
+                                    .define('A', LOItems.BLACK_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_black_saddle"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_HEAVY_SADDLES.get(color).get())
-                    .define('A', LOItems.BLACK_HEAVY_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_black_heavy_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_LIGHT_SADDLES.get(color).get())
+                                    .define('A', LOItems.BLACK_LIGHT_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_black_light_saddle"));
+
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_BLACK_HEAVY_SADDLES.get(color).get())
+                                    .define('A', LOItems.BLACK_HEAVY_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_black_heavy_saddle"));
 
 
             ConditionalRecipe.builder()
@@ -1985,29 +2011,41 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
             Item carpetItem = BuiltInRegistries.ITEM.get(new ResourceLocation("minecraft", color.getName() + "_carpet"));
             if (color == DyeColor.WHITE)
                 continue;
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_SADDLES.get(color).get())
-                    .define('A', LOItems.WHITE_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_white_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_SADDLES.get(color).get())
+                                    .define('A', LOItems.WHITE_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_white_saddle"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_LIGHT_SADDLES.get(color).get())
-                    .define('A', LOItems.WHITE_LIGHT_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_white_light_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_LIGHT_SADDLES.get(color).get())
+                                    .define('A', LOItems.WHITE_LIGHT_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_white_light_saddle"));
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_HEAVY_SADDLES.get(color).get())
-                    .define('A', LOItems.WHITE_HEAVY_SADDLE.get())
-                    .define('B', woolItem)
-                    .pattern("AB")
-                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
-                            .of(ItemTags.WOOL).build()))
-                    .save(pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_white_heavy_saddle"));
+            ConditionalRecipe.builder()
+                    .addCondition(new LOMAConfigCondition(new ResourceLocation(LivestockOverhaul.MODID, "mount_additions_config_condition")))
+                    .addRecipe(
+                            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, LOItems.ACCENTED_WHITE_HEAVY_SADDLES.get(color).get())
+                                    .define('A', LOItems.WHITE_HEAVY_SADDLE.get())
+                                    .define('B', woolItem)
+                                    .pattern("AB")
+                                    .unlockedBy("has_wool", inventoryTrigger(ItemPredicate.Builder.item()
+                                            .of(ItemTags.WOOL).build()))
+                                    ::save).build
+                            (pFinishedRecipeConsumer, new ResourceLocation(LivestockOverhaul.MODID, color.getName() + "_accented_white_heavy_saddle"));
 
 
             ConditionalRecipe.builder()
