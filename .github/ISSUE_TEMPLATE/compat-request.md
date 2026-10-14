@@ -1,7 +1,7 @@
 ---
 name: Compat request
 about: Suggest a compat bridge with another mod’s feature(s).
-title: 'Compat Request: {Mod Name}'
+title: 'Compat Request: {Other Mod’s Name}'
 labels: compat request
 assignees: ''
 
