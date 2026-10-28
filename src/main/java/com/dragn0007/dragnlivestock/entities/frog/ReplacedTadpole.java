@@ -17,13 +17,11 @@ public class ReplacedTadpole implements GeoReplacedEntity {
 
 	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
-
 		if (tAnimationState.isMoving()) {
 				controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
 		} else {
 			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 		}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -33,12 +31,8 @@ public class ReplacedTadpole implements GeoReplacedEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
-	public EntityType<?> getReplacingEntityType() {
-		return EntityType.TADPOLE;
-	}
+	public EntityType<?> getReplacingEntityType() {return EntityType.TADPOLE;}
 }

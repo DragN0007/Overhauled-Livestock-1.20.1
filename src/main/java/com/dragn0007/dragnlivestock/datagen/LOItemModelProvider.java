@@ -37,17 +37,7 @@ public class LOItemModelProvider extends ItemModelProvider {
         simpleItem(LOItems.O_SALMON_SPAWN_EGG);
         simpleItem(LOItems.O_COD_SPAWN_EGG);
         simpleItem(LOItems.O_BEE_SPAWN_EGG);
-        simpleItem(LOItems.AZALEA_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.BEETROOT_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.CARROT_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.FLOWERING_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.GLOW_BERRY_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.MELON_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.PEACH_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.POTATO_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.PUMPKIN_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.SWEET_BERRY_MOOBLOOM_SPAWN_EGG);
-        simpleItem(LOItems.WHEAT_MOOBLOOM_SPAWN_EGG);
+        simpleItem(LOItems.MOOBLOOM_SPAWN_EGG);
         simpleItem(LOItems.GRUB_SPAWN_EGG);
         simpleItem(LOItems.FARM_GOAT_SPAWN_EGG);
         simpleItem(LOItems.CARIBOU_SPAWN_EGG);

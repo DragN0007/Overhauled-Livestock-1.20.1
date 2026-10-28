@@ -20,7 +20,6 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
 
     @Override
     public void setCustomAnimations(Caribou animatable, long instanceId, AnimationState<Caribou> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
 
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
@@ -64,9 +63,7 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");
@@ -75,22 +72,16 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
 
     @Override
     public ResourceLocation getModelResource(Caribou object) {
-        if (object.isBaby()) {
-            return BABY_MODEL;
-        }
+        if (object.isBaby()) return BABY_MODEL;
         return MODEL;
     }
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
-    public ResourceLocation getTextureResource(Caribou object) {
-        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-    }
+    public ResourceLocation getTextureResource(Caribou object) {return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);}
 
     @Override
-    public ResourceLocation getAnimationResource(Caribou animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(Caribou animatable) {return ANIMATION;}
 }
 

@@ -69,9 +69,7 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
 
     @Override
     public ResourceLocation getModelResource(ODonkey object) {
-        if (object.isBaby()) {
-            return BABY_MODEL;
-        }
+        if (object.isBaby()) return BABY_MODEL;
         return MODEL;
     }
 
@@ -83,8 +81,6 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
     }
 
     @Override
-    public ResourceLocation getAnimationResource(ODonkey animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(ODonkey animatable) {return ANIMATION;}
 }
 

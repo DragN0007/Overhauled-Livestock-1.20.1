@@ -75,21 +75,16 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/camel");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
-			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-				return new OCamelMenu(containerId, inventory, this.inventory, this);
-			}, this.getDisplayName()), (data) -> {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) ->
+					new OCamelMenu(containerId, inventory, this.inventory, this), this.getDisplayName()), (data) -> {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());
 			});
@@ -97,14 +92,10 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public int getMaxHeadXRot() {
-		return 40;
-	}
+	public int getMaxHeadXRot() {return 40;}
 
 	@Override
-	public int getMaxHeadYRot() {
-		return 60;
-	}
+	public int getMaxHeadYRot() {return 60;}
 
 	@Nullable
 	public OCamel caravanHead;
@@ -112,10 +103,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	public OCamel caravanTail;
 
 	public void leaveCaravan() {
-		if (this.caravanHead != null) {
-			this.caravanHead.caravanTail = null;
-		}
-
+		if (this.caravanHead != null) this.caravanHead.caravanTail = null;
 		this.caravanHead = null;
 	}
 
@@ -124,22 +112,12 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.caravanHead.caravanTail = this;
 	}
 
-	public boolean hasCaravanTail() {
-		return this.caravanTail != null;
-	}
-
-	public boolean inCaravan() {
-		return this.caravanHead != null;
-	}
+	public boolean hasCaravanTail() {return this.caravanTail != null;}
+	public boolean inCaravan() {return this.caravanHead != null;}
 
 	@Nullable
-	public OCamel getCaravanHead() {
-		return this.caravanHead;
-	}
-
-	public double followLeashSpeed() {
-		return 1.6D;
-	}
+	public OCamel getCaravanHead() {return this.caravanHead;}
+	public double followLeashSpeed() {return 1.6D;}
 
 	@Override
 	public Vec3 getLeashOffset() {
@@ -164,19 +142,13 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.DEAD_BUSH, Items.CACTUS, Blocks.HAY_BLOCK.asItem());
 
 	@Override
-	public boolean isFood(ItemStack stack) {
-		return FOOD_ITEMS.test(stack);
-	}
+	public boolean isFood(ItemStack stack) {return FOOD_ITEMS.test(stack);}
 
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	@Override
-	public boolean canJump() {
-		return false;
-	}
+	public boolean canJump() {return false;}
 
 	@Override
 	public void registerGoals() {
@@ -208,13 +180,9 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		));
 	}
 
-	public float generateRandomMaxHealth() {
-		return 25.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
-	}
+	public float generateRandomMaxHealth() {return 25.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);}
 
-	public double generateRandomJumpStrength() {
-		return (double)0.0F + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D;
-	}
+	public double generateRandomJumpStrength() {return (double)0.0F + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D;}
 
 	public double generateRandomSpeed() {
 		double randomSpeed = (0.20 + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.25D;
@@ -292,14 +260,12 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 
 	protected <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
-
 		if(tAnimationState.isMoving() || !this.shouldEmote) {
 			controller.forceAnimationReset();
 			controller.stop();
 			this.shouldEmote = false;
 			return PlayState.STOP;
 		}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -311,17 +277,12 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.camel");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.camel");
+		else return super.getTypeName();
 	}
 
 	public int filledHumpsTime = this.random.nextInt(6000) + 6000;
@@ -426,40 +387,27 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean isArmor(ItemStack itemStack) {
-		return itemStack.is(ItemTags.WOOL_CARPETS) || itemStack.is(LOTags.Items.CAMEL_ARMOR);
-	}
+	public boolean isArmor(ItemStack itemStack) {return itemStack.is(ItemTags.WOOL_CARPETS) || itemStack.is(LOTags.Items.CAMEL_ARMOR);}
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (damageSource.is(DamageTypes.CACTUS)) {
-			return false;
-		}
+		if (damageSource.is(DamageTypes.CACTUS)) return false;
 		return super.hurt(damageSource, v);
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-
 		if (this.isOnSand()) {
-			if (!this.hasSpeedEffect()) {
-				this.applySpeedEffect();
-			}
+			if (!this.hasSpeedEffect()) this.applySpeedEffect();
 		} else {
-			if (this.hasSpeedEffect()) {
-				this.removeSpeedEffect();
-			}
+			if (this.hasSpeedEffect()) this.removeSpeedEffect();
 		}
 
 		if (this.isOnGrass()) {
-			if (!this.hasSlownessEffect()) {
-				this.applySlownessEffect();
-			}
+			if (!this.hasSlownessEffect()) this.applySlownessEffect();
 		} else {
-			if (this.hasSlownessEffect()) {
-				this.removeSlownessEffect();
-			}
+			if (this.hasSlownessEffect()) this.removeSlownessEffect();
 		}
 	}
 
@@ -473,13 +421,8 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.addEffect(speedEffectInstance);
 	}
 
-	protected boolean hasSpeedEffect() {
-		return this.hasEffect(MobEffects.MOVEMENT_SPEED);
-	}
-
-	protected void removeSpeedEffect() {
-		this.removeEffect(MobEffects.MOVEMENT_SPEED);
-	}
+	protected boolean hasSpeedEffect() {return this.hasEffect(MobEffects.MOVEMENT_SPEED);}
+	protected void removeSpeedEffect() {this.removeEffect(MobEffects.MOVEMENT_SPEED);}
 
 	public boolean isOnGrass() {
 		BlockState blockState = this.level().getBlockState(this.blockPosition().below());
@@ -491,21 +434,14 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		this.addEffect(slownessEffectInstance);
 	}
 
-	public boolean hasSlownessEffect() {
-		return this.hasEffect(MobEffects.MOVEMENT_SLOWDOWN);
-	}
-
-	public void removeSlownessEffect() {
-		this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-	}
+	public boolean hasSlownessEffect() {return this.hasEffect(MobEffects.MOVEMENT_SLOWDOWN);}
+	public void removeSlownessEffect() {this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);}
 
 	public Vec3 calcOffset ( double x, double y, double z){
 		double rad = this.getYRot() * Math.PI / 180;
-
 		double xOffset = this.position().x + (x * Math.cos(rad) - z * Math.sin(rad));
 		double yOffset = this.position().y + y;
 		double zOffset = this.position().z + (x * Math.sin(rad) + z * Math.cos(rad));
-
 		return new Vec3(xOffset, yOffset, zOffset);
 	}
 
@@ -523,7 +459,6 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
 		int i = this.getPassengers().indexOf(entity);
-
 		if (getBreed() == 0) {
 			switch (i) {
 				case 0:
@@ -546,9 +481,7 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 
 	@Override
 	public LivingEntity getControllingPassenger() {
-		if (this.isTamed() && this.isSaddled()) {
-			return (LivingEntity) this.getFirstPassenger();
-		}
+		if (this.isTamed() && this.isSaddled()) return (LivingEntity) this.getFirstPassenger();
 		return null;
 	}
 
@@ -559,15 +492,11 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public SoundEvent getDeathSound() {
-		return SoundEvents.CAMEL_DEATH;
-	}
+	public SoundEvent getDeathSound() {return SoundEvents.CAMEL_DEATH;}
 
 	@Nullable
 	@Override
-	public SoundEvent getEatingSound() {
-		return SoundEvents.CAMEL_EAT;
-	}
+	public SoundEvent getEatingSound() {return SoundEvents.CAMEL_EAT;}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource damageSource) {
@@ -581,90 +510,47 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 		return SoundEvents.CAMEL_HURT;
 	}
 
-
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
-	public ResourceLocation getModelResource() {
-		return CamelBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;
-	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
+	public ResourceLocation getModelResource() {return CamelBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;}
+	public int getBreed() {return this.entityData.get(BREED);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 		this.entityData.set(VARIANT_TEXTURE, OCamelModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.STRING);
-	public String getTextureResource() {
-		return this.entityData.get(VARIANT_TEXTURE);
-	}
-	public void setVariantTexture(String variant) {
-		this.entityData.set(VARIANT_TEXTURE, variant);
-	}
+	public String getTextureResource() {return this.entityData.get(VARIANT_TEXTURE);}
+	public void setVariantTexture(String variant) {this.entityData.set(VARIANT_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
 		this.entityData.set(OVERLAY_TEXTURE, OCamelBodyLayer.Marking.overlayFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.STRING);
-	public String getOverlayLocation() {
-		return this.entityData.get(OVERLAY_TEXTURE);
-	}
-	public void setOverlayVariantTexture(String variant) {
-		this.entityData.set(OVERLAY_TEXTURE, variant);
-	}
+	public String getOverlayLocation() {return this.entityData.get(OVERLAY_TEXTURE);}
+	public void setOverlayVariantTexture(String variant) {this.entityData.set(OVERLAY_TEXTURE, variant);}
 
-	public enum Mane {
-		NONE,
-		HALF,
-		FULL;
-		public OCamel.Mane next() {
-			return OCamel.Mane.values()[(this.ordinal() + 1) % OCamel.Mane.values().length];
-		}
-	}
 	public static final EntityDataAccessor<Integer> MANE = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
-	public int getMane() {
-		return this.entityData.get(MANE);
-	}
-	public void setMane(int feathering) {
-		this.entityData.set(MANE, feathering);
-	}
+	public int getMane() {return this.entityData.get(MANE);}
+	public void setMane(int feathering) {this.entityData.set(MANE, feathering);}
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCamel.class, EntityDataSerializers.BOOLEAN);
-	public DyeColor getBrandTagColor() {
-		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
-	}
-	public void setBrandTagColor(DyeColor color) {
-		this.entityData.set(BRAND_TAG_COLOR, color.getId());
-	}
+	public DyeColor getBrandTagColor() {return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));}
+	public void setBrandTagColor(DyeColor color) {this.entityData.set(BRAND_TAG_COLOR, color.getId());}
 	@Override
-	public boolean isTaggable() {
-		return this.isAlive() && !this.isBaby();
-	}
+	public boolean isTaggable() {return this.isAlive() && !this.isBaby();}
 	@Override
-	public boolean isTagged() {
-		return this.entityData.get(TAGGED);
-	}
-	public void setTagged(boolean tagged) {
-		this.entityData.set(TAGGED, tagged);
-	}
+	public boolean isTagged() {return this.entityData.get(TAGGED);}
+	public void setTagged(boolean tagged) {this.entityData.set(TAGGED, tagged);}
 	@Override
 	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 
 	@Override
@@ -677,56 +563,23 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public int decorSlot() {
-		return 1;
-	}
+	public int decorSlot() {return 1;}
 
 	@Override
-	public int armorSlot() {
-		return 1;
-	}
+	public int armorSlot() {return 1;}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Breed")) {
-			this.setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Variant")) {
-			this.setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			this.setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Variant_Texture")) {
-			this.setVariantTexture(tag.getString("Variant_Texture"));
-		}
-
-		if (tag.contains("Overlay_Texture")) {
-			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-		}
-
-		if (tag.contains("FilledHumpsTime")) {
-			this.filledHumpsTime = tag.getInt("FilledHumpsTime");
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
-		if (tag.contains("Mane")) {
-			this.setMane(tag.getInt("Mane"));
-		}
-
-
+		if (tag.contains("Breed")) {this.setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Variant")) {this.setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {this.setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Variant_Texture")) {this.setVariantTexture(tag.getString("Variant_Texture"));}
+		if (tag.contains("Overlay_Texture")) {this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));}
+		if (tag.contains("FilledHumpsTime")) {this.filledHumpsTime = tag.getInt("FilledHumpsTime");}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
+		if (tag.contains("Mane")) {this.setMane(tag.getInt("Mane"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
@@ -748,15 +601,12 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 		this.setVariant(random.nextInt(OCamelModel.Variant.values().length));
 		this.setOverlayVariant(random.nextInt(OCamelBodyLayer.Marking.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
 		this.setBreed(random.nextInt(CamelBreed.Breed.values().length));
-
 		this.randomizeAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
@@ -847,7 +697,6 @@ public class OCamel extends AbstractOMount implements GeoEntity, Taggable {
 			calf.setGender(random.nextInt(Gender.values().length));
 			calf.setBreed(breed);
 		}
-
 		return calf;
 	}
 

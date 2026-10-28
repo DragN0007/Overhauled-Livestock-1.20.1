@@ -17,7 +17,6 @@ public class FarmGoatModel extends DefaultedEntityGeoModel<FarmGoat> {
 
     @Override
     public void setCustomAnimations(FarmGoat animatable, long instanceId, AnimationState<FarmGoat> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
 
@@ -64,13 +63,10 @@ public class FarmGoatModel extends DefaultedEntityGeoModel<FarmGoat> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_goat.animation.json");
-
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/farm_goat/o_doe.geo.json");
     public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/farm_goat/o_buck.geo.json");
     public static final ResourceLocation MEAT_FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/farm_goat/meat_doe.geo.json");
@@ -83,39 +79,23 @@ public class FarmGoatModel extends DefaultedEntityGeoModel<FarmGoat> {
     @Override
     public ResourceLocation getModelResource(FarmGoat object) {
         if (object.getBreed() == 1) {
-            if (object.isMale()) {
-                return MEAT_MALE;
-            } else {
-                return MEAT_FEMALE;
-            }
+            if (object.isMale()) return MEAT_MALE;
+            else return MEAT_FEMALE;
         } else if (object.getBreed() == 2) {
-            if (object.isMale()) {
-                return NUBIAN_MALE;
-            } else {
-                return NUBIAN_FEMALE;
-            }
+            if (object.isMale()) return NUBIAN_MALE;
+            else return NUBIAN_FEMALE;
         } else if (object.getBreed() == 3) {
-            if (object.isMale()) {
-                return WARM_MALE;
-            } else {
-                return WARM_FEMALE;
-            }
+            if (object.isMale()) return WARM_MALE;
+            else return WARM_FEMALE;
         } else {
-            if (object.isMale()) {
-                return MALE;
-            } else {
-                return FEMALE;
-            }
+            if (object.isMale()) return MALE;
+            else return FEMALE;
         }
     }
 
-    public ResourceLocation getTextureResource(FarmGoat object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getTextureResource(FarmGoat object) {return object.getTextureLocation();}
 
     @Override
-    public ResourceLocation getAnimationResource(FarmGoat animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(FarmGoat animatable) {return ANIMATION;}
 }
 

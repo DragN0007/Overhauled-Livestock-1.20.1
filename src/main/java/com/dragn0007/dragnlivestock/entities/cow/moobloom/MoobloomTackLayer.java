@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea;
+package com.dragn0007.dragnlivestock.entities.cow.moobloom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
@@ -17,13 +17,13 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 @OnlyIn(Dist.CLIENT)
-public class AzaleaMoobloomTackLayer extends GeoRenderLayer<AzaleaMoobloom> {
-    public AzaleaMoobloomTackLayer(GeoRenderer<AzaleaMoobloom> entityRendererIn) {
+public class MoobloomTackLayer extends GeoRenderLayer<Moobloom> {
+    public MoobloomTackLayer(GeoRenderer<Moobloom> entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(PoseStack poseStack, AzaleaMoobloom animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(PoseStack poseStack, Moobloom animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         Player player = Minecraft.getInstance().player;
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
@@ -35,49 +35,45 @@ public class AzaleaMoobloomTackLayer extends GeoRenderLayer<AzaleaMoobloom> {
         if (animatable.isHarnessed()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/rodeo_harness.png");
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderType1,
-                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderType1, bufferSource.getBuffer(renderType1),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
 
         if (animatable.isBelled()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/bell.png");
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderType1,
-                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderType1, bufferSource.getBuffer(renderType1),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
 
         if (animatable.isSaddled()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/wagon_harness.png");
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderType1,
-                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderType1, bufferSource.getBuffer(renderType1),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
 
         if (animatable.hasChest()) {
             resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/tack/saddlebags.png");
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderType1,
-                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderType1, bufferSource.getBuffer(renderType1),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
     }
 }

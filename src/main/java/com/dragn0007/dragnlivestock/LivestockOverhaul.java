@@ -71,7 +71,6 @@ public class LivestockOverhaul {
     }
 
     public static void warn(Player entity){
-
         LocalDate date = LocalDate.now();
         Month month = date.getMonth();
         int day = date.getDayOfMonth();

@@ -58,7 +58,6 @@ public class OBee extends Bee implements GeoEntity {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 				}
 			}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -69,11 +68,8 @@ public class OBee extends Bee implements GeoEntity {
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.bee");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.bee");
+		else return super.getTypeName();
 	}
 
 	@Override
@@ -97,13 +93,7 @@ public class OBee extends Bee implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
-
-	public ResourceLocation getTextureResource() {
-		return OBeeModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
@@ -115,21 +105,14 @@ public class OBee extends Bee implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OBee.class, EntityDataSerializers.INT);
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+	public ResourceLocation getTextureResource() {return OBeeModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
 	}
 
 	@Override
@@ -141,12 +124,9 @@ public class OBee extends Bee implements GeoEntity {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 		setVariant(random.nextInt(OBeeModel.Variant.values().length));
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -175,7 +155,6 @@ public class OBee extends Bee implements GeoEntity {
 
 			oBee.setVariant(variant);
 		}
-
 		return oBee;
 	}
 

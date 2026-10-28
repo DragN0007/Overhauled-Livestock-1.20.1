@@ -37,8 +37,7 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         if (atCullDistance || LivestockOverhaulClientConfig.DISABLE_MARKINGS.get()) return;
 
         if (animatable.getDecompVariant() != 4 && animatable.getDecompVariant() != 5 && animatable.getDecompVariant() != 6) {
-            if (animatable.getOverlayVariant() == 0) return;
-            if (animatable.getOverlayVariant() != 0) {
+            if (animatable.getOverlayVariant() != 0 || animatable.getOverlayLocation().equals(EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant()).toString())) {
                 EquineMarkingOverlay overlay = EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
                 RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
                 getRenderer().reRender(getDefaultBakedModel(animatable),
@@ -48,7 +47,9 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
                         renderMarkingType,
                         bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
                         1, 1, 1, 1);
+            }
 
+            if (!animatable.getOverlayLocation().equals(EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant()).toString())) {
                 RenderType renderMarkingTypeDynamic = RenderType.entityCutout(this.getTexture(animatable));
                 getRenderer().reRender(getDefaultBakedModel(animatable),
                         poseStack,
@@ -74,7 +75,7 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
 
         if (!animatable.isUndead()) return;
         if (animatable.isUndead() && !animatable.isHallow()) {
-            UndeadStage overlay = UndeadStage.overlayFromOrdinal(animatable.getDecompVariant());
+            UndeadType overlay = UndeadType.overlayFromOrdinal(animatable.getDecompVariant());
             RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
             getRenderer().reRender(getDefaultBakedModel(animatable),
                     poseStack,
@@ -86,12 +87,9 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         }
     }
 
-    public enum UndeadStage {
+    public enum UndeadType { //todo: remove all stages in favor of variants
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/none.png")),
-        MINIMAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_1.png")),
-        MODERATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_2.png")),
-        EXTREME(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_3.png")),
-        SKELETAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/undead_stage_4.png")),
+        MINIMAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/zombie.png")),
         WITHER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/wither.png")),
         STRAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/stray.png")),
         DROWNED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/drowned.png")),
@@ -99,11 +97,11 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         ;
 
         public final ResourceLocation resourceLocation;
-        UndeadStage(ResourceLocation resourceLocation) {
+        UndeadType(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
 
-        public static UndeadStage overlayFromOrdinal(int overlay) { return UndeadStage.values()[overlay % values().length];
+        public static UndeadType overlayFromOrdinal(int overlay) { return UndeadType.values()[overlay % values().length];
         }
     }
 

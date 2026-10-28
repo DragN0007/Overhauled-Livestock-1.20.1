@@ -32,62 +32,38 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class OCod extends AbstractSchoolingOFish implements GeoEntity {
-
 	public OCod(EntityType<? extends OCod> type, Level level) {
 		super(type, level);
 	}
 
 	public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cod");
 	public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cod");
-
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc_o_cod");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
-	public OCod getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return EntityTypes.O_COD_ENTITY.get().create(serverLevel);
-	}
+	public OCod getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {return EntityTypes.O_COD_ENTITY.get().create(serverLevel);}
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 3.0D);
 	}
 
-	public int getMaxSchoolSize() {
-		return 5;
-	}
-
-	public ItemStack getBucketItemStack() {
-		return new ItemStack(Items.COD_BUCKET);
-	}
-	public SoundEvent getAmbientSound() {
-		return SoundEvents.COD_AMBIENT;
-	}
-	public SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
-	public SoundEvent getHurtSound(DamageSource p_29795_) {
-		return SoundEvents.COD_HURT;
-	}
-	public SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+	public int getMaxSchoolSize() {return 5;}
+	public ItemStack getBucketItemStack() {return new ItemStack(Items.COD_BUCKET);}
+	public SoundEvent getAmbientSound() {return SoundEvents.COD_AMBIENT;}
+	public SoundEvent getDeathSound() {return SoundEvents.COD_DEATH;}
+	public SoundEvent getHurtSound(DamageSource p_29795_) {return SoundEvents.COD_HURT;}
+	public SoundEvent getFlopSound() {return SoundEvents.COD_FLOP;}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.cod");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.cod");
+		else return super.getTypeName();
 	}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
@@ -114,7 +90,6 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
 				}
 			}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -124,32 +99,17 @@ public class OCod extends AbstractSchoolingOFish implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
-	// Generates the base texture
-	public ResourceLocation getTextureResource() {
-		return OCodModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-
+	public ResourceLocation getTextureResource() {return OCodModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCod.class, EntityDataSerializers.INT);
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
 	}
 
 	@Override

@@ -57,7 +57,6 @@ import java.util.Optional;
 import java.util.Random;
 
 public class OChicken extends Animal implements GeoEntity, Taggable {
-
 	public int eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 	public boolean isChickenJockey;
 
@@ -76,13 +75,9 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/chicken");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	public boolean isMeatBreed() {
@@ -140,17 +135,12 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.chicken");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.chicken");
+		else return super.getTypeName();
 	}
 
 	@Override
-	public float getStepHeight() {
-		return 1F;
-	}
+	public float getStepHeight() {return 1F;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -188,23 +178,14 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
-	public boolean isGreatQuality() {
-		return this.getQuality() > 25 && this.getQuality() <= 50;
-	}
-	public boolean isFantasticQuality() {
-		return this.getQuality() > 50 && this.getQuality() <= 75;
-	}
-	public boolean isExquisiteQuality() {
-		return this.getQuality() > 75 && this.getQuality() <= 100;
-	}
+	public boolean isGreatQuality() {return this.getQuality() > 25 && this.getQuality() <= 50;}
+	public boolean isFantasticQuality() {return this.getQuality() > 50 && this.getQuality() <= 75;}
+	public boolean isExquisiteQuality() {return this.getQuality() > 75 && this.getQuality() <= 100;}
 
 	public void aiStep() {
 		super.aiStep();
-
 		Vec3 vec3 = this.getDeltaMovement();
 		if (!this.onGround() && vec3.y < 0.0D) {
 			this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
@@ -244,7 +225,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.eggTime = this.random.nextInt(LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_TIME.get()) + 6000;
 		}
-
 	}
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -340,127 +320,59 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		return SoundEvents.CHICKEN_HURT;
 	}
 
-	public void playStepSound(BlockPos p_28254_, BlockState p_28255_) {
-		this.playSound(SoundEvents.CHICKEN_STEP, 0.15F, 1.0F);
-	}
-
-	public boolean causeFallDamage(float p_148875_, float p_148876_, DamageSource p_148877_) {
-		return false;
-	}
-
-	public boolean isFood(ItemStack p_28271_) {
-		return FOOD_ITEMS.test(p_28271_);
-	}
-
-	public int getExperienceReward() {
-		return this.isChickenJockey() ? 10 : super.getExperienceReward();
-	}
+	public void playStepSound(BlockPos p_28254_, BlockState p_28255_) {this.playSound(SoundEvents.CHICKEN_STEP, 0.15F, 1.0F);}
+	public boolean causeFallDamage(float p_148875_, float p_148876_, DamageSource p_148877_) {return false;}
+	public boolean isFood(ItemStack p_28271_) {return FOOD_ITEMS.test(p_28271_);}
+	public int getExperienceReward() {return this.isChickenJockey() ? 10 : super.getExperienceReward();}
 
 	// Generates the base texture
-	public ResourceLocation getTextureResource() {
-		return OChickenModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getOverlayLocation() {
-		return OChickenRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getModelResource() {
-		return ChickenBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;
-	}
+	public ResourceLocation getTextureResource() {return OChickenModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+	public ResourceLocation getOverlayLocation() {return OChickenRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
+	public ResourceLocation getModelResource() {return ChickenBreed.Breed.breedFromOrdinal(getBreed()).resourceLocation;}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+	public int getBreed() {return this.entityData.get(BREED);}
 
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
+	public void setOverlayVariant(int overlayVariant) {this.entityData.set(OVERLAY, overlayVariant);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.BOOLEAN);
-	public DyeColor getBrandTagColor() {
-		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
-	}
-	public void setBrandTagColor(DyeColor color) {
-		this.entityData.set(BRAND_TAG_COLOR, color.getId());
-	}
+	public DyeColor getBrandTagColor() {return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));}
+	public void setBrandTagColor(DyeColor color) {this.entityData.set(BRAND_TAG_COLOR, color.getId());}
 	@Override
 	public boolean isTaggable() {
 		return this.isAlive() && !this.isBaby();
 	}
 	@Override
 	public void equipTag(@Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 	@Override
-	public boolean isTagged() {
-		return this.entityData.get(TAGGED);
-	}
-	public void setTagged(boolean tagged) {
-		this.entityData.set(TAGGED, tagged);
-	}
+	public boolean isTagged() {return this.entityData.get(TAGGED);}
+	public void setTagged(boolean tagged) {this.entityData.set(TAGGED, tagged);}
 
 	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
-	public int getQuality() {
-		return this.entityData.get(QUALITY);
-	}
-	public void setQuality(int i) {
-		this.entityData.set(QUALITY, i);
-	}
+	public int getQuality() {return this.entityData.get(QUALITY);}
+	public void setQuality(int i) {this.entityData.set(QUALITY, i);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if(tag.contains("Quality")) {
-			this.setQuality(tag.getInt("Quality"));
-		}
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Breed")) {
-			setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Gender")) {
-			setGender(tag.getInt("Gender"));
-		}
-
+		if(tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Breed")) {setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Gender")) {setGender(tag.getInt("Gender"));}
 		this.isChickenJockey = tag.getBoolean("IsChickenJockey");
-
-		if (tag.contains("EggLayTime")) {
-			this.eggTime = tag.getInt("EggLayTime");
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
+		if (tag.contains("EggLayTime")) {this.eggTime = tag.getInt("EggLayTime");}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
@@ -481,16 +393,12 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 		this.setBreed(random.nextInt(ChickenBreed.Breed.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
 
-		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-			this.setQuality(random.nextInt(30));
-		}
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) this.setQuality(random.nextInt(30));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
@@ -499,7 +407,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 			this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
 			this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
 		}
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -516,7 +423,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void setColorByBreed() {
-
 		if (this.getBreed() == 0) { //leghorn
 			if (random.nextDouble() < 0.10) {
 				this.setVariant(random.nextInt(OChickenModel.Variant.values().length));
@@ -644,7 +550,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void setMarkingByBreed() {
-
 		if (this.getBreed() == 0) { //leghorn
 			if (random.nextDouble() < 0.10) {
 				this.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
@@ -759,27 +664,16 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 
 	}
 
-    public boolean canParent() {
-        return !this.isBaby() && this.isInLove();
-    }
-
 	public enum Gender {
 		FEMALE,
 		MALE
 	}
-	public boolean isFemale() {
-		return this.getGender() == 0;
-	}
-	public boolean isMale() {
-		return this.getGender() == 1;
-	}
+	public boolean isFemale() {return this.getGender() == 0;}
+	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OChicken.class, EntityDataSerializers.INT);
-	public int getGender() {
-		return this.entityData.get(GENDER);
-	}
-	public void setGender(int gender) {
-		this.entityData.set(GENDER, gender);
-	}
+	public int getGender() {return this.entityData.get(GENDER);}
+	public void setGender(int gender) {this.entityData.set(GENDER, gender);}
+	public boolean canParent() {return !this.isBaby() && this.isInLove();}
 
     @Override
     public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
@@ -888,9 +782,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
     }
 
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-        return EntityTypes.O_CHICKEN_ENTITY.get().create(serverLevel);
-    }
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {return EntityTypes.O_CHICKEN_ENTITY.get().create(serverLevel);}
 
     protected void dropFertilizedEgg(ServerLevel serverLevel, OChicken child) {
         ItemStack fertilizedEgg = ItemStack.EMPTY;
@@ -921,9 +813,7 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
     }
 
 
-	public boolean removeWhenFarAway(double p_28266_) {
-		return this.isChickenJockey();
-	}
+	public boolean removeWhenFarAway(double p_28266_) {return this.isChickenJockey();}
 
 	public void positionRider(Entity p_289537_, MoveFunction p_289541_) {
 		super.positionRider(p_289537_, p_289541_);
@@ -933,15 +823,10 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 		if (p_289537_ instanceof LivingEntity) {
 			((LivingEntity)p_289537_).yBodyRot = this.yBodyRot;
 		}
-
 	}
 
-	public boolean isChickenJockey() {
-		return this.isChickenJockey;
-	}
-	public void setChickenJockey(boolean p_28274_) {
-		this.isChickenJockey = p_28274_;
-	}
+	public boolean isChickenJockey() {return this.isChickenJockey;}
+	public void setChickenJockey(boolean p_28274_) {this.isChickenJockey = p_28274_;}
 
 	@Override
 	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
@@ -978,7 +863,6 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 					this.spawnAtLocation(Items.FEATHER);
 				}
 			}
-
 		}
 	}
 }

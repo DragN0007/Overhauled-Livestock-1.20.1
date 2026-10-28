@@ -5,6 +5,7 @@ import com.dragn0007.dragnlivestock.client.event.LivestockOverhaulClientEvent;
 import com.dragn0007.dragnlivestock.common.gui.OMuleMenu;
 import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
@@ -71,30 +72,22 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/mule");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.mule");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.mule");
+		else return super.getTypeName();
 	}
 
 	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
-			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-				return new OMuleMenu(containerId, inventory, this.inventory, this);
-			}, this.getDisplayName()), (data) -> {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) ->
+					new OMuleMenu(containerId, inventory, this.inventory, this), this.getDisplayName()), (data) -> {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());
 			});
@@ -102,16 +95,11 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public boolean hurt(DamageSource pSource, float pAmount) {
-		return super.hurt(pSource, pAmount);
-	}
+	public boolean hurt(DamageSource pSource, float pAmount) {return super.hurt(pSource, pAmount);}
 
 	public int getInventorySize() {
-		if (this.hasChest()) {
-			return 18;
-		} else {
-			return 3;
-		}
+		if (this.hasChest()) return 18;
+		else return 3;
 	}
 
 	public static AttributeSupplier.Builder createBaseHorseAttributes() {
@@ -169,9 +157,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -370,7 +356,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	@Override
 	public boolean canAddPassenger(Entity entity) {
 		if (!(this.getBreed() == 2)) {
-			return this.getPassengers().size() < 1;
+			return this.getPassengers().isEmpty();
 		} else if (this.getBreed() == 2) {
 			return this.getPassengers().size() < 2;
 		} else {
@@ -381,9 +367,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	@Override
 	public LivingEntity getControllingPassenger() {
 		LivingEntity firstPassenger = (LivingEntity) this.getFirstPassenger();
-		if (firstPassenger != null && this.isSaddled()) {
-			return firstPassenger;
-		}
+		if (firstPassenger != null && this.isSaddled()) return firstPassenger;
 		return null;
 	}
 
@@ -396,9 +380,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 			int i = this.getPassengers().indexOf(entity);
 
-			if (this.getBreed() == 0) {
-				offsetY = 0.85;
-			}
+			if (this.getBreed() == 0) offsetY = 0.85;
 
 			if (this.getBreed() == 1) {
 				offsetY = 0.6;
@@ -418,11 +400,9 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
-
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
 			double offsetYRotated = offsetY;
 			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
 			double x = this.getX() + offsetXRotated;
 			double y = this.getY() + offsetYRotated;
 			double z = this.getZ() + offsetZRotated;
@@ -438,15 +418,11 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public SoundEvent getDeathSound() {
-		return SoundEvents.MULE_DEATH;
-	}
+	public SoundEvent getDeathSound() {return SoundEvents.MULE_DEATH;}
 
 	@Nullable
 	@Override
-	public SoundEvent getEatingSound() {
-		return SoundEvents.MULE_EAT;
-	}
+	public SoundEvent getEatingSound() {return SoundEvents.MULE_EAT;}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource damageSource) {
@@ -461,93 +437,45 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public ResourceLocation getModelResource() {
-		return MuleBreed.breedFromOrdinal(getBreed()).resourceLocation;
-	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
-
+	public ResourceLocation getModelResource() {return MuleBreed.breedFromOrdinal(getBreed()).resourceLocation;}
+	public int getBreed() {return this.entityData.get(BREED);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
-		this.entityData.set(VARIANT_TEXTURE, OMuleModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
+		this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.STRING);
-	public String getTextureResource() {
-		return this.entityData.get(VARIANT_TEXTURE);
-	}
-	public void setVariantTexture(String variant) {
-		this.entityData.set(VARIANT_TEXTURE, variant);
-	}
-
-	public ResourceLocation getSimplifiedVariantTextureResource() {
-		return OMuleModel.SVariant.variantFromOrdinal(getSimplifiedVariant()).resourceLocation;
-	}
-	public int getSimplifiedVariant() {
-		return this.entityData.get(VARIANT);
-	}
+	public String getTextureResource() {return this.entityData.get(VARIANT_TEXTURE);}
+	public void setVariantTexture(String variant) {this.entityData.set(VARIANT_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
 		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.STRING);
-	public String getOverlayLocation() {
-		return this.entityData.get(OVERLAY_TEXTURE);
-	}
-	public void setOverlayVariantTexture(String variant) {
-		this.entityData.set(OVERLAY_TEXTURE, variant);
-	}
-
+	public String getOverlayLocation() {return this.entityData.get(OVERLAY_TEXTURE);}
+	public void setOverlayVariantTexture(String variant) {this.entityData.set(OVERLAY_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public ResourceLocation getEyeTextureResource() {
-		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
-	}
-	public int getEyeVariant() {
-		return this.entityData.get(EYES);
-	}
-	public void setEyeVariant(int eyeVariant) {
-		this.entityData.set(EYES, eyeVariant);
-	}
-
+	public int getEyeVariant() {return this.entityData.get(EYES);}
+	public void setEyeVariant(int eyeVariant) {this.entityData.set(EYES, eyeVariant);}
 
 	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public int getFeathering() {
-		return this.entityData.get(FEATHERING);
-	}
-	public void setFeathering(int feathering) {
-		this.entityData.set(FEATHERING, feathering);
-	}
-
+	public int getFeathering() {return this.entityData.get(FEATHERING);}
+	public void setFeathering(int feathering) {this.entityData.set(FEATHERING, feathering);}
 
 	public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.ITEM_STACK);
-	public ItemStack getFlowerItem() {
-		return this.entityData.get(FLOWER_ITEM);
-	}
-	public void setFlowerItem(ItemStack decorItem) {
-		this.entityData.set(FLOWER_ITEM, decorItem);
-	}
+	public ItemStack getFlowerItem() {return this.entityData.get(FLOWER_ITEM);}
+	public void setFlowerItem(ItemStack decorItem) {this.entityData.set(FLOWER_ITEM, decorItem);}
 
 	public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(OMule.class, EntityDataSerializers.INT);
-	public int getFlowerType() {
-		return this.entityData.get(FLOWER_TYPE);
-	}
-	public void setFlowerType(int decompVariant) {
-		this.entityData.set(FLOWER_TYPE, decompVariant);
-	}
+	public int getFlowerType() {return this.entityData.get(FLOWER_TYPE);}
+	public void setFlowerType(int decompVariant) {this.entityData.set(FLOWER_TYPE, decompVariant);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -601,7 +529,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 			this.setMarking();
 			this.setFeatheringByBreed();
 		} else {
-			this.setVariant(random.nextInt(OMuleModel.Variant.values().length));
+			this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
 			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			this.setFeathering(random.nextInt(OHorse.Feathering.values().length));
 		}
@@ -621,7 +549,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(OVERLAY, 0);
-		this.entityData.define(VARIANT_TEXTURE, OMuleModel.Variant.RUST.resourceLocation.toString());
+		this.entityData.define(VARIANT_TEXTURE, OHorseModel.Variant.BAY.resourceLocation.toString());
 		this.entityData.define(OVERLAY_TEXTURE, EquineMarkingOverlay.NONE.resourceLocation.toString());
 		this.entityData.define(GENDER, 0);
 		this.entityData.define(BREED, 0);
@@ -708,38 +636,28 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	public void setColor() {
-
-		//mules tend to come in browns, grey and black but can uncommonly come in other colors
+		//mules tend to come in red/ bay, but can uncommonly come in other colors
 		if (random.nextDouble() < 0.20) {
-			this.setOverlayVariant(random.nextInt(OMuleModel.Variant.values().length));
+			this.setVariant(random.nextInt(OHorseModel.Variant.values().length));
 		} else if (random.nextDouble() > 0.20) {
-			int[] variants = {0, 1, 2, 3, 4, 8, 9, 10, 13, 14};
-			int randomIndex = new Random().nextInt(variants.length);
-			this.setVariant(variants[randomIndex]);
+			this.setVariant(0);
 		}
-
 	}
 
 	public void setMarking() {
-
-		//mules dont usually come with markings but definitely can. generally come with small ones
+		//mules dont usually come with markings but definitely can. They generally come with small ones
 		if (random.nextDouble() < 0.20) {
 			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 		} else if (random.nextDouble() > 0.20) {
-			int[] variants = {0, 4, 6, 7, 11, 12, 13, 14, 18, 19, 21, 22, 23, 29, 30, 32, 33, 35, 39, 41, 42, 43};
+			int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
-
 	}
 
 	@Override
-	public boolean canMate(Animal animal) {
-		return false;
-	}
+	public boolean canMate(Animal animal) {return false;}
 
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return null;
-	}
+	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {return null;}
 }

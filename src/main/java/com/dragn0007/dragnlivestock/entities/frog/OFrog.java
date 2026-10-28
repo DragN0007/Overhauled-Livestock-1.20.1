@@ -62,22 +62,16 @@ public class OFrog extends Animal implements GeoEntity {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/frog");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.frog");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.frog");
+		else return super.getTypeName();
+
 	}
 
 	@Override
@@ -124,16 +118,12 @@ public class OFrog extends Animal implements GeoEntity {
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (damageSource.is(DamageTypes.DROWN)) {
-			return false;
-		}
+		if (damageSource.is(DamageTypes.DROWN)) return false;
 		return super.hurt(damageSource, v);
 	}
 
 	@Override
-	public float getStepHeight() {
-		return 2F;
-	}
+	public float getStepHeight() {return 2F;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -166,9 +156,7 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -216,16 +204,9 @@ public class OFrog extends Animal implements GeoEntity {
 		this.playSound(SoundEvents.FROG_STEP, 0.15F, 1.0F);
 	}
 
-	public boolean isFood(ItemStack p_28271_) {
-		return FOOD_ITEMS.test(p_28271_);
-	}
-
-	public boolean isBaby() {
-		return false;
-	}
-
-	public void setBaby(boolean p_218500_) {
-	}
+	public boolean isFood(ItemStack p_28271_) {return FOOD_ITEMS.test(p_28271_);}
+	public boolean isBaby() {return false;}
+	public void setBaby(boolean p_218500_) {}
 
 	@Override
 	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
@@ -237,80 +218,45 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	// Generates the base texture
-	public ResourceLocation getTextureLocation() {
-		return OFrogModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getOverlayLocation() {
-		return OFrogRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;
-	}
-
-	public ResourceLocation getEyesLocation() {
-		return OFrogRenderLayer.EyeColor.overlayFromOrdinal(getEyesVariant()).resourceLocation;
-	}
-
+	public ResourceLocation getTextureLocation() {return OFrogModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OFrog.class, EntityDataSerializers.INT);
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
+
+	public ResourceLocation getOverlayLocation() {return OFrogRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OFrog.class, EntityDataSerializers.INT);
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+	public void setOverlayVariant(int overlayVariant) {this.entityData.set(OVERLAY, overlayVariant);}
+
+	public ResourceLocation getEyesLocation() {return OFrogRenderLayer.EyeColor.overlayFromOrdinal(getEyesVariant()).resourceLocation;}
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OFrog.class, EntityDataSerializers.INT);
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public int getEyesVariant() {
-		return this.entityData.get(EYES);
-	}
-
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
-	public void setEyesVariant(int eyesVariant) {
-		this.entityData.set(EYES, eyesVariant);
-	}
+	public int getEyesVariant() {return this.entityData.get(EYES);}
+	public void setEyesVariant(int eyesVariant) {this.entityData.set(EYES, eyesVariant);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Eyes")) {
-			setEyesVariant(tag.getInt("Eyes"));
-		}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Eyes")) {setEyesVariant(tag.getInt("Eyes"));}
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putInt("Variant", getVariant());
-
 		tag.putInt("Overlay", getOverlayVariant());
-
 		tag.putInt("Eyes", getEyesVariant());
 	}
 
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 		setVariant(random.nextInt(OFrogModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OFrogRenderLayer.Marking.values().length));
 		setEyesVariant(random.nextInt(OFrogRenderLayer.EyeColor.values().length));
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -322,9 +268,7 @@ public class OFrog extends Animal implements GeoEntity {
 		this.entityData.define(EYES, 0);
 	}
 
-	public boolean canParent() {
-		return !this.isBaby() && this.isInLove();
-	}
+	public boolean canParent() {return !this.isBaby() && this.isInLove();}
 
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
@@ -338,11 +282,7 @@ public class OFrog extends Animal implements GeoEntity {
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-
-		if (!this.isInLove() || !this.isAlive() || eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) {
-			return null;
-		}
-
+		if (!this.isInLove() || !this.isAlive() || eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get()) return null;
 		eggsLaid++;
 		dropFertilizedEgg(serverLevel);
 		return null;
@@ -350,7 +290,6 @@ public class OFrog extends Animal implements GeoEntity {
 
 	public void tick() {
 		super.tick();
-
 		if (eggsLaid >= LivestockOverhaulCommonConfig.CHICKEN_EGG_LAY_AMOUNT.get() && eggLayCooldown >= 100) {
 			eggsLaid = 0;
 			eggLayCooldown = 0;
@@ -358,13 +297,10 @@ public class OFrog extends Animal implements GeoEntity {
 	}
 
 	protected void dropFertilizedEgg(ServerLevel serverLevel) {
-
 		ItemStack fertilizedEgg = new ItemStack(Items.FROGSPAWN);
 		ItemEntity eggEntity = new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), fertilizedEgg);
 		serverLevel.addFreshEntity(eggEntity);
-
 		serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.FROG_LAY_SPAWN, SoundSource.NEUTRAL, 1.0F, 1.0F);
 	}
-
 
 }

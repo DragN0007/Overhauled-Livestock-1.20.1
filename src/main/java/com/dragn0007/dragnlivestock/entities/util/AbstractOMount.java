@@ -26,7 +26,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -558,12 +557,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                     itemStack.shrink(1);
                 }
                 this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-
-                if (oHorse.canDecompose()) {
-                    oHorse.setCanDecompose(false);
-                } else if (!oHorse.canDecompose()) {
-                    oHorse.setCanDecompose(true);
-                }
             }
             return InteractionResult.SUCCESS;
         }
@@ -584,7 +577,6 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 healthAttribute.setBaseValue(healthValue + 10.0D);
                 oHorse.setHallow(true);
                 oHorse.setUndead(true);
-                oHorse.setCanDecompose(false);
                 oHorse.setVariant(2);
                 oHorse.setOverlayVariant(0);
                 oHorse.setEyeVariant(10);

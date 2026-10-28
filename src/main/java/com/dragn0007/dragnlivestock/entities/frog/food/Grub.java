@@ -128,9 +128,8 @@ public class Grub extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public float getStepHeight() {
-		return 1F;
-	}
+	public float getStepHeight() {return 1F;}
+	
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 

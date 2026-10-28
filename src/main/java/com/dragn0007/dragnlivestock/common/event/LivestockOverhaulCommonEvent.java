@@ -8,17 +8,7 @@ import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot.CarrotMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering.FloweringMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.Moobloom;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
@@ -70,18 +60,7 @@ public class LivestockOverhaulCommonEvent {
         event.put(EntityTypes.GRUB_ENTITY.get(), Grub.createAttributes().build());
         event.put(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorseman.createBaseHorseAttributes().build());
         event.put(EntityTypes.UNICORN_ENTITY.get(), Unicorn.createUnicornAttributes().build());
-
-        event.put(EntityTypes.WHEAT_MOOBLOOM_ENTITY.get(), WheatMoobloom.createAttributes().build());
-        event.put(EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get(), SweetBerryMoobloom.createAttributes().build());
-        event.put(EntityTypes.PUMPKIN_MOOBLOOM_ENTITY.get(), PumpkinMoobloom.createAttributes().build());
-        event.put(EntityTypes.POTATO_MOOBLOOM_ENTITY.get(), PotatoMoobloom.createAttributes().build());
-        event.put(EntityTypes.MELON_MOOBLOOM_ENTITY.get(), MelonMoobloom.createAttributes().build());
-        event.put(EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get(), GlowBerryMoobloom.createAttributes().build());
-        event.put(EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get(), FloweringMoobloom.createAttributes().build());
-        event.put(EntityTypes.CARROT_MOOBLOOM_ENTITY.get(), CarrotMoobloom.createAttributes().build());
-        event.put(EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get(), BeetrootMoobloom.createAttributes().build());
-        event.put(EntityTypes.AZALEA_MOOBLOOM_ENTITY.get(), AzaleaMoobloom.createAttributes().build());
-        event.put(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloom.createAttributes().build());
+        event.put(EntityTypes.MOOBLOOM_ENTITY.get(), Moobloom.createAttributes().build());
     }
 
     @SubscribeEvent

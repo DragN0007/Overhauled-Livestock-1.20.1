@@ -65,28 +65,8 @@ public class LOItems {
     public static final RegistryObject<Item> UNICORN_SPAWN_EGG = ITEMS.register("unicorn_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityTypes.UNICORN_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
 
-    public static final RegistryObject<Item> WHEAT_MOOBLOOM_SPAWN_EGG = ITEMS.register("wheat_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.WHEAT_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> SWEET_BERRY_MOOBLOOM_SPAWN_EGG = ITEMS.register("sweet_berry_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> PUMPKIN_MOOBLOOM_SPAWN_EGG = ITEMS.register("pumpkin_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.PUMPKIN_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> POTATO_MOOBLOOM_SPAWN_EGG = ITEMS.register("potato_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.POTATO_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> MELON_MOOBLOOM_SPAWN_EGG = ITEMS.register("melon_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.MELON_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> GLOW_BERRY_MOOBLOOM_SPAWN_EGG = ITEMS.register("glow_berry_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> FLOWERING_MOOBLOOM_SPAWN_EGG = ITEMS.register("flowering_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.FLOWERING_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> CARROT_MOOBLOOM_SPAWN_EGG = ITEMS.register("carrot_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.CARROT_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> BEETROOT_MOOBLOOM_SPAWN_EGG = ITEMS.register("beetroot_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.BEETROOT_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> AZALEA_MOOBLOOM_SPAWN_EGG = ITEMS.register("azalea_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.AZALEA_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> PEACH_MOOBLOOM_SPAWN_EGG = ITEMS.register("peach_moobloom_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityTypes.PEACH_MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> MOOBLOOM_SPAWN_EGG = ITEMS.register("moobloom_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityTypes.MOOBLOOM_ENTITY, 0x00FFFFFF, 0x00FFFFFF, new Item.Properties().stacksTo(64)));
 
     //Misc
     public static final RegistryObject<Item> GENDER_TEST_STRIP = ITEMS.register("gender_test_strip",
@@ -478,8 +458,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_brand_tag";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new BrandTagItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new BrandTagItem(color, new Item.Properties()));
             BRAND_TAGS.put(color, item);
         }
     }
@@ -488,8 +467,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_wool_dye";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new WoolDyeItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new WoolDyeItem(color, new Item.Properties()));
             WOOL_DYE.put(color, item);
         }
     }
@@ -498,8 +476,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_wool_staple";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new WoolStapleItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new WoolStapleItem(color, new Item.Properties()));
             WOOL_STAPLES.put(color, item);
         }
     }
@@ -508,8 +485,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_medieval_blanket";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new BlanketItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new BlanketItem(color, new Item.Properties()));
             MEDIEVAL_BLANKETS.put(color, item);
         }
     }
@@ -518,8 +494,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_modern_blanket";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new BlanketItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new BlanketItem(color, new Item.Properties()));
             MODERN_BLANKETS.put(color, item);
         }
     }
@@ -528,8 +503,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_racing_blanket";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new BlanketItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new BlanketItem(color, new Item.Properties()));
             RACING_BLANKETS.put(color, item);
         }
     }
@@ -538,8 +512,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_western_blanket";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new BlanketItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new BlanketItem(color, new Item.Properties()));
             WESTERN_BLANKETS.put(color, item);
         }
     }
@@ -548,8 +521,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_grub_sweater";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new GrubSweaterItem(color, new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new GrubSweaterItem(color, new Item.Properties()));
             GRUB_SWEATERS.put(color, item);
         }
     }
@@ -560,8 +532,7 @@ public class LOItems {
             if (color == DyeColor.BLACK)
                 continue;
             String name = color.getName() + "_accented_black_light_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_BLACK_LIGHT_SADDLES.put(color, item);
         }
     }
@@ -572,8 +543,7 @@ public class LOItems {
             if (color == DyeColor.BLACK)
                 continue;
             String name = color.getName() + "_accented_black_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_BLACK_SADDLES.put(color, item);
         }
     }
@@ -584,8 +554,7 @@ public class LOItems {
             if (color == DyeColor.BLACK)
                 continue;
             String name = color.getName() + "_accented_black_heavy_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_BLACK_HEAVY_SADDLES.put(color, item);
         }
     }
@@ -594,8 +563,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_accented_light_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_LIGHT_SADDLES.put(color, item);
         }
     }
@@ -604,8 +572,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_accented_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_SADDLES.put(color, item);
         }
     }
@@ -614,8 +581,7 @@ public class LOItems {
     static {
         for (DyeColor color : DyeColor.values()) {
             String name = color.getName() + "_accented_heavy_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_HEAVY_SADDLES.put(color, item);
         }
     }
@@ -626,8 +592,7 @@ public class LOItems {
             if (color == DyeColor.WHITE)
                 continue;
             String name = color.getName() + "_accented_white_light_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_WHITE_LIGHT_SADDLES.put(color, item);
         }
     }
@@ -638,8 +603,7 @@ public class LOItems {
             if (color == DyeColor.WHITE)
                 continue;
             String name = color.getName() + "_accented_white_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_WHITE_SADDLES.put(color, item);
         }
     }
@@ -650,8 +614,7 @@ public class LOItems {
             if (color == DyeColor.WHITE)
                 continue;
             String name = color.getName() + "_accented_white_heavy_saddle";
-            RegistryObject<Item> item = ITEMS.register(name,
-                    () -> new SaddleItem(new Item.Properties()));
+            RegistryObject<Item> item = ITEMS.register(name, () -> new SaddleItem(new Item.Properties()));
             ACCENTED_WHITE_HEAVY_SADDLES.put(color, item);
         }
     }

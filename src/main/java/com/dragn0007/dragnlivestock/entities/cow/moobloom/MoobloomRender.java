@@ -1,4 +1,4 @@
-package com.dragn0007.dragnlivestock.entities.cow.moobloom.potato;
+package com.dragn0007.dragnlivestock.entities.cow.moobloom;
 
 import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
@@ -14,16 +14,16 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import java.util.Optional;
 
-public class PotatoMoobloomRender extends GeoEntityRenderer<PotatoMoobloom> {
+public class MoobloomRender extends GeoEntityRenderer<Moobloom> {
 
-    public PotatoMoobloomRender(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new PotatoMoobloomModel());
-        this.addRenderLayer(new PotatoMoobloomBodyLayer(this));
-        this.addRenderLayer(new PotatoMoobloomTackLayer(this));
+    public MoobloomRender(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new MoobloomModel());
+        this.addRenderLayer(new MoobloomBodyLayer(this));
+        this.addRenderLayer(new MoobloomTackLayer(this));
     }
 
     @Override
-    public void preRender(PoseStack poseStack, PotatoMoobloom animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void preRender(PoseStack poseStack, Moobloom animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Optional<GeoBone> body = this.getGeoModel().getBone("body");
         Optional<GeoBone> body_fluff = this.getGeoModel().getBone("body_fluff");
         Optional<GeoBone> neck_fluff = this.getGeoModel().getBone("neck_fluff");
@@ -40,16 +40,12 @@ public class PotatoMoobloomRender extends GeoEntityRenderer<PotatoMoobloom> {
         Optional<GeoBone> horns_9 = this.getGeoModel().getBone("horns_9");
         Optional<GeoBone> horns_10 = this.getGeoModel().getBone("horns_10");
         Optional<GeoBone> tail = this.getGeoModel().getBone("tail");
-        Optional<GeoBone> crest = this.getGeoModel().getBone("crest");
-        Optional<GeoBone> hump = this.getGeoModel().getBone("hump");
-        Optional<GeoBone> saddlebags = this.getGeoModel().getBone("saddlebags");
         Optional<GeoBone> udders = this.getGeoModel().getBone("utters");
         Optional<GeoBone> wagon_harness = this.getGeoModel().getBone("wagon_harness");
-        Optional<GeoBone> plant = this.getGeoModel().getBone("plant");
 
         //culls unnecessary bones at a certain distance to improve performance
         Player player = Minecraft.getInstance().player;
-        double distanceSq = animatable.distanceToSqr(player);
+        double distanceSq = this.animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_CUBES_DISTANCE.get();
         if (player != null) {
             if (LivestockOverhaulClientConfig.CULL_HIDDEN.get())
@@ -69,24 +65,9 @@ public class PotatoMoobloomRender extends GeoEntityRenderer<PotatoMoobloom> {
             if (horns_10.isPresent()) {horns_10.ifPresent(b -> b.setHidden(atCullDistance));}
             if (udders.isPresent()) {udders.ifPresent(b -> b.setHidden(atCullDistance));}
             if (tail.isPresent()) {tail.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (saddlebags.isPresent()) {saddlebags.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (crest.isPresent()) {crest.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (hump.isPresent()) {hump.ifPresent(b -> b.setHidden(atCullDistance));}
             if (wagon_harness.isPresent()) {wagon_harness.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (plant.isPresent()) {plant.ifPresent(b -> b.setHidden(atCullDistance));}
         }
         if (atCullDistance) return;
-
-        hump.ifPresent(b -> b.setHidden(true));
-        body_fluff.ifPresent(b -> b.setHidden(true));
-        neck_fluff.ifPresent(b -> b.setHidden(true));
-        head_fluff.ifPresent(b -> b.setHidden(true));
-
-        if (animatable.isSheared()) {
-            plant.ifPresent(b -> b.setHidden(true));
-        } else {
-            plant.ifPresent(b -> b.setHidden(false));
-        }
 
         horns_1.ifPresent(b -> b.setHidden(true));
         horns_2.ifPresent(b -> b.setHidden(true));
@@ -99,44 +80,45 @@ public class PotatoMoobloomRender extends GeoEntityRenderer<PotatoMoobloom> {
         horns_9.ifPresent(b -> b.setHidden(true));
         horns_10.ifPresent(b -> b.setHidden(true));
 
-        if(animatable.isBaby()) {
-            udders.ifPresent(b -> b.setHidden(true));
-            horn_connection.ifPresent(b -> b.setHidden(true));
-        } else {
-            udders.ifPresent(b -> b.setScaleY(1.5F));
-            udders.ifPresent(b -> b.setScaleX(1.5F));
-            udders.ifPresent(b -> b.setScaleZ(1.5F));
-
-            if (!(animatable.getHornVariant() == 0)) {
-                horn_connection.ifPresent(b -> b.setScaleY(2.3F));
-            } else {
-                horn_connection.ifPresent(b -> b.setScaleY(1.0F));
-            }
-
-            if (animatable.getHornVariant() == 1) {
-                horns_1.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 2) {
-                horns_2.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 3) {
-                horns_3.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 4) {
-                horns_4.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 5) {
-                horns_5.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 6) {
-                horns_6.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 7) {
-                horns_7.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 8) {
-                horns_8.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 9) {
-                horns_9.ifPresent(b -> b.setHidden(false));
-            } else if (animatable.getHornVariant() == 10) {
-                horns_10.ifPresent(b -> b.setHidden(false));
-            }
+        if (animatable.wasMilked()) {
+            if (!isReRender)  udders.ifPresent(b -> b.setScaleY(0.8F));
+            if (!isReRender)  udders.ifPresent(b -> b.setScaleX(0.8F));
+            if (!isReRender) udders.ifPresent(b -> b.setScaleZ(0.8F));
+        } else if (!animatable.wasMilked()) {
+            udders.ifPresent(b -> b.setScaleY(1.0F));
+            udders.ifPresent(b -> b.setScaleX(1.0F));
+            udders.ifPresent(b -> b.setScaleZ(1.0F));
         }
 
-        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        if (!(animatable.getHornVariant() == 0)) {
+            if (!isReRender) horn_connection.ifPresent(b -> b.setScaleY(2.3F));
+        } else {
+            horn_connection.ifPresent(b -> b.setScaleY(1.0F));
+        }
+
+        if (animatable.getHornVariant() == 1) {
+            horns_1.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 2) {
+            horns_2.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 3) {
+            horns_3.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 4) {
+            horns_4.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 5) {
+            horns_5.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 6) {
+            horns_6.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 7) {
+            horns_7.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 8) {
+            horns_8.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 9) {
+            horns_9.ifPresent(b -> b.setHidden(false));
+        } else if (animatable.getHornVariant() == 10) {
+            horns_10.ifPresent(b -> b.setHidden(false));
+        }
+
+        super.preRender(poseStack, this.animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }
 

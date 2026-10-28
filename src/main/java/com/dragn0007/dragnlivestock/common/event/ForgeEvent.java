@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.common.event;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
@@ -20,12 +21,14 @@ import com.dragn0007.dragnlivestock.items.custom.MountRegistryItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,6 +38,13 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvent {
+
+    @SubscribeEvent
+    public static void onResourceReload(AddReloadListenerEvent event) {
+        event.addListener((ResourceManagerReloadListener) resourceManager -> {
+            LivestockOverhaul.LOGGER.info("Sullivan King2 :))))))");
+        });
+    }
 
     @SubscribeEvent
     public static void leashHandler(PlayerInteractEvent.EntityInteract event) {

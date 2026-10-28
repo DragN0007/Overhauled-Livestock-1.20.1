@@ -44,7 +44,6 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
         Optional<GeoBone> tail = this.getGeoModel().getBone("tail");
         Optional<GeoBone> crest = this.getGeoModel().getBone("crest");
         Optional<GeoBone> hump = this.getGeoModel().getBone("hump");
-        Optional<GeoBone> saddlebags = this.getGeoModel().getBone("saddlebags");
         Optional<GeoBone> udders = this.getGeoModel().getBone("utters");
         Optional<GeoBone> wagon_harness = this.getGeoModel().getBone("wagon_harness");
 
@@ -70,12 +69,19 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             if (horns_10.isPresent()) {horns_10.ifPresent(b -> b.setHidden(atCullDistance));}
             if (udders.isPresent()) {udders.ifPresent(b -> b.setHidden(atCullDistance));}
             if (tail.isPresent()) {tail.ifPresent(b -> b.setHidden(atCullDistance));}
-            if (saddlebags.isPresent()) {saddlebags.ifPresent(b -> b.setHidden(atCullDistance));}
             if (crest.isPresent()) {crest.ifPresent(b -> b.setHidden(atCullDistance));}
             if (hump.isPresent()) {hump.ifPresent(b -> b.setHidden(atCullDistance));}
             if (wagon_harness.isPresent()) {wagon_harness.ifPresent(b -> b.setHidden(atCullDistance));}
         }
         if (atCullDistance) return;
+
+        if (!isReRender) {
+            if (animatable.isNormalBreed()) poseStack.scale(1.0F, 1.0F, 1.0F);
+            if (animatable.isMeatBreed()) poseStack.scale(1.05F, 1.05F, 1.05F);
+            if (animatable.isDairyBreed()) poseStack.scale(0.98F, 0.98F, 0.98F);
+            if (animatable.isMiniBreed()) poseStack.scale(0.7F, 0.7F, 0.7F);
+            if (animatable.getBreed() == 10) poseStack.scale(1.1F, 1.1F, 1.1F);
+        }
 
         if (animatable.getBreed() == 9) {
             body_fluff.ifPresent(b -> b.setHidden(false));
@@ -90,13 +96,13 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
         if (animatable.getBreed() == 2) {
             crest.ifPresent(b -> b.setHidden(true));
             hump.ifPresent(b -> b.setHidden(false));
-            left_ear.ifPresent(b -> b.setScaleY(2.0F));
-            right_ear.ifPresent(b -> b.setScaleY(2.0F));
+            if (!isReRender) left_ear.ifPresent(b -> b.setScaleY(2.0F));
+            if (!isReRender) right_ear.ifPresent(b -> b.setScaleY(2.0F));
         } else {
             crest.ifPresent(b -> b.setHidden(false));
             hump.ifPresent(b -> b.setHidden(true));
-            left_ear.ifPresent(b -> b.setScaleY(1.0F));
-            right_ear.ifPresent(b -> b.setScaleY(1.0F));
+            if (!isReRender) left_ear.ifPresent(b -> b.setScaleY(1.0F));
+            if (!isReRender) right_ear.ifPresent(b -> b.setScaleY(1.0F));
         }
 
         if (animatable.getBreed() == 11) {
@@ -120,11 +126,10 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             udders.ifPresent(b -> b.setHidden(true));
             horn_connection.ifPresent(b -> b.setHidden(true));
         } else {
-
             if (animatable.isDairyBreed()) {
-                udders.ifPresent(b -> b.setScaleY(1.5F));
-                udders.ifPresent(b -> b.setScaleX(1.5F));
-                udders.ifPresent(b -> b.setScaleZ(1.5F));
+                if (!isReRender) udders.ifPresent(b -> b.setScaleY(1.5F));
+                if (!isReRender) udders.ifPresent(b -> b.setScaleX(1.5F));
+                if (!isReRender) udders.ifPresent(b -> b.setScaleZ(1.5F));
             } else {
                 udders.ifPresent(b -> b.setScaleY(1.0F));
                 udders.ifPresent(b -> b.setScaleX(1.0F));
@@ -137,15 +142,15 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
                     udders.ifPresent(b -> b.setScaleX(1.2F));
                     udders.ifPresent(b -> b.setScaleZ(1.2F));
                 } else {
-                    udders.ifPresent(b -> b.setScaleY(0.8F));
-                    udders.ifPresent(b -> b.setScaleX(0.8F));
-                    udders.ifPresent(b -> b.setScaleZ(0.8F));
+                    if (!isReRender)  udders.ifPresent(b -> b.setScaleY(0.8F));
+                    if (!isReRender)  udders.ifPresent(b -> b.setScaleX(0.8F));
+                    if (!isReRender) udders.ifPresent(b -> b.setScaleZ(0.8F));
                 }
             } else if (!animatable.wasMilked()) {
                 if (animatable.isDairyBreed()) {
-                    udders.ifPresent(b -> b.setScaleY(1.5F));
-                    udders.ifPresent(b -> b.setScaleX(1.5F));
-                    udders.ifPresent(b -> b.setScaleZ(1.5F));
+                    if (!isReRender) udders.ifPresent(b -> b.setScaleY(1.5F));
+                    if (!isReRender) udders.ifPresent(b -> b.setScaleX(1.5F));
+                    if (!isReRender) udders.ifPresent(b -> b.setScaleZ(1.5F));
                 } else {
                     udders.ifPresent(b -> b.setScaleY(1.0F));
                     udders.ifPresent(b -> b.setScaleX(1.0F));
@@ -154,7 +159,7 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             }
 
             if (!(animatable.getHornVariant() == 0)) {
-                horn_connection.ifPresent(b -> b.setScaleY(2.3F));
+                if (!isReRender)  horn_connection.ifPresent(b -> b.setScaleY(2.3F));
             } else {
                 horn_connection.ifPresent(b -> b.setScaleY(1.0F));
             }
@@ -179,8 +184,8 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
                 horns_9.ifPresent(b -> b.setHidden(false));
             } else if (animatable.getHornVariant() == 10) {
                     horns_10.ifPresent(b -> b.setHidden(false));
-                }
             }
+        }
 
         super.preRender(poseStack, this.animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }

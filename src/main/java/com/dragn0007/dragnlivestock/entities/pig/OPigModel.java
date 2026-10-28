@@ -17,7 +17,6 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
 
     @Override
     public void setCustomAnimations(OPig animatable, long instanceId, AnimationState<OPig> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
 
@@ -52,7 +51,6 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
         }
     }
@@ -61,18 +59,12 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_pig.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OPig object) {
-        return MODEL;
-    }
+    public ResourceLocation getModelResource(OPig object) {return MODEL;}
 
     @Override
-    public ResourceLocation getTextureResource(OPig object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getTextureResource(OPig object) {return object.getTextureLocation();}
 
     @Override
-    public ResourceLocation getAnimationResource(OPig animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OPig animatable) {return ANIMATION;}
 }
 

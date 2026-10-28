@@ -13,16 +13,10 @@ public class OCodRender extends GeoEntityRenderer<OCod> {
 
     @Override
     public void render(OCod entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-
-        if(entity.isBaby()) {
-            poseStack.scale(0.5F, 0.5F, 0.5F);
-        } else {
-            poseStack.scale(1F, 1F, 1F);
-        }
-
+        if(entity.isBaby()) poseStack.scale(0.5F, 0.5F, 0.5F);
+        else poseStack.scale(1F, 1F, 1F);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
-
 }
 
 

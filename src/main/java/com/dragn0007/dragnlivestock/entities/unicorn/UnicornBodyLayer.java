@@ -97,7 +97,6 @@ public class UnicornBodyLayer extends GeoRenderLayer<Unicorn> {
         HornType(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
         public static HornType overlayFromOrdinal(int overlay) { return HornType.values()[overlay % HornType.values().length];
         }
     }

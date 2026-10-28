@@ -11,17 +11,7 @@ import com.dragn0007.dragnlivestock.entities.caribou.CaribouRender;
 import com.dragn0007.dragnlivestock.entities.chicken.OChickenRender;
 import com.dragn0007.dragnlivestock.entities.cod.OCodRender;
 import com.dragn0007.dragnlivestock.entities.cow.OCowRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot.CarrotMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering.FloweringMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloomRender;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloomRender;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.MoobloomRender;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomRender;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkeyRender;
 import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoatRender;
@@ -77,18 +67,7 @@ public class LivestockOverhaulClientEvent {
         EntityRenderers.register(EntityTypes.GRUB_ENTITY.get(), GrubRender::new);
         EntityRenderers.register(EntityTypes.UNICORN_ENTITY.get(), UnicornRender::new);
         EntityRenderers.register(EntityTypes.HEADLESS_HORSEMAN_ENTITY.get(), HeadlessHorsemanRender::new);
-
-        EntityRenderers.register(EntityTypes.WHEAT_MOOBLOOM_ENTITY.get(), WheatMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.SWEET_BERRY_MOOBLOOM_ENTITY.get(), SweetBerryMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.PUMPKIN_MOOBLOOM_ENTITY.get(), PumpkinMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.POTATO_MOOBLOOM_ENTITY.get(), PotatoMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.MELON_MOOBLOOM_ENTITY.get(), MelonMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.GLOW_BERRY_MOOBLOOM_ENTITY.get(), GlowBerryMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.FLOWERING_MOOBLOOM_ENTITY.get(), FloweringMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.CARROT_MOOBLOOM_ENTITY.get(), CarrotMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.BEETROOT_MOOBLOOM_ENTITY.get(), BeetrootMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.AZALEA_MOOBLOOM_ENTITY.get(), AzaleaMoobloomRender::new);
-        EntityRenderers.register(EntityTypes.PEACH_MOOBLOOM_ENTITY.get(), PeachMoobloomRender::new);
+        EntityRenderers.register(EntityTypes.MOOBLOOM_ENTITY.get(), MoobloomRender::new);
 
         EntityRenderers.register(EntityTypes.COVERED_WAGON.get(), c -> new WagonRenderer<>(c, "covered_wagon"));
         EntityRenderers.register(EntityTypes.LIVESTOCK_WAGON.get(), c -> new WagonRenderer<>(c, "livestock_wagon"));

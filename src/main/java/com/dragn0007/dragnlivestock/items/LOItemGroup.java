@@ -49,20 +49,7 @@ public class LOItemGroup {
                         output.accept(LOItems.O_FROG_SPAWN_EGG.get());
                         output.accept(LOItems.FARM_GOAT_SPAWN_EGG.get());
                         output.accept(LOItems.GRUB_SPAWN_EGG.get());
-                        output.accept(LOItems.WHEAT_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.SWEET_BERRY_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.PUMPKIN_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.POTATO_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.MELON_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.GLOW_BERRY_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.FLOWERING_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.CARROT_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.BEETROOT_MOOBLOOM_SPAWN_EGG.get());
-                        output.accept(LOItems.AZALEA_MOOBLOOM_SPAWN_EGG.get());
-
-                        if (ModList.get().isLoaded("thatsjustpeachy")) {
-                            output.accept(LOItems.PEACH_MOOBLOOM_SPAWN_EGG.get());
-                        }
+                        output.accept(LOItems.MOOBLOOM_SPAWN_EGG.get());
 
                         output.accept(LOItems.CARIBOU_SPAWN_EGG.get());
                         output.accept(LOItems.UNICORN_SPAWN_EGG.get());

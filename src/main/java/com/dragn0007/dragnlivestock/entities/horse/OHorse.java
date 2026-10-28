@@ -7,7 +7,6 @@ import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
-import com.dragn0007.dragnlivestock.entities.mule.OMuleModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
@@ -15,6 +14,7 @@ import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOve
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
@@ -51,7 +51,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -72,41 +71,30 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class OHorse extends AbstractOMount implements GeoEntity {
-
 	public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_horse");
 	public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/horse");
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/horse");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
-	public boolean hasGrowableHair() {
-		return true;
-	}
+	public boolean hasGrowableHair() {return true;}
 
 	public OHorse leader;
 	public int herdSize = 1;
 
 	public OHorse(EntityType<? extends OHorse> type, Level level) {
 		super(type, level);
-		this.setCanDecompose(true);
 	}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.horse");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.horse");
+		else return super.getTypeName();
 	}
 
 	@Override
@@ -159,94 +147,43 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public float generateRandomOHorseMaxHealth() {
-		float baseHealth;
-		switch (this.getBreed()) {
-			case 0:
-			default:
-				baseHealth = 16.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-			case 1, 11, 17:
-				baseHealth = 20.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-            case 3:
-				baseHealth = 14.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-			case 4:
-				baseHealth = 13.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-			case 5, 10, 6, 15, 16:
-				baseHealth = 18.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-            case 8, 12:
-				baseHealth = 24.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-			case 9, 18, 19:
-				baseHealth = 17.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-            case 13, 20:
-				baseHealth = 15.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-			case 14, 22:
-				baseHealth = 28.0F;
-				return baseHealth + this.random.nextInt(3) + this.random.nextInt(5);
-        }
+		float bonus = this.random.nextInt(3) + this.random.nextInt(5);
+        return switch (this.getBreed()) {
+            default -> 16.0F + bonus;
+            case 1,11,17 -> 20.0F + bonus;
+            case 3 -> 14.0F + bonus;
+            case 4 -> 13.0F + bonus;
+            case 5,10,6,15,16 -> 18.0F + bonus;
+            case 8,12 -> 24.0F + bonus;
+            case 9,18,19 -> 17.0F + bonus;
+            case 13,20 -> 15.0F + bonus;
+            case 14,22 -> 28.0F + bonus;
+        };
 	}
 
 	public double generateRandomOHorseJumpStrength() {
-		double baseStrength = 0.4F;
 		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.25D;
-
-		switch (this.getBreed()) {
-			case 0:
-			default:
-				baseStrength = 0.5F;
-				return baseStrength + multiplier;
-			case 1, 6, 11, 13, 15, 20:
-				baseStrength = 0.3F;
-				return baseStrength + multiplier;
-			case 2, 7, 10, 21:
-				baseStrength = 0.4F;
-				return baseStrength + multiplier;
-			case 3, 4, 5, 16, 18:
-				baseStrength = 0.35F;
-				return baseStrength + multiplier;
-            case 8, 17:
-				baseStrength = 0.25F;
-				return baseStrength + multiplier;
-			case 9:
-				baseStrength = 0.55F;
-				return baseStrength + multiplier;
-            case 12, 14, 22:
-				baseStrength = 0.2F;
-				return baseStrength + multiplier;
-			case 19:
-				baseStrength = 0.1F;
-				return baseStrength + multiplier;
-        }
+        return switch (this.getBreed()) {
+            default -> 0.5F + multiplier;
+            case 1,6,11,13,15,20 -> 0.3F + multiplier;
+            case 2,7,10,21 -> 0.4F + multiplier;
+            case 3,4,5,16,18 -> 0.35F + multiplier;
+            case 8,17 -> 0.25F + multiplier;
+            case 9 -> 0.55F + multiplier;
+            case 12,14,22 -> 0.2F + multiplier;
+            case 19 -> 0.1 + multiplier;
+        };
 	}
 
 	public double generateRandomOHorseSpeed() {
-		double baseSpeed = 0.0F;
 		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.30D;
-
-		switch (this.getBreed()) {
-			case 0:
-			default:
-				baseSpeed = 0.2F;
-				return baseSpeed + multiplier;
-			case 1, 3, 6, 8, 17:
-				baseSpeed = 0.15F;
-				return baseSpeed + multiplier;
-            case 4, 20:
-				baseSpeed = 0.28F;
-				return baseSpeed + multiplier;
-            case 13:
-				baseSpeed = 0.3F;
-				return baseSpeed + multiplier;
-			case 19:
-				baseSpeed = 0.1F;
-				return baseSpeed + multiplier;
-        }
+        return switch (this.getBreed()) {
+            default -> 0.2F + multiplier;
+            case 1,3,6,8,17 -> 0.15F + multiplier;
+            case 4,20 -> 0.28F + multiplier;
+            case 13 -> 0.3F + multiplier;
+            case 19 -> 0.1 + multiplier;
+        };
 	}
 
 	public boolean isDraftBreed() {
@@ -286,31 +223,22 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public boolean canAddPassenger(Entity entity) {
-		if (!this.isDraftBreed()) {
-			return this.getPassengers().isEmpty();
-		} else if (this.isDraftBreed()) {
-			return this.getPassengers().size() < 2;
-		} else {
-			return false;
-		}
+		if (!this.isDraftBreed()) return this.getPassengers().isEmpty();
+		else if (this.isDraftBreed()) return this.getPassengers().size() < 2;
+		else return false;
 	}
 
 	@Override
 	public LivingEntity getControllingPassenger() {
 		LivingEntity firstPassenger = (LivingEntity) this.getFirstPassenger();
-			if (firstPassenger != null && this.isSaddled()) {
-				return firstPassenger;
-			}
+		if (firstPassenger != null && this.isSaddled()) return firstPassenger;
 		return null;
 	}
 
 	@Override
 	public int getInventorySize() {
-		if (this.hasChest()) {
-			return 18;
-		} else {
-			return 3;
-		}
+		if (this.hasChest()) return 18;
+		else return 3;
 	}
 
 	@Override
@@ -424,11 +352,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
-
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
 			double offsetYRotated = offsetY;
 			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
 			double x = this.getX() + offsetXRotated;
 			double y = this.getY() + offsetYRotated;
 			double z = this.getZ() + offsetZRotated;
@@ -449,14 +375,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	@Override
-	public boolean dismountsUnderwater() {
-		return false;
-	}
+	public boolean dismountsUnderwater() {return false;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -590,56 +512,31 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return PlayState.CONTINUE;
 	}
 
-	public boolean isFollower() {
-		return this.leader != null && this.leader.isAlive() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());
-	}
-
+	public boolean isFollower() {return this.leader != null && this.leader.isAlive() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());}
 	public void startFollowing(OHorse horse) {
 		this.leader = horse;
 		horse.addFollower();
 	}
-
 	public void stopFollowing() {
 		this.leader.removeFollower();
 		this.leader = null;
 	}
-
-	public void addFollower() {
-		this.herdSize++;
-	}
+	public void addFollower() {this.herdSize++;}
 
 	public void removeFollower() {
 		if (this.leader != null)
 		this.herdSize--;
 	}
-
-	public boolean canBeFollowed() {
-		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());
-	}
-
-	public int getMaxHerdSize() {
-		return LivestockOverhaulCommonConfig.HORSE_HERD_MAX.get();
-	}
-
-	public boolean hasFollowers() {
-		return this.herdSize > 1;
-	}
-
+	public boolean canBeFollowed() {return this.hasFollowers() && this.herdSize < this.getMaxHerdSize() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());}
+	public int getMaxHerdSize() {return LivestockOverhaulCommonConfig.HORSE_HERD_MAX.get();}
+	public boolean hasFollowers() {return this.herdSize > 1;}
 	public boolean inRangeOfLeader() {
 		return this.distanceToSqr(this.leader) <= 121.0D && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());
 	}
-
 	public void pathToLeader() {
-		if (this.isFollower() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied())) {
+		if (this.isFollower() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied()))
 			this.getNavigation().moveTo(this.leader, 1.0D);
-		}
 	}
-
-	@Override
-	public float getStepHeight() {
-		return 1.0F;
-	}
-
 	public void addFollowers(Stream<? extends OHorse> stream) {
 		stream.limit(this.getMaxHerdSize() - this.herdSize).filter((horse) -> horse != this).forEach((horse) -> {
 			horse.startFollowing(this);
@@ -647,13 +544,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
+	public float getStepHeight() {return 1.0F;}
+
+	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (this.isUndead() && !this.isHallow()) {
+		if (this.isUndead() && !this.isHallow())
 			this.level().addParticle(ParticleTypes.ASH, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-		} else if (this.isHallow()) {
+		else if (this.isHallow())
 			this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-		}
 	}
 
 	@Override
@@ -679,20 +578,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.isUndead()) {
 			if (damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.ON_FIRE)
-					|| damageSource.is(DamageTypes.DROWN) || damageSource.is(DamageTypes.EXPLOSION)) {
-				return false;
-			}
+					|| damageSource.is(DamageTypes.DROWN) || damageSource.is(DamageTypes.EXPLOSION)) return false;
 		}
 
 		return super.hurt(damageSource, v);
 	}
 
 	public MobType getMobType() {
-		if (this.isUndead()) {
-			return MobType.UNDEAD;
-		} else {
-			return super.getMobType();
-		}
+		if (this.isUndead()) return MobType.UNDEAD;
+		else return super.getMobType();
 	}
 
 	public int maxSprint = 20 * LivestockOverhaulCommonConfig.BASE_HORSE_SPRINT_TIME.get();
@@ -703,8 +597,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public int ponySprintAddition = 200;
 	public int maneGrowthTick;
 	public int tailGrowthTick;
-	public int decompTick;
-	public int trainStatsTick;
 	public int maxBabyAmount = 2;
 	public int babiesBirthed = 0;
 	public int babyCooldown = 0;
@@ -713,81 +605,29 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public void tick() {
 		super.tick();
 
-		if (babiesBirthed > 0) {
+		if (babiesBirthed > 0)
 			babyCooldown++;
-		}
 
 		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20 && LivestockOverhaulCommonConfig.ALLOW_TWINS.get()) {
 			babiesBirthed = 0;
 			babyCooldown = 0;
 		}
 
-		if (babyCooldown >= 20) {
+		if (babyCooldown >= 20)
 			babyCooldown = 0;
-		}
 
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
 			List<? extends OHorse> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
-			if (list.size() <= 1) {
-				this.herdSize = 1;
-			}
-		}
-
-		if (this.isVehicle() && this.getControllingPassenger() == this.getOwner() && this.getClass() == OHorse.class) {
-			if (this.isTamed() && this.isSaddled()) {
-				if (this.getSpeedTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
-						|| this.getJumpTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()
-						|| this.getHealthTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
-
-					trainStatsTick++;
-
-					if (trainStatsTick >= LivestockOverhaulCommonConfig.HORSE_TRAIN_TIME.get()) {
-						AttributeInstance speedAttribute = this.getAttribute(Attributes.MOVEMENT_SPEED);
-						assert speedAttribute != null;
-						double speedValue = speedAttribute.getBaseValue();
-						if (speedValue < 0.284F && !(getSpeedTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
-							speedAttribute.setBaseValue(speedValue + 0.005);
-							setSpeedTrained(getSpeedTrained() + 1);
-						} else if (speedValue > 0.284F) {
-							setSpeedTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
-						}
-
-						AttributeInstance jumpAttribute = this.getAttribute(Attributes.JUMP_STRENGTH);
-						assert jumpAttribute != null;
-						double jumpValue = jumpAttribute.getBaseValue();
-						if (jumpValue < 1.0F && !(getJumpTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
-							jumpAttribute.setBaseValue(jumpValue + 0.005);
-							setJumpTrained(getJumpTrained() + 1);
-						} else if (jumpValue > 1.0F) {
-							setJumpTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
-						}
-
-						AttributeInstance healthAttribute = this.getAttribute(Attributes.MAX_HEALTH);
-						assert healthAttribute != null;
-						double healthValue = healthAttribute.getBaseValue();
-						if (healthValue < 40.0D && !(getHealthTrained() >= LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get())) {
-							healthAttribute.setBaseValue(healthValue + 1.0D);
-							setHealthTrained(getHealthTrained() + 1);
-						} else if (healthValue > 40.0D) {
-							setHealthTrained(LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get());
-						}
-						trainStatsTick = 0;
-					}
-				}
-			}
+			if (list.size() <= 1) this.herdSize = 1;
 		}
 
 		List<ItemStack> armorSlots = (List<ItemStack>) this.getArmorSlots();
 		ItemStack armorItemStack = armorSlots.get(2);
 		
 		if (this.isOnSand()) {
-			if (!this.hasSlownessEffect()) {
-				this.applySlownessEffect();
-			}
+			if (!this.hasSlownessEffect()) this.applySlownessEffect();
 		} else if (!(!this.isDraftBreed() && armorItemStack.getItem() instanceof HorseArmorItem) || !(this.isRacingBreed() && armorItemStack.getItem() instanceof LightHorseArmorItem)){
-			if (this.hasSlownessEffect()) {
-				this.removeSlownessEffect();
-			}
+			if (this.hasSlownessEffect()) this.removeSlownessEffect();
 		}
 
 		if (armorItemStack.getItem() instanceof HorseArmorItem) {
@@ -796,19 +636,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 					this.applySlownessEffect();
 				}
 			} else if (!this.isOnSand()) {
-				if (this.hasSlownessEffect()) {
-					this.removeSlownessEffect();
-				}
+				if (this.hasSlownessEffect()) this.removeSlownessEffect();
 			}
 		} else if (armorItemStack.getItem() instanceof LightHorseArmorItem) {
 			if (this.isRacingBreed()) {
-				if (!this.hasSlownessEffect()) {
-					this.applySlownessEffect();
-				}
+				if (!this.hasSlownessEffect()) this.applySlownessEffect();
 			} else if (!this.isOnSand()) {
-				if (this.hasSlownessEffect()) {
-					this.removeSlownessEffect();
-				}
+				if (this.hasSlownessEffect()) this.removeSlownessEffect();
 			}
 		}
 
@@ -827,25 +661,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.isUndead() && this.getDecompVariant() < 4 && this.canDecompose() && !this.isHallow()) {
-			decompTick++;
+		runSprintingTick();
+	}
 
-			if (decompTick >= LivestockOverhaulCommonConfig.DECOMPISITION_STAGE_TIME.get()) {
-				if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_HOT_NETHER)) {
-					this.setDecompVariant(5);
-				} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
-					this.setDecompVariant(6);
-				} else if (this.isInWater()) {
-					this.setDecompVariant(7);
-				} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_DESERT)) {
-					this.setDecompVariant(8);
-				} else {
-					this.setDecompVariant(this.getDecompVariant() + 1);
-				}
-				decompTick = 0;
-			}
-		}
-
+	public void runSprintingTick() {
 		Entity controllingPassenger = this.getControllingPassenger();
 		Entity entity = controllingPassenger;
 		int sprintLeftInSeconds = sprintTick / 20;
@@ -894,17 +713,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public SoundEvent getAmbientSound() {
 		super.getAmbientSound();
-		if (this.isUndead()) {
-			return SoundEvents.ZOMBIE_HORSE_AMBIENT;
-		}
+		if (this.isUndead()) return SoundEvents.ZOMBIE_HORSE_AMBIENT;
 		return SoundEvents.HORSE_AMBIENT;
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		if (this.isUndead()) {
-			return SoundEvents.ZOMBIE_HORSE_DEATH;
-		}
+		if (this.isUndead()) return SoundEvents.ZOMBIE_HORSE_DEATH;
 		return SoundEvents.HORSE_DEATH;
 	}
 
@@ -917,9 +732,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public SoundEvent getHurtSound(DamageSource damageSource) {
 		super.getHurtSound(damageSource);
-		if (this.isUndead()) {
-			return SoundEvents.ZOMBIE_HORSE_HURT;
-		}
+		if (this.isUndead()) return SoundEvents.ZOMBIE_HORSE_HURT;
 		return SoundEvents.HORSE_HURT;
 	}
 
@@ -930,67 +743,37 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public ResourceLocation getModelResource() {
-		return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
-	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
+	public ResourceLocation getModelResource() {return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;}
+	public int getBreed() {return this.entityData.get(BREED);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 		this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
-
 	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.STRING);
-	public String getTextureResource() {
-		return this.entityData.get(VARIANT_TEXTURE);
-	}
-	public void setVariantTexture(String variant) {
-		this.entityData.set(VARIANT_TEXTURE, variant);
-	}
+	public String getTextureResource() {return this.entityData.get(VARIANT_TEXTURE);}
+	public void setVariantTexture(String variant) {this.entityData.set(VARIANT_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
 		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.STRING);
-	public String getOverlayLocation() {
-		return this.entityData.get(OVERLAY_TEXTURE);
-	}
-	public void setOverlayVariantTexture(String variant) {
-		this.entityData.set(OVERLAY_TEXTURE, variant);
-	}
+	public String getOverlayLocation() {return this.entityData.get(OVERLAY_TEXTURE);}
+	public void setOverlayVariantTexture(String variant) {this.entityData.set(OVERLAY_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getEyeVariant() {
-		return this.entityData.get(EYES);
-	}
-	public void setEyeVariant(int eyeVariant) {
-		this.entityData.set(EYES, eyeVariant);
-	}
+	public int getEyeVariant() {return this.entityData.get(EYES);}
+	public void setEyeVariant(int eyeVariant) {this.entityData.set(EYES, eyeVariant);}
 
 	public static final EntityDataAccessor<Integer> REINDEER_VARIANT = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public ResourceLocation getReindeerTextureResource() {
-		return OHorseModel.ReindeerVariant.reindeerVariantFromOrdinal(getReindeerVariant()).resourceLocation;
-	}
-	public int getReindeerVariant() {
-		return this.entityData.get(REINDEER_VARIANT);
-	}
-	public void setReindeerVariant(int reindeerVariant) {
-		this.entityData.set(REINDEER_VARIANT, reindeerVariant);
-	}
+	public int getReindeerVariant() {return this.entityData.get(REINDEER_VARIANT);}
+	public void setReindeerVariant(int reindeerVariant) {this.entityData.set(REINDEER_VARIANT, reindeerVariant);}
 
 	public enum Feathering {
 		NONE,
@@ -1001,92 +784,32 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 	}
 	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getFeathering() {
-		return this.entityData.get(FEATHERING);
-	}
-	public void setFeathering(int feathering) {
-		this.entityData.set(FEATHERING, feathering);
-	}
+	public int getFeathering() {return this.entityData.get(FEATHERING);}
+	public void setFeathering(int feathering) {this.entityData.set(FEATHERING, feathering);}
 
 	public static final EntityDataAccessor<Boolean> UNDEAD = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
-	public boolean isUndead() {
-		return this.entityData.get(UNDEAD);
-	}
-	public void setUndead(boolean undead) {
-		this.entityData.set(UNDEAD, undead);
-	}
+	public boolean isUndead() {return this.entityData.get(UNDEAD);}
+	public void setUndead(boolean undead) {this.entityData.set(UNDEAD, undead);}
 
 	public static final EntityDataAccessor<Boolean> HALLOW = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
-	public boolean isHallow() {
-		return this.entityData.get(HALLOW);
-	}
-	public void setHallow(boolean hallow) {
-		this.entityData.set(HALLOW, hallow);
-	}
+	public boolean isHallow() {return this.entityData.get(HALLOW);}
+	public void setHallow(boolean hallow) {this.entityData.set(HALLOW, hallow);}
 
 	public static final EntityDataAccessor<Integer> DECOMP = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getDecompVariant() {
-		return this.entityData.get(DECOMP);
-	}
-	public void setDecompVariant(int decompVariant) {
-		this.entityData.set(DECOMP, decompVariant);
-	}
-
-	public static final EntityDataAccessor<Boolean> DECOMPOSE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
-	public boolean canDecompose() {
-		return this.entityData.get(DECOMPOSE);
-	}
-	public void setCanDecompose(boolean canDecompose) {
-		this.entityData.set(DECOMPOSE, canDecompose);
-	}
+	public int getDecompVariant() {return this.entityData.get(DECOMP);}
+	public void setDecompVariant(int decompVariant) {this.entityData.set(DECOMP, decompVariant);}
 
 	public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.ITEM_STACK);
-	public ItemStack getFlowerItem() {
-		return this.entityData.get(FLOWER_ITEM);
-	}
-	public void setFlowerItem(ItemStack decorItem) {
-		this.entityData.set(FLOWER_ITEM, decorItem);
-	}
+	public ItemStack getFlowerItem() {return this.entityData.get(FLOWER_ITEM);}
+	public void setFlowerItem(ItemStack decorItem) {this.entityData.set(FLOWER_ITEM, decorItem);}
 
 	public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getFlowerType() {
-		return this.entityData.get(FLOWER_TYPE);
-	}
-	public void setFlowerType(int decompVariant) {
-		this.entityData.set(FLOWER_TYPE, decompVariant);
-	}
+	public int getFlowerType() {return this.entityData.get(FLOWER_TYPE);}
+	public void setFlowerType(int decompVariant) {this.entityData.set(FLOWER_TYPE, decompVariant);}
 
 	public static final EntityDataAccessor<Boolean> BRANDED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.BOOLEAN);
-	public boolean isBranded() {
-		return this.entityData.get(BRANDED);
-	}
-	public void setIsBranded(boolean canBeBranded) {
-		this.entityData.set(BRANDED, canBeBranded);
-	}
-
-	public static final EntityDataAccessor<Integer> SPEED_TRAINED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getSpeedTrained() {
-		return this.entityData.get(SPEED_TRAINED);
-	}
-	public void setSpeedTrained(int trained) {
-		this.entityData.set(SPEED_TRAINED, trained);
-	}
-
-	public static final EntityDataAccessor<Integer> JUMP_TRAINED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getJumpTrained() {
-		return this.entityData.get(JUMP_TRAINED);
-	}
-	public void setJumpTrained(int trained) {
-		this.entityData.set(JUMP_TRAINED, trained);
-	}
-
-	public static final EntityDataAccessor<Integer> HEALTH_TRAINED = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getHealthTrained() {
-		return this.entityData.get(HEALTH_TRAINED);
-	}
-	public void setHealthTrained(int trained) {
-		this.entityData.set(HEALTH_TRAINED, trained);
-	}
+	public boolean isBranded() {return this.entityData.get(BRANDED);}
+	public void setIsBranded(boolean canBeBranded) {this.entityData.set(BRANDED, canBeBranded);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -1107,15 +830,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		if (tag.contains("ManeGrowthTime")) {this.maneGrowthTick = tag.getInt("ManeGrowthTime");}
 		if (tag.contains("TailGrowthTime")) {this.tailGrowthTick = tag.getInt("TailGrowthTime");}
 		if (tag.contains("Undead")) {this.setUndead(tag.getBoolean("Undead"));}
-		if (tag.contains("CanDecompose")) {this.setCanDecompose(tag.getBoolean("CanDecompose"));}
 		if (tag.contains("Flower_Type")) {this.setFlowerType(tag.getInt("Flower_Type"));}
 		if(tag.contains("FlowerItem")) {ItemStack decorItem = ItemStack.of(tag.getCompound("FlowerItem"));
 			this.setFlowerItem(decorItem);}
 		if (tag.contains("IsBranded")) {this.setIsBranded(tag.getBoolean("IsBranded"));}
-		if (tag.contains("TrainingTime")) {this.trainStatsTick = tag.getInt("TrainingTime");}
-		if (tag.contains("SpeedTrained")) {this.setSpeedTrained(tag.getInt("SpeedTrained"));}
-		if (tag.contains("JumpTrained")) {this.setJumpTrained(tag.getInt("JumpTrained"));}
-		if (tag.contains("HealthTrained")) {this.setHealthTrained(tag.getInt("HealthTrained"));}
 		if (tag.contains("IsHallow")) {this.setHallow(tag.getBoolean("IsHallow"));}
 	}
 
@@ -1138,36 +856,21 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		tag.putInt("ManeGrowthTime", this.maneGrowthTick);
 		tag.putInt("TailGrowthTime", this.tailGrowthTick);
 		tag.putBoolean("Undead", this.isUndead());
-		tag.putBoolean("CanDecompose", this.canDecompose());
 		tag.putInt("Flower_Type", this.getFlowerType());
-		if(!this.getFlowerItem().isEmpty()) {
-			tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));
-		}
+		if(!this.getFlowerItem().isEmpty()) {tag.put("FlowerItem", this.getFlowerItem().save(new CompoundTag()));}
 		tag.putBoolean("IsBranded", this.isBranded());
-		tag.putInt("TrainingTime", this.trainStatsTick);
-		tag.putInt("SpeedTrained", this.getSpeedTrained());
-		tag.putInt("JumpTrained", this.getJumpTrained());
-		tag.putInt("HealthTrained", this.getHealthTrained());
 		tag.putBoolean("IsHallow", this.isHallow());
 	}
 
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
-
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 
 		if (spawnType == MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-			if (!ModList.get().isLoaded("deadlydinos")) {
-				int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22};
-				int randomIndex = new Random().nextInt(breeds.length);
-				this.setBreed(breeds[randomIndex]);
-			} else {
-				this.setBreed(random.nextInt(HorseBreed.values().length));
-			}
+			if (ModList.get().isLoaded("deadlydinos")) this.setBreed(random.nextInt(HorseBreed.values().length));
+			else do this.setBreed(random.nextInt(HorseBreed.values().length)); while (this.getBreed() == 14);
 		}
 
 		this.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
@@ -1189,11 +892,13 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setEyeVariant(random.nextInt(EquineMarkingOverlay.values().length));
 		}
 
-		int randomMane = 1 + this.getRandom().nextInt(3);
-		this.setManeType(randomMane);
+		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= 0.20) {
+			this.setVariantTexture(String.valueOf(LOUtils.getRandomClientCoat("base_colors/horse")));
+			this.setOverlayVariantTexture(String.valueOf(LOUtils.getRandomClientPattern("pattern_overlays/horse")));
+		}
 
-		int randomTail = 1 + this.getRandom().nextInt(3);
-		this.setTailType(randomTail);
+		this.setManeType(this.getRandom().nextInt(1,3));
+		this.setTailType(this.getRandom().nextInt(1,3));
 
 		this.randomizeOHorseAttributes();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
@@ -1215,13 +920,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.define(FEATHERING, 0);
 		this.entityData.define(EYES, 0);
 		this.entityData.define(UNDEAD, false);
-		this.entityData.define(DECOMPOSE, false);
 		this.entityData.define(FLOWER_ITEM, ItemStack.EMPTY);
 		this.entityData.define(FLOWER_TYPE, 0);
 		this.entityData.define(BRANDED, false);
-		this.entityData.define(SPEED_TRAINED, 0);
-		this.entityData.define(JUMP_TRAINED, 0);
-		this.entityData.define(HEALTH_TRAINED, 0);
 		this.entityData.define(HALLOW, false);
 	}
 
@@ -1249,7 +950,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		AbstractOMount foal;
 		if (ageableMob instanceof ODonkey partnerDonkey) {
-
 			foal = EntityTypes.O_MULE_ENTITY.get().create(serverLevel);
 
 			int overlayChance = this.random.nextInt(100);
@@ -1262,20 +962,21 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				overlay = this.random.nextInt(EquineMarkingOverlay.values().length);
 			}
 			foal.setOverlayVariant(overlay);
-			foal.setVariant(random.nextInt(OMuleModel.Variant.values().length));
 
-			if (this.isStockBreed() || this.isWarmbloodedBreed() || this.isRacingBreed()) {
-				foal.setBreed(0);
-			}
-			if (this.isPonyBreed()) {
-				foal.setBreed(1);
-			}
-			if (this.isDraftBreed()) {
-				foal.setBreed(2);
-			}
+            int variantChance = this.random.nextInt(100);
+            int variant;
+            if (variantChance < ((100 - LivestockOverhaulCommonConfig.COAT_CHANCE.get()) / 2)) {
+                variant = this.getVariant();
+            } else {
+                variant = this.random.nextInt(OHorseModel.Variant.values().length);
+            }
+            foal.setVariant(variant);
+
+			if (this.isStockBreed() || this.isWarmbloodedBreed() || this.isRacingBreed()) foal.setBreed(0);
+			if (this.isPonyBreed()) foal.setBreed(1);
+			if (this.isDraftBreed()) foal.setBreed(2);
 
 			foal.setGender(random.nextInt(Gender.values().length));
-
 		} else {
 			OHorse partner = (OHorse) ageableMob;
 			foal = EntityTypes.O_HORSE_ENTITY.get().create(serverLevel);
@@ -1288,7 +989,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				breed = partner.getBreed();
 			} else {
 				if (!ModList.get().isLoaded("deadlydinos")) {
-					int[] breeds = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21};
+					int[] breeds = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21};
 					int randomIndex = new Random().nextInt(breeds.length);
 					breed = (breeds[randomIndex]);
 				} else {
@@ -1516,10 +1217,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public void setColorByBreed() {
-
 		if (this.getBreed() == 0) { //mustangs can come in any color naturally, aside from fjord coloring
-			int[] variants = {12,3,4,5,6,7,8,9,10,11,12,13,15,
-					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int[] variants = {12,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
@@ -1568,8 +1267,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 4) { //thoroughbreds can come in any color naturally, aside from fjord coloring. they usually come in bays
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
@@ -1591,23 +1289,20 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		if (this.getBreed() == 6) { //irish cobs can come in any color naturally, aside from fjord coloring
-			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 7) { //american quarters can come in any color naturally, aside from fjord coloring
-			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 8) { //percherons usually just come in blacks and greys
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
@@ -1619,8 +1314,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 9) { //selle francais can come in any color naturally, aside from fjord coloring. they usually come in bays
 			if (random.nextDouble() < 0.20) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
@@ -1631,16 +1325,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		if (this.getBreed() == 10) { //marwaris can come in any color naturally, aside from fjord coloring
-			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 11) { //mongolian ponies can come in any color naturally, aside from fjord coloring. they usually come in duns or bays
 			if (random.nextDouble() < 0.20) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
@@ -1652,8 +1344,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 12) { //shires usually come in greys or browns
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
@@ -1665,8 +1356,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 13) { //ahkal tekes usually come in creams or other light colors
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
@@ -1678,8 +1368,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 14) { //american soliders usually come in blacks or greys but can be other colors as well
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
@@ -1707,8 +1396,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 16) { //connemaras usually come in blacks or greys but can be other colors as well
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
@@ -1720,8 +1408,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 17) { //haflingers can come in any color naturally, aside from fjord coloring. they usually come in duns or bays
 			if (random.nextDouble() < 0.20) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
@@ -1748,16 +1435,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		}
 
 		if (this.getBreed() == 19) { //shetland ponies can come in any color naturally, aside from fjord coloring
-			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-					16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 
 		if (this.getBreed() == 20) { //standardbreds can come in any color naturally, aside from fjord coloring. they usually come in bays
 			if (random.nextDouble() < 0.40) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.40) {
@@ -1785,8 +1470,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 22) { //boulonnais usually just come in white or silver
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
@@ -1798,8 +1482,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		if (this.getBreed() == 22) { //lusitanos usually just come in greys
 			if (random.nextDouble() < 0.10) {
-				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,
-						16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			} else if (random.nextDouble() > 0.10) {
@@ -2067,11 +1750,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (ModList.get().isLoaded("create")) {
 				ResourceLocation resourceLocation = new ResourceLocation("create", "superglue");
 				Item createSuperglue = ForgeRegistries.ITEMS.getValue(resourceLocation);
-				if (random.nextDouble() < 0.25) {
-					this.spawnAtLocation(createSuperglue.getDefaultInstance());
-				}
+				if (random.nextDouble() < 0.25) this.spawnAtLocation(createSuperglue.getDefaultInstance());
 			}
-
 		}
 	}
 

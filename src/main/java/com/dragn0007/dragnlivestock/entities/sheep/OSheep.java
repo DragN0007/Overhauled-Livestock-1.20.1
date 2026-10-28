@@ -73,13 +73,9 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_sheep_tfc");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -92,11 +88,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.sheep");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.sheep");
+		else return super.getTypeName();
 	}
 
 	public void registerGoals() {
@@ -129,9 +122,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	public OSheep leader;
 	public int herdSize = 1;
 
-	public boolean isFollower() {
-		return this.leader != null && this.leader.isAlive();
-	}
+	public boolean isFollower() {return this.leader != null && this.leader.isAlive();}
 
 	public OSheep startFollowing(OSheep oSheep) {
 		this.leader = oSheep;
@@ -146,29 +137,17 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		}
 	}
 
-	public void addFollower() {
-		++this.herdSize;
-	}
+	public void addFollower() {++this.herdSize;}
 	public void removeFollower() {
 		if (this.leader != null)
 		--this.herdSize;
 	}
-	public boolean canBeFollowed() {
-		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();
-	}
+	public boolean canBeFollowed() {return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();}
 
-	public boolean isFineQuality() {
-		return this.getQuality() <= 25;
-	}
-	public boolean isGreatQuality() {
-		return this.getQuality() > 25 && this.getQuality() <= 50;
-	}
-	public boolean isFantasticQuality() {
-		return this.getQuality() > 50 && this.getQuality() <= 75;
-	}
-	public boolean isExquisiteQuality() {
-		return this.getQuality() > 75 && this.getQuality() <= 100;
-	}
+	public boolean isFineQuality() {return this.getQuality() <= 25;}
+	public boolean isGreatQuality() {return this.getQuality() > 25 && this.getQuality() <= 50;}
+	public boolean isFantasticQuality() {return this.getQuality() > 50 && this.getQuality() <= 75;}
+	public boolean isExquisiteQuality() {return this.getQuality() > 75 && this.getQuality() <= 100;}
 
 	public int replenishMilkCounter = 0;
 	public int regrowWoolCounter = 0;
@@ -178,43 +157,29 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		super.tick();
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
 			List<? extends OSheep> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
-			if (list.size() <= 1) {
-				this.herdSize = 1;
-			}
+			if (list.size() <= 1) this.herdSize = 1;
 		}
 
-		if (babiesBirthed > 0) {
-			babyCooldown++;
-		}
+		if (babiesBirthed > 0) babyCooldown++;
 
 		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
 			babiesBirthed = 0;
 			babyCooldown = 0;
 		}
 
-		if (babyCooldown >= 20) {
-			babyCooldown = 0;
-		}
+		if (babyCooldown >= 20) babyCooldown = 0;
 
 		regrowWoolCounter++;
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			if (this.isFineQuality()) {
-				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) this.setSheared(false);
 			} else if (this.isGreatQuality()) {
-				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 1.3)) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 1.3)) this.setSheared(false);
 			} else if (this.isFantasticQuality()) {
-				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2)) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2)) this.setSheared(false);
 			} else if (this.isExquisiteQuality()) {
-				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2.5)) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2.5)) this.setSheared(false);
 			}
 		} else {
 			if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
@@ -226,21 +191,13 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			if (this.isFineQuality()) {
-				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
-					this.setMilked(false);
-				}
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) this.setMilked(false);
 			} else if (this.isGreatQuality()) {
-				if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 1.3)) {
-					this.setMilked(false);
-				}
+				if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 1.3)) this.setMilked(false);
 			} else if (this.isFantasticQuality()) {
-				if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2)) {
-					this.setMilked(false);
-				}
+				if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2)) this.setMilked(false);
 			} else if (this.isExquisiteQuality()) {
-				if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2.5)) {
-					this.setMilked(false);
-				}
+				if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2.5)) this.setMilked(false);
 			}
 		} else {
 			if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
@@ -248,29 +205,16 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			}
 		}
 
-		if (this.getBreed() == 6) {
-			this.setSheared(true);
-		}
+		if (this.getBreed() == 6) this.setSheared(true);
 	}
 
 	public int getMaxHerdSize() {
 		return LivestockOverhaulCommonConfig.SHEEP_HERD_MAX.get();
 	}
 
-	public boolean hasFollowers() {
-		return this.herdSize > 1;
-	}
-
-	public boolean inRangeOfLeader() {
-		return this.distanceToSqr(this.leader) <= 121.0D;
-	}
-
-	public void pathToLeader() {
-		if (this.isFollower()) {
-			this.getNavigation().moveTo(this.leader, 1.0D);
-		}
-
-	}
+	public boolean hasFollowers() {return this.herdSize > 1;}
+	public boolean inRangeOfLeader() {return this.distanceToSqr(this.leader) <= 121.0D;}
+	public void pathToLeader() {if (this.isFollower()) this.getNavigation().moveTo(this.leader, 1.0D);}
 
 	public void addFollowers(Stream<? extends OSheep> p_27534_) {
 		p_27534_.limit(this.getMaxHerdSize() - this.herdSize).filter((cow) -> cow != this).forEach((cow) -> {
@@ -432,9 +376,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public float getStepHeight() {
-		return 1F;
-	}
+	public float getStepHeight() {return 1F;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -464,151 +406,70 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
-	public SoundEvent getAmbientSound() {
-		return SoundEvents.SHEEP_AMBIENT;
-	}
-
-	public SoundEvent getDeathSound() {
-		return SoundEvents.SHEEP_DEATH;
-	}
-
-	public SoundEvent getHurtSound(DamageSource p_30720_) {
-		return SoundEvents.SHEEP_HURT;
-	}
-
-	public void playStepSound(BlockPos p_28254_, BlockState p_28255_) {
-		this.playSound(SoundEvents.SHEEP_STEP, 0.15F, 1.0F);
-	}
-
-	public boolean isFood(ItemStack p_28271_) {
-		return FOOD_ITEMS.test(p_28271_);
-	}
-
+	public SoundEvent getAmbientSound() {return SoundEvents.SHEEP_AMBIENT;}
+	public SoundEvent getDeathSound() {return SoundEvents.SHEEP_DEATH;}
+	public SoundEvent getHurtSound(DamageSource p_30720_) {return SoundEvents.SHEEP_HURT;}
+	public void playStepSound(BlockPos p_28254_, BlockState p_28255_) {this.playSound(SoundEvents.SHEEP_STEP, 0.15F, 1.0F);}
+	public boolean isFood(ItemStack p_28271_) {return FOOD_ITEMS.test(p_28271_);}
 
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public int getBreedLocation() {
-		return SheepBreed.Breed.values().length;
-	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
+	public int getBreed() {return this.entityData.get(BREED);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public ResourceLocation getTextureLocation() {
-		return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+	public ResourceLocation getTextureLocation() {return OSheepModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public ResourceLocation getOverlayLocation() {return OSheepRenderLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+	public void setOverlayVariant(int overlayVariant) {this.entityData.set(OVERLAY, overlayVariant);}
 
 	public static final EntityDataAccessor<Integer> WOOL_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public ResourceLocation getWoolLocation() {
-		return OSheepRenderLayer.WoolColor.overlayFromOrdinal(getWoolVariant()).resourceLocation;
-	}
-	public int getWoolVariant() {
-		return this.entityData.get(WOOL_COLOR);
-	}
-	public void setWoolVariant(int overlayVariant) {
-		this.entityData.set(WOOL_COLOR, overlayVariant);
-	}
+	public ResourceLocation getWoolLocation() {return OSheepRenderLayer.WoolColor.overlayFromOrdinal(getWoolVariant()).resourceLocation;}
+	public int getWoolVariant() {return this.entityData.get(WOOL_COLOR);}
+	public void setWoolVariant(int overlayVariant) {this.entityData.set(WOOL_COLOR, overlayVariant);}
 
 	public static final EntityDataAccessor<Integer> WOOL_DYE_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public ResourceLocation getWoolDyeLocation() {
-		return OSheepRenderLayer.DyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;
-	}
-	public int getWoolDyeVariant() {
-		return this.entityData.get(WOOL_DYE_COLOR);
-	}
-	public void setWoolDyeVariant(int overlayVariant) {
-		this.entityData.set(WOOL_DYE_COLOR, overlayVariant);
-	}
+	public ResourceLocation getWoolDyeLocation() {return OSheepRenderLayer.DyeOverlay.overlayFromOrdinal(getWoolDyeVariant()).resourceLocation;}
+	public int getWoolDyeVariant() {return this.entityData.get(WOOL_DYE_COLOR);}
+	public void setWoolDyeVariant(int overlayVariant) {this.entityData.set(WOOL_DYE_COLOR, overlayVariant);}
 	public static final EntityDataAccessor<Boolean> DYED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
-	public boolean isDyeable() {
-		return this.isAlive() && !this.isBaby() && this.getBreed() != 6;
-	}
-	public boolean isDyed() {
-		return this.entityData.get(DYED);
-	}
-	public void setDyed(boolean dyed) {
-		this.entityData.set(DYED, dyed);
-	}
+	public boolean isDyed() {return this.entityData.get(DYED);}
+	public void setDyed(boolean dyed) {this.entityData.set(DYED, dyed);}
 
 	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public int getHornVariant() {
-		return this.entityData.get(HORN_TYPE);
-	}
-	public void setHornVariant(int hornVariant) {
-		this.entityData.set(HORN_TYPE, hornVariant);
-	}
+	public int getHornVariant() {return this.entityData.get(HORN_TYPE);}
+	public void setHornVariant(int hornVariant) {this.entityData.set(HORN_TYPE, hornVariant);}
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
-	public DyeColor getBrandTagColor() {
-		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
-	}
-	public void setBrandTagColor(DyeColor color) {
-		this.entityData.set(BRAND_TAG_COLOR, color.getId());
-	}
+	public DyeColor getBrandTagColor() {return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));}
+	public void setBrandTagColor(DyeColor color) {this.entityData.set(BRAND_TAG_COLOR, color.getId());}
 	@Override
-	public boolean isTaggable() {
-		return this.isAlive() && !this.isBaby();
-	}
+	public boolean isTaggable() {return this.isAlive() && !this.isBaby();}
 	@Override
-	public boolean isTagged() {
-		return this.entityData.get(TAGGED);
-	}
-	public void setTagged(boolean tagged) {
-		this.entityData.set(TAGGED, tagged);
-	}
+	public boolean isTagged() {return this.entityData.get(TAGGED);}
+	public void setTagged(boolean tagged) {this.entityData.set(TAGGED, tagged);}
 	@Override
 	public void equipTag(@Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 
 	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
-	public boolean isSheared() {
-		return this.entityData.get(SHEARED);
-	}
-	public void setSheared(boolean sheared) {
-		this.entityData.set(SHEARED, sheared);
-	}
+	public boolean isSheared() {return this.entityData.get(SHEARED);}
+	public void setSheared(boolean sheared) {this.entityData.set(SHEARED, sheared);}
 
 	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.BOOLEAN);
-	public boolean wasMilked() {
-		return this.entityData.get(MILKED);
-	}
-	public void setMilked(boolean milked) {
-		this.entityData.set(MILKED, milked);
-	}
+	public boolean wasMilked() {return this.entityData.get(MILKED);}
+	public void setMilked(boolean milked) {this.entityData.set(MILKED, milked);}
 
 	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public int getQuality() {
-		return this.entityData.get(QUALITY);
-	}
-	public void setQuality(int i) {
-		this.entityData.set(QUALITY, i);
-	}
+	public int getQuality() {return this.entityData.get(QUALITY);}
+	public void setQuality(int i) {this.entityData.set(QUALITY, i);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -671,9 +532,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 
 		this.setBreed(random.nextInt(SheepBreed.Breed.values().length));
@@ -702,39 +561,23 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		FEMALE,
 		MALE
 	}
-	public boolean isFemale() {
-		return this.getGender() == 0;
-	}
-	public boolean isMale() {
-		return this.getGender() == 1;
-	}
+	public boolean isFemale() {return this.getGender() == 0;}
+	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);
-	public int getGender() {
-		return this.entityData.get(GENDER);
-	}
-	public void setGender(int gender) {
-		this.entityData.set(GENDER, gender);
-	}
-
-	public boolean canParent() {
-		return !this.isBaby() && this.isInLove();
-	}
+	public int getGender() {return this.entityData.get(GENDER);}
+	public void setGender(int gender) {this.entityData.set(GENDER, gender);}
+	public boolean canParent() {return !this.isBaby() && this.isInLove();}
 
 	@Override
 	public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
 		super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
 		if (pAnimal instanceof OSheep partner) {
 			if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-				if (this.isMale()) {
-					this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
-				} else {
-					this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-				}
-				if (partner.isMale()) {
-					partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
-				} else {
-					partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-				}
+				if (this.isMale()) this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+				else this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+
+				if (partner.isMale()) partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+				else partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
 			} else {
 				this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
 				partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
@@ -881,7 +724,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		Item hide = null;
 		if (!this.isSheared() || this.getBreed() == 6) {
 			this.dropWoolByColorAndMarking();
-
 			if (ModList.get().isLoaded("tfc")) {
 				if (this.isExquisiteQuality()) {
 					hide = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tfc", "large_sheepskin_hide"));
@@ -900,25 +742,16 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isExquisiteQuality()) {
 					this.spawnAtLocation(new ItemStack(Items.MUTTON, 3), 0F);
-					if (!this.isSheared() || this.getBreed() == 6) {
-						this.dropWoolByColorAndMarking();
-					} else {
-						this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
-					}
+					if (!this.isSheared() || this.getBreed() == 6) this.dropWoolByColorAndMarking();
+					else this.spawnAtLocation(new ItemStack(Items.LEATHER, 3), 0F);
 				} else if (this.isFantasticQuality()) {
 					this.spawnAtLocation(new ItemStack(Items.MUTTON, 2), 0F);
-					if (!this.isSheared() || this.getBreed() == 6) {
-						this.dropWoolByColorAndMarking();
-					} else {
-						this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
-					}
+					if (!this.isSheared() || this.getBreed() == 6) this.dropWoolByColorAndMarking();
+					else this.spawnAtLocation(new ItemStack(Items.LEATHER, 2), 0F);
 				} else if (this.isGreatQuality()) {
 					this.spawnAtLocation(new ItemStack(Items.MUTTON, 1), 0F);
-					if (!this.isSheared() || this.getBreed() == 6) {
-						this.dropWoolByColorAndMarking();
-					} else {
-						this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
-					}
+					if (!this.isSheared() || this.getBreed() == 6) this.dropWoolByColorAndMarking();
+					else this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 				}
 			}
 		}
@@ -926,10 +759,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void dropWoolByColorAndMarking() {
-
 		//skin color generally does not affect dropped wool color, just the wool variant.
 		//however, breed can affect wool and skin color
-
 		if (!(this.getBreed() == 6)) {
 			if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 				DyeColor color = null;
@@ -1016,7 +847,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 			//if vanilla loot
 			} else {
-
 				if (!this.isDyed()) {
 					if (this.getWoolVariant() == 0 && !(this.getOverlayVariant() == 3)) {
 						if (random.nextDouble() <= 0.20) {
@@ -1264,11 +1094,8 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 				}
 			}
 		} else {
-			if (random.nextDouble() < 0.50) {
-				this.spawnAtLocation(Items.LEATHER, 2);
-			} else if (random.nextDouble() > 0.50) {
-				this.spawnAtLocation(Items.LEATHER, 1);
-			}
+			if (random.nextDouble() < 0.50) this.spawnAtLocation(Items.LEATHER, 2);
+			else this.spawnAtLocation(Items.LEATHER, 1);
 		}
 
 	}
@@ -1543,7 +1370,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 	}
 
 	public void setHornsByBreed() {
-
 		if (this.getBreed() == 0) { //gulf coast can come with small, curly horns. usually males, but sometimes females too
 			if (this.isFemale()) {
 				if (random.nextDouble() < 0.02) {
@@ -1705,7 +1531,6 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		DORSET,
 		JACOB,
 		RACKA;
-
 		public static BreedHorns hornsFromOrdinal(int ordinal) {
 			return BreedHorns.values()[ordinal % BreedHorns.values().length];
 		}

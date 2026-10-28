@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.horse;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -12,8 +13,6 @@ import software.bernie.geckolib.model.data.EntityModelData;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
 
@@ -132,31 +131,27 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
 
     @Override
     public ResourceLocation getModelResource(OHorse object) {
-        if (object.isBaby()) {
-            return BABY_MODEL;
-        } else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
-            return REINDEER_MODEL;
-        }
+        if (object.isBaby()) return BABY_MODEL;
+        else if (!object.isBaby() && month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) return REINDEER_MODEL;
         return HorseBreed.breedFromOrdinal(object.getBreed()).resourceLocation;
     }
 
-    public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
-
     @Override
     public ResourceLocation getTextureResource(OHorse object) {
-        if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
-            if (month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
-                return object.getReindeerTextureResource();
-            }
-            return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-        } else if (object.getDecompVariant() == 4) {
-            return OHorseBodyLayer.UndeadStage.SKELETAL.resourceLocation;
-        } else if (object.getDecompVariant() == 5) {
-            return OHorseBodyLayer.UndeadStage.WITHER.resourceLocation;
-        } else if (object.getDecompVariant() == 6) {
-            return OHorseBodyLayer.UndeadStage.STRAY.resourceLocation;
-        }
-        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
+//        if (!object.isUndead() && !(object.getDecompVariant() >= 3)) {
+//            if (month == Month.DECEMBER && (day == 24 || day == 25) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get()) {
+//                return object.getReindeerTextureResource();
+//            }
+//            return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
+//        } else if (object.getDecompVariant() == 4) {
+//            return OHorseBodyLayer.UndeadStage.SKELETAL.resourceLocation;
+//        } else if (object.getDecompVariant() == 5) {
+//            return OHorseBodyLayer.UndeadStage.WITHER.resourceLocation;
+//        } else if (object.getDecompVariant() == 6) {
+//            return OHorseBodyLayer.UndeadStage.STRAY.resourceLocation;
+//        }
+
+        return LOUtils.TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
     }
 
     @Override

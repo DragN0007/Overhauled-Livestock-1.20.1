@@ -17,7 +17,6 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
 
     @Override
     public void setCustomAnimations(OSheep animatable, long instanceId, AnimationState<OSheep> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
         CoreGeoBone left_ear = getAnimationProcessor().getBone("left_ear");
@@ -80,10 +79,7 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
         ;
 
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
         }
     }
@@ -92,17 +88,12 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_sheep.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OSheep object) {
-        return MODEL;
-    }
-
-    public ResourceLocation getTextureResource(OSheep object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getModelResource(OSheep object) {return MODEL;}
 
     @Override
-    public ResourceLocation getAnimationResource(OSheep animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getTextureResource(OSheep object) {return object.getTextureLocation();}
+
+    @Override
+    public ResourceLocation getAnimationResource(OSheep animatable) {return ANIMATION;}
 }
 

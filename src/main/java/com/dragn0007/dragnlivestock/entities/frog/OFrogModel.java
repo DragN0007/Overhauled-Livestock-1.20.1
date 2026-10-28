@@ -26,7 +26,6 @@ public class OFrogModel extends GeoModel<OFrog> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
         }
     }
@@ -35,18 +34,12 @@ public class OFrogModel extends GeoModel<OFrog> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/frog.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OFrog object) {
-        return MODEL;
-    }
+    public ResourceLocation getModelResource(OFrog object) {return MODEL;}
 
     @Override
-    public ResourceLocation getTextureResource(OFrog object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getTextureResource(OFrog object) {return object.getTextureLocation();}
 
     @Override
-    public ResourceLocation getAnimationResource(OFrog animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OFrog animatable) {return ANIMATION;}
 }
 

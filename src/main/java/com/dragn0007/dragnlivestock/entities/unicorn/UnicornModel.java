@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.unicorn;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import software.bernie.geckolib.constant.DataTickets;
@@ -47,9 +46,7 @@ public class UnicornModel extends DefaultedEntityGeoModel<Unicorn> {
     public static final ResourceLocation BABY = new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/baby_o_horse.geo.json");
     @Override
     public ResourceLocation getModelResource(Unicorn object) {
-        if (object.isBaby()) {
-            return BABY;
-        }
+        if (object.isBaby()) return BABY;
         return MODEL;
     }
 
@@ -61,8 +58,6 @@ public class UnicornModel extends DefaultedEntityGeoModel<Unicorn> {
     }
 
     @Override
-    public ResourceLocation getAnimationResource(Unicorn animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(Unicorn animatable) {return ANIMATION;}
 }
 

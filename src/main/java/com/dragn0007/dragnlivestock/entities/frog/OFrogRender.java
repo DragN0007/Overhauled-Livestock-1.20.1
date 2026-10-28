@@ -16,7 +16,6 @@ public class OFrogRender extends GeoEntityRenderer<OFrog> {
     public void render(OFrog entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
-
 }
 
 

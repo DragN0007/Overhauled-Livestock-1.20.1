@@ -75,13 +75,9 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/caribou");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
@@ -148,14 +144,14 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public double generateRandomJumpStrength() {
-		double baseStrength = 0.4F;
+		double baseStrength;
 		double multiplier = this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.25D;
 		baseStrength = 0.55F;
 		return baseStrength + multiplier;
 	}
 
 	public double generateRandomSpeed() {
-		double baseSpeed = 0.0F;
+		double baseSpeed;
 		double multiplier = (this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D + this.random.nextDouble() * 0.1D) * 0.30D;
 		baseSpeed = 0.2F;
 		return baseSpeed + multiplier;
@@ -168,21 +164,17 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void positionRider(Entity entity, MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
-
 			double offsetX = 0;
 			double offsetY = 1.0;
 			double offsetZ = -0.1;
 
 			double radYaw = Math.toRadians(this.getYRot());
-
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
 			double offsetYRotated = offsetY;
 			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
 			double x = this.getX() + offsetXRotated;
 			double y = this.getY() + offsetYRotated;
 			double z = this.getZ() + offsetZRotated;
-
 			entity.setPos(x, y, z);
 		}
 	}
@@ -190,9 +182,8 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
-			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-				return new CaribouMenu(containerId, inventory, this.inventory, this);
-			}, this.getDisplayName()), (data) -> {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> 
+					new CaribouMenu(containerId, inventory, this.inventory, this), this.getDisplayName()), (data) -> {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());
 			});
@@ -250,9 +241,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -390,14 +379,12 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 
 	protected <T extends GeoAnimatable> PlayState emotePredicate(AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
-
 		if (tAnimationState.isMoving() || !this.shouldEmote) {
 			controller.forceAnimationReset();
 			controller.stop();
 			this.shouldEmote = false;
 			return PlayState.STOP;
 		}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -407,13 +394,8 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		this.addEffect(speedEffectInstance);
 	}
 
-	protected boolean hasSpeedEffect() {
-		return this.hasEffect(MobEffect.byId(1));
-	}
-
-	protected void removeSpeedEffect() {
-		this.removeEffect(MobEffect.byId(1));
-	}
+	protected boolean hasSpeedEffect() {return this.hasEffect(MobEffect.byId(1));}
+	protected void removeSpeedEffect() {this.removeEffect(MobEffect.byId(1));}
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
@@ -452,23 +434,15 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		super.tick();
 		
 		if (this.isOnSand()) {
-			if (!this.hasSlownessEffect()) {
-				this.applySlownessEffect();
-			}
+			if (!this.hasSlownessEffect()) this.applySlownessEffect();
 		} else {
-			if (this.hasSlownessEffect()) {
-				this.removeSlownessEffect();
-			}
+			if (this.hasSlownessEffect()) this.removeSlownessEffect();
 		}
 
 		if (this.isOnSnow()) {
-			if (!this.hasSpeedEffect()) {
-				this.applySpeedEffect();
-			}
+			if (!this.hasSpeedEffect())this.applySpeedEffect();
 		} else {
-			if (this.hasSpeedEffect()) {
-				this.removeSpeedEffect();
-			}
+			if (this.hasSpeedEffect()) this.removeSpeedEffect();
 		}
 
 		Entity controllingPassenger = this.getControllingPassenger();
@@ -512,9 +486,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 
 	@Override
 	public boolean hurt(DamageSource damageSource, float v) {
-		if (damageSource.is(DamageTypes.FREEZE)) {
-			return false;
-		}
+		if (damageSource.is(DamageTypes.FREEZE)) return false;
 		return super.hurt(damageSource, v);
 	}
 
@@ -525,15 +497,11 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public SoundEvent getDeathSound() {
-		return SoundEvents.CAMEL_DEATH;
-	}
+	public SoundEvent getDeathSound() {return SoundEvents.CAMEL_DEATH;}
 
 	@Nullable
 	@Override
-	public SoundEvent getEatingSound() {
-		return SoundEvents.CAMEL_EAT;
-	}
+	public SoundEvent getEatingSound() {return SoundEvents.CAMEL_EAT;}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource damageSource) {
@@ -546,136 +514,68 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		super.getAngrySound();
 		return SoundEvents.CAMEL_HURT;
 	}
-
 	
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
 	public void setVariant(int variant) {
 		this.entityData.set(VARIANT, variant);
 		this.entityData.set(VARIANT_TEXTURE, CaribouModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.STRING);
-	public String getTextureResource() {
-		return this.entityData.get(VARIANT_TEXTURE);
-	}
-	public void setVariantTexture(String variant) {
-		this.entityData.set(VARIANT_TEXTURE, variant);
-	}
-
+	public String getTextureResource() {return this.entityData.get(VARIANT_TEXTURE);}
+	public void setVariantTexture(String variant) {this.entityData.set(VARIANT_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
 	public void setOverlayVariant(int variant) {
 		this.entityData.set(OVERLAY, variant);
 		this.entityData.set(OVERLAY_TEXTURE, EquineMarkingOverlay.overlayFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.STRING);
-	public String getOverlayLocation() {
-		return this.entityData.get(OVERLAY_TEXTURE);
-	}
-	public void setOverlayVariantTexture(String variant) {
-		this.entityData.set(OVERLAY_TEXTURE, variant);
-	}
-
-
+	public String getOverlayLocation() {return this.entityData.get(OVERLAY_TEXTURE);}
+	public void setOverlayVariantTexture(String variant) {this.entityData.set(OVERLAY_TEXTURE, variant);}
+	
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
-	public ResourceLocation getEyeTextureResource() {
-		return EquineEyeColorOverlay.eyesFromOrdinal(getEyeVariant()).resourceLocation;
-	}
-	public int getEyeVariant() {
-		return this.entityData.get(EYES);
-	}
-	public void setEyeVariant(int eyeVariant) {
-		this.entityData.set(EYES, eyeVariant);
-	}
+	public int getEyeVariant() {return this.entityData.get(EYES);}
+	public void setEyeVariant(int eyeVariant) {this.entityData.set(EYES, eyeVariant);}
 
 	public enum Feathering {
 		NONE,
 		HALF,
 		FULL;
-		public OHorse.Feathering next() {
-			return OHorse.Feathering.values()[(this.ordinal() + 1) % OHorse.Feathering.values().length];
-		}
+		public OHorse.Feathering next() {return OHorse.Feathering.values()[(this.ordinal() + 1) % OHorse.Feathering.values().length];}
 	}
 	public static final EntityDataAccessor<Integer> FEATHERING = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
-	public int getFeathering() {
-		return this.entityData.get(FEATHERING);
-	}
-	public void setFeathering(int feathering) {
-		this.entityData.set(FEATHERING, feathering);
-	}
+	public int getFeathering() {return this.entityData.get(FEATHERING);}
+	public void setFeathering(int feathering) {this.entityData.set(FEATHERING, feathering);}
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(Caribou.class, EntityDataSerializers.BOOLEAN);
-	public DyeColor getBrandTagColor() {
-		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
-	}
-	public void setBrandTagColor(DyeColor color) {
-		this.entityData.set(BRAND_TAG_COLOR, color.getId());
-	}
+	public DyeColor getBrandTagColor() {return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));}
+	public void setBrandTagColor(DyeColor color) {this.entityData.set(BRAND_TAG_COLOR, color.getId());}
 	@Override
-	public boolean isTaggable() {
-		return this.isAlive() && !this.isBaby();
-	}
+	public boolean isTaggable() {return this.isAlive() && !this.isBaby();}
 	@Override
 	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 	@Override
-	public boolean isTagged() {
-		return this.entityData.get(TAGGED);
-	}
-	public void setTagged(boolean tagged) {
-		this.entityData.set(TAGGED, tagged);
-	}
+	public boolean isTagged() {return this.entityData.get(TAGGED);}
+	public void setTagged(boolean tagged) {this.entityData.set(TAGGED, tagged);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Variant")) {
-			this.setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			this.setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Variant_Texture")) {
-			this.setVariantTexture(tag.getString("Variant_Texture"));
-		}
-
-		if (tag.contains("Overlay_Texture")) {
-			this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));
-		}
-
-		if (tag.contains("Gender")) {
-			this.setGender(tag.getInt("Gender"));
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
+		if (tag.contains("Variant")) {this.setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {this.setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Variant_Texture")) {this.setVariantTexture(tag.getString("Variant_Texture"));}
+		if (tag.contains("Overlay_Texture")) {this.setOverlayVariantTexture(tag.getString("Overlay_Texture"));}
+		if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
-
-		if (tag.contains("Feathering")) {
-			this.setFeathering(tag.getInt("Feathering"));
-		}
-
-		if (tag.contains("Eyes")) {
-			this.setEyeVariant(tag.getInt("Eyes"));
-		}
-
-		if (tag.contains("SprintTime")) {
-			this.sprintTick = tag.getInt("SprintTime");
-		}
+		if (tag.contains("Feathering")) {this.setFeathering(tag.getInt("Feathering"));}
+		if (tag.contains("Eyes")) {this.setEyeVariant(tag.getInt("Eyes"));}
+		if (tag.contains("SprintTime")) {this.sprintTick = tag.getInt("SprintTime");}
 	}
 
 	@Override
@@ -696,10 +596,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
-
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 		this.setGender(random.nextInt(Gender.values().length));
 
@@ -738,9 +635,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean canParent() {
-		return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && this.isInLove();
-	}
+	public boolean canParent() {return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && this.isInLove();}
 
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
@@ -763,7 +658,6 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void setEyeColorByChance() {
-
 		//white, cream and mostly-white or bald caribou have a better chance of gaining blue or green eyes
 		if (this.getVariant() == 6 || this.getVariant() == 16 || this.getOverlayVariant() == 2 || this.getOverlayVariant() == 8
 				|| this.getOverlayVariant() == 9 || this.getOverlayVariant() == 10 || this.getOverlayVariant() == 15
@@ -795,7 +689,6 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 				this.setEyeVariant(0);
 			}
 		}
-
 	}
 
 	@Override
@@ -840,7 +733,6 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 		calf.setGender(random.nextInt(Gender.values().length));
 		calf.setFeatheringByChance();
 
-
 		if (this.random.nextInt(3) >= 1) {
 			calf.generateRandomJumpStrength();
 
@@ -849,7 +741,6 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 
 			int betterHealth = (int) Math.max(partner.getHealth(), this.random.nextInt(20) + 40);
 			calf.setHealth(betterHealth);
-
 			//generate random stats of the breed standard of the baby if the breed is random
 		}
 
@@ -858,7 +749,6 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void setFeatheringByChance() {
-
 		if (random.nextDouble() < 0.05) {
 			this.setFeathering(2);
 		} else if (random.nextDouble() < 0.50 && random.nextDouble() > 0.05) {
@@ -871,31 +761,29 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void setColorByChance() {
-
 		if (random.nextDouble() < 0.05) {
-			int[] variants = {2, 3, 6, 8, 11, 12};
+			int[] variants = {2,3,6,8,11,12};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		} else if (random.nextDouble() < 0.30 && random.nextDouble() > 0.05) {
-			int[] variants = {1, 4, 9, 10, 13, 16};
+			int[] variants = {1,4,9,10,13,16};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		} else if (random.nextDouble() > 0.30) {
-			int[] variants = {0, 5, 7, 15, 15};
+			int[] variants = {0,5,7,15,15};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setVariant(variants[randomIndex]);
 		}
 	}
 
 	public void setMarkingByChance() {
-
 		if (random.nextDouble() < 0.15) {
-			int[] variants = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20,
-					23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41};
+			int[] variants = {0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,
+					23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setOverlayVariant(variants[randomIndex]);
 		} else if (random.nextDouble() > 0.15) {
-			int[] variants = {0, 2, 4, 5, 6, 7, 11, 12, 14, 18, 19, 21, 29, 30, 32, 33, 35, 39, 41};
+			int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,29,30,32,33,35,39,41};
 			int randomIndex = new Random().nextInt(variants.length);
 			this.setOverlayVariant(variants[randomIndex]);
 		}

@@ -48,56 +48,32 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/tfc_o_salmon");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.salmon");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.salmon");
+		else return super.getTypeName();
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 3.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D);
 	}
 
 	public OSalmon getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
 		return EntityTypes.O_SALMON_ENTITY.get().create(serverLevel);
 	}
 
-	public int getMaxSchoolSize() {
-		return 5;
-	}
+	public int getMaxSchoolSize() {return 5;}
 
-	public ItemStack getBucketItemStack() {
-		return new ItemStack(Items.SALMON_BUCKET);
-	}
-
-	public SoundEvent getAmbientSound() {
-		return SoundEvents.SALMON_AMBIENT;
-	}
-
-	public SoundEvent getDeathSound() {
-		return SoundEvents.SALMON_DEATH;
-	}
-
-	public SoundEvent getHurtSound(DamageSource p_29795_) {
-		return SoundEvents.SALMON_HURT;
-	}
-
-	public SoundEvent getFlopSound() {
-		return SoundEvents.SALMON_FLOP;
-	}
+	public ItemStack getBucketItemStack() {return new ItemStack(Items.SALMON_BUCKET);}
+	public SoundEvent getAmbientSound() {return SoundEvents.SALMON_AMBIENT;}
+	public SoundEvent getDeathSound() {return SoundEvents.SALMON_DEATH;}
+	public SoundEvent getHurtSound(DamageSource p_29795_) {return SoundEvents.SALMON_HURT;}
+	public SoundEvent getFlopSound() {return SoundEvents.SALMON_FLOP;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -133,45 +109,27 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	// Generates the base texture
-	public ResourceLocation getTextureResource() {
-		return OSalmonModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-
+	public ResourceLocation getTextureResource() {return OSalmonModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OSalmon.class, EntityDataSerializers.INT);
-
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-		if (groupData == null) {
-			groupData = new AgeableMob.AgeableMobGroupData(0.2F);
-		}
-
+		if (groupData == null) {groupData = new AgeableMob.AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 		setVariant(random.nextInt(OSalmonModel.Variant.values().length));
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, groupData, tag);
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
 	}
 
 	@Override

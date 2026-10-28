@@ -83,21 +83,23 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	public boolean isMeatBreed() {
-		return this.getBreed() == 0 || this.getBreed() == 2 || this.getBreed() == 4 || this.getBreed() == 8 || this.getBreed() == 10 || this.getBreed() == 11;
+		return switch (this.getBreed()) {
+			case 0,2,4,8,10,11 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isNormalBreed() {
-		return this.getBreed() == 1 || this.getBreed() == 5;
+		return switch (this.getBreed()) {
+			case 1,5 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isMiniBreed() {
@@ -105,16 +107,16 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public boolean isDairyBreed() {
-		return this.getBreed() == 6 || this.getBreed() == 7;
+		return switch (this.getBreed()) {
+			case 6,7 -> true;
+			default -> false;
+		};
 	}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.cow");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.cow");
+		else return super.getTypeName();
 	}
 
 	@Override
@@ -131,20 +133,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_COW_EATS);
-	public boolean isFood(ItemStack stack) {
-		return FOOD_ITEMS.test(stack);
-	}
+	public boolean isFood(ItemStack stack) {return FOOD_ITEMS.test(stack);}
 
 	@Override
 	public void playEmote(String emoteName, String loopType) {}
 	@Override
-	public boolean canWearArmor() {
-		return false;
-	}
+	public boolean canWearArmor() {return false;}
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -178,9 +174,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public float getStepHeight() {
-		return 1F;
-	}
+	public float getStepHeight() {return 1F;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -228,9 +222,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
@@ -281,11 +273,9 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			}
 
 			double radYaw = Math.toRadians(this.getYRot());
-
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
 			double offsetYRotated = offsetY;
 			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
 			double x = this.getX() + offsetXRotated;
 			double y = this.getY() + offsetYRotated;
 			double z = this.getZ() + offsetZRotated;
@@ -294,9 +284,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
-	public boolean isFollower() {
-		return this.leader != null && this.leader.isAlive();
-	}
+	public boolean isFollower() {return this.leader != null && this.leader.isAlive();}
 
 	public OCow startFollowing(OCow cow) {
 		this.leader = cow;
@@ -311,61 +299,29 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
-	public void addFollower() {
-		++this.herdSize;
-	}
+	public void addFollower() {++this.herdSize;}
 
 	public void removeFollower() {
-		if (this.leader != null)
-		--this.herdSize;
+		if (this.leader != null) --this.herdSize;
 	}
 
-	public boolean canBeFollowed() {
-		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();
-	}
-
-	public int getMaxHerdSize() {
-		return LivestockOverhaulCommonConfig.COW_HERD_MAX.get();
-	}
-
-	public boolean hasFollowers() {
-		return this.herdSize > 1;
-	}
-
-	public boolean inRangeOfLeader() {
-		return this.distanceToSqr(this.leader) <= 120.0D;
-	}
+	public boolean canBeFollowed() {return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();}
+	public int getMaxHerdSize() {return LivestockOverhaulCommonConfig.COW_HERD_MAX.get();}
+	public boolean hasFollowers() {return this.herdSize > 1;}
+	public boolean inRangeOfLeader() {return this.distanceToSqr(this.leader) <= 120.0D;}
 
 	public void pathToLeader() {
-		if (this.isFollower()) {
-			this.getNavigation().moveTo(this.leader, 1.0D);
-		}
-
+		if (this.isFollower()) this.getNavigation().moveTo(this.leader, 1.0D);
 	}
 
 	public void addFollowers(Stream<? extends OCow> p_27534_) {
-		p_27534_.limit((long)(this.getMaxHerdSize() - this.herdSize)).filter((cow) -> {
-			return cow != this;
-		}).forEach((cow) -> {
-			cow.startFollowing(this);
-		});
+		p_27534_.limit(this.getMaxHerdSize() - this.herdSize).filter((cow) -> cow != this).forEach((cow) -> cow.startFollowing(this));
 	}
 
-	public boolean isFineQuality() {
-        return this.getQuality() <= 25;
-	}
-
-	public boolean isGreatQuality() {
-		return this.getQuality() > 25 && this.getQuality() <= 50;
-	}
-
-	public boolean isFantasticQuality() {
-		return this.getQuality() > 50 && this.getQuality() <= 75;
-	}
-
-	public boolean isExquisiteQuality() {
-		return this.getQuality() > 75 && this.getQuality() <= 100;
-	}
+	public boolean isFineQuality() {return this.getQuality() <= 25;}
+	public boolean isGreatQuality() {return this.getQuality() > 25 && this.getQuality() <= 50;}
+	public boolean isFantasticQuality() {return this.getQuality() > 50 && this.getQuality() <= 75;}
+	public boolean isExquisiteQuality() {return this.getQuality() > 75 && this.getQuality() <= 100;}
 
 	public void setAttackDamage() {
 		if (this.getBreed() == 11) {
@@ -391,18 +347,14 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	public void tick() {
 		super.tick();
 
-		if (babiesBirthed > 0) {
-			babyCooldown++;
-		}
+		if (babiesBirthed > 0) babyCooldown++;
 
 		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20) {
 			babiesBirthed = 0;
 			babyCooldown = 0;
 		}
 
-		if (babyCooldown >= 20) {
-			babyCooldown = 0;
-		}
+		if (babyCooldown >= 20) babyCooldown = 0;
 
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
 			List<? extends OCow> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(20.0D, 20.0D, 20.0D));
@@ -625,110 +577,57 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 
 	//mostly for Spanish Fighting Bulls, cow postures before attacking
 	public boolean doneWaiting = false;
-	public boolean isDoneWaiting() {
-		return this.doneWaiting;
-	}
-	public void setDoneWaiting(boolean doneWaiting) {
-		this.doneWaiting = doneWaiting;
-	}
+	public boolean isDoneWaiting() {return this.doneWaiting;}
+	public void setDoneWaiting(boolean doneWaiting) {this.doneWaiting = doneWaiting;}
 
 	// Generates the base texture
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public int getBreedLocation() {
-		return CowBreed.Breed.values().length;
-	}
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
+	public int getBreed() {return this.entityData.get(BREED);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public ResourceLocation getTextureLocation() {
-		return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+	public ResourceLocation getTextureLocation() {return OCowModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public String getOverlayLocation() {return BovineMarkingOverlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+	public void setOverlayVariant(int overlayVariant) {this.entityData.set(OVERLAY, overlayVariant);}
 
 	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public int getHornVariant() {
-		return this.entityData.get(HORN_TYPE);
-	}
-	public void setHornVariant(int hornVariant) {
-		this.entityData.set(HORN_TYPE, hornVariant);
-	}
+	public int getHornVariant() {return this.entityData.get(HORN_TYPE);}
+	public void setHornVariant(int hornVariant) {this.entityData.set(HORN_TYPE, hornVariant);}
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
-	public DyeColor getBrandTagColor() {
-		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
-	}
-	public void setBrandTagColor(DyeColor color) {
-		this.entityData.set(BRAND_TAG_COLOR, color.getId());
-	}
+	public DyeColor getBrandTagColor() {return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));}
+	public void setBrandTagColor(DyeColor color) {this.entityData.set(BRAND_TAG_COLOR, color.getId());}
 	@Override
-	public boolean isTaggable() {
-		return this.isAlive() && !this.isBaby();
-	}
+	public boolean isTaggable() {return this.isAlive() && !this.isBaby();}
 	@Override
-	public boolean isTagged() {
-		return this.entityData.get(TAGGED);
-	}
-	public void setTagged(boolean tagged) {
-		this.entityData.set(TAGGED, tagged);
-	}
+	public boolean isTagged() {return this.entityData.get(TAGGED);}
+	public void setTagged(boolean tagged) {this.entityData.set(TAGGED, tagged);}
 	@Override
 	public void equipTag(@javax.annotation.Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 
 	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
-	public boolean wasMilked() {
-		return this.entityData.get(MILKED);
-	}
-	public void setMilked(boolean milked) {
-		this.entityData.set(MILKED, milked);
-	}
+	public boolean wasMilked() {return this.entityData.get(MILKED);}
+	public void setMilked(boolean milked) {this.entityData.set(MILKED, milked);}
 
 	public static final EntityDataAccessor<Boolean> HARNESSED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
-	public boolean isHarnessed() {
-		return this.entityData.get(HARNESSED);
-	}
-	public void setHarnessed(boolean harnessed) {
-		this.entityData.set(HARNESSED, harnessed);
-	}
+	public boolean isHarnessed() {return this.entityData.get(HARNESSED);}
+	public void setHarnessed(boolean harnessed) {this.entityData.set(HARNESSED, harnessed);}
 
 	public static final EntityDataAccessor<Boolean> BELLED = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.BOOLEAN);
-	public boolean isBelled() {
-		return this.entityData.get(BELLED);
-	}
-	public void setBelled(boolean belled) {
-		this.entityData.set(BELLED, belled);
-	}
+	public boolean isBelled() {return this.entityData.get(BELLED);}
+	public void setBelled(boolean belled) {this.entityData.set(BELLED, belled);}
 
 	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public int getQuality() {
-		return this.entityData.get(QUALITY);
-	}
-	public void setQuality(int i) {
-		this.entityData.set(QUALITY, i);
-	}
+	public int getQuality() {return this.entityData.get(QUALITY);}
+	public void setQuality(int i) {this.entityData.set(QUALITY, i);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -818,22 +717,12 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		FEMALE,
 		MALE
 	}
-	public boolean isFemale() {
-		return this.getGender() == 0;
-	}
-	public boolean isMale() {
-		return this.getGender() == 1;
-	}
+	public boolean isFemale() {return this.getGender() == 0;}
+	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);
-	public int getGender() {
-		return this.entityData.get(GENDER);
-	}
-	public void setGender(int gender) {
-		this.entityData.set(GENDER, gender);
-	}
-	public boolean canParent() {
-		return !this.isBaby() && this.isInLove();
-	}
+	public int getGender() {return this.entityData.get(GENDER);}
+	public void setGender(int gender) {this.entityData.set(GENDER, gender);}
+	public boolean canParent() {return !this.isBaby() && this.isInLove();}
 
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
@@ -1002,7 +891,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //longhorn
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 3, 4, 5, 7, 8, 10, 12};
+				int[] variants = {2,3,4,5,7,8,10,12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1012,7 +901,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //brahman
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {1, 2, 3, 4, 5, 6, 8, 9, 11, 12, 13};
+				int[] variants = {1,2,3,4,5,6,8,9,11,12,13};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1026,7 +915,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) {
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 3, 5, 10, 12};
+				int[] variants = {2,3,5,10,12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1036,7 +925,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //corriente
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 2, 3, 4, 5, 8, 9, 10, 12};
+				int[] variants = {0,2,3,4,5,8,9,10,12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1046,7 +935,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //holstein
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 2, 9, 10};
+				int[] variants = {0,2,9,10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1056,7 +945,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //jersey
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 8};
+				int[] variants = {2,8};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1066,7 +955,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //hereford
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 5, 10, 12};
+				int[] variants = {2,5,10,12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1080,7 +969,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.15) { //ox
 				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
 			} else if (random.nextDouble() > 0.15) {
-				int[] variants = {2, 8, 10, 12};
+				int[] variants = {2,8,10,12};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setVariant(variants[randomIndex]);
 			}
@@ -1110,7 +999,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //longhorn
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {9, 10, 11, 13, 14, 15, 17, 18, 19};
+				int[] variants = {9,10,11,13,14,15,17,18,19};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1132,7 +1021,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 9, 10, 11, 13, 14, 15, 17, 18, 19};
+				int[] variants = {0,9,10,11,13,14,15,17,18,19};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1142,7 +1031,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //corriente
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 1, 5, 9, 13, 17, 21, 22, 23};
+				int[] variants = {0,1,5,9,13,17,21,22,23};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1152,7 +1041,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //holstein
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 3, 5, 10, 11, 18, 19, 21, 22, 23, 24};
+				int[] variants = {2,3,5,10,11,18,19,21,22,23,24};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1162,7 +1051,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //jersey
 				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 21, 22, 23};
+				int[] variants = {0,21,22,23};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setOverlayVariant(variants[randomIndex]);
 			}
@@ -1216,7 +1105,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //longhorn
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {2, 3, 4};
+				int[] variants = {2,3,4};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1226,7 +1115,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //brahman
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 8, 9, 10};
+				int[] variants = {0,8,9,10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1236,7 +1125,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //mini
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {0, 8, 10};
+				int[] variants = {0,8,10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1246,7 +1135,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) {
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {5, 6};
+				int[] variants = {5,6};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1256,7 +1145,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //corriente
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {1, 7, 8, 10};
+				int[] variants = {1,7,8,10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1290,7 +1179,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.05) { //highland
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.05) {
-				int[] variants = {1, 7, 8, 10};
+				int[] variants = {1,7,8,10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1300,7 +1189,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 			if (random.nextDouble() < 0.25) { //ox
 				this.setHornVariant(random.nextInt(BreedHorns.values().length));
 			} else if (random.nextDouble() > 0.25) {
-				int[] variants = {1, 3, 7, 8, 10};
+				int[] variants = {1,3,7,8,10};
 				int randomIndex = new Random().nextInt(variants.length);
 				this.setHornVariant(variants[randomIndex]);
 			}
@@ -1334,24 +1223,20 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		}
 	}
 
-
 	//ox stuff
 	public static final AttributeModifier WALK_SPEED_MOD = new AttributeModifier(WALK_SPEED_MOD_UUID, "Walk speed mod", -0.8D, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
 	@Override
 	public int getInventorySize() {
-		if (this.getBreed() == 10) {
-			return this.hasChest() ? 26 : super.getInventorySize();
-		}
+		if (this.getBreed() == 10) return this.hasChest() ? 26 : super.getInventorySize();
 		return super.getInventorySize();
 	}
 
 	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed() && this.getBreed() == 10) {
-			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-				return new OxMenu(containerId, inventory, this.inventory, this);
-			}, this.getDisplayName()), (data) -> {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) ->
+					new OxMenu(containerId, inventory, this.inventory, this), this.getDisplayName()), (data) -> {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());
 			});
@@ -1359,25 +1244,16 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean isSaddleable() {
-		return super.isSaddleable() && this.getBreed() == 10;
-	}
+	public boolean isSaddleable() {return super.isSaddleable() && this.getBreed() == 10;}
 
 	@Override
-	public int saddleSlot() {
-		return 0;
-	}
+	public int saddleSlot() {return 0;}
 
 	@Override
-	public boolean canJump() {
-		return false;
-	}
+	public boolean canJump() {return false;}
 
 	public class CowPanicGoal extends PanicGoal {
-		public CowPanicGoal(double v) {
-			super(OCow.this, v);
-		}
-
+		public CowPanicGoal(double v) {super(OCow.this, v);}
 		public boolean shouldPanic() {
 			return this.mob.isFreezing() || this.mob.isOnFire() || this.mob.getHealth() < this.mob.getMaxHealth() / 3 && this.mob.isAlive();
 		}

@@ -6,17 +6,7 @@ import com.dragn0007.dragnlivestock.entities.caribou.Caribou;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import com.dragn0007.dragnlivestock.entities.cod.OCod;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.azalea.AzaleaMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.beetroot.BeetrootMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.carrot.CarrotMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.flowering.FloweringMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.glow_berry.GlowBerryMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.melon.MelonMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.peach.PeachMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.potato.PotatoMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.pumpkin.PumpkinMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.sweet_berry.SweetBerryMoobloom;
-import com.dragn0007.dragnlivestock.entities.cow.moobloom.wheat.WheatMoobloom;
+import com.dragn0007.dragnlivestock.entities.cow.moobloom.Moobloom;
 import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroom;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.farm_goat.FarmGoat;
@@ -167,84 +157,17 @@ public class EntityTypes {
                     .sized(1.5f,2f)
                     .build(new ResourceLocation(MODID,"headless_horseman").toString()));
 
-
-//    public static final RegistryObject<EntityType<CoveredWagon>> COVERED_WAGON_ENTITY = ENTITY_TYPES.register("covered_wagon",
-//            () -> EntityType.Builder.of(CoveredWagon::new,
-//                            MobCategory.CREATURE)
-//                    .sized(3f,0.8f)
-//                    .build(new ResourceLocation(MODID,"covered_wagon").toString()));
-
-    public static final RegistryObject<EntityType<WheatMoobloom>> WHEAT_MOOBLOOM_ENTITY = ENTITY_TYPES.register("wheat_moobloom",
-            () -> EntityType.Builder.of(WheatMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"wheat_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<SweetBerryMoobloom>> SWEET_BERRY_MOOBLOOM_ENTITY = ENTITY_TYPES.register("sweet_berry_moobloom",
-            () -> EntityType.Builder.of(SweetBerryMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"sweet_berry_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<PumpkinMoobloom>> PUMPKIN_MOOBLOOM_ENTITY = ENTITY_TYPES.register("pumpkin_moobloom",
-            () -> EntityType.Builder.of(PumpkinMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"pumpkin_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<PotatoMoobloom>> POTATO_MOOBLOOM_ENTITY = ENTITY_TYPES.register("potato_moobloom",
-            () -> EntityType.Builder.of(PotatoMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"potato_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<MelonMoobloom>> MELON_MOOBLOOM_ENTITY = ENTITY_TYPES.register("melon_moobloom",
-            () -> EntityType.Builder.of(MelonMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"melon_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<GlowBerryMoobloom>> GLOW_BERRY_MOOBLOOM_ENTITY = ENTITY_TYPES.register("glow_berry_moobloom",
-            () -> EntityType.Builder.of(GlowBerryMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"glow_berry_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<FloweringMoobloom>> FLOWERING_MOOBLOOM_ENTITY = ENTITY_TYPES.register("flowering_moobloom",
-            () -> EntityType.Builder.of(FloweringMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"flowering_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<CarrotMoobloom>> CARROT_MOOBLOOM_ENTITY = ENTITY_TYPES.register("carrot_moobloom",
-            () -> EntityType.Builder.of(CarrotMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"carrot_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<BeetrootMoobloom>> BEETROOT_MOOBLOOM_ENTITY = ENTITY_TYPES.register("beetroot_moobloom",
-            () -> EntityType.Builder.of(BeetrootMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"beetroot_moobloom").toString()));
-
-    public static final RegistryObject<EntityType<AzaleaMoobloom>> AZALEA_MOOBLOOM_ENTITY = ENTITY_TYPES.register("azalea_moobloom",
-            () -> EntityType.Builder.of(AzaleaMoobloom::new,
-                            MobCategory.CREATURE)
-                    .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"azalea_moobloom").toString()));
-
     public static final RegistryObject<EntityType<Caribou>> CARIBOU_ENTITY = ENTITY_TYPES.register("caribou",
             () -> EntityType.Builder.of(Caribou::new,
                             MobCategory.CREATURE)
                     .sized(1.5f,2f)
                     .build(new ResourceLocation(MODID,"caribou").toString()));
 
-    public static final RegistryObject<EntityType<PeachMoobloom>> PEACH_MOOBLOOM_ENTITY = ENTITY_TYPES.register("peach_moobloom",
-            () -> EntityType.Builder.of(PeachMoobloom::new,
+    public static final RegistryObject<EntityType<Moobloom>> MOOBLOOM_ENTITY = ENTITY_TYPES.register("moobloom",
+            () -> EntityType.Builder.of(Moobloom::new,
                             MobCategory.CREATURE)
                     .sized(1.5f,1.5f)
-                    .build(new ResourceLocation(MODID,"peach_moobloom").toString()));
+                    .build(new ResourceLocation(MODID,"moobloom").toString()));
 
 
     public static final RegistryObject<EntityType<CoveredWagon>> COVERED_WAGON = ENTITY_TYPES.register("covered_wagon",

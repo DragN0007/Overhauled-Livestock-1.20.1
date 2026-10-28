@@ -1,11 +1,13 @@
 package com.dragn0007.dragnlivestock.util;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.wagon.Mower;
 import com.dragn0007.dragnlivestock.entities.wagon.Plow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -154,6 +156,80 @@ public class LONetwork {
         }
     }
 
+    public static class ApplyTexture {
+        public final int id;
+        public final ResourceLocation coat;
+
+        public ApplyTexture(int id, ResourceLocation coat) {
+            this.id = id;
+            this.coat = coat;
+        }
+
+        public static void encode(ApplyTexture msg, FriendlyByteBuf buf) {
+            buf.writeInt(msg.id);
+            buf.writeResourceLocation(msg.coat);
+        }
+
+        public static ApplyTexture decode(FriendlyByteBuf buf) {
+            int id = buf.readInt();
+            ResourceLocation coat = buf.readResourceLocation();
+
+            return new ApplyTexture(id, coat);
+        }
+
+        public static void handle(ApplyTexture msg, Supplier<NetworkEvent.Context> contextSupplier) {
+            NetworkEvent.Context ctx = contextSupplier.get();
+            ctx.enqueueWork(() -> {
+                ServerPlayer serverPlayer = ctx.getSender();
+                if(serverPlayer != null) {
+                    Entity entity = serverPlayer.level().getEntity(msg.id);
+                    if(entity instanceof OHorse abstractSteed) {
+                        abstractSteed.setVariantTexture(String.valueOf(msg.coat));
+                    }
+                }
+            });
+            ctx.setPacketHandled(true);
+        }
+    }
+
+    public static class TextureRequest {
+        public final int id;
+        public final String folderName;
+        public final boolean useServerCoats;
+
+        public TextureRequest(int id, String folderName, boolean useServerCoats) {
+            this.id = id;
+            this.folderName = folderName;
+            this.useServerCoats = useServerCoats;
+        }
+
+        public static void encode(TextureRequest msg, FriendlyByteBuf buf) {
+            buf.writeInt(msg.id);
+            buf.writeUtf(msg.folderName);
+            buf.writeBoolean(msg.useServerCoats);
+        }
+
+        public static TextureRequest decode(FriendlyByteBuf buf) {
+            int id = buf.readInt();
+            String folderName = buf.readUtf();
+            boolean useServerCoats = buf.readBoolean();
+
+            return new TextureRequest(id, folderName, useServerCoats);
+        }
+
+        public static void handle(TextureRequest msg, Supplier<NetworkEvent.Context> contextSupplier) {
+            NetworkEvent.Context ctx = contextSupplier.get();
+            ctx.enqueueWork(() -> {
+                LocalPlayer player = Minecraft.getInstance().player;
+                if(player != null) {
+                    ResourceLocation coat = msg.useServerCoats ? LOUtils.getRandomServerCoat(msg.folderName) : LOUtils.getRandomClientCoat(msg.folderName);
+                    INSTANCE.sendToServer(new ApplyTexture(msg.id, coat));
+                }
+            });
+            ctx.setPacketHandled(true);
+        }
+    }
+
     public static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(LivestockOverhaul.MODID, "lo_network"),
@@ -169,6 +245,8 @@ public class LONetwork {
             INSTANCE.registerMessage(1, PlayEmoteRequest.class, PlayEmoteRequest::encode, PlayEmoteRequest::decode, PlayEmoteRequest::handle);
             INSTANCE.registerMessage(2, PlayEmoteResponse.class, PlayEmoteResponse::encode, PlayEmoteResponse::decode, PlayEmoteResponse::handle);
             INSTANCE.registerMessage(3, ToggleTillerPowerRequest.class, ToggleTillerPowerRequest::encode, ToggleTillerPowerRequest::decode, ToggleTillerPowerRequest::handle);
+            INSTANCE.registerMessage(4, ApplyTexture.class, ApplyTexture::encode, ApplyTexture::decode, ApplyTexture::handle);
+            INSTANCE.registerMessage(5, TextureRequest.class, TextureRequest::encode, TextureRequest::decode, TextureRequest::handle);
         });
     }
 

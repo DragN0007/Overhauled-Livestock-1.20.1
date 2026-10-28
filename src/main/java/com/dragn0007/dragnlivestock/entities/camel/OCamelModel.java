@@ -20,9 +20,7 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
 
     @Override
     public void setCustomAnimations(OCamel animatable, long instanceId, AnimationState<OCamel> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
-
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
         float targetYaw = entityData.netHeadYaw();
 
@@ -62,28 +60,20 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_camel.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OCamel object) {
-        return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
-    }
+    public ResourceLocation getModelResource(OCamel object) {return CamelBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;}
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
-    public ResourceLocation getTextureResource(OCamel object) {
-        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-    }
+    public ResourceLocation getTextureResource(OCamel object) {return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);}
 
     @Override
-    public ResourceLocation getAnimationResource(OCamel animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OCamel animatable) {return ANIMATION;}
 }
 

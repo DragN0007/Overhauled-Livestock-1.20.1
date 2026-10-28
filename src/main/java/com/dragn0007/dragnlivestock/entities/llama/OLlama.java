@@ -75,10 +75,8 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public static final EntityDataAccessor<Integer> DATA_STRENGTH_ID = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_SWAG_ID = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
 	boolean didSpit;
-	@Nullable
-	public OLlama caravanHead;
-	@Nullable
-	public OLlama caravanTail;
+	@Nullable public OLlama caravanHead;
+	@Nullable public OLlama caravanTail;
 
 	public static final EntityDataAccessor<Boolean> CHESTED = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.BOOLEAN);
 
@@ -91,22 +89,15 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/llama");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	@Override
 	public Component getTypeName() {
-		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-			return Component.translatable("entity.minecraft.llama");
-		} else {
-			return super.getTypeName();
-		}
+		if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.llama");
+		else return super.getTypeName();
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -117,14 +108,10 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	@Override
-	public boolean removeWhenFarAway(double p_27598_) {
-		return !this.isTamed() && this.tickCount > 2400;
-	}
+	public boolean removeWhenFarAway(double p_27598_) {return !this.isTamed() && this.tickCount > 2400;}
 
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -183,13 +170,9 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
-	public boolean isFollower() {
-		return this.leader != null && this.leader.isAlive();
-	}
+	public boolean isFollower() {return this.leader != null && this.leader.isAlive();}
 
 	public OLlama startFollowing(OLlama horse) {
 		this.leader = horse;
@@ -204,35 +187,14 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		}
 	}
 
-	public void addFollower() {
-		++this.herdSize;
-	}
-
-	public void removeFollower() {
-		--this.herdSize;
-	}
-
-	public boolean canBeFollowed() {
-		return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();
-	}
-
-	public int getMaxHerdSize() {
-		return LivestockOverhaulCommonConfig.LLAMA_HERD_MAX.get();
-	}
-
-	public boolean hasFollowers() {
-		return this.herdSize > 1;
-	}
-
-	public boolean inRangeOfLeader() {
-		return this.distanceToSqr(this.leader) <= 121.0D;
-	}
-
+	public void addFollower() {++this.herdSize;}
+	public void removeFollower() {--this.herdSize;}
+	public boolean canBeFollowed() {return this.hasFollowers() && this.herdSize < this.getMaxHerdSize();}
+	public int getMaxHerdSize() {return LivestockOverhaulCommonConfig.LLAMA_HERD_MAX.get();}
+	public boolean hasFollowers() {return this.herdSize > 1;}
+	public boolean inRangeOfLeader() {return this.distanceToSqr(this.leader) <= 121.0D;}
 	public void pathToLeader() {
-		if (this.isFollower()) {
-			this.getNavigation().moveTo(this.leader, 1.0D);
-		}
-
+		if (this.isFollower()) this.getNavigation().moveTo(this.leader, 1.0D);
 	}
 
 	public void addFollowers(Stream<? extends OLlama> stream) {
@@ -259,19 +221,11 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 
 		regrowWoolCounter++;
 
-		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
-			this.setSheared(false);
-		}
-
-		if (this.getWooly() == 0) {
-			this.setSheared(true);
-		}
+		if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) this.setSheared(false);
+		if (this.getWooly() == 0) this.setSheared(true);
 
 		replenishMilkCounter++;
-
-		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
-			this.setMilked(false);
-		}
+		if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) this.setMilked(false);
 	}
 
 	@Override
@@ -286,15 +240,12 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 			offsetZ = -0.2;
 
 			double radYaw = Math.toRadians(this.getYRot());
-
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
 			double offsetYRotated = offsetY;
 			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
 			double x = this.getX() + offsetXRotated;
 			double y = this.getY() + offsetYRotated;
 			double z = this.getZ() + offsetZRotated;
-
 			entity.setPos(x, y, z);
 		}
 	}
@@ -411,55 +362,31 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		}
 	}
 
-	// Generates the base texture
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
-	public ResourceLocation getTextureLocation() {
-		return OLlamaModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
-
+	public ResourceLocation getTextureLocation() {return OLlamaModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
 	public ResourceLocation getOverlayLocation() {return OLlamaMarkingLayer.Overlay.overlayFromOrdinal(getOverlayVariant()).resourceLocation;}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+	public void setOverlayVariant(int overlayVariant) {this.entityData.set(OVERLAY, overlayVariant);}
 
 	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.BOOLEAN);
-	public boolean wasMilked() {
-		return this.entityData.get(MILKED);
-	}
-	public void setMilked(boolean milked) {
-		this.entityData.set(MILKED, milked);
-	}
+	public boolean wasMilked() {return this.entityData.get(MILKED);}
+	public void setMilked(boolean milked) {this.entityData.set(MILKED, milked);}
 
 	public enum Wooly {
 		NONE,
 		WOOLY
 	}
 	public static final EntityDataAccessor<Integer> WOOLY = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
-	public int getWooly() {
-		return this.entityData.get(WOOLY);
-	}
-	public void setWooly(int wooly) {
-		this.entityData.set(WOOLY, wooly);
-	}
+	public int getWooly() {return this.entityData.get(WOOLY);}
+	public void setWooly(int wooly) {this.entityData.set(WOOLY, wooly);}
 
 	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.BOOLEAN);
-	public boolean isSheared() {
-		return this.entityData.get(SHEARED);
-	}
-	public void setSheared(boolean sheared) {
-		this.entityData.set(SHEARED, sheared);
-	}
+	public boolean isSheared() {return this.entityData.get(SHEARED);}
+	public void setSheared(boolean sheared) {this.entityData.set(SHEARED, sheared);}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
@@ -493,7 +420,6 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		tag.putInt("MilkedTime", this.replenishMilkCounter);
 		tag.putBoolean("Sheared", this.isSheared());
 		tag.putInt("ShearedTime", this.regrowWoolCounter);
-
 		if (!this.inventory.getItem(1).isEmpty()) {
 			tag.put("DecorItem", this.inventory.getItem(1).save(new CompoundTag()));
 		}
@@ -502,32 +428,23 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
-
 		this.spawnByBiome(this.level().getBiome(this.getOnPos()));
 		setVariant(random.nextInt(OLlamaModel.Variant.values().length));
 		setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
 		setWooly(random.nextInt(Wooly.values().length));
 		this.setGender(random.nextInt(OLlama.Gender.values().length));
 		this.setRandomStrength();
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
 	public void spawnByBiome(Holder<Biome> biome) {
 		Random random = new Random();
-
 		if (biome.is(Tags.Biomes.IS_HOT_OVERWORLD)) {
-			if (random.nextDouble() < 0.20) {
-				this.setWooly(1);
-			} else {
-				this.setWooly(0);
-			}
+			if (random.nextDouble() < 0.20) this.setWooly(1);
+			else this.setWooly(0);
 		}
-
 	}
 
 	@Override
@@ -548,23 +465,12 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		FEMALE,
 		MALE
 	}
-	public boolean isFemale() {
-		return this.getGender() == 0;
-	}
-	public boolean isMale() {
-		return this.getGender() == 1;
-	}
+	public boolean isFemale() {return this.getGender() == 0;}
+	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OLlama.class, EntityDataSerializers.INT);
-	public int getGender() {
-		return this.entityData.get(GENDER);
-	}
-	public void setGender(int gender) {
-		this.entityData.set(GENDER, gender);
-	}
-
-	public boolean canParent() {
-		return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && this.isInLove();
-	}
+	public int getGender() {return this.entityData.get(GENDER);}
+	public void setGender(int gender) {this.entityData.set(GENDER, gender);}
+	public boolean canParent() {return !this.isVehicle() && !this.isPassenger() && !this.isBaby() && this.isInLove();}
 
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
@@ -642,15 +548,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
 		Random random = new Random();
-
-		if (!this.isSheared()) {
-			this.dropWoolByColorAndMarking();
-		}
-
-		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && !ModList.get().isLoaded("tfc")) {
-
-		}
-
+		if (!this.isSheared()) this.dropWoolByColorAndMarking();
 	}
 
 	public void dropWoolByColorAndMarking() {
@@ -718,50 +616,27 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 	}
 
 	@Override
-	public boolean isChestable() {
-		return this.isAlive() && !this.isBaby();
-	}
+	public boolean isChestable() {return this.isAlive() && !this.isBaby();}
 
 	@Override
 	public void equipChest(@Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.MULE_CHEST, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.MULE_CHEST, soundSource, 0.5f, 1f);
 	}
 
 	@Override
-	public boolean isChested() {
-		return this.entityData.get(CHESTED);
-	}
-
-	public void setChested(boolean chested) {
-		this.entityData.set(CHESTED, chested);
-	}
-
-	public void setStrength(int p_30841_) {
-		this.entityData.set(DATA_STRENGTH_ID, Math.max(1, Math.min(5, p_30841_)));
-	}
+	public boolean isChested() {return this.entityData.get(CHESTED);}
+	public void setChested(boolean chested) {this.entityData.set(CHESTED, chested);}
+	public void setStrength(int p_30841_) {this.entityData.set(DATA_STRENGTH_ID, Math.max(1, Math.min(5, p_30841_)));}
 
 	public void setRandomStrength() {
 		int i = this.random.nextFloat() < 0.04F ? 5 : 3;
 		this.setStrength(1 + this.random.nextInt(i));
 	}
 
-	public int getStrength() {
-		return this.entityData.get(DATA_STRENGTH_ID);
-	}
-
-	public int getInventorySize() {
-		return this.hasChest() ? 2 + 3 * this.getInventoryColumns() : super.getInventorySize();
-	}
-
-	public double getPassengersRidingOffset() {
-		return (double)this.getBbHeight() * 0.6D;
-	}
-
-	public boolean isFood(ItemStack p_30832_) {
-		return FOOD_ITEMS.test(p_30832_);
-	}
+	public int getStrength() {return this.entityData.get(DATA_STRENGTH_ID);}
+	public int getInventorySize() {return this.hasChest() ? 2 + 3 * this.getInventoryColumns() : super.getInventorySize();}
+	public double getPassengersRidingOffset() {return (double)this.getBbHeight() * 0.6D;}
+	public boolean isFood(ItemStack p_30832_) {return FOOD_ITEMS.test(p_30832_);}
 
 	@Override
 	public boolean handleEating(Player player, ItemStack stack) {
@@ -813,67 +688,26 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		return flag;
 	}
 
-
-	public boolean isImmobile() {
-		return this.isDeadOrDying() || this.isEating();
-	}
-
-	public SoundEvent getAngrySound() {
-		return SoundEvents.LLAMA_ANGRY;
-	}
-
-	public SoundEvent getAmbientSound() {
-		return SoundEvents.LLAMA_AMBIENT;
-	}
-
-	public SoundEvent getHurtSound(DamageSource p_30803_) {
-		return SoundEvents.LLAMA_HURT;
-	}
-
-	public SoundEvent getDeathSound() {
-		return SoundEvents.LLAMA_DEATH;
-	}
+	public boolean isImmobile() {return this.isDeadOrDying() || this.isEating();}
+	public SoundEvent getAngrySound() {return SoundEvents.LLAMA_ANGRY;}
+	public SoundEvent getAmbientSound() {return SoundEvents.LLAMA_AMBIENT;}
+	public SoundEvent getHurtSound(DamageSource p_30803_) {return SoundEvents.LLAMA_HURT;}
+	public SoundEvent getDeathSound() {return SoundEvents.LLAMA_DEATH;}
 
 	@Nullable
-	public SoundEvent getEatingSound() {
-		return SoundEvents.LLAMA_EAT;
-	}
-
-	public void playStepSound(BlockPos p_30790_, BlockState p_30791_) {
-		this.playSound(SoundEvents.LLAMA_STEP, 0.15F, 1.0F);
-	}
-
-	public void playChestEquipsSound() {
-		this.playSound(SoundEvents.LLAMA_CHEST, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-	}
+	public SoundEvent getEatingSound() {return SoundEvents.LLAMA_EAT;}
+	public void playStepSound(BlockPos p_30790_, BlockState p_30791_) {this.playSound(SoundEvents.LLAMA_STEP, 0.15F, 1.0F);}
+	public void playChestEquipsSound() {this.playSound(SoundEvents.LLAMA_CHEST, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);}
 
 	public void makeMad() {
 		SoundEvent soundevent = this.getAngrySound();
-		if (soundevent != null) {
-			this.playSound(soundevent, this.getSoundVolume(), this.getVoicePitch());
-		}
-
+		if (soundevent != null) this.playSound(soundevent, this.getSoundVolume(), this.getVoicePitch());
 	}
-
-	public int getInventoryColumns() {
-		return this.getStrength();
-	}
-
-	public boolean canWearArmor() {
-		return true;
-	}
-
-	public boolean isWearingArmor() {
-		return !this.inventory.getItem(1).isEmpty();
-	}
-
-	public boolean isArmor(ItemStack p_30834_) {
-		return p_30834_.is(ItemTags.WOOL_CARPETS);
-	}
-
-	public boolean isSaddleable() {
-		return false;
-	}
+	public int getInventoryColumns() {return this.getStrength();}
+	public boolean canWearArmor() {return true;}
+	public boolean isWearingArmor() {return !this.inventory.getItem(1).isEmpty();}
+	public boolean isArmor(ItemStack p_30834_) {return p_30834_.is(ItemTags.WOOL_CARPETS);}
+	public boolean isSaddleable() {return false;}
 
 	public void containerChanged(Container p_30760_) {
 		DyeColor dyecolor = this.getSwag();
@@ -882,7 +716,6 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		if (this.tickCount > 20 && dyecolor1 != null && dyecolor1 != dyecolor) {
 			this.playSound(SoundEvents.LLAMA_SWAG, 0.5F, 1.0F);
 		}
-
 	}
 
 	public void updateContainerEquipment() {
@@ -892,10 +725,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		}
 	}
 
-	public void setSwag(@Nullable DyeColor p_30772_) {
-		this.entityData.set(DATA_SWAG_ID, p_30772_ == null ? -1 : p_30772_.getId());
-	}
-
+	public void setSwag(@Nullable DyeColor p_30772_) {this.entityData.set(DATA_SWAG_ID, p_30772_ == null ? -1 : p_30772_.getId());}
 	@Nullable
 	public static DyeColor getDyeColor(ItemStack p_30836_) {
 		Block block = Block.byItem(p_30836_.getItem());
@@ -908,9 +738,8 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		return i == -1 ? null : DyeColor.byId(i);
 	}
 
-	public int getMaxTemper() {
-		return 30;
-	}
+	public int getMaxTemper() {return 30;}
+
 	public void spit(LivingEntity p_30828_) {
 		OLlamaSpit llamaspit = new OLlamaSpit(this.level(), this);
 		double d0 = p_30828_.getX() - this.getX();
@@ -926,9 +755,7 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		this.didSpit = true;
 	}
 
-	void setDidSpit(boolean p_30753_) {
-		this.didSpit = p_30753_;
-	}
+	void setDidSpit(boolean p_30753_) {this.didSpit = p_30753_;}
 
 	public boolean causeFallDamage(float p_149538_, float p_149539_, DamageSource p_149540_) {
 		int i = this.calculateFallDamage(p_149538_, p_149539_);
@@ -943,17 +770,13 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 					}
 				}
 			}
-
 			this.playBlockFallSound();
 			return true;
 		}
 	}
 
 	public void leaveCaravan() {
-		if (this.caravanHead != null) {
-			this.caravanHead.caravanTail = null;
-		}
-
+		if (this.caravanHead != null) {this.caravanHead.caravanTail = null;}
 		this.caravanHead = null;
 	}
 
@@ -962,49 +785,21 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		this.caravanHead.caravanTail = this;
 	}
 
-	public boolean hasCaravanTail() {
-		return this.caravanTail != null;
-	}
-
-	public boolean inCaravan() {
-		return this.caravanHead != null;
-	}
+	public boolean hasCaravanTail() {return this.caravanTail != null;}
+	public boolean inCaravan() {return this.caravanHead != null;}
 
 	@Nullable
-	public OLlama getCaravanHead() {
-		return this.caravanHead;
-	}
-
-	public double followLeashSpeed() {
-		return 2.0D;
-	}
-
-	public void followMommy() {
-		if (!this.inCaravan() && this.isBaby()) {
-			super.followMommy();
-		}
-
-	}
-
-	public boolean canEatGrass() {
-		return false;
-	}
-
-	public void performRangedAttack(LivingEntity p_30762_, float p_30763_) {
-		this.spit(p_30762_);
-	}
-
-	public Vec3 getLeashOffset() {
-		return new Vec3(0.0D, 0.75D * (double)this.getEyeHeight(), (double)this.getBbWidth() * 0.5D);
-	}
+	public OLlama getCaravanHead() {return this.caravanHead;}
+	public double followLeashSpeed() {return 2.0D;}
+	public void followMommy() {if (!this.inCaravan() && this.isBaby()) super.followMommy();}
+	public boolean canEatGrass() {return false;}
+	public void performRangedAttack(LivingEntity p_30762_, float p_30763_) {this.spit(p_30762_);}
+	public Vec3 getLeashOffset() {return new Vec3(0.0D, 0.75D * (double)this.getEyeHeight(), (double)this.getBbWidth() * 0.5D);}
 
 	static class LlamaAttackWolfGoal extends NearestAttackableTargetGoal<Wolf> {
 		public LlamaAttackWolfGoal(OLlama p_30843_) {
-			super(p_30843_, Wolf.class, 16, false, true, (p_30845_) -> {
-				return !((Wolf)p_30845_).isTame();
-			});
+			super(p_30843_, Wolf.class, 16, false, true, (p_30845_) -> !((Wolf)p_30845_).isTame());
 		}
-
 		public double getFollowDistance() {
 			return super.getFollowDistance() * 0.25D;
 		}
@@ -1014,7 +809,6 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 		public LlamaHurtByTargetGoal(OLlama p_30854_) {
 			super(p_30854_);
 		}
-
 		public boolean canContinueToUse() {
 			if (this.mob instanceof OLlama) {
 				OLlama llama = (OLlama)this.mob;
@@ -1023,14 +817,12 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 					return false;
 				}
 			}
-
 			return super.canContinueToUse();
 		}
 	}
 
 	static class LlamaGroupData extends AgeableMobGroupData {
 		public final int variant;
-
 		LlamaGroupData(int p_30849_) {
 			super(true);
 			this.variant = p_30849_;

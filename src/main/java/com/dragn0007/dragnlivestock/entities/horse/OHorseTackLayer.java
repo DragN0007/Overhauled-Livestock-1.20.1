@@ -57,21 +57,6 @@ public class OHorseTackLayer extends GeoRenderLayer<OHorse> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/" + saddleItem + ".png");
                 if (resourceLocation != null) {
                     RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-                    
-                    getRenderer().reRender(getDefaultBakedModel(animatable),
-                            poseStack,
-                            bufferSource,
-                            animatable,
-                            renderType1,
-                            bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                            1, 1, 1, 1);
-                }
-            }
-
-            if (animatable.isSaddled()) {
-                resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/tack/stone_horseshoes.png");
-                if (resourceLocation != null) {
-                    RenderType renderType1 = RenderType.entityCutout(resourceLocation);
                     getRenderer().reRender(getDefaultBakedModel(animatable),
                             poseStack,
                             bufferSource,

@@ -31,13 +31,12 @@ public class OCowBodyLayer extends GeoRenderLayer<OCow> {
         if (animatable.getOverlayVariant() != 0) {
             BovineMarkingOverlay overlay = BovineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
             RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderMarkingType,
-                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderMarkingType, bufferSource.getBuffer(renderMarkingType),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
 
         if (!animatable.isTagged() || !LivestockOverhaulClientConfig.RENDER_BRAND_TAGS.get())
@@ -49,13 +48,12 @@ public class OCowBodyLayer extends GeoRenderLayer<OCow> {
                 resourceLocation = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/tag/" + dyeColor + ".png");
             }
             RenderType renderType1 = RenderType.entityCutout(resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderType1,
-                    bufferSource.getBuffer(renderType1), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderType1, bufferSource.getBuffer(renderType1),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
     }
 

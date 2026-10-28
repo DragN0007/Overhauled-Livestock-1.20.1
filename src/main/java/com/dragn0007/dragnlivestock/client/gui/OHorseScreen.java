@@ -4,7 +4,6 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,10 +11,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
-
-import java.text.DecimalFormat;
 
 public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
@@ -134,12 +130,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         if (LivestockOverhaulClientConfig.HORSE_COAT_GUI.get()) {
             renderBaseCoatLabel(graphics);
             renderMarkingLabel(graphics);
-            renderSpeedLabel(graphics);
-            renderJumpStrengthLabel(graphics);
-            renderHealthLabel(graphics);
-            if (oHorse.isUndead()) {
-                renderDecompLabel(graphics);
-            }
         }
 
         if (LivestockOverhaulClientConfig.ACCESSIBILITY_GENDER_IDENTIFIER.get()) {
@@ -237,104 +227,6 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
             graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
         }
     }
-
-    private void renderDecompLabel(GuiGraphics graphics) {
-        String decompText = getDecompText(this.oHorse.getDecompVariant());
-        String labelText = "Undead Decomp Stage: " + decompText;
-        String preserved = labelText + " (Preserved)";
-        String hallow = "Hallowed Soul";
-
-        if (!oHorse.canDecompose() && !oHorse.isHallow()) {
-            graphics.drawString(this.font, preserved, decompStateLabelX, decompStateLabelY, 0xFFFFFF, false);
-        } else if (oHorse.isHallow()) {
-            graphics.drawString(this.font, hallow, decompStateLabelX, decompStateLabelY, 0xAA0000, false);
-        } else {
-            graphics.drawString(this.font, labelText, decompStateLabelX, decompStateLabelY, 0xFFFFFF, false);
-        }
-    }
-
-    private String getDecompText(int i) {
-        switch (i) {
-            case 0: return "None";
-            case 1: return "Minimal";
-            case 2: return "Moderate";
-            case 3: return "Extreme";
-            case 4: return "Skeletal";
-            case 5: return "Wither";
-            case 6: return "Stray";
-            case 7: return "Drowned";
-            case 8: return "Husk";
-            default: return "Unknown";
-        }
-    }
-
-
-    //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v
-    //https://github.com/Snownee/Jade/blob/1.20-forge/src/main/java/snownee/jade/addon/vanilla/HorseStatsProvider.java#L51
-    //These calculations are placed in this manner so that the numbers will match up with Jade's tooltip.
-    //If use of this code and/ or these calculations are no longer permitted, for any reason, please contact me
-    // at DragN0007 on Curseforge or dragn0007.jar on Discord. I will remove them, no questions asked. :)
-    public static double getJumpHeight(double jump) {
-        return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
-    }
-
-    //This code is slightly altered to fit as a label rather than a tooltip
-    private void renderSpeedLabel(GuiGraphics graphics) {
-
-        double speed = oHorse.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 42.16;
-
-        DecimalFormat limitDec = new DecimalFormat("#.###");
-        String num = limitDec.format(speed);
-        String baseSpeedText = "Base Speed: " + num;
-        int trainingNum = oHorse.getSpeedTrained();
-        String notMaxLabel = baseSpeedText + ", Training: +" + trainingNum;
-        String maxLabel = baseSpeedText + ", Training: Maxed";
-
-        if (oHorse.getSpeedTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
-            graphics.drawString(this.font, notMaxLabel, speedLabelX, speedLabelY, 0xFFFFFF, false);
-        } else {
-            graphics.drawString(this.font, maxLabel, speedLabelX, speedLabelY, 0xFFFFFF, false);
-        }
-    }
-
-    //This code is slightly altered to fit as a label rather than a tooltip
-    private void renderJumpStrengthLabel(GuiGraphics graphics) {
-
-        oHorse.getAttributes().hasAttribute(Attributes.JUMP_STRENGTH);
-        double jumpStrength = oHorse.getAttributeBaseValue(Attributes.JUMP_STRENGTH);
-        double jumpHeight = getJumpHeight(jumpStrength);
-
-        DecimalFormat limitDec = new DecimalFormat("#.###");
-        String num = limitDec.format(jumpHeight);
-        String baseJumpText = "Jump Strength: " + num;
-        int trainingNum = oHorse.getJumpTrained();
-
-        String notMaxLabel = baseJumpText + ", Training: +" + trainingNum;
-        String maxLabel = baseJumpText + ", Training: Maxed";
-
-        if (oHorse.getJumpTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
-            graphics.drawString(this.font, notMaxLabel, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
-        } else {
-            graphics.drawString(this.font, maxLabel, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
-        }
-    }
-    //End of CC-Licensed code ^
-
-
-    private void renderHealthLabel(GuiGraphics graphics) {
-        String text = String.valueOf(this.oHorse.getMaxHealth());
-        String baseHealthText = "Base Health: " + text;
-        int trainingNum = oHorse.getHealthTrained();
-        String notMaxLabel = baseHealthText + ", Training: +" + trainingNum;
-        String maxLabel = baseHealthText + ", Training: Maxed";
-
-        if (oHorse.getHealthTrained() < LivestockOverhaulCommonConfig.HORSE_TRAIN_AMOUNT.get()) {
-            graphics.drawString(this.font, notMaxLabel, healthLabelX, healthLabelY, 0xFFFFFF, false);
-        } else {
-            graphics.drawString(this.font, maxLabel, healthLabelX, healthLabelY, 0xFFFFFF, false);
-        }
-    }
-
 }
 
 

@@ -57,32 +57,22 @@ public class OChickenModel extends DefaultedEntityGeoModel<OChicken> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_chicken.animation.json");
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/baby_o_chicken.geo.json");
     public static final ResourceLocation BABY_TEXTURE = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/chicken/cream.png");
 
     @Override
-    public ResourceLocation getModelResource(OChicken object) {
-        return ChickenBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;
-    }
+    public ResourceLocation getModelResource(OChicken object) {return ChickenBreed.Breed.breedFromOrdinal(object.getBreed()).resourceLocation;}
 
     @Override
     public ResourceLocation getTextureResource(OChicken object) {
-        if(object.isBaby()) {
-            return BABY_TEXTURE;
-        } else {
-            return object.getTextureResource();
-        }
+        if(object.isBaby()) return BABY_TEXTURE;
+        else return object.getTextureResource();
     }
 
     @Override
-    public ResourceLocation getAnimationResource(OChicken animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OChicken animatable) {return ANIMATION;}
 }
 

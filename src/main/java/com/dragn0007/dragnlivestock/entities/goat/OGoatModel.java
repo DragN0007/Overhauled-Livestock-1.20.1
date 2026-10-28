@@ -17,7 +17,6 @@ public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
 
     @Override
     public void setCustomAnimations(OGoat animatable, long instanceId, AnimationState<OGoat> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
 
@@ -54,26 +53,19 @@ public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_goat.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_goat.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OGoat object) {
-        return MODEL;
-    }
-
-    public ResourceLocation getTextureResource(OGoat object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getModelResource(OGoat object) {return MODEL;}
 
     @Override
-    public ResourceLocation getAnimationResource(OGoat animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getTextureResource(OGoat object) {return object.getTextureLocation();}
+
+    @Override
+    public ResourceLocation getAnimationResource(OGoat animatable) {return ANIMATION;}
 }
 

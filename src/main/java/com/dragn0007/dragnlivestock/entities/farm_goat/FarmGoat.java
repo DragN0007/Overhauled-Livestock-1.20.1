@@ -99,13 +99,9 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/goat");
 	@Override
 	public @NotNull ResourceLocation getDefaultLootTable() {
-		if (ModList.get().isLoaded("tfc")) {
-			return TFC_LOOT_TABLE;
-		} else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-			return VANILLA_LOOT_TABLE;
-		} else {
-			return LOOT_TABLE;
-		}
+		if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
+		else if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+		else return LOOT_TABLE;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -138,9 +134,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		));
 	}
 
-	public int calculateFallDamage(float p_149389_, float p_149390_) {
-		return super.calculateFallDamage(p_149389_, p_149390_) - 10;
-	}
+	public int calculateFallDamage(float p_149389_, float p_149390_) {return super.calculateFallDamage(p_149389_, p_149390_) - 10;}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.FARM_GOAT_EATS);
 
@@ -298,28 +292,15 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean canWearArmor() {
-		return false;
-	}
+	public boolean canWearArmor() {return false;}
 
 	public int replenishMilkCounter = 0;
 	public int regrowWoolCounter = 0;
 
-	public boolean isFineQuality() {
-		return this.getQuality() <= 25;
-	}
-
-	public boolean isGreatQuality() {
-		return this.getQuality() > 25 && this.getQuality() <= 50;
-	}
-
-	public boolean isFantasticQuality() {
-		return this.getQuality() > 50 && this.getQuality() <= 75;
-	}
-
-	public boolean isExquisiteQuality() {
-		return this.getQuality() > 75 && this.getQuality() <= 100;
-	}
+	public boolean isFineQuality() {return this.getQuality() <= 25;}
+	public boolean isGreatQuality() {return this.getQuality() > 25 && this.getQuality() <= 50;}
+	public boolean isFantasticQuality() {return this.getQuality() > 50 && this.getQuality() <= 75;}
+	public boolean isExquisiteQuality() {return this.getQuality() > 75 && this.getQuality() <= 100;}
 
 	public void tick() {
 		super.tick();
@@ -328,26 +309,16 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 			if (this.isFineQuality()) {
-				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) this.setSheared(false);
 			} else if (this.isGreatQuality()) {
-				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 1.3)) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 1.3)) this.setSheared(false);
 			} else if (this.isFantasticQuality()) {
-				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2)) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2)) this.setSheared(false);
 			} else if (this.isExquisiteQuality()) {
-				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2.5)) {
-					this.setSheared(false);
-				}
+				if (regrowWoolCounter >= (LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get() / 2.5)) this.setSheared(false);
 			}
 		} else {
-			if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
-				this.setSheared(false);
-			}
+			if (regrowWoolCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) this.setSheared(false);
 		}
 
 		replenishMilkCounter++;
@@ -355,65 +326,41 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		if (this.getBreed() != 5) {
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isFineQuality()) {
-					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) this.setMilked(false);
 				} else if (this.isGreatQuality()) {
-					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 1.3)) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 1.3)) this.setMilked(false);
 				} else if (this.isFantasticQuality()) {
-					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2)) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2)) this.setMilked(false);
 				} else if (this.isExquisiteQuality()) {
-					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2.5)) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get() / 2.5)) this.setMilked(false);
 				}
 			} else {
-				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) {
-					this.setMilked(false);
-				}
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.MILKING_COOLDOWN.get()) this.setMilked(false);
 			}
 		}
 
 		if (this.getBreed() == 5) {
 			if (LivestockOverhaulCommonConfig.QUALITY.get()) {
 				if (this.isFineQuality()) {
-					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) this.setMilked(false);
 				} else if (this.isGreatQuality()) {
-					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 1.3)) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 1.3)) this.setMilked(false);
 				} else if (this.isFantasticQuality()) {
-					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2)) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2))this.setMilked(false);
 				} else if (this.isExquisiteQuality()) {
-					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2.5)) {
-						this.setMilked(false);
-					}
+					if (replenishMilkCounter >= (LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get() / 2.5)) this.setMilked(false);
 				}
 			} else {
-				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) {
-					this.setMilked(false);
-				}
+				if (replenishMilkCounter >= LivestockOverhaulCommonConfig.DAIRY_MILKING_COOLDOWN.get()) this.setMilked(false);
 			}
 		}
 	}
 
 	@Override
-	public boolean canRide(Entity p_20339_) {
-		return false;
-	}
+	public boolean canRide(Entity p_20339_) {return false;}
 
 	@Override
-	public float getStepHeight() {
-		return 1F;
-	}
+	public float getStepHeight() {return 1F;}
 
 	protected final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
@@ -447,9 +394,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Nullable
 	public FarmGoat caravanHead;
@@ -457,10 +402,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	public FarmGoat caravanTail;
 
 	public void leaveCaravan() {
-		if (this.caravanHead != null) {
-			this.caravanHead.caravanTail = null;
-		}
-
+		if (this.caravanHead != null) {this.caravanHead.caravanTail = null;}
 		this.caravanHead = null;
 	}
 
@@ -469,49 +411,19 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		this.caravanHead.caravanTail = this;
 	}
 
-	public boolean hasCaravanTail() {
-		return this.caravanTail != null;
-	}
-
-	public boolean inCaravan() {
-		return this.caravanHead != null;
-	}
+	public boolean hasCaravanTail() {return this.caravanTail != null;}
+	public boolean inCaravan() {return this.caravanHead != null;}
 
 	@Nullable
-	public FarmGoat getCaravanHead() {
-		return this.caravanHead;
-	}
-
-	public double followLeashSpeed() {
-		return 1.6D;
-	}
-
-	public SoundEvent getAmbientSound() {
-		return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_AMBIENT : SoundEvents.GOAT_AMBIENT;
-	}
-
-	public SoundEvent getHurtSound(DamageSource p_149387_) {
-		return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_HURT : SoundEvents.GOAT_HURT;
-	}
-
-	public SoundEvent getDeathSound() {
-		return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_DEATH : SoundEvents.GOAT_DEATH;
-	}
-
-	public void playStepSound(BlockPos p_149382_, BlockState p_149383_) {
-		this.playSound(SoundEvents.GOAT_STEP, 0.15F, 1.0F);
-	}
-	public boolean isFood(ItemStack stack) {
-		return FOOD_ITEMS.test(stack);
-	}
-
-	public boolean isScreamingGoat() {
-		return this.entityData.get(DATA_IS_SCREAMING_GOAT);
-	}
-
-	public void setScreamingGoat(boolean p_149406_) {
-		this.entityData.set(DATA_IS_SCREAMING_GOAT, p_149406_);
-	}
+	public FarmGoat getCaravanHead() {return this.caravanHead;}
+	public double followLeashSpeed() {return 1.6D;}
+	public SoundEvent getAmbientSound() {return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_AMBIENT : SoundEvents.GOAT_AMBIENT;}
+	public SoundEvent getHurtSound(DamageSource p_149387_) {return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_HURT : SoundEvents.GOAT_HURT;}
+	public SoundEvent getDeathSound() {return this.isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_DEATH : SoundEvents.GOAT_DEATH;}
+	public void playStepSound(BlockPos p_149382_, BlockState p_149383_) {this.playSound(SoundEvents.GOAT_STEP, 0.15F, 1.0F);}
+	public boolean isFood(ItemStack stack) {return FOOD_ITEMS.test(stack);}
+	public boolean isScreamingGoat() {return this.entityData.get(DATA_IS_SCREAMING_GOAT);}
+	public void setScreamingGoat(boolean p_149406_) {this.entityData.set(DATA_IS_SCREAMING_GOAT, p_149406_);}
 
 	public void handleEntityEvent(byte p_149356_) {
 		if (p_149356_ == 58) {
@@ -521,16 +433,11 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		} else {
 			super.handleEntityEvent(p_149356_);
 		}
-
 	}
 
 	public void aiStep() {
-		if (this.isLoweringHead) {
-			++this.lowerHeadTick;
-		} else {
-			this.lowerHeadTick -= 2;
-		}
-
+		if (this.isLoweringHead) ++this.lowerHeadTick;
+		else this.lowerHeadTick -= 2;
 		this.lowerHeadTick = Mth.clamp(this.lowerHeadTick, 0, 20);
 		super.aiStep();
 	}
@@ -540,204 +447,95 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		DebugPackets.sendEntityBrain(this);
 	}
 
-	public EntityDimensions getDimensions(Pose pose) {
-		return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDimensions(pose);
-	}
+	public EntityDimensions getDimensions(Pose pose) {return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDimensions(pose);}
 
 	public static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public DyeColor getCollarColor() {
-		return DyeColor.byId(this.entityData.get(DATA_COLLAR_COLOR));
-	}
-	public void setCollarColor(DyeColor p_30398_) {
-		this.entityData.set(DATA_COLLAR_COLOR, p_30398_.getId());
-	}
+	public DyeColor getCollarColor() {return DyeColor.byId(this.entityData.get(DATA_COLLAR_COLOR));}
+	public void setCollarColor(DyeColor p_30398_) {this.entityData.set(DATA_COLLAR_COLOR, p_30398_.getId());}
 
 	public static final EntityDataAccessor<Boolean> COLLARED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
-	public boolean isCollared() {
-		return this.entityData.get(COLLARED);
-	}
-	public void setCollared(boolean collared) {
-		this.entityData.set(COLLARED, collared);
-	}
+	public boolean isCollared() {return this.entityData.get(COLLARED);}
+	public void setCollared(boolean collared) {this.entityData.set(COLLARED, collared);}
 
 	public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public int getBreed() {
-		return this.entityData.get(BREED);
-	}
-	public void setBreed(int breed) {
-		this.entityData.set(BREED, breed);
-	}
+	public int getBreed() {return this.entityData.get(BREED);}
+	public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public ResourceLocation getTextureLocation() {
-		return FarmGoatModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-	}
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
-	public void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+	public ResourceLocation getTextureLocation() {return FarmGoatModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+	public int getVariant() {return this.entityData.get(VARIANT);}
+	public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public String getOverlayLocation() {return FarmGoatBodyLayer.Marking.overlayFromOrdinal(getOverlayVariant()).resourceLocation.toString();}
-	public int getOverlayVariant() {
-		return this.entityData.get(OVERLAY);
-	}
-	public void setOverlayVariant(int overlayVariant) {
-		this.entityData.set(OVERLAY, overlayVariant);
-	}
+	public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+	public void setOverlayVariant(int overlayVariant) {this.entityData.set(OVERLAY, overlayVariant);}
 
 	public static final EntityDataAccessor<Integer> FACE_OVERLAY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public ResourceLocation getFaceOverlayLocation() {return FarmGoatBodyLayer.Face_Marking.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
-	public int getFaceOverlayVariant() {
-		return this.entityData.get(FACE_OVERLAY);
-	}
-	public void setFaceOverlayVariant(int overlayVariant) {
-		this.entityData.set(FACE_OVERLAY, overlayVariant);
-	}
+	public int getFaceOverlayVariant() {return this.entityData.get(FACE_OVERLAY);}
+	public void setFaceOverlayVariant(int overlayVariant) {this.entityData.set(FACE_OVERLAY, overlayVariant);}
 
 	public static final EntityDataAccessor<Integer> EYES = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public ResourceLocation getEyeLocation() {return FarmGoatBodyLayer.Face_Marking.overlayFromOrdinal(getFaceOverlayVariant()).resourceLocation;}
-	public int getEyeVariant() {
-		return this.entityData.get(EYES);
-	}
-	public void setEyeVariant(int overlayVariant) {
-		this.entityData.set(EYES, overlayVariant);
-	}
+	public int getEyeVariant() {return this.entityData.get(EYES);}
+	public void setEyeVariant(int overlayVariant) {this.entityData.set(EYES, overlayVariant);}
 
 	public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public int getHornVariant() {
-		return this.entityData.get(HORN_TYPE);
-	}
-	public void setHornVariant(int hornVariant) {
-		this.entityData.set(HORN_TYPE, hornVariant);
-	}
+	public int getHornVariant() {return this.entityData.get(HORN_TYPE);}
+	public void setHornVariant(int hornVariant) {this.entityData.set(HORN_TYPE, hornVariant);}
 
 	protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Boolean> TAGGED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
-	public DyeColor getBrandTagColor() {
-		return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));
-	}
-	public void setBrandTagColor(DyeColor color) {
-		this.entityData.set(BRAND_TAG_COLOR, color.getId());
-	}
+	public DyeColor getBrandTagColor() {return DyeColor.byId(this.entityData.get(BRAND_TAG_COLOR));}
+	public void setBrandTagColor(DyeColor color) {this.entityData.set(BRAND_TAG_COLOR, color.getId());}
 	@Override
-	public boolean isTaggable() {
-		return this.isAlive() && !this.isBaby();
-	}
+	public boolean isTaggable() {return this.isAlive() && !this.isBaby();}
 	@Override
-	public boolean isTagged() {
-		return this.entityData.get(TAGGED);
-	}
-	public void setTagged(boolean tagged) {
-		this.entityData.set(TAGGED, tagged);
-	}
+	public boolean isTagged() {return this.entityData.get(TAGGED);}
+	public void setTagged(boolean tagged) {this.entityData.set(TAGGED, tagged);}
 	@Override
 	public void equipTag(@Nullable SoundSource soundSource) {
-		if(soundSource != null) {
-			this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
-		}
+		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 
 	public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
-	public boolean isSheared() {
-		return this.entityData.get(SHEARED);
-	}
-	public void setSheared(boolean sheared) {
-		this.entityData.set(SHEARED, sheared);
-	}
+	public boolean isSheared() {return this.entityData.get(SHEARED);}
+	public void setSheared(boolean sheared) {this.entityData.set(SHEARED, sheared);}
 
 	public static final EntityDataAccessor<Boolean> MILKED = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.BOOLEAN);
-	public boolean wasMilked() {
-		return this.entityData.get(MILKED);
-	}
-	public void setMilked(boolean milked) {
-		this.entityData.set(MILKED, milked);
-	}
+	public boolean wasMilked() {return this.entityData.get(MILKED);}
+	public void setMilked(boolean milked) {this.entityData.set(MILKED, milked);}
 
 	public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(FarmGoat.class, EntityDataSerializers.INT);
-	public int getQuality() {
-		return this.entityData.get(QUALITY);
-	}
-	public void setQuality(int i) {
-		this.entityData.set(QUALITY, i);
-	}
+	public int getQuality() {return this.entityData.get(QUALITY);}
+	public void setQuality(int i) {this.entityData.set(QUALITY, i);}
 
 	@Override
-	public void updateContainerEquipment() {
-		if(!this.level().isClientSide) {
-			this.setDecorItem(this.inventory.getItem(1));
-		}
-	}
+	public void updateContainerEquipment() {if(!this.level().isClientSide) this.setDecorItem(this.inventory.getItem(1));}
 
 	@Override
-	public int decorSlot() {
-		return 1;
-	}
+	public int decorSlot() {return 1;}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		if(tag.contains("Quality")) {
-			this.setQuality(tag.getInt("Quality"));
-		}
-
-		if (tag.contains("Breed")) {
-			setBreed(tag.getInt("Breed"));
-		}
-
-		if (tag.contains("Variant")) {
-			setVariant(tag.getInt("Variant"));
-		}
-
-		if (tag.contains("Overlay")) {
-			this.setOverlayVariant(tag.getInt("Overlay"));
-		}
-
-		if (tag.contains("Face_Overlay")) {
-			this.setFaceOverlayVariant(tag.getInt("Face_Overlay"));
-		}
-
-		if (tag.contains("Eyes")) {
-			this.setEyeVariant(tag.getInt("Eyes"));
-		}
-
-		if (tag.contains("HornType")) {
-			setHornVariant(tag.getInt("HornType"));
-		}
-
-		if (tag.contains("Gender")) {
-			setGender(tag.getInt("Gender"));
-		}
-
-		if (tag.contains("Milked")) {
-			this.setMilked(tag.getBoolean("Milked"));
-		}
-
-		if (tag.contains("MilkedTime")) {
-			this.replenishMilkCounter = tag.getInt("MilkedTime");
-		}
-
-		if (tag.contains("Sheared")) {
-			this.setSheared(tag.getBoolean("Sheared"));
-		}
-
-		if (tag.contains("ShearedTime")) {
-			this.regrowWoolCounter = tag.getInt("ShearedTime");
-		}
-
-		if(tag.contains("Tagged")) {
-			this.setTagged(tag.getBoolean("Tagged"));
-		}
-
+		if(tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
+		if (tag.contains("Breed")) {setBreed(tag.getInt("Breed"));}
+		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+		if (tag.contains("Overlay")) {this.setOverlayVariant(tag.getInt("Overlay"));}
+		if (tag.contains("Face_Overlay")) {this.setFaceOverlayVariant(tag.getInt("Face_Overlay"));}
+		if (tag.contains("Eyes")) {this.setEyeVariant(tag.getInt("Eyes"));}
+		if (tag.contains("HornType")) {setHornVariant(tag.getInt("HornType"));}
+		if (tag.contains("Gender")) {setGender(tag.getInt("Gender"));}
+		if (tag.contains("Milked")) {this.setMilked(tag.getBoolean("Milked"));}
+		if (tag.contains("MilkedTime")) {this.replenishMilkCounter = tag.getInt("MilkedTime");}
+		if (tag.contains("Sheared")) {this.setSheared(tag.getBoolean("Sheared"));}
+		if (tag.contains("ShearedTime")) {this.regrowWoolCounter = tag.getInt("ShearedTime");}
+		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
-
 		this.setScreamingGoat(tag.getBoolean("IsScreamingGoat"));
-
-		if(tag.contains("Collared")) {
-			this.setCollared(tag.getBoolean("Collared"));
-		}
+		if(tag.contains("Collared")) {this.setCollared(tag.getBoolean("Collared"));}
 	}
 
 	@Override
@@ -784,17 +582,13 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 
 		this.setGender(random.nextInt(Gender.values().length));
 		this.setBreedByBiome();
 
-		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-			this.setQuality(random.nextInt(30));
-		}
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) this.setQuality(random.nextInt(30));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();
@@ -813,7 +607,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		RandomSource randomsource = serverLevelAccessor.getRandom();
 		this.setScreamingGoat(randomsource.nextDouble() < 0.02D);
 		this.ageBoundaryReached();
-
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
@@ -846,12 +639,9 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public void playEmote(String emoteName, String loopType) {
-	}
+	public void playEmote(String emoteName, String loopType) {}
 
-	public boolean canParent() {
-		return !this.isBaby() && this.isInLove();
-	}
+	public boolean canParent() {return !this.isBaby() && this.isInLove();}
 
 	public boolean canMate(Animal animal) {
 		if (animal == this) {
@@ -955,7 +745,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void setColorByBreed() {
-
 		if (this.getBreed() == 0) { //classic
 			this.setVariant(random.nextInt(FarmGoatModel.Variant.values().length));
 		}
@@ -1001,7 +790,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void setMarkingByBreed() {
-
 		if (this.getBreed() == 0) { //classic
 			this.setOverlayVariant(random.nextInt(FarmGoatBodyLayer.Marking.values().length));
 		}
@@ -1051,7 +839,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	public void setFaceMarkingByBreed() {
-
 		if (this.getBreed() == 0) { //classic
 			this.setFaceOverlayVariant(random.nextInt(FarmGoatBodyLayer.Face_Marking.values().length));
 		}
@@ -1103,16 +890,13 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public boolean isSaddleable() {
-		return false;
-	}
+	public boolean isSaddleable() {return false;}
 
 	@Override
 	public void openInventory(Player player) {
 		if(player instanceof ServerPlayer serverPlayer && this.isTamed()) {
-			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-				return new OxMenu(containerId, inventory, this.inventory, this);
-			}, this.getDisplayName()), (data) -> {
+			NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) ->
+					new OxMenu(containerId, inventory, this.inventory, this), this.getDisplayName()), (data) -> {
 				data.writeInt(this.getInventorySize());
 				data.writeInt(this.getId());
 			});
@@ -1131,37 +915,28 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 			offsetZ = 0;
 
 			double radYaw = Math.toRadians(this.getYRot());
-
 			double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
 			double offsetYRotated = offsetY;
 			double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
 			double x = this.getX() + offsetXRotated;
 			double y = this.getY() + offsetYRotated;
 			double z = this.getZ() + offsetZRotated;
-
 			entity.setPos(x, y, z);
 		}
 	}
 
 	@Override
-	public boolean canPerformRearing() {
-		return false;
-	}
+	public boolean canPerformRearing() {return false;}
 
 	@Override
-	public int getInventorySize() {
-		return 26;
-	}
+	public int getInventorySize() {return 26;}
 
 	@Override
 	public void dropCustomDeathLoot(DamageSource p_33574_, int p_33575_, boolean p_33576_) {
 		super.dropCustomDeathLoot(p_33574_, p_33575_, p_33576_);
 		Random random = new Random();
 
-		if (!this.isSheared() && this.getBreed() == 4) {
-			this.dropWoolByColorAndMarking();
-		}
+		if (!this.isSheared() && this.getBreed() == 4) this.dropWoolByColorAndMarking();
 
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get() && !ModList.get().isLoaded("tfc")) {
 			if (this.getBreed() == 1) {
@@ -1195,11 +970,9 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 				this.spawnAtLocation(new ItemStack(Items.LEATHER, 1), 0F);
 			}
 		}
-
 	}
 
 	public void dropWoolByColorAndMarking() {
-
 		if (!LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
 			DyeColor color;
 			if (this.getVariant() == 3 && !(this.getOverlayVariant() == 38)) {
@@ -1242,7 +1015,6 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 					this.spawnAtLocation(new ItemStack(LOItems.WOOL_STAPLES.get(color).get(), 1), 0F);
 				}
 			}
-
 
 			//if vanilla loot
 		} else {
@@ -1347,10 +1119,7 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 		UPWARDS_CURL,
 		CORKSCREW,
 		OUTWARDS_FANNING;
-
-		public static FarmGoat.BreedHorns hornsFromOrdinal(int ordinal) {
-			return FarmGoat.BreedHorns.values()[ordinal % FarmGoat.BreedHorns.values().length];
-		}
+		public static FarmGoat.BreedHorns hornsFromOrdinal(int ordinal) {return FarmGoat.BreedHorns.values()[ordinal % FarmGoat.BreedHorns.values().length];}
 	}
 
 }

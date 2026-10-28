@@ -17,7 +17,6 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
 
     @Override
     public void setCustomAnimations(OCow animatable, long instanceId, AnimationState<OCow> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
         CoreGeoBone left_ear = getAnimationProcessor().getBone("left_ear");
@@ -75,49 +74,24 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
 
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_cow.geo.json");
     public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_bull.geo.json");
-    public static final ResourceLocation OX = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/ox.geo.json");
-    public static final ResourceLocation MEAT_FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/large_cow.geo.json");
-    public static final ResourceLocation MEAT_MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/large_bull.geo.json");
-    public static final ResourceLocation MINI_FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/mini_cow.geo.json");
-    public static final ResourceLocation MINI_MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/mini_bull.geo.json");
-    public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/baby_o_cow.geo.json");
+    public static final ResourceLocation BABY = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/baby_o_cow.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
 
     @Override
     public ResourceLocation getModelResource(OCow object) {
         if (object.isBaby()) {
-            return BABY_MODEL;
-        } else if (object.getBreed() == 10) {
-            return OX;
-        } else if (object.isMeatBreed()) {
-            if (object.isMale()) {
-                return MEAT_MALE;
-            } else {
-                return MEAT_FEMALE;
-            }
-        } else if (object.isMiniBreed()) {
-            if (object.isMale()) {
-                return MINI_MALE;
-            } else {
-                return MINI_FEMALE;
-            }
+            return BABY;
+        } else if (object.isMale()) {
+            return MALE;
         } else {
-            if (object.isMale()) {
-                return MALE;
-            } else {
-                return FEMALE;
-            }
+            return FEMALE;
         }
     }
 
     @Override
-    public ResourceLocation getTextureResource(OCow object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getTextureResource(OCow object) {return object.getTextureLocation();}
 
     @Override
-    public ResourceLocation getAnimationResource(OCow animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OCow animatable) {return ANIMATION;}
 }
 

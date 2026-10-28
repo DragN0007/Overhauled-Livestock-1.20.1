@@ -73,6 +73,8 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue ALLOW_HOLIDAY_EVENTS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_ACCENTED_SADDLES;
+    public static final ForgeConfigSpec.BooleanValue DYNAMIC_RESOURCE_SPAWNS;
+    public static final ForgeConfigSpec.ConfigValue<Double> DYNAMIC_RESOURCE_SPAWN_PERCENT;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_SNIPPING;
     public static final ForgeConfigSpec.BooleanValue QUALITY;
@@ -302,7 +304,6 @@ public class LivestockOverhaulCommonConfig {
         BUILDER.pop();
 
         BUILDER.push("Miscellaneous");
-
         UNICORN_BREEDING = BUILDER.comment("Should Unicorns be able to breed?")
                 .define("Allow Unicorn Breeding", false);
 
@@ -317,14 +318,21 @@ public class LivestockOverhaulCommonConfig {
         ALLOW_SPECIAL_BLANKET_CRAFTING = BUILDER.comment("Should players be able to craft special event blankets? " +
                         "If this is false, servers can give out blankets as free event rewards instead (cannot be a real currency payment).")
                 .define("Allow Special Event Blanket Crafting", true);
-
         ALLOW_HOLIDAY_EVENTS = BUILDER.comment("Should holiday events take place, and should holiday items be available? " +
                         "If this is false, all holiday events are disabled and holiday items will not be available to craft.")
                 .define("Allow Holiday Events & Items", true);
-
         ALLOW_ACCENTED_SADDLES = BUILDER.comment("Should players be able to craft accented saddles with LO: Mount Additions installed?" +
                         "By default, this is set to false, since the base accented saddles are incompatible with the LO:MA tack system.")
                 .define("Allow Accented Saddles w/ Mount Additions", false);
+        BUILDER.pop();
+
+        BUILDER.push("Dynamic Resources");
+        BUILDER.comment("Dynamic Resources is a built-in way to add custom coats and patterns to applicable O-Animals via resource pack; " +
+                "No coding or datapack required. You can find more information at the [GitHub Repository](https://github.com/DragN0007/Overhauled-Livestock-1.20.1/blob/master/README.md)");
+        DYNAMIC_RESOURCE_SPAWNS = BUILDER.comment("Should coats & patterns from custom Dynamic Resource packs be able to spawn naturally?")
+                .define("Naturally-Spawning Dynamic Resources", true);
+        DYNAMIC_RESOURCE_SPAWN_PERCENT = BUILDER.comment("Chance of a Dynamic Resource coat or pattern spawning naturally. Default is 0.20 (20%).")
+                .define("Natural Dynamic Resource Coat Chance", 0.20);
         BUILDER.pop();
 
         BUILDER.push("Wagons");
