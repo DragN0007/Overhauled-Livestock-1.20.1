@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
-
     protected static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(AbstractOFish.class, EntityDataSerializers.BOOLEAN);
 
     public AbstractOFish(EntityType<? extends AbstractOFish> p_27461_, Level p_27462_) {
@@ -39,35 +38,18 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
     public float getStandingEyeHeight(Pose p_27474_, EntityDimensions p_27475_) {
         return p_27475_.height * 0.65F;
     }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D);
-    }
-
-    public boolean requiresCustomPersistence() {
-        return super.requiresCustomPersistence() || this.fromBucket();
-    }
-
-    public boolean removeWhenFarAway(double p_27492_) {
-        return !this.fromBucket() && !this.hasCustomName();
-    }
-
-    public int getMaxSpawnClusterSize() {
-        return 8;
-    }
+    public static AttributeSupplier.Builder createAttributes() {return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D);}
+    public boolean requiresCustomPersistence() {return super.requiresCustomPersistence() || this.fromBucket();}
+    public boolean removeWhenFarAway(double p_27492_) {return !this.fromBucket() && !this.hasCustomName();}
+    public int getMaxSpawnClusterSize() {return 8;}
 
     public void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FROM_BUCKET, false);
-
-    }
-    public boolean fromBucket() {
-        return this.entityData.get(FROM_BUCKET);
     }
 
-    public void setFromBucket(boolean p_27498_) {
-        this.entityData.set(FROM_BUCKET, p_27498_);
-    }
+    public boolean fromBucket() {return this.entityData.get(FROM_BUCKET);}
+    public void setFromBucket(boolean p_27498_) {this.entityData.set(FROM_BUCKET, p_27498_);}
 
     public void addAdditionalSaveData(CompoundTag p_27485_) {
         super.addAdditionalSaveData(p_27485_);
@@ -119,30 +101,13 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
         return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
     }
 
-    public void saveToBucketTag(ItemStack p_27494_) {
-        Bucketable.saveDefaultDataToBucketTag(this, p_27494_);
-    }
-
-    public void loadFromBucketTag(CompoundTag p_148708_) {
-        Bucketable.loadDefaultDataFromBucketTag(this, p_148708_);
-    }
-
-    public SoundEvent getPickupSound() {
-        return SoundEvents.BUCKET_FILL_FISH;
-    }
-
-    public boolean canRandomSwim() {
-        return true;
-    }
-
+    public void saveToBucketTag(ItemStack p_27494_) {Bucketable.saveDefaultDataToBucketTag(this, p_27494_);}
+    public void loadFromBucketTag(CompoundTag p_148708_) {Bucketable.loadDefaultDataFromBucketTag(this, p_148708_);}
+    public SoundEvent getPickupSound() {return SoundEvents.BUCKET_FILL_FISH;}
+    public boolean canRandomSwim() {return true;}
     public abstract SoundEvent getFlopSound();
-
-    public SoundEvent getSwimSound() {
-        return SoundEvents.FISH_SWIM;
-    }
-
-    public void playStepSound(BlockPos p_27482_, BlockState p_27483_) {
-    }
+    public SoundEvent getSwimSound() {return SoundEvents.FISH_SWIM;}
+    public void playStepSound(BlockPos p_27482_, BlockState p_27483_) {}
 
     static class FishMoveControl extends MoveControl {
         protected final AbstractOFish fish;
@@ -188,8 +153,6 @@ public abstract class AbstractOFish extends OWaterAnimal implements Bucketable {
             this.fish = p_27505_;
         }
 
-        public boolean canUse() {
-            return this.fish.canRandomSwim() && super.canUse();
-        }
+        public boolean canUse() {return this.fish.canRandomSwim() && super.canUse();}
     }
 }

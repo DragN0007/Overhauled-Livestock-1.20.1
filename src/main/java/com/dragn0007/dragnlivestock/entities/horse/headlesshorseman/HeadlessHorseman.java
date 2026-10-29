@@ -154,9 +154,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public void registerGoals() {

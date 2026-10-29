@@ -254,14 +254,12 @@ public class OMule extends AbstractOMount implements GeoEntity {
 
 	protected <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
-
 		if(tAnimationState.isMoving() || !this.shouldEmote) {
 			controller.forceAnimationReset();
 			controller.stop();
 			this.shouldEmote = false;
 			return PlayState.STOP;
 		}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -273,9 +271,7 @@ public class OMule extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public void playEmote(String emoteName, String loopType) {

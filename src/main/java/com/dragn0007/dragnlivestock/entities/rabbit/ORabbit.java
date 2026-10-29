@@ -317,9 +317,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	int moreCarrotTicks;
 	boolean wantsMoreFood() {return this.moreCarrotTicks == 0;}

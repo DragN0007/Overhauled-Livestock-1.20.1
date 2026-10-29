@@ -101,59 +101,40 @@ public class LivestockOverhaulCommonConfig {
 
     static {
         BUILDER.push("Spawning");
-
         BUILDER.comment("Welcome to Livestock Overhaul! You can turn off any O-Animal from spawning in this config, among other things." +
                 "\nPlease note that LO *DOES NOT CHANGE SPAWN RATES* because O-Animals simply replace existing vanilla ones. " +
                 "If you have an issue with too many O-Animals spawning, check your other mods. LO does not have it's own spawn rates, " +
                 "you'll have to change vanilla animal spawn rates to see differences in spawning.");
-
         REPLACE_SPAWN_EGG_ANIMALS = BUILDER.comment("Should vanilla animals spawned via Spawn Egg be replaced with O-Animals?" +
                         "\nNote that if this is turned on, all previously-spawned vanilla animals will be converted regardless of spawn type.")
                 .define("Replace Spawn Egg Vanilla Animals", false);
-
         SPAWN_PREVENTION_PERCENT = BUILDER.comment("Percent of O-Animals that should be removed on-spawn. " +
                         "Higher the number = more O-Animals removed. Default is 0.3 (30%)" +
                         "\nThis may help lower-end servers or computers run LO a little better if set to a higher value, since not as many animals will spawn. " +
                         "Only affects common farm animals (since they spawn most often) and does not affect anything vanilla or from other mods.")
                 .define("Spawn Rate Prevention Percent", 0.30);
 
-        REPLACE_HORSES = BUILDER.comment("Should horses be replaced by O-Horses?")
-                .define("Replace Horses", true);
-        REPLACE_MULES = BUILDER.comment("Should mules be replaced by O-Mules?")
-                .define("Replace Mules", true);
-        REPLACE_DONKEYS = BUILDER.comment("Should donkeys be replaced by O-Donkeys?")
-                .define("Replace Donkeys", true);
-        REPLACE_COWS = BUILDER.comment("Should cows be replaced by O-Cows?")
-                .define("Replace Cows", true);
-        REPLACE_CHICKENS = BUILDER.comment("Should chickens be replaced by O-Chickens?")
-                .define("Replace Chickens", true);
-        REPLACE_SHEEP = BUILDER.comment("Should sheep be replaced by O-Sheep?")
-                .define("Replace Sheep", true);
-        REPLACE_PIGS = BUILDER.comment("Should pigs be replaced by O-Pigs?")
-                .define("Replace Pigs", true);
-        REPLACE_LLAMAS = BUILDER.comment("Should llamas be replaced by O-Llamas?")
-                .define("Replace Llamas", true);
-        REPLACE_RABBITS = BUILDER.comment("Should rabbits be replaced by O-Rabbits?")
-                .define("Replace Rabbits", true);
-        REPLACE_SALMON = BUILDER.comment("Should  be replaced by O-Salmon?")
-                .define("Replace Salmon", true);
-        REPLACE_COD = BUILDER.comment("Should cod be replaced by O-Cod?")
-                .define("Replace Cod", true);
-        REPLACE_BEES = BUILDER.comment("Should bees be replaced by O-Bees?")
-                .define("Replace Bees", true);
-        REPLACE_CAMELS = BUILDER.comment("Should camels be replaced by O-Camels?")
-                .define("Replace Camels", true);
-        REPLACE_GOATS = BUILDER.comment("Should goats be replaced by O-Goats?")
-                .define("Replace Goats", true);
-        REPLACE_FROGS = BUILDER.comment("Should frogs be replaced by O-Frogs?")
-                .define("Replace Frogs", true);
-        REPLACE_UNDEAD_HORSES = BUILDER.comment("Should undead horses be replaced by O-Undead Horses?")
-                .define("Replace Undead Horses", true);
+        REPLACE_HORSES = BUILDER.define("Replace Horses with O-Horses", true);
+        REPLACE_MULES = BUILDER.define("Replace Mules with O-Mules", true);
+        REPLACE_DONKEYS = BUILDER.define("Replace Donkeys with O-Donkeys", true);
+        REPLACE_COWS = BUILDER.define("Replace Cows with O-Cows", true);
+        REPLACE_CHICKENS = BUILDER.define("Replace Chickens with O-Chickens", true);
+        REPLACE_SHEEP = BUILDER.define("Replace Sheep with O-Sheep", true);
+        REPLACE_PIGS = BUILDER.define("Replace Pigs with O-Pigs", true);
+        REPLACE_LLAMAS = BUILDER.define("Replace Llamas with O-Llamas", true);
+        REPLACE_RABBITS = BUILDER.define("Replace Rabbits with O-Rabbits", true);
+        REPLACE_SALMON = BUILDER.define("Replace Salmon with O-Salmon", true);
+        REPLACE_COD = BUILDER.define("Replace Cod with O-Cod", true);
+        REPLACE_BEES = BUILDER.define("Replace Bees with O-Bees", true);
+        REPLACE_CAMELS = BUILDER.define("Replace Camels with O-Camels", true);
+        REPLACE_GOATS = BUILDER.define("Replace Goats with O-Goats", true);
+        REPLACE_FROGS = BUILDER.define("Replace Frogs with O-Frogs", true);
+        REPLACE_UNDEAD_HORSES = BUILDER.define("Replace Undead Horses with O-Undead Horses", true);
+
         SPAWN_MOOBLOOMS = BUILDER.comment("Should Mooblooms have a chance to spawn alongside O-Cows?")
                 .define("Spawn Mooblooms", true);
         SPAWN_UNICORNS = BUILDER.comment("Should Unicorns have a chance to spawn in unique situations?")
                 .define("Spawn Unicorns", true);
-
         BUILDER.pop();
 
         BUILDER.push("Husbandry");

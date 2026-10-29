@@ -364,9 +364,7 @@ public class Caribou extends AbstractOMount implements GeoEntity, Taggable {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	@Override
 	public void playEmote(String emoteName, String loopType) {

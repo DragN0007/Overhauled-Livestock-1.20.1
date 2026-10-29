@@ -6,8 +6,6 @@ import javax.annotation.Nullable;
 
 public interface Taggable {
     boolean isTaggable();
-
     void equipTag(@Nullable SoundSource var1);
-
     boolean isTagged();
 }

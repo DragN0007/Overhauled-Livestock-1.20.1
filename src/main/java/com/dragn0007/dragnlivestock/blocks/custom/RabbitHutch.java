@@ -11,7 +11,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.stream.Stream;
 
 public class RabbitHutch extends RabbitHutchBase {
-
     public static final VoxelShape NORTH = Stream.of(
             box(0, 15, 0, 16, 16, 16),
             box(1, 0, 0, 15, 16, 2),
@@ -68,5 +67,4 @@ public class RabbitHutch extends RabbitHutchBase {
         super(NORTH, EAST, SOUTH, WEST, Properties.copy(Blocks.OAK_PLANKS).noOcclusion().pushReaction(PushReaction.IGNORE), SoundEvents.CHERRY_WOOD_FENCE_GATE_CLOSE, SoundEvents.CHERRY_WOOD_FENCE_GATE_OPEN);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
-
 }

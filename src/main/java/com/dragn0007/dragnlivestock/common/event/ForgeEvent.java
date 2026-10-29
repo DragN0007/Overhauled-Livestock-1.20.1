@@ -42,7 +42,7 @@ public class ForgeEvent {
     @SubscribeEvent
     public static void onResourceReload(AddReloadListenerEvent event) {
         event.addListener((ResourceManagerReloadListener) resourceManager -> {
-            LivestockOverhaul.LOGGER.info("Sullivan King2 :))))))");
+            LivestockOverhaul.LOGGER.info("placeholder");
         });
     }
 
@@ -59,16 +59,12 @@ public class ForgeEvent {
                 );
 
                 if (!currentlyLeading.isEmpty()) {
-                    for (Mob sourceMob : currentlyLeading) {
-                        mob.setLeashedTo(sourceMob, true);
-                    }
+                    for (Mob sourceMob : currentlyLeading) {mob.setLeashedTo(sourceMob, true);}
                 } else {
                     mob.setLeashedTo(player, true);
                 }
 
-                if (!player.getAbilities().instabuild) {
-                    stack.shrink(1);
-                }
+                if (!player.getAbilities().instabuild) {stack.shrink(1);}
             }
 
             if (mob.isLeashed() && !(mob.getLeashHolder() instanceof Player) && stack.is(Items.SHEARS)) {
@@ -109,7 +105,6 @@ public class ForgeEvent {
 
     @SubscribeEvent
     public static void onUseMagnifyingGlass(PlayerInteractEvent.EntityInteract event) {
-
         if (event.getTarget() instanceof LivingEntity entity) {
             Player player = event.getEntity();
             ItemStack stack = event.getItemStack();

@@ -17,7 +17,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.stream.Stream;
 
 public class RawGameJerky extends JerkyBase {
-
     public static final VoxelShape NORTH = Stream.of(
             Block.box(3, 0, 14, 13, 14, 16)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
@@ -44,9 +43,7 @@ public class RawGameJerky extends JerkyBase {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
-
         if (!level.isAreaLoaded(pos, 1)) return;
-
         int i = this.getDryTime(state);
 
         if (i <= this.getMaxDryTime()) {
@@ -65,7 +62,5 @@ public class RawGameJerky extends JerkyBase {
                     .setValue(this.getDryTimeProperty(), 0);
             level.setBlockAndUpdate(pos, state1);
         }
-
     }
-
 }

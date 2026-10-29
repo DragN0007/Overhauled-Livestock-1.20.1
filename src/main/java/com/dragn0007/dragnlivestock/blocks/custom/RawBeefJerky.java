@@ -43,9 +43,7 @@ public class RawBeefJerky extends JerkyBase {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
-
         if (!level.isAreaLoaded(pos, 1)) return;
-
         int i = this.getDryTime(state);
 
         if (i <= this.getMaxDryTime()) {
@@ -64,7 +62,5 @@ public class RawBeefJerky extends JerkyBase {
                     .setValue(this.getDryTimeProperty(), 0);
             level.setBlockAndUpdate(pos, state1);
         }
-
     }
-
 }

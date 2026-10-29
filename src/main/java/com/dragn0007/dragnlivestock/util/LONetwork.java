@@ -27,19 +27,9 @@ public class LONetwork {
 
     public static class HandleHorseSpeedRequest {
         private final int speedMod;
-
-        public HandleHorseSpeedRequest(int speedMod) {
-            this.speedMod = speedMod;
-        }
-
-        public static void encode(HandleHorseSpeedRequest msg, FriendlyByteBuf buffer) {
-            buffer.writeInt(msg.speedMod);
-        }
-
-        public static HandleHorseSpeedRequest decode(FriendlyByteBuf buffer) {
-            return new HandleHorseSpeedRequest(buffer.readInt());
-        }
-
+        public HandleHorseSpeedRequest(int speedMod) {this.speedMod = speedMod;}
+        public static void encode(HandleHorseSpeedRequest msg, FriendlyByteBuf buffer) {buffer.writeInt(msg.speedMod);}
+        public static HandleHorseSpeedRequest decode(FriendlyByteBuf buffer) {return new HandleHorseSpeedRequest(buffer.readInt());}
         public static void handle(HandleHorseSpeedRequest msg, Supplier<NetworkEvent.Context> context) {
             NetworkEvent.Context ctx = context.get();
             ctx.enqueueWork(() -> {
@@ -130,28 +120,14 @@ public class LONetwork {
 
     public static class ToggleTillerPowerRequest {
         private final int id;
-
-        public ToggleTillerPowerRequest(int id) {
-            this.id = id;
-        }
-
-        public static void encode(ToggleTillerPowerRequest msg, FriendlyByteBuf buffer) {
-            buffer.writeInt(msg.id);
-        }
-
-        public static ToggleTillerPowerRequest decode(FriendlyByteBuf buffer) {
-            return new ToggleTillerPowerRequest(buffer.readInt());
-        }
-
+        public ToggleTillerPowerRequest(int id) {this.id = id;}
+        public static void encode(ToggleTillerPowerRequest msg, FriendlyByteBuf buffer) {buffer.writeInt(msg.id);}
+        public static ToggleTillerPowerRequest decode(FriendlyByteBuf buffer) {return new ToggleTillerPowerRequest(buffer.readInt());}
         public static void handle(ToggleTillerPowerRequest msg, Supplier<NetworkEvent.Context> context) {
             ServerPlayer player = context.get().getSender();
             if(player != null) {
-                if(player.level().getEntity(msg.id) instanceof Plow plow) {
-                    plow.cycleMode();
-                }
-                if(player.level().getEntity(msg.id) instanceof Mower mower) {
-                    mower.cycleMode();
-                }
+                if(player.level().getEntity(msg.id) instanceof Plow plow) {plow.cycleMode();}
+                if(player.level().getEntity(msg.id) instanceof Mower mower) {mower.cycleMode();}
             }
         }
     }
@@ -249,5 +225,4 @@ public class LONetwork {
             INSTANCE.registerMessage(5, TextureRequest.class, TextureRequest::encode, TextureRequest::decode, TextureRequest::handle);
         });
     }
-
 }

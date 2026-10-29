@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 public class LOTags {
 
     public static class Items {
-
         public static final TagKey<Item> O_BEE_EATS = tag("o_bee_eats");
         public static final TagKey<Item> O_CAMEL_EATS = tag("o_camel_eats");
         public static final TagKey<Item> CARIBOU_EATS = tag("caribou_eats");
@@ -69,8 +68,6 @@ public class LOTags {
         public static final TagKey<Item> EGG = forgeTag("egg");
         public static final TagKey<Item> VEGETABLES = forgeTag("vegetables");
 
-        public static final TagKey<Item> SWEM_CANTAZARITE_POTION = forgeTag("swem_cantazarite_potion");
-
         public static final TagKey<Item> SADDLE = tag("saddle");
         public static final TagKey<Item> DECOR_FOR_O_MOUNTS = tag("decor_for_o_mounts");
         public static final TagKey<Item> ARMOR_SLOT_OTHER = tag("armor_slot_other");
@@ -96,12 +93,8 @@ public class LOTags {
         public static final TagKey<Item> GOLD_METALS = tag("gold_metals");
         public static final TagKey<Item> GOLD_METAL_NUGGETS = tag("gold_metal_nuggets");
 
-        public static TagKey<Item> forgeTag (String name) {
-            return ItemTags.create(new ResourceLocation("forge", name));
-        }
-        public static TagKey<Item> tag (String name) {
-            return ItemTags.create(new ResourceLocation(LivestockOverhaul.MODID, name));
-        }
+        public static TagKey<Item> forgeTag (String name) {return ItemTags.create(new ResourceLocation("forge", name));}
+        public static TagKey<Item> tag (String name) {return ItemTags.create(new ResourceLocation(LivestockOverhaul.MODID, name));}
     }
 
     public static class Entity_Types {
@@ -122,12 +115,8 @@ public class LOTags {
         public static final TagKey<EntityType<?>> LUMBER_WAGON = tag("lumber_wagon");
         public static final TagKey<EntityType<?>> MINING_CART = tag("mining_cart");
 
-        public static TagKey<EntityType<?>> forgeTag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", name));
-        }
-        public static TagKey<EntityType<?>> tag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(LivestockOverhaul.MODID, name));
-        }
+        public static TagKey<EntityType<?>> forgeTag(String name) {return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", name));}
+        public static TagKey<EntityType<?>> tag(String name) {return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(LivestockOverhaul.MODID, name));}
     }
 
     public static class Blocks {
@@ -139,9 +128,7 @@ public class LOTags {
         public static final TagKey<Block> DIRT = forgeTag("dirt");
         public static final TagKey<Block> RABBIT_HUTCHES = forgeTag("rabbit_hutches");
 
-        public static TagKey<Block> forgeTag (String name) {
-            return BlockTags.create(new ResourceLocation("forge", name));
-        }
+        public static TagKey<Block> forgeTag (String name) {return BlockTags.create(new ResourceLocation("forge", name));}
     }
 
 }

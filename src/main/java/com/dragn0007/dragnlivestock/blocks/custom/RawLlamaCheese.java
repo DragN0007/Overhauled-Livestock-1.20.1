@@ -15,9 +15,7 @@ public class RawLlamaCheese extends CheeseBase {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
-
         if (!level.isAreaLoaded(pos, 1)) return;
-
         int i = this.getAgeTime(state);
 
         if (i <= this.getMaxAgeTime()) {
@@ -28,7 +26,5 @@ public class RawLlamaCheese extends CheeseBase {
         if (i >= this.getMaxAgeTime()) {
             level.setBlockAndUpdate(pos, LOBlocks.LLAMA_CHEESE.get().defaultBlockState());
         }
-
     }
-
 }

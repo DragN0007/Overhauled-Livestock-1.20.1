@@ -12,7 +12,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.stream.Stream;
 
 public class DriedJerky extends JerkyBase {
-
     public static final VoxelShape NORTH = Stream.of(
             Block.box(3, 0, 14, 13, 14, 16)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();

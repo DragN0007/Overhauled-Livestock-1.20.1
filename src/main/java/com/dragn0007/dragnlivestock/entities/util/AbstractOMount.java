@@ -60,39 +60,18 @@ import java.time.Month;
 import java.util.UUID;
 
 public abstract class AbstractOMount extends AbstractChestedHorse {
-
-    public SimpleContainer getInventory() {
-        return inventory;
-    }
-
+    public SimpleContainer getInventory() {return inventory;}
     public net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
-
-    public static final float MAX_HEALTH = generateMaxHealth((p_272504_) -> {
-        return p_272504_ - 1;
-    });
-
+    public static final float MAX_HEALTH = generateMaxHealth((p_272504_) -> p_272504_ - 1);
     public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_HORSE_EATS);
-    public boolean isFood(ItemStack stack) {
-        return FOOD_ITEMS.test(stack);
-    }
+    public boolean isFood(ItemStack stack) {return FOOD_ITEMS.test(stack);}
 
     @Override
-    public int getMaxHeadXRot() {
-        return 40;
-    }
-
+    public int getMaxHeadXRot() {return 40;}
     @Override
-    public int getMaxHeadYRot() {
-        return 60;
-    }
-
-    public int getTemper() {
-        return this.temper;
-    }
-
-    public void setTemper(int temper) {
-            this.temper = temper;
-    }
+    public int getMaxHeadYRot() {return 60;}
+    public int getTemper() {return this.temper;}
+    public void setTemper(int temper) {this.temper = temper;}
 
     public int modifyTemper(int p_30654_) {
         int i = Mth.clamp(this.getTemper() + p_30654_, 0, this.getMaxTemper());
@@ -100,9 +79,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return i;
     }
 
-    public boolean isWearingHarness() {
-        return this.isWearingPullingHarness() || this.isWearingRodeoHarness();
-    }
+    public boolean isWearingHarness() {return this.isWearingPullingHarness() || this.isWearingRodeoHarness();}
 
     public boolean isWearingRodeoHarness() {
         return (this.getItemBySlot(EquipmentSlot.CHEST).is(LOItems.RODEO_HARNESS.get()) && !this.getItemBySlot(EquipmentSlot.CHEST).isEmpty());
@@ -117,13 +94,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-    }
+    protected void registerGoals() {super.registerGoals();}
 
     public void tickRidden(Player player, Vec3 vec3) {
         Vec2 vec2 = this.getRiddenRotation(player);
-
         //bringing back the old horse head turning feature, because who thought getting rid of it was a good idea
 
         float degrees = Mth.wrapDegrees(vec2.y - this.getYRot());
@@ -150,16 +124,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         }
 
         if (this.isControlledByLocalInstance()) {
-            if (vec3.z <= 0.0D) {
-                this.gallopSoundCounter = 0;
-            }
-
+            if (vec3.z <= 0.0D) {this.gallopSoundCounter = 0;}
             if (this.onGround()) {
                 this.setIsJumping(false);
-                if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
-                    this.executeRidersJump(this.playerJumpPendingScale, vec3);
-                }
-
+                if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {this.executeRidersJump(this.playerJumpPendingScale, vec3);}
                 this.playerJumpPendingScale = 0.0F;
             }
         }
@@ -171,10 +139,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         } else {
             float strafe = player.xxa * 0.5F;
             float forward = player.zza;
-            if (forward <= 0.0F) {
-                forward *= 0.25F;
-            }
-
+            if (forward <= 0.0F) {forward *= 0.25F;}
             return new Vec3((double)strafe, 0.0D, (double)forward);
         }
     }
@@ -193,9 +158,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public boolean shouldEmote;
 
-    public boolean isGroundTied() {
-        return this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get();
-    }
+    public boolean isGroundTied() {return this.isSaddled() && !this.isVehicle() && LivestockOverhaulCommonConfig.GROUND_TIE.get();}
 
     public boolean isOnSand() {
         BlockState blockState = this.level().getBlockState(this.blockPosition().below());
@@ -212,13 +175,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.addEffect(slownessEffectInstance);
     }
 
-    public boolean hasSlownessEffect() {
-        return this.hasEffect(MobEffects.MOVEMENT_SLOWDOWN);
-    }
-
-    public void removeSlownessEffect() {
-        this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-    }
+    public boolean hasSlownessEffect() {return this.hasEffect(MobEffects.MOVEMENT_SLOWDOWN);}
+    public void removeSlownessEffect() {this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);}
 
     public AbstractOMount(EntityType<? extends AbstractOMount> entityType, Level level) {
         super(entityType, level);
@@ -228,9 +186,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
     public void openInventory(Player player) {
         if(player instanceof ServerPlayer serverPlayer && this.isTamed() && ((this.isOwnedBy(player) && this.isLocked()) || !this.isLocked())) {
-            NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) -> {
-                return new OMountMenu(containerId, inventory, this.inventory, this);
-            }, this.getDisplayName()), (data) -> {
+            NetworkHooks.openScreen(serverPlayer, new SimpleMenuProvider((containerId, inventory, p) ->
+                    new OMountMenu(containerId, inventory, this.inventory, this), this.getDisplayName()), (data) -> {
                 data.writeInt(this.getInventorySize());
                 data.writeInt(this.getId());
             });
@@ -263,40 +220,21 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
-    public boolean canParent() {
-        return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.isInLove();
-    }
+    public boolean canParent() {return !this.isVehicle() && !this.isPassenger() && this.isTamed() && !this.isBaby() && this.isInLove();}
 
-    public boolean isOwnedBy(LivingEntity entity) {
-        return entity == this.getOwner();
-    }
+    public boolean isOwnedBy(LivingEntity entity) {return entity == this.getOwner();}
 
     @Override
-    public boolean isSaddleable() {
-        return this.isAlive() && !this.isBaby() && this.isTamed();
-    }
+    public boolean isSaddleable() {return this.isAlive() && !this.isBaby() && this.isTamed();}
 
     @Override
-    public boolean isSaddled() {
-        return !this.entityData.get(SADDLE_ITEM).isEmpty();
-    }
-
-    public boolean isSaddle(ItemStack itemStack) {
-        return itemStack.getItem() instanceof SaddleItem;
-    }
+    public boolean isSaddled() {return !this.entityData.get(SADDLE_ITEM).isEmpty();}
+    public boolean isSaddle(ItemStack itemStack) {return itemStack.getItem() instanceof SaddleItem;}
+    public void setSaddleItem(ItemStack itemStack) {this.entityData.set(SADDLE_ITEM, itemStack);}
+    public ItemStack getSaddleItem() {return this.entityData.get(SADDLE_ITEM);}
 
     @Override
-    public void equipSaddle(@Nullable SoundSource soundSource) {
-        // NOTE(EVNGLX): Handled in the interact method instead
-    }
-
-    public void setSaddleItem(ItemStack itemStack) {
-        this.entityData.set(SADDLE_ITEM, itemStack);
-    }
-
-    public ItemStack getSaddleItem() {
-        return this.entityData.get(SADDLE_ITEM);
-    }
+    public void equipSaddle(@Nullable SoundSource soundSource) {}
 
     @Override
     public boolean isArmor(ItemStack itemStack) {
@@ -304,37 +242,22 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
-    public double getPassengersRidingOffset() {
-        return super.getPassengersRidingOffset() - 0.25D;
-    }
+    public double getPassengersRidingOffset() {return super.getPassengersRidingOffset() - 0.25D;}
 
     public enum Gender {
         FEMALE,
         MALE
     }
-    public boolean isFemale() {
-        return this.getGender() == 0;
-    }
-    public boolean isMale() {
-        return this.getGender() == 1;
-    }
-
+    public boolean isFemale() {return this.getGender() == 0;}
+    public boolean isMale() {return this.getGender() == 1;}
     public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-    public int getGender() {
-        return this.entityData.get(GENDER);
-    }
-    public void setGender(int gender) {
-        this.entityData.set(GENDER, gender);
-    }
+    public int getGender() {return this.entityData.get(GENDER);}
+    public void setGender(int gender) {this.entityData.set(GENDER, gender);}
 
-    public boolean hasGrowableHair() {
-        return false;
-    }
+    public boolean hasGrowableHair() {return false;}
 
     @Override
-    protected boolean canAddPassenger(Entity p_20354_) {
-        return super.canAddPassenger(p_20354_);
-    }
+    protected boolean canAddPassenger(Entity p_20354_) {return super.canAddPassenger(p_20354_);}
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -682,28 +605,19 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         if (!this.level().isClientSide) {
             player.setYRot(this.getYRot());
             player.setXRot(this.getXRot());
-            if ((this.isLocked() && this.isOwnedBy(player)) || !this.isLocked() || !this.isTamed()) {
-                player.startRiding(this);
-            }
+            if ((this.isLocked() && this.isOwnedBy(player)) || !this.isLocked() || !this.isTamed()) {player.startRiding(this);}
         }
-
     }
 
-    @Override
     public void finalizeSpawnChildFromBreeding(ServerLevel pLevel, Animal pAnimal, @org.jetbrains.annotations.Nullable AgeableMob pBaby) {
         super.finalizeSpawnChildFromBreeding(pLevel, pAnimal, pBaby);
         if (pAnimal instanceof AbstractOMount partner) {
             if (LivestockOverhaulCommonConfig.GENDERS_AFFECT_BREEDING.get()) {
-                if (this.isMale()) {
-                    this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
-                } else {
-                    this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-                }
-                if (partner.isMale()) {
-                    partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
-                } else {
-                    partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
-                }
+                if (this.isMale()) this.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+                else this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
+
+                if (partner.isMale()) partner.setAge(LivestockOverhaulCommonConfig.MALE_COOLDOWN.get());
+                else partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
             } else {
                 this.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
                 partner.setAge(LivestockOverhaulCommonConfig.FEMALE_COOLDOWN.get());
@@ -712,24 +626,16 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     @Override
-    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {
-        super.spawnChildFromBreeding(pLevel, pMate);
-    }
+    public void spawnChildFromBreeding(ServerLevel pLevel, Animal pMate) {super.spawnChildFromBreeding(pLevel, pMate);}
 
     @Override
-    public boolean canWearArmor() {
-        return true;
-    }
+    public boolean canWearArmor() {return true;}
 
     protected static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Boolean> LOCKED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
-    public boolean isLocked() {
-        return this.entityData.get(LOCKED);
-    }
-    public void setLocked(boolean locked) {
-        this.entityData.set(LOCKED, locked);
-    }
+    public boolean isLocked() {return this.entityData.get(LOCKED);}
+    public void setLocked(boolean locked) {this.entityData.set(LOCKED, locked);}
 
     @Override
     public void defineSynchedData() {
@@ -741,31 +647,16 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         this.entityData.define(SNIPPED, false);
     }
 
-    public ItemStack getDecorItem() {
-        return this.entityData.get(DECOR_ITEM);
-    }
-
-    public void setDecorItem(ItemStack decorItem) {
-        this.entityData.set(DECOR_ITEM, decorItem);
-    }
+    public ItemStack getDecorItem() {return this.entityData.get(DECOR_ITEM);}
+    public void setDecorItem(ItemStack decorItem) {this.entityData.set(DECOR_ITEM, decorItem);}
 
     @Override
     public void addAdditionalSaveData(CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
-        if(!this.getSaddleItem().isEmpty()) {
-            compoundTag.put("SaddleItem", this.getSaddleItem().save(new CompoundTag()));
-        }
-
-        if(!this.getArmor().isEmpty()) {
-            compoundTag.put("ArmorItem", this.getArmor().save(new CompoundTag()));
-        }
-
-        if(!this.getDecorItem().isEmpty()) {
-            compoundTag.put("DecorItem", this.getDecorItem().save(new CompoundTag()));
-        }
-
+        if(!this.getSaddleItem().isEmpty()) {compoundTag.put("SaddleItem", this.getSaddleItem().save(new CompoundTag()));}
+        if(!this.getArmor().isEmpty()) {compoundTag.put("ArmorItem", this.getArmor().save(new CompoundTag()));}
+        if(!this.getDecorItem().isEmpty()) {compoundTag.put("DecorItem", this.getDecorItem().save(new CompoundTag()));}
         compoundTag.putBoolean("Locked", this.isLocked());
-
         compoundTag.putBoolean("IsSnipped", this.isSnipped());
 
         if (this.hasChest()) {
@@ -806,13 +697,8 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             this.inventory.setItem(this.decorSlot(), decorItem);
         }
 
-        if (compoundTag.contains("Locked")) {
-            this.setLocked(compoundTag.getBoolean("Locked"));
-        }
-
-        if (compoundTag.contains("IsSnipped")) {
-            this.setSnipped(compoundTag.getBoolean("IsSnipped"));
-        }
+        if (compoundTag.contains("Locked")) {this.setLocked(compoundTag.getBoolean("Locked"));}
+        if (compoundTag.contains("IsSnipped")) {this.setSnipped(compoundTag.getBoolean("IsSnipped"));}
 
         if (this.hasChest()) {
             ListTag listtag = compoundTag.getList("Items", 10);
@@ -833,19 +719,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     @Override
     public void playGallopSound(SoundType soundType) {
         super.playGallopSound(soundType);
-        if(this.random.nextInt(10) == 0) {
-            this.playSound(SoundEvents.HORSE_BREATHE, soundType.getVolume() * 0.6f, soundType.getPitch());
-        }
-
+        if(this.random.nextInt(10) == 0) {this.playSound(SoundEvents.HORSE_BREATHE, soundType.getVolume() * 0.6f, soundType.getPitch());}
         ItemStack itemStack = this.inventory.getItem(1);
-        if(this.isArmor(itemStack)) {
-            itemStack.onHorseArmorTick(this.level(), this);
-        }
+        if(this.isArmor(itemStack)) {itemStack.onHorseArmorTick(this.level(), this);}
     }
 
-    public ItemStack getArmor() {
-        return this.getItemBySlot(EquipmentSlot.CHEST);
-    }
+    public ItemStack getArmor() {return this.getItemBySlot(EquipmentSlot.CHEST);}
 
     public void setArmor(ItemStack itemStack) {
         this.setItemSlot(EquipmentSlot.CHEST, itemStack);
@@ -887,42 +766,25 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     private boolean falling = false;
-    public boolean isFalling() {
-        return this.falling;
-    }
-    public void setFalling(boolean fall) {
-        this.falling = fall;
-    }
+    public boolean isFalling() {return this.falling;}
+    public void setFalling(boolean fall) {this.falling = fall;}
 
     @Override
     public void tick() {
         super.tick();
-
-        if (this.getDeltaMovement().y < -0.5) { //about 1.5 blocks
-            this.setFalling(true);
-        }
+        if (this.getDeltaMovement().y < -0.5) {this.setFalling(true);} //about 1.5 blocks
     }
 
-    public int saddleSlot() {
-        return 0;
-    }
-
-    public int armorSlot() {
-        return 1;
-    }
-
-    public int decorSlot() {
-        return 2;
-    }
+    public int saddleSlot() {return 0;}
+    public int armorSlot() {return 1;}
+    public int decorSlot() {return 2;}
 
     @Override
     public void containerChanged(Container container) {
         ItemStack prevArmor = this.getArmor();
         super.containerChanged(container);
         ItemStack newArmor = this.getArmor();
-        if(this.tickCount > 20 && this.isArmor(newArmor) && prevArmor != newArmor) {
-            this.playSound(SoundEvents.HORSE_ARMOR, 0.5f, 1f);
-        }
+        if(this.tickCount > 20 && this.isArmor(newArmor) && prevArmor != newArmor) {this.playSound(SoundEvents.HORSE_ARMOR, 0.5f, 1f);}
     }
 
     @Override
@@ -933,24 +795,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         return super.getDismountLocationForPassenger(livingEntity);
     }
 
-    public boolean isOx(Entity entity) {
-        return entity.getType() == EntityTypes.O_COW_ENTITY.get();
-    }
-    public boolean isHorse(Entity entity) {
-        return entity.getType() == EntityTypes.O_HORSE_ENTITY.get();
-    }
-    public boolean isUnicorn(Entity entity) {
-        return entity.getType() == EntityTypes.UNICORN_ENTITY.get();
-    }
-    public boolean isMule(Entity entity) {
-        return entity.getType() == EntityTypes.O_MULE_ENTITY.get();
-    }
-    public boolean isDonkey(Entity entity) {
-        return entity.getType() == EntityTypes.O_DONKEY_ENTITY.get();
-    }
-    public boolean isCamel(Entity entity) {
-        return entity.getType() == EntityTypes.O_CAMEL_ENTITY.get();
-    }
+    public boolean isHorse(Entity entity) {return entity.getType() == EntityTypes.O_HORSE_ENTITY.get();}
+    public boolean isUnicorn(Entity entity) {return entity.getType() == EntityTypes.UNICORN_ENTITY.get();}
+    public boolean isMule(Entity entity) {return entity.getType() == EntityTypes.O_MULE_ENTITY.get();}
+    public boolean isCamel(Entity entity) {return entity.getType() == EntityTypes.O_CAMEL_ENTITY.get();}
     public boolean isEquine(Entity entity) {
         return entity.getType() == EntityTypes.O_HORSE_ENTITY.get() ||
                 entity.getType() == EntityTypes.O_DONKEY_ENTITY.get() ||
@@ -1033,77 +881,36 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     }
 
     public static final EntityDataAccessor<Boolean> SNIPPED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
-    public boolean isSnipped() {
-        return this.entityData.get(SNIPPED);
-    }
-    public void setSnipped(boolean snipped) {
-        this.entityData.set(SNIPPED, snipped);
-    }
+    public boolean isSnipped() {return this.entityData.get(SNIPPED);}
+    public void setSnipped(boolean snipped) {this.entityData.set(SNIPPED, snipped);}
 
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-    public int getVariant() {
-        return this.entityData.get(VARIANT);
-    }
-    public void setVariant(int variant) {
-        this.entityData.set(VARIANT, variant);
-//        this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
-    }
+    public int getVariant() {return this.entityData.get(VARIANT);}
+    public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
     public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.STRING);
-    public String getTextureResource() {
-        return this.entityData.get(VARIANT_TEXTURE);
-    }
-    public void setVariantTexture(String variant) {
-        this.entityData.set(VARIANT_TEXTURE, variant);
-    }
+    public String getTextureResource() {return this.entityData.get(VARIANT_TEXTURE);}
+    public void setVariantTexture(String variant) {this.entityData.set(VARIANT_TEXTURE, variant);}
 
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-    public int getOverlayVariant() {
-        return this.entityData.get(OVERLAY);
-    }
-    public void setOverlayVariant(int variant) {
-        this.entityData.set(OVERLAY, variant);
-    }
+    public int getOverlayVariant() {return this.entityData.get(OVERLAY);}
+    public void setOverlayVariant(int variant) {this.entityData.set(OVERLAY, variant);}
     public static final EntityDataAccessor<String> OVERLAY_TEXTURE = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.STRING);
-    public String getOverlayLocation() {
-        return this.entityData.get(OVERLAY_TEXTURE);
-    }
-    public void setOverlayVariantTexture(String variant) {
-        this.entityData.set(OVERLAY_TEXTURE, variant);
-    }
+    public String getOverlayLocation() {return this.entityData.get(OVERLAY_TEXTURE);}
+    public void setOverlayVariantTexture(String variant) {this.entityData.set(OVERLAY_TEXTURE, variant);}
 
     public static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-//    public ResourceLocation getModelResource() {
-//        return HorseBreed.breedFromOrdinal(getBreed()).resourceLocation;
-//    }
-    public int getBreed() {
-        return this.entityData.get(BREED);
-    }
-    public void setBreed(int breed) {
-        this.entityData.set(BREED, breed);
-    }
+    public int getBreed() {return this.entityData.get(BREED);}
+    public void setBreed(int breed) {this.entityData.set(BREED, breed);}
 
     public static final EntityDataAccessor<ItemStack> FLOWER_ITEM = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.ITEM_STACK);
-    public ItemStack getFlowerItem() {
-        return this.entityData.get(FLOWER_ITEM);
-    }
-    public void setFlowerItem(ItemStack decorItem) {
-        this.entityData.set(FLOWER_ITEM, decorItem);
-    }
+    public ItemStack getFlowerItem() {return this.entityData.get(FLOWER_ITEM);}
+    public void setFlowerItem(ItemStack decorItem) {this.entityData.set(FLOWER_ITEM, decorItem);}
 
     public static final EntityDataAccessor<Integer> FLOWER_TYPE = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.INT);
-    public int getFlowerType() {
-        return this.entityData.get(FLOWER_TYPE);
-    }
-    public void setFlowerType(int decompVariant) {
-        this.entityData.set(FLOWER_TYPE, decompVariant);
-    }
+    public int getFlowerType() {return this.entityData.get(FLOWER_TYPE);}
+    public void setFlowerType(int decompVariant) {this.entityData.set(FLOWER_TYPE, decompVariant);}
 
     public static final EntityDataAccessor<Boolean> BRANDED = SynchedEntityData.defineId(AbstractOMount.class, EntityDataSerializers.BOOLEAN);
-    public boolean isBranded() {
-        return this.entityData.get(BRANDED);
-    }
-    public void setIsBranded(boolean canBeBranded) {
-        this.entityData.set(BRANDED, canBeBranded);
-    }
-
+    public boolean isBranded() {return this.entityData.get(BRANDED);}
+    public void setIsBranded(boolean canBeBranded) {this.entityData.set(BRANDED, canBeBranded);}
 }

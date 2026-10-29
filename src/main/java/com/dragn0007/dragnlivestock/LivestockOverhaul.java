@@ -35,7 +35,6 @@ import java.time.Month;
 
 @Mod(LivestockOverhaul.MODID)
 public class LivestockOverhaul {
-
     public static final String MODID = "dragnlivestock";
     public static final Logger LOGGER = LogUtils.getLogger();
 

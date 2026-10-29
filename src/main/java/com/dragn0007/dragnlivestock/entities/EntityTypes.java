@@ -33,7 +33,6 @@ import net.minecraftforge.registries.RegistryObject;
 import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
 public class EntityTypes {
-
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
 
     public static final RegistryObject<EntityType<OHorse>> O_HORSE_ENTITY = ENTITY_TYPES.register("o_horse",

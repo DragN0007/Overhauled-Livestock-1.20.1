@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 
 public class FishTrapBlock extends FishTrapBlockEntity implements SimpleWaterloggedBlock {
-
     public FishTrapBlock(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }

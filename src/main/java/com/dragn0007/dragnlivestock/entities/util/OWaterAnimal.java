@@ -14,25 +14,11 @@ public abstract class OWaterAnimal extends AgeableMob {
       this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
    }
 
-   public boolean canBreatheUnderwater() {
-      return true;
-   }
-
-   public MobType getMobType() {
-      return MobType.WATER;
-   }
-
-   public boolean checkSpawnObstruction(LevelReader p_30348_) {
-      return p_30348_.isUnobstructed(this);
-   }
-
-   public int getAmbientSoundInterval() {
-      return 120;
-   }
-
-   public int getExperienceReward() {
-      return 1 + this.level().random.nextInt(3);
-   }
+   public boolean canBreatheUnderwater() {return true;}
+   public MobType getMobType() {return MobType.WATER;}
+   public boolean checkSpawnObstruction(LevelReader p_30348_) {return p_30348_.isUnobstructed(this);}
+   public int getAmbientSoundInterval() {return 120;}
+   public int getExperienceReward() {return 1 + this.level().random.nextInt(3);}
 
    public void handleAirSupply(int p_30344_) {
       if (this.isAlive() && !this.isInWaterOrBubble()) {
@@ -44,7 +30,6 @@ public abstract class OWaterAnimal extends AgeableMob {
       } else {
          this.setAirSupply(300);
       }
-
    }
 
    public void baseTick() {
@@ -53,11 +38,6 @@ public abstract class OWaterAnimal extends AgeableMob {
       this.handleAirSupply(i);
    }
 
-   public boolean isPushedByFluid() {
-      return false;
-   }
-
-   public boolean canBeLeashed(Player p_30346_) {
-      return false;
-   }
+   public boolean isPushedByFluid() {return false;}
+   public boolean canBeLeashed(Player p_30346_) {return false;}
 }

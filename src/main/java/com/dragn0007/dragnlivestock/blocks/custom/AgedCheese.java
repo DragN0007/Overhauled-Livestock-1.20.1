@@ -10,7 +10,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class AgedCheese extends Block {
-
     public VoxelShape getShape(BlockState state, BlockGetter blockReader, BlockPos pos, CollisionContext context) {
         return Block.box(2, 0, 2, 14, 6, 14);
     }
@@ -20,7 +19,5 @@ public class AgedCheese extends Block {
         return super.getCollisionShape(p_60572_, p_60573_, p_60574_, p_60575_);
     }
 
-    public AgedCheese() {
-        super(Properties.copy(Blocks.OAK_PLANKS).strength(0.1F).noOcclusion().pushReaction(PushReaction.IGNORE));
-    }
+    public AgedCheese() {super(Properties.copy(Blocks.OAK_PLANKS).strength(0.1F).noOcclusion().pushReaction(PushReaction.IGNORE));}
 }

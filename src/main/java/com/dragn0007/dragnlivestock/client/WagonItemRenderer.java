@@ -23,13 +23,9 @@ public class WagonItemRenderer extends BlockEntityWithoutLevelRenderer {
 
     @Override
     public void renderByItem(ItemStack stack, ItemDisplayContext context, PoseStack pose, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        if(entity == null)
-            entity = type.create(Minecraft.getInstance().level);
-
+        if(entity == null) entity = type.create(Minecraft.getInstance().level);
         CompoundTag nbt = stack.getTag();
         entity.setWoodType(nbt != null && nbt.contains("type") ? Type.values()[nbt.getInt("type")] : Type.OAK);
-
         Minecraft.getInstance().getEntityRenderDispatcher().render(entity, 0, 0, 0, 0, 0, pose, buffer, packedLight);
     }
-
 }

@@ -84,10 +84,8 @@ public abstract class AbstractWagonMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
             }
 
-            if(item.isEmpty())
-                slot.setByPlayer(ItemStack.EMPTY);
-            else
-                slot.setChanged();
+            if(item.isEmpty()) slot.setByPlayer(ItemStack.EMPTY);
+            else slot.setChanged();
         }
 
         return copy;

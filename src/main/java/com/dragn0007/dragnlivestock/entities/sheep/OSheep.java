@@ -538,9 +538,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		this.setBreed(random.nextInt(SheepBreed.Breed.values().length));
 		this.setGender(random.nextInt(Gender.values().length));
 
-		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-			this.setQuality(random.nextInt(30));
-		}
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) this.setQuality(random.nextInt(30));
 
 		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
 			this.setColorByBreed();

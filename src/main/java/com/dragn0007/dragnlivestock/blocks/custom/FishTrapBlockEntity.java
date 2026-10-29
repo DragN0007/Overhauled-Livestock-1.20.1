@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class FishTrapBlockEntity extends BaseContainerBlockEntity implements MenuProvider {
-
     public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
 
     public FishTrapBlockEntity(BlockEntityType<?> entityType, BlockPos blockPos, BlockState state) {

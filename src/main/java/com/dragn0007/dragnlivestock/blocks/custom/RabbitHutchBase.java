@@ -28,7 +28,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.stream.Stream;
 
 public class RabbitHutchBase extends HorizontalDirectionalBlock {
-
     private boolean isHutch(BlockState state) {
         return state.is(LOTags.Blocks.RABBIT_HUTCHES);
     }

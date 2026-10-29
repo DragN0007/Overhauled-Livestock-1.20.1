@@ -16,7 +16,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 
 public class BiomeHitter {
-
     public static final ResourceKey<BiomeModifier> GRUB = registerKey("grub");
     public static final ResourceKey<BiomeModifier> CARIBOU = registerKey("caribou");
     public static final ResourceKey<BiomeModifier> FARM_GOAT_PLAINS = registerKey("farm_goat_plains");
@@ -31,51 +30,32 @@ public class BiomeHitter {
         context.register(GRUB, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_FOREST),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.GRUB_ENTITY.get(),
-                        4,
-                        1,
-                        4
-                ))));
+                        4, 1, 4))));
 
         context.register(CARIBOU, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.CARIBOU_ENTITY.get(),
-                        2,
-                        1,
-                        3
-                ))));
+                        2, 1, 3))));
 
         context.register(FARM_GOAT_PLAINS, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.FARM_GOAT_ENTITY.get(),
-                        2,
-                        1,
-                        3
-                ))));
+                        2, 1, 3))));
 
         context.register(FARM_GOAT_HOT, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_HOT_OVERWORLD),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.FARM_GOAT_ENTITY.get(),
-                        2,
-                        1,
-                        3
-                ))));
+                        2, 1, 3))));
 
         context.register(FARM_GOAT_COLD, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.FARM_GOAT_ENTITY.get(),
-                        2,
-                        1,
-                        3
-                ))));
+                        2, 1, 3))));
 
         context.register(FARM_GOAT_SPARSE, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_SPARSE),
                 List.of(new MobSpawnSettings.SpawnerData(EntityTypes.FARM_GOAT_ENTITY.get(),
-                        2,
-                        1,
-                        3
-                ))));
-
+                        2, 1, 3))));
     }
 
     public static ResourceKey<BiomeModifier> registerKey(String name) {

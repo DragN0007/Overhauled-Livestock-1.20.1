@@ -16,29 +16,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class JerkyBase extends HorizontalDirectionalBlock {
-
     public static final IntegerProperty DRY_TIME = IntegerProperty.create("dry_time", 0, 33);
-
-    public IntegerProperty getDryTimeProperty() {
-        return DRY_TIME;
-    }
-
-    public int getMaxDryTime() {
-        return 32;
-    }
-
-    public int getDryTime(BlockState state) {
-        return state.getValue(this.getDryTimeProperty());
-    }
-
-    public BlockState getStateForDryTime(int i) {
-        return this.defaultBlockState().setValue(this.getDryTimeProperty(), Integer.valueOf(i));
-    }
-
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
-
+    public IntegerProperty getDryTimeProperty() {return DRY_TIME;}
+    public int getMaxDryTime() {return 32;}
+    public int getDryTime(BlockState state) {return state.getValue(this.getDryTimeProperty());}
+    public BlockState getStateForDryTime(int i) {return this.defaultBlockState().setValue(this.getDryTimeProperty(), Integer.valueOf(i));}
+    public boolean isRandomlyTicking(BlockState state) {return true;}
     public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(DRY_TIME).add(HorizontalDirectionalBlock.FACING);
     }
@@ -50,12 +33,10 @@ public class JerkyBase extends HorizontalDirectionalBlock {
 
     public JerkyBase(VoxelShape north, VoxelShape east, VoxelShape south, VoxelShape west, Properties properties) {
         super (properties);
-
         NORTH = north;
         EAST = east;
         SOUTH = south;
         WEST = west;
-
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
@@ -66,11 +47,7 @@ public class JerkyBase extends HorizontalDirectionalBlock {
         Level level = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
         BlockState state = level.getBlockState(clickedPos);
-
-        if (face == Direction.UP || face == Direction.DOWN) {
-            return null;
-        }
-
+        if (face == Direction.UP || face == Direction.DOWN) {return null;}
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
@@ -95,7 +72,6 @@ public class JerkyBase extends HorizontalDirectionalBlock {
             default:
                 return NORTH;
         }
-
     }
 
     @Override
@@ -104,8 +80,5 @@ public class JerkyBase extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public boolean isCollisionShapeFullBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return false;
-    }
-
+    public boolean isCollisionShapeFullBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {return false;}
 }

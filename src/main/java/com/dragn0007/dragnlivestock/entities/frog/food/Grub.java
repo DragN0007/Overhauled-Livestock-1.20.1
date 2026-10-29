@@ -163,9 +163,7 @@ public class Grub extends Animal implements GeoEntity {
 	}
 
 	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return this.geoCache;
-	}
+	public AnimatableInstanceCache getAnimatableInstanceCache() {return this.geoCache;}
 
 	public SoundEvent getDeathSound() {
 		super.getDeathSound();

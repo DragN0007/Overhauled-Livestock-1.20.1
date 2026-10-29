@@ -7,7 +7,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RawGoatCheese extends CheeseBase {
-
     public RawGoatCheese() {
         super();
         this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeTimeProperty(), 0));
@@ -15,9 +14,7 @@ public class RawGoatCheese extends CheeseBase {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
-
         if (!level.isAreaLoaded(pos, 1)) return;
-
         int i = this.getAgeTime(state);
 
         if (i <= this.getMaxAgeTime()) {
@@ -28,7 +25,5 @@ public class RawGoatCheese extends CheeseBase {
         if (i >= this.getMaxAgeTime()) {
             level.setBlockAndUpdate(pos, LOBlocks.GOAT_CHEESE.get().defaultBlockState());
         }
-
     }
-
 }

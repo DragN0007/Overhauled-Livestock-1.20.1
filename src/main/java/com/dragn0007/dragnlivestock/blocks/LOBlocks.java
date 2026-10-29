@@ -17,7 +17,6 @@ public class LOBlocks {
     public static final DeferredRegister<Block> BLOCKS
             = DeferredRegister.create(ForgeRegistries.BLOCKS, LivestockOverhaul.MODID);
 
-
 //    public static final RegistryObject<Block> FISH_TRAP = registerBlock("fish_trap",
 //            () -> new FishTrapBlock());
 
@@ -45,7 +44,6 @@ public class LOBlocks {
     public static final RegistryObject<Block> RAW_GENERIC_JERKY_HANGING = registerBlockWithoutItem("raw_generic_jerky_hanging", RawGenericJerky::new);
     public static final RegistryObject<Block> GENERIC_JERKY_HANGING = registerBlockWithoutItem("generic_jerky_hanging", DriedJerky::new);
 
-
     public static <T extends Block>RegistryObject<T> registerBlockWithoutItem(String name, Supplier<T> block){
         return BLOCKS.register(name, block);
     }
@@ -60,7 +58,5 @@ public class LOBlocks {
                 new Item.Properties()));
     }
 
-    public static void register(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
-    }
+    public static void register(IEventBus eventBus) {BLOCKS.register(eventBus);}
 }
