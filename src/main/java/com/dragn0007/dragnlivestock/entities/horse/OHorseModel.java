@@ -15,14 +15,12 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
-
     public OHorseModel() {
         super(new ResourceLocation(LivestockOverhaul.MODID, "o_horse"), true);
     }
 
     @Override
     public void setCustomAnimations(OHorse animatable, long instanceId, AnimationState<OHorse> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
 
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
@@ -85,12 +83,8 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         ;
 
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public enum ReindeerVariant {
@@ -113,12 +107,8 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/white.png"));
 
         public final ResourceLocation resourceLocation;
-        ReindeerVariant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static ReindeerVariant reindeerVariantFromOrdinal(int christmasVariant) { return ReindeerVariant.values()[christmasVariant % ReindeerVariant.values().length];
-        }
+        ReindeerVariant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static ReindeerVariant reindeerVariantFromOrdinal(int christmasVariant) { return ReindeerVariant.values()[christmasVariant % ReindeerVariant.values().length];}
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_horse.animation.json");

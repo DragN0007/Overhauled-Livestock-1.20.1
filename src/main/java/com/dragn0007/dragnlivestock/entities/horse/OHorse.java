@@ -8,7 +8,7 @@ import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -67,6 +67,7 @@ import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -242,7 +243,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	@Override
-	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+	public void positionRider(Entity entity, MoveFunction moveFunction) {
 		if (this.hasPassenger(entity)) {
 
 			LocalDate date = LocalDate.now();
@@ -385,7 +386,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
-		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
+		controllers.add(LOAnims.genericAttackAnimation(this, LOAnims.ATTACK));
 		controllers.add(new AnimationController<>(this, "emoteController", 5, this::emotePredicate));
 	}
 
@@ -398,89 +399,118 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		double speedTrotThreshold = 0.015;
 		double wagonSpeedRunThreshold = 0.09;
 		double wagonSpeedTrotThreshold = 0.06;
-
-		boolean isMoving = (x * x + z * z) > 0.0001;
-
 		double movementSpeed = this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);
 		double animationSpeed = Math.max(0.1, movementSpeed);
-
 		AnimationController<T> controller = tAnimationState.getController();
 
+		boolean isMoving = (x * x + z * z) > 0.0001;
+		boolean isMovingBackwards = false;
+		boolean isLeftStrafing = false;
+		boolean isRightStrafing = false;
+		if (this.isVehicle() && isMoving && this.getControllingPassenger() != null) {
+			isMovingBackwards = Objects.requireNonNull(this.getControllingPassenger()).zza < 0;
+			isLeftStrafing = Objects.requireNonNull(this.getControllingPassenger()).xxa > 0.0001;
+			isRightStrafing = Objects.requireNonNull(this.getControllingPassenger()).xxa < 0;
+		}
+
 		if ((!this.isTamed() || this.isWearingRodeoHarness()) && this.isVehicle() && !this.isJumping()) {
-			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.BUCK);
 			controller.setAnimationSpeed(1.3);
 		} else if (this.isJumping()) {
-			controller.setAnimation(RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE));
+			controller.setAnimation(LOAnims.JUMP);
 			controller.setAnimationSpeed(1.0);
 		} else {
-			if (isMoving) {
-				if (!LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
-					if (this.isNoAi() && !this.isVehicle()) { //for wagons
-						if (currentSpeed < wagonSpeedTrotThreshold) {
-							controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
-						} else if (currentSpeed > wagonSpeedTrotThreshold && currentSpeed < wagonSpeedRunThreshold) {
-							controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-						} else if (currentSpeed > wagonSpeedRunThreshold) {
-							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-						} else {
-							controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-						}
+			if (isMoving && !isMovingBackwards) {
 
-					} else if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
-						controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
-						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
-
-					} else if ((this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedTrotThreshold)) {
-						controller.setAnimation(RawAnimation.begin().then("trot", Animation.LoopType.LOOP));
-						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-
-					} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD))
-							|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
-						if (this.isOnSand()) {
-							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.75 * controller.getAnimationSpeed() + animationSpeed));
-						} else {
-							controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-						}
-
-					} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-						if (LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown()) {
-							controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
-						} else {
-							controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
-							controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
-						}
-
-					} else {
-						controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				//wagon control
+				if (this.isNoAi() && !this.isVehicle()) {
+					if (currentSpeed < wagonSpeedTrotThreshold) {
+						controller.setAnimation(LOAnims.WALK);
 						controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
-					}
-
-				} else if (this.isVehicle() && LivestockOverhaulClientEvent.HORSE_WALK_BACKWARDS.isDown()) {
-					if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
-						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
-						controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
+					} else if (currentSpeed > wagonSpeedTrotThreshold && currentSpeed < wagonSpeedRunThreshold) {
+						controller.setAnimation(LOAnims.TROT);
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					} else if (currentSpeed > wagonSpeedRunThreshold) {
+						controller.setAnimation(LOAnims.RUN);
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
 					} else {
-						controller.setAnimation(RawAnimation.begin().then("walk_back", Animation.LoopType.LOOP));
-						controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+						controller.setAnimation(LOAnims.TROT);
+						controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+					}
+
+					//gallop
+				} else if (this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedThreshold)) {
+					controller.setAnimation(LOAnims.SPRINT);
+					controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
+
+					//trot
+				} else if ((this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) || (!this.isVehicle() && currentSpeed > speedTrotThreshold)) {
+					controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					if (isLeftStrafing) {
+						controller.setAnimation(LOAnims.LEFT_TROT_STRAFE);
+					} else if (isRightStrafing) {
+						controller.setAnimation(LOAnims.RIGHT_TROT_STRAFE);
+					} else {
+						controller.setAnimation(LOAnims.TROT);
+					}
+
+					//canter
+				} else if ((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(TROT_SPEED_MOD)) 
+						|| (!this.isVehicle() && currentSpeed > speedRunThreshold && currentSpeed < speedThreshold)) {
+					if (isLeftStrafing) {
+						controller.setAnimation(LOAnims.LEFT_TROT_STRAFE);
+						controller.setAnimationSpeed(Math.max(0.1, 0.84 * controller.getAnimationSpeed() + animationSpeed));
+					} else if (isRightStrafing) {
+						controller.setAnimation(LOAnims.RIGHT_TROT_STRAFE);
+						controller.setAnimationSpeed(Math.max(0.1, 0.84 * controller.getAnimationSpeed() + animationSpeed));
+					} else {
+						controller.setAnimation(LOAnims.RUN);
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+						if (this.isOnSand())
+							controller.setAnimationSpeed(Math.max(0.1, 0.75 * controller.getAnimationSpeed() + animationSpeed));
+					}
+
+					//walk
+				} else if (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD)) {
+					controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+					if (isLeftStrafing) {
+						controller.setAnimation(LOAnims.LEFT_WALK_STRAFE);
+					} else if (isRightStrafing) {
+						controller.setAnimation(LOAnims.RIGHT_WALK_STRAFE);
+					} else {
+						controller.setAnimation(LOAnims.WALK);
+					}
+
+					if (LivestockOverhaulClientEvent.HORSE_SPANISH_WALK_TOGGLE.isDown()) {
+						controller.setAnimation(RawAnimation.begin().then("spanish_walk", Animation.LoopType.LOOP));
+						controller.setAnimationSpeed(Math.max(0.1, 0.78 * controller.getAnimationSpeed() + animationSpeed));
+					}
+				} else {
+					controller.setAnimationSpeed(Math.max(0.1, 0.80 * controller.getAnimationSpeed() + animationSpeed));
+					if (isLeftStrafing) {
+						controller.setAnimation(LOAnims.LEFT_WALK_STRAFE);
+					} else if (isRightStrafing) {
+						controller.setAnimation(LOAnims.RIGHT_WALK_STRAFE);
+					} else {
+						controller.setAnimation(LOAnims.WALK);
 					}
 				}
 
+				//backwards movement
+			} else if (this.isVehicle() && isMovingBackwards) {
+				controller.setAnimation(LOAnims.BACKWARDS_WALK);
+				controller.setAnimationSpeed(Math.max(0.1, 0.83 * controller.getAnimationSpeed() + animationSpeed));
+				if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD))
+					controller.setAnimationSpeed(Math.max(0.1, 0.76 * controller.getAnimationSpeed() + animationSpeed));
+
+				//idle
 			} else {
-				if (this.isGroundTied() && LivestockOverhaulCommonConfig.GROUND_TIE.get()) {
-					controller.setAnimation(RawAnimation.begin().then("ground_tie", Animation.LoopType.LOOP));
-				} else {
-					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-				}
+				if (this.isGroundTied() && LivestockOverhaulCommonConfig.GROUND_TIE.get())
+					controller.setAnimation(LOAnims.GROUND_TIE);
+				else
+					controller.setAnimation(LOAnims.IDLE);
 				controller.setAnimationSpeed(1.0);
 			}
-
 		}
 		return PlayState.CONTINUE;
 	}
@@ -497,16 +527,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.shouldEmote = true;
 	}
 
-	protected <T extends GeoAnimatable> PlayState emotePredicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
+	protected <T extends GeoAnimatable> PlayState emotePredicate(AnimationState<T> tAnimationState) {
 		AnimationController<T> controller = tAnimationState.getController();
-
 		if (tAnimationState.isMoving() || !this.shouldEmote) {
 			controller.forceAnimationReset();
 			controller.stop();
 			this.shouldEmote = false;
 			return PlayState.STOP;
 		}
-
 		return PlayState.CONTINUE;
 	}
 
@@ -520,10 +548,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.leader = null;
 	}
 	public void addFollower() {this.herdSize++;}
-
 	public void removeFollower() {
-		if (this.leader != null)
-		this.herdSize--;
+		if (this.leader != null) this.herdSize--;
 	}
 	public boolean canBeFollowed() {return this.hasFollowers() && this.herdSize < this.getMaxHerdSize() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());}
 	public int getMaxHerdSize() {return LivestockOverhaulCommonConfig.HORSE_HERD_MAX.get();}
@@ -532,8 +558,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		return this.distanceToSqr(this.leader) <= 121.0D && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());
 	}
 	public void pathToLeader() {
-		if (this.isFollower() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied()))
-			this.getNavigation().moveTo(this.leader, 1.0D);
+		if (this.isFollower() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied())) this.getNavigation().moveTo(this.leader, 1.0D);
 	}
 	public void addFollowers(Stream<? extends OHorse> stream) {
 		stream.limit(this.getMaxHerdSize() - this.herdSize).filter((horse) -> horse != this).forEach((horse) -> {
@@ -602,17 +627,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	@Override
 	public void tick() {
 		super.tick();
-
-		if (babiesBirthed > 0)
-			babyCooldown++;
+		if (babiesBirthed > 0) babyCooldown++;
 
 		if (babiesBirthed >= maxBabyAmount && babyCooldown >= 20 && LivestockOverhaulCommonConfig.ALLOW_TWINS.get()) {
 			babiesBirthed = 0;
 			babyCooldown = 0;
 		}
 
-		if (babyCooldown >= 20)
-			babyCooldown = 0;
+		if (babyCooldown >= 20) babyCooldown = 0;
 
 		if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
 			List<? extends OHorse> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
@@ -621,27 +643,24 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 		List<ItemStack> armorSlots = (List<ItemStack>) this.getArmorSlots();
 		ItemStack armorItemStack = armorSlots.get(2);
-		
+
 		if (this.isOnSand()) {
 			if (!this.hasSlownessEffect()) this.applySlownessEffect();
-		} else if (!(!this.isDraftBreed() && armorItemStack.getItem() instanceof HorseArmorItem) || !(this.isRacingBreed() && armorItemStack.getItem() instanceof LightHorseArmorItem)){
+		} else if (!(!this.isDraftBreed() && armorItemStack.getItem() instanceof HorseArmorItem) || !(this.isRacingBreed() && armorItemStack.getItem() instanceof LightHorseArmorItem)) {
 			if (this.hasSlownessEffect()) this.removeSlownessEffect();
 		}
 
 		if (armorItemStack.getItem() instanceof HorseArmorItem) {
 			if (!this.isDraftBreed()) {
-				if (!this.hasSlownessEffect()) {
-					this.applySlownessEffect();
-				}
+				if (!this.hasSlownessEffect()) this.applySlownessEffect();
 			} else if (!this.isOnSand()) {
 				if (this.hasSlownessEffect()) this.removeSlownessEffect();
 			}
 		} else if (armorItemStack.getItem() instanceof LightHorseArmorItem) {
 			if (this.isRacingBreed()) {
 				if (!this.hasSlownessEffect()) this.applySlownessEffect();
-			} else if (!this.isOnSand()) {
+			} else if (!this.isOnSand())
 				if (this.hasSlownessEffect()) this.removeSlownessEffect();
-			}
 		}
 
 		if (!this.isBaby() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {

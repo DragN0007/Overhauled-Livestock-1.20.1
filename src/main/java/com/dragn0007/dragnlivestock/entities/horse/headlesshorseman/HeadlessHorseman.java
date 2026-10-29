@@ -1,7 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.horse.headlesshorseman;
 
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.core.particles.ParticleTypes;
@@ -150,7 +150,7 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
-		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
+		controllers.add(LOAnims.genericAttackAnimation(this, LOAnims.ATTACK));
 	}
 
 	@Override

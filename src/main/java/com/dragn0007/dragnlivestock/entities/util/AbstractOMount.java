@@ -140,7 +140,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             float strafe = player.xxa * 0.5F;
             float forward = player.zza;
             if (forward <= 0.0F) {forward *= 0.25F;}
-            return new Vec3((double)strafe, 0.0D, (double)forward);
+            return new Vec3(strafe, 0.0D, forward);
         }
     }
 
@@ -263,6 +263,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
+        //shear extras
         if (itemStack.is(LOTags.Items.SHEARS) && player.isShiftKeyDown() && this.isOwnedBy(player)) {
             if (this.isEquine(this)) {
                 AbstractOMount equine = this;
@@ -280,6 +281,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //mount locking
         if (itemStack.is(LOItems.MOUNT_KEY.get()) && player.isShiftKeyDown() && this.isOwnedBy(player) && this.isTamed()) {
             if (!this.isLocked()) {
                 this.setLocked(true);
@@ -299,6 +301,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
+        //mane maintenance
         if (itemStack.is(LOItems.MANE_SCISSORS.get()) && this.hasGrowableHair() && (this.isOwnedBy(player) || !this.isTamed())) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
@@ -317,6 +320,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
+        //tail maintenance
         if (itemStack.is(LOItems.TAIL_SCISSORS.get()) && this.hasGrowableHair() && !this.isUnicorn(this) && (this.isOwnedBy(player) || !this.isTamed())) {
             OHorse oHorse = (OHorse) this;
             if (player.isShiftKeyDown() && LivestockOverhaulCommonConfig.HORSE_HAIR_GROWTH.get()) {
@@ -335,6 +339,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
+        //branding
         if (itemStack.is(Items.PACKED_ICE) && this.isHorse(this) && ((player.getAbilities().instabuild && LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get()) ||
                 !LivestockOverhaulCommonConfig.CREATIVE_BRANDING.get())) {
             OHorse oHorse = (OHorse) this;
@@ -345,6 +350,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //snipping
         if (itemStack.is(LOItems.UTILITY_KNIFE.get()) && ((player.getAbilities().instabuild && LivestockOverhaulCommonConfig.CREATIVE_SNIPPING.get()) ||
                 !LivestockOverhaulCommonConfig.CREATIVE_SNIPPING.get()) && ((this.isOwnedBy(player) || player.getAbilities().instabuild) || !this.isTamed())) {
             if (!(this instanceof OGoat) && !(this instanceof FarmGoat) && !(this instanceof OCow)) {
@@ -358,6 +364,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //reversing snip
         if (itemStack.is(Items.GLISTERING_MELON_SLICE) && player.getAbilities().instabuild) {
             if (player.isShiftKeyDown()) {
                 if (this.isSnipped()) {
@@ -368,6 +375,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //oscillators
         if (itemStack.is(LOItems.COAT_OSCILLATOR.get()) && player.getAbilities().instabuild) {
             if (player.isShiftKeyDown()) {
                 if (this.getVariant() > 0) {
@@ -379,9 +387,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             this.setVariant(this.getVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
             return InteractionResult.SUCCESS;
-        }
-
-        if (itemStack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+        } else if (itemStack.is(LOItems.MARKING_OSCILLATOR.get()) && player.getAbilities().instabuild) {
             if (player.isShiftKeyDown()) {
                 if (this.getOverlayVariant() > 0) {
                     this.setOverlayVariant(this.getOverlayVariant() - 1);
@@ -392,9 +398,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             this.setOverlayVariant(this.getOverlayVariant() + 1);
             this.playSound(SoundEvents.BEEHIVE_EXIT, 0.5f, 1f);
             return InteractionResult.SUCCESS;
-        }
-
-        if (itemStack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
+        } else if (itemStack.is(LOItems.BREED_OSCILLATOR.get()) && player.getAbilities().instabuild) {
             if (this.isHorse(this) || this.isMule(this) || this.isCamel(this) || this instanceof FarmGoat) {
                 if (player.isShiftKeyDown()) {
                     if (this.getBreed() > 0) {
@@ -438,6 +442,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //flower decors
         if (this.isEquine(this) && this.isOwnedBy(player)) {
             AbstractOMount mount = this;
             if (this.isEquine(this) && itemStack.is(LOTags.Items.HAIR_FLOWERS)) {
@@ -448,42 +453,27 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 } else if (mount.getFlowerType() == 2) {
                     mount.setFlowerType(0);
                 }
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
+                if (!player.getAbilities().instabuild) {itemStack.shrink(1);}
                 mount.setFlowerItem(itemStack);
                 this.playSound(SoundEvents.FLOWERING_AZALEA_PLACE, 0.5f, 1f);
                 return InteractionResult.SUCCESS;
             }
         }
 
+        //reverse undead
         if (this.isHorse(this) && itemStack.is(Items.HEART_OF_THE_SEA) && this.isOwnedBy(player)) {
             OHorse oHorse = (OHorse) this;
             if (oHorse.isUndead()) {
                 oHorse.setDecompVariant(0);
                 oHorse.setUndead(false);
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-
+                if (!player.getAbilities().instabuild) {itemStack.shrink(1);}
                 this.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
                 this.level().playSound(null, this, SoundEvents.TOTEM_USE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
             }
             return InteractionResult.SUCCESS;
         }
 
-        if (this.isHorse(this) && itemStack.is(Items.COAL) && this.isOwnedBy(player)) {
-            OHorse oHorse = (OHorse) this;
-            if (oHorse.isUndead()) {
-                itemStack.finishUsingItem(level(), player);
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-                this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
-            }
-            return InteractionResult.SUCCESS;
-        }
-
+        //hallow heart
         if (this.isHorse(this) && itemStack.is(LOItems.HALLOW_HEART.get()) && this.isOwnedBy(player)) {
             LocalDate date = LocalDate.now();
             Month month = date.getMonth();
@@ -507,13 +497,12 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
                 this.level().addParticle(ParticleTypes.SOUL, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
                 this.level().playSound(null, this, SoundEvents.SOUL_ESCAPE, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
                 this.level().playSound(null, this, SoundEvents.AMBIENT_CAVE.get(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
+                if (!player.getAbilities().instabuild) {itemStack.shrink(1);}
                 return InteractionResult.SUCCESS;
             }
         }
 
+        //default stuff
         if (!this.isBaby()) {
             if (this.isTamed() && player.isSecondaryUseActive()) {
                 this.openInventory(player);
@@ -529,6 +518,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //gender test strips
         if (itemStack.is(LOItems.GENDER_TEST_STRIP.get()) && this.isFemale()) {
             player.playSound(SoundEvents.BEEHIVE_EXIT, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemStack, player, LOItems.FEMALE_GENDER_TEST_STRIP.get().getDefaultInstance());
@@ -543,19 +533,19 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             return InteractionResult.SUCCESS;
         }
 
+        //saddle mechanics
         if (this.isSaddle(itemStack) && this.isSaddleable() && !this.isSaddled()) {
-            // item is a saddle, entity can be saddled, and isn't already wearing a saddle
             if (!this.level().isClientSide) {
                 this.level().gameEvent(this, GameEvent.EQUIP, this.position());
                 ItemStack saddleItem = itemStack.copy();
                 this.inventory.setItem(this.saddleSlot(), saddleItem);
                 itemStack.shrink(1);
-
                 this.setSaddleItem(saddleItem);
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
+        //if not holding anything... default stuff
         if (!itemStack.isEmpty()) {
             if (this.isFood(itemStack)) {
                 return this.fedFood(player, itemStack);
@@ -574,10 +564,7 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             if (!this.hasChest() && itemStack.is(Tags.Items.CHESTS)) {
                 this.setChest(true);
                 this.playChestEquipsSound();
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-
+                if (!player.getAbilities().instabuild) {itemStack.shrink(1);}
                 this.createInventory();
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
@@ -589,12 +576,11 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
             }
         }
 
+        //end
         if(this.isBaby()) {
             return super.mobInteract(player, hand);
         } else {
-            if (!(this instanceof FarmGoat)) {
-                this.doPlayerRide(player);
-            }
+            if (!(this instanceof FarmGoat)) {this.doPlayerRide(player);}
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
     }

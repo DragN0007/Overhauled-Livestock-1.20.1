@@ -3,7 +3,7 @@ package com.dragn0007.dragnlivestock.entities.rabbit;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
-import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -313,7 +313,7 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
-		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
+		controllers.add(LOAnims.genericAttackAnimation(this, LOAnims.ATTACK));
 	}
 
 	@Override

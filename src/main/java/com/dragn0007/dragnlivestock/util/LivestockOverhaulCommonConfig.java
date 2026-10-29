@@ -309,11 +309,12 @@ public class LivestockOverhaulCommonConfig {
 
         BUILDER.push("Dynamic Resources");
         BUILDER.comment("Dynamic Resources is a built-in way to add custom coats and patterns to applicable O-Animals via resource pack; " +
-                "No coding or datapack required. You can find more information at the [GitHub Repository](https://github.com/DragN0007/Overhauled-Livestock-1.20.1/blob/master/README.md)");
+                "No coding or datapack required. You can find more information at the \n" +
+                "[GitHub Repository](https://github.com/DragN0007/Overhauled-Livestock-1.20.1/blob/master/README.md)");
         DYNAMIC_RESOURCE_SPAWNS = BUILDER.comment("Should coats & patterns from custom Dynamic Resource packs be able to spawn naturally?")
                 .define("Naturally-Spawning Dynamic Resources", true);
-        DYNAMIC_RESOURCE_SPAWN_PERCENT = BUILDER.comment("Chance of a Dynamic Resource coat or pattern spawning naturally. Default is 0.20 (20%).")
-                .define("Natural Dynamic Resource Coat Chance", 0.20);
+        DYNAMIC_RESOURCE_SPAWN_PERCENT = BUILDER.comment("Chance of a Dynamic Resource coat or pattern spawning naturally. Default is 0.10 (10%).")
+                .define("Natural Dynamic Resource Coat Chance", 0.10);
         BUILDER.pop();
 
         BUILDER.push("Wagons");

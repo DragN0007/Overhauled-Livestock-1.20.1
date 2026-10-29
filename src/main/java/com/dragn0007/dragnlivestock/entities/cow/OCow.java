@@ -8,7 +8,7 @@ import com.dragn0007.dragnlivestock.entities.ai.CattleFollowHerdLeaderGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.PauseMeleeAttackGoal;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -218,7 +218,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
-		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
+		controllers.add(LOAnims.genericAttackAnimation(this, LOAnims.ATTACK));
 	}
 
 	@Override

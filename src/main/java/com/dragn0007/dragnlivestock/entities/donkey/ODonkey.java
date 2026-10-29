@@ -8,7 +8,7 @@ import com.dragn0007.dragnlivestock.entities.ai.GroundTieGoal;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
-import com.dragn0007.dragnlivestock.entities.util.LOAnimations;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -266,7 +266,7 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 	@Override
 	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 		controllers.add(new AnimationController<>(this, "controller", 2, this::predicate));
-		controllers.add(LOAnimations.genericAttackAnimation(this, LOAnimations.ATTACK));
+		controllers.add(LOAnims.genericAttackAnimation(this, LOAnims.ATTACK));
 		controllers.add(new AnimationController<>(this, "emoteController", 5, this::emotePredicate));
 	}
 

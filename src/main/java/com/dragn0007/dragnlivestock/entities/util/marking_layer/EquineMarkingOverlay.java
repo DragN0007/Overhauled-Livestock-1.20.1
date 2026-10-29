@@ -35,27 +35,12 @@ public enum EquineMarkingOverlay {
         SNOWCAP(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/snowcap.png")),
         HALF_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/half_bald.png")),
         DAPPLES(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/dapples.png")),
-        PINK_NOSE_APPALOOSA(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_appaloosa.png")),
-        PINK_NOSE_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_bald.png")),
-        PINK_NOSE_BLAZE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_blaze.png")),
-        PINK_NOSE_FEW_SPOT_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_few_spot_leopard.png")),
-        PINK_NOSE_HALF_BALD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_half_bald.png")),
-        PINK_NOSE_LEOPARD(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_leopard.png")),
-        PINK_NOSE_OVERO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_overo.png")),
-        PINK_NOSE_PURE_WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_pure_white.png")),
-        PINK_NOSE_SNIP(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_snip.png")),
-        PINK_NOSE_SPLASH_OVERO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_splash_overo.png")),
-        PINK_NOSE_SPOTTED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/pink_spotted.png")),
         REVERSE_HALF_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/reverse_half_silver.png")),
         REVERSE_FULL_SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/reverse_full_silver.png")),
         MINIMAL_SABINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/minimal_sabino.png")),
         LIGHT_MARKER_OVERO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/light_marker_overo.png"));
 
         public final ResourceLocation resourceLocation;
-        EquineMarkingOverlay(ResourceLocation resourceLocation) {
-                this.resourceLocation = resourceLocation;
-        }
-
-        public static EquineMarkingOverlay overlayFromOrdinal(int overlay) { return EquineMarkingOverlay.values()[overlay % EquineMarkingOverlay.values().length];
-        }
+        EquineMarkingOverlay(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static EquineMarkingOverlay overlayFromOrdinal(int overlay) { return EquineMarkingOverlay.values()[overlay % EquineMarkingOverlay.values().length];}
 }

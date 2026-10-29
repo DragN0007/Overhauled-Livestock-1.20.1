@@ -40,7 +40,6 @@ public class LivestockOverhaul {
 
     public LivestockOverhaul() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
         LOItems.register(eventBus);
         LOItemGroup.register(eventBus);
         LOBlocks.register(eventBus);
@@ -50,23 +49,20 @@ public class LivestockOverhaul {
         LOPackets.register();
         MinecraftForge.EVENT_BUS.addListener((PlayerEvent.PlayerLoggedInEvent warn) -> warn(warn.getEntity()));
 
+        if (ModList.get().isLoaded("medievalembroidery")) {MECompatItems.register(eventBus);}
+
         CraftingHelper.register(new BlanketConfigCondition.Serializer(new ResourceLocation(MODID, "blanket_config_condition")));
         CraftingHelper.register(new HolidayConfigCondition.Serializer(new ResourceLocation(MODID, "holiday_config_condition")));
         CraftingHelper.register(new LOMAConfigCondition.Serializer(new ResourceLocation(MODID, "mount_additions_config_condition")));
         CraftingHelper.register(new TFCCondition.Serializer(new ResourceLocation(MODID, "tfc_condition")));
 
-        if (ModList.get().isLoaded("medievalembroidery")) {
-            MECompatItems.register(eventBus);
-        }
-
         GeckoLib.initialize();
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, LivestockOverhaulClientConfig.SPEC, "livestock-overhaul-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, LivestockOverhaulCommonConfig.SPEC, "livestock-overhaul-common.toml");
-
         MinecraftForge.EVENT_BUS.register(this);
 
-        System.out.println("[DragN's Livestock Overhaul!] Registered Livestock Overhaul.");
-        System.out.println("[DragN's Livestock Overhaul!] Do not remove this mod without running the Failsafe Config!");
+        LOGGER.info("Registered Livestock Overhaul.");
+        LOGGER.info("Do not remove this mod without running the Failsafe Config!");
     }
 
     public static void warn(Player entity){

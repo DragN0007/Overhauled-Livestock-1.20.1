@@ -36,73 +36,63 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance || LivestockOverhaulClientConfig.DISABLE_MARKINGS.get()) return;
 
-        if (animatable.getDecompVariant() != 4 && animatable.getDecompVariant() != 5 && animatable.getDecompVariant() != 6) {
+        if (!animatable.isUndead()) {
             if (animatable.getOverlayVariant() != 0 || animatable.getOverlayLocation().equals(EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant()).toString())) {
                 EquineMarkingOverlay overlay = EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant());
                 RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
-                getRenderer().reRender(getDefaultBakedModel(animatable),
-                        poseStack,
-                        bufferSource,
-                        animatable,
-                        renderMarkingType,
-                        bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                        1, 1, 1, 1);
+                getRenderer().reRender(
+                        getDefaultBakedModel(animatable), poseStack, bufferSource,
+                        animatable, renderMarkingType, bufferSource.getBuffer(renderMarkingType),
+                        partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1.0F, 1.0F, 1.0F, 1.0F
+                );
             }
 
             if (!animatable.getOverlayLocation().equals(EquineMarkingOverlay.overlayFromOrdinal(animatable.getOverlayVariant()).toString())) {
                 RenderType renderMarkingTypeDynamic = RenderType.entityCutout(this.getTexture(animatable));
-                getRenderer().reRender(getDefaultBakedModel(animatable),
-                        poseStack,
-                        bufferSource,
-                        animatable,
-                        renderMarkingTypeDynamic,
-                        bufferSource.getBuffer(renderMarkingTypeDynamic), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                        1, 1, 1, 1);
+                getRenderer().reRender(
+                        getDefaultBakedModel(animatable), poseStack, bufferSource,
+                        animatable, renderMarkingTypeDynamic, bufferSource.getBuffer(renderMarkingTypeDynamic),
+                        partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                        1.0F, 1.0F, 1.0F, 1.0F
+                );
             }
 
-            if (!(animatable.getDecompVariant() > 0)) {
-                EquineEyeColorOverlay eyes = EquineEyeColorOverlay.eyesFromOrdinal(animatable.getEyeVariant());
-                RenderType renderEyeType = RenderType.entityCutout(eyes.resourceLocation);
-                getRenderer().reRender(getDefaultBakedModel(animatable),
-                        poseStack,
-                        bufferSource,
-                        animatable,
-                        renderEyeType,
-                        bufferSource.getBuffer(renderEyeType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                        1, 1, 1, 1);
-            }
+            EquineEyeColorOverlay eyes = EquineEyeColorOverlay.eyesFromOrdinal(animatable.getEyeVariant());
+            RenderType renderEyeType = RenderType.entityCutout(eyes.resourceLocation);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderEyeType, bufferSource.getBuffer(renderEyeType),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
 
-        if (!animatable.isUndead()) return;
         if (animatable.isUndead() && !animatable.isHallow()) {
             UndeadType overlay = UndeadType.overlayFromOrdinal(animatable.getDecompVariant());
             RenderType renderMarkingType = RenderType.entityCutout(overlay.resourceLocation);
-            getRenderer().reRender(getDefaultBakedModel(animatable),
-                    poseStack,
-                    bufferSource,
-                    animatable,
-                    renderMarkingType,
-                    bufferSource.getBuffer(renderMarkingType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-                    1, 1, 1, 1);
+            getRenderer().reRender(
+                    getDefaultBakedModel(animatable), poseStack, bufferSource,
+                    animatable, renderMarkingType, bufferSource.getBuffer(renderMarkingType),
+                    partialTick, packedLight, OverlayTexture.NO_OVERLAY,
+                    1.0F, 1.0F, 1.0F, 1.0F
+            );
         }
     }
 
-    public enum UndeadType { //todo: remove all stages in favor of variants
+    public enum UndeadType {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/overlay/none.png")),
-        MINIMAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/zombie.png")),
-        WITHER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/wither.png")),
-        STRAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/stray.png")),
+        ZOMBIE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/zombie.png")),
         DROWNED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/drowned.png")),
         HUSK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/husk.png")),
+        SKELETON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/skeleton.png")),
+        STRAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/stray.png")),
+        WITHER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/wither.png")),
         ;
 
         public final ResourceLocation resourceLocation;
-        UndeadType(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static UndeadType overlayFromOrdinal(int overlay) { return UndeadType.values()[overlay % values().length];
-        }
+        UndeadType(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static UndeadType overlayFromOrdinal(int overlay) { return UndeadType.values()[overlay % values().length];}
     }
 
 }

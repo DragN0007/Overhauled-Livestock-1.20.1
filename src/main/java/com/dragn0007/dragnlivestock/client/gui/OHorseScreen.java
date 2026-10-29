@@ -200,7 +200,8 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     private void renderMarkingLabel(GuiGraphics graphics) {
         String text = this.oHorse.getOverlayLocation().toString();
         String noFillerText = text.replaceAll(".+overlay/", "");
-        String noUnderscoresText = noFillerText.replaceAll("_", " ");
+        String noDR = noFillerText.replaceAll(".+horse/", "");
+        String noUnderscoresText = noDR.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
         String addPinkNoseText = noPNGText.replace("pink", "pink-nosed");
         String labelText = "Marking(s): " + addPinkNoseText.toUpperCase();

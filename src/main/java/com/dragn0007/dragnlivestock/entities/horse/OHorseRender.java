@@ -167,7 +167,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             feathering_bl.ifPresent(b -> b.setPosY(-3.5F));
             feathering_fr.ifPresent(b -> b.setPosZ(-0.8F));
             feathering_fl.ifPresent(b -> b.setPosZ(-0.8F));
-        } else if (animatable.getFeathering() == 2) {
+       } else if (animatable.getFeathering() == 2) {
             feathering_fr.ifPresent(b -> b.setHidden(false));
             feathering_fl.ifPresent(b -> b.setHidden(false));
             feathering_br.ifPresent(b -> b.setHidden(false));
@@ -176,7 +176,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             feathering_fl.ifPresent(b -> b.setScaleY(1F));
             feathering_br.ifPresent(b -> b.setScaleY(1F));
             feathering_bl.ifPresent(b -> b.setScaleY(1F));
-        }
+       }
 
         super.preRender(poseStack, this.animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
