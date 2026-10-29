@@ -3,16 +3,7 @@
   "values": [
     "minecraft:cat",
     "minecraft:ocelot",
-
-    {
-      "id": "dragnpets:o_cat",
-      "required": false
-    },
-
-    {
-      "id": "dragnpets:o_ocelot",
-      "required": false
-    }
-
+    {"id": "dragnpets:o_cat", "required": false},
+    {"id": "dragnpets:o_ocelot", "required": false}
   ]
 }

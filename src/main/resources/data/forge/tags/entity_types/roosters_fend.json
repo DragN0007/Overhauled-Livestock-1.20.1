@@ -4,22 +4,9 @@
     "minecraft:fox",
     "minecraft:ocelot",
     "minecraft:cat",
-
-    {
-      "id": "dragnpets:o_fox",
-      "required": false
-    },
-    {
-      "id": "dragnpets:o_ocelot",
-      "required": false
-    },
-    {
-      "id": "dragnpets:o_cat",
-      "required": false
-    },
-    {
-      "id": "fferrets:ferret",
-      "required": false
-    }
+    {"id": "dragnpets:o_fox", "required": false},
+    {"id": "dragnpets:o_ocelot", "required": false},
+    {"id": "dragnpets:o_cat", "required": false},
+    {"id": "fferrets:ferret", "required": false}
   ]
 }

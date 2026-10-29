@@ -2,15 +2,8 @@
   "replace": false,
   "values": [
     "minecraft:wolf",
-
-    {
-      "id": "dragnpets:o_wolf",
-      "required": false
-    },
-
-    {
-      "id": "permafrost:direwolf",
-      "required": false
-    }
+    {"id": "dragnpets:o_wolf", "required": false},
+    {"id": "permafrost:direwolf", "required": false},
+    {"id": "medievalembroidery:direwolf", "required": false}
   ]
 }

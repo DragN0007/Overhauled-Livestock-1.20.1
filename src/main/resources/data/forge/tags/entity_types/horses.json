@@ -4,18 +4,8 @@
     "minecraft:horse",
     "dragnlivestock:o_horse",
     "dragnlivestock:unicorn",
-
-    {
-      "id": "permafrost:quagga",
-      "required": false
-    },
-    {
-      "id": "permafrost:qorse",
-      "required": false
-    },
-    {
-      "id": "horse_colors:horse_felinoid",
-      "required": false
-    }
+    {"id": "permafrost:quagga", "required": false},
+    {"id": "permafrost:qorse", "required": false},
+    {"id": "horse_colors:horse_felinoid", "required": false}
   ]
 }

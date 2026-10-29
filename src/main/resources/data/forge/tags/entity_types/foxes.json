@@ -2,10 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:fox",
-
-    {
-      "id": "dragnpets:o_fox",
-      "required": false
-    }
+    {"id": "dragnpets:o_fox", "required": false}
   ]
 }
