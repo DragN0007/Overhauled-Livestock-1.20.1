@@ -1512,6 +1512,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public void setMarkingByBreed() {
+		int[] minimalMarkings = new int[]{1,3,6,9,11,13,16,23};
+		int[] moderateMarkings = new int[]{1,3,6,9,11,13,16,23,2,5,7,8,12,14,18,20,22,26,27};
+		int[] heavyMarkings = new int[]{2,5,7,8,12,14,18,20,22,26,27,4,17};
 
 		if (this.getBreed() == 0) { //mustangs can come in any pattern naturally
 			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
@@ -1521,9 +1524,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1531,9 +1533,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.10) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.10 && random.nextDouble() < 0.30) {
-				int[] variants = {0,4,14,19,21,22,23,29,33,35,38,41,42};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
 				this.setOverlayVariant(0);
 			}
@@ -1543,9 +1544,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.05) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.05 && random.nextDouble() < 0.20) {
-				int[] variants = {0,4,14,19,21,22,23,29,33,35,39,42,43};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			} else if (random.nextDouble() > 0.20) {
 				this.setOverlayVariant(0);
 			}
@@ -1571,9 +1571,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.02) {
-				int[] variants = {1,3,6,8,9,10,12,15,16,17,20,24,25,27,28,30,31,34,36,37,40};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(heavyMarkings.length);
+				this.setOverlayVariant(heavyMarkings[randomIndex]);
 			}
 		}
 
@@ -1585,9 +1584,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.02) {
-				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1595,9 +1593,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0,4,6,7,14,19,21,22,23,29,32,33,42,43};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(moderateMarkings.length);
+				this.setOverlayVariant(moderateMarkings[randomIndex]);
 			}
 		}
 
@@ -1621,9 +1618,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.07) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.07) {
-				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1639,9 +1635,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1649,9 +1644,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(moderateMarkings.length);
+				this.setVariant(moderateMarkings[randomIndex]);
 			}
 		}
 
@@ -1659,9 +1653,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1669,9 +1662,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1679,9 +1671,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.20) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.20) {
-				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(moderateMarkings.length);
+				this.setVariant(moderateMarkings[randomIndex]);
 			}
 		}
 
@@ -1689,9 +1680,8 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.30) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0,2,4,5,6,7,11,12,14,18,19,21,22,23,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			}
 		}
 
@@ -1715,22 +1705,20 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0,26,30};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				this.setOverlayVariant(24);
 			}
 		}
 
 		if (this.getBreed() == 22) { //lusitanos can have small markings or dapples
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() < 0.30) {
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
-				int[] variants = {0,4,6,7,11,12,13,14,18,19,21,22,23,26,29,30,32,33,35,39,41,42,43,44};
-				int randomIndex = new Random().nextInt(variants.length);
-				this.setOverlayVariant(variants[randomIndex]);
+				this.setOverlayVariant(24);
 			}
 		}
-
 	}
 
 	//drops extra loot based on animal size

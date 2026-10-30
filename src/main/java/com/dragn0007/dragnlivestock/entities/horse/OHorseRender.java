@@ -157,14 +157,14 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             feathering_fl.ifPresent(b -> b.setHidden(false));
             feathering_br.ifPresent(b -> b.setHidden(false));
             feathering_bl.ifPresent(b -> b.setHidden(false));
-            feathering_fr.ifPresent(b -> b.setScaleY(0.6F));
-            feathering_fl.ifPresent(b -> b.setScaleY(0.6F));
-            feathering_br.ifPresent(b -> b.setScaleY(0.6F));
-            feathering_bl.ifPresent(b -> b.setScaleY(0.6F));
-            feathering_fr.ifPresent(b -> b.setPosY(-3.5F));
-            feathering_fl.ifPresent(b -> b.setPosY(-3.5F));
-            feathering_br.ifPresent(b -> b.setPosY(-3.5F));
-            feathering_bl.ifPresent(b -> b.setPosY(-3.5F));
+            feathering_fr.ifPresent(b -> b.setScaleY(0.7F));
+            feathering_fl.ifPresent(b -> b.setScaleY(0.7F));
+            feathering_br.ifPresent(b -> b.setScaleY(0.7F));
+            feathering_bl.ifPresent(b -> b.setScaleY(0.7F));
+            feathering_fr.ifPresent(b -> b.setPosY(-3.0F));
+            feathering_fl.ifPresent(b -> b.setPosY(-3.0F));
+            feathering_br.ifPresent(b -> b.setPosY(-3.0F));
+            feathering_bl.ifPresent(b -> b.setPosY(-3.0F));
             feathering_fr.ifPresent(b -> b.setPosZ(-0.8F));
             feathering_fl.ifPresent(b -> b.setPosZ(-0.8F));
        } else if (animatable.getFeathering() == 2) {

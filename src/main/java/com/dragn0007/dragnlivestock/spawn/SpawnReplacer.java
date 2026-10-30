@@ -209,7 +209,7 @@ public class SpawnReplacer {
                             oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                         }
 
-                        if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= 0.20) {
+                        if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWN_PERCENT.get()) {
                             oHorse.setVariantTexture(String.valueOf(LOUtils.getRandomClientCoat("base_colors/horse")));
                             oHorse.setOverlayVariantTexture(String.valueOf(LOUtils.getRandomClientPattern("pattern_overlays/horse")));
 
