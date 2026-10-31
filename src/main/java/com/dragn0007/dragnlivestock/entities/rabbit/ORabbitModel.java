@@ -68,16 +68,12 @@ public class ORabbitModel extends DefaultedEntityGeoModel<ORabbit> {
         SALLANDER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/sallander.png")),
         SMOKE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/smoke.png")),
         STEEL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/steel.png")),
-        TORTISHELL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/tortishell.png")),
-        ;
-
+        TORTISHELL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/tortishell.png")),;
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {
             this.resourceLocation = resourceLocation;
         }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_rabbit.animation.json");

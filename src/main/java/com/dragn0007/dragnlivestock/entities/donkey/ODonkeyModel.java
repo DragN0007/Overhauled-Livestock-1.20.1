@@ -53,14 +53,9 @@ public class ODonkeyModel extends DefaultedEntityGeoModel<ODonkey> {
         BAY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "bay.png")),
         DARK_BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "dark_brown.png")),
         SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png"));
-
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_donkey.geo.json");

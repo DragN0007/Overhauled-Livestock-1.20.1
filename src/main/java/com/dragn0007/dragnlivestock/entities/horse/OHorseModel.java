@@ -79,9 +79,7 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         GOLD(new ResourceLocation(LivestockOverhaul.MODID, default_path + "gold.png")),
         SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png")),
         GRULLO_DUN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grullo_dun.png")),
-        STEEL_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "steel_grey.png")),
-        ;
-
+        STEEL_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "steel_grey.png")),;
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
@@ -105,7 +103,6 @@ public class OHorseModel extends DefaultedEntityGeoModel<OHorse> {
         STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/strawberry.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/white.png"));
-
         public final ResourceLocation resourceLocation;
         ReindeerVariant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static ReindeerVariant reindeerVariantFromOrdinal(int christmasVariant) { return ReindeerVariant.values()[christmasVariant % ReindeerVariant.values().length];}

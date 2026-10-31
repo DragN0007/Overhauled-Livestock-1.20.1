@@ -45,16 +45,9 @@ public class OLlamaModel extends DefaultedEntityGeoModel<OLlama> {
         SANDY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/sandy.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/white.png"));
-
-        //Add new entries to bottom when mod is public, else llamas will change textures during update.
-
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_llama.geo.json");

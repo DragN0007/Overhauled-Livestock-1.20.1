@@ -87,9 +87,7 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         HUSK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/husk.png")),
         SKELETON(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/skeleton.png")),
         STRAY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/stray.png")),
-        WITHER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/wither.png")),
-        ;
-
+        WITHER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/undead/wither.png"));
         public final ResourceLocation resourceLocation;
         UndeadType(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static UndeadType overlayFromOrdinal(int overlay) { return UndeadType.values()[overlay % values().length];}

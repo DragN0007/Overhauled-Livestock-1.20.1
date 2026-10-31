@@ -56,13 +56,9 @@ public class FarmGoatModel extends DefaultedEntityGeoModel<FarmGoat> {
         SILVER_BEZOAR(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/silver_bezoar.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/tan.png")),
         TWO_TONED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/two_toned.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/white.png")),
-        ;
-
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/farm_goat/white.png"));
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 

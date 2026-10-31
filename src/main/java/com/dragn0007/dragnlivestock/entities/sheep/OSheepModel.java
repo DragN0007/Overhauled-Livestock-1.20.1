@@ -75,13 +75,10 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
         DOBERMAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "doberman.png")),
         LIGHT(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light.png")),
         MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "mahogany.png")),
-        DARK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "dark.png")),
-        ;
-
+        DARK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "dark.png")),;
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/sheep/o_sheep.geo.json");

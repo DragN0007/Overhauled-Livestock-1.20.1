@@ -14,35 +14,22 @@ public class OBeeModel extends GeoModel<OBee> {
         RED_MASON_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/red_mason_bee.png")),
         RED_TAILED_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/red_tailed_bumble_bee.png")),
         TAWNY_MINING_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/tawny_mining_bee.png")),
-        TREE_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/tree_bumble_bee.png")),
-        ;
-
+        TREE_BEE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/bee/tree_bumble_bee.png")),;
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) {
-            return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) {return Variant.values()[variant % Variant.values().length];}
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/overhauled_bee.geo.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_bee.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_bee.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OBee oBee) {
-        return MODEL;
-    }
+    public ResourceLocation getModelResource(OBee oBee) {return MODEL;}
 
     @Override
-    public ResourceLocation getTextureResource(OBee oBee) {
-        return oBee.getTextureResource();
-    }
+    public ResourceLocation getTextureResource(OBee oBee) {return oBee.getTextureResource();}
 
     @Override
-    public ResourceLocation getAnimationResource(OBee oBee) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OBee oBee) {return ANIMATION;}
 }
 

@@ -46,13 +46,9 @@ public class OPigModel extends DefaultedEntityGeoModel<OPig> {
         PINK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "pink.png")),
         RED(new ResourceLocation(LivestockOverhaul.MODID, default_path + "red.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png"));
-
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/pig/o_pig.geo.json");

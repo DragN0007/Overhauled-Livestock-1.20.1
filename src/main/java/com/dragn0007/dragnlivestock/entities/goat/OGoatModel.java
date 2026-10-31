@@ -46,13 +46,9 @@ public class OGoatModel extends DefaultedEntityGeoModel<OGoat> {
         MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/mahogany.png")),
         RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/red.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/white.png")),
-        ;
-
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/goat/white.png")),;
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 

@@ -55,11 +55,8 @@ public class OCamelModel extends DefaultedEntityGeoModel<OCamel> {
         SANDY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "sandy.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png"));
-
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 

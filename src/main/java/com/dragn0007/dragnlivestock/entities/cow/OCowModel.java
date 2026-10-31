@@ -60,16 +60,10 @@ public class OCowModel extends DefaultedEntityGeoModel<OCow> {
         CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "chocolate.png")),
         GOLD(new ResourceLocation(LivestockOverhaul.MODID, default_path + "gold.png")),
         MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "mahogany.png")),
-        SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png"))
-        ;
-
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, default_path + "silver.png"));
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/o_cow.geo.json");
