@@ -11,12 +11,10 @@ public class SheepBreed {
         CALIFORNIA_RED,
         HAIR,
         BUNNY,
-        FAT_TAILED;
-
-        public static Breed breedFromOrdinal(int ordinal) {
-            return Breed.values()[ordinal % Breed.values().length];
-        }
-
+        FAT_TAILED,
+        MERINO,
+        LINCOLN;
+        public static Breed breedFromOrdinal(int ordinal) {return Breed.values()[ordinal % Breed.values().length];}
         public SheepBreed.Breed next() {
             return SheepBreed.Breed.values()[(this.ordinal() + 1) % SheepBreed.Breed.values().length];
         }

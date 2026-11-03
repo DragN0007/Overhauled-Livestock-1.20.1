@@ -81,7 +81,7 @@ public class OSheepModel extends DefaultedEntityGeoModel<OSheep> {
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
-    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/sheep/o_sheep.geo.json");
+    public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/o_sheep.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_sheep.animation.json");
 
     @Override

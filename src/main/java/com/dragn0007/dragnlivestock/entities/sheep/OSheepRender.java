@@ -26,6 +26,7 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
         Optional<GeoBone> body = this.getGeoModel().getBone("body");
         Optional<GeoBone> wool_body = this.getGeoModel().getBone("wool_body");
         Optional<GeoBone> wool_neck = this.getGeoModel().getBone("wool_neck");
+        Optional<GeoBone> wool_head = this.getGeoModel().getBone("wool_head");
         Optional<GeoBone> wool_rt = this.getGeoModel().getBone("right_thigh_wool");
         Optional<GeoBone> wool_lt = this.getGeoModel().getBone("left_thigh_wool");
         Optional<GeoBone> horns = this.getGeoModel().getBone("horns");
@@ -91,13 +92,18 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
             if (!entity.isBaby() && entity.isSheared()) {
                 wool_body.ifPresent(b -> b.setHidden(true));
                 wool_neck.ifPresent(b -> b.setHidden(true));
+                wool_head.ifPresent(b -> b.setHidden(true));
                 wool_rt.ifPresent(b -> b.setHidden(true));
                 wool_lt.ifPresent(b -> b.setHidden(true));
             } else {
                 wool_body.ifPresent(b -> b.setHidden(false));
                 wool_neck.ifPresent(b -> b.setHidden(false));
+                wool_head.ifPresent(b -> b.setHidden(false));
                 wool_rt.ifPresent(b -> b.setHidden(false));
                 wool_lt.ifPresent(b -> b.setHidden(false));
+                if (entity.getBreed() == 0 || entity.getBreed() == 1 || entity.getBreed() == 3 || entity.getBreed() == 4 ||
+                        entity.getBreed() == 6 || entity.getBreed() == 7 || entity.getBreed() == 8)
+                    wool_head.ifPresent(b -> b.setHidden(true));
             }
 
             if (entity.getHornVariant() == 0) {
@@ -134,7 +140,7 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
                 racka_horns.ifPresent(b -> b.setHidden(false));
             }
 
-            if (entity.getBreed() == 2 || entity.getBreed() == 4) {
+            if (entity.getBreed() == 2 || entity.getBreed() == 4 || entity.getBreed() == 9 || entity.getBreed() == 10) {
                 wool_body.ifPresent(b -> b.setScaleY(1.1F));
                 wool_body.ifPresent(b -> b.setScaleX(1.1F));
                 wool_body.ifPresent(b -> b.setScaleZ(1.1F));
@@ -150,6 +156,11 @@ public class OSheepRender extends GeoEntityRenderer<OSheep> {
                 tail.ifPresent(b -> b.setScaleY(1.1F));
                 tail.ifPresent(b -> b.setScaleX(1.1F));
                 tail.ifPresent(b -> b.setScaleZ(1.1F));
+                if (entity.getBreed() == 10) {
+                    wool_head.ifPresent(b -> b.setScaleY(1.1F));
+                    wool_head.ifPresent(b -> b.setScaleX(1.1F));
+                    wool_head.ifPresent(b -> b.setScaleZ(1.1F));
+                }
             } else if (!(entity.getBreed() == 6)) {
                 wool_body.ifPresent(b -> b.setScaleY(1.0F));
                 wool_body.ifPresent(b -> b.setScaleX(1.0F));

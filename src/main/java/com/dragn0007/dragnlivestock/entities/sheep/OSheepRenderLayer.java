@@ -93,63 +93,26 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
         FANCY_SPLOTCHED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_splotched.png")),
         FANCY_SOCKS_BACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_socks_back.png")),
         FANCY_SOCKS_FRONT(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/fancy_socks_front.png")),
-        ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/roan.png")),
-        ;
-
-        //Add new entries to bottom when mod is public, else sheep will change textures during update.
-
+        ROAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/roan.png"));
         public final ResourceLocation resourceLocation;
-        Marking(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Marking overlayFromOrdinal(int overlay) { return Marking.values()[overlay % Marking.values().length];
-        }
+        Marking(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Marking overlayFromOrdinal(int overlay) { return Marking.values()[overlay % Marking.values().length];}
     }
 
     public static String default_path = "textures/entity/sheep/wool/";
-    public static String config_simplified_path = "textures/entity/config_simplified/sheep/wool/";
-
     public enum WoolColor {
-//        BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
-//        BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
-//        GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grey.png")),
-//        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light_grey.png")),
-//        TAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png")),
-        ;
-
+        BLACK(new ResourceLocation(LivestockOverhaul.MODID, default_path + "black.png")),
+        BROWN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "brown.png")),
+        GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "grey.png")),
+        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "light_grey.png")),
+        TAN(new ResourceLocation(LivestockOverhaul.MODID, default_path + "tan.png")),
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, default_path + "white.png")),;
         public final ResourceLocation resourceLocation;
-        WoolColor(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static WoolColor overlayFromOrdinal(int overlay) { return WoolColor.values()[overlay % WoolColor.values().length];
-        }
-    }
-
-
-    public enum SWoolColor {
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "black.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "brown.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "grey.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "light_grey.png")),
-        TAN(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, config_simplified_path + "white.png")),
-        ;
-
-        public final ResourceLocation resourceLocation;
-        SWoolColor(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SWoolColor overlayFromOrdinal(int overlay) { return SWoolColor.values()[overlay % SWoolColor.values().length];
-        }
+        WoolColor(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static WoolColor overlayFromOrdinal(int overlay) { return WoolColor.values()[overlay % WoolColor.values().length];}
     }
 
     public static String dye_default_path = "textures/entity/sheep/wool/";
-    public static String dye_config_simplified_path = "textures/entity/config_simplified/sheep/wool/";
-
     public enum DyeOverlay {
         NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, dye_default_path + "black.png")),
@@ -167,45 +130,9 @@ public class OSheepRenderLayer extends GeoRenderLayer<OSheep> {
         PURPLE(new ResourceLocation(LivestockOverhaul.MODID, dye_default_path + "purple.png")),
         RED(new ResourceLocation(LivestockOverhaul.MODID, dye_default_path + "red.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, dye_default_path + "white.png")),
-        YELLOW(new ResourceLocation(LivestockOverhaul.MODID, dye_default_path + "yellow.png")),
-        ;
-
+        YELLOW(new ResourceLocation(LivestockOverhaul.MODID, dye_default_path + "yellow.png"));
         public final ResourceLocation resourceLocation;
-        DyeOverlay(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static DyeOverlay overlayFromOrdinal(int overlay) { return DyeOverlay.values()[overlay % DyeOverlay.values().length];
-        }
+        DyeOverlay(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static DyeOverlay overlayFromOrdinal(int overlay) { return DyeOverlay.values()[overlay % DyeOverlay.values().length];}
     }
-
-    public enum SDyeOverlay {
-        NONE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/sheep/overlay/none.png")),
-        BLACK(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "black.png")),
-        BLUE(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "blue.png")),
-        BROWN(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "brown.png")),
-        CYAN(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "cyan.png")),
-        GREEN(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "green.png")),
-        GREY(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "grey.png")),
-        LIGHT_BLUE(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "light_blue.png")),
-        LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "light_grey.png")),
-        LIME(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "lime.png")),
-        MAGENTA(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "magenta.png")),
-        ORANGE(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "orange.png")),
-        PINK(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "pink.png")),
-        PURPLE(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "purple.png")),
-        RED(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "red.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "white.png")),
-        YELLOW(new ResourceLocation(LivestockOverhaul.MODID, dye_config_simplified_path + "yellow.png")),
-        ;
-
-        public final ResourceLocation resourceLocation;
-        SDyeOverlay(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static SDyeOverlay overlayFromOrdinal(int overlay) { return SDyeOverlay.values()[overlay % SDyeOverlay.values().length];
-        }
-    }
-
 }

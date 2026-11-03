@@ -52,7 +52,7 @@ public class CaribouModel extends DefaultedEntityGeoModel<Caribou> {
         IVORY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/ivory.png")),
         LIGHT_GREY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/light_grey.png")),
         LIVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/liver_chestnut.png")),
-        PALAMINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/palamino.png")),
+        PALOMINO(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/palomino.png")),
         RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/red.png")),
         SEAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/seal.png")),
         STRAWBERRY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/reindeer/strawberry.png")),
