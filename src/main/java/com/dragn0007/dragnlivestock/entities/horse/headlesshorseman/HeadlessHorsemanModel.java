@@ -1,44 +1,38 @@
 package com.dragn0007.dragnlivestock.entities.horse.headlesshorseman;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.horse.OHorse;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeadlessHorsemanModel extends GeoModel<HeadlessHorseman> {
+public class HeadlessHorsemanModel extends DefaultedEntityGeoModel<HeadlessHorseman> {
+    public HeadlessHorsemanModel() {super(new ResourceLocation(LivestockOverhaul.MODID, "headless_horseman"), true);}
 
-    public enum Variant {
-        HEADLESS_HORSEMAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/horse/horseman_horse.png"));
+    @Override
+    public void setCustomAnimations(HeadlessHorseman animatable, long instanceId, AnimationState<HeadlessHorseman> animationState) {}
 
-        public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
-    }
-
+    public static final ResourceLocation TEXTURE = new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/headless_horseman.png");
     public static final ResourceLocation MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/headless_horseman.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/headless_horseman.animation.json");
-    @Override
-    public ResourceLocation getModelResource(HeadlessHorseman object) {
-        return MODEL;
-    }
 
+    @Override
+    public ResourceLocation getModelResource(HeadlessHorseman object) {return MODEL;}
 
     public static final Map<String, ResourceLocation> TEXTURE_CACHE = new HashMap<>();
 
     @Override
-    public ResourceLocation getTextureResource(HeadlessHorseman object) {
-        return TEXTURE_CACHE.computeIfAbsent(object.getTextureResource(), ResourceLocation::tryParse);
-    }
+    public ResourceLocation getTextureResource(HeadlessHorseman object) {return TEXTURE;}
 
     @Override
-    public ResourceLocation getAnimationResource(HeadlessHorseman animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(HeadlessHorseman animatable) {return ANIMATION;}
 }
 

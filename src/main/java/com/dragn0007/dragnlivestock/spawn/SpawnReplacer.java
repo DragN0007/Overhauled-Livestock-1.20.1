@@ -56,11 +56,13 @@ import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -73,6 +75,8 @@ import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
@@ -142,19 +146,37 @@ public class SpawnReplacer {
                 if (event.getEntity().getClass() == Horse.class && (((!(vanillaHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
 
                     //spawn Headless Horseman
-                    if (((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get() && level.isNight() && level.getRandom().nextDouble() <= 0.12)
-                            || ((level.isNight() && level.getRandom().nextDouble() <= 0.02))) {
+                    if (((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get() && level.isNight() && level.getRandom().nextDouble() <= 0.12) ||
+                    ((level.isNight() && level.getRandom().nextDouble() <= 0.02))) {
                         HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(level);
+                        OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                         if (headlessHorseman != null) {
-                            headlessHorseman.copyPosition(vanillaHorse);
+                            level.addFreshEntity(oHorse);
                             level.addFreshEntity(headlessHorseman);
-                            headlessHorseman.setVariant(0);
+                            oHorse.copyPosition(vanillaHorse);
+                            oHorse.setCustomName(Component.nullToEmpty("Daredevil"));
+                            oHorse.setAge(vanillaHorse.getAge());
+                            oHorse.randomizeOHorseAttributes();
+                            oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
+                            oHorse.setBreed(5);
+                            oHorse.setVariant(2);
+                            oHorse.setOverlayVariant(0);
+                            oHorse.setFeathering(2);
+                            oHorse.setManeType(1);
+                            oHorse.setTailType(2);
+                            oHorse.setEyeVariant(10);
+                            oHorse.setSaddleItem(new ItemStack(LOItems.BLACK_LIGHT_SADDLE.get()));
+                            oHorse.setDecorItem(new ItemStack(LOItems.MODERN_BLANKETS.get(DyeColor.BLACK).get()));
+                            oHorse.updateContainerEquipment();
+                            oHorse.setTamed(true);
+                            oHorse.setHallow(true);
+                            headlessHorseman.startRiding(oHorse);
                             if (level.isClientSide) vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
-                            level.addFreshEntity(headlessHorseman);
                             vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
 
+                    //spawn normal horse
                     OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                     if (oHorse != null) {
                         //try to take on as many identifiers from the vanilla horse possible
@@ -205,7 +227,8 @@ public class SpawnReplacer {
                         if (LivestockOverhaulCommonConfig.EYES_BY_COLOR.get()) {
                             oHorse.setEyeColorByChance();
                         } else {
-                            oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
+                            do oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
+                            while (oHorse.getEyeVariant() == 10);
                         }
 
                         if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWN_PERCENT.get()) {

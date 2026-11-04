@@ -6,6 +6,7 @@ import com.dragn0007.dragnlivestock.common.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.*;
 import com.dragn0007.dragnlivestock.entities.donkey.ODonkey;
+import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.entities.util.LOAnims;
@@ -224,9 +225,15 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	@Override
 	public boolean canAddPassenger(Entity entity) {
-		if (!this.isDraftBreed()) return this.getPassengers().isEmpty();
-		else if (this.isDraftBreed()) return this.getPassengers().size() < 2;
-		else return false;
+		if (this.hasControllingPassenger() && this.getControllingPassenger() instanceof HeadlessHorseman) {
+			return false;
+		} else if (!this.isDraftBreed()) {
+			return this.getPassengers().isEmpty();
+		} else if (this.isDraftBreed()) {
+			return this.getPassengers().size() < 2;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -290,10 +297,10 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			if (getBreed() == 5) {
 				switch (passengers) {
 					case 0:
-						offsetY = 1.3;
+						offsetY = 1.25;
 						break;
 					case 1:
-						offsetY = 1.25;
+						offsetY = 1.2;
 						offsetZ = -0.7;
 						break;
 				}

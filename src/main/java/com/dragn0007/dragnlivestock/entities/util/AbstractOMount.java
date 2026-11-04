@@ -10,6 +10,7 @@ import com.dragn0007.dragnlivestock.entities.farm_goat.GoatBreed;
 import com.dragn0007.dragnlivestock.entities.goat.OGoat;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.mule.MuleBreed;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
@@ -505,8 +506,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
         //default stuff
         if (!this.isBaby()) {
             if (this.isTamed() && player.isSecondaryUseActive()) {
-                this.openInventory(player);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                if (!this.hasControllingPassenger() && !(this.getControllingPassenger() instanceof HeadlessHorseman)) {
+                    this.openInventory(player);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
+                }
             }
 
             if(this.isVehicle()) {
@@ -571,8 +574,10 @@ public abstract class AbstractOMount extends AbstractChestedHorse {
 
             boolean canSaddle = !this.isBaby() && !this.isSaddled() && this.isSaddle(itemStack);
             if (this.isArmor(itemStack) || canSaddle) {
-                this.openInventory(player);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                if (!this.hasControllingPassenger() && !(this.getControllingPassenger() instanceof HeadlessHorseman)) {
+                    this.openInventory(player);
+                    return InteractionResult.sidedSuccess(this.level().isClientSide);
+                }
             }
         }
 
