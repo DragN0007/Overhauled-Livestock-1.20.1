@@ -17,11 +17,8 @@ public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
 
     @Override
     public void setCustomAnimations(OMooshroom animatable, long instanceId, AnimationState<OMooshroom> animationState) {
-
         CoreGeoBone neck = getAnimationProcessor().getBone("neck");
         CoreGeoBone head = getAnimationProcessor().getBone("head");
-        CoreGeoBone left_ear = getAnimationProcessor().getBone("left_ear");
-        CoreGeoBone right_ear = getAnimationProcessor().getBone("right_ear");
         EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
         if (neck != null) {

@@ -666,31 +666,29 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 	@Override
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-		if (data == null) {
-			data = new AgeableMobGroupData(0.2F);
-		}
+		if (data == null) {data = new AgeableMobGroupData(0.2F);}
 		Random random = new Random();
 
-		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
-		if (LivestockOverhaulCommonConfig.QUALITY.get()) this.setQuality(random.nextInt(30));
+		if (this.getClass() == OCow.class) {
+			do this.setBreed(random.nextInt(CowBreed.Breed.values().length));
+			while (this.getBreed() == 10);
 
-		if (this.getBreed() == 10) {
-			this.setGender(1);
-		} else {
-			this.setGender(random.nextInt(OCow.Gender.values().length));
+			if (this.getBreed() == 10) this.setGender(1);
+			else this.setGender(random.nextInt(OCow.Gender.values().length));
+
+			if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
+				this.setColorByBreed();
+				this.setMarkingByBreed();
+				this.setHornsByBreed();
+			} else {
+				this.setVariant(random.nextInt(OCowModel.Variant.values().length));
+				this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+				this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
+			}
+
+			if (LivestockOverhaulCommonConfig.QUALITY.get()) this.setQuality(random.nextInt(30));
+			this.setAttackDamage();
 		}
-
-		if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-			this.setColorByBreed();
-			this.setMarkingByBreed();
-			this.setHornsByBreed();
-		} else {
-			this.setVariant(random.nextInt(OCowModel.Variant.values().length));
-			this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
-			this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
-		}
-
-		this.setAttackDamage();
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 

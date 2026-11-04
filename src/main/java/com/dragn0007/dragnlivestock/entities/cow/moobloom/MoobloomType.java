@@ -25,9 +25,7 @@ public enum MoobloomType {
     WHEAT(new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/crop_moobloom.geo.json")),
     AZALEA(new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/moobloom.geo.json")),
     SWEET_BERRY(new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/moobloom.geo.json")),
-    PEACH(new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/moobloom.geo.json"))
-    ;
-
+    PEACH(new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/moobloom.geo.json"));
     public final ResourceLocation resourceLocation;
     MoobloomType(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
     public static MoobloomType breedFromOrdinal(int ordinal) {return MoobloomType.values()[ordinal % MoobloomType.values().length];}

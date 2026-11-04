@@ -233,6 +233,7 @@ public class Moobloom extends OCow implements GeoEntity {
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {return null;}
 
+    public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HORN_TYPE = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Integer> BRAND_TAG_COLOR = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.INT);
@@ -242,7 +243,7 @@ public class Moobloom extends OCow implements GeoEntity {
     public static final EntityDataAccessor<Boolean> BELLED = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.INT);
-    public ResourceLocation getTextureLocation() {return OMooshroomModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+    public ResourceLocation getTextureLocation() {return MoobloomModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
     public int getVariant() {return this.entityData.get(VARIANT);}
     public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
@@ -251,7 +252,7 @@ public class Moobloom extends OCow implements GeoEntity {
     public void setSheared(boolean sheared) {this.entityData.set(SHEARED, sheared);}
 
     public static final EntityDataAccessor<Integer> PLANT_TYPE = SynchedEntityData.defineId(Moobloom.class, EntityDataSerializers.INT);
-    public ResourceLocation getModelResource() {return MoobloomType.breedFromOrdinal(getBreed()).resourceLocation;}
+    public ResourceLocation getModelResource() {return MoobloomType.breedFromOrdinal(getPlantType()).resourceLocation;}
     public int getPlantType() {return this.entityData.get(PLANT_TYPE);}
     public void setPlantType(int variant) {this.entityData.set(PLANT_TYPE, variant);}
 
@@ -262,7 +263,7 @@ public class Moobloom extends OCow implements GeoEntity {
         if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
         if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
         if (tag.contains("HornType")) {setHornVariant(tag.getInt("HornType"));}
-        if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+        if (tag.contains("Gender")) {this.setGender(0);}
         if (tag.contains("MilkedTime")) {this.replenishMilkCounter = tag.getInt("MilkedTime");}
         if (tag.contains("Milked")) {setMilked(tag.getBoolean("Milked"));}
         if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
@@ -303,7 +304,9 @@ public class Moobloom extends OCow implements GeoEntity {
         this.setVariant(this.getPlantType());
         this.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
         this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
+        this.setBreed(0);
         this.setGender(0);
+        this.setQuality(100);
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
 
@@ -313,6 +316,7 @@ public class Moobloom extends OCow implements GeoEntity {
         this.entityData.define(PLANT_TYPE, 0);
         this.entityData.define(VARIANT, 0);
         this.entityData.define(OVERLAY, 0);
+        this.entityData.define(GENDER, 0);
         this.entityData.define(HORN_TYPE, 0);
         this.entityData.define(BRAND_TAG_COLOR, DyeColor.YELLOW.getId());
         this.entityData.define(TAGGED, false);

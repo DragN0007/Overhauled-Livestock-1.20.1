@@ -58,9 +58,7 @@ public class MoobloomModel extends DefaultedEntityGeoModel<Moobloom> {
         WHEAT(new ResourceLocation(LivestockOverhaul.MODID, default_path + "wheat.png")),
         AZALEA(new ResourceLocation(LivestockOverhaul.MODID, default_path + "azalea.png")),
         SWEET_BERRY(new ResourceLocation(LivestockOverhaul.MODID, default_path + "sweet_berry.png")),
-        PEACH(new ResourceLocation(LivestockOverhaul.MODID, default_path + "peach.png"))
-        ;
-
+        PEACH(new ResourceLocation(LivestockOverhaul.MODID, default_path + "peach.png"));
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
@@ -69,7 +67,7 @@ public class MoobloomModel extends DefaultedEntityGeoModel<Moobloom> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(Moobloom object) {return MoobloomType.breedFromOrdinal(object.getBreed()).resourceLocation;}
+    public ResourceLocation getModelResource(Moobloom object) {return MoobloomType.breedFromOrdinal(object.getPlantType()).resourceLocation;}
 
     @Override
     public ResourceLocation getTextureResource(Moobloom object) {return object.getTextureLocation();}
