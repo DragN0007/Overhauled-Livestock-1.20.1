@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.entities.pig;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -118,13 +119,13 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 
 		if (tAnimationState.isMoving()) {
 			if (currentSpeed > speedThreshold) {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.WALK);
 				controller.setAnimationSpeed(2.0);
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.WALK);
 			}
 		} else {
-			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.IDLE);
 		}
 
 		return PlayState.CONTINUE;

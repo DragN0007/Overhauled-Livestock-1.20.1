@@ -30,4 +30,5 @@ public class LOAnims {
     public static final RawAnimation RIGHT_WALK_STRAFE = RawAnimation.begin().then("right_walk_strafe", Animation.LoopType.LOOP);
     public static final RawAnimation JUMP = RawAnimation.begin().then("jump", Animation.LoopType.PLAY_ONCE);
     public static final RawAnimation BUCK = RawAnimation.begin().then("buck", Animation.LoopType.LOOP);
+    public static final RawAnimation SWIM = RawAnimation.begin().then("swim", Animation.LoopType.LOOP);
 }

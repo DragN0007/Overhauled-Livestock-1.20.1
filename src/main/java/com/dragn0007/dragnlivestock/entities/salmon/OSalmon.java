@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.salmon;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.util.AbstractSchoolingOFish;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -92,7 +93,7 @@ public class OSalmon extends AbstractSchoolingOFish implements GeoEntity {
 			} else if(currentSpeed < speedThreshold) {
 				controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.IDLE);
 			}
 		}
 

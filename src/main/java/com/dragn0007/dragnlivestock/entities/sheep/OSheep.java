@@ -4,6 +4,7 @@ import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.ai.SheepFollowHerdLeaderGoal;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;
@@ -392,13 +393,13 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 
 		if (tAnimationState.isMoving()) {
 			if (currentSpeed > speedThreshold) {
-				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.RUN);
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.WALK);
 				controller.setAnimationSpeed(1.4);
 			}
 		} else {
-			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.IDLE);
 		}
 
 		return PlayState.CONTINUE;

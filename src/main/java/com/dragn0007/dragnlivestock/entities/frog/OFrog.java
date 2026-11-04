@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.entities.frog;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.ai.FrogSitOnBlockGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -137,14 +138,10 @@ public class OFrog extends Animal implements GeoEntity {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (isMoving) {
-			if (currentSpeed > speedThreshold) {
-				controller.setAnimation(RawAnimation.begin().then("hop", Animation.LoopType.LOOP));
-				controller.setAnimationSpeed(2.0);
-			} else {
-				controller.setAnimation(RawAnimation.begin().then("hop", Animation.LoopType.LOOP));
-			}
-		} else {
-			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+            controller.setAnimation(RawAnimation.begin().then("hop", Animation.LoopType.LOOP));
+            if (currentSpeed > speedThreshold) controller.setAnimationSpeed(2.0);
+        } else {
+			controller.setAnimation(LOAnims.IDLE);
 		}
 
 		return PlayState.CONTINUE;

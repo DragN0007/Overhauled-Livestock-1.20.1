@@ -150,14 +150,14 @@ public class OLlama extends AbstractChestedHorse implements GeoEntity, Chestable
 
 		if (isMoving) {
 			if (currentSpeed > speedThreshold) {
-				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.RUN);
 				controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.WALK);
 				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 			}
 		} else {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.IDLE);
 			controller.setAnimationSpeed(1.0);
 		}
 		return PlayState.CONTINUE;

@@ -7,6 +7,7 @@ import com.dragn0007.dragnlivestock.entities.ai.FarmGoatFollowCaravanGoal;
 import com.dragn0007.dragnlivestock.entities.ai.GoatFollowOwnerGoal;
 import com.dragn0007.dragnlivestock.entities.ai.OAvoidEntityGoal;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.entities.util.Taggable;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
@@ -376,13 +377,13 @@ public class FarmGoat extends AbstractOMount implements GeoEntity, Taggable {
 
 		if (isMoving) {
 			if (currentSpeed > speedThreshold) {
-				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.RUN);
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.WALK);
 				controller.setAnimationSpeed(1.6);
 			}
 		} else {
-			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.IDLE);
 			controller.setAnimationSpeed(1.0);
 		}
 		return PlayState.CONTINUE;

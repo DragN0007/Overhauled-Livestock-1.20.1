@@ -128,20 +128,20 @@ public class HeadlessHorseman extends OHorse implements GeoEntity {
 
 		if(tAnimationState.isMoving()) {
 			if(this.isAggressive() || (this.isVehicle() && this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-				controller.setAnimation(RawAnimation.begin().then("sprint", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.SPRINT);
 				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 
 			} else if
 			((this.isVehicle() && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(WALK_SPEED_MOD) && !this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(SPRINT_SPEED_MOD))) {
-				controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.RUN);
 				controller.setAnimationSpeed(Math.max(0.1, 0.8 * controller.getAnimationSpeed() + animationSpeed));
 
 			} else {
-				controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.WALK);
 				controller.setAnimationSpeed(Math.max(0.1, 0.82 * controller.getAnimationSpeed() + animationSpeed));
 			}
 		} else {
-				controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+				controller.setAnimation(LOAnims.IDLE);
 			controller.setAnimationSpeed(1.0);
 		}
 		return PlayState.CONTINUE;

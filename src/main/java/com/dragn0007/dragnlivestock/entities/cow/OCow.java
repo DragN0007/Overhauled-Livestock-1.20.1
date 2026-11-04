@@ -188,7 +188,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (this.isHarnessed() && this.isVehicle()) {
-			controller.setAnimation(RawAnimation.begin().then("buck", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.BUCK);
 			controller.setAnimationSpeed(1.3);
 		} else {
 			if (isMoving) {
@@ -197,17 +197,17 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 						controller.setAnimation(RawAnimation.begin().then("charge", Animation.LoopType.LOOP));
 						controller.setAnimationSpeed(1.1);
 					} else {
-						controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+						controller.setAnimation(LOAnims.RUN);
 						controller.setAnimationSpeed(1.1);
 					}
 				} else {
-					controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+					controller.setAnimation(LOAnims.WALK);
 				}
 			} else {
 				if (this.isAggressive()) {
 					controller.setAnimation(RawAnimation.begin().then("posture", Animation.LoopType.LOOP));
 				} else {
-					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+					controller.setAnimation(LOAnims.IDLE);
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.frog.food;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.GrubSweaterItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -151,7 +152,7 @@ public class Grub extends Animal implements GeoEntity {
 				controller.setAnimationSpeed(1.5);
 			}
 		} else {
-			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.IDLE);
 		}
 
 		return PlayState.CONTINUE;

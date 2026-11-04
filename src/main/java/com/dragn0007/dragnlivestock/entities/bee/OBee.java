@@ -1,6 +1,7 @@
 package com.dragn0007.dragnlivestock.entities.bee;
 
 import com.dragn0007.dragnlivestock.entities.EntityTypes;
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
@@ -55,7 +56,7 @@ public class OBee extends Bee implements GeoEntity {
 				if (!tAnimationState.isMoving() && !this.onGround()) {
 					controller.setAnimation(RawAnimation.begin().then("idle_flap", Animation.LoopType.LOOP));
 				} else {
-					controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+					controller.setAnimation(LOAnims.IDLE);
 				}
 			}
 		return PlayState.CONTINUE;

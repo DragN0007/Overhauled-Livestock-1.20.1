@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.entities.frog;
 
+import com.dragn0007.dragnlivestock.entities.util.LOAnims;
 import net.minecraft.world.entity.EntityType;
 import software.bernie.geckolib.animatable.GeoReplacedEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -20,7 +21,7 @@ public class ReplacedTadpole implements GeoReplacedEntity {
 		if (tAnimationState.isMoving()) {
 				controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
 		} else {
-			controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+			controller.setAnimation(LOAnims.IDLE);
 		}
 		return PlayState.CONTINUE;
 	}

@@ -419,6 +419,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		} else if (this.isJumping()) {
 			controller.setAnimation(LOAnims.JUMP);
 			controller.setAnimationSpeed(1.0);
+		} else if (this.isInWater()) {
+			controller.setAnimation(LOAnims.SWIM);
+			controller.setAnimationSpeed(1.0);
 		} else {
 			if (isMoving && !isMovingBackwards) {
 
