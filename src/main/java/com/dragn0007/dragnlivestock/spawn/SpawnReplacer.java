@@ -30,7 +30,6 @@ import com.dragn0007.dragnlivestock.entities.goat.OGoatBodyLayer;
 import com.dragn0007.dragnlivestock.entities.goat.OGoatModel;
 import com.dragn0007.dragnlivestock.entities.horse.HorseBreed;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
-import com.dragn0007.dragnlivestock.entities.horse.OHorseBodyLayer;
 import com.dragn0007.dragnlivestock.entities.horse.OHorseModel;
 import com.dragn0007.dragnlivestock.entities.horse.headlesshorseman.HeadlessHorseman;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
