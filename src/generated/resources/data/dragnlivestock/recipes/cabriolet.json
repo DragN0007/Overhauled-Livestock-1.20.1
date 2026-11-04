@@ -16,9 +16,9 @@
     }
   },
   "pattern": [
-    " C ",
-    "#A#",
-    " B "
+    "C ",
+    "A#",
+    "B "
   ],
   "result": {
     "item": "dragnlivestock:cabriolet"

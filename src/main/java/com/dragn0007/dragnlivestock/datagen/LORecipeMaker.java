@@ -354,9 +354,9 @@ public class LORecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .define('A', LOItems.WAGON_BODY.get())
                 .define('B', LOItems.WAGON_AXEL.get())
                 .define('C', LOItems.WAGON_COVER.get())
-                .pattern(" C ")
-                .pattern("#A#")
-                .pattern(" B ")
+                .pattern("C ")
+                .pattern("A#")
+                .pattern("B ")
                 .unlockedBy("has_wood", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(ItemTags.PLANKS).build()))
                 .save(pFinishedRecipeConsumer);

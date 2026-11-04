@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-09T01:06:13.1114538	Recipes
+// 1.20.1	2026-11-03T23:05:25.0864981	Recipes
 9c5d3130899a63b310c33f027407dbd1149a920f data/dragnlivestock/advancements/recipes/misc/beef_strips.json
 4a09907e0fd4dd081a07505996f2a32e5a4fef34 data/dragnlivestock/advancements/recipes/misc/black_brand_tag.json
 2233de36be6fbd7c999e2bf865ae39fe94d93993 data/dragnlivestock/advancements/recipes/misc/black_grub_sweater.json
@@ -338,7 +338,7 @@ c8c9abb99fcf796d0652de9f883ae9a62b6d877d data/dragnlivestock/recipes/brown_accen
 4a35ef22eb70f45ffa8bcf66bb93935ef6c928db data/dragnlivestock/recipes/brown_wool_from_wool_dye_8.json
 402a0c0781723ec47062f5becc025f9541c6be0a data/dragnlivestock/recipes/brown_wool_staple.json
 17373944e7f58fdee505cc861aacb83d8253cedf data/dragnlivestock/recipes/brown_wool_staple_8.json
-af065db56d4cf8f210a131e4d935c5a626fbf130 data/dragnlivestock/recipes/cabriolet.json
+d15e569975e91e4c03cad6c7d6816f62bb808fd3 data/dragnlivestock/recipes/cabriolet.json
 92718dfccc918a9c447d836f4c7cf19a71038fe5 data/dragnlivestock/recipes/carrot_soup.json
 1d6cb46b295e375e0149df4fb2392eb14eb74b6d data/dragnlivestock/recipes/chainmail_horse_armor.json
 f903ff83abaf79049a3939946607b74129347b6a data/dragnlivestock/recipes/cheesecake.json
