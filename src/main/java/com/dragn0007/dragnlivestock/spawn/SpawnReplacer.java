@@ -176,7 +176,7 @@ public class SpawnReplacer {
                                 int[] breeds = {1, 5, 6, 8, 12, 15, 16, 17, 19, 21, 22};
                                 int randomIndex = new Random().nextInt(breeds.length);
                                 oHorse.setBreed(breeds[randomIndex]);
-                            } else if (!ModList.get().isLoaded("deadlydinos")) {
+                            } else if (ModList.get().isLoaded("deadlydinos")) {
                                 oHorse.setBreed(random.nextInt(HorseBreed.values().length));
                             } else {
                                 do oHorse.setBreed(random.nextInt(HorseBreed.values().length));
@@ -341,6 +341,9 @@ public class SpawnReplacer {
 
                                 moobloom.setVariant(moobloom.getPlantType());
                                 moobloom.setOverlayVariant(random.nextInt(BovineMarkingOverlay.values().length));
+                                moobloom.setBreed(0);
+                                moobloom.setGender(0);
+                                moobloom.setQuality(100);
                                 if (level.isClientSide) vanillacow.remove(Entity.RemovalReason.DISCARDED);
                             }
                             level.addFreshEntity(moobloom);
@@ -353,7 +356,8 @@ public class SpawnReplacer {
                         if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                             if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                                 if (random.nextDouble() < 0.20) {
-                                    oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                                    do oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                                    while (oCow.getBreed() == 10);
                                 } else {
                                     int[] variants = {1, 2, 4, 5};
                                     int randomIndex = new Random().nextInt(variants.length);
@@ -361,7 +365,8 @@ public class SpawnReplacer {
                                 }
                             } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
                                 if (random.nextDouble() < 0.20) {
-                                    oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                                    do oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                                    while (oCow.getBreed() == 10);
                                 } else {
                                     oCow.setBreed(9);
                                 }
@@ -371,7 +376,8 @@ public class SpawnReplacer {
                                 oCow.setBreed(variants[randomIndex]);
                             }
                         } else {
-                            oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                            do oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
+                            while (oCow.getBreed() == 10);
                         }
 
                         oCow.copyPosition(vanillacow);
