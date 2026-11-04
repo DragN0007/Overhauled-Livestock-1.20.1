@@ -44,7 +44,12 @@ public class OLlamaModel extends DefaultedEntityGeoModel<OLlama> {
         RED(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/red.png")),
         SANDY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/sandy.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/tan.png")),
-        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/white.png"));
+        WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/white.png")),
+        CHOCOLATE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/chocolate.png")),
+        CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/cream.png")),
+        MAHOGANY(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/mahogany.png")),
+        SEAL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/seal.png")),
+        SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/llama/silver.png"));
         public final ResourceLocation resourceLocation;
         Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
@@ -54,18 +59,12 @@ public class OLlamaModel extends DefaultedEntityGeoModel<OLlama> {
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_llama.animation.json");
 
     @Override
-    public ResourceLocation getModelResource(OLlama object) {
-        return MODEL;
-    }
+    public ResourceLocation getModelResource(OLlama object) {return MODEL;}
 
     @Override
-    public ResourceLocation getTextureResource(OLlama object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getTextureResource(OLlama object) {return object.getTextureLocation();}
 
     @Override
-    public ResourceLocation getAnimationResource(OLlama animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OLlama animatable) {return ANIMATION;}
 }
 

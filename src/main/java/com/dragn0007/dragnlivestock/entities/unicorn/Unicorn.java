@@ -421,10 +421,7 @@ public class Unicorn extends OHorse implements GeoEntity {
 		return false;
 	}
 
-	public enum Gender {
-		FEMALE,
-		MALE
-	}
+	public enum Gender {FEMALE,MALE}
 	public boolean isFemale() {return this.getGender() == 0;}
 	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(Unicorn.class, EntityDataSerializers.INT);

@@ -318,10 +318,7 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		if(soundSource != null) this.level().playSound(null, this, SoundEvents.BOOK_PAGE_TURN, soundSource, 0.5f, 1f);
 	}
 
-	public enum Gender {
-		FEMALE,
-		MALE
-	}
+	public enum Gender {FEMALE,MALE}
 	public boolean isFemale() {return this.getGender() == 0;}
 	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OPig.class, EntityDataSerializers.INT);

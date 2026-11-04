@@ -672,10 +672,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		Random random = new Random();
 
 		this.setBreed(random.nextInt(CowBreed.Breed.values().length));
-
-		if (LivestockOverhaulCommonConfig.QUALITY.get()) {
-			this.setQuality(random.nextInt(30));
-		}
+		if (LivestockOverhaulCommonConfig.QUALITY.get()) this.setQuality(random.nextInt(30));
 
 		if (this.getBreed() == 10) {
 			this.setGender(1);
@@ -713,10 +710,7 @@ public class OCow extends AbstractOMount implements GeoEntity, Taggable {
 		this.entityData.define(BELLED, false);
 	}
 
-	public enum Gender {
-		FEMALE,
-		MALE
-	}
+	public enum Gender {FEMALE,MALE}
 	public boolean isFemale() {return this.getGender() == 0;}
 	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OCow.class, EntityDataSerializers.INT);

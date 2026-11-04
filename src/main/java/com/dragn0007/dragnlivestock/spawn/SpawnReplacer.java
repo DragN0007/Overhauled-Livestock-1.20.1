@@ -376,7 +376,8 @@ public class SpawnReplacer {
                         }
 
                         oCow.copyPosition(vanillacow);
-                        oCow.setGender(random.nextInt(OCow.Gender.values().length));
+                        if (oCow.getBreed() == 10) oCow.setGender(1);
+                        else oCow.setGender(random.nextInt(OCow.Gender.values().length));
                         if (LivestockOverhaulCommonConfig.QUALITY.get()) oCow.setQuality(random.nextInt(30));
 
                         if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {

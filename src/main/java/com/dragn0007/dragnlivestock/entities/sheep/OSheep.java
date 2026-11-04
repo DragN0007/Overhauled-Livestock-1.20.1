@@ -559,10 +559,7 @@ public class OSheep extends Animal implements GeoEntity, Taggable {
 		return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
 	}
 
-	public enum Gender {
-		FEMALE,
-		MALE
-	}
+	public enum Gender {FEMALE,MALE}
 	public boolean isFemale() {return this.getGender() == 0;}
 	public boolean isMale() {return this.getGender() == 1;}
 	public static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(OSheep.class, EntityDataSerializers.INT);

@@ -26,7 +26,7 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
     public void preRender(PoseStack poseStack, OLlama animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Optional<GeoBone> body = this.getGeoModel().getBone("body");
         Optional<GeoBone> saddlebags = this.getGeoModel().getBone("saddlebags");
-        Optional<GeoBone> wool_body = this.getGeoModel().getBone("wool_body");
+        Optional<GeoBone> wool_body = this.getGeoModel().getBone("body_wool");
         Optional<GeoBone> blanket = this.getGeoModel().getBone("blanket");
 
         //culls unnecessary bones at a certain distance to improve performance
@@ -61,9 +61,9 @@ public class OLlamaRender extends GeoEntityRenderer<OLlama> {
         }
 
         if(animatable.getWooly() == 0 || animatable.isSheared()) {
-            blanket.ifPresent(b -> b.setHidden(true));
+            wool_body.ifPresent(b -> b.setHidden(true));
         } else {
-            blanket.ifPresent(b -> b.setHidden(false));
+            wool_body.ifPresent(b -> b.setHidden(false));
         }
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
