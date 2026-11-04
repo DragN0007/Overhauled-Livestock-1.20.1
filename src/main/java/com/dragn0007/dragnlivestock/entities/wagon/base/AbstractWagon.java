@@ -22,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -100,10 +101,12 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
                 if(animal == null)
                     continue;
             animal.setNoAi(true);
+            animal.setInvulnerable(true);
             animal.setMaxUpStep(1.0F);
             if(animal.isLeashed()) {
                 setAnimal(null, i);
                 animal.setNoAi(false);
+                animal.setInvulnerable(false);
                 animal.setMaxUpStep(animal.getStepHeight());
             } else if(!isAnimalInRange(i))
                 animal.setPos(rotateY(animalPositions[i], getYRot()).add(position()));
@@ -339,8 +342,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     }
 
     protected void initDraught(Mob animal, int index) {
-        if(animal == null)
-            return;
+        if(animal == null) return;
         animal.ejectPassengers();
         animal.setDeltaMovement(Vec3.ZERO);
         float rot = getYRot();
@@ -355,8 +357,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     }
 
     protected void setAnimalPos(Mob animal, Vec3 pos, float rot) {
-        if(animal == null)
-            return;
+        if(animal == null) return;
         animal.setYRot(rot);
         animal.setYBodyRot(rot);
         animal.setYHeadRot(rot);
@@ -453,10 +454,15 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     protected void setAnimal(Mob animal, int index) {
         Mob old = animals[0];
-        if(old != null && old != animal)
+        if (old != null && old != animal) {
             old.setNoAi(false);
-        if(animal != null)
+            animal.setInvulnerable(false);
+        }
+
+        if (animal != null) {
             animal.setNoAi(true);
+            animal.setInvulnerable(true);
+        }
 
         animals[index] = animal;
         animalUuids[index] = animal != null ? animal.getUUID() : null;
@@ -464,7 +470,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (this.isInvulnerableTo(source)) {
+        if (this.isInvulnerableTo(source) || source.is(DamageTypes.ARROW)) {
             return false;
         } else if (!this.level().isClientSide && !this.isRemoved()) {
             level().playSound(null, blockPosition(), SoundEvents.WOOD_BREAK, SoundSource.MASTER);
@@ -494,8 +500,10 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
             return;
 
         for(Mob animal : animals) {
-            if(animal != null)
+            if(animal != null) {
                 animal.setNoAi(false);
+                animal.setInvulnerable(false);
+            }
         }
 
         ejectPassengers();
@@ -543,21 +551,10 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         setWoodType(Type.values()[tag.getInt("woodType")]);
     }
 
-    public float getHealth() {
-        return entityData.get(DATA_HEALTH);
-    }
-
-    protected void setHealth(float health) {
-        entityData.set(DATA_HEALTH, Mth.clamp(health, 0, maxHealth));
-    }
-
-    public Type getWoodType() {
-        return Type.values()[entityData.get(DATA_TYPE)];
-    }
-
-    public void setWoodType(Type type) {
-        entityData.set(DATA_TYPE, type.ordinal());
-    }
+    public float getHealth() {return entityData.get(DATA_HEALTH);}
+    protected void setHealth(float health) {entityData.set(DATA_HEALTH, Mth.clamp(health, 0, maxHealth));}
+    public Type getWoodType() {return Type.values()[entityData.get(DATA_TYPE)];}
+    public void setWoodType(Type type) {entityData.set(DATA_TYPE, type.ordinal());}
 
     @Override
     protected void defineSynchedData() {
@@ -566,18 +563,14 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
     }
 
     @Override
-    public boolean isControlledByLocalInstance() {
-        return isEffectiveAi();
-    }
+    public boolean isControlledByLocalInstance() {return isEffectiveAi();}
 
     @Override
     public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
         return !getType().is(EntityTypeTags.FALL_DAMAGE_IMMUNE);
     }
 
-    public double getMaxSpeed() {
-        return maxSpeed;
-    }
+    public double getMaxSpeed() {return maxSpeed;}
 
     public enum Type {
         OAK(Blocks.OAK_PLANKS),
@@ -590,17 +583,8 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         DARK_OAK(Blocks.DARK_OAK_PLANKS),
         WARPED(Blocks.WARPED_PLANKS),
         MANGROVE(Blocks.MANGROVE_PLANKS);
-
         protected final Block planks;
-
-        Type(Block planks) {
-            this.planks = planks;
-        }
-
-        public Block getPlanks() {
-            return this.planks;
-        }
-
+        Type(Block planks) {this.planks = planks;}
+        public Block getPlanks() {return this.planks;}
     }
-
 }
