@@ -159,7 +159,7 @@ public class OCowRender extends GeoEntityRenderer<OCow> {
             }
 
             if (!(animatable.getHornVariant() == 0)) {
-                if (!isReRender)  horn_connection.ifPresent(b -> b.setScaleY(2.3F));
+                if (!isReRender)  horn_connection.ifPresent(b -> b.setScaleY(2.0F));
             } else {
                 horn_connection.ifPresent(b -> b.setScaleY(1.0F));
             }
