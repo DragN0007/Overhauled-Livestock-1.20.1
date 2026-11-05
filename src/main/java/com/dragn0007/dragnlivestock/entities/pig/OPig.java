@@ -118,11 +118,11 @@ public class OPig extends Animal implements GeoEntity, Taggable {
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (tAnimationState.isMoving()) {
-			if (currentSpeed > speedThreshold) {
-				controller.setAnimation(LOAnims.WALK);
-				controller.setAnimationSpeed(2.0);
+            controller.setAnimation(LOAnims.WALK);
+            if (currentSpeed > speedThreshold) {
+                controller.setAnimationSpeed(2.0);
 			} else {
-				controller.setAnimation(LOAnims.WALK);
+                controller.setAnimationSpeed(1.2);
 			}
 		} else {
 			controller.setAnimation(LOAnims.IDLE);
