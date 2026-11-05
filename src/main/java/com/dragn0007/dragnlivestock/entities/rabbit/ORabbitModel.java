@@ -51,7 +51,7 @@ public class ORabbitModel extends DefaultedEntityGeoModel<ORabbit> {
         SILVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/silver.png")),
         TAN(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/tan.png")),
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/white.png")),
-        CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/clover_brown.png")),
+        CLOVER(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/chocolate_agouti.png")),
         JACKIE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/jackie.png")),
         CREAM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/cream.png")),
         BLUE_TORTISHELL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/rabbit/blue_tortishell.png")),

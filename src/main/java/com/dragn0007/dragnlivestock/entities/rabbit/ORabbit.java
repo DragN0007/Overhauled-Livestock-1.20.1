@@ -92,19 +92,19 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 3.0D)
-				.add(Attributes.MOVEMENT_SPEED, 0.25F);
+				.add(Attributes.MOVEMENT_SPEED, 0.22F);
 	}
 
 	public static final Ingredient FOOD_ITEMS = Ingredient.of(LOTags.Items.O_RABBIT_EATS);
 
 	public void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.8F));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0F));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
-		this.goalSelector.addGoal(4, new RabbitOAvoidEntityGoal<>(this, Player.class, 8.0F, 2.2D, 2.2D));
-		this.goalSelector.addGoal(4, new RabbitOAvoidEntityGoal<>(this, Wolf.class, 10.0F, 2.2D, 2.2D));
-		this.goalSelector.addGoal(4, new RabbitOAvoidEntityGoal<>(this, Monster.class, 4.0F, 2.2D, 2.2D));
+		this.goalSelector.addGoal(4, new RabbitOAvoidEntityGoal<>(this, Player.class, 8.0F, 2.4D, 2.2D));
+		this.goalSelector.addGoal(4, new RabbitOAvoidEntityGoal<>(this, Wolf.class, 10.0F, 2.4D, 2.2D));
+		this.goalSelector.addGoal(4, new RabbitOAvoidEntityGoal<>(this, Monster.class, 4.0F, 2.4D, 2.2D));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new RaidGardenGoal(this));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
@@ -161,7 +161,6 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 			this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 			this.poopTime = this.random.nextInt(LivestockOverhaulCommonConfig.RABBIT_POOP_TIME.get()) + 6000;
 		}
-
 	}
 
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -289,17 +288,17 @@ public class ORabbit extends TamableAnimal implements GeoEntity {
 
 	protected <T extends GeoAnimatable> PlayState predicate(software.bernie.geckolib.core.animation.AnimationState<T> tAnimationState) {
 		double currentSpeed = this.getDeltaMovement().lengthSqr();
-		double speedThreshold = 0.01;
+		double speedThreshold = 0.02;
 
 		AnimationController<T> controller = tAnimationState.getController();
 
 		if (tAnimationState.isMoving()) {
 			if (currentSpeed > speedThreshold) {
 				controller.setAnimation(LOAnims.RUN);
-				controller.setAnimationSpeed(2.2);
+				controller.setAnimationSpeed(2.4);
 			} else {
 				controller.setAnimation(LOAnims.WALK);
-				controller.setAnimationSpeed(1.7);
+				controller.setAnimationSpeed(2.4);
 			}
 		} else if (this.isInSittingPose()) {
 			controller.setAnimation(RawAnimation.begin().then("sit", Animation.LoopType.LOOP));
