@@ -10,23 +10,17 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class ChickenGenderTooltip implements IEntityComponentProvider {
-
-    public ChickenGenderTooltip() {
-    }
+    public ChickenGenderTooltip() {}
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         OChicken animal = (OChicken)entityAccessor.getEntity();
-        if (animal.isFemale()) {
-            tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.female.tooltip"));
-        } else if (animal.isMale()) {
-            tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.male.tooltip"));
+        if (entityAccessor.getPlayer().isShiftKeyDown()) {
+            if (animal.isFemale()) tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.female.tooltip"));
+            else if (animal.isMale()) tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.male.tooltip"));
         }
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");
-    }
-
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");}
 }

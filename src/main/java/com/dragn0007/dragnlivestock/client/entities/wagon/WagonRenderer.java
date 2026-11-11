@@ -36,5 +36,4 @@ public class WagonRenderer<T extends AbstractWagon> extends GeoEntityRenderer<T>
 
         super.preRender(pose, wagon, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
-
 }

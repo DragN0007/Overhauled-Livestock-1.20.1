@@ -12,23 +12,19 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class SheepMilkableTooltip implements IEntityComponentProvider {
-
-    public SheepMilkableTooltip() {
-    }
+    public SheepMilkableTooltip() {}
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (LivestockOverhaulCommonConfig.QUALITY.get()) {
             if (entityAccessor.getEntity() instanceof OSheep animal) {
                 if (!animal.wasMilked() && !animal.isMale() && !animal.isBaby()) {
-                    tooltip.add(Component.translatable("Milk Ready!").withStyle(ChatFormatting.GREEN));
+                    tooltip.add(Component.translatable("tooltip.dragnlivestock.milk_ready.tooltip").withStyle(ChatFormatting.GREEN));
                 }
             }
         }
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");
-    }
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");}
 }

@@ -1,12 +1,4 @@
-NOTICE:
-Some code in this repository falls under the LGPL license, as it was referenced from Realistic Horse Genetics (https://github.com/sekelsta/horse-colors).
-
-The class(es) included under this LGPL license are stated to be:
-(src\main\java\com\dragn0007\dragnlivestock\spawn\ SpawnReplacer )
-
-NOTICE:
-Some code in this repository falls under the Creative Commons license, as it was referenced from Jade (https://github.com/Snownee/Jade/tree/1.20-forge).
-
+Unless stated otherwise, this mod's code falls under the GNU General Public License.
 
 
                     GNU GENERAL PUBLIC LICENSE

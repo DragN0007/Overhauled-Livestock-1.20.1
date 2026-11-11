@@ -11,30 +11,22 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class RabbitQualityTooltip implements IEntityComponentProvider {
-
-    public RabbitQualityTooltip() {
-    }
+    public RabbitQualityTooltip() {}
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
-        if (LivestockOverhaulCommonConfig.QUALITY.get()) {
+        if (LivestockOverhaulCommonConfig.QUALITY.get() && entityAccessor.getPlayer().isShiftKeyDown()) {
             if (entityAccessor.getEntity() instanceof ORabbit animal) {
                 String quality = Integer.toString(animal.getQuality());
                 String rating = "(Fine)";
-                if (animal.isGreatQuality()) {
-                    rating = "(Great)";
-                } else if (animal.isFantasticQuality()) {
-                    rating = "(Fantastic)";
-                } else if (animal.isExquisiteQuality()) {
-                    rating = "(Exquisite!)";
-                }
+                if (animal.isGreatQuality()) {rating = "(Great)";
+                } else if (animal.isFantasticQuality()) {rating = "(Fantastic)";
+                } else if (animal.isExquisiteQuality()) {rating = "(Exquisite!)";}
                 tooltip.add(Component.translatable("Quality: " + quality + "% " + rating));
             }
         }
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");
-    }
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");}
 }

@@ -10,13 +10,11 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class HorseBreedTooltip implements IEntityComponentProvider {
-
-    public HorseBreedTooltip() {
-    }
+    public HorseBreedTooltip() {}
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
-        if (entityAccessor.getEntity() instanceof OHorse animal && entityAccessor.getEntity().getClass() == OHorse.class) {
+        if (entityAccessor.getEntity() instanceof OHorse animal && entityAccessor.getEntity().getClass() == OHorse.class && entityAccessor.getPlayer().isShiftKeyDown()) {
             String breeds = getBreeds(animal.getBreed());
             tooltip.add(Component.translatable(breeds));
         }
@@ -53,7 +51,5 @@ public class HorseBreedTooltip implements IEntityComponentProvider {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");
-    }
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");}
 }

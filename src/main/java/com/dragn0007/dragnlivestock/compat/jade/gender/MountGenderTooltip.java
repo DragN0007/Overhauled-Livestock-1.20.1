@@ -10,23 +10,17 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class MountGenderTooltip implements IEntityComponentProvider {
-
-    public MountGenderTooltip() {
-    }
+    public MountGenderTooltip() {}
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         AbstractOMount mount = (AbstractOMount)entityAccessor.getEntity();
-        if (mount.isFemale()) {
-            tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.female.tooltip"));
-        } else if (mount.isMale()) {
-            tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.male.tooltip"));
+        if (entityAccessor.getPlayer().isShiftKeyDown()) {
+            if (mount.isFemale()) tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.female.tooltip"));
+            else if (mount.isMale()) tooltip.add(Component.translatable("tooltip.dragnlivestock.jade.male.tooltip"));
         }
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");
-    }
-
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");}
 }

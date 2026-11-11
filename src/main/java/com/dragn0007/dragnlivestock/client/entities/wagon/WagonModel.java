@@ -32,6 +32,4 @@ public class WagonModel<T extends AbstractWagon> extends DefaultedEntityGeoModel
         processor.getBone("FrontWheels").setRotX(-rot);
         processor.getBone("BackWheels").setRotX(-rot);
     }
-
-
 }

@@ -57,12 +57,15 @@ import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOve
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOverlay;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LONetwork;
 import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -88,22 +91,26 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 import static com.dragn0007.dragnlivestock.LivestockOverhaul.MODID;
 
+/*
+This class falls under the LGPL 3 license, as some code was referenced from
+the Realistic Horse Genetics repository, though has since been heavily modified.
+https://github.com/sekelsta/horse-colors/tree/1.20.1
+*/
+
 @Mod.EventBusSubscriber(modid = LivestockOverhaul.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SpawnReplacer {
-    // This class falls under the LGPL license, as stated in the CODE_LICENSE.txt
-    // Some of this code was referenced from Realistic Horse Genetics. Please check them out, too! :)
-    // https://github.com/sekelsta/horse-colors  |  https://www.curseforge.com/minecraft/mc-mods/realistic-horse-genetics
-
-    //NOTE(EVGLX): The following beehive-specific code should not be used elsewhere, but I'm keeping it public because private functionality is stupid
+    //NOTE (EVGLX): The following beehive-specific code should not be used elsewhere, but I'm keeping it public because private functionality is stupid
     public static Map<BeehiveBlockEntity, CompoundTag> beehivesToUpdate = new HashMap<>();
     public static void handleBeehiveData(BlockEntity blockEntity) {
         if(blockEntity instanceof BeehiveBlockEntity beehiveBlockEntity) {
@@ -134,17 +141,18 @@ public class SpawnReplacer {
 
     @SubscribeEvent
     public static void onSpawn(EntityJoinLevelEvent event) {
+        //TODO: Vanilla animals spawn wrongly when replace spawn egg animals is false
         Random random = new Random();
         Level level = event.getLevel();
+        Entity eventEntity = event.getEntity();
         LocalDate date = LocalDate.now();
         Month month = date.getMonth();
         int day = date.getDayOfMonth();
 
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get()) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && (((!(eventEntity instanceof Animal animal && animal.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
             //Horse
-            if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof Horse vanillaHorse) {
-                if (event.getEntity().getClass() == Horse.class && (((!(vanillaHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
-
+            if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && eventEntity instanceof Horse vanillaHorse) {
+                if (eventEntity.getClass() == Horse.class) {
                     //spawn Headless Horseman
                     if (((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get() && level.isNight() && level.getRandom().nextDouble() <= 0.12) ||
                     ((level.isNight() && level.getRandom().nextDouble() <= 0.02))) {
@@ -190,11 +198,11 @@ public class SpawnReplacer {
 
                         //spawn breeds except for compat-only ones if the config allows it
                         if (LivestockOverhaulCommonConfig.NATURAL_HORSE_BREEDS.get()) {
-                            if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                                 int[] breeds = {10, 13};
                                 int randomIndex = new Random().nextInt(breeds.length);
                                 oHorse.setBreed(breeds[randomIndex]);
-                            } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            } else if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
                                 int[] breeds = {1, 5, 6, 8, 12, 15, 16, 17, 19, 21, 22};
                                 int randomIndex = new Random().nextInt(breeds.length);
                                 oHorse.setBreed(breeds[randomIndex]);
@@ -232,17 +240,26 @@ public class SpawnReplacer {
                         }
 
                         if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWN_PERCENT.get()) {
-                            oHorse.setVariantTexture(String.valueOf(LOUtils.getRandomClientCoat("base_colors/horse")));
-                            oHorse.setOverlayVariantTexture(String.valueOf(LOUtils.getRandomClientPattern("pattern_overlays/horse")));
+                            if (!Objects.requireNonNull(oHorse.level().getServer()).isSingleplayer()) {
+                                int id = oHorse.getId();
+                                String folderName = "base_colors/horse";
+                                boolean useServerCoats = false;
+                                if (oHorse.level().getServer() instanceof DedicatedServer dedicatedServer) {
+                                    MinecraftServer.ServerResourcePackInfo serverResourcePackInfo = dedicatedServer.getProperties().serverResourcePackInfo.orElse(null);
+                                    if (serverResourcePackInfo != null) {
+                                        useServerCoats = !serverResourcePackInfo.url().isEmpty();
+                                    }
+                                }
+                                LONetwork.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> oHorse), new LONetwork.TextureRequest(id, folderName, useServerCoats));
+                            } else {
+                                oHorse.setVariantTexture(String.valueOf(LOUtils.getRandomClientCoat("base_colors/horse")));
+                                oHorse.setOverlayVariantTexture(String.valueOf(LOUtils.getRandomClientPattern("pattern_overlays/horse")));
+                            }
 
-//                            int id = oHorse.getId();
-//                            String folderName = "horse";
-//                            boolean useServerCoats = false;
-//                            if(level.getServer() instanceof DedicatedServer dedicatedServer) {
-//                                MinecraftServer.ServerResourcePackInfo serverResourcePackInfo = dedicatedServer.getProperties().serverResourcePackInfo.orElse(null);
-//                                if(serverResourcePackInfo != null) useServerCoats = dedicatedServer.isDedicatedServer() && !serverResourcePackInfo.url().equals("");
-//                            }
-//                            LONetwork.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> oHorse), new LONetwork.TextureRequest(id, folderName, useServerCoats));
+                            if (oHorse.getTextureResource().contains("missingno"))
+                                oHorse.setVariantTexture(OHorseModel.Variant.variantFromOrdinal(oHorse.getVariant()).resourceLocation.toString());
+                            if (oHorse.getOverlayLocation().contains("missingno"))
+                                oHorse.setOverlayVariantTexture(EquineMarkingOverlay.overlayFromOrdinal(oHorse.getOverlayVariant()).resourceLocation.toString());
                         }
 
                         //discard vanilla horse once it's been successfully replaced on client and server
@@ -267,8 +284,8 @@ public class SpawnReplacer {
             }
 
             //Donkey
-            if (LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && event.getEntity() instanceof Donkey vanillaDonkey) {
-                if (event.getEntity().getClass() == Donkey.class && (((!(vanillaDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+            if (LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && eventEntity instanceof Donkey vanillaDonkey) {
+                if (eventEntity.getClass() == Donkey.class) {
                     ODonkey oDonkey = EntityTypes.O_DONKEY_ENTITY.get().create(level);
                     if (oDonkey != null) {
                         oDonkey.copyPosition(vanillaDonkey);
@@ -302,8 +319,8 @@ public class SpawnReplacer {
             }
 
             //Mule
-            if (LivestockOverhaulCommonConfig.REPLACE_MULES.get() && event.getEntity() instanceof Mule vanillaMule) {
-                if (event.getEntity().getClass() == Mule.class && (((!(vanillaMule.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+            if (LivestockOverhaulCommonConfig.REPLACE_MULES.get() && eventEntity instanceof Mule vanillaMule) {
+                if (eventEntity.getClass() == Mule.class) {
                     OMule oMule = EntityTypes.O_MULE_ENTITY.get().create(level);
                     if (oMule != null) {
                         oMule.copyPosition(vanillaMule);
@@ -336,8 +353,8 @@ public class SpawnReplacer {
             }
 
             //Cow
-            if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && event.getEntity() instanceof Cow vanillacow) {
-                if (event.getEntity().getClass() == Cow.class && (((!(vanillacow.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+            if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof Cow vanillacow) {
+                if (eventEntity.getClass() == Cow.class) {
 
                     if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get()) {
                         if (level.getRandom().nextDouble() < 0.02) {
@@ -346,19 +363,19 @@ public class SpawnReplacer {
                                 moobloom.copyPosition(vanillacow);
                                 level.addFreshEntity(moobloom);
 
-                                if (level.getBiome(event.getEntity().blockPosition()).is(Biomes.PLAINS)) {
+                                if (level.getBiome(eventEntity.blockPosition()).is(Biomes.PLAINS)) {
                                     int[] variants = {12, 13, 14, 15, 16, 17, 18};
                                     int randomIndex = new Random().nextInt(variants.length);
                                     moobloom.setPlantType(variants[randomIndex]);
-                                } else if (level.getBiome(event.getEntity().blockPosition()).is(Biomes.SUNFLOWER_PLAINS)) {
+                                } else if (level.getBiome(eventEntity.blockPosition()).is(Biomes.SUNFLOWER_PLAINS)) {
                                     int[] variants = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
                                     int randomIndex = new Random().nextInt(variants.length);
                                     moobloom.setPlantType(variants[randomIndex]);
-                                } else if (level.getBiome(event.getEntity().blockPosition()).is(Biomes.TAIGA)) {
+                                } else if (level.getBiome(eventEntity.blockPosition()).is(Biomes.TAIGA)) {
                                     int[] variants = {19, 20};
                                     int randomIndex = new Random().nextInt(variants.length);
                                     moobloom.setPlantType(variants[randomIndex]);
-                                } else if (level.getBiome(event.getEntity().blockPosition()).is(Biomes.SAVANNA)) {
+                                } else if (level.getBiome(eventEntity.blockPosition()).is(Biomes.SAVANNA)) {
                                     if (ModList.get().isLoaded("thatsjustpeachy")) moobloom.setPlantType(21);
                                 }
 
@@ -377,7 +394,7 @@ public class SpawnReplacer {
                     OCow oCow = EntityTypes.O_COW_ENTITY.get().create(level);
                     if (oCow != null) {
                         if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                            if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                                 if (random.nextDouble() < 0.20) {
                                     do oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
                                     while (oCow.getBreed() == 10);
@@ -386,7 +403,7 @@ public class SpawnReplacer {
                                     int randomIndex = new Random().nextInt(variants.length);
                                     oCow.setBreed(variants[randomIndex]);
                                 }
-                            } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            } else if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
                                 if (random.nextDouble() < 0.20) {
                                     do oCow.setBreed(random.nextInt(CowBreed.Breed.values().length));
                                     while (oCow.getBreed() == 10);
@@ -433,8 +450,8 @@ public class SpawnReplacer {
             }
 
             //Chicken
-            if (LivestockOverhaulCommonConfig.REPLACE_CHICKENS.get() && event.getEntity() instanceof Chicken vanillachicken)
-                if (event.getEntity().getClass() == Chicken.class && (((!(vanillachicken.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+            if (LivestockOverhaulCommonConfig.REPLACE_CHICKENS.get() && eventEntity instanceof Chicken vanillachicken)
+                if (eventEntity.getClass() == Chicken.class) {
                     OChicken oChicken = EntityTypes.O_CHICKEN_ENTITY.get().create(level);
                     if (oChicken != null) {
                         oChicken.copyPosition(vanillachicken);
@@ -453,7 +470,7 @@ public class SpawnReplacer {
 //                        }
 
                         if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                            if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                            if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                                 if (random.nextDouble() < 0.15) {
                                     int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 10};
                                     int randomIndex = new Random().nextInt(variants.length);
@@ -463,7 +480,7 @@ public class SpawnReplacer {
                                     int randomIndex = new Random().nextInt(variants.length);
                                     oChicken.setBreed(variants[randomIndex]);
                                 }
-                            } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                            } else if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
                                 if (random.nextDouble() < 0.15) {
                                     int[] variants = {0, 1, 2, 3, 4, 5, 7, 8, 9, 10};
                                     int randomIndex = new Random().nextInt(variants.length);
@@ -514,8 +531,8 @@ public class SpawnReplacer {
 
         //Salmon
         OSalmon oSalmon = EntityTypes.O_SALMON_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_SALMON.get() && event.getEntity() instanceof Salmon vanillasalmon) {
-            if (event.getEntity().getClass() == Salmon.class && (((!(vanillasalmon.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_SALMON.get() && eventEntity instanceof Salmon vanillasalmon) {
+            if (eventEntity.getClass() == Salmon.class) {
                 if (oSalmon != null) {
                     oSalmon.copyPosition(vanillasalmon);
                     oSalmon.setCustomName(vanillasalmon.getCustomName());
@@ -532,8 +549,8 @@ public class SpawnReplacer {
 
         //Cod
         OCod oCod = EntityTypes.O_COD_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_COD.get() && event.getEntity() instanceof Cod vanillacod) {
-            if (event.getEntity().getClass() == Cod.class && (((!(vanillacod.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_COD.get() && eventEntity instanceof Cod vanillacod) {
+            if (eventEntity.getClass() == Cod.class) {
                 if (oCod != null) {
                     oCod.copyPosition(vanillacod);
                     oCod.setCustomName(vanillacod.getCustomName());
@@ -548,8 +565,8 @@ public class SpawnReplacer {
         }
 
         //Bee
-        if (LivestockOverhaulCommonConfig.REPLACE_BEES.get() && (event.getEntity().getClass() == Bee.class)) {
-            Bee bee = (Bee) event.getEntity();
+        if (LivestockOverhaulCommonConfig.REPLACE_BEES.get() && (eventEntity.getClass() == Bee.class)) {
+            Bee bee = (Bee) eventEntity;
             OBee oBee = EntityTypes.O_BEE_ENTITY.get().create(level);
             if (oBee != null) {
                 oBee.setCustomName(bee.getCustomName());
@@ -569,17 +586,17 @@ public class SpawnReplacer {
 
         //Rabbit
         ORabbit oRabbit = EntityTypes.O_RABBIT_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() && event.getEntity() instanceof Rabbit vanillarabbit) {
-            if (event.getEntity().getClass() == Rabbit.class && (((!(vanillarabbit.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() && eventEntity instanceof Rabbit vanillarabbit) {
+            if (eventEntity.getClass() == Rabbit.class) {
                 if (oRabbit != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oRabbit.setBreedByWildStatus();
                         oRabbit.setMarkingByWildStatus();
-                        if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                        if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                             int[] variants = {4, 7, 10, 14};
                             int randomIndex = new Random().nextInt(variants.length);
                             oRabbit.setVariant(variants[randomIndex]);
-                        } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                        } else if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
                             int[] variants = {1, 9, 11};
                             int randomIndex = new Random().nextInt(variants.length);
                             oRabbit.setVariant(variants[randomIndex]);
@@ -614,11 +631,11 @@ public class SpawnReplacer {
 
         //Sheep
         OSheep oSheep = EntityTypes.O_SHEEP_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_SHEEP.get() && event.getEntity() instanceof Sheep vanillasheep) {
-            if (event.getEntity().getClass() == Sheep.class && (((!(vanillasheep.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_SHEEP.get() && eventEntity instanceof Sheep vanillasheep) {
+            if (eventEntity.getClass() == Sheep.class) {
                 if (oSheep != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
-                        if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                        if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                             if (random.nextDouble() < 0.20) {
                                 oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
                             } else {
@@ -678,9 +695,8 @@ public class SpawnReplacer {
 
         //Llama
         OLlama oLlama = EntityTypes.O_LLAMA_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && event.getEntity() instanceof Llama vanillallama) {
-            if (((event.getEntity().getClass() == Llama.class) || (event.getEntity().getClass() == TraderLlama.class)) &&
-                    (((!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && eventEntity instanceof Llama vanillallama) {
+            if (((eventEntity.getClass() == Llama.class) || (eventEntity.getClass() == TraderLlama.class))) {
                 if (oLlama != null) {
                     oLlama.copyPosition(vanillallama);
                     oLlama.setCustomName(vanillallama.getCustomName());
@@ -718,8 +734,8 @@ public class SpawnReplacer {
 
         //Pig
         OPig oPig = EntityTypes.O_PIG_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_PIGS.get() && event.getEntity() instanceof Pig vanillapig) {
-            if (event.getEntity().getClass() == Pig.class && (((!(vanillapig.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_PIGS.get() && eventEntity instanceof Pig vanillapig) {
+            if (eventEntity.getClass() == Pig.class) {
                 if (oPig != null) {
                     oPig.copyPosition(vanillapig);
                     oPig.setCustomName(vanillapig.getCustomName());
@@ -751,8 +767,8 @@ public class SpawnReplacer {
         }
 
         //Mooshroom
-        if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && event.getEntity() instanceof MushroomCow vanillamooshroom) {
-            if (event.getEntity().getClass() == MushroomCow.class && (((!(vanillamooshroom.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof MushroomCow vanillamooshroom) {
+            if (eventEntity.getClass() == MushroomCow.class) {
                 OMooshroom oMooshroom = EntityTypes.O_MOOSHROOM_ENTITY.get().create(level);
                 if (oMooshroom != null) {
                     oMooshroom.copyPosition(vanillamooshroom);
@@ -790,8 +806,8 @@ public class SpawnReplacer {
         }
 
         //Camel
-        if (LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && event.getEntity() instanceof Camel vanillacamel) {
-            if (event.getEntity().getClass() == Camel.class && (((!(vanillacamel.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && eventEntity instanceof Camel vanillacamel) {
+            if (eventEntity.getClass() == Camel.class) {
                 OCamel oCamel = EntityTypes.O_CAMEL_ENTITY.get().create(level);
                 if (oCamel != null) {
                     oCamel.copyPosition(vanillacamel);
@@ -814,8 +830,8 @@ public class SpawnReplacer {
         }
 
         //Goat
-        if (LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && event.getEntity() instanceof Goat vanillagoat) {
-            if (event.getEntity().getClass() == Goat.class && (((!(vanillagoat.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && eventEntity instanceof Goat vanillagoat) {
+            if (eventEntity.getClass() == Goat.class) {
                 OGoat oGoat = EntityTypes.O_GOAT_ENTITY.get().create(level);
                 if (oGoat != null) {
                     oGoat.copyPosition(vanillagoat);
@@ -846,8 +862,8 @@ public class SpawnReplacer {
         }
 
         //Undead Horse
-        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && event.getEntity() instanceof SkeletonHorse skeletonHorse) {
-            if (event.getEntity().getClass() == SkeletonHorse.class && (((!(skeletonHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && eventEntity instanceof SkeletonHorse skeletonHorse) {
+            if (eventEntity.getClass() == SkeletonHorse.class) {
                 OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                 if (oHorse != null) {
                     oHorse.copyPosition(skeletonHorse);
@@ -865,9 +881,9 @@ public class SpawnReplacer {
                     oHorse.setColorByBreed();
                     oHorse.setMarkingByBreed();
                     oHorse.setFeatheringByBreed();
-                    if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_NETHER)) {
+                    if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_NETHER)) {
                         oHorse.setDecompVariant(6);
-                    } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
+                    } else if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) {
                         oHorse.setDecompVariant(5);
                     } else {
                         oHorse.setDecompVariant(4);
@@ -889,8 +905,8 @@ public class SpawnReplacer {
             }
         }
 
-        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && event.getEntity() instanceof ZombieHorse zombieHorse) {
-            if (event.getEntity().getClass() == ZombieHorse.class && (((!(zombieHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && eventEntity instanceof ZombieHorse zombieHorse) {
+            if (eventEntity.getClass() == ZombieHorse.class) {
                 OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                 if (oHorse != null) {
                     oHorse.copyPosition(zombieHorse);
@@ -910,7 +926,7 @@ public class SpawnReplacer {
                     oHorse.setFeatheringByBreed();
                     if (oHorse.isInWaterOrRain()) {
                         oHorse.setDecompVariant(2);
-                    } else if (level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
+                    } else if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
                         oHorse.setDecompVariant(3);
                     } else {
                         oHorse.setDecompVariant(0);
@@ -933,8 +949,8 @@ public class SpawnReplacer {
         }
 
         //Frog
-        if (LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && event.getEntity() instanceof Frog frog) {
-            if (event.getEntity().getClass() == Frog.class && (((!(frog.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && eventEntity instanceof Frog frog) {
+            if (eventEntity.getClass() == Frog.class) {
                 OFrog oFrog = EntityTypes.O_FROG_ENTITY.get().create(level);
                 if (oFrog != null) {
                     oFrog.copyPosition(frog);
@@ -956,8 +972,8 @@ public class SpawnReplacer {
         //Unicorn
         Unicorn unicorn = EntityTypes.UNICORN_ENTITY.get().create(level);
         if (LivestockOverhaulCommonConfig.SPAWN_UNICORNS.get()) {
-            if (event.getEntity().getClass() == Rabbit.class && random.nextDouble() < 0.0012 && level.isDay() && level.getBiome(event.getEntity().blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
-                Rabbit rabbit = (Rabbit) event.getEntity();
+            if (eventEntity.getClass() == Rabbit.class && random.nextDouble() < 0.0012 && level.isDay() && level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
+                Rabbit rabbit = (Rabbit) eventEntity;
                 if (unicorn != null) {
                     unicorn.copyPosition(rabbit);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
@@ -989,8 +1005,8 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getEntity().getClass() == PiglinBrute.class && random.nextDouble() < 0.007) {
-                PiglinBrute brute = (PiglinBrute) event.getEntity();
+            if (eventEntity.getClass() == PiglinBrute.class && random.nextDouble() < 0.007) {
+                PiglinBrute brute = (PiglinBrute) eventEntity;
                 if (unicorn != null) {
                     unicorn.copyPosition(brute);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
@@ -1022,8 +1038,8 @@ public class SpawnReplacer {
                 }
             }
 
-            if (event.getEntity().getClass() == EnderMan.class && random.nextDouble() < 0.002 && level.getBiome(event.getEntity().blockPosition()).is(BiomeTags.IS_END)) {
-                EnderMan enderMan = (EnderMan) event.getEntity();
+            if (eventEntity.getClass() == EnderMan.class && random.nextDouble() < 0.002 && level.getBiome(eventEntity.blockPosition()).is(BiomeTags.IS_END)) {
+                EnderMan enderMan = (EnderMan) eventEntity;
                 if (unicorn != null) {
                     unicorn.copyPosition(enderMan);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
@@ -1059,8 +1075,8 @@ public class SpawnReplacer {
         //FAILSAFE O-to-Vanilla Converter
         if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get()) {
             //Horse
-            if (!LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && event.getEntity() instanceof OHorse) {
-                OHorse oHorse1 = (OHorse) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && eventEntity instanceof OHorse) {
+                OHorse oHorse1 = (OHorse) eventEntity;
                 Horse horse = EntityType.HORSE.create(level);
                 if (horse != null) {
                     horse.copyPosition(oHorse1);
@@ -1077,8 +1093,8 @@ public class SpawnReplacer {
             }
 
             //Donkey
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && event.getEntity() instanceof ODonkey) {
-                ODonkey oDonkey1 = (ODonkey) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && eventEntity instanceof ODonkey) {
+                ODonkey oDonkey1 = (ODonkey) eventEntity;
                 Donkey donkey = EntityType.DONKEY.create(level);
                 if (donkey != null) {
                     donkey.copyPosition(oDonkey1);
@@ -1095,8 +1111,8 @@ public class SpawnReplacer {
             }
 
             //Mule
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && event.getEntity() instanceof OMule) {
-                OMule oMule1 = (OMule) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_MULES.get() && eventEntity instanceof OMule) {
+                OMule oMule1 = (OMule) eventEntity;
                 Mule mule = EntityType.MULE.create(level);
                 if (mule != null) {
                     mule.copyPosition(oMule1);
@@ -1113,8 +1129,8 @@ public class SpawnReplacer {
             }
 
             //Cow
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_COWS.get() && event.getEntity() instanceof OCow) {
-                OCow oCow1 = (OCow) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof OCow) {
+                OCow oCow1 = (OCow) eventEntity;
                 Cow cow = EntityType.COW.create(level);
                 if (cow != null) {
                     cow.copyPosition(oCow1);
@@ -1128,8 +1144,8 @@ public class SpawnReplacer {
             }
 
             //Chicken
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_CHICKENS.get() && event.getEntity() instanceof OChicken) {
-                OChicken oChicken1 = (OChicken) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_CHICKENS.get() && eventEntity instanceof OChicken) {
+                OChicken oChicken1 = (OChicken) eventEntity;
                 Chicken chicken = EntityType.CHICKEN.create(level);
                 if (chicken != null) {
                     chicken.copyPosition(oChicken1);
@@ -1144,8 +1160,8 @@ public class SpawnReplacer {
 
             //Salmon
             Salmon salmon = EntityType.SALMON.create(level);
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_SALMON.get() && event.getEntity() instanceof OSalmon) {
-                OSalmon oSalmon1 = (OSalmon) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_SALMON.get() && eventEntity instanceof OSalmon) {
+                OSalmon oSalmon1 = (OSalmon) eventEntity;
                 if (salmon != null) {
                     salmon.copyPosition(oSalmon1);
                     salmon.setCustomName(oSalmon1.getCustomName());
@@ -1158,8 +1174,8 @@ public class SpawnReplacer {
 
             //Cod
             Cod cod = EntityType.COD.create(level);
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_COD.get() && event.getEntity() instanceof OCod) {
-                OCod cod1 = (OCod) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_COD.get() && eventEntity instanceof OCod) {
+                OCod cod1 = (OCod) eventEntity;
                 if (cod != null) {
                     cod.copyPosition(cod1);
                     cod.setCustomName(cod1.getCustomName());
@@ -1171,7 +1187,7 @@ public class SpawnReplacer {
             }
 
             //Bee
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_BEES.get() && event.getEntity() instanceof OBee oBee1) {
+            if (!LivestockOverhaulCommonConfig.REPLACE_BEES.get() && eventEntity instanceof OBee oBee1) {
                 Bee bee = EntityType.BEE.create(level);
                 oBee1.remove(Entity.RemovalReason.DISCARDED);
                 level.addFreshEntity(bee);
@@ -1182,8 +1198,8 @@ public class SpawnReplacer {
 
             //Rabbit
             Rabbit rabbit = EntityType.RABBIT.create(level);
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() && event.getEntity() instanceof ORabbit) {
-                ORabbit oRabbit1 = (ORabbit) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() && eventEntity instanceof ORabbit) {
+                ORabbit oRabbit1 = (ORabbit) eventEntity;
                 if (rabbit != null) {
                     rabbit.copyPosition(oRabbit1);
                     rabbit.setCustomName(oRabbit1.getCustomName());
@@ -1197,8 +1213,8 @@ public class SpawnReplacer {
 
             //Sheep
             Sheep sheep = EntityType.SHEEP.create(level);
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_SHEEP.get() && event.getEntity() instanceof OSheep) {
-                OSheep oSheep1 = (OSheep) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_SHEEP.get() && eventEntity instanceof OSheep) {
+                OSheep oSheep1 = (OSheep) eventEntity;
                 if (sheep != null) {
                     sheep.copyPosition(oSheep1);
                     sheep.setCustomName(oSheep1.getCustomName());
@@ -1212,8 +1228,8 @@ public class SpawnReplacer {
 
             //Llama
             Llama llama = EntityType.LLAMA.create(level);
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && event.getEntity() instanceof OLlama) {
-                OLlama oLlama1 = (OLlama) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && eventEntity instanceof OLlama) {
+                OLlama oLlama1 = (OLlama) eventEntity;
                 if (llama != null) {
                     llama.copyPosition(oLlama1);
                     llama.setCustomName(oLlama1.getCustomName());
@@ -1230,8 +1246,8 @@ public class SpawnReplacer {
 
             //Pig
             Pig pig = EntityType.PIG.create(level);
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_PIGS.get() && event.getEntity() instanceof OPig) {
-                OPig oPig1 = (OPig) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_PIGS.get() && eventEntity instanceof OPig) {
+                OPig oPig1 = (OPig) eventEntity;
                 if (pig != null) {
                     pig.copyPosition(oPig1);
                     pig.setCustomName(oPig1.getCustomName());
@@ -1244,8 +1260,8 @@ public class SpawnReplacer {
             }
 
             //Mooshroom
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_COWS.get() && event.getEntity() instanceof OMooshroom) {
-                OMooshroom oMooshroom1 = (OMooshroom) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof OMooshroom) {
+                OMooshroom oMooshroom1 = (OMooshroom) eventEntity;
                 MushroomCow cow = EntityType.MOOSHROOM.create(level);
                 if (cow != null) {
                     cow.copyPosition(oMooshroom1);
@@ -1259,8 +1275,8 @@ public class SpawnReplacer {
             }
 
             //Goat
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && event.getEntity() instanceof OGoat) {
-                OGoat oGoat = (OGoat) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && eventEntity instanceof OGoat) {
+                OGoat oGoat = (OGoat) eventEntity;
                 Goat goat = EntityType.GOAT.create(level);
                 if (goat != null) {
                     goat.copyPosition(oGoat);
@@ -1275,8 +1291,8 @@ public class SpawnReplacer {
             }
 
             //Frog
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && event.getEntity() instanceof OFrog) {
-                OFrog oFrog = (OFrog) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && eventEntity instanceof OFrog) {
+                OFrog oFrog = (OFrog) eventEntity;
                 Frog frog = EntityType.FROG.create(level);
                 if (frog != null) {
                     frog.copyPosition(oFrog);
@@ -1290,8 +1306,8 @@ public class SpawnReplacer {
             }
 
             //Camel
-            if (LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && !LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && event.getEntity() instanceof OCamel) {
-                OCamel oCamel = (OCamel) event.getEntity();
+            if (!LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && eventEntity instanceof OCamel) {
+                OCamel oCamel = (OCamel) eventEntity;
                 Camel camel = EntityType.CAMEL.create(level);
                 if (camel != null) {
                     camel.copyPosition(oCamel);

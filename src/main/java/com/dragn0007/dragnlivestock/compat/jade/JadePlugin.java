@@ -31,6 +31,14 @@ public class JadePlugin implements IWailaPlugin {
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
+        registration.registerEntityComponent(new HoldShiftTooltip(), AbstractOMount.class);
+        registration.registerEntityComponent(new HoldShiftTooltip(), OChicken.class);
+        registration.registerEntityComponent(new HoldShiftTooltip(), OLlama.class);
+        registration.registerEntityComponent(new HoldShiftTooltip(), OPig.class);
+        registration.registerEntityComponent(new HoldShiftTooltip(), ORabbit.class);
+        registration.registerEntityComponent(new HoldShiftTooltip(), OSheep.class);
+        registration.registerEntityComponent(new HoldShiftTooltip(), OBee.class);
+
         registration.registerEntityComponent(new MountGenderTooltip(), AbstractOMount.class);
         registration.registerEntityComponent(new ChickenGenderTooltip(), OChicken.class);
         registration.registerEntityComponent(new LlamaGenderTooltip(), OLlama.class);

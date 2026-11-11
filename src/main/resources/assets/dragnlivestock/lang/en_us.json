@@ -916,5 +916,12 @@
   "tooltip.dragnlivestock.mount_registry.tooltip": "Mount owned by",
   "tooltip.dragnlivestock.rabbit_poop.tooltip": "Acts like bonemeal, but more potent.",
   "tooltip.dragnlivestock.mount_name.tooltip": "Mount Name: ",
-  "tooltip.dragnlivestock.owner_name.tooltip": "Owner :"
+  "tooltip.dragnlivestock.owner_name.tooltip": "Owner :",
+  "tooltip.dragnlivestock.animal_crate.tooltip": "A crate to hold animals for better transport.",
+  "tooltip.dragnlivestock.coat.tooltip": "Coat: ",
+  "tooltip.dragnlivestock.marking.tooltip": "Marking: ",
+  "tooltip.dragnlivestock.animal.tooltip": "Animal: ",
+  "tooltip.dragnlivestock.shift.tooltip": "Hold Shift for info.",
+  "tooltip.dragnlivestock.wool_ready.tooltip": "Wool Ready!",
+  "tooltip.dragnlivestock.milk_ready.tooltip": "Milk Ready!"
 }

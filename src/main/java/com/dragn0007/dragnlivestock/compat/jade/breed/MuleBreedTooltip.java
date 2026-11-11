@@ -10,13 +10,11 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 public class MuleBreedTooltip implements IEntityComponentProvider {
-
-    public MuleBreedTooltip() {
-    }
+    public MuleBreedTooltip() {}
 
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
-        if (entityAccessor.getEntity() instanceof OMule animal) {
+        if (entityAccessor.getEntity() instanceof OMule animal && entityAccessor.getPlayer().isShiftKeyDown()) {
             String breeds = getBreeds(animal.getBreed());
             tooltip.add(Component.translatable(breeds));
         }
@@ -32,7 +30,5 @@ public class MuleBreedTooltip implements IEntityComponentProvider {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");
-    }
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "o_tooltips");}
 }
