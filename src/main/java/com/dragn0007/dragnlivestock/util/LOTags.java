@@ -93,6 +93,9 @@ public class LOTags {
         public static final TagKey<Item> GOLD_METALS = tag("gold_metals");
         public static final TagKey<Item> GOLD_METAL_NUGGETS = tag("gold_metal_nuggets");
 
+        public static final TagKey<Item> HAM_KNIVES = forgeTag("ham_knives");
+        public static final TagKey<Item> OIL_KNIVES = forgeTag("oil_knives");
+
         public static TagKey<Item> forgeTag (String name) {return ItemTags.create(new ResourceLocation("forge", name));}
         public static TagKey<Item> tag (String name) {return ItemTags.create(new ResourceLocation(LivestockOverhaul.MODID, name));}
     }

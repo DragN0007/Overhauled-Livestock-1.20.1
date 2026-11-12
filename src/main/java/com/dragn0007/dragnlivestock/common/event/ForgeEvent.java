@@ -18,10 +18,15 @@ import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.MountRegistryItem;
+import com.dragn0007.dragnlivestock.util.LOTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -29,11 +34,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Random;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -44,6 +53,24 @@ public class ForgeEvent {
         event.addListener((ResourceManagerReloadListener) resourceManager -> {
             LivestockOverhaul.LOGGER.info("placeholder");
         });
+    }
+
+    @SubscribeEvent
+    public static void dropOnDeath(LivingDeathEvent event) {
+        LivingEntity entity = event.getEntity();
+        Entity source = event.getSource().getEntity();
+        Random random = new Random();
+        if (entity instanceof OPig && ModList.get().isLoaded("kaleidoscope_cookery")) {
+            if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.OIL_KNIVES)) {
+                entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("kaleidoscope_cookery", "oil")), random.nextInt(2)), 0F);
+            }
+        }
+
+        if (entity instanceof OPig && ModList.get().isLoaded("farmersdelight")) {
+            if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.HAM_KNIVES)) {
+                entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("farmersdelight", "ham")), 1), 0F);
+            }
+        }
     }
 
     @SubscribeEvent
