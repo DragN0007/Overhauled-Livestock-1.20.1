@@ -7,10 +7,6 @@
     "minecraft:large_fern",
     "minecraft:dead_bush",
     "#minecraft:flowers",
-
-    {
-      "id": "#tfc:replaceable_plants",
-      "required": false
-    }
+    {"id": "#tfc:replaceable_plants", "required": false}
   ]
 }

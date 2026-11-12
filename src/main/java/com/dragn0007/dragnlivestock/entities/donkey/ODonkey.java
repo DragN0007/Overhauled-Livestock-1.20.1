@@ -591,15 +591,9 @@ public class ODonkey extends AbstractOMount implements GeoEntity {
 			}
 			foal.setVariant(variant);
 
-			if (partnerHorse.isStockBreed() || partnerHorse.isWarmbloodedBreed() || partnerHorse.isRacingBreed()) {
-				foal.setBreed(0);
-			}
-			if (partnerHorse.isPonyBreed()) {
-				foal.setBreed(1);
-			}
-			if (partnerHorse.isDraftBreed()) {
-				foal.setBreed(2);
-			}
+			if (partnerHorse.isStockBreed() || partnerHorse.isWarmbloodedBreed() || partnerHorse.isRacingBreed()) foal.setBreed(0);
+			if (partnerHorse.isPonyBreed()) foal.setBreed(1);
+			if (partnerHorse.isDraftBreed()) foal.setBreed(2);
 
 			foal.setGender(random.nextInt(Gender.values().length));
 

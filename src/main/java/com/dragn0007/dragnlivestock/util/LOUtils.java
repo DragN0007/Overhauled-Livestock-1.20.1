@@ -1,9 +1,11 @@
 package com.dragn0007.dragnlivestock.util;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
+import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
@@ -11,6 +13,7 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -82,11 +85,18 @@ public class LOUtils {
                 Set<String> namespaces = packResources.getNamespaces(PackType.CLIENT_RESOURCES);
                 for(String namespace : namespaces) {
                     packResources.listResources(PackType.CLIENT_RESOURCES, namespace, folderName, (resourceLocation, inputStreamIoSupplier) -> {
-                        if(resourceLocation.toString().endsWith(".png")) allTextures.add(resourceLocation);
+                        allTextures.add(resourceLocation);
                     });
                 }
-            } catch (Exception e) {return MissingTextureAtlasSprite.getLocation();}
-        } if(allTextures.isEmpty()) return MissingTextureAtlasSprite.getLocation();
+            } catch (Exception e) {
+                LivestockOverhaul.LOGGER.error("Failed to randomly get server coat from: " + folderName);
+                return MissingTextureAtlasSprite.getLocation();
+            }
+        }
+        if(allTextures.isEmpty()) {
+            LivestockOverhaul.LOGGER.error("Failed to randomly get a server coat from: " + folderName);
+            return MissingTextureAtlasSprite.getLocation();
+        }
         return allTextures.get(random.nextInt(allTextures.size()));
     }
 
@@ -95,30 +105,19 @@ public class LOUtils {
         if (mc.player == null) return false;
         Vec3 start = mc.player.getEyePosition(1.0F);
         Vec3 end = entity.getEyePosition(1.0F);
-
-        BlockHitResult result = entity.level().clip(new ClipContext(
-                start,
-                end,
-                ClipContext.Block.COLLIDER,
-                ClipContext.Fluid.NONE,
-                entity
-        ));
+        BlockHitResult result = entity.level().clip(new ClipContext(start, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
 
         if (result.getType() == HitResult.Type.BLOCK) {
             BlockPos hitPos = result.getBlockPos();
             BlockState hitState = entity.level().getBlockState(hitPos);
-            if (hitState.getBlock().defaultBlockState().isSolid() ||
-                    hitState.getBlock() instanceof FenceBlock ||
-                    hitState.getBlock() instanceof FenceGateBlock ||
-                    hitState.getBlock() instanceof IronBarsBlock ||
-                    hitState.getBlock() instanceof HalfTransparentBlock ||
-                    hitState.getBlock() instanceof LeavesBlock ||
-                    hitState.getBlock() instanceof StainedGlassBlock) {
-                return false;
-            }
-            return true;
+            return !hitState.getBlock().defaultBlockState().isSolid() &&
+                    !(hitState.getBlock() instanceof FenceBlock) &&
+                    !(hitState.getBlock() instanceof FenceGateBlock) &&
+                    !(hitState.getBlock() instanceof IronBarsBlock) &&
+                    !(hitState.getBlock() instanceof HalfTransparentBlock) &&
+                    !(hitState.getBlock() instanceof LeavesBlock) &&
+                    !(hitState.getBlock() instanceof StainedGlassBlock);
         }
         return false;
     }
-
 }

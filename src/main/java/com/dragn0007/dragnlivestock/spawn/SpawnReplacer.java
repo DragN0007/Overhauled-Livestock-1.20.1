@@ -148,8 +148,9 @@ public class SpawnReplacer {
         LocalDate date = LocalDate.now();
         Month month = date.getMonth();
         int day = date.getDayOfMonth();
+        if (((eventEntity instanceof Animal animal && animal.getSpawnType() != MobSpawnType.SPAWN_EGG) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) return;
 
-        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get() && (((!(eventEntity instanceof Animal animal && animal.getSpawnType() == MobSpawnType.SPAWN_EGG)) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
+        if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get()) {
             //Horse
             if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && eventEntity instanceof Horse vanillaHorse) {
                 if (eventEntity.getClass() == Horse.class) {

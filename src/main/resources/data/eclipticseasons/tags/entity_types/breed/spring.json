@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "dragnlivestock:o_bee",
+    "dragnlivestock:o_chicken",
+    {"id": "dragnpets:o_wolf", "required": false}
+  ]
+}

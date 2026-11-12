@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    {
-      "id": "#tfc:twigs",
-      "required": false
-    }
+    {"id": "#tfc:twigs", "required": false}
   ]
 }

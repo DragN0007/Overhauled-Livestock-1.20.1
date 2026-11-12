@@ -14,10 +14,7 @@ import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineEyeColorOv
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.EquineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.LightHorseArmorItem;
-import com.dragn0007.dragnlivestock.util.LOTags;
-import com.dragn0007.dragnlivestock.util.LOUtils;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
-import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
+import com.dragn0007.dragnlivestock.util.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +23,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -54,6 +53,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -781,7 +781,9 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.entityData.set(VARIANT_TEXTURE, OHorseModel.Variant.variantFromOrdinal(variant).resourceLocation.toString());
 	}
 	public static final EntityDataAccessor<String> VARIANT_TEXTURE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.STRING);
-	public String getTextureResource() {return this.entityData.get(VARIANT_TEXTURE);}
+	public String getTextureResource() {
+		return this.entityData.get(VARIANT_TEXTURE);
+	}
 	public void setVariantTexture(String variant) {this.entityData.set(VARIANT_TEXTURE, variant);}
 
 	public static final EntityDataAccessor<Integer> OVERLAY = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
@@ -919,9 +921,27 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			this.setEyeVariant(random.nextInt(EquineMarkingOverlay.values().length));
 		}
 
-		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= 0.20) {
-			this.setVariantTexture(String.valueOf(LOUtils.getRandomClientCoat("base_colors/horse")));
-			this.setOverlayVariantTexture(String.valueOf(LOUtils.getRandomClientPattern("pattern_overlays/horse")));
+		if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWN_PERCENT.get()) {
+			if (!Objects.requireNonNull(this.level().getServer()).isSingleplayer()) {
+				int id = this.getId();
+				String folderName = "base_colors/horse";
+				boolean useServerCoats = false;
+				if (this.level().getServer() instanceof DedicatedServer dedicatedServer) {
+					MinecraftServer.ServerResourcePackInfo serverResourcePackInfo = dedicatedServer.getProperties().serverResourcePackInfo.orElse(null);
+					if (serverResourcePackInfo != null) {
+						useServerCoats = !serverResourcePackInfo.url().isEmpty();
+					}
+				}
+				LONetwork.INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new LONetwork.TextureRequest(id, folderName, useServerCoats));
+			} else {
+				this.setVariantTexture(String.valueOf(LOUtils.getRandomClientCoat("base_colors/horse")));
+				this.setOverlayVariantTexture(String.valueOf(LOUtils.getRandomClientPattern("pattern_overlays/horse")));
+			}
+
+			if (this.getTextureResource().contains("missingno"))
+				this.setVariantTexture(OHorseModel.Variant.variantFromOrdinal(this.getVariant()).resourceLocation.toString());
+			if (this.getOverlayLocation().contains("missingno"))
+				this.setOverlayVariantTexture(EquineMarkingOverlay.overlayFromOrdinal(this.getOverlayVariant()).resourceLocation.toString());
 		}
 
 		this.setManeType(this.getRandom().nextInt(1,3));
