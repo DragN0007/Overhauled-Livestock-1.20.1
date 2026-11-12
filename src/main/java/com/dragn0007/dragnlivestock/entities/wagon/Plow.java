@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
@@ -169,7 +170,9 @@ public class Plow extends AbstractInventoryWagon {
         pos = pos.below();
         BlockState blockState = this.level().getBlockState(pos);
         if (!ModList.get().isLoaded("tfc")) {
-            if (blockState.is(LOTags.Blocks.GRASS_BLOCKS) || blockState.is(BlockTags.DIRT)) {
+            if (ModList.get().isLoaded("farmersdelight") && blockState.is(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("farmersdelight", "rich_soil")))) {
+                this.level().setBlockAndUpdate(pos, ForgeRegistries.BLOCKS.getValue(new ResourceLocation("farmersdelight", "rich_soil_farmland")).defaultBlockState());
+            } else if (blockState.is(LOTags.Blocks.GRASS_BLOCKS) || blockState.is(BlockTags.DIRT)) {
                 this.level().setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState());
             }
         }

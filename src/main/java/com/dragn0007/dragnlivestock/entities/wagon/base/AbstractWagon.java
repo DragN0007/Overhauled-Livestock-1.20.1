@@ -456,7 +456,7 @@ public abstract class AbstractWagon extends AbstractGeckolibVehicle {
         Mob old = animals[0];
         if (old != null && old != animal) {
             old.setNoAi(false);
-            animal.setInvulnerable(false);
+            old.setInvulnerable(false);
         }
 
         if (animal != null) {
