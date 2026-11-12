@@ -118,6 +118,7 @@ dependencies {
     implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
     implementation fg.deobf("curse.maven:jei-238222:6075247")
     implementation fg.deobf("curse.maven:worldedit-225608:4586218")
+//    implementation fg.deobf("curse.maven:hexerei-548599:6314111")
 //    implementation fg.deobf("curse.maven:kaleidoscope-cookery-1309203:9019240")
 //    implementation fg.deobf("curse.maven:ecliptic-seasons-1118306:9317849")
 //    implementation fg.deobf("curse.maven:farmers-delight-398521:8765179")

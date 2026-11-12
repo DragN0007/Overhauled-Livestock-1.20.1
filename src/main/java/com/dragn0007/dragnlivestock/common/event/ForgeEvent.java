@@ -65,11 +65,13 @@ public class ForgeEvent {
                 entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("kaleidoscope_cookery", "oil")), random.nextInt(2)), 0F);
             }
         }
-
         if (entity instanceof OPig && ModList.get().isLoaded("farmersdelight")) {
             if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.HAM_KNIVES)) {
                 entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("farmersdelight", "ham")), 1), 0F);
             }
+        }
+        if (entity instanceof OPig || entity instanceof OSheep || entity instanceof OCow && ModList.get().isLoaded("hexerei")) {
+            entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("hexerei", "animal_fat")), random.nextInt(3)), 0F);
         }
     }
 
