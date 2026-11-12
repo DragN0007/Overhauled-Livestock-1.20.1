@@ -148,23 +148,24 @@ public class SpawnReplacer {
         LocalDate date = LocalDate.now();
         Month month = date.getMonth();
         int day = date.getDayOfMonth();
-        if (((eventEntity instanceof Animal animal && animal.getSpawnType() != MobSpawnType.SPAWN_EGG) && !LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) return;
+
+        if (level.isClientSide) return;
 
         if (!LivestockOverhaulCommonConfig.FAILSAFE_REPLACER.get()) {
             //Horse
-            if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && eventEntity instanceof Horse vanillaHorse) {
-                if (eventEntity.getClass() == Horse.class) {
+            if (LivestockOverhaulCommonConfig.REPLACE_HORSES.get() && eventEntity instanceof Horse animal) {
+                if (eventEntity.getClass() == Horse.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                     //spawn Headless Horseman
                     if (((month == Month.OCTOBER && (day == 31)) || (month == Month.NOVEMBER && (day == 1 || day == 2)) && LivestockOverhaulCommonConfig.ALLOW_HOLIDAY_EVENTS.get() && level.isNight() && level.getRandom().nextDouble() <= 0.12) ||
-                    ((level.isNight() && level.getRandom().nextDouble() <= 0.02))) {
+                            ((level.isNight() && level.getRandom().nextDouble() <= 0.02))) {
                         HeadlessHorseman headlessHorseman = EntityTypes.HEADLESS_HORSEMAN_ENTITY.get().create(level);
                         OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                         if (headlessHorseman != null) {
                             level.addFreshEntity(oHorse);
                             level.addFreshEntity(headlessHorseman);
-                            oHorse.copyPosition(vanillaHorse);
+                            oHorse.copyPosition(animal);
                             oHorse.setCustomName(Component.nullToEmpty("Daredevil"));
-                            oHorse.setAge(vanillaHorse.getAge());
+                            oHorse.setAge(animal.getAge());
                             oHorse.randomizeOHorseAttributes();
                             oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
                             oHorse.setBreed(5);
@@ -180,8 +181,8 @@ public class SpawnReplacer {
                             oHorse.setTamed(true);
                             oHorse.setHallow(true);
                             headlessHorseman.startRiding(oHorse);
-                            if (level.isClientSide) vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
-                            vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                            if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
+                            animal.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
 
@@ -189,10 +190,10 @@ public class SpawnReplacer {
                     OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                     if (oHorse != null) {
                         //try to take on as many identifiers from the vanilla horse possible
-                        oHorse.copyPosition(vanillaHorse);
-                        oHorse.setCustomName(vanillaHorse.getCustomName());
-                        oHorse.setOwnerUUID(vanillaHorse.getOwnerUUID());
-                        oHorse.setAge(vanillaHorse.getAge());
+                        oHorse.copyPosition(animal);
+                        oHorse.setCustomName(animal.getCustomName());
+                        oHorse.setOwnerUUID(animal.getOwnerUUID());
+                        oHorse.setAge(animal.getAge());
                         oHorse.randomizeOHorseAttributes();
                         oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
                         oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
@@ -241,7 +242,7 @@ public class SpawnReplacer {
                         }
 
                         if (LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWNS.get() && random.nextDouble() <= LivestockOverhaulCommonConfig.DYNAMIC_RESOURCE_SPAWN_PERCENT.get()) {
-                            if (!Objects.requireNonNull(oHorse.level().getServer()).isSingleplayer()) {
+                            if (!(oHorse.level().getServer()).isSingleplayer()) {
                                 int id = oHorse.getId();
                                 String folderName = "base_colors/horse";
                                 boolean useServerCoats = false;
@@ -264,8 +265,8 @@ public class SpawnReplacer {
                         }
 
                         //discard vanilla horse once it's been successfully replaced on client and server
-                        if (level.isClientSide) vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
-                        vanillaHorse.remove(Entity.RemovalReason.DISCARDED);
+                        if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
+                        animal.remove(Entity.RemovalReason.DISCARDED);
 
                         //add new o-horse
                         level.addFreshEntity(oHorse);
@@ -273,7 +274,7 @@ public class SpawnReplacer {
                             LivestockOverhaul.LOGGER.debug("Replaced a vanilla horse at: " + oHorse.getOnPos());
 
                         //remove a certain percentage based on configs
-                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillaHorse.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oHorse.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                             if (level.isClientSide) oHorse.remove(Entity.RemovalReason.DISCARDED);
                             oHorse.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -285,14 +286,14 @@ public class SpawnReplacer {
             }
 
             //Donkey
-            if (LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && eventEntity instanceof Donkey vanillaDonkey) {
-                if (eventEntity.getClass() == Donkey.class) {
+            if (LivestockOverhaulCommonConfig.REPLACE_DONKEYS.get() && eventEntity instanceof Donkey animal) {
+                if (eventEntity.getClass() == Donkey.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                     ODonkey oDonkey = EntityTypes.O_DONKEY_ENTITY.get().create(level);
                     if (oDonkey != null) {
-                        oDonkey.copyPosition(vanillaDonkey);
-                        oDonkey.setCustomName(vanillaDonkey.getCustomName());
-                        oDonkey.setOwnerUUID(vanillaDonkey.getOwnerUUID());
-                        oDonkey.setAge(vanillaDonkey.getAge());
+                        oDonkey.copyPosition(animal);
+                        oDonkey.setCustomName(animal.getCustomName());
+                        oDonkey.setOwnerUUID(animal.getOwnerUUID());
+                        oDonkey.setAge(animal.getAge());
                         oDonkey.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oDonkey.generateRandomMaxHealth());
                         oDonkey.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oDonkey.generateRandomSpeed());
                         oDonkey.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oDonkey.generateRandomJumpStrength());
@@ -307,10 +308,10 @@ public class SpawnReplacer {
                         }
 
                         level.addFreshEntity(oDonkey);
-                        vanillaDonkey.remove(Entity.RemovalReason.DISCARDED);
+                        animal.remove(Entity.RemovalReason.DISCARDED);
                         if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                             LivestockOverhaul.LOGGER.debug("Replaced a vanilla donkey at: " + oDonkey.getOnPos());
-                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillaDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oDonkey.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                             if (level.isClientSide) oDonkey.remove(Entity.RemovalReason.DISCARDED);
                             oDonkey.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -320,14 +321,14 @@ public class SpawnReplacer {
             }
 
             //Mule
-            if (LivestockOverhaulCommonConfig.REPLACE_MULES.get() && eventEntity instanceof Mule vanillaMule) {
-                if (eventEntity.getClass() == Mule.class) {
+            if (LivestockOverhaulCommonConfig.REPLACE_MULES.get() && eventEntity instanceof Mule animal) {
+                if (eventEntity.getClass() == Mule.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                     OMule oMule = EntityTypes.O_MULE_ENTITY.get().create(level);
                     if (oMule != null) {
-                        oMule.copyPosition(vanillaMule);
-                        oMule.setCustomName(vanillaMule.getCustomName());
-                        oMule.setOwnerUUID(vanillaMule.getOwnerUUID());
-                        oMule.setAge(vanillaMule.getAge());
+                        oMule.copyPosition(animal);
+                        oMule.setCustomName(animal.getCustomName());
+                        oMule.setOwnerUUID(animal.getOwnerUUID());
+                        oMule.setAge(animal.getAge());
                         oMule.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oMule.generateRandomMaxHealth());
                         oMule.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oMule.generateRandomSpeed());
                         oMule.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(oMule.generateRandomJumpStrength());
@@ -343,9 +344,9 @@ public class SpawnReplacer {
                             oMule.setFeathering(random.nextInt(OHorse.Feathering.values().length));
                         }
 
-                        if (level.isClientSide) vanillaMule.remove(Entity.RemovalReason.DISCARDED);
+                        if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                         level.addFreshEntity(oMule);
-                        vanillaMule.remove(Entity.RemovalReason.DISCARDED);
+                        animal.remove(Entity.RemovalReason.DISCARDED);
                         if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                             LivestockOverhaul.LOGGER.debug("Replaced a vanilla mule at: " + oMule.getOnPos());
                         event.setCanceled(true);
@@ -354,14 +355,13 @@ public class SpawnReplacer {
             }
 
             //Cow
-            if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof Cow vanillacow) {
-                if (eventEntity.getClass() == Cow.class) {
-
+            if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof Cow animal) {
+                if (eventEntity.getClass() == Cow.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                     if (LivestockOverhaulCommonConfig.SPAWN_MOOBLOOMS.get()) {
                         if (level.getRandom().nextDouble() < 0.02) {
                             Moobloom moobloom = EntityTypes.MOOBLOOM_ENTITY.get().create(level);
                             if (moobloom != null) {
-                                moobloom.copyPosition(vanillacow);
+                                moobloom.copyPosition(animal);
                                 level.addFreshEntity(moobloom);
 
                                 if (level.getBiome(eventEntity.blockPosition()).is(Biomes.PLAINS)) {
@@ -385,10 +385,11 @@ public class SpawnReplacer {
                                 moobloom.setBreed(0);
                                 moobloom.setGender(0);
                                 moobloom.setQuality(100);
-                                if (level.isClientSide) vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                                if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
+                                level.addFreshEntity(moobloom);
+                                animal.remove(Entity.RemovalReason.DISCARDED);
+                                event.setCanceled(true);
                             }
-                            level.addFreshEntity(moobloom);
-                            vanillacow.remove(Entity.RemovalReason.DISCARDED);
                         }
                     }
 
@@ -421,7 +422,7 @@ public class SpawnReplacer {
                             while (oCow.getBreed() == 10);
                         }
 
-                        oCow.copyPosition(vanillacow);
+                        oCow.copyPosition(animal);
                         if (oCow.getBreed() == 10) oCow.setGender(1);
                         else oCow.setGender(random.nextInt(OCow.Gender.values().length));
                         if (LivestockOverhaulCommonConfig.QUALITY.get()) oCow.setQuality(random.nextInt(30));
@@ -436,12 +437,10 @@ public class SpawnReplacer {
                             oCow.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
                         }
 
-                        if (level.isClientSide) vanillacow.remove(Entity.RemovalReason.DISCARDED);
+                        if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                         level.addFreshEntity(oCow);
-                        vanillacow.remove(Entity.RemovalReason.DISCARDED);
-                        if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
-                            LivestockOverhaul.LOGGER.debug("Replaced a vanilla cow at: " + oCow.getOnPos());
-                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oCow.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillacow.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                        animal.remove(Entity.RemovalReason.DISCARDED);
+                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oCow.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                             if (level.isClientSide) oCow.remove(Entity.RemovalReason.DISCARDED);
                             oCow.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -451,15 +450,15 @@ public class SpawnReplacer {
             }
 
             //Chicken
-            if (LivestockOverhaulCommonConfig.REPLACE_CHICKENS.get() && eventEntity instanceof Chicken vanillachicken)
-                if (eventEntity.getClass() == Chicken.class) {
+            if (LivestockOverhaulCommonConfig.REPLACE_CHICKENS.get() && eventEntity instanceof Chicken animal) {
+                if (eventEntity.getClass() == Chicken.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                     OChicken oChicken = EntityTypes.O_CHICKEN_ENTITY.get().create(level);
                     if (oChicken != null) {
-                        oChicken.copyPosition(vanillachicken);
-                        oChicken.setCustomName(vanillachicken.getCustomName());
-                        oChicken.setAge(vanillachicken.getAge());
+                        oChicken.copyPosition(animal);
+                        oChicken.setCustomName(animal.getCustomName());
+                        oChicken.setAge(animal.getAge());
                         oChicken.setGender(random.nextInt(OChicken.Gender.values().length));
-                        oChicken.setChickenJockey(vanillachicken.isChickenJockey());
+                        oChicken.setChickenJockey(animal.isChickenJockey());
 
 //                        if (vanillachicken.isChickenJockey()) {
 //                            List<Entity> passengers = vanillachicken.getPassengers().stream().collect(Collectors.toList());
@@ -516,31 +515,33 @@ public class SpawnReplacer {
                             oChicken.setOverlayVariant(random.nextInt(OChickenRenderLayer.Marking.values().length));
                         }
 
-                        if (level.isClientSide) vanillachicken.remove(Entity.RemovalReason.DISCARDED);
+                        if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                         level.addFreshEntity(oChicken);
-                        vanillachicken.remove(Entity.RemovalReason.DISCARDED);
-                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oChicken.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillachicken.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                        animal.remove(Entity.RemovalReason.DISCARDED);
+                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oChicken.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                             if (level.isClientSide) oChicken.remove(Entity.RemovalReason.DISCARDED);
                             oChicken.remove(Entity.RemovalReason.DISCARDED);
                         }
                         if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                             LivestockOverhaul.LOGGER.debug("Replaced a vanilla chicken at: " + oChicken.getOnPos());
                         event.setCanceled(true);
+
                     }
                 }
+            }
         }
 
         //Salmon
         OSalmon oSalmon = EntityTypes.O_SALMON_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_SALMON.get() && eventEntity instanceof Salmon vanillasalmon) {
-            if (eventEntity.getClass() == Salmon.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_SALMON.get() && eventEntity instanceof Salmon animal) {
+            if (eventEntity.getClass() == Salmon.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 if (oSalmon != null) {
-                    oSalmon.copyPosition(vanillasalmon);
-                    oSalmon.setCustomName(vanillasalmon.getCustomName());
+                    oSalmon.copyPosition(animal);
+                    oSalmon.setCustomName(animal.getCustomName());
                     oSalmon.setVariant(random.nextInt(OSalmonModel.Variant.values().length));
-                    if (level.isClientSide) vanillasalmon.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oSalmon);
-                    vanillasalmon.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla salmon at: " + oSalmon.getOnPos());
                     event.setCanceled(true);
@@ -550,14 +551,14 @@ public class SpawnReplacer {
 
         //Cod
         OCod oCod = EntityTypes.O_COD_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_COD.get() && eventEntity instanceof Cod vanillacod) {
-            if (eventEntity.getClass() == Cod.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_COD.get() && eventEntity instanceof Cod animal) {
+            if (eventEntity.getClass() == Cod.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 if (oCod != null) {
-                    oCod.copyPosition(vanillacod);
-                    oCod.setCustomName(vanillacod.getCustomName());
-                    if (level.isClientSide) vanillacod.remove(Entity.RemovalReason.DISCARDED);
+                    oCod.copyPosition(animal);
+                    oCod.setCustomName(animal.getCustomName());
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oCod);
-                    vanillacod.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla cod at: " + oCod.getOnPos());
                     event.setCanceled(true);
@@ -567,28 +568,30 @@ public class SpawnReplacer {
 
         //Bee
         if (LivestockOverhaulCommonConfig.REPLACE_BEES.get() && (eventEntity.getClass() == Bee.class)) {
-            Bee bee = (Bee) eventEntity;
-            OBee oBee = EntityTypes.O_BEE_ENTITY.get().create(level);
-            if (oBee != null) {
-                oBee.setCustomName(bee.getCustomName());
-                oBee.deserializeNBT(bee.serializeNBT());
-                oBee.setVariant(random.nextInt(OBeeModel.Variant.values().length));
-                bee.remove(Entity.RemovalReason.DISCARDED);
-                level.addFreshEntity(oBee);
-                if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
-                    LivestockOverhaul.LOGGER.debug("Replaced a vanilla bee at: " + oBee.getOnPos());
-                if (oBee.getHivePos() != null) {
-                    BlockEntity blockEntity = level.getBlockEntity(oBee.getHivePos());
-                    handleBeehiveData(blockEntity);
+            Bee animal = (Bee) eventEntity;
+            if (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get()) {
+                OBee oBee = EntityTypes.O_BEE_ENTITY.get().create(level);
+                if (oBee != null) {
+                    oBee.setCustomName(animal.getCustomName());
+                    oBee.deserializeNBT(animal.serializeNBT());
+                    oBee.setVariant(random.nextInt(OBeeModel.Variant.values().length));
+                    animal.remove(Entity.RemovalReason.DISCARDED);
+                    level.addFreshEntity(oBee);
+                    if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
+                        LivestockOverhaul.LOGGER.debug("Replaced a vanilla bee at: " + oBee.getOnPos());
+                    if (oBee.getHivePos() != null) {
+                        BlockEntity blockEntity = level.getBlockEntity(oBee.getHivePos());
+                        handleBeehiveData(blockEntity);
+                    }
                 }
+                event.setCanceled(true);
             }
-            event.setCanceled(true);
         }
 
         //Rabbit
         ORabbit oRabbit = EntityTypes.O_RABBIT_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() && eventEntity instanceof Rabbit vanillarabbit) {
-            if (eventEntity.getClass() == Rabbit.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_RABBITS.get() && eventEntity instanceof Rabbit animal) {
+            if (eventEntity.getClass() == Rabbit.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 if (oRabbit != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oRabbit.setBreedByWildStatus();
@@ -611,15 +614,15 @@ public class SpawnReplacer {
                     }
 
                     if (LivestockOverhaulCommonConfig.QUALITY.get()) oRabbit.setQuality(random.nextInt(30));
-                    oRabbit.copyPosition(vanillarabbit);
-                    oRabbit.setCustomName(vanillarabbit.getCustomName());
-                    oRabbit.setAge(vanillarabbit.getAge());
+                    oRabbit.copyPosition(animal);
+                    oRabbit.setCustomName(animal.getCustomName());
+                    oRabbit.setAge(animal.getAge());
                     oRabbit.setGender(random.nextInt(ORabbit.Gender.values().length));
                     oRabbit.setDewlapByGender();
-                    if (level.isClientSide) vanillarabbit.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oRabbit);
-                    vanillarabbit.remove(Entity.RemovalReason.DISCARDED);
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oRabbit.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillarabbit.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    animal.remove(Entity.RemovalReason.DISCARDED);
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oRabbit.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (level.isClientSide) oRabbit.remove(Entity.RemovalReason.DISCARDED);
                         oRabbit.remove(Entity.RemovalReason.DISCARDED);
                     }
@@ -632,8 +635,8 @@ public class SpawnReplacer {
 
         //Sheep
         OSheep oSheep = EntityTypes.O_SHEEP_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_SHEEP.get() && eventEntity instanceof Sheep vanillasheep) {
-            if (eventEntity.getClass() == Sheep.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_SHEEP.get() && eventEntity instanceof Sheep animal) {
+            if (eventEntity.getClass() == Sheep.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 if (oSheep != null) {
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         if (level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) {
@@ -657,7 +660,7 @@ public class SpawnReplacer {
                         oSheep.setBreed(random.nextInt(SheepBreed.Breed.values().length));
                     }
 
-                    oSheep.copyPosition(vanillasheep);
+                    oSheep.copyPosition(animal);
                     oSheep.setGender(random.nextInt(OSheep.Gender.values().length));
                     if (LivestockOverhaulCommonConfig.QUALITY.get()) oSheep.setQuality(random.nextInt(30));
 
@@ -682,8 +685,8 @@ public class SpawnReplacer {
                     }
 
                     level.addFreshEntity(oSheep);
-                    vanillasheep.remove(Entity.RemovalReason.DISCARDED);
-                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oSheep.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillasheep.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    animal.remove(Entity.RemovalReason.DISCARDED);
+                    if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oSheep.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (level.isClientSide) oSheep.remove(Entity.RemovalReason.DISCARDED);
                         oSheep.remove(Entity.RemovalReason.DISCARDED);
                     }
@@ -696,31 +699,31 @@ public class SpawnReplacer {
 
         //Llama
         OLlama oLlama = EntityTypes.O_LLAMA_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && eventEntity instanceof Llama vanillallama) {
-            if (((eventEntity.getClass() == Llama.class) || (eventEntity.getClass() == TraderLlama.class))) {
+        if (LivestockOverhaulCommonConfig.REPLACE_LLAMAS.get() && eventEntity instanceof Llama animal) {
+            if (((eventEntity.getClass() == Llama.class) || (eventEntity.getClass() == TraderLlama.class)) && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 if (oLlama != null) {
-                    oLlama.copyPosition(vanillallama);
-                    oLlama.setCustomName(vanillallama.getCustomName());
-                    oLlama.setOwnerUUID(vanillallama.getOwnerUUID());
-                    oLlama.setAge(vanillallama.getAge());
+                    oLlama.copyPosition(animal);
+                    oLlama.setCustomName(animal.getCustomName());
+                    oLlama.setOwnerUUID(animal.getOwnerUUID());
+                    oLlama.setAge(animal.getAge());
 
-                    Entity leashHolder = vanillallama.getLeashHolder();
+                    Entity leashHolder = animal.getLeashHolder();
                     if (leashHolder != null) {
                         oLlama.setLeashedTo(leashHolder, true);
                         oLlama.setDelayedLeashHolderId(leashHolder.getId());
                     }
 
-                    if (vanillallama instanceof TraderLlama) oLlama.setChested(true);
+                    if (animal instanceof TraderLlama) oLlama.setChested(true);
                     oLlama.setWooly(random.nextInt(OLlama.Wooly.values().length));
                     oLlama.setVariant(random.nextInt(OLlamaModel.Variant.values().length));
                     oLlama.setOverlayVariant(random.nextInt(OLlamaMarkingLayer.Overlay.values().length));
                     oLlama.setGender(random.nextInt(OLlama.Gender.values().length));
-                    if (level.isClientSide) vanillallama.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oLlama);
-                    vanillallama.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
 
-                    if (!(vanillallama instanceof TraderLlama)) {
-                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oLlama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(vanillallama.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
+                    if (!(animal instanceof TraderLlama)) {
+                        if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oLlama.getSpawnType() == MobSpawnType.SPAWN_EGG)) && (!(animal.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                             if (level.isClientSide) oLlama.remove(Entity.RemovalReason.DISCARDED);
                             oLlama.remove(Entity.RemovalReason.DISCARDED);
                         }
@@ -735,12 +738,12 @@ public class SpawnReplacer {
 
         //Pig
         OPig oPig = EntityTypes.O_PIG_ENTITY.get().create(level);
-        if (LivestockOverhaulCommonConfig.REPLACE_PIGS.get() && eventEntity instanceof Pig vanillapig) {
-            if (eventEntity.getClass() == Pig.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_PIGS.get() && eventEntity instanceof Pig animal) {
+            if (eventEntity.getClass() == Pig.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 if (oPig != null) {
-                    oPig.copyPosition(vanillapig);
-                    oPig.setCustomName(vanillapig.getCustomName());
-                    oPig.setAge(vanillapig.getAge());
+                    oPig.copyPosition(animal);
+                    oPig.setCustomName(animal.getCustomName());
+                    oPig.setAge(animal.getAge());
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oPig.setColorByBreed();
@@ -753,9 +756,9 @@ public class SpawnReplacer {
                     oPig.setBreed(random.nextInt(PigBreed.Breed.values().length));
                     oPig.setGender(random.nextInt(OPig.Gender.values().length));
                     if (LivestockOverhaulCommonConfig.QUALITY.get()) oPig.setQuality(random.nextInt(30));
-                    if (level.isClientSide) vanillapig.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oPig);
-                    vanillapig.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oPig.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (level.isClientSide) oPig.remove(Entity.RemovalReason.DISCARDED);
                         oPig.remove(Entity.RemovalReason.DISCARDED);
@@ -768,13 +771,13 @@ public class SpawnReplacer {
         }
 
         //Mooshroom
-        if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof MushroomCow vanillamooshroom) {
-            if (eventEntity.getClass() == MushroomCow.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_COWS.get() && eventEntity instanceof MushroomCow animal) {
+            if (eventEntity.getClass() == MushroomCow.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 OMooshroom oMooshroom = EntityTypes.O_MOOSHROOM_ENTITY.get().create(level);
                 if (oMooshroom != null) {
-                    oMooshroom.copyPosition(vanillamooshroom);
-                    oMooshroom.setCustomName(vanillamooshroom.getCustomName());
-                    oMooshroom.setAge(vanillamooshroom.getAge());
+                    oMooshroom.copyPosition(animal);
+                    oMooshroom.setCustomName(animal.getCustomName());
+                    oMooshroom.setAge(animal.getAge());
                     oMooshroom.setGender(random.nextInt(OCow.Gender.values().length));
                     oMooshroom.setBreed(random.nextInt(CowBreed.Breed.values().length));
                     oMooshroom.setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
@@ -790,10 +793,10 @@ public class SpawnReplacer {
                     }
 
                     if (level.isClientSide)
-                        vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);
+                        animal.remove(Entity.RemovalReason.DISCARDED);
 
                     level.addFreshEntity(oMooshroom);
-                    vanillamooshroom.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
 
                     if (random.nextDouble() <= LivestockOverhaulCommonConfig.SPAWN_PREVENTION_PERCENT.get() && (!(oMooshroom.getSpawnType() == MobSpawnType.SPAWN_EGG))) {
                         if (level.isClientSide) oMooshroom.remove(Entity.RemovalReason.DISCARDED);
@@ -807,22 +810,22 @@ public class SpawnReplacer {
         }
 
         //Camel
-        if (LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && eventEntity instanceof Camel vanillacamel) {
-            if (eventEntity.getClass() == Camel.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_CAMELS.get() && eventEntity instanceof Camel animal) {
+            if (eventEntity.getClass() == Camel.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 OCamel oCamel = EntityTypes.O_CAMEL_ENTITY.get().create(level);
                 if (oCamel != null) {
-                    oCamel.copyPosition(vanillacamel);
-                    oCamel.setCustomName(vanillacamel.getCustomName());
-                    oCamel.setAge(vanillacamel.getAge());
+                    oCamel.copyPosition(animal);
+                    oCamel.setCustomName(animal.getCustomName());
+                    oCamel.setAge(animal.getAge());
                     oCamel.getAttribute(Attributes.MAX_HEALTH).setBaseValue(oCamel.generateRandomMaxHealth());
                     oCamel.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(oCamel.generateRandomSpeed());
                     oCamel.setVariant(random.nextInt(OCamelModel.Variant.values().length));
                     oCamel.setOverlayVariant(random.nextInt(OCamelBodyLayer.Marking.values().length));
                     oCamel.setBreed(random.nextInt(CamelBreed.Breed.values().length));
                     oCamel.setGender(random.nextInt(AbstractOMount.Gender.values().length));
-                    if (level.isClientSide) vanillacamel.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oCamel);
-                    vanillacamel.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla camel at: " + oCamel.getOnPos());
                     event.setCanceled(true);
@@ -831,13 +834,13 @@ public class SpawnReplacer {
         }
 
         //Goat
-        if (LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && eventEntity instanceof Goat vanillagoat) {
-            if (eventEntity.getClass() == Goat.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_GOATS.get() && eventEntity instanceof Goat animal) {
+            if (eventEntity.getClass() == Goat.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 OGoat oGoat = EntityTypes.O_GOAT_ENTITY.get().create(level);
                 if (oGoat != null) {
-                    oGoat.copyPosition(vanillagoat);
-                    oGoat.setCustomName(vanillagoat.getCustomName());
-                    oGoat.setAge(vanillagoat.getAge());
+                    oGoat.copyPosition(animal);
+                    oGoat.setCustomName(animal.getCustomName());
+                    oGoat.setAge(animal.getAge());
                     oGoat.setGender(random.nextInt(OGoat.Gender.values().length));
 
                     if (LivestockOverhaulCommonConfig.QUALITY.get()) {
@@ -852,9 +855,9 @@ public class SpawnReplacer {
                         oGoat.setOverlayVariant(random.nextInt(OGoatBodyLayer.Overlay.values().length));
                     }
 
-                    if (level.isClientSide) vanillagoat.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oGoat);
-                    vanillagoat.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla goat at: " + oGoat.getOnPos());
                     event.setCanceled(true);
@@ -863,14 +866,14 @@ public class SpawnReplacer {
         }
 
         //Undead Horse
-        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && eventEntity instanceof SkeletonHorse skeletonHorse) {
-            if (eventEntity.getClass() == SkeletonHorse.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && eventEntity instanceof SkeletonHorse animal) {
+            if (eventEntity.getClass() == SkeletonHorse.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                 if (oHorse != null) {
-                    oHorse.copyPosition(skeletonHorse);
-                    oHorse.setCustomName(skeletonHorse.getCustomName());
-                    oHorse.setOwnerUUID(skeletonHorse.getOwnerUUID());
-                    oHorse.setAge(skeletonHorse.getAge());
+                    oHorse.copyPosition(animal);
+                    oHorse.setCustomName(animal.getCustomName());
+                    oHorse.setOwnerUUID(animal.getOwnerUUID());
+                    oHorse.setAge(animal.getAge());
                     oHorse.randomizeOHorseAttributes();
                     oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
                     oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
@@ -896,9 +899,9 @@ public class SpawnReplacer {
                         oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                     }
 
-                    if (level.isClientSide) skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oHorse);
-                    skeletonHorse.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla skeleton horse at: " + oHorse.getOnPos());
                     event.setCanceled(true);
@@ -906,14 +909,14 @@ public class SpawnReplacer {
             }
         }
 
-        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && eventEntity instanceof ZombieHorse zombieHorse) {
-            if (eventEntity.getClass() == ZombieHorse.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_UNDEAD_HORSES.get() && eventEntity instanceof ZombieHorse animal) {
+            if (eventEntity.getClass() == ZombieHorse.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 OHorse oHorse = EntityTypes.O_HORSE_ENTITY.get().create(level);
                 if (oHorse != null) {
-                    oHorse.copyPosition(zombieHorse);
-                    oHorse.setCustomName(zombieHorse.getCustomName());
-                    oHorse.setOwnerUUID(zombieHorse.getOwnerUUID());
-                    oHorse.setAge(zombieHorse.getAge());
+                    oHorse.copyPosition(animal);
+                    oHorse.setCustomName(animal.getCustomName());
+                    oHorse.setOwnerUUID(animal.getOwnerUUID());
+                    oHorse.setAge(animal.getAge());
                     oHorse.randomizeOHorseAttributes();
                     oHorse.setReindeerVariant(random.nextInt(OHorseModel.ReindeerVariant.values().length));
                     oHorse.setGender(random.nextInt(AbstractOMount.Gender.values().length));
@@ -939,9 +942,9 @@ public class SpawnReplacer {
                         oHorse.setEyeVariant(random.nextInt(EquineEyeColorOverlay.values().length));
                     }
 
-                    if (level.isClientSide) zombieHorse.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oHorse);
-                    zombieHorse.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla zombie horse at: " + oHorse.getOnPos());
                     event.setCanceled(true);
@@ -950,19 +953,19 @@ public class SpawnReplacer {
         }
 
         //Frog
-        if (LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && eventEntity instanceof Frog frog) {
-            if (eventEntity.getClass() == Frog.class) {
+        if (LivestockOverhaulCommonConfig.REPLACE_FROGS.get() && eventEntity instanceof Frog animal) {
+            if (eventEntity.getClass() == Frog.class && (animal.getSpawnType() != MobSpawnType.SPAWN_EGG || LivestockOverhaulCommonConfig.REPLACE_SPAWN_EGG_ANIMALS.get())) {
                 OFrog oFrog = EntityTypes.O_FROG_ENTITY.get().create(level);
                 if (oFrog != null) {
-                    oFrog.copyPosition(frog);
-                    oFrog.setCustomName(frog.getCustomName());
-                    oFrog.setAge(frog.getAge());
+                    oFrog.copyPosition(animal);
+                    oFrog.setCustomName(animal.getCustomName());
+                    oFrog.setAge(animal.getAge());
                     oFrog.setVariant(random.nextInt(OFrogModel.Variant.values().length));
                     oFrog.setOverlayVariant(random.nextInt(OFrogRenderLayer.Marking.values().length));
                     oFrog.setEyesVariant(random.nextInt(OFrogRenderLayer.EyeColor.values().length));
-                    if (level.isClientSide) frog.remove(Entity.RemovalReason.DISCARDED);
+                    if (level.isClientSide) animal.remove(Entity.RemovalReason.DISCARDED);
                     level.addFreshEntity(oFrog);
-                    frog.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Replaced a vanilla frog at: " + oFrog.getOnPos());
                     event.setCanceled(true);
@@ -974,9 +977,9 @@ public class SpawnReplacer {
         Unicorn unicorn = EntityTypes.UNICORN_ENTITY.get().create(level);
         if (LivestockOverhaulCommonConfig.SPAWN_UNICORNS.get()) {
             if (eventEntity.getClass() == Rabbit.class && random.nextDouble() < 0.0012 && level.isDay() && level.getBiome(eventEntity.blockPosition()).is(Tags.Biomes.IS_PLAINS)) {
-                Rabbit rabbit = (Rabbit) eventEntity;
+                Rabbit animal = (Rabbit) eventEntity;
                 if (unicorn != null) {
-                    unicorn.copyPosition(rabbit);
+                    unicorn.copyPosition(animal);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
                     unicorn.setSpecies(0);
                     unicorn.randomizeUnicornAttributes();
@@ -999,7 +1002,7 @@ public class SpawnReplacer {
 
                     unicorn.setManeType(1 + random.nextInt(4));
                     level.addFreshEntity(unicorn);
-                    rabbit.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Added a unicorn at: " + unicorn.getOnPos());
                     event.setCanceled(true);
@@ -1007,9 +1010,9 @@ public class SpawnReplacer {
             }
 
             if (eventEntity.getClass() == PiglinBrute.class && random.nextDouble() < 0.007) {
-                PiglinBrute brute = (PiglinBrute) eventEntity;
+                PiglinBrute animal = (PiglinBrute) eventEntity;
                 if (unicorn != null) {
-                    unicorn.copyPosition(brute);
+                    unicorn.copyPosition(animal);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
                     unicorn.setSpecies(1);
                     unicorn.randomizeUnicornAttributes();
@@ -1032,7 +1035,7 @@ public class SpawnReplacer {
 
                     unicorn.setManeType(1 + random.nextInt(4));
                     level.addFreshEntity(unicorn);
-                    brute.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Added a unicorn at: " + unicorn.getOnPos());
                     event.setCanceled(true);
@@ -1040,9 +1043,9 @@ public class SpawnReplacer {
             }
 
             if (eventEntity.getClass() == EnderMan.class && random.nextDouble() < 0.002 && level.getBiome(eventEntity.blockPosition()).is(BiomeTags.IS_END)) {
-                EnderMan enderMan = (EnderMan) eventEntity;
+                EnderMan animal = (EnderMan) eventEntity;
                 if (unicorn != null) {
-                    unicorn.copyPosition(enderMan);
+                    unicorn.copyPosition(animal);
                     unicorn.setGender(random.nextInt(Unicorn.Gender.values().length));
                     unicorn.setSpecies(2);
                     unicorn.randomizeUnicornAttributes();
@@ -1065,7 +1068,7 @@ public class SpawnReplacer {
 
                     unicorn.setManeType(1 + random.nextInt(4));
                     level.addFreshEntity(unicorn);
-                    enderMan.remove(Entity.RemovalReason.DISCARDED);
+                    animal.remove(Entity.RemovalReason.DISCARDED);
                     if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get())
                         LivestockOverhaul.LOGGER.debug("Added a unicorn at: " + unicorn.getOnPos());
                     event.setCanceled(true);
