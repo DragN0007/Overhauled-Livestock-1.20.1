@@ -179,15 +179,12 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
     //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v
     //https://github.com/Snownee/Jade/blob/1.20-forge/src/main/java/snownee/jade/addon/vanilla/HorseStatsProvider.java#L51
     //These calculations are placed in this manner so that the numbers will match up with Jade's tooltip.
-    //If use of this code and/ or these calculations are no longer permitted, for any reason, please contact me
-    // at DragN0007 on Curseforge or dragn0007.jar on Discord. I will remove them, no questions asked. :)
     public static double getJumpHeight(double jump) {
         return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
     }
 
     //This code is slightly altered to fit as a label rather than a tooltip
     private void renderSpeedLabel(GuiGraphics graphics) {
-
         double speed = oDonkey.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 42.16;
 
         DecimalFormat limitDec = new DecimalFormat("#.###");
@@ -199,7 +196,6 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
 
     //This code is slightly altered to fit as a label rather than a tooltip
     private void renderJumpStrengthLabel(GuiGraphics graphics) {
-
         oDonkey.getAttributes().hasAttribute(Attributes.JUMP_STRENGTH);
         double jumpStrength = oDonkey.getAttributeBaseValue(Attributes.JUMP_STRENGTH);
         double jumpHeight = getJumpHeight(jumpStrength);
@@ -219,7 +215,6 @@ public class ODonkeyScreen extends AbstractContainerScreen<ODonkeyMenu> {
 
         graphics.drawString(this.font, labelText, healthLabelX, healthLabelY, 0xFFFFFF, false);
     }
-
 }
 
 

@@ -120,4 +120,126 @@ public class LOUtils {
         }
         return false;
     }
+
+    public static String getHorseBreeds(int breed) {
+        return switch (breed) {
+            case 0 -> "Mustang";
+            case 1 -> "Ardennes";
+            case 2 -> "Kladruber";
+            case 3 -> "Fjord";
+            case 4 -> "Thoroughbred";
+            case 5 -> "Friesian";
+            case 6 -> "Irish Cob";
+            case 7 -> "American Quarter";
+            case 8 -> "Percheron";
+            case 9 -> "Selle Francais";
+            case 10 -> "Marwari";
+            case 11 -> "Mongolian";
+            case 12 -> "Shire";
+            case 13 -> "Akhal-Teke";
+            case 14 -> "American Soldier";
+            case 15 -> "Welsh Pony";
+            case 16 -> "Connemara";
+            case 17 -> "Haflinger";
+            case 18 -> "Oldenburger";
+            case 19 -> "Shetland";
+            case 20 -> "Standardbred";
+            case 21 -> "Trakehner";
+            case 22 -> "Boulonnais";
+            case 23 -> "Lusitano";
+            case 24 -> "Nokota";
+            case 25 -> "Dutch Warmblood";
+            case 26 -> "Suffolk Punch";
+            case 27 -> "Vanner";
+            case 28 -> "American Paint";
+            case 29 -> "Appaloosa";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getMuleBreeds(int breed) {
+        return switch (breed) {
+            case 0 -> "Stock";
+            case 1 -> "Mini";
+            case 2 -> "Draft";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getCowBreeds(int breed) {
+        return switch (breed) {
+            case 0 -> "Angus";
+            case 1 -> "Longhorn";
+            case 2 -> "Brahman";
+            case 3 -> "Mini";
+            case 4 -> "Watusi";
+            case 5 -> "Corriente";
+            case 6 -> "Holstein";
+            case 7 -> "Jersey";
+            case 8 -> "Hereford";
+            case 9 -> "Highland";
+            case 10 -> "Ox";
+            case 11 -> "Spanish Fighting";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getCowHorns(int horns) {
+        return switch (horns) {
+            case 0 -> "Polled";
+            case 1, 8 -> "Medium";
+            case 2, 4, 3 -> "Long";
+            case 5, 6 -> "Thick";
+            case 7, 10 -> "Small";
+            case 9 -> "Zebu";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getPigBreeds(int breed) {
+        return switch (breed) {
+            case 0 -> "Yorkshire";
+            case 1 -> "Pot-Belly";
+            case 2 -> "Guinea Hog";
+            case 3 -> "Kunekune";
+            case 4 -> "Poland-China";
+            case 5 -> "Berkshire";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getSheepBreeds(int breed) {
+        return switch (breed) {
+            case 0 -> "Gulf Coast";
+            case 1 -> "Norfolk";
+            case 2 -> "Dorset";
+            case 3 -> "Jacob";
+            case 4 -> "Racka";
+            case 5 -> "California Red";
+            case 6 -> "Hair";
+            case 7 -> "Border Leicester";
+            case 8 -> "Fat-Tailed";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getLlamaBreeds(int breed) {
+        return switch (breed) {
+            case 0 -> "Flocculent";
+            case 1 -> "Woolly";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getGoatBreeds(int breed) {
+        switch (breed) {
+            case 0: return "Classic";
+            case 1: return "Meat";
+            case 2: return "Nubian";
+            case 3: return "Warm";
+            case 4: return "Fibrous";
+            case 5: return "Dairy";
+            default: return "Unknown";
+        }
+    }
 }

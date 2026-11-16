@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.compat.jade.breed;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.llama.OLlama;
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.EntityAccessor;
@@ -15,17 +16,9 @@ public class LlamaBreedTooltip implements IEntityComponentProvider {
     @Override
     public void appendTooltip(ITooltip tooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig) {
         if (entityAccessor.getEntity() instanceof OLlama animal && entityAccessor.getPlayer().isShiftKeyDown()) {
-            String breeds = getBreeds(animal.getWooly());
+            String breeds = LOUtils.getLlamaBreeds(animal.getWooly());
             tooltip.add(Component.translatable(breeds));
         }
-    }
-
-    private String getBreeds(int breed) {
-        return switch (breed) {
-            case 0 -> "Flocculent";
-            case 1 -> "Woolly";
-            default -> "Unknown";
-        };
     }
 
     @Override

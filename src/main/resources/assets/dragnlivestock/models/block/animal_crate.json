@@ -1,0 +1,6 @@
+{
+  "parent": "dragnlivestock:block/parent/animal_crate",
+  "textures": {
+    "texture": "dragnlivestock:block/occupied_animal_crate"
+  }
+}

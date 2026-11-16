@@ -3,10 +3,6 @@
   "values": [
     "dragnlivestock:o_donkey",
     "dragnlivestock:o_goat",
-
-    {
-      "id": "dragnpets:o_dog",
-      "required": false
-    }
+    {"id": "dragnpets:o_dog", "required": false}
   ]
 }

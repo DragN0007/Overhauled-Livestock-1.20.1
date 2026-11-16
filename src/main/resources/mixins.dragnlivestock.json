@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.dragn0007.dragnlivestock.mixin",
+  "refmap": "mixins.dragnlivestock.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "SlotMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

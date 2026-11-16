@@ -20,6 +20,8 @@ public class LOBlocks {
 //    public static final RegistryObject<Block> FISH_TRAP = registerBlock("fish_trap",
 //            () -> new FishTrapBlock());
 
+    public static final RegistryObject<Block> ANIMAL_CRATE = registerBlockWithoutItem("animal_crate", AnimalCrate::new);
+
     public static final RegistryObject<Block> RAW_CHEESE = registerBlockWithoutItem("raw_cheese", RawCheese::new);
     public static final RegistryObject<Block> CHEESE = registerBlockWithoutItem("cheese", AgedCheese::new);
     public static final RegistryObject<Block> RAW_SHEEP_CHEESE = registerBlockWithoutItem("raw_sheep_cheese", RawSheepCheese::new);

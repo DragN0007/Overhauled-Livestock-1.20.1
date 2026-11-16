@@ -17,8 +17,11 @@ import com.dragn0007.dragnlivestock.entities.sheep.OSheep;
 import com.dragn0007.dragnlivestock.entities.unicorn.Unicorn;
 import com.dragn0007.dragnlivestock.entities.util.AbstractOMount;
 import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.items.custom.AnimalCrateItem;
 import com.dragn0007.dragnlivestock.items.custom.MountRegistryItem;
 import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LOUtils;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -34,13 +37,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.awt.event.ContainerEvent;
 import java.util.List;
 import java.util.Random;
 
@@ -56,23 +63,39 @@ public class ForgeEvent {
     }
 
     @SubscribeEvent
+    public static void preventCrateItemDespawn(ItemExpireEvent event) {
+        if (event.getEntity().getItem().is(LOItems.ANIMAL_CRATE.get())) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void preventFilledCratePickup(EntityItemPickupEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+            if (event.getItem().getItem().is(LOItems.ANIMAL_CRATE.get())) {
+                if (AnimalCrateItem.getFilledCrateAmount(player) >= LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
+                    player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.too_many_crates.tooltip").withStyle(ChatFormatting.RED), true);
+                    event.setCanceled(true);
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @SubscribeEvent
     public static void dropOnDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         Entity source = event.getSource().getEntity();
         Random random = new Random();
         if (entity instanceof OPig && ModList.get().isLoaded("kaleidoscope_cookery")) {
-            if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.OIL_KNIVES)) {
+            if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.OIL_KNIVES))
                 entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("kaleidoscope_cookery", "oil")), random.nextInt(2)), 0F);
-            }
         }
         if (entity instanceof OPig && ModList.get().isLoaded("farmersdelight")) {
-            if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.HAM_KNIVES)) {
+            if (source instanceof Player player && player.getMainHandItem().is(LOTags.Items.HAM_KNIVES))
                 entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("farmersdelight", "ham")), 1), 0F);
-            }
         }
-        if (entity instanceof OPig || entity instanceof OSheep || entity instanceof OCow && ModList.get().isLoaded("hexerei")) {
+        if (entity instanceof OPig || entity instanceof OSheep || entity instanceof OCow && ModList.get().isLoaded("hexerei"))
             entity.spawnAtLocation(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation("hexerei", "animal_fat")), random.nextInt(3)), 0F);
-        }
     }
 
     @SubscribeEvent
@@ -121,7 +144,7 @@ public class ForgeEvent {
                     entity.setOwnerUUID(player.getUUID());
                     player.displayClientMessage(Component.translatable(name + " has been transferred to you!").withStyle(ChatFormatting.GOLD), true);
                     if (entity.getOwner() instanceof Player ownerPlayer)
-                    ownerPlayer.displayClientMessage(Component.translatable(name + " has been transferred!").withStyle(ChatFormatting.GOLD), true);
+                        ownerPlayer.displayClientMessage(Component.translatable(name + " has been transferred!").withStyle(ChatFormatting.GOLD), true);
                 }
             } else {
                 tag.putString("mount_name", entity.getName().getString());
@@ -146,13 +169,13 @@ public class ForgeEvent {
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
                     String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
 
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+camel/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -191,7 +214,7 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof OCow animal) {
-                    String breedText = getCowBreeds(animal.getBreed()).toUpperCase();
+                    String breedText = LOUtils.getCowBreeds(animal.getBreed()).toUpperCase();
 
                     String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+cow/", "");
@@ -199,25 +222,25 @@ public class ForgeEvent {
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
                     String markingText = "Marking: " + noPNGTextMarking.toUpperCase();
 
-                    String hornText = getCowHorns(animal.getHornVariant()).toUpperCase();
+                    String hornText = LOUtils.getCowHorns(animal.getHornVariant()).toUpperCase();
 
                     player.displayClientMessage(Component.translatable("Breed: " + breedText + " | " + coatText + " | " + markingText + " | " + "Horns: " + hornText).withStyle(ChatFormatting.GOLD), true);
                 }
 
                 if (entity instanceof ODonkey animal) {
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+donkey/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -227,7 +250,7 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof FarmGoat animal) {
-                    String breedText = getGoatBreeds(animal.getBreed()).toUpperCase();
+                    String breedText = LOUtils.getGoatBreeds(animal.getBreed()).toUpperCase();
 
                     String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+farm_goat/", "");
@@ -235,7 +258,7 @@ public class ForgeEvent {
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -267,13 +290,13 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof OGoat animal) {
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+goat/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -289,13 +312,13 @@ public class ForgeEvent {
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
                     String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
 
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+horse/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -305,7 +328,7 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof OLlama animal) {
-                    String breedText = getLlamaBreeds(animal.getWooly()).toUpperCase();
+                    String breedText = LOUtils.getLlamaBreeds(animal.getWooly()).toUpperCase();
 
                     String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+llama/", "");
@@ -329,13 +352,13 @@ public class ForgeEvent {
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
                     String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
 
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+mule/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -345,7 +368,7 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof OPig animal) {
-                    String breedText = getPigBreeds(animal.getBreed()).toUpperCase();
+                    String breedText = LOUtils.getPigBreeds(animal.getBreed()).toUpperCase();
 
                     String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+pig/", "");
@@ -369,13 +392,13 @@ public class ForgeEvent {
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
                     String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
 
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+rabbit/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+overlay/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -385,7 +408,7 @@ public class ForgeEvent {
                 }
 
                 if (entity instanceof OSheep animal) {
-                    String breedText = getSheepBreeds(animal.getBreed()).toUpperCase();
+                    String breedText = LOUtils.getSheepBreeds(animal.getBreed()).toUpperCase();
 
                     String coat = animal.getTextureLocation().toString();
                     String noFillerTextCoat = coat.replaceAll(".+sheep/", "");
@@ -409,13 +432,13 @@ public class ForgeEvent {
                     String noPNGTextBreed = noUnderscoresTextBreed.replace(".geo.json", "");
                     String breedText = "Breed: " + noPNGTextBreed.toUpperCase();
 
-                    String coat = animal.getTextureResource().toString();
+                    String coat = animal.getTextureResource();
                     String noFillerTextCoat = coat.replaceAll(".+unicorn/", "");
                     String noUnderscoresTextCoat = noFillerTextCoat.replaceAll("_", " ");
                     String noPNGTextCoat = noUnderscoresTextCoat.replace(".png", "");
                     String coatText = "Coat: " + noPNGTextCoat.toUpperCase();
 
-                    String marking = animal.getOverlayLocation().toString();
+                    String marking = animal.getOverlayLocation();
                     String noFillerTextMarking = marking.replaceAll(".+unicorn/", "");
                     String noUnderscoresTextMarking = noFillerTextMarking.replaceAll("_", " ");
                     String noPNGTextMarking = noUnderscoresTextMarking.replace(".png", "");
@@ -424,83 +447,6 @@ public class ForgeEvent {
                     player.displayClientMessage(Component.translatable(breedText + " | " + coatText + " | " + markingText).withStyle(ChatFormatting.GOLD), true);
                 }
             }
-        }
-    }
-
-    private static String getCowBreeds(int breed) {
-        return switch (breed) {
-            case 0 -> "Angus";
-            case 1 -> "Longhorn";
-            case 2 -> "Brahman";
-            case 3 -> "Mini";
-            case 4 -> "Watusi";
-            case 5 -> "Corriente";
-            case 6 -> "Holstein";
-            case 7 -> "Jersey";
-            case 8 -> "Hereford";
-            case 9 -> "Highland";
-            case 10 -> "Ox";
-            case 11 -> "Spanish Fighting";
-            default -> "Unknown";
-        };
-    }
-
-    private static String getCowHorns(int horns) {
-        return switch (horns) {
-            case 0 -> "Polled";
-            case 1, 8 -> "Medium";
-            case 2, 4, 3 -> "Long";
-            case 5, 6 -> "Thick";
-            case 7, 10 -> "Small";
-            case 9 -> "Zebu";
-            default -> "Unknown";
-        };
-    }
-
-    private static String getPigBreeds(int breed) {
-        return switch (breed) {
-            case 0 -> "Yorkshire";
-            case 1 -> "Pot-Belly";
-            case 2 -> "Guinea Hog";
-            case 3 -> "Kunekune";
-            case 4 -> "Poland-China";
-            case 5 -> "Berkshire";
-            default -> "Unknown";
-        };
-    }
-
-    private static String getSheepBreeds(int breed) {
-        return switch (breed) {
-            case 0 -> "Gulf Coast";
-            case 1 -> "Norfolk";
-            case 2 -> "Dorset";
-            case 3 -> "Jacob";
-            case 4 -> "Racka";
-            case 5 -> "California Red";
-            case 6 -> "Hair";
-            case 7 -> "Border Leicester";
-            case 8 -> "Fat-Tailed";
-            default -> "Unknown";
-        };
-    }
-
-    private static String getLlamaBreeds(int breed) {
-        return switch (breed) {
-            case 0 -> "Flocculent";
-            case 1 -> "Woolly";
-            default -> "Unknown";
-        };
-    }
-
-    private static String getGoatBreeds(int breed) {
-        switch (breed) {
-            case 0: return "Classic";
-            case 1: return "Meat";
-            case 2: return "Nubian";
-            case 3: return "Warm";
-            case 4: return "Fibrous";
-            case 5: return "Dairy";
-            default: return "Unknown";
         }
     }
 }

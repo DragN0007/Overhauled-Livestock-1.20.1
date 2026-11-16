@@ -73,6 +73,12 @@ public class LivestockOverhaulCommonConfig {
     public static final ForgeConfigSpec.BooleanValue ALLOW_SPECIAL_BLANKET_CRAFTING;
     public static final ForgeConfigSpec.BooleanValue ALLOW_HOLIDAY_EVENTS;
     public static final ForgeConfigSpec.BooleanValue ALLOW_ACCENTED_SADDLES;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_CRATES;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_CRATES;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_ALL_IN_CRATES;
+    public static final ForgeConfigSpec.BooleanValue SMALL_ONLY_IN_CRATES;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_CRATES_IN_CONTAINTERS;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_CRATE_PLACING;
     public static final ForgeConfigSpec.BooleanValue DYNAMIC_RESOURCE_SPAWNS;
     public static final ForgeConfigSpec.ConfigValue<Double> DYNAMIC_RESOURCE_SPAWN_PERCENT;
     public static final ForgeConfigSpec.BooleanValue CREATIVE_BRANDING;
@@ -307,14 +313,28 @@ public class LivestockOverhaulCommonConfig {
                 .define("Allow Accented Saddles w/ Mount Additions", false);
         BUILDER.pop();
 
+        BUILDER.push("Animal Crates");
+        ALLOW_CRATES = BUILDER.define("Allow Animal Crates", true);
+        MAX_CRATES = BUILDER.comment("How many filled Animal Crates should be allowed in a player's inventory at once?")
+                .define("Maximum Filled Allowed", 3);
+        ALLOW_ALL_IN_CRATES = BUILDER.comment("Should players be allowed to pick up *any* creature with Animal Crates, rather than just O-Animals?")
+                .define("Allow All in Crates", false);
+        SMALL_ONLY_IN_CRATES = BUILDER.comment("Should players only be allowed to pick up small O-Animals in crates?")
+                .define("Small Animals Only", false);
+        ALLOW_CRATES_IN_CONTAINTERS = BUILDER.comment("Should players be able to put Animal Crates in containers, such as chests?")
+                .define("Allow Container Storage", false);
+        ALLOW_CRATE_PLACING = BUILDER.comment("Should players be able to place Animal Crates on the ground?")
+                .define("Allow Crate Placing", true);
+        BUILDER.pop();
+
         BUILDER.push("Dynamic Resources");
         BUILDER.comment("Dynamic Resources is a built-in way to add custom coats and patterns to applicable O-Animals via resource pack; " +
                 "No coding or datapack required. You can find more information at the \n" +
                 "[GitHub Repository](https://github.com/DragN0007/Overhauled-Livestock-1.20.1/blob/master/README.md)");
         DYNAMIC_RESOURCE_SPAWNS = BUILDER.comment("Should coats & patterns from custom Dynamic Resource packs be able to spawn naturally?")
-                .define("Naturally-Spawning Dynamic Resources", true);
+                .define("Naturally-Spawning Coats & Patterns", true);
         DYNAMIC_RESOURCE_SPAWN_PERCENT = BUILDER.comment("Chance of a Dynamic Resource coat or pattern spawning naturally. Default is 0.10 (10%).")
-                .define("Natural Dynamic Resource Coat Chance", 0.10);
+                .define("Natural Coat Chance", 0.10);
         BUILDER.pop();
 
         BUILDER.push("Wagons");

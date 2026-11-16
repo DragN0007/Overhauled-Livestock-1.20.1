@@ -28,10 +28,13 @@ import com.dragn0007.dragnlivestock.entities.rabbit.ORabbitRender;
 import com.dragn0007.dragnlivestock.entities.salmon.OSalmonRender;
 import com.dragn0007.dragnlivestock.entities.sheep.OSheepRender;
 import com.dragn0007.dragnlivestock.entities.unicorn.UnicornRender;
+import com.dragn0007.dragnlivestock.items.LOItems;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -98,8 +101,13 @@ public class LivestockOverhaulClientEvent {
         MenuScreens.register(LOMenuTypes.LUMBER_WAGON.get(), LumberWagonScreen::new);
         MenuScreens.register(LOMenuTypes.MINING_CART.get(), MiningCartScreen::new);
 
-        //Vanilla Replacers
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
+
+        event.enqueueWork(() -> ItemProperties.register(LOItems.ANIMAL_CRATE.get(),
+                new ResourceLocation(LivestockOverhaul.MODID, "capture"), (stack, level, entity, seed) -> {
+            boolean capture = stack.hasTag() && stack.getTag().getBoolean("capture");
+            return capture ? 1.0F : 0.0F;
+        }));
     }
 
     public static final KeyMapping HORSE_SPEED_UP = new KeyMapping("key.dragnlivestock.horse_speed_up", InputConstants.KEY_LCONTROL, "key.dragnlivestock.categories.dragnlivestock");

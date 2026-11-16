@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.client.gui;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.OMuleMenu;
 import com.dragn0007.dragnlivestock.entities.mule.OMule;
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -137,23 +138,14 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     }
 
     private void renderBreedLabel(GuiGraphics graphics) {
-        String breedText = getBreedText(this.oMule.getBreed());
+        String breedText = LOUtils.getMuleBreeds(this.oMule.getBreed());
         String labelText = "Body Type: " + breedText;
 
         graphics.drawString(this.font, labelText, breedLabelX, breedLabelY, 0xFFFFFF, false);
     }
 
-    private String getBreedText(int breed) {
-        switch (breed) {
-            case 0: return "Stock";
-            case 1: return "Miniature";
-            case 2: return "Draft";
-            default: return "Unknown";
-        }
-    }
-
     private void renderBaseCoatLabel(GuiGraphics graphics) {
-        String text = this.oMule.getTextureResource().toString(); //texture name
+        String text = this.oMule.getTextureResource(); //texture name
         String noFillerText = text.replaceAll(".+mule/", ""); //remove 'mule_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
@@ -170,7 +162,7 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     }
 
     private void renderMarkingLabel(GuiGraphics graphics) {
-        String text = this.oMule.getOverlayLocation().toString();
+        String text = this.oMule.getOverlayLocation();
         String noFillerText = text.replaceAll(".+overlay/", "");
         String noUnderscoresText = noFillerText.replaceAll("_", " ");
         String noPNGText = noUnderscoresText.replace(".png", "");
@@ -204,15 +196,12 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
     //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v
     //https://github.com/Snownee/Jade/blob/1.20-forge/src/main/java/snownee/jade/addon/vanilla/HorseStatsProvider.java#L51
     //These calculations are placed in this manner so that the numbers will match up with Jade's tooltip.
-    //If use of this code and/ or these calculations are no longer permitted, for any reason, please contact me
-    // at DragN0007 on Curseforge or dragn0007.jar on Discord. I will remove them, no questions asked. :)
     public static double getJumpHeight(double jump) {
         return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
     }
 
     //This code is slightly altered to fit as a label rather than a tooltip
     private void renderSpeedLabel(GuiGraphics graphics) {
-
         double speed = oMule.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 42.16;
 
         DecimalFormat limitDec = new DecimalFormat("#.###");
@@ -224,7 +213,6 @@ public class OMuleScreen extends AbstractContainerScreen<OMuleMenu> {
 
     //This code is slightly altered to fit as a label rather than a tooltip
     private void renderJumpStrengthLabel(GuiGraphics graphics) {
-
         oMule.getAttributes().hasAttribute(Attributes.JUMP_STRENGTH);
         double jumpStrength = oMule.getAttributeBaseValue(Attributes.JUMP_STRENGTH);
         double jumpHeight = getJumpHeight(jumpStrength);

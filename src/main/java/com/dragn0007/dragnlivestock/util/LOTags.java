@@ -101,6 +101,8 @@ public class LOTags {
     }
 
     public static class Entity_Types {
+        public static final TagKey<EntityType<?>> O_ANIMALS = tag("o_animals");
+        public static final TagKey<EntityType<?>> SMALL_O_ANIMALS = tag("small_o_animals");
         public static final TagKey<EntityType<?>> HORSES = forgeTag("horses");
         public static final TagKey<EntityType<?>> WOLVES = forgeTag("wolves");
         public static final TagKey<EntityType<?>> FOXES = forgeTag("foxes");

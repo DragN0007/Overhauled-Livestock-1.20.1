@@ -84,6 +84,7 @@ public class LOItems {
     public static final RegistryObject<Item> MARKING_OSCILLATOR = ITEMS.register("marking_oscillator", OscillatorItem::new);
     public static final RegistryObject<Item> BREED_OSCILLATOR = ITEMS.register("breed_oscillator", OscillatorItem::new);
     public static final RegistryObject<Item> VARA = ITEMS.register("vara", VaraItem::new);
+    public static final RegistryObject<Item> ANIMAL_CRATE = ITEMS.register("animal_crate", AnimalCrateItem::new);
 
     public static final RegistryObject<Item> MANE_SCISSORS = ITEMS.register("mane_scissors",
             () -> new HairScissorItem(new Item.Properties().stacksTo(1)));
@@ -304,9 +305,7 @@ public class LOItems {
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1).effect(new MobEffectInstance(MobEffects.REGENERATION, 600, 0), 0.8F).effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0), 0.8F).build())));
 
     public static final RegistryObject<Item> FISH_OIL = ITEMS.register("fish_oil",
-            () -> new FishOilItem(
-                    new MobEffectInstance(MobEffects.REGENERATION, 500, 0, true, false)
-            ));
+            () -> new FishOilItem(new MobEffectInstance(MobEffects.REGENERATION, 500, 0, true, false)));
     public static final RegistryObject<Item> ROE = ITEMS.register("roe",
             () -> new SalmonRoeItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())));
     public static final RegistryObject<Item> COD_ROE = ITEMS.register("cod_roe",

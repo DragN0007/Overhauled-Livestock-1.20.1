@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dragnlivestock:block/animal_crate",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "dragnlivestock:block/animal_crate"
+    },
+    "facing=south": {
+      "model": "dragnlivestock:block/animal_crate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dragnlivestock:block/animal_crate",
+      "y": 270
+    }
+  }
+}

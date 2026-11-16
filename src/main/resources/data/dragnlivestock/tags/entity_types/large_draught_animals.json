@@ -7,54 +7,17 @@
     "dragnlivestock:o_cow",
     "dragnlivestock:caribou",
     "dragnlivestock:unicorn",
-
-    {
-      "id": "permafrost:qorse",
-      "required": false
-    },
-    {
-      "id": "medievalembroidery:direwolf",
-      "required": false
-    },
-    {
-      "id": "medievalembroidery:fanged_elk",
-      "required": false
-    },
-    {
-      "id": "chocobos:chocobo",
-      "required": false
-    },
-    {
-      "id": "deadlydinos:yutyrannus",
-      "required": false
-    },
-    {
-      "id": "more_critters:nightshroom",
-      "required": false
-    },
-    {
-      "id": "more_critters:carrybug",
-      "required": false
-    },
-    {
-      "id": "untamedwilds:bison",
-      "required": false
-    },
-    {
-      "id": "untamedwilds:wisent",
-      "required": false
-    },
-    {
-      "id": "untamedwilds:camel",
-      "required": false
-    },
-    {
-      "id": "wildernature:bison",
-      "required": false
-    },
-    {
-      "id": "horse_colors:horse_felinoid",
-      "required": false
-    }
+    {"id": "permafrost:qorse", "required": false},
+    {"id": "medievalembroidery:direwolf", "required": false},
+    {"id": "medievalembroidery:fanged_elk", "required": false},
+    {"id": "chocobos:chocobo", "required": false},
+    {"id": "deadlydinos:yutyrannus", "required": false},
+    {"id": "more_critters:nightshroom", "required": false},
+    {"id": "more_critters:carrybug", "required": false},
+    {"id": "untamedwilds:bison", "required": false},
+    {"id": "untamedwilds:wisent", "required": false},
+    {"id": "untamedwilds:camel", "required": false},
+    {"id": "wildernature:bison", "required": false},
+    {"id": "horse_colors:horse_felinoid", "required": false}
   ]
 }

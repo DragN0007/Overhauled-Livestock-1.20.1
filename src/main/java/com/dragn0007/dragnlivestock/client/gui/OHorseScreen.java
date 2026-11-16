@@ -3,6 +3,7 @@ package com.dragn0007.dragnlivestock.client.gui;
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.common.gui.OHorseMenu;
 import com.dragn0007.dragnlivestock.entities.horse.OHorse;
+import com.dragn0007.dragnlivestock.util.LOUtils;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,7 +12,10 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
+
+import java.text.DecimalFormat;
 
 public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
 
@@ -130,6 +134,9 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         if (LivestockOverhaulClientConfig.HORSE_COAT_GUI.get()) {
             renderBaseCoatLabel(graphics);
             renderMarkingLabel(graphics);
+            renderSpeedLabel(graphics);
+            renderJumpStrengthLabel(graphics);
+            renderHealthLabel(graphics);
         }
 
         if (LivestockOverhaulClientConfig.ACCESSIBILITY_GENDER_IDENTIFIER.get()) {
@@ -145,44 +152,14 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     }
 
     private void renderBreedLabel(GuiGraphics graphics) {
-        String breedText = getBreedText(this.oHorse.getBreed());
+        String breedText = LOUtils.getHorseBreeds(this.oHorse.getBreed());
         String labelText = "Breed: " + breedText;
 
         graphics.drawString(this.font, labelText, breedLabelX, breedLabelY, 0xFFFFFF, false);
     }
 
-    private String getBreedText(int breed) {
-        switch (breed) {
-            case 0: return "Mustang (Stock)";
-            case 1: return "Ardennes (Draft)";
-            case 2: return "Kladruber (Warmblood)";
-            case 3: return "Fjord (Pony)";
-            case 4: return "Thoroughbred (Racer)";
-            case 5: return "Friesian (Coldblood)";
-            case 6: return "Irish Cob (Draft)";
-            case 7: return "American Quarter (Stock)";
-            case 8: return "Percheron (Draft)";
-            case 9: return "Selle Francais (Warmblood)";
-            case 10: return "Marwari (Warmblood)";
-            case 11: return "Mongolian (Pony)";
-            case 12: return "Shire (Draft)";
-            case 13: return "Akhal-Teke (Racer)";
-            case 14: return "American Soldier (Draft)";
-            case 15: return "Welsh (Pony)";
-            case 16: return "Connemara (Pony)";
-            case 17: return "Haflinger (Coldblood)";
-            case 18: return "Oldenburger (Warmblood)";
-            case 19: return "Shetland (Pony)";
-            case 20: return "Standardbred (Racer)";
-            case 21: return "Trakehner (Warmblood)";
-            case 22: return "Boulonnais (Draft)";
-            case 23: return "Lusitano (Warmblood)";
-            default: return "Unknown";
-        }
-    }
-
     private void renderBaseCoatLabel(GuiGraphics graphics) {
-        String text = this.oHorse.getTextureResource().toString(); //texture name
+        String text = this.oHorse.getTextureResource(); //texture name
         String noFillerText = text.replaceAll(".+horse/", ""); //remove 'horse_' and anything before it
         String noUnderscoresText = noFillerText.replaceAll("_", " "); //replace any underscores with spaces
         String noPNGText = noUnderscoresText.replace(".png", ""); //remove '.png'
@@ -198,7 +175,7 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
     }
 
     private void renderMarkingLabel(GuiGraphics graphics) {
-        String text = this.oHorse.getOverlayLocation().toString();
+        String text = this.oHorse.getOverlayLocation();
         String noFillerText = text.replaceAll(".+overlay/", "");
         String noDR = noFillerText.replaceAll(".+horse/", "");
         String noUnderscoresText = noDR.replaceAll("_", " ");
@@ -227,6 +204,45 @@ public class OHorseScreen extends AbstractContainerScreen<OHorseMenu> {
         } else {
             graphics.drawString(this.font, error, genderFLabelX, genderLabelY, 0xFFFFFF, false);
         }
+    }
+
+    //Code & Calculations from Jade, by Snowee, under the Creative Commons License (https://github.com/Snownee/Jade/tree/1.20-forge) v
+    //https://github.com/Snownee/Jade/blob/1.20-forge/src/main/java/snownee/jade/addon/vanilla/HorseStatsProvider.java#L51
+    //These calculations are placed in this manner so that the numbers will match up with Jade's tooltip.
+    public static double getJumpHeight(double jump) {
+        return -0.1817584952 * jump * jump * jump + 3.689713992 * jump * jump + 2.128599134 * jump - 0.343930367;
+    }
+
+    //This code is slightly altered to fit as a label rather than a tooltip
+    private void renderSpeedLabel(GuiGraphics graphics) {
+        double speed = oHorse.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) * 42.16;
+
+        DecimalFormat limitDec = new DecimalFormat("#.###");
+        String num = limitDec.format(speed);
+        String labelText = "Speed: " + num;
+
+        graphics.drawString(this.font, labelText, speedLabelX, speedLabelY, 0xFFFFFF, false);
+    }
+
+    //This code is slightly altered to fit as a label rather than a tooltip
+    private void renderJumpStrengthLabel(GuiGraphics graphics) {
+        oHorse.getAttributes().hasAttribute(Attributes.JUMP_STRENGTH);
+        double jumpStrength = oHorse.getAttributeBaseValue(Attributes.JUMP_STRENGTH);
+        double jumpHeight = getJumpHeight(jumpStrength);
+
+        DecimalFormat limitDec = new DecimalFormat("#.###");
+        String num = limitDec.format(jumpHeight);
+        String labelText = "Jump Strength: " + num;
+
+        graphics.drawString(this.font, labelText, jumpStrengthLabelX, jumpStrengthLabelY, 0xFFFFFF, false);
+    }
+    //End of CC-Licensed code ^
+
+    private void renderHealthLabel(GuiGraphics graphics) {
+        String text = String.valueOf(this.oHorse.getMaxHealth());
+        String labelText = "Max Health: " + text;
+
+        graphics.drawString(this.font, labelText, healthLabelX, healthLabelY, 0xFFFFFF, false);
     }
 }
 

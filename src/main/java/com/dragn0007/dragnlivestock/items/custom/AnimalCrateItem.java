@@ -1,19 +1,27 @@
 package com.dragn0007.dragnlivestock.items.custom;
 
-import com.mojang.math.Constants;
+import com.dragn0007.dragnlivestock.blocks.LOBlocks;
+import com.dragn0007.dragnlivestock.items.LOItems;
+import com.dragn0007.dragnlivestock.util.LOTags;
+import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -21,9 +29,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /*
-This class falls under the MIT license, as some code was referenced from
-the Mob Capturing Tool repository, though has since been heavily modified.
+This class falls under the MIT license, as some code was taken from
+the Mob Capturing Tool repository, though has since been modified.
 https://github.com/MatyrobbrtMods/MobCapturingTool/tree/1.20.x
+https://github.com/MatyrobbrtMods/MobCapturingTool/blob/1.20.x/Common/src/main/java/com/matyrobbrt/mobcapturingtool/item/CapturingToolItem.java
 
 MIT License
 Copyright (c) 2022 matyrobbrt
@@ -31,7 +40,7 @@ Copyright (c) 2022 matyrobbrt
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
-        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
@@ -47,30 +56,95 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-public class AnimalCrateItem extends Item {
-   public static final String ANIMAL = "Animal";
-   public static final String ENTITY_TYPE = "Entity_Type";
+public class AnimalCrateItem extends ItemNameBlockItem {
+   public static final String ANIMAL = "Animal"; //changed name from CAPTURED_ENTITY_TAG
+   public static final String ENTITY_TYPE = "Entity_Type"; //changed name from ENTITY_TYPE_TAG
+   public static final Boolean capture = false;
 
-   public AnimalCrateItem(Properties properties) {
-      super(properties);
+   public AnimalCrateItem() {
+      super(LOBlocks.ANIMAL_CRATE.get(), new Properties().stacksTo(1));
    }
 
    @Override
-   public InteractionResult useOn(UseOnContext context) {
-      //TODO
-      return InteractionResult.SUCCESS;
+   public InteractionResult place(BlockPlaceContext context) {
+      BlockPos blockpos = context.getClickedPos();
+      Level level = context.getLevel();
+      if (context.getPlayer().isCrouching()) level.setBlock(blockpos, LOBlocks.ANIMAL_CRATE.get().defaultBlockState(), 2);
+      return super.place(context);
    }
 
    @Override
-   public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity livingEntity, InteractionHand hand) {
-      //TODO
-      player.swing(hand);
-      player.setItemInHand(hand, stack);
+   public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
+      if (LivestockOverhaulCommonConfig.ALLOW_CRATES.get()) {
+         if (getFilledCrateAmount(player) < LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
+            if (!capture(stack, interactionTarget)) return InteractionResult.FAIL;
+            player.swing(usedHand);
+            player.setItemInHand(usedHand, stack);
+            return InteractionResult.SUCCESS;
+         } else {
+            player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.too_many_crates.tooltip").withStyle(ChatFormatting.RED), true);
+            return InteractionResult.FAIL; //disallows more crates to be filled when the player has too many
+         }
+      } else {
+         player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.no_crates_allowed.tooltip").withStyle(ChatFormatting.RED), true);
+         return InteractionResult.FAIL; //disallows crates to be filled if ALLOW_CRATES config is false
+      }
+   }
+
+   public static int getFilledCrateAmount(Player player) { //figures up how many filled crates are in the player's inv
+      int fullCrates = 0;
+      for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+         ItemStack stack = player.getInventory().getItem(i);
+         if (!stack.isEmpty() && stack.is(LOItems.ANIMAL_CRATE.get())) {
+            final var entity = getType(stack);
+            if (entity != null) fullCrates += stack.getCount();
+         }
+      }
+      return fullCrates;
+   }
+
+   public static boolean capture(ItemStack stack, LivingEntity target) { //modified
+      if (target.level().isClientSide || getType(stack) != null) return false;
+      if (target instanceof Player || !target.canChangeDimensions() || !target.isAlive()) return false;
+      if (!target.getType().is(LOTags.Entity_Types.O_ANIMALS) && !LivestockOverhaulCommonConfig.ALLOW_ALL_IN_CRATES.get()) return false;
+      if (!target.getType().is(LOTags.Entity_Types.SMALL_O_ANIMALS) && LivestockOverhaulCommonConfig.SMALL_ONLY_IN_CRATES.get()) return false;
+      final var nbt = new CompoundTag();
+      nbt.putString(ENTITY_TYPE, EntityType.getKey(target.getType()).toString());
+      target.saveWithoutId(nbt);
+      stack.getOrCreateTag().put(ANIMAL, nbt);
+      target.remove(Entity.RemovalReason.KILLED);
+      stack.getOrCreateTag().putBoolean(String.valueOf(capture), true);
+      System.out.println(capture);
+      return true;
+   }
+
+   @Override
+   public InteractionResult useOn(UseOnContext context) { //unchanged
+      if (!release(context.getClickedPos(), context.getClickedFace(), context.getLevel(), context.getItemInHand()))
+         return InteractionResult.FAIL;
       return InteractionResult.SUCCESS;
+   }
+
+   public static boolean release(BlockPos pos, Direction facing, Level level, ItemStack stack) { //unchanged
+      if (level.isClientSide)
+         return false;
+      final var entityType = getType(stack);
+      if (entityType == null)
+         return false;
+      final var entity = entityType.create(level);
+      if (entity != null) {
+         entity.load(stack.getOrCreateTagElement(ANIMAL));
+         BlockPos blockPos = pos.relative(facing);
+         entity.absMoveTo(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, 0, 0);
+         stack.getOrCreateTag().remove(ANIMAL);
+         level.addFreshEntity(entity);
+         return true;
+      }
+      return false;
    }
 
    @Nullable
-   public static EntityType<?> getType(ItemStack stack) {
+   public static EntityType<?> getType(ItemStack stack) { //changed name from getEntityType
       if (stack.getOrCreateTag().contains(ANIMAL, Tag.TAG_COMPOUND)) {
          final var typeStr = stack.getOrCreateTagElement(ANIMAL).getString(ENTITY_TYPE);
          final var rl = new ResourceLocation(typeStr);
@@ -82,14 +156,22 @@ public class AnimalCrateItem extends Item {
    @Override
    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
       final var entity = getType(pStack);
-      pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.animal_crate.tooltip").withStyle(ChatFormatting.GOLD));
+      final var tag = pStack.getOrCreateTagElement(ANIMAL);
       if (entity != null) {
-         final var tag = pStack.getOrCreateTagElement(ANIMAL);
-         pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.animal.tooltip", BuiltInRegistries.ENTITY_TYPE.getKey(entity).toString()).withStyle(ChatFormatting.GRAY));
-         if (!String.valueOf(tag.getDouble("Variant")).isEmpty())
-          pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.coat.tooltip", Component.literal(String.valueOf(tag.getDouble("Variant")))).withStyle(ChatFormatting.GRAY));
-         if (!String.valueOf(tag.getDouble("Overlay_Variant")).isEmpty())
-            pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.marking.tooltip", Component.literal(String.valueOf(tag.getDouble("Overlay_Variant")))).withStyle(ChatFormatting.GRAY));
+         pTooltipComponents.add(Component.literal(BuiltInRegistries.ENTITY_TYPE.getKey(entity).toString()).withStyle(ChatFormatting.GOLD));
+         if (entity.is(LOTags.Entity_Types.O_ANIMALS)) {
+            pTooltipComponents.add(Component.translatable("Variant: " + tag.getInt("Variant")).withStyle(ChatFormatting.GRAY));
+            pTooltipComponents.add(Component.translatable("Pattern: " + tag.getInt("Overlay_Variant")).withStyle(ChatFormatting.GRAY));
+            if (tag.getInt("Quality") > 0)
+               pTooltipComponents.add(Component.translatable("Quality: " + tag.getInt("Quality")).withStyle(ChatFormatting.GRAY));
+         }
+      } else {
+         pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.animal_crate.tooltip").withStyle(ChatFormatting.GOLD));
       }
+   }
+
+   @Override
+   public boolean canFitInsideContainerItems() {
+       return !LivestockOverhaulCommonConfig.ALLOW_CRATES_IN_CONTAINTERS.get();
    }
 }

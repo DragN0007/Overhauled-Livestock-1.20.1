@@ -127,6 +127,7 @@
   "item.dragnlivestock.breed_oscillator": "Breed Oscillator",
   "item.dragnlivestock.gender_oscillator": "Gender Oscillator",
   "item.dragnlivestock.vara": "Vara",
+  "item.dragnlivestock.animal_crate": "Animal Crate",
 
   "item.dragnlivestock.black_brand_tag": "Black Brand Tag",
   "item.dragnlivestock.blue_brand_tag": "Blue Brand Tag",
@@ -918,10 +919,9 @@
   "tooltip.dragnlivestock.mount_name.tooltip": "Mount Name: ",
   "tooltip.dragnlivestock.owner_name.tooltip": "Owner :",
   "tooltip.dragnlivestock.animal_crate.tooltip": "A crate to hold animals for better transport.",
-  "tooltip.dragnlivestock.coat.tooltip": "Coat: ",
-  "tooltip.dragnlivestock.marking.tooltip": "Marking: ",
-  "tooltip.dragnlivestock.animal.tooltip": "Animal: ",
   "tooltip.dragnlivestock.shift.tooltip": "Hold Shift for info.",
   "tooltip.dragnlivestock.wool_ready.tooltip": "Wool Ready!",
-  "tooltip.dragnlivestock.milk_ready.tooltip": "Milk Ready!"
+  "tooltip.dragnlivestock.milk_ready.tooltip": "Milk Ready!",
+  "tooltip.dragnlivestock.too_many_crates.tooltip": "You have too many filled crates to pick another animal or filled crate up!",
+  "tooltip.dragnlivestock.no_crates_allowed.tooltip": "Animal Crates are disallowed on this world/ server."
 }
