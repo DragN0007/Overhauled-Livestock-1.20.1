@@ -104,8 +104,6 @@ public class LOItems {
             () -> new HorseArmorItem(15, "netherite", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> OBSIDIAN_HORSE_ARMOR = ITEMS.register("obsidian_horse_armor",
             () -> new HorseArmorItem(18, "netherite", (new Item.Properties()).stacksTo(1)));
-    public static final RegistryObject<Item> GRIFFITH_INSPIRED_HORSE_ARMOR = ITEMS.register("griffith_inspired_horse_armor",
-            () -> new HorseArmorItem(15, "griffith", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> RIOT_HORSE_ARMOR = ITEMS.register("riot_horse_armor",
             () -> new LightHorseArmorItem(12, "riot", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> MINIMAL_LEATHER_HORSE_ARMOR = ITEMS.register("minimal_leather_horse_armor",
@@ -124,8 +122,6 @@ public class LOItems {
             () -> new LightHorseArmorItem(9, "light_diamond", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> MINIMAL_NETHERITE_HORSE_ARMOR = ITEMS.register("minimal_netherite_horse_armor",
             () -> new LightHorseArmorItem(12, "light_netherite", (new Item.Properties()).stacksTo(1)));
-    public static final RegistryObject<Item> MINIMAL_GRIFFITH_INSPIRED_HORSE_ARMOR = ITEMS.register("minimal_griffith_inspired_horse_armor",
-            () -> new LightHorseArmorItem(12, "light_griffith", (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> MINIMAL_OBSIDIAN_HORSE_ARMOR = ITEMS.register("minimal_obsidian_horse_armor",
             () -> new LightHorseArmorItem(14, "light_obsidian", (new Item.Properties()).stacksTo(1)));
 
