@@ -75,7 +75,7 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
                 saddlebags.ifPresent(b -> b.setHidden(true));
             }
 
-            if (animatable.isSaddled()) {
+            if (animatable.isSaddled() || !animatable.getDecorItem().isEmpty() || !animatable.getArmor().isEmpty()) {
                 saddle.ifPresent(b -> b.setHidden(false));
                 reins.ifPresent(b -> b.setHidden(false));
             } else {
@@ -140,9 +140,9 @@ public class OHorseRender extends GeoEntityRenderer<OHorse> {
             tail_end.ifPresent(b -> b.setHidden(false));
         } else if (animatable.getTailType() == 3) {
             tail.ifPresent(b -> b.setScaleX(1.0F));
-            tail.ifPresent(b -> b.setScaleY(0.6F));
+            tail.ifPresent(b -> b.setScaleY(1.0F));
             tail.ifPresent(b -> b.setScaleZ(1.0F));
-            tail_end.ifPresent(b -> b.setHidden(false));
+            tail_end.ifPresent(b -> b.setHidden(true));
         } else if (animatable.getTailType() == 4) {
             tail.ifPresent(b -> b.setScaleY(0.7F));
             tail.ifPresent(b -> b.setScaleX(1.1F));
