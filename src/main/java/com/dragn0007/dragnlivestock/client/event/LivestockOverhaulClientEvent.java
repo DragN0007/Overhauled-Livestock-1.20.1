@@ -103,20 +103,19 @@ public class LivestockOverhaulClientEvent {
 
         EntityRenderers.register(EntityType.TADPOLE, ReplacedTadpoleRender::new);
 
-        event.enqueueWork(() -> ItemProperties.register(LOItems.ANIMAL_CRATE.get(),
-                new ResourceLocation(LivestockOverhaul.MODID, "capture"), (stack, level, entity, seed) -> {
-            boolean capture = stack.hasTag() && stack.getTag().getBoolean("capture");
-            return capture ? 1.0F : 0.0F;
+        event.enqueueWork(() -> ItemProperties.register(LOItems.ANIMAL_CRATE.get(), new ResourceLocation(LivestockOverhaul.MODID, "captured"), (stack, level, entity, seed) -> {
+            boolean captured = stack.hasTag() && stack.getTag().getBoolean(LivestockOverhaul.MODID + ":captured");
+            return captured ? 1.0F : 0.0F;
         }));
     }
 
     public static final KeyMapping HORSE_SPEED_UP = new KeyMapping("key.dragnlivestock.horse_speed_up", InputConstants.KEY_LCONTROL, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_SLOW_DOWN = new KeyMapping("key.dragnlivestock.horse_slow_down", InputConstants.KEY_LALT, "key.dragnlivestock.categories.dragnlivestock");
-    public static final KeyMapping HORSE_BOW = new KeyMapping("key.dragnlivestock.horse_bow", InputConstants.KEY_B, "key.dragnlivestock.categories.dragnlivestock");
-    public static final KeyMapping HORSE_PIAFFE = new KeyMapping("key.dragnlivestock.horse_piaffe", InputConstants.KEY_P, "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HORSE_BOW = new KeyMapping("key.dragnlivestock.horse_bow", InputConstants.UNKNOWN.getValue(), "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HORSE_PIAFFE = new KeyMapping("key.dragnlivestock.horse_piaffe", InputConstants.UNKNOWN.getValue(), "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_SPANISH_WALK_TOGGLE = new KeyMapping("key.dragnlivestock.horse_spanish_walk_toggle", InputConstants.KEY_DOWN, "key.dragnlivestock.categories.dragnlivestock");
-    public static final KeyMapping HORSE_WAVE = new KeyMapping("key.dragnlivestock.horse_wave", InputConstants.KEY_G, "key.dragnlivestock.categories.dragnlivestock");
-    public static final KeyMapping HORSE_LEVADE = new KeyMapping("key.dragnlivestock.horse_levade", InputConstants.KEY_L, "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HORSE_WAVE = new KeyMapping("key.dragnlivestock.horse_wave", InputConstants.UNKNOWN.getValue(), "key.dragnlivestock.categories.dragnlivestock");
+    public static final KeyMapping HORSE_LEVADE = new KeyMapping("key.dragnlivestock.horse_levade", InputConstants.UNKNOWN.getValue(), "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping PLOW_MODE = new KeyMapping("key.dragnlivestock.plow_mode", InputConstants.KEY_SPACE, "key.dragnlivestock.categories.dragnlivestock");
     public static final KeyMapping HORSE_WALK_BACKWARDS = new KeyMapping("key.dragnlivestock.horse_walk_backwards", InputConstants.KEY_S, "key.dragnlivestock.categories.dragnlivestock");
 
@@ -127,5 +126,4 @@ public class LivestockOverhaulClientEvent {
             event.register(keyMapping);
         }
     }
-
 }

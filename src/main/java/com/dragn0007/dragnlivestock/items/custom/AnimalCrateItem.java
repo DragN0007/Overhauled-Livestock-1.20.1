@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock.items.custom;
 
+import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
@@ -59,7 +60,6 @@ SOFTWARE.
 public class AnimalCrateItem extends ItemNameBlockItem {
    public static final String ANIMAL = "Animal"; //changed name from CAPTURED_ENTITY_TAG
    public static final String ENTITY_TYPE = "Entity_Type"; //changed name from ENTITY_TYPE_TAG
-   public static final Boolean capture = false;
 
    public AnimalCrateItem() {
       super(LOBlocks.ANIMAL_CRATE.get(), new Properties().stacksTo(1));
@@ -113,8 +113,7 @@ public class AnimalCrateItem extends ItemNameBlockItem {
       target.saveWithoutId(nbt);
       stack.getOrCreateTag().put(ANIMAL, nbt);
       target.remove(Entity.RemovalReason.KILLED);
-      stack.getOrCreateTag().putBoolean(String.valueOf(capture), true);
-      System.out.println(capture);
+      stack.getOrCreateTag().putBoolean(LivestockOverhaul.MODID + ":captured", true);
       return true;
    }
 
@@ -138,6 +137,7 @@ public class AnimalCrateItem extends ItemNameBlockItem {
          entity.absMoveTo(blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, 0, 0);
          stack.getOrCreateTag().remove(ANIMAL);
          level.addFreshEntity(entity);
+         stack.getOrCreateTag().putBoolean(LivestockOverhaul.MODID + ":captured", false);
          return true;
       }
       return false;
