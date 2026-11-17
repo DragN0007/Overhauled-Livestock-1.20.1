@@ -23,14 +23,10 @@ public class ForgeClientEvents {
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
         List<Component> tooltip = event.getToolTip();
-
-        if (event.getItemStack().getItem() instanceof HorseArmorItem item) {
+        if (event.getItemStack().getItem() instanceof HorseArmorItem item)
             tooltip.add(Component.translatable("Protection: " + item.getProtection()).withStyle(ChatFormatting.GOLD));
-        }
-
-        if (event.getItemStack().getItem() instanceof LightHorseArmorItem item) {
+        if (event.getItemStack().getItem() instanceof LightHorseArmorItem item)
             tooltip.add(Component.translatable("Protection: " + item.getProtection()).withStyle(ChatFormatting.GOLD));
-        }
     }
 
     @SubscribeEvent

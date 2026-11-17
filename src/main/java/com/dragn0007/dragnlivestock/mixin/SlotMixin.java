@@ -19,8 +19,9 @@ public abstract class SlotMixin {
 
     @Inject(method = "mayPlace", at = @At("HEAD"), cancellable = true)
     private void preventRestrictedItemInContainers(ItemStack stack, CallbackInfoReturnable<Boolean> ci) {
-        if (stack.getItem() instanceof AnimalCrateItem && !LivestockOverhaulCommonConfig.ALLOW_CRATES_IN_CONTAINTERS.get()) {
-            if (!(this.container instanceof Inventory)) ci.setReturnValue(false);
+        if (stack.getItem() instanceof AnimalCrateItem crateItem && !LivestockOverhaulCommonConfig.ALLOW_CRATES_IN_CONTAINTERS.get()) {
+            if ((!(this.container instanceof Inventory)) && stack.hasTag() && stack.getTag().getBoolean(LivestockOverhaul.MODID + ":captured"))
+                ci.setReturnValue(false);
         }
     }
 }

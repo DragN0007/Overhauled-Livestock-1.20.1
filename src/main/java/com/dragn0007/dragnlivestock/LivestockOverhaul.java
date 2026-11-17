@@ -1,5 +1,6 @@
 package com.dragn0007.dragnlivestock;
 
+import com.dragn0007.dragnlivestock.blocks.LOBlockEntities;
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
 import com.dragn0007.dragnlivestock.common.gui.LOMenuTypes;
 import com.dragn0007.dragnlivestock.common.network.LOPackets;
@@ -45,6 +46,7 @@ public class LivestockOverhaul {
         LOItemGroup.register(eventBus);
         LOBlocks.register(eventBus);
         EntityTypes.ENTITY_TYPES.register(eventBus);
+        LOBlockEntities.register(eventBus);
         LOMenuTypes.register(eventBus);
         LOSoundEvents.REGISTRY.register(eventBus);
         LOPackets.register();

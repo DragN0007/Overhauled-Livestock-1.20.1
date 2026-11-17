@@ -13,6 +13,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -65,29 +68,34 @@ public class AnimalCrateItem extends ItemNameBlockItem {
       super(LOBlocks.ANIMAL_CRATE.get(), new Properties().stacksTo(1));
    }
 
-   @Override
-   public InteractionResult place(BlockPlaceContext context) {
-      BlockPos blockpos = context.getClickedPos();
-      Level level = context.getLevel();
-      if (context.getPlayer().isCrouching()) level.setBlock(blockpos, LOBlocks.ANIMAL_CRATE.get().defaultBlockState(), 2);
-      return super.place(context);
-   }
+//   @Override
+//   public InteractionResult place(BlockPlaceContext context) {
+//      BlockPos blockpos = context.getClickedPos();
+//      Level level = context.getLevel();
+//      if (context.getPlayer().isCrouching()) level.setBlock(blockpos, LOBlocks.ANIMAL_CRATE.get().defaultBlockState(), 2);
+//      return super.place(context);
+//   }
 
    @Override
    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
-      if (LivestockOverhaulCommonConfig.ALLOW_CRATES.get()) {
-         if (getFilledCrateAmount(player) < LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
-            if (!capture(stack, interactionTarget)) return InteractionResult.FAIL;
-            player.swing(usedHand);
-            player.setItemInHand(usedHand, stack);
-            return InteractionResult.SUCCESS;
+      if (!player.isCrouching()) {
+         if (LivestockOverhaulCommonConfig.ALLOW_CRATES.get()) {
+            if (getFilledCrateAmount(player) < LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
+               if (!capture(stack, interactionTarget)) return InteractionResult.FAIL;
+               player.swing(usedHand);
+               player.setItemInHand(usedHand, stack);
+               player.level().playSound(null, player, SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(player.level().random, 0.8F, 1.2F));
+               return InteractionResult.SUCCESS;
+            } else {
+               player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.too_many_crates.tooltip").withStyle(ChatFormatting.RED), true);
+               return InteractionResult.FAIL; //disallows more crates to be filled when the player has too many
+            }
          } else {
-            player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.too_many_crates.tooltip").withStyle(ChatFormatting.RED), true);
-            return InteractionResult.FAIL; //disallows more crates to be filled when the player has too many
+            player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.no_crates_allowed.tooltip").withStyle(ChatFormatting.RED), true);
+            return InteractionResult.FAIL; //disallows crates to be filled if ALLOW_CRATES config is false
          }
       } else {
-         player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.no_crates_allowed.tooltip").withStyle(ChatFormatting.RED), true);
-         return InteractionResult.FAIL; //disallows crates to be filled if ALLOW_CRATES config is false
+         return InteractionResult.FAIL;
       }
    }
 
@@ -119,12 +127,17 @@ public class AnimalCrateItem extends ItemNameBlockItem {
 
    @Override
    public InteractionResult useOn(UseOnContext context) { //unchanged
-      if (!release(context.getClickedPos(), context.getClickedFace(), context.getLevel(), context.getItemInHand()))
-         return InteractionResult.FAIL;
-      return InteractionResult.SUCCESS;
+      if (!context.getPlayer().isCrouching()) {
+         if (!release(context.getClickedPos(), context.getClickedFace(), context.getLevel(), context.getItemInHand()))
+            return InteractionResult.FAIL;
+         context.getPlayer().level().playSound(null, context.getPlayer(), SoundEvents.BEEHIVE_ENTER, SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(context.getPlayer().level().random, 0.8F, 1.2F));
+         return InteractionResult.SUCCESS;
+      } else {
+         return super.useOn(context);
+      }
    }
 
-   public static boolean release(BlockPos pos, Direction facing, Level level, ItemStack stack) { //unchanged
+   public static boolean release(BlockPos pos, Direction facing, Level level, ItemStack stack) { //modified
       if (level.isClientSide)
          return false;
       final var entityType = getType(stack);
