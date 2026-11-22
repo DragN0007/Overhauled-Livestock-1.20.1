@@ -1,7 +1,5 @@
 DragN's Livestock Overhaul!
-if (DragN0007().wasHere) { continue };
-Watch out, the Headless Horseman might be lurking...
-Mooblooms... so colorful!
+if (modder instanceof DragN0007.class) { continue; }
 Did you know?: Horses can't throw up due to the way their esophagus is made!
 Did you know?: Donkeys are great protectors, often warding off predators from livestock.
 Did you know?: Mules are often considered the "ATVs" of the equine world!
