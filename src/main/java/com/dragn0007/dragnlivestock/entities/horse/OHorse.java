@@ -190,7 +190,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public boolean isDraftBreed() {
 		return switch (this.getBreed()) {
-			case 1,5,8,12,14,17,22 -> true;
+			case 1,5,8,12,14,17,22,26,27 -> true;
 			default -> false;
 		};
 	}
@@ -204,14 +204,14 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 
 	public boolean isStockBreed() {
 		return switch (this.getBreed()) {
-			case 0,7 -> true;
+			case 0,7,24,28,29 -> true;
 			default -> false;
 		};
 	}
 
 	public boolean isWarmbloodedBreed() {
 		return switch (this.getBreed()) {
-			case 2,9,10,18,21,23 -> true;
+			case 2,9,10,18,21,23,25 -> true;
 			default -> false;
 		};
 	}
@@ -1119,47 +1119,24 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public enum Mane {
-		BUTTONS,
-		LONG,
-		ROACHED,
-		SHORT,
-		NONE;
-
-		public Mane next() {
-			return Mane.values()[(this.ordinal() + 1) % Mane.values().length];
-		}
+		BUTTONS, LONG,ROACHED, SHORT, NONE;
+		public Mane next() {return Mane.values()[(this.ordinal() + 1) % Mane.values().length];}
 	}
 
 	public enum Tail {
-		TIED,
-		LONG,
-		AVERAGE,
-		SHORT,
-		TUCKED;
-
-		public Tail next() {
-			return Tail.values()[(this.ordinal() + 1) % Tail.values().length];
-		}
+		TIED, LONG, AVERAGE, SHORT, TUCKED;
+		public Tail next() {return Tail.values()[(this.ordinal() + 1) % Tail.values().length];}
 	}
 
 	public static final EntityDataAccessor<Integer> MANE_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getManeType() {
-		return this.entityData.get(MANE_TYPE);
-	}
-	public void setManeType(int mane) {
-		this.entityData.set(MANE_TYPE, mane);
-	}
+	public int getManeType() {return this.entityData.get(MANE_TYPE);}
+	public void setManeType(int mane) {this.entityData.set(MANE_TYPE, mane);}
 
 	public static final EntityDataAccessor<Integer> TAIL_TYPE = SynchedEntityData.defineId(OHorse.class, EntityDataSerializers.INT);
-	public int getTailType() {
-		return this.entityData.get(TAIL_TYPE);
-	}
-	public void setTailType(int tail) {
-		this.entityData.set(TAIL_TYPE, tail);
-	}
+	public int getTailType() {return this.entityData.get(TAIL_TYPE);}
+	public void setTailType(int tail) {this.entityData.set(TAIL_TYPE, tail);}
 
 	public void setFeatheringByBreed() {
-
 		//warmbloods are more likely to have half or no feathering, but have a very small chance of having full.
 		if (this.isWarmbloodedBreed()) {
 			if (random.nextDouble() < 0.05) {
@@ -1228,7 +1205,6 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	}
 
 	public void setEyeColorByChance() {
-
 		//white, cream and mostly-white or bald horses have a better chance of gaining blue or green eyes
 		if (this.getVariant() == 24 || this.getVariant() == 25 || this.getOverlayVariant() == 2 || this.getOverlayVariant() == 8
 				|| this.getOverlayVariant() == 9 || this.getOverlayVariant() == 10 || this.getOverlayVariant() == 15
@@ -1527,7 +1503,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.getBreed() == 22) { //lusitanos usually just come in greys
+		if (this.getBreed() == 23) { //lusitanos usually just come in greys
 			if (random.nextDouble() < 0.10) {
 				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
 				int randomIndex = new Random().nextInt(variants.length);
@@ -1539,6 +1515,65 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
+		if (this.getBreed() == 24) { //nokotas come in the rare blue roan
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {4,5};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 25) { //dutch warmblood come in bays
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {0,1,2,3,6,10,12,13,17,20,21,22,26};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 26) { //suffolk punch come in bays
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {0,1,2,3,6,10,12,13,17,20,21,22,26};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 27) { //vanners can come in any color naturally, aside from fjord coloring
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+
+		if (this.getBreed() == 28) { //american paint can come in any color naturally, aside from fjord coloring
+			int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33};
+			int randomIndex = new Random().nextInt(variants.length);
+			this.setVariant(variants[randomIndex]);
+		}
+
+		if (this.getBreed() == 29) { //appaloosa can come in any color naturally, aside from fjord coloring
+			if (random.nextDouble() < 0.10) {
+				int[] variants = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			} else if (random.nextDouble() > 0.10) {
+				int[] variants = {0,1,2,3,6,10,12,13,17,20,21,22,26};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setVariant(variants[randomIndex]);
+			}
+		}
 	}
 
 	public void setMarkingByBreed() {
@@ -1739,7 +1774,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 			}
 		}
 
-		if (this.getBreed() == 22) { //lusitanos can have small markings or dapples
+		if (this.getBreed() == 23) { //lusitanos can have small markings or dapples
 			if (random.nextDouble() < 0.02) {
 				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
 			} else if (random.nextDouble() < 0.30) {
@@ -1747,6 +1782,56 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 				this.setOverlayVariant(minimalMarkings[randomIndex]);
 			} else if (random.nextDouble() > 0.30) {
 				this.setOverlayVariant(24);
+			}
+		}
+
+		if (this.getBreed() == 24) { //nokotas can come in any pattern naturally
+			this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+		}
+
+		if (this.getBreed() == 25) { //dutch warmblood can come in any pattern naturally, but usually come in solids
+			if (random.nextDouble() < 0.30) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				this.setOverlayVariant(0);
+			}
+		}
+
+		if (this.getBreed() == 26) { //suffolk punch usually come in small markings or socks
+			if (random.nextDouble() < 0.30) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.30) {
+				int randomIndex = new Random().nextInt(minimalMarkings.length);
+				this.setOverlayVariant(minimalMarkings[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 27) { //vanners usually come with large markings
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				int randomIndex = new Random().nextInt(heavyMarkings.length);
+				this.setOverlayVariant(heavyMarkings[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 28) { //american paint usually come in paint/ pinto
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				int[] variants = {7,8,12};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
+			}
+		}
+
+		if (this.getBreed() == 29) { //appaloosa paint usually come in blanket/ appaloosa
+			if (random.nextDouble() < 0.02) {
+				this.setOverlayVariant(random.nextInt(EquineMarkingOverlay.values().length));
+			} else if (random.nextDouble() > 0.02) {
+				int[] variants = {2,4,17,22};
+				int randomIndex = new Random().nextInt(variants.length);
+				this.setOverlayVariant(variants[randomIndex]);
 			}
 		}
 	}

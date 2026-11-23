@@ -28,6 +28,12 @@ public enum HorseBreed {
     TRAKEHNER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/trakehner.geo.json")),
     BOULONNAIS(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/boulonnais.geo.json")),
     LUSITANO(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/lusitano.geo.json")),
+    NOKOTA(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/nokota.geo.json")),
+    DUTCH_WARMBLOOD(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/dutch_warmblood.geo.json")),
+    SUFFOLK_PUNCH(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/suffolk_punch.geo.json")),
+    VANNER(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/vanner.geo.json")),
+    AMERICAN_PAINT(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/o_horse.geo.json")),
+    APPALOOSA(new ResourceLocation(LivestockOverhaul.MODID, "geo/horse/o_horse.geo.json")),
     ;
 
     public final ResourceLocation resourceLocation;
