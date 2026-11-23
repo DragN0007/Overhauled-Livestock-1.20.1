@@ -1,5 +1,22 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_frog.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/frog/green.png",
+    "dragnlivestock:textures/entity/frog/black.png": "normal_sprite:dragnlivestock/frog/black.png",
+    "dragnlivestock:textures/entity/frog/blue.png": "normal_sprite:dragnlivestock/frog/blue.png",
+    "dragnlivestock:textures/entity/frog/brown.png": "normal_sprite:dragnlivestock/frog/brown.png",
+    "dragnlivestock:textures/entity/frog/cyan.png": "normal_sprite:dragnlivestock/frog/cyan.png",
+    "dragnlivestock:textures/entity/frog/gray.png": "normal_sprite:dragnlivestock/frog/gray.png",
+    "dragnlivestock:textures/entity/frog/green.png": "normal_sprite:dragnlivestock/frog/green.png",
+    "dragnlivestock:textures/entity/frog/light_blue.png": "normal_sprite:dragnlivestock/frog/light_blue.png",
+    "dragnlivestock:textures/entity/frog/light_gray.png": "normal_sprite:dragnlivestock/frog/light_gray.png",
+    "dragnlivestock:textures/entity/frog/lime.png": "normal_sprite:dragnlivestock/frog/lime.png",
+    "dragnlivestock:textures/entity/frog/magenta.png": "normal_sprite:dragnlivestock/frog/magenta.png",
+    "dragnlivestock:textures/entity/frog/orange.png": "normal_sprite:dragnlivestock/frog/orange.png",
+    "dragnlivestock:textures/entity/frog/pink.png": "normal_sprite:dragnlivestock/frog/pink.png",
+    "dragnlivestock:textures/entity/frog/purple.png": "normal_sprite:dragnlivestock/frog/purple.png",
+    "dragnlivestock:textures/entity/frog/red.png": "normal_sprite:dragnlivestock/frog/red.png",
+    "dragnlivestock:textures/entity/frog/white.png": "normal_sprite:dragnlivestock/frog/white.png",
+    "dragnlivestock:textures/entity/frog/yellow.png": "normal_sprite:dragnlivestock/frog/yellow.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

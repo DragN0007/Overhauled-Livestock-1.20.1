@@ -1,5 +1,19 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_chicken.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/chicken/red.png",
+    "dragnlivestock:textures/entity/chicken/black.png": "normal_sprite:dragnlivestock/chicken/black.png",
+    "dragnlivestock:textures/entity/chicken/blue.png": "normal_sprite:dragnlivestock/chicken/blue.png",
+    "dragnlivestock:textures/entity/chicken/brown.png": "normal_sprite:dragnlivestock/chicken/brown.png",
+    "dragnlivestock:textures/entity/chicken/chocolate.png": "normal_sprite:dragnlivestock/chicken/chocolate.png",
+    "dragnlivestock:textures/entity/chicken/cream.png": "normal_sprite:dragnlivestock/chicken/cream.png",
+    "dragnlivestock:textures/entity/chicken/gold.png": "normal_sprite:dragnlivestock/chicken/gold.png",
+    "dragnlivestock:textures/entity/chicken/lilac.png": "normal_sprite:dragnlivestock/chicken/lilac.png",
+    "dragnlivestock:textures/entity/chicken/mahogany.png": "normal_sprite:dragnlivestock/chicken/mahogany.png",
+    "dragnlivestock:textures/entity/chicken/red.png": "normal_sprite:dragnlivestock/chicken/red.png",
+    "dragnlivestock:textures/entity/chicken/silver.png": "normal_sprite:dragnlivestock/chicken/silver.png",
+    "dragnlivestock:textures/entity/chicken/tan.png": "normal_sprite:dragnlivestock/chicken/tan.png",
+    "dragnlivestock:textures/entity/chicken/void.png": "normal_sprite:dragnlivestock/chicken/void.png",
+    "dragnlivestock:textures/entity/chicken/white.png": "normal_sprite:dragnlivestock/chicken/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

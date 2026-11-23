@@ -1,5 +1,1 @@
-{
-  "variants" : {
-    "default" : "sprite:dragnlivestock/headless_horseman.png"
-  }
-}
+{"variants": {"default": "normal_sprite:dragnlivestock/headless_horseman.png"}}

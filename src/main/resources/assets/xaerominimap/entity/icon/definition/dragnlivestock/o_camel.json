@@ -1,5 +1,18 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_camel.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/camel/desert.png",
+    "dragnlivestock:textures/entity/camel/ash.png": "normal_sprite:dragnlivestock/camel/ash.png",
+    "dragnlivestock:textures/entity/camel/black.png": "normal_sprite:dragnlivestock/camel/black.png",
+    "dragnlivestock:textures/entity/camel/chestnut.png": "normal_sprite:dragnlivestock/camel/chestnut.png",
+    "dragnlivestock:textures/entity/camel/cream.png": "normal_sprite:dragnlivestock/camel/cream.png",
+    "dragnlivestock:textures/entity/camel/desert.png": "normal_sprite:dragnlivestock/camel/desert.png",
+    "dragnlivestock:textures/entity/camel/grey.png": "normal_sprite:dragnlivestock/camel/grey.png",
+    "dragnlivestock:textures/entity/camel/light_grey.png": "normal_sprite:dragnlivestock/camel/light_grey.png",
+    "dragnlivestock:textures/entity/camel/liver_chestnut.png": "normal_sprite:dragnlivestock/camel/liver_chestnut.png",
+    "dragnlivestock:textures/entity/camel/mahogany.png": "normal_sprite:dragnlivestock/camel/mahogany.png",
+    "dragnlivestock:textures/entity/camel/sandy.png": "normal_sprite:dragnlivestock/camel/sandy.png",
+    "dragnlivestock:textures/entity/camel/tan.png": "normal_sprite:dragnlivestock/camel/tan.png",
+    "dragnlivestock:textures/entity/camel/white.png": "normal_sprite:dragnlivestock/camel/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

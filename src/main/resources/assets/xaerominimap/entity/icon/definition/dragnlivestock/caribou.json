@@ -1,5 +1,1 @@
-{
-  "variants" : {
-    "default" : "sprite:dragnlivestock/caribou.png"
-  }
-}
+{"variants": {"default": "normal_sprite:dragnlivestock/caribou.png"}}

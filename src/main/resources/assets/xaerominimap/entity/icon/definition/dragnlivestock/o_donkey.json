@@ -1,5 +1,15 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_donkey.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/donkey/brown.png",
+    "dragnlivestock:textures/entity/donkey/bay.png": "normal_sprite:dragnlivestock/donkey/bay.png",
+    "dragnlivestock:textures/entity/donkey/black.png": "normal_sprite:dragnlivestock/donkey/black.png",
+    "dragnlivestock:textures/entity/donkey/brown.png": "normal_sprite:dragnlivestock/donkey/brown.png",
+    "dragnlivestock:textures/entity/donkey/cream.png": "normal_sprite:dragnlivestock/donkey/cream.png",
+    "dragnlivestock:textures/entity/donkey/dark_brown.png": "normal_sprite:dragnlivestock/donkey/dark_brown.png",
+    "dragnlivestock:textures/entity/donkey/grey.png": "normal_sprite:dragnlivestock/donkey/grey.png",
+    "dragnlivestock:textures/entity/donkey/silver.png": "normal_sprite:dragnlivestock/donkey/silver.png",
+    "dragnlivestock:textures/entity/donkey/strawberry.png": "normal_sprite:dragnlivestock/donkey/strawberry.png",
+    "dragnlivestock:textures/entity/donkey/white.png": "normal_sprite:dragnlivestock/donkey/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

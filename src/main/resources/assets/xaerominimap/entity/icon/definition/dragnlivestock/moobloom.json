@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/moobloom/allium.png",
+    "dragnlivestock:textures/entity/moobloom/allium.png": "normal_sprite:dragnlivestock/moobloom/allium.png",
+    "dragnlivestock:textures/entity/moobloom/azalea.png": "normal_sprite:dragnlivestock/moobloom/azalea.png",
+    "dragnlivestock:textures/entity/moobloom/azure_bluet.png": "normal_sprite:dragnlivestock/moobloom/azure_bluet.png",
+    "dragnlivestock:textures/entity/moobloom/beetroot.png": "normal_sprite:dragnlivestock/moobloom/beetroot.png",
+    "dragnlivestock:textures/entity/moobloom/blue_orchid.png": "normal_sprite:dragnlivestock/moobloom/blue_orchid.png",
+    "dragnlivestock:textures/entity/moobloom/carrot.png": "normal_sprite:dragnlivestock/moobloom/carrot.png",
+    "dragnlivestock:textures/entity/moobloom/cornflower.png": "normal_sprite:dragnlivestock/moobloom/cornflower.png",
+    "dragnlivestock:textures/entity/moobloom/dandelion.png": "normal_sprite:dragnlivestock/moobloom/dandelion.png",
+    "dragnlivestock:textures/entity/moobloom/lilac.png": "normal_sprite:dragnlivestock/moobloom/lilac.png",
+    "dragnlivestock:textures/entity/moobloom/lily_of_the_valley.png": "normal_sprite:dragnlivestock/moobloom/lily_of_the_valley.png",
+    "dragnlivestock:textures/entity/moobloom/melon.png": "normal_sprite:dragnlivestock/moobloom/melon.png",
+    "dragnlivestock:textures/entity/moobloom/oxeye_daisy.png": "normal_sprite:dragnlivestock/moobloom/oxeye_daisy.png",
+    "dragnlivestock:textures/entity/moobloom/peach.png": "normal_sprite:dragnlivestock/moobloom/peach.png",
+    "dragnlivestock:textures/entity/moobloom/peony.png": "normal_sprite:dragnlivestock/moobloom/peony.png",
+    "dragnlivestock:textures/entity/moobloom/poppy.png": "normal_sprite:dragnlivestock/moobloom/poppy.png",
+    "dragnlivestock:textures/entity/moobloom/potato.png": "normal_sprite:dragnlivestock/moobloom/potato.png",
+    "dragnlivestock:textures/entity/moobloom/pumpkin.png": "normal_sprite:dragnlivestock/moobloom/pumpkin.png",
+    "dragnlivestock:textures/entity/moobloom/rose_bush.png": "normal_sprite:dragnlivestock/moobloom/rose_bush.png",
+    "dragnlivestock:textures/entity/moobloom/sunflower.png": "normal_sprite:dragnlivestock/moobloom/sunflower.png",
+    "dragnlivestock:textures/entity/moobloom/sweet_berry.png": "normal_sprite:dragnlivestock/moobloom/sweet_berry.png",
+    "dragnlivestock:textures/entity/moobloom/tulip.png": "normal_sprite:dragnlivestock/moobloom/tulip.png",
+    "dragnlivestock:textures/entity/moobloom/wheat.png": "normal_sprite:dragnlivestock/moobloom/wheat.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
+}

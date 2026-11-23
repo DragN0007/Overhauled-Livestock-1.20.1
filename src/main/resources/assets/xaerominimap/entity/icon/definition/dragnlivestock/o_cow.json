@@ -1,5 +1,20 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_cow.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/cow/chocolate.png",
+    "dragnlivestock:textures/entity/cow/black.png": "normal_sprite:dragnlivestock/cow/black.png",
+    "dragnlivestock:textures/entity/cow/blue.png": "normal_sprite:dragnlivestock/cow/blue.png",
+    "dragnlivestock:textures/entity/cow/brown.png": "normal_sprite:dragnlivestock/cow/brown.png",
+    "dragnlivestock:textures/entity/cow/chestnut.png": "normal_sprite:dragnlivestock/cow/chestnut.png",
+    "dragnlivestock:textures/entity/cow/chocolate.png": "normal_sprite:dragnlivestock/cow/chocolate.png",
+    "dragnlivestock:textures/entity/cow/cream.png": "normal_sprite:dragnlivestock/cow/cream.png",
+    "dragnlivestock:textures/entity/cow/dark_brown.png": "normal_sprite:dragnlivestock/cow/dark_brown.png",
+    "dragnlivestock:textures/entity/cow/gold.png": "normal_sprite:dragnlivestock/cow/gold.png",
+    "dragnlivestock:textures/entity/cow/grey.png": "normal_sprite:dragnlivestock/cow/grey.png",
+    "dragnlivestock:textures/entity/cow/mahogany.png": "normal_sprite:dragnlivestock/cow/mahogany.png",
+    "dragnlivestock:textures/entity/cow/silver.png": "normal_sprite:dragnlivestock/cow/silver.png",
+    "dragnlivestock:textures/entity/cow/strawberry.png": "normal_sprite:dragnlivestock/cow/strawberry.png",
+    "dragnlivestock:textures/entity/cow/tan.png": "normal_sprite:dragnlivestock/cow/tan.png",
+    "dragnlivestock:textures/entity/cow/white.png": "normal_sprite:dragnlivestock/cow/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

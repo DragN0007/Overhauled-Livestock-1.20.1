@@ -1,5 +1,20 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_llama.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/llama/sandy.png",
+    "dragnlivestock:textures/entity/llama/black.png": "normal_sprite:dragnlivestock/llama/black.png",
+    "dragnlivestock:textures/entity/llama/blue.png": "normal_sprite:dragnlivestock/llama/blue.png",
+    "dragnlivestock:textures/entity/llama/brown.png": "normal_sprite:dragnlivestock/llama/brown.png",
+    "dragnlivestock:textures/entity/llama/chocolate.png": "normal_sprite:dragnlivestock/llama/chocolate.png",
+    "dragnlivestock:textures/entity/llama/cream.png": "normal_sprite:dragnlivestock/llama/cream.png",
+    "dragnlivestock:textures/entity/llama/grey.png": "normal_sprite:dragnlivestock/llama/grey.png",
+    "dragnlivestock:textures/entity/llama/light_grey.png": "normal_sprite:dragnlivestock/llama/light_grey.png",
+    "dragnlivestock:textures/entity/llama/mahogany.png": "normal_sprite:dragnlivestock/llama/mahogany.png",
+    "dragnlivestock:textures/entity/llama/red.png": "normal_sprite:dragnlivestock/llama/red.png",
+    "dragnlivestock:textures/entity/llama/sandy.png": "normal_sprite:dragnlivestock/llama/sandy.png",
+    "dragnlivestock:textures/entity/llama/seal.png": "normal_sprite:dragnlivestock/llama/seal.png",
+    "dragnlivestock:textures/entity/llama/silver.png": "normal_sprite:dragnlivestock/llama/silver.png",
+    "dragnlivestock:textures/entity/llama/tan.png": "normal_sprite:dragnlivestock/llama/tan.png",
+    "dragnlivestock:textures/entity/llama/white.png": "normal_sprite:dragnlivestock/llama/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

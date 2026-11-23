@@ -1,5 +1,26 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_sheep.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/sheep/white.png",
+    "dragnlivestock:textures/entity/sheep/wool/black.png": "normal_sprite:dragnlivestock/sheep/black.png",
+    "dragnlivestock:textures/entity/sheep/wool/blue.png": "normal_sprite:dragnlivestock/sheep/blue.png",
+    "dragnlivestock:textures/entity/sheep/wool/brown.png": "normal_sprite:dragnlivestock/sheep/brown.png",
+    "dragnlivestock:textures/entity/sheep/wool/cyan.png": "normal_sprite:dragnlivestock/sheep/cyan.png",
+    "dragnlivestock:textures/entity/sheep/wool/gray.png": "normal_sprite:dragnlivestock/sheep/gray.png",
+    "dragnlivestock:textures/entity/sheep/wool/green.png": "normal_sprite:dragnlivestock/sheep/green.png",
+    "dragnlivestock:textures/entity/sheep/wool/grey.png": "normal_sprite:dragnlivestock/sheep/grey.png",
+    "dragnlivestock:textures/entity/sheep/wool/light_blue.png": "normal_sprite:dragnlivestock/sheep/light_blue.png",
+    "dragnlivestock:textures/entity/sheep/wool/light_gray.png": "normal_sprite:dragnlivestock/sheep/light_gray.png",
+    "dragnlivestock:textures/entity/sheep/wool/light_grey.png": "normal_sprite:dragnlivestock/sheep/light_grey.png",
+    "dragnlivestock:textures/entity/sheep/wool/lime.png": "normal_sprite:dragnlivestock/sheep/lime.png",
+    "dragnlivestock:textures/entity/sheep/wool/magenta.png": "normal_sprite:dragnlivestock/sheep/magenta.png",
+    "dragnlivestock:textures/entity/sheep/wool/orange.png": "normal_sprite:dragnlivestock/sheep/orange.png",
+    "dragnlivestock:textures/entity/sheep/wool/pink.png": "normal_sprite:dragnlivestock/sheep/pink.png",
+    "dragnlivestock:textures/entity/sheep/wool/purple.png": "normal_sprite:dragnlivestock/sheep/purple.png",
+    "dragnlivestock:textures/entity/sheep/wool/red.png": "normal_sprite:dragnlivestock/sheep/red.png",
+    "dragnlivestock:textures/entity/sheep/wool/tan.png": "normal_sprite:dragnlivestock/sheep/tan.png",
+    "dragnlivestock:textures/entity/sheep/wool/white.png": "normal_sprite:dragnlivestock/sheep/white.png",
+    "dragnlivestock:textures/entity/sheep/wool/yellow.png": "normal_sprite:dragnlivestock/sheep/yellow.png",
+    "dragnlivestock:textures/entity/sheep/overlay/none.png": "normal_sprite:dragnlivestock/sheep/none.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getCustomLayer"
 }

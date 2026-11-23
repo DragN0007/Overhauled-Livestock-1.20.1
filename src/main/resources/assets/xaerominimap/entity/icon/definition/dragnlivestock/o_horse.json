@@ -1,5 +1,41 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_horse.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/horse/chestnut.png",
+    "dragnlivestock:textures/entity/horse/bay.png": "normal_sprite:dragnlivestock/horse/bay.png",
+    "dragnlivestock:textures/entity/horse/bay_roan.png": "normal_sprite:dragnlivestock/horse/bay_roan.png",
+    "dragnlivestock:textures/entity/horse/bay_dun.png": "normal_sprite:dragnlivestock/horse/bay_dun.png",
+    "dragnlivestock:textures/entity/horse/black.png": "normal_sprite:dragnlivestock/horse/black.png",
+    "dragnlivestock:textures/entity/horse/blood_bay.png": "normal_sprite:dragnlivestock/horse/blood_bay.png",
+    "dragnlivestock:textures/entity/horse/blue.png": "normal_sprite:dragnlivestock/horse/blue.png",
+    "dragnlivestock:textures/entity/horse/blue_roan.png": "normal_sprite:dragnlivestock/horse/blue_roan.png",
+    "dragnlivestock:textures/entity/horse/brown.png": "normal_sprite:dragnlivestock/horse/brown.png",
+    "dragnlivestock:textures/entity/horse/buckskin.png": "normal_sprite:dragnlivestock/horse/buckskin.png",
+    "dragnlivestock:textures/entity/horse/champagne.png": "normal_sprite:dragnlivestock/horse/champagne.png",
+    "dragnlivestock:textures/entity/horse/chestnut.png": "normal_sprite:dragnlivestock/horse/chestnut.png",
+    "dragnlivestock:textures/entity/horse/chocolate_roan.png": "normal_sprite:dragnlivestock/horse/chocolate_roan.png",
+    "dragnlivestock:textures/entity/horse/cinnamon.png": "normal_sprite:dragnlivestock/horse/cinnamon.png",
+    "dragnlivestock:textures/entity/horse/cream.png": "normal_sprite:dragnlivestock/horse/cream.png",
+    "dragnlivestock:textures/entity/horse/creamy.png": "normal_sprite:dragnlivestock/horse/creamy.png",
+    "dragnlivestock:textures/entity/horse/dark_bay.png": "normal_sprite:dragnlivestock/horse/dark_bay.png",
+    "dragnlivestock:textures/entity/horse/dark_brown.png": "normal_sprite:dragnlivestock/horse/dark_brown.png",
+    "dragnlivestock:textures/entity/horse/fjord.png": "normal_sprite:dragnlivestock/horse/fjord.png",
+    "dragnlivestock:textures/entity/horse/gold.png": "normal_sprite:dragnlivestock/horse/gold.png",
+    "dragnlivestock:textures/entity/horse/grey.png": "normal_sprite:dragnlivestock/horse/grey.png",
+    "dragnlivestock:textures/entity/horse/grulla.png": "normal_sprite:dragnlivestock/horse/grulla.png",
+    "dragnlivestock:textures/entity/horse/grullo_dun.png": "normal_sprite:dragnlivestock/horse/grullo_dun.png",
+    "dragnlivestock:textures/entity/horse/ivory.png": "normal_sprite:dragnlivestock/horse/ivory.png",
+    "dragnlivestock:textures/entity/horse/liver_chestnut.png": "normal_sprite:dragnlivestock/horse/liver_chestnut.png",
+    "dragnlivestock:textures/entity/horse/palomino.png": "normal_sprite:dragnlivestock/horse/palomino.png",
+    "dragnlivestock:textures/entity/horse/palomino_orange.png": "normal_sprite:dragnlivestock/horse/palomino_orange.png",
+    "dragnlivestock:textures/entity/horse/red_dun.png": "normal_sprite:dragnlivestock/horse/red_dun.png",
+    "dragnlivestock:textures/entity/horse/seal_bay.png": "normal_sprite:dragnlivestock/horse/seal_bay.png",
+    "dragnlivestock:textures/entity/horse/silver.png": "normal_sprite:dragnlivestock/horse/silver.png",
+    "dragnlivestock:textures/entity/horse/steel_grey.png": "normal_sprite:dragnlivestock/horse/steel_grey.png",
+    "dragnlivestock:textures/entity/horse/strawberry.png": "normal_sprite:dragnlivestock/horse/strawberry.png",
+    "dragnlivestock:textures/entity/horse/strawberry_roan.png": "normal_sprite:dragnlivestock/horse/strawberry_roan.png",
+    "dragnlivestock:textures/entity/horse/warm_black.png": "normal_sprite:dragnlivestock/horse/warm_black.png",
+    "dragnlivestock:textures/entity/horse/warm_grey.png": "normal_sprite:dragnlivestock/horse/warm_grey.png",
+    "dragnlivestock:textures/entity/horse/white.png": "normal_sprite:dragnlivestock/horse/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

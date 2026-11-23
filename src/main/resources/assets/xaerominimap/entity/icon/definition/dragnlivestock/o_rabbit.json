@@ -1,5 +1,33 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_rabbit.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/rabbit/silver.png",
+    "dragnlivestock:textures/entity/rabbit/black.png": "normal_sprite:dragnlivestock/rabbit/black.png",
+    "dragnlivestock:textures/entity/rabbit/blue.png": "normal_sprite:dragnlivestock/rabbit/blue.png",
+    "dragnlivestock:textures/entity/rabbit/blue_tortishell.png": "normal_sprite:dragnlivestock/rabbit/blue_tortishell.png",
+    "dragnlivestock:textures/entity/rabbit/brown.png": "normal_sprite:dragnlivestock/rabbit/brown.png",
+    "dragnlivestock:textures/entity/rabbit/chestnut_agouti.png": "normal_sprite:dragnlivestock/rabbit/chestnut_agouti.png",
+    "dragnlivestock:textures/entity/rabbit/chocolate_agouti.png": "normal_sprite:dragnlivestock/rabbit/chocolate_agouti.png",
+    "dragnlivestock:textures/entity/rabbit/chocolate_tortishell.png": "normal_sprite:dragnlivestock/rabbit/chocolate_tortishell.png",
+    "dragnlivestock:textures/entity/rabbit/cream.png": "normal_sprite:dragnlivestock/rabbit/cream.png",
+    "dragnlivestock:textures/entity/rabbit/dark_chin.png": "normal_sprite:dragnlivestock/rabbit/dark_chin.png",
+    "dragnlivestock:textures/entity/rabbit/fawn.png": "normal_sprite:dragnlivestock/rabbit/fawn.png",
+    "dragnlivestock:textures/entity/rabbit/gold.png": "normal_sprite:dragnlivestock/rabbit/gold.png",
+    "dragnlivestock:textures/entity/rabbit/gold_red.png": "normal_sprite:dragnlivestock/rabbit/gold_red.png",
+    "dragnlivestock:textures/entity/rabbit/golden_steel.png": "normal_sprite:dragnlivestock/rabbit/golden_steel.png",
+    "dragnlivestock:textures/entity/rabbit/light_chin.png": "normal_sprite:dragnlivestock/rabbit/light_chin.png",
+    "dragnlivestock:textures/entity/rabbit/lilac.png": "normal_sprite:dragnlivestock/rabbit/lilac.png",
+    "dragnlivestock:textures/entity/rabbit/lynx.png": "normal_sprite:dragnlivestock/rabbit/lynx.png",
+    "dragnlivestock:textures/entity/rabbit/mahogany.png": "normal_sprite:dragnlivestock/rabbit/mahogany.png",
+    "dragnlivestock:textures/entity/rabbit/red.png": "normal_sprite:dragnlivestock/rabbit/red.png",
+    "dragnlivestock:textures/entity/rabbit/sable.png": "normal_sprite:dragnlivestock/rabbit/sable.png",
+    "dragnlivestock:textures/entity/rabbit/sallander.png": "normal_sprite:dragnlivestock/rabbit/sallander.png",
+    "dragnlivestock:textures/entity/rabbit/seal.png": "normal_sprite:dragnlivestock/rabbit/seal.png",
+    "dragnlivestock:textures/entity/rabbit/silver.png": "normal_sprite:dragnlivestock/rabbit/silver.png",
+    "dragnlivestock:textures/entity/rabbit/smoke.png": "normal_sprite:dragnlivestock/rabbit/smoke.png",
+    "dragnlivestock:textures/entity/rabbit/steel.png": "normal_sprite:dragnlivestock/rabbit/steel.png",
+    "dragnlivestock:textures/entity/rabbit/tan.png": "normal_sprite:dragnlivestock/rabbit/tan.png",
+    "dragnlivestock:textures/entity/rabbit/tortishell.png": "normal_sprite:dragnlivestock/rabbit/tortishell.png",
+    "dragnlivestock:textures/entity/rabbit/white.png": "normal_sprite:dragnlivestock/rabbit/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

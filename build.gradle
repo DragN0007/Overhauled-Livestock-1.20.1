@@ -115,7 +115,7 @@ dependencies {
     implementation fg.deobf("curse.maven:nbtenks-1255827:9402683")
 
     implementation fg.deobf("curse.maven:jade-324717:5876199")
-    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6012833")
+    implementation fg.deobf("curse.maven:xaeros-minimap-263420:9067172")
     implementation fg.deobf("curse.maven:jei-238222:6075247")
     implementation fg.deobf("curse.maven:worldedit-225608:4586218")
 //    implementation fg.deobf("curse.maven:hexerei-548599:6314111")

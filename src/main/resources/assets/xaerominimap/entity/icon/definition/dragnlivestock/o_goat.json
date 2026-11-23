@@ -1,5 +1,17 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_goat.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/goat/white.png",
+    "dragnlivestock:textures/entity/goat/black.png": "normal_sprite:dragnlivestock/goat/black.png",
+    "dragnlivestock:textures/entity/goat/blue.png": "normal_sprite:dragnlivestock/goat/blue.png",
+    "dragnlivestock:textures/entity/goat/brown.png": "normal_sprite:dragnlivestock/goat/brown.png",
+    "dragnlivestock:textures/entity/goat/chocolate.png": "normal_sprite:dragnlivestock/goat/chocolate.png",
+    "dragnlivestock:textures/entity/goat/cream.png": "normal_sprite:dragnlivestock/goat/cream.png",
+    "dragnlivestock:textures/entity/goat/grey.png": "normal_sprite:dragnlivestock/goat/grey.png",
+    "dragnlivestock:textures/entity/goat/light_grey.png": "normal_sprite:dragnlivestock/goat/light_grey.png",
+    "dragnlivestock:textures/entity/goat/mahogany.png": "normal_sprite:dragnlivestock/goat/mahogany.png",
+    "dragnlivestock:textures/entity/goat/red.png": "normal_sprite:dragnlivestock/goat/red.png",
+    "dragnlivestock:textures/entity/goat/tan.png": "normal_sprite:dragnlivestock/goat/tan.png",
+    "dragnlivestock:textures/entity/goat/white.png": "normal_sprite:dragnlivestock/goat/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }

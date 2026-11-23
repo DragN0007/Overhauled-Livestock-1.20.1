@@ -1,5 +1,14 @@
 {
-  "variants" : {
-    "default" : "sprite:dragnlivestock/o_pig.png"
-  }
+  "variants": {
+    "default": "normal_sprite:dragnlivestock/pig/pink.png",
+    "dragnlivestock:textures/entity/pig/black.png": "normal_sprite:dragnlivestock/pig/black.png",
+    "dragnlivestock:textures/entity/pig/blue.png": "normal_sprite:dragnlivestock/pig/blue.png",
+    "dragnlivestock:textures/entity/pig/brown.png": "normal_sprite:dragnlivestock/pig/brown.png",
+    "dragnlivestock:textures/entity/pig/grey.png": "normal_sprite:dragnlivestock/pig/grey.png",
+    "dragnlivestock:textures/entity/pig/light_grey.png": "normal_sprite:dragnlivestock/pig/light_grey.png",
+    "dragnlivestock:textures/entity/pig/pink.png": "normal_sprite:dragnlivestock/pig/pink.png",
+    "dragnlivestock:textures/entity/pig/red.png": "normal_sprite:dragnlivestock/pig/red.png",
+    "dragnlivestock:textures/entity/pig/white.png": "normal_sprite:dragnlivestock/pig/white.png"
+  },
+  "variantMethod" : "xaero.hud.minimap.radar.icon.definition.BuiltInRadarIconDefinitions.getVariant"
 }
