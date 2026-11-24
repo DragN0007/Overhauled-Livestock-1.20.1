@@ -31,6 +31,6 @@ public abstract class SlotMixin {
     private boolean isSomeBackpackOrOther(Inventory inventory) {
         //if the container/ inventory name has the keywords "backpack" or similar (disallowed)
         String className = inventory.getClass().getName().toLowerCase();
-        return className.contains("backpack") || className.contains("pouch") || className.contains("bag") || className.contains("sack") || className.contains("box");
+        return className.contains("backpack") || className.contains("pouch") || className.contains("bag") || className.contains("sack") || className.contains("box") || className.contains("bundle");
     }
 }

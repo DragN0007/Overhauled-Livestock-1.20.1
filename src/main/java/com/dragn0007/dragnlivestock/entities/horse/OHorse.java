@@ -559,9 +559,7 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 		this.leader = null;
 	}
 	public void addFollower() {this.herdSize++;}
-	public void removeFollower() {
-		if (this.leader != null) this.herdSize--;
-	}
+	public void removeFollower() {if (this.leader != null) this.herdSize--;}
 	public boolean canBeFollowed() {return this.hasFollowers() && this.herdSize < this.getMaxHerdSize() && (!this.isSaddled() && !this.isLeashed() && !this.isGroundTied());}
 	public int getMaxHerdSize() {return LivestockOverhaulCommonConfig.HORSE_HERD_MAX.get();}
 	public boolean hasFollowers() {return this.herdSize > 1;}

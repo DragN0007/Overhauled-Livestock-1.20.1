@@ -77,7 +77,7 @@ public class AnimalCrateItem extends ItemNameBlockItem {
 //   }
 
    @Override
-   public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
+   public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) { //modified
       if (!player.isCrouching()) {
          if (LivestockOverhaulCommonConfig.ALLOW_CRATES.get()) {
             if (getFilledCrateAmount(player) < LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
@@ -167,7 +167,17 @@ public class AnimalCrateItem extends ItemNameBlockItem {
    }
 
    @Override
-   public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+   public Component getName(ItemStack stack) { //modified
+      final var entity = getType(stack);
+      if (entity != null) {
+         final var name = Component.translatable(entity.getDescriptionId());
+         return Component.translatable("tooltip.dragnlivestock.crated.tooltip").append(name);
+      }
+      return super.getName(stack);
+   }
+
+   @Override
+   public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) { //modified
       final var entity = getType(pStack);
       final var tag = pStack.getOrCreateTagElement(ANIMAL);
       if (entity != null) {
@@ -184,7 +194,5 @@ public class AnimalCrateItem extends ItemNameBlockItem {
    }
 
    @Override
-   public boolean canFitInsideContainerItems() {
-       return !LivestockOverhaulCommonConfig.ALLOW_CRATES_IN_CONTAINTERS.get();
-   }
+   public boolean canFitInsideContainerItems() {return LivestockOverhaulCommonConfig.ALLOW_CRATES_IN_CONTAINTERS.get();}
 }
