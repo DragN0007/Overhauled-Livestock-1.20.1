@@ -92,5 +92,4 @@ public class OHorseBodyLayer extends GeoRenderLayer<OHorse> {
         UndeadType(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static UndeadType overlayFromOrdinal(int overlay) { return UndeadType.values()[overlay % values().length];}
     }
-
 }

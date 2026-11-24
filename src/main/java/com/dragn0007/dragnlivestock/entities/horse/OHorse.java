@@ -51,6 +51,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PacketDistributor;
@@ -592,13 +593,16 @@ public class OHorse extends AbstractOMount implements GeoEntity {
 	public boolean hurt(DamageSource damageSource, float v) {
 		Entity entity = damageSource.getEntity();
 		if (!(entity instanceof Player)) {
-			if (!this.isUndead() && random.nextDouble() <= LivestockOverhaulCommonConfig.UNDEAD_HORSE_CHANCE.get() &&
-					LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
+			if (!this.isUndead() && random.nextDouble() <= LivestockOverhaulCommonConfig.UNDEAD_HORSE_CHANCE.get() && LivestockOverhaulCommonConfig.UNDEAD_HORSE_DEATH.get()) {
 				if (this.getHealth() <= 4) {
-					if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) {
-						System.out.println("[DragN's Livestock Overhaul!]: An O-Horse has turned undead at: " + this.getOnPos());
-					}
+					if (LivestockOverhaulCommonConfig.DEBUG_LOGS.get()) System.out.println("[DragN's Livestock Overhaul!]: An O-Horse has turned undead at: " + this.getOnPos());
 					this.heal(20);
+					if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_HOT_NETHER) || damageSource.is(DamageTypes.IN_FIRE)) { this.setDecompVariant(6); //wither
+					} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_COLD_OVERWORLD)) { this.setDecompVariant(5); //stray
+					} else if (this.level().isRaining()) { this.setDecompVariant(2); //drowned
+					} else if (this.level().getBiome(this.blockPosition()).is(Tags.Biomes.IS_HOT_OVERWORLD)) { this.setDecompVariant(3); //husk
+					} else if (random.nextDouble() <= 0.5) { this.setDecompVariant(1); //zombie
+					} else {this.setDecompVariant(4);} //skeleton
 					this.setUndead(true);
 					this.level().playSound(null, this, this.getDeathSound(), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level().random, 0.8F, 1.2F));
 					this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getRandomX(0.6D), this.getRandomY(), this.getRandomZ(0.6D), 0.0D, 0.0D, 0.0D);
