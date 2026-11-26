@@ -25,7 +25,6 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
         double distanceSq = animatable.distanceToSqr(player);
         boolean atCullDistance = distanceSq > LivestockOverhaulClientConfig.CULL_LAYERS_DISTANCE.get();
         if (atCullDistance) return;
-
         RenderType renderMarkingType = RenderType.entityCutout(animatable.getMushroomLocation());
         getRenderer().reRender(getDefaultBakedModel(animatable),
                 poseStack,
@@ -39,16 +38,9 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
     public enum MushroomOverlay {
         BROWN_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/mushroom/brown_mushroom.png")),
         RED_FULL(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/mushroom/red_mushroom.png"));
-
-        //Add new entries to bottom when mod is public, else mooshrooms will change textures during update.
-
         public final ResourceLocation resourceLocation;
-        MushroomOverlay(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static MushroomOverlay overlayFromOrdinal(int overlay) { return MushroomOverlay.values()[overlay % MushroomOverlay.values().length];
-        }
+        MushroomOverlay(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static MushroomOverlay overlayFromOrdinal(int overlay) { return MushroomOverlay.values()[overlay % MushroomOverlay.values().length];}
     }
 
 }

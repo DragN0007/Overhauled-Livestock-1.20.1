@@ -38,34 +38,26 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class OMooshroom extends OCow implements GeoEntity {
-    public OMooshroom(EntityType<? extends OCow> type, Level level) {
-        super(type, level);
-    }
+    public OMooshroom(EntityType<? extends OCow> type, Level level) {super(type, level);}
 
-    public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_mooshroom");
-    public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/mooshroom");
+    public static final ResourceLocation LOOT_TABLE = new ResourceLocation(LivestockOverhaul.MODID, "entities/o_cow");
+    public static final ResourceLocation VANILLA_LOOT_TABLE = new ResourceLocation("minecraft", "entities/cow");
     public static final ResourceLocation TFC_LOOT_TABLE = new ResourceLocation("tfc", "entities/cow");
     @Override
     public @NotNull ResourceLocation getDefaultLootTable() {
-        if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) {
-            return VANILLA_LOOT_TABLE;
-        }
-        if (ModList.get().isLoaded("tfc")) {
-            return TFC_LOOT_TABLE;
-        }
+        if (LivestockOverhaulCommonConfig.USE_VANILLA_LOOT.get()) return VANILLA_LOOT_TABLE;
+        if (ModList.get().isLoaded("tfc")) return TFC_LOOT_TABLE;
         return LOOT_TABLE;
     }
+
     public float getWalkTargetValue(BlockPos p_28933_, LevelReader p_28934_) {
         return p_28934_.getBlockState(p_28933_.below()).is(Blocks.MYCELIUM) ? 10.0F : p_28934_.getPathfindingCostFromLightLevels(p_28933_);
     }
 
     @Override
     public Component getTypeName() {
-        if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) {
-            return Component.translatable("entity.minecraft.mooshroom");
-        } else {
-            return super.getTypeName();
-        }
+        if (LivestockOverhaulCommonConfig.VANILLA_NAMES.get()) return Component.translatable("entity.minecraft.mooshroom");
+        else return super.getTypeName();
     }
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -76,30 +68,13 @@ public class OMooshroom extends OCow implements GeoEntity {
             this.setSheared(true);
             this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             if (this.getMushroomVariant() == 0) {
-                if (random.nextDouble() < 0.40) {
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                } else {
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                    this.spawnAtLocation(Items.BROWN_MUSHROOM);
-                }
+                if (random.nextDouble() < 0.40) this.spawnAtLocation(new ItemStack(Items.BROWN_MUSHROOM, random.nextInt(2, 4)), 0F);
+                else this.spawnAtLocation(new ItemStack(Items.BROWN_MUSHROOM, random.nextInt(1, 3)), 0F);
             } else if (this.getMushroomVariant() == 1) {
-                if (random.nextDouble() < 0.40) {
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                } else {
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                    this.spawnAtLocation(Items.RED_MUSHROOM);
-                }
+                if (random.nextDouble() < 0.40) this.spawnAtLocation(new ItemStack(Items.RED_MUSHROOM, random.nextInt(2, 4)), 0F);
+                else this.spawnAtLocation(new ItemStack(Items.RED_MUSHROOM, random.nextInt(1, 3)), 0F);
             }
             regrowPlantsCounter = 0;
-
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
@@ -132,12 +107,8 @@ public class OMooshroom extends OCow implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
-
         regrowPlantsCounter++;
-
-        if (regrowPlantsCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) {
-            this.setSheared(false);
-        }
+        if (regrowPlantsCounter >= LivestockOverhaulCommonConfig.SHEEP_WOOL_REGROWTH_TIME.get()) this.setSheared(false);
     }
 
     // Generates the base texture
@@ -151,92 +122,36 @@ public class OMooshroom extends OCow implements GeoEntity {
     public static final EntityDataAccessor<Boolean> BELLED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-    public ResourceLocation getTextureLocation() {
-        return OMooshroomModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;
-    }
-    public int getVariant() {
-        return this.entityData.get(VARIANT);
-    }
-    public void setVariant(int variant) {
-        this.entityData.set(VARIANT, variant);
-    }
+    public ResourceLocation getTextureLocation() {return OMooshroomModel.Variant.variantFromOrdinal(getVariant()).resourceLocation;}
+    public int getVariant() {return this.entityData.get(VARIANT);}
+    public void setVariant(int variant) {this.entityData.set(VARIANT, variant);}
 
     public static final EntityDataAccessor<Integer> MUSHROOMS = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.INT);
-    public ResourceLocation getMushroomLocation() {
-        return OMooshroomMushroomLayer.MushroomOverlay.overlayFromOrdinal(getMushroomVariant()).resourceLocation;
-    }
-    public int getMushroomVariant() {
-        return this.entityData.get(MUSHROOMS);
-    }
-    public void setMushroomVariant(int mushroomVariant) {
-        this.entityData.set(MUSHROOMS, mushroomVariant);
-    }
+    public ResourceLocation getMushroomLocation() {return OMooshroomMushroomLayer.MushroomOverlay.overlayFromOrdinal(getMushroomVariant()).resourceLocation;}
+    public int getMushroomVariant() {return this.entityData.get(MUSHROOMS);}
+    public void setMushroomVariant(int mushroomVariant) {this.entityData.set(MUSHROOMS, mushroomVariant);}
 
     public static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(OMooshroom.class, EntityDataSerializers.BOOLEAN);
-    public boolean isSheared() {
-        return this.entityData.get(SHEARED);
-    }
-    public void setSheared(boolean sheared) {
-        this.entityData.set(SHEARED, sheared);
-    }
+    public boolean isSheared() {return this.entityData.get(SHEARED);}
+    public void setSheared(boolean sheared) {this.entityData.set(SHEARED, sheared);}
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-
-        if (tag.contains("Breed")) {
-            setBreed(tag.getInt("Breed"));
-        }
-
-        if (tag.contains("Variant")) {
-            setVariant(tag.getInt("Variant"));
-        }
-
-        if (tag.contains("Overlay")) {
-            setOverlayVariant(tag.getInt("Overlay"));
-        }
-
-        if (tag.contains("Mushrooms")) {
-            setMushroomVariant(tag.getInt("Mushrooms"));
-        }
-
-        if (tag.contains("HornType")) {
-            setHornVariant(tag.getInt("HornType"));
-        }
-
-        if (tag.contains("Gender")) {
-            this.setGender(tag.getInt("Gender"));
-        }
-
-        if (tag.contains("MilkedTime")) {
-            this.replenishMilkCounter = tag.getInt("MilkedTime");
-        }
-
-        if (tag.contains("Milked")) {
-            setMilked(tag.getBoolean("Milked"));
-        }
-
-        if(tag.contains("Tagged")) {
-            this.setTagged(tag.getBoolean("Tagged"));
-        }
-
+        if (tag.contains("Breed")) {setBreed(tag.getInt("Breed"));}
+        if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
+        if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
+        if (tag.contains("Mushrooms")) {setMushroomVariant(tag.getInt("Mushrooms"));}
+        if (tag.contains("HornType")) {setHornVariant(tag.getInt("HornType"));}
+        if (tag.contains("Gender")) {this.setGender(tag.getInt("Gender"));}
+        if (tag.contains("MilkedTime")) {this.replenishMilkCounter = tag.getInt("MilkedTime");}
+        if (tag.contains("Milked")) {setMilked(tag.getBoolean("Milked"));}
+        if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
         this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
-
-        if(tag.contains("Harnessed")) {
-            this.setHarnessed(tag.getBoolean("Harnessed"));
-        }
-
-        if(tag.contains("Belled")) {
-            this.setBelled(tag.getBoolean("Belled"));
-        }
-
-        if (tag.contains("Sheared")) {
-            this.setSheared(tag.getBoolean("Sheared"));
-        }
-
-        if (tag.contains("ShearedTime")) {
-            this.regrowPlantsCounter = tag.getInt("ShearedTime");
-        }
+        if(tag.contains("Harnessed")) {this.setHarnessed(tag.getBoolean("Harnessed"));}
+        if(tag.contains("Belled")) {this.setBelled(tag.getBoolean("Belled"));}
+        if (tag.contains("Sheared")) {this.setSheared(tag.getBoolean("Sheared"));}
+        if (tag.contains("ShearedTime")) {this.regrowPlantsCounter = tag.getInt("ShearedTime");}
     }
 
     @Override
@@ -261,9 +176,7 @@ public class OMooshroom extends OCow implements GeoEntity {
     @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData data, @Nullable CompoundTag tag) {
-        if (data == null) {
-            data = new AgeableMob.AgeableMobGroupData(0.2F);
-        }
+        if (data == null) {data = new AgeableMob.AgeableMobGroupData(0.2F);}
         Random random = new Random();
         setBreed(random.nextInt(CowBreed.Breed.values().length));
         setGender(random.nextInt(Gender.values().length));
@@ -278,8 +191,7 @@ public class OMooshroom extends OCow implements GeoEntity {
             this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
         }
 
-        setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
-
+        this.setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
 
@@ -302,9 +214,7 @@ public class OMooshroom extends OCow implements GeoEntity {
         this.entityData.define(SHEARED, false);
     }
 
-    public boolean canParent() {
-        return !this.isBaby() && this.isInLove();
-    }
+    public boolean canParent() {return !this.isBaby() && this.isInLove();}
 
     public boolean canMate(Animal animal) {
         if (animal == this) {
@@ -394,12 +304,10 @@ public class OMooshroom extends OCow implements GeoEntity {
         }
 
         calf.setGender(this.random.nextInt(OCow.Gender.values().length));
-
         return calf;
     }
 
     public void setColorByBreed() {
-
         if (random.nextDouble() < 0.05) {
             this.setVariant(random.nextInt(OMooshroomModel.Variant.values().length));
         } else if (random.nextDouble() > 0.05) {
@@ -408,5 +316,4 @@ public class OMooshroom extends OCow implements GeoEntity {
             this.setVariant(variants[randomIndex]);
         }
     }
-
 }

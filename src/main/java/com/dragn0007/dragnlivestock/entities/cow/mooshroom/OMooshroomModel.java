@@ -47,16 +47,9 @@ public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
         WHITE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/white.png")),
         BROWN_MUSHROOM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/brown_mushroom.png")),
         RED_MUSHROOM(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/moobloom/red_mushroom.png"));
-
-        //Add new entries to bottom when mod is public, else mooshrooms will change textures during update.
-
         public final ResourceLocation resourceLocation;
-        Variant(ResourceLocation resourceLocation) {
-            this.resourceLocation = resourceLocation;
-        }
-
-        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];
-        }
+        Variant(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
+        public static Variant variantFromOrdinal(int variant) { return Variant.values()[variant % Variant.values().length];}
     }
 
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/o_mooshroom.geo.json");
@@ -69,22 +62,15 @@ public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
         if (object.isBaby()) {
             return BABY_MODEL;
         } else {
-            if (object.isMale()) {
-                return MALE;
-            } else {
-                return FEMALE;
-            }
+            if (object.isMale()) return MALE;
+            else return FEMALE;
         }
     }
 
     @Override
-    public ResourceLocation getTextureResource(OMooshroom object) {
-        return object.getTextureLocation();
-    }
+    public ResourceLocation getTextureResource(OMooshroom object) {return object.getTextureLocation();}
 
     @Override
-    public ResourceLocation getAnimationResource(OMooshroom animatable) {
-        return ANIMATION;
-    }
+    public ResourceLocation getAnimationResource(OMooshroom animatable) {return ANIMATION;}
 }
 
