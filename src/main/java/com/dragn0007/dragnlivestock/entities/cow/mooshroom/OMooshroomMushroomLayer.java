@@ -42,5 +42,4 @@ public class OMooshroomMushroomLayer extends GeoRenderLayer<OMooshroom> {
         MushroomOverlay(ResourceLocation resourceLocation) {this.resourceLocation = resourceLocation;}
         public static MushroomOverlay overlayFromOrdinal(int overlay) { return MushroomOverlay.values()[overlay % MushroomOverlay.values().length];}
     }
-
 }

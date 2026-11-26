@@ -779,7 +779,7 @@ public class SpawnReplacer {
                     oMooshroom.setAge(animal.getAge());
                     oMooshroom.setGender(random.nextInt(OCow.Gender.values().length));
                     oMooshroom.setBreed(random.nextInt(CowBreed.Breed.values().length));
-                    oMooshroom.setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
+                    oMooshroom.setMushroomVariant(random.nextInt(OMooshroomMushroomLayer.MushroomOverlay.values().length));
 
                     if (LivestockOverhaulCommonConfig.SPAWN_BY_BREED.get()) {
                         oMooshroom.setColorByBreed();

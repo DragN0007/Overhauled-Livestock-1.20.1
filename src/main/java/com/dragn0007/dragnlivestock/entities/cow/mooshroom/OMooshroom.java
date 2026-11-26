@@ -191,7 +191,7 @@ public class OMooshroom extends OCow implements GeoEntity {
             this.setHornVariant(random.nextInt(OCow.BreedHorns.values().length));
         }
 
-        this.setMushroomVariant(OMooshroomMushroomLayer.MushroomOverlay.values().length);
+        this.setMushroomVariant(random.nextInt(OMooshroomMushroomLayer.MushroomOverlay.values().length));
         return super.finalizeSpawn(serverLevelAccessor, instance, spawnType, data, tag);
     }
 

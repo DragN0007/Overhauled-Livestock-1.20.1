@@ -11,9 +11,7 @@ import software.bernie.geckolib.model.data.EntityModelData;
 
 public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
 
-    public OMooshroomModel() {
-        super(new ResourceLocation(LivestockOverhaul.MODID, "o_mooshroom"), true);
-    }
+    public OMooshroomModel() {super(new ResourceLocation(LivestockOverhaul.MODID, "o_mooshroom"), true);}
 
     @Override
     public void setCustomAnimations(OMooshroom animatable, long instanceId, AnimationState<OMooshroom> animationState) {
@@ -32,8 +30,8 @@ public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
             float maxYaw = Mth.clamp(entityData.netHeadYaw(), -25.0f, 25.0f);
             head.setRotY(head.getRotY() + (maxYaw * Mth.DEG_TO_RAD));
         }
-
     }
+
     public enum Variant {
         BLACK(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/black.png")),
         BLUE(new ResourceLocation(LivestockOverhaul.MODID, "textures/entity/cow/blue.png")),
@@ -53,7 +51,7 @@ public class OMooshroomModel extends DefaultedEntityGeoModel<OMooshroom> {
     }
 
     public static final ResourceLocation FEMALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/o_mooshroom.geo.json");
-    public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/mooshroom_bull.geo.json");
+    public static final ResourceLocation MALE = new ResourceLocation(LivestockOverhaul.MODID, "geo/moobloom/o_mooshroom_bull.geo.json");
     public static final ResourceLocation BABY_MODEL = new ResourceLocation(LivestockOverhaul.MODID, "geo/cow/baby_o_cow.geo.json");
     public static final ResourceLocation ANIMATION = new ResourceLocation(LivestockOverhaul.MODID, "animations/o_cow.animation.json");
 
