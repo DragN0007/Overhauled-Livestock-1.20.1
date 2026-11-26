@@ -28,7 +28,5 @@ public class JerkyTooltipProvider implements IBlockComponentProvider {
     }
 
     @Override
-    public ResourceLocation getUid() {
-        return new ResourceLocation(LivestockOverhaul.MODID, "dry_time");
-    }
+    public ResourceLocation getUid() {return new ResourceLocation(LivestockOverhaul.MODID, "dry_time");}
 }

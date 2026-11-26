@@ -2,6 +2,7 @@ package com.dragn0007.dragnlivestock.items.custom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.blocks.LOBlocks;
+import com.dragn0007.dragnlivestock.blocks.custom.AnimalCrateBlockEntity;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.util.LOTags;
 import com.dragn0007.dragnlivestock.util.LivestockOverhaulCommonConfig;
@@ -68,13 +69,26 @@ public class AnimalCrateItem extends ItemNameBlockItem {
       super(LOBlocks.ANIMAL_CRATE.get(), new Properties().stacksTo(1));
    }
 
-//   @Override
-//   public InteractionResult place(BlockPlaceContext context) {
-//      BlockPos blockpos = context.getClickedPos();
-//      Level level = context.getLevel();
-//      if (context.getPlayer().isCrouching()) level.setBlock(blockpos, LOBlocks.ANIMAL_CRATE.get().defaultBlockState(), 2);
-//      return super.place(context);
-//   }
+   @Override
+   public InteractionResult place(BlockPlaceContext context) {
+      if (LivestockOverhaulCommonConfig.ALLOW_CRATE_PLACING.get()) {
+         BlockPos blockpos = context.getClickedPos();
+         Level level = context.getLevel();
+         ItemStack stack = context.getItemInHand();
+         CompoundTag tag = stack.getTag();
+         if (context.getPlayer().isCrouching())
+            level.setBlock(blockpos, LOBlocks.ANIMAL_CRATE.get().defaultBlockState(), 2);
+         if (context.getLevel().getBlockEntity(blockpos) instanceof AnimalCrateBlockEntity crateBlockEntity) {
+            if (stack.getItem() instanceof AnimalCrateItem && stack.getTag() != null) {
+               if (stack.getTag().get("Animal") != null) crateBlockEntity.animal = stack.getTag().get("Animal");
+               crateBlockEntity.saveAdditional(tag);
+               crateBlockEntity.setChanged();
+            }
+         }
+         context.getItemInHand().shrink(1);
+      }
+      return super.place(context);
+   }
 
    @Override
    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity interactionTarget, InteractionHand usedHand) { //modified
@@ -186,7 +200,11 @@ public class AnimalCrateItem extends ItemNameBlockItem {
             pTooltipComponents.add(Component.translatable("Variant: " + tag.getInt("Variant")).withStyle(ChatFormatting.GRAY));
             pTooltipComponents.add(Component.translatable("Pattern: " + tag.getInt("Overlay_Variant")).withStyle(ChatFormatting.GRAY));
             if (tag.getInt("Quality") > 0)
-               pTooltipComponents.add(Component.translatable("Quality: " + tag.getInt("Quality")).withStyle(ChatFormatting.GRAY));
+               pTooltipComponents.add(Component.translatable("Quality: " + tag.getInt("Quality") + "%").withStyle(ChatFormatting.GRAY));
+            if (tag.getInt("Gender") == 0)
+               pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.jade.female.tooltip").withStyle(ChatFormatting.GRAY));
+            else
+               pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.jade.male.tooltip").withStyle(ChatFormatting.GRAY));
          }
       } else {
          pTooltipComponents.add(Component.translatable("tooltip.dragnlivestock.animal_crate.tooltip").withStyle(ChatFormatting.GOLD));

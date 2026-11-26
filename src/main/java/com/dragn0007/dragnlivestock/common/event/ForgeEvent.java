@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.common.event;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007.dragnlivestock.blocks.custom.AnimalCrate;
 import com.dragn0007.dragnlivestock.blocks.custom.AnimalCrateBlockEntity;
 import com.dragn0007.dragnlivestock.entities.camel.OCamel;
 import com.dragn0007.dragnlivestock.entities.chicken.OChicken;
@@ -29,20 +28,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -53,7 +47,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.awt.event.ContainerEvent;
 import java.util.List;
 import java.util.Random;
 
@@ -61,16 +54,25 @@ import java.util.Random;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvent {
 
-    @SubscribeEvent
-    public static void onResourceReload(AddReloadListenerEvent event) {
-        event.addListener((ResourceManagerReloadListener) resourceManager -> {
-            LivestockOverhaul.LOGGER.info("placeholder");
-        });
-    }
+//    @SubscribeEvent
+//    public static void onResourceReload(AddReloadListenerEvent event) {
+//        event.addListener((ResourceManagerReloadListener) resourceManager -> {
+//            LivestockOverhaul.LOGGER.info("placeholder");
+//        });
+//    }
 
     @SubscribeEvent
     public static void breakCrate(BlockEvent.BreakEvent event) {
-
+        BlockPos pos = event.getPos();
+        BlockEntity blockEntity = event.getLevel().getBlockEntity(pos);
+        if (blockEntity instanceof AnimalCrateBlockEntity crateBlockEntity) {
+            ItemStack crateStack = new ItemStack(LOItems.ANIMAL_CRATE.get());
+            if (crateBlockEntity.getAnimalNBT() != null && !crateBlockEntity.getAnimalNBT().toString().equalsIgnoreCase("") && !crateBlockEntity.getAnimalNBT().toString().isEmpty() && !crateBlockEntity.getAnimalNBT().toString().isBlank()) {
+                crateStack.getOrCreateTag().put("Animal", crateBlockEntity.animal);
+                crateStack.getOrCreateTag().putBoolean(LivestockOverhaul.MODID + ":captured", true);
+            }
+            event.getLevel().addFreshEntity(new ItemEntity(event.getPlayer().level(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, crateStack));
+        }
     }
 
     @SubscribeEvent
@@ -81,12 +83,10 @@ public class ForgeEvent {
     @SubscribeEvent
     public static void preventFilledCratePickup(EntityItemPickupEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity instanceof Player player) {
-            if (event.getItem().getItem().is(LOItems.ANIMAL_CRATE.get())) {
-                if (AnimalCrateItem.getFilledCrateAmount(player) >= LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
-                    player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.too_many_crates.tooltip").withStyle(ChatFormatting.RED), true);
-                    event.setCanceled(true);
-                }
+        if (entity instanceof Player player && event.getItem().getItem().is(LOItems.ANIMAL_CRATE.get())) {
+            if (AnimalCrateItem.getFilledCrateAmount(player) >= LivestockOverhaulCommonConfig.MAX_CRATES.get()) {
+                player.displayClientMessage(Component.translatable("tooltip.dragnlivestock.too_many_crates.tooltip").withStyle(ChatFormatting.RED), true);
+                event.setCanceled(true);
             }
         }
     }

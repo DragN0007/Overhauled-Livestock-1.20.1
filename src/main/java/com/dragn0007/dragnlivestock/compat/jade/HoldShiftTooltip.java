@@ -1,7 +1,6 @@
 package com.dragn0007.dragnlivestock.compat.jade;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
-import com.dragn0007_evangelix.medievalembroidery.MedievalEmbroidery;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.EntityAccessor;

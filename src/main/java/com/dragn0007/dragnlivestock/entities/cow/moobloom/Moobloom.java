@@ -2,7 +2,6 @@ package com.dragn0007.dragnlivestock.entities.cow.moobloom;
 
 import com.dragn0007.dragnlivestock.LivestockOverhaul;
 import com.dragn0007.dragnlivestock.entities.cow.OCow;
-import com.dragn0007.dragnlivestock.entities.cow.mooshroom.OMooshroomModel;
 import com.dragn0007.dragnlivestock.entities.util.marking_layer.BovineMarkingOverlay;
 import com.dragn0007.dragnlivestock.items.LOItems;
 import com.dragn0007.dragnlivestock.items.custom.BrandTagItem;

@@ -31,7 +31,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
-import java.lang.annotation.Retention;
 import java.time.LocalDate;
 import java.time.Month;
 

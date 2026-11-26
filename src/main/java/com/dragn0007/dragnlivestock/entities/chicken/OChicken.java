@@ -366,14 +366,14 @@ public class OChicken extends Animal implements GeoEntity, Taggable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		if(tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
+		if (tag.contains("Quality")) {this.setQuality(tag.getInt("Quality"));}
 		if (tag.contains("Variant")) {setVariant(tag.getInt("Variant"));}
 		if (tag.contains("Overlay")) {setOverlayVariant(tag.getInt("Overlay"));}
 		if (tag.contains("Breed")) {setBreed(tag.getInt("Breed"));}
 		if (tag.contains("Gender")) {setGender(tag.getInt("Gender"));}
 		this.isChickenJockey = tag.getBoolean("IsChickenJockey");
 		if (tag.contains("EggLayTime")) {this.eggTime = tag.getInt("EggLayTime");}
-		if(tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
+		if (tag.contains("Tagged")) {this.setTagged(tag.getBoolean("Tagged"));}
 		this.setBrandTagColor(DyeColor.byId(tag.getInt("BrandTagColor")));
 	}
 
